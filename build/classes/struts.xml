@@ -1,0 +1,99 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="team6-struts" extends="struts-default">
+	
+		<!-- SqlMapClient 인터셉터... -->
+		<interceptors>
+			<interceptor name="conDao" class="board.test.action.ConDAOInterceptor"/>
+		</interceptors>
+				
+		<!-- 로그인 액션. -->
+		<action name="loginForm" class="login.action.LoginAction" method="loginForm">
+			<result>/login/loginForm.jsp</result>
+		</action>
+		
+		<action name="login" class="login.action.LoginAction">		
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />				
+			<interceptor-ref name="conDao" />
+			<interceptor-ref name="servletConfig" />
+			<result name="error">/login/loginError.jsp</result>
+			<result name="success" type="redirect">${currentActionName}.action</result>
+		</action>
+		
+		<!-- 홈 액션. -->
+		<action name="home" class="home.action.HomeAction">
+			<result>/index.jsp</result>
+		</action>
+		
+		<!-- 레스토랑 게시판 리스트 액션. -->
+		<action name="listRest" class="board.rest.action.ListRestAction">
+			<result>/board/rest/listRest.jsp</result>
+		</action>
+		
+		<!-- 테스트 게시판 리스트 액션. -->
+		<action name="listTest" class="board.test.action.ListTestAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDao"/>
+			<result>/board/test/listTest.jsp</result>
+		</action>
+		
+		<!-- 테스트 게시판 쓰기 액션. -->
+		<action name="createTestForm" class="board.test.action.CreateTestAction" method="createForm">
+			<result>/board/test/createTest.jsp</result>
+		</action>
+		
+		<action name="createTest" class="board.test.action.CreateTestAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDao"/>
+			<result type="redirect-action">
+				<param name="actionName">listTest</param>
+			</result>
+		</action>
+		
+		<!-- 테스트 게시판 읽기 액션. -->
+		<action name="readTest" class="board.test.action.ReadTestAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDao"/>
+			<result>/board/test/readTest.jsp</result>
+		</action>
+		
+		<!-- 비밀번호 체크 액션. -->
+		<action name="checkForm" class="board.test.action.ReadTestAction" method="checkForm">
+			<result>/board/test/checkPassword.jsp</result>
+		</action>
+		
+		<action name="check" class="board.test.action.ReadTestAction" method="checkAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDao"/>
+			<result name="error">/board/test/checkError.jsp</result>
+			<result>/board/test/checkSuccess.jsp</result>
+		</action>
+		
+		<!-- 테스트 게시판 수정 액션. -->
+		<action name="updateTestForm" class="board.test.action.ReadTestAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDao"/>
+			<result type="chain">createTestForm</result>
+		</action>
+		
+		<action name="updateTest" class="board.test.action.UpdateTestAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDao"/>
+			<result type="chain">readTest</result>
+		</action>
+
+		<!--테스트 게시판 삭제 액션. -->
+		<action name="deleteTest" class="board.test.action.DeleteTestAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDao"/>
+			<result type="chain">listTest</result>
+		</action>
+			
+	</package>
+</struts>
+
