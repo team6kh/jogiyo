@@ -17,7 +17,7 @@
 
 	<!-- 공통으로 사용할 select 절 정의 -->
 	<sql id="select-all">
-		SELECT * FROM TEST_BOARD
+		SELECT * FROM test_board
 	</sql>
 
 	<!-- 공통으로 사용할 where-no 절 정의 -->
@@ -32,13 +32,13 @@
 		ORDER BY no DESC
 	</select>
 
-	<select id="selectOne" resultMap="TestResult" parameterClass="int">
+	<select id="selectWhereNo" resultMap="TestResult" parameterClass="int">
 		<include refid="select-all" />
 		<include refid="where-no" />
 	</select>
 
-	<select id="selectLastNo" resultClass="TestDTO" parameterClass="int">
-		SELECT max(no) as no FROM TEST_BOARD
+	<select id="selectMaxNo" resultClass="TestDTO" parameterClass="int">
+		SELECT max(no) as no FROM test_board
 	</select>
 
 	<select id="selectPassword" resultMap="TestResult">
@@ -49,14 +49,14 @@
 
 	<!-- insert 쿼리문 정의 -->
 	<insert id="insertBoard" parameterClass="TestDTO">
-		INSERT INTO TEST_BOARD (NO,
-								SUBJECT,
-								NAME,
-								PASSWORD,
-								CONTENT,
-								REGDATE
+		INSERT INTO test_board (no,
+								subject,
+								name,
+								password,
+								content,
+								regdate
 								)
-						VALUES (TEST_BOARD_NO_SEQ.NEXTVAL,
+						VALUES (test_board_no_seq.nextval,
 								#subject#,
 								#name#,
 								#password#,
@@ -67,21 +67,21 @@
 
 	<!-- update 쿼리문 정의 -->
 	<update id="updateBoard" parameterClass="TestDTO">
-		UPDATE TEST_BOARD SET SUBJECT = #subject#,
-								NAME = #name#,
-								PASSWORD = #password#,
-								CONTENT = #content#
+		UPDATE test_board SET subject = #subject#,
+								name = #name#,
+								password = #password#,
+								content = #content#
 								<include refid="where-no" />
 	</update>
 
-	<update id="updateReadHit" parameterClass="TestDTO">
-		UPDATE TEST_BOARD SET READHIT = readHit + 1
+	<update id="updateReadhit" parameterClass="TestDTO">
+		UPDATE test_board SET readhit = readhit + 1
 		<include refid="where-no" />
 	</update>
 
 	<!-- delete 쿼리문 정의 -->
 	<delete id="deleteBoard" parameterClass="TestDTO">
-		DELETE FROM TEST_BOARD
+		DELETE FROM test_board
 		<include refid="where-no" />
 	</delete>
 

@@ -40,10 +40,10 @@ public class ReadTestAction extends ActionSupport implements ConDAOAware {
 
 		// 해당 글의 조회수 +1.
 		paramClass.setNo(getNo());
-		sqlMapper.update("Test.updateReadHit", paramClass);
+		sqlMapper.update("Test.updateReadhit", paramClass);
 
 		// 해당 번호의 글을 가져온다.
-		resultClass = (TestDTO) sqlMapper.queryForObject("Test.selectOne", getNo());
+		resultClass = (TestDTO) sqlMapper.queryForObject("Test.selectWhereNo", getNo());
 
 		return SUCCESS;
 	}

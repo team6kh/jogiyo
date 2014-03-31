@@ -52,43 +52,43 @@ public class PagingAction {
 		// 이전 block 페이지
 		pagingHtml = new StringBuffer();
 		if (currentPage > blockPage) {
-			pagingHtml.append("<a href="+urlName+".action?currentPage="
+			pagingHtml.append("<li><a href="+urlName+".action?currentPage="
 					+ (startPage - 1) + ">");
 			pagingHtml.append("이전");
-			pagingHtml.append("</a>");
+			pagingHtml.append("</a></li>");
 		}
 
-		pagingHtml.append("&nbsp;|&nbsp;");
+		//pagingHtml.append("&nbsp;|&nbsp;");
 
-		// 페이지 번호.현재 페이지는 빨간색으로 강조하고 링크를 제거.
+		// 페이지 번호.현재 페이지는 파란색으로 강조하고 링크를 제거.
 		for (int i = startPage; i <= endPage; i++) {
 			if (i > totalPage) {
 				break;
 			}
 			if (i == currentPage) {
-				pagingHtml.append("&nbsp;<b> <font color='red'>");
+				pagingHtml.append("<li class='active'><a>");
 				pagingHtml.append(i);
-				pagingHtml.append("</font></b>");
+				pagingHtml.append("</a></li>");
 			} else {
 				pagingHtml
-						.append("&nbsp;<a href="+urlName+".action?currentPage=");
+						.append("<li><a href="+urlName+".action?currentPage=");
 				pagingHtml.append(i);
 				pagingHtml.append(">");
 				pagingHtml.append(i);
-				pagingHtml.append("</a>");
+				pagingHtml.append("</a><li>");
 			}
 
-			pagingHtml.append("&nbsp;");
+			//pagingHtml.append("&nbsp;");
 		}
 
-		pagingHtml.append("&nbsp;&nbsp;|&nbsp;&nbsp;");
+		//pagingHtml.append("&nbsp;&nbsp;|&nbsp;&nbsp;");
 
 		// 다음 block 페이지
 		if (totalPage - startPage >= blockPage) {
-			pagingHtml.append("<a href="+urlName+".action?currentPage="
+			pagingHtml.append("<li><a href="+urlName+".action?currentPage="
 					+ (endPage + 1) + ">");
 			pagingHtml.append("다음");
-			pagingHtml.append("</a>");
+			pagingHtml.append("</a></li>");
 		}
 	}
 	

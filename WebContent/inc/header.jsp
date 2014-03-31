@@ -30,7 +30,6 @@
 			</c:when>
 			<c:when test="${empty sessionBuyerId}">
 			<form class="navbar-form navbar-right" role="form" action="/jogiyo/login.action">
-			  <% System.out.println(request.getRequestURI()); %>
 	          <input type="hidden" name="currentActionName" value="${currentActionName}">
 	          <div class="form-group">
 	            <input type="text" placeholder="아이디" class="form-control" name="buyer_id">

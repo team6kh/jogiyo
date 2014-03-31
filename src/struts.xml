@@ -22,13 +22,13 @@
 			<interceptor-ref name="conDao" />
 			<interceptor-ref name="servletConfig" />
 			<result name="error">/login/loginError.jsp</result>
-			<result name="success" type="redirect">${currentActionName}.action</result>
+			<result name="success" type="redirect.action">${currentActionName}</result>
 		</action>
 		
 		<!-- 로그아웃 액션. -->
 		<action name="logout" class="logout.action.LogoutAction">
 			<interceptor-ref name="servletConfig" />
-			<result name="success" type="redirect">home.action</result>
+			<result name="success" type="redirect.action">home</result>
 		</action>
 		
 		<!-- 홈 액션. -->
