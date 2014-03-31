@@ -25,6 +25,12 @@
 			<result name="success" type="redirect">${currentActionName}.action</result>
 		</action>
 		
+		<!-- 로그아웃 액션. -->
+		<action name="logout" class="logout.action.LogoutAction">
+			<interceptor-ref name="servletConfig" />
+			<result name="success" type="redirect">home.action</result>
+		</action>
+		
 		<!-- 홈 액션. -->
 		<action name="home" class="home.action.HomeAction">
 			<result>/index.jsp</result>

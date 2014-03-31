@@ -18,7 +18,7 @@
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="index-template.css" rel="stylesheet">
+    <link href="home-template.css" rel="stylesheet">
     
   </head>
 
@@ -30,13 +30,9 @@
 
     <div class="container">
 
-      <div class="index-template">
-        <h1>index template</h1>
-        <p class="lead">currentActionName:${currentActionName}</p>
-        <p class="lead">sessionId:${sessionId}</p>
-        <p class="lead">sessionScope.sessionId:${sessionScope.sessionId}</p>
-        <c:set var="sId" value="${sessionScope.sessionId}"></c:set>        
-        <p class="lead">sId:${sId}</p>
+      <div class="home-template">
+        <h1>home template</h1>
+        <p class="lead">Hello Home</p>
       </div>
 
     </div><!-- /.container -->
@@ -46,6 +42,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="/dist/js/bootstrap.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
   </body>
 </html>

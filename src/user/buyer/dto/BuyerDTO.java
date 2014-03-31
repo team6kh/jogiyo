@@ -6,7 +6,7 @@ public class BuyerDTO {
 	private String buyer_id;
 	private String buyer_pw;
 	private String buyer_name;
-	private Timestamp regDate;
+	private Timestamp buyer_reg_date;
 	private String buyer_email;
 	private String buyer_phonenumber;
 	private String buyer_gender;
@@ -29,11 +29,11 @@ public class BuyerDTO {
 	public void setBuyer_name(String buyer_name) {
 		this.buyer_name = buyer_name;
 	}
-	public Timestamp getRegDate() {
-		return regDate;
+	public Timestamp getBuyer_reg_date() {
+		return buyer_reg_date;
 	}
-	public void setRegDate(Timestamp regDate) {
-		this.regDate = regDate;
+	public void setRegDate(Timestamp buyer_reg_Date) {
+		this.buyer_reg_date = buyer_reg_Date;
 	}
 	public String getBuyer_email() {
 		return buyer_email;

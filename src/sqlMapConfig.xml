@@ -21,6 +21,6 @@
 	</transactionManager>
 	
 	<sqlMap resource="/board/test/dao/TestDAO.xml"/>
-	<sqlMap resource="/user/dao/UserDAO.xml"/>
+	<sqlMap resource="/user/buyer/dao/BuyerDAO.xml"/>
 	
 </sqlMapConfig>

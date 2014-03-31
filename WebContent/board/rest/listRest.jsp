@@ -33,7 +33,7 @@
 
       <div class="rest-template">
         <h1>카테고리 게시판</h1>
-        <p class="lead">..</p>
+        <p class="lead">Hello Rest</p>
       </div>
 
     </div><!-- /.container -->

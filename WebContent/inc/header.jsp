@@ -22,22 +22,23 @@
             <li><a href="listTest.action">테스트</a></li>
           </ul>
           <c:choose>
-			<c:when test="${not empty sessionId}">
-			<form class="navbar-form navbar-right" role="form" action="/jogiyo/logout.action">
-	          ${sessionId} 님 환영합니다.
-	          <button type="submit" class="btn btn-success">로그아웃</button>
+			<c:when test="${not empty sessionBuyerId}">
+			<form class="navbar-form navbar-inverse navbar-right" role="form" action="/jogiyo/logout.action">
+	          <a href=#>${sessionBuyerName} 님 환영합니다.</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	          <button type="submit" class="btn btn-danger">로그아웃</button>
 	        </form>  
 			</c:when>
-			<c:when test="${empty sessionId}">
+			<c:when test="${empty sessionBuyerId}">
 			<form class="navbar-form navbar-right" role="form" action="/jogiyo/login.action">
+			  <% System.out.println(request.getRequestURI()); %>
 	          <input type="hidden" name="currentActionName" value="${currentActionName}">
 	          <div class="form-group">
-	            <input type="text" placeholder="아이디" class="form-control" name="userId">
+	            <input type="text" placeholder="아이디" class="form-control" name="buyer_id">
 	          </div>
 	          <div class="form-group">
-	            <input type="password" placeholder="비밀번호" class="form-control" name="password">
+	            <input type="password" placeholder="비밀번호" class="form-control" name="buyer_pw">
 	          </div>
-	          <button type="submit" class="btn btn-success">로그인</button>
+	          <button type="submit" class="btn btn-primary">로그인</button>
 	        </form>  
 			</c:when>
 		  </c:choose>             

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,10 +34,12 @@
       <div class="test-template">
         <h1>test template</h1>
         <p class="lead">currentActionName:${currentActionName}</p>
-        <p class="lead">sessionId:${sessionId}</p>
-        <p class="lead">sessionScope.sessionId:${sessionScope.sessionId}</p>
-        <c:set var="sId" value="${sessionScope.sessionId}"></c:set>        
+        <p class="lead">sessionBuyerId:${sessionBuyerId}</p>
+        <p class="lead">sessionScope.sessionBuyerId:${sessionScope.sessionBuyerId}</p>
+        <c:set var="sId" value="${sessionScope.sessionBuyerId}"></c:set>        
         <p class="lead">sId:${sId}</p>
+        <p class="lead">sessionBuyerName:"${sessionBuyerName}" 님 환영합니다.</p>
+        <p class="lead">resultClass.buyer_name:<s:property value="resultClass.buyer_name"/> 님 환영합니다.</p>
       </div>
 
     </div><!-- /.container -->
@@ -46,6 +49,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="/dist/js/bootstrap.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
   </body>
 </html>
