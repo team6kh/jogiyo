@@ -29,34 +29,27 @@
 	<%@ include file="/inc/header.jsp"%>
 	<!-- end of header -->
 
-	<div class="container test-template">		
+	<!-- container -->
+	<div class="container">
 
 		<!-- test board pretty -->
-		<div class="well">
+		<div class="col-md-12">
+			<h3>테스트 게시판</h3>
+		</div>
 
+		<div class="well col-md-12">
 			<table class="table table-striped table-forum">
 				<thead>
 					<tr>
 						<th class="text-center" colspan="2">제목</th>
-						<th class="text-center hidden-xs hidden-sm" style="width: 100px;">글쓴이</th>
-						<th class="text-center hidden-xs hidden-sm" style="width: 200px;">날짜</th>
-						<th class="text-center hidden-xs hidden-sm" style="width: 100px;">조회</th>
+						<th class="text-center" style="width: 200px;">작성자</th>
+						<th class="text-center" style="width: 100px;">작성일</th>
+						<th class="text-center" style="width: 100px;">조회</th>
 					</tr>
 				</thead>
 				<tbody>
-
-					<!-- TR -->
-					<tr>
-						<td colspan="2"><a href=#>테스트 제목입니다.</a></td>
-						<td>테스트</td>
-						<td>14. 3. 31</td>
-						<td>22</td>
-					</tr>
-					<!-- end TR -->
-
 					<s:iterator value="list" status="stat">
-
-						<s:url id="viewURL" action="readTestAction">
+						<s:url id="viewURL" action="readTest">
 							<s:param name="no">
 								<s:property value="no" />
 							</s:param>
@@ -64,44 +57,40 @@
 								<s:property value="currentPage" />
 							</s:param>
 						</s:url>
-
 						<tr>
 							<td colspan="2"><s:a href="%{viewURL}">
 									<s:property value="subject" />
 								</s:a></td>
-							<td><s:property value="name" /></td>
-							<td><s:property value="regdate" /></td>
-							<td><s:property value="readhit" /></td>
+							<td class="text-center"><s:property value="name" /></td>
+							<td class="text-center"><s:property value="regdate" /></td>
+							<td class="text-center"><s:property value="readhit" /></td>
 						</tr>
-
 					</s:iterator>
-
 					<s:if test="list.size() <= 0">
-
 						<tr>
 							<td colspan="5">등록된 게시물이 없습니다.</td>
 						</tr>
-
 					</s:if>
-
 				</tbody>
 			</table>
 
 			<div class="text-center">
 				<ul class="pagination pagination-sm">
 					<s:property value="pagingHtml" escape="false" />
-					<li>
 				</ul>
 			</div>
-			
-			<div class="text-right">
-				<a href="createTestForm.action?currentPage=<s:property value="currentPage"/>" 
-				 class="btn btn-primary">글쓰기</a>
-			</div>			
 
-		</div><!-- end of test board pretty -->
-		
-		<div>
+			<div class="pull-right">
+				<a
+					href="createTestForm.action?currentPage=<s:property value="currentPage"/>"
+					class="btn btn-primary">글쓰기</a>
+			</div>
+
+		</div>
+		<!-- end of test board pretty -->
+
+		<!-- test message -->
+		<div class="test-template">
 			<h1>test template</h1>
 			<p class="lead">currentActionName:${currentActionName}</p>
 			<p class="lead">sessionBuyerId:${sessionBuyerId}</p>
@@ -115,8 +104,8 @@
 				님 환영합니다.
 			</p>
 		</div>
-		<!-- end of test-template -->
-		
+		<!-- end of test message -->
+
 	</div>
 	<!-- /.container -->
 
