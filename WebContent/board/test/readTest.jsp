@@ -34,7 +34,7 @@
 		<div class="col-md-12">
 			<h3>테스트 게시판 > 읽기</h3>
 		</div>
-		
+
 		<div class="well col-md-12">
 
 			<table class="table table-striped table-forum">
@@ -46,8 +46,8 @@
 				<tbody>
 					<!-- Post -->
 					<tr>
-						<td class="text-center">
-							<span class="glyphicon glyphicon-user"></span> &nbsp; <strong>${resultClass.name}</strong></td>
+						<td class="text-center"><span
+							class="glyphicon glyphicon-user"></span> &nbsp; <strong>${resultClass.name}</strong></td>
 						<td>등록일 : <em>${resultClass.regdate}</em></td>
 					</tr>
 					<tr>
@@ -59,23 +59,23 @@
 							<p>${resultClass.content}</p>
 						</td>
 					</tr>
-					<!-- end Post -->					
+					<!-- end Post -->
 
 				</tbody>
 			</table>
-			
+
 			<div class="pull-right">
 
 				<!-- Button trigger modal : 수정 -->
-				<button class="btn btn-default" data-toggle="modal"
-					data-target="#checkModal">수정</button>
+				<button class="btn btn-default insertModalParam" data-toggle="modal"
+					data-target="#checkModal" data-id="updateTestForm">수정</button>
 
 				<!-- Modal -->
 				<div class="modal fade" id="checkModal" tabindex="-1" role="dialog"
 					aria-labelledby="checkModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form action="check.action">
+							<form action="checkPass.action">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
@@ -83,13 +83,14 @@
 								</div>
 								<div class="modal-body">
 									<div class="form-group">
-										<label for="password">비밀번호</label> <input type="password"
-											class="form-control" name="password">
+										<label for="password">비밀번호</label>
+										<input type="password" class="form-control" name="password">
+										<input type="hidden" name="modalParam" id="modalParam">	
 									</div>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
-										data-dismiss="modal">닫기</button>
+										data-dismiss="modal">닫기</button>							
 									<input type="hidden" name="no" value="${resultClass.no}">
 									<input type="hidden" name="currentPage" value="${currentPage}">
 									<button type="submit" class="btn btn-primary">입력</button>
@@ -100,8 +101,8 @@
 				</div>
 
 				<!-- Button trigger modal : 삭제 -->
-				<button class="btn btn-default" data-toggle="modal"
-					data-target="#checkModal">삭제</button>
+				<button class="btn btn-default insertModalParam" data-toggle="modal"
+					data-target="#checkModal" data-id="deleteTest">삭제</button>
 
 				<a
 					href="listTest.action?currentPage=<s:property value="currentPage"/>"
@@ -121,5 +122,11 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
+	<script>
+		$(document).on("click", ".insertModalParam", function() {
+			var thisModalParam = $(this).data('id');
+			$(".modal-body #modalParam").val(thisModalParam);
+		});
+	</script>
 </body>
 </html>

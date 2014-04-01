@@ -6,12 +6,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
+import common.ConDAOAware;
 
 import java.io.Reader;
 import java.io.IOException;
 
-public class UpdateTestAction extends ActionSupport implements ConDAOAware {
-	public static Reader reader;
+public class UpdateTestAction extends ActionSupport implements ConDAOAware {	
 	public static SqlMapClient sqlMapper;
 
 	private TestDTO paramClass; // 파라미터를 저장할 객체
@@ -24,18 +24,14 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	private String name;
 	private String password;
 	private String content;
-	
-	private ConDAO conDao;
-	
-	public void setConDAO(ConDAO conDao){
-		this.conDao = conDao;
+		
+	public void setConDAO(SqlMapClient sqlMapper){
+		this.sqlMapper = sqlMapper;
 	}
 
 	// 게시글 수정
 	public String execute() throws Exception {
-		
-		sqlMapper = conDao.getCon();
-		
+				
 		// 파라미터와 리절트 객체 생성.
 		paramClass = new TestDTO();
 		resultClass = new TestDTO();

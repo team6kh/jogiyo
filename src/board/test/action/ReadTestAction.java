@@ -7,6 +7,8 @@ import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
+import common.ConDAOAware;
+
 import java.io.Reader;
 import java.io.InputStream;
 import java.io.IOException;
@@ -26,17 +28,15 @@ public class ReadTestAction extends ActionSupport implements ConDAOAware {
 	private InputStream inputStream;
 	private String contentDisposition;
 	private long contentLength;
-
-	private ConDAO conDao;
 	
-	public void setConDAO(ConDAO conDao){
-		this.conDao = conDao;
+	public void setConDAO(SqlMapClient sqlMapper){
+		this.sqlMapper = sqlMapper;
 	}
+	
+	private String modalParam;
 
 	// 상세보기
 	public String execute() throws Exception {
-		
-		sqlMapper = conDao.getCon();
 
 		// 해당 글의 조회수 +1.
 		paramClass.setNo(getNo());
@@ -56,7 +56,7 @@ public class ReadTestAction extends ActionSupport implements ConDAOAware {
 
 	// 비밀번호 체크 액션
 	public String checkAction() throws Exception {
-
+		
 		// 비밀번호 입력값 파라미터 설정.
 		paramClass.setNo(getNo());
 		paramClass.setPassword(getPassword());
@@ -134,4 +134,13 @@ public class ReadTestAction extends ActionSupport implements ConDAOAware {
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
+
+	public String getModalParam() {
+		return modalParam;
+	}
+
+	public void setModalParam(String modalParam) {
+		this.modalParam = modalParam;
+	}
+	
 }

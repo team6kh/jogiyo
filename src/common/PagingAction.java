@@ -1,4 +1,4 @@
-package board.test.action;
+package common;
 
 public class PagingAction {
 

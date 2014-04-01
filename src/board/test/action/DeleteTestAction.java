@@ -7,6 +7,8 @@ import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
+import common.ConDAOAware;
+
 import java.io.File;
 import java.io.Reader;
 import java.io.IOException;
@@ -21,17 +23,13 @@ public class DeleteTestAction extends ActionSupport implements ConDAOAware {
 	private int currentPage;	// 현재 페이지
 	
 	private int no;
-	
-	private ConDAO conDao;
-	
-	public void setConDAO(ConDAO conDao){
-		this.conDao = conDao;
+		
+	public void setConDAO(SqlMapClient sqlMapper){
+		this.sqlMapper = sqlMapper;
 	}
 
 	// 게시글 글 삭제
 	public String execute() throws Exception {
-		
-		sqlMapper = conDao.getCon();
 		
 		// 파라미터와 리절트 객체 생성.
 		paramClass = new TestDTO();

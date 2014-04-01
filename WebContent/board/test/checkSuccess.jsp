@@ -7,25 +7,11 @@
 <head>
 	<title>비밀번호 확인</title>
 	<link rel="stylesheet" href="/team6-struts/css/css.css"" type="text/css">
-	<script type="text/javascript">
-		function locationURL() {
-		
-		if ( window.name == 'update' ) 
-			window.opener.parent.location.href='updateTestForm.action?no=<s:property value="no" />&currentPage=<s:property value="currentPage" />';
-				
-		else if ( window.name == 'delete' ) 
-		{
-			alert('삭제되었습니다.');
-			window.opener.parent.location.href='deleteTestAction.action?no=<s:property value="no" />&currentPage=<s:property value="currentPage" />';
-		}
-			
-		window.close();
-		}
-	</script>
 </head>
   
 <body>
-  	<script>locationURL()</script>
+  	checkSuccess.jsp
+  	modalParam:${modalParam}
 </body>
 </html>
 

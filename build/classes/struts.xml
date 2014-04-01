@@ -7,8 +7,16 @@
 	
 		<!-- SqlMapClient 인터셉터... -->
 		<interceptors>
-			<interceptor name="conDao" class="board.test.action.ConDAOInterceptor"/>
+			<interceptor name="conDAO" class="common.ConDAOInterceptor"/>
 		</interceptors>
+		
+		<!-- NEW 비밀번호 체크 액션. -->
+		<action name="checkPass" class="common.CheckPasswordAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result name="error">/board/test/checkError.jsp</result>
+			<result name="success" type="chain">${modalParam}</result>
+		</action>		
 				
 		<!-- 로그인 액션. -->
 		<action name="loginForm" class="login.action.LoginAction" method="loginForm">
@@ -19,16 +27,16 @@
 			<interceptor-ref name="prepare" />
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="params" />				
-			<interceptor-ref name="conDao" />
+			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="servletConfig" />
 			<result name="error">/login/loginError.jsp</result>
-			<result name="success" type="redirect">${currentActionName}.action</result>
+			<result name="success" type="redirect-action">${currentActionName}</result>
 		</action>
 		
 		<!-- 로그아웃 액션. -->
 		<action name="logout" class="logout.action.LogoutAction">
 			<interceptor-ref name="servletConfig" />
-			<result name="success" type="redirect">home.action</result>
+			<result name="success" type="redirect-action">home</result>
 		</action>
 		
 		<!-- 홈 액션. -->
@@ -44,7 +52,7 @@
 		<!-- 테스트 게시판 리스트 액션. -->
 		<action name="listTest" class="board.test.action.ListTestAction">
 			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDao"/>
+			<interceptor-ref name="conDAO"/>
 			<result>/board/test/listTest.jsp</result>
 		</action>
 		
@@ -55,7 +63,7 @@
 		
 		<action name="createTest" class="board.test.action.CreateTestAction">
 			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDao"/>
+			<interceptor-ref name="conDAO"/>
 			<result type="redirect-action">
 				<param name="actionName">listTest</param>
 			</result>
@@ -64,7 +72,7 @@
 		<!-- 테스트 게시판 읽기 액션. -->
 		<action name="readTest" class="board.test.action.ReadTestAction">
 			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDao"/>
+			<interceptor-ref name="conDAO"/>
 			<result>/board/test/readTest.jsp</result>
 		</action>
 		
@@ -73,9 +81,9 @@
 			<result>/board/test/checkPassword.jsp</result>
 		</action>
 		
-		<action name="check" class="board.test.action.ReadTestAction" method="checkAction">
+		<action name="checkAction" class="board.test.action.ReadTestAction" method="checkAction">
 			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDao"/>
+			<interceptor-ref name="conDAO"/>
 			<result name="error">/board/test/checkError.jsp</result>
 			<result>/board/test/checkSuccess.jsp</result>
 		</action>
@@ -83,20 +91,20 @@
 		<!-- 테스트 게시판 수정 액션. -->
 		<action name="updateTestForm" class="board.test.action.ReadTestAction">
 			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDao"/>
+			<interceptor-ref name="conDAO"/>
 			<result type="chain">createTestForm</result>
 		</action>
 		
 		<action name="updateTest" class="board.test.action.UpdateTestAction">
 			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDao"/>
+			<interceptor-ref name="conDAO"/>
 			<result type="chain">readTest</result>
 		</action>
 
 		<!--테스트 게시판 삭제 액션. -->
 		<action name="deleteTest" class="board.test.action.DeleteTestAction">
 			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDao"/>
+			<interceptor-ref name="conDAO"/>
 			<result type="chain">listTest</result>
 		</action>
 			

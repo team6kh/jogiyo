@@ -7,6 +7,8 @@ import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
+import common.ConDAOAware;
+
 import java.util.*;
 import java.io.Reader;
 import java.io.IOException;
@@ -28,10 +30,8 @@ public class CreateTestAction extends ActionSupport implements ConDAOAware {
 	private String content;
 	Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기.
 	
-	private ConDAO conDao;
-	
-	public void setConDAO(ConDAO conDao){
-		this.conDao = conDao;
+	public void setConDAO(SqlMapClient sqlMapper){
+		this.sqlMapper = sqlMapper;
 	}
 
 	public String createForm() throws Exception {
@@ -41,8 +41,6 @@ public class CreateTestAction extends ActionSupport implements ConDAOAware {
 
 	// 게시판 WRITE 액션
 	public String execute() throws Exception {
-		
-		sqlMapper = conDao.getCon();
 
 		// 파라미터와 리절트 객체 생성.
 		paramClass = new TestDTO();

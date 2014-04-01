@@ -50,26 +50,35 @@
 			</s:else>
 			<div class="form-group">
 				<label for="subject">제목</label> <input type="text"
-					class="form-control" id="subject" name="subject" placeholder="제목">
+					class="form-control" id="subject" name="subject" placeholder="제목"
+					value="${resultClass.subject}">
 			</div>
 			<div class="form-group">
-				<label for="name">작성자</label> <input type="text"
-					class="form-control" id="name" name="name" placeholder="작성자">
+				<label for="name">작성자</label>
+				<s:if test="resultClass == NULL">
+					<input type="text" class="form-control" id="name" name="name"
+						placeholder="작성자">
+				</s:if>
+				<s:else>
+					<input type="text" class="form-control" value="${resultClass.name}" disabled>
+					<input type="hidden" id="name" name="name" value="${resultClass.name}">
+				</s:else>
 			</div>
 			<div class="form-group">
 				<label for="password">비밀번호</label> <input type="text"
 					class="form-control" id="password" name="password"
-					placeholder="비밀번호">
+					placeholder="비밀번호" value="${resultClass.password}">
 			</div>
 			<div class="form-group">
 				<label for="content">내용</label>
-				<textarea class="form-control" rows="3" id="content" name="content"></textarea>
+				<textarea class="form-control" rows="3" id="content" name="content">${resultClass.content}</textarea>
 			</div>
 
-			<div class="pull-right">				
+			<div class="pull-right">
 				<button type="submit" class="btn btn-primary">글쓰기</button>
-				<a href="listTest.action?currentPage=<s:property value="currentPage"/>"
-				 class="btn btn-default">목록</a>
+				<a
+					href="listTest.action?currentPage=<s:property value="currentPage"/>"
+					class="btn btn-default">목록</a>
 			</div>
 
 		</div>
