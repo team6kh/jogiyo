@@ -36,7 +36,7 @@
 		<include refid="whereBuyerId" />
 	</select>
 
-	<select id="selectBuyerPassword" resultMap="BuyerResult">
+	<select id="selectBuyerPw" resultMap="BuyerResult">
 		<include refid="selectAll" />
 		<include refid="whereBuyerId" />
 		AND buyer_pw = #buyer_pw#

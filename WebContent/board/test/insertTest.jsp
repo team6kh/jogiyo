@@ -39,39 +39,38 @@
 
 		<div class="well col-md-12">
 			<s:if test="resultClass == NULL">
-				<form action="createTest.action" method="post"
+				<form action="insertTest.action" method="post"
 					enctype="multipart/form-data" onsubmit="return validation();">
 			</s:if>
 			<s:else>
 				<form action="updateTest.action" method="post"
 					enctype="multipart/form-data">
-					<s:hidden name="no" value="%{resultClass.no}" />
+					<s:hidden name="test_num" value="%{resultClass.test_num}" />
 					<s:hidden name="currentPage" value="%{currentPage}" />
 			</s:else>
 			<div class="form-group">
-				<label for="subject">제목</label> <input type="text"
-					class="form-control" id="subject" name="subject" placeholder="제목"
-					value="${resultClass.subject}">
+				<label for="test_subject">제목</label>
+				<input type="text" class="form-control" id="test_subject" name="test_subject"
+				 placeholder="제목" value="${resultClass.test_subject}">
 			</div>
 			<div class="form-group">
-				<label for="name">작성자</label>
+				<label for="test_writer_name">작성자</label>
 				<s:if test="resultClass == NULL">
-					<input type="text" class="form-control" id="name" name="name"
-						placeholder="작성자">
+					<input type="text" class="form-control" id="test_writer_name" name="test_writer_name" placeholder="작성자">
 				</s:if>
 				<s:else>
-					<input type="text" class="form-control" value="${resultClass.name}" disabled>
-					<input type="hidden" id="name" name="name" value="${resultClass.name}">
+					<input type="text" class="form-control" value="${resultClass.test_writer_name}" disabled>
+					<input type="hidden" id="test_writer_name" name="test_writer_name" value="${resultClass.test_writer_name}">
 				</s:else>
 			</div>
 			<div class="form-group">
-				<label for="password">비밀번호</label> <input type="text"
-					class="form-control" id="password" name="password"
-					placeholder="비밀번호" value="${resultClass.password}">
+				<label for="password">비밀번호</label>
+				<input type="text" class="form-control" id="test_writer_pw" name="test_writer_pw"
+				 placeholder="비밀번호" value="${resultClass.test_writer_pw}">
 			</div>
 			<div class="form-group">
-				<label for="content">내용</label>
-				<textarea class="form-control" rows="3" id="content" name="content">${resultClass.content}</textarea>
+				<label for="test_content">내용</label>
+				<textarea class="form-control" rows="3" id="test_content" name="test_content">${resultClass.test_content}</textarea>
 			</div>
 
 			<div class="pull-right">

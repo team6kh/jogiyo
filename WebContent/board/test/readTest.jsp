@@ -40,23 +40,23 @@
 			<table class="table table-striped table-forum">
 				<thead>
 					<tr>
-						<th colspan="2">제목</th>
+						<th colspan="2">${resultClass.test_subject}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<!-- Post -->
 					<tr>
 						<td class="text-center"><span
-							class="glyphicon glyphicon-user"></span> &nbsp; <strong>${resultClass.name}</strong></td>
-						<td>등록일 : <em>${resultClass.regdate}</em></td>
+							class="glyphicon glyphicon-user"></span> &nbsp; <strong>${resultClass.test_writer_name}</strong></td>
+						<td>등록일 : <em>${resultClass.test_reg_date}</em></td>
 					</tr>
 					<tr>
 						<td class="text-center" style="width: 12%;">
 							<!-- 공백 -->
 						</td>
 						<td>
-							<p>이 글의 비밀번호는 ${resultClass.password} 입니다. 밑에서부터는 글 내용입니다.</p>
-							<p>${resultClass.content}</p>
+							<p>이 글의 비밀번호는 ${resultClass.test_writer_pw} 입니다. 밑에서부터는 글 내용입니다.</p>
+							<p>${resultClass.test_content}</p>
 						</td>
 					</tr>
 					<!-- end Post -->
@@ -83,15 +83,15 @@
 								</div>
 								<div class="modal-body">
 									<div class="form-group">
-										<label for="password">비밀번호</label>
-										<input type="password" class="form-control" name="password">
+										<label>비밀번호</label>
+										<input type="password" class="form-control" name="test_writer_pw">
 										<input type="hidden" name="modalParam" id="modalParam">	
 									</div>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">닫기</button>							
-									<input type="hidden" name="no" value="${resultClass.no}">
+									<input type="hidden" name="test_num" value="${resultClass.test_num}">
 									<input type="hidden" name="currentPage" value="${currentPage}">
 									<button type="submit" class="btn btn-primary">입력</button>
 								</div>

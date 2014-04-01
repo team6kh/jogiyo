@@ -36,7 +36,7 @@
 	          <div class="form-group">
 	            <input type="password" placeholder="비밀번호" class="form-control" name="buyer_pw">
 	          </div>	          
-	          <input type="hidden" name="currentActionName" value="${currentActionName}">
+	          <input type="hidden" name="actionName" value="${actionName}">
 	          <button type="submit" class="btn btn-primary">로그인</button>
 	        </form>  
 			</c:when>

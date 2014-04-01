@@ -50,8 +50,8 @@
 				<tbody>
 					<s:iterator value="list" status="stat">
 						<s:url id="viewURL" action="readTest">
-							<s:param name="no">
-								<s:property value="no" />
+							<s:param name="test_num">
+								<s:property value="test_num" />
 							</s:param>
 							<s:param name="currentPage">
 								<s:property value="currentPage" />
@@ -59,11 +59,11 @@
 						</s:url>
 						<tr>
 							<td colspan="2"><s:a href="%{viewURL}">
-									<s:property value="subject" />
+									<s:property value="test_subject" />
 								</s:a></td>
-							<td class="text-center"><s:property value="name" /></td>
-							<td class="text-center"><s:property value="regdate" /></td>
-							<td class="text-center"><s:property value="readhit" /></td>
+							<td class="text-center"><s:property value="test_writer_name" /></td>
+							<td class="text-center"><s:property value="test_reg_date" /></td>
+							<td class="text-center"><s:property value="test_readcount" /></td>
 						</tr>
 					</s:iterator>
 					<s:if test="list.size() <= 0">
@@ -82,7 +82,7 @@
 
 			<div class="pull-right">
 				<a
-					href="createTestForm.action?currentPage=<s:property value="currentPage"/>"
+					href="insertTestForm.action?currentPage=<s:property value="currentPage"/>"
 					class="btn btn-primary">글쓰기</a>
 			</div>
 

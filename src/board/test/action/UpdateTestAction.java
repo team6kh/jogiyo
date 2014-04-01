@@ -14,40 +14,34 @@ import java.io.IOException;
 public class UpdateTestAction extends ActionSupport implements ConDAOAware {	
 	public static SqlMapClient sqlMapper;
 
-	private TestDTO paramClass; // 파라미터를 저장할 객체
-	private TestDTO resultClass; // 쿼리 결과 값을 저장할 객체
+	private TestDTO paramClass = new TestDTO();		// 파라미터를 저장할 객체
+	private TestDTO resultClass = new TestDTO();	// 쿼리 결과 값을 저장할 객체
 
-	private int currentPage;	//현재 페이지
+	private int currentPage;	// 현재 페이지	
+	private int test_num;		// 현재 글 고유넘버
 	
-	private int no;
-	private String subject;
-	private String name;
-	private String password;
-	private String content;
+	private String test_writer_pw;
+	private String test_subject;
+	private String test_content;
 		
 	public void setConDAO(SqlMapClient sqlMapper){
 		this.sqlMapper = sqlMapper;
 	}
 
-	// 게시글 수정
+	// 게시글 UPDATE 액션.
 	public String execute() throws Exception {
-				
-		// 파라미터와 리절트 객체 생성.
-		paramClass = new TestDTO();
-		resultClass = new TestDTO();
 
-		// 수정할 항목 설정.
-		paramClass.setNo(getNo());
-		paramClass.setSubject(getSubject());
-		paramClass.setName(getName());
-		paramClass.setPassword(getPassword());
-		paramClass.setContent(getContent());
+		// 수정할 항목 설정. 여기서는 인터셉터를 사용하지 않고 직접(?) 설정해보자.
+		paramClass.setTest_num(getTest_num());
+		paramClass.setTest_writer_pw(getTest_writer_pw());
+		paramClass.setTest_subject(getTest_subject());
+		paramClass.setTest_content(getTest_content());
 
 		// 일단 항목만 수정한다.
 		sqlMapper.update("Test.updateBoard", paramClass);		
 
 		// 수정이 끝나면 view 페이지로 이동.
-		resultClass = (TestDTO) sqlMapper.queryForObject("Test.selectWhereNo", getNo());
+		resultClass = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
 
 		return SUCCESS;
 	}
@@ -68,46 +62,6 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 		this.resultClass = resultClass;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public int getNo() {
-		return no;
-	}
-
-	public void setNo(int no) {
-		this.no = no;
-	}
-
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -115,4 +69,37 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
+
+	public int getTest_num() {
+		return test_num;
+	}
+
+	public void setTest_num(int test_num) {
+		this.test_num = test_num;
+	}
+
+	public String getTest_writer_pw() {
+		return test_writer_pw;
+	}
+
+	public void setTest_writer_pw(String test_writer_pw) {
+		this.test_writer_pw = test_writer_pw;
+	}
+
+	public String getTest_subject() {
+		return test_subject;
+	}
+
+	public void setTest_subject(String test_subject) {
+		this.test_subject = test_subject;
+	}
+
+	public String getTest_content() {
+		return test_content;
+	}
+
+	public void setTest_content(String test_content) {
+		this.test_content = test_content;
+	}
+	
 }

@@ -24,9 +24,7 @@
 
   <body>
 
-    <div id="header">
-		<%@ include file="inc/header.jsp"%>
-	</div>
+    <%@ include file="inc/header.jsp"%>
 
     <div class="container">
 

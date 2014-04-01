@@ -30,7 +30,7 @@
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="servletConfig" />
 			<result name="error">/login/loginError.jsp</result>
-			<result name="success" type="redirect-action">${currentActionName}</result>
+			<result name="success" type="redirect-action">${actionName}</result>
 		</action>
 		
 		<!-- 로그아웃 액션. -->
@@ -57,11 +57,13 @@
 		</action>
 		
 		<!-- 테스트 게시판 쓰기 액션. -->
-		<action name="createTestForm" class="board.test.action.CreateTestAction" method="createForm">
-			<result>/board/test/createTest.jsp</result>
+		<action name="insertTestForm" class="board.test.action.InsertTestAction" method="insertForm">
+			<result>/board/test/insertTest.jsp</result>
 		</action>
 		
-		<action name="createTest" class="board.test.action.CreateTestAction">
+		<action name="insertTest" class="board.test.action.InsertTestAction">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result type="redirect-action">
@@ -74,25 +76,13 @@
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/board/test/readTest.jsp</result>
-		</action>
-		
-		<!-- 비밀번호 체크 액션. -->
-		<action name="checkForm" class="board.test.action.ReadTestAction" method="checkForm">
-			<result>/board/test/checkPassword.jsp</result>
-		</action>
-		
-		<action name="checkAction" class="board.test.action.ReadTestAction" method="checkAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
-			<result name="error">/board/test/checkError.jsp</result>
-			<result>/board/test/checkSuccess.jsp</result>
-		</action>
+		</action>		
 		
 		<!-- 테스트 게시판 수정 액션. -->
 		<action name="updateTestForm" class="board.test.action.ReadTestAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result type="chain">createTestForm</result>
+			<result type="chain">insertTestForm</result>
 		</action>
 		
 		<action name="updateTest" class="board.test.action.UpdateTestAction">
