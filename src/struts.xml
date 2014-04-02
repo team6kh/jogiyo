@@ -22,7 +22,7 @@
 		<action name="loginForm" class="login.action.LoginAction" method="loginForm">
 			<result>/login/loginForm.jsp</result>
 		</action>
-		
+				
 		<action name="login" class="login.action.LoginAction">		
 			<interceptor-ref name="params" />				
 			<interceptor-ref name="conDAO" />

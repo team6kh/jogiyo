@@ -69,6 +69,10 @@
 				<!-- Button trigger modal : 수정 -->
 				<button class="btn btn-default insertModalParam" data-toggle="modal"
 					data-target="#checkModal" data-id="updateTestForm">수정</button>
+					
+				<!-- Button trigger modal : 삭제 -->
+				<button class="btn btn-default insertModalParam" data-toggle="modal"
+					data-target="#checkModal" data-id="deleteTest">삭제</button>
 
 				<!-- Modal -->
 				<div class="modal fade" id="checkModal" tabindex="-1" role="dialog"
@@ -98,11 +102,7 @@
 							</form>
 						</div>
 					</div>
-				</div>
-
-				<!-- Button trigger modal : 삭제 -->
-				<button class="btn btn-default insertModalParam" data-toggle="modal"
-					data-target="#checkModal" data-id="deleteTest">삭제</button>
+				</div>			
 
 				<a
 					href="listTest.action?currentPage=<s:property value="currentPage"/>"

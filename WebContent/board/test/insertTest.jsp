@@ -48,12 +48,12 @@
 			</c:if>
 			<div class="form-group">
 				<label for="test_subject">제목</label>
-				<input type="text" class="form-control" name="test_subject" placeholder="제목" value="${resultClass.test_subject}">
+				<input type="text" class="form-control" name="test_subject" placeholder="제목" value="${resultClass.test_subject}" required>
 			</div>
 			<div class="form-group">
 				<label for="test_writer_name">작성자</label>
 				<c:if test="${resultClass.test_writer_name eq null}">
-					<input type="text" class="form-control" name="test_writer_name" placeholder="작성자">
+					<input type="text" class="form-control" name="test_writer_name" placeholder="작성자" required>
 				</c:if>
 				<c:if test="${resultClass.test_writer_name ne null}">
 					<input type="text" class="form-control" value="${resultClass.test_writer_name}" disabled>
@@ -63,7 +63,7 @@
 			<c:if test="${resultClass.test_writer_pw eq null}">
 				<div class="form-group">
 					<label for="test_writer_pw">비밀번호</label>
-					<input type="password" class="form-control" name="test_writer_pw" placeholder="비밀번호" value="${resultClass.test_writer_pw}">
+					<input type="password" class="form-control" name="test_writer_pw" placeholder="비밀번호" value="${resultClass.test_writer_pw}" required>
 				</div>
 			</c:if>
 			<c:if test="${resultClass.test_writer_pw ne null}">
@@ -71,7 +71,7 @@
 			</c:if>
 			<div class="form-group">
 				<label for="test_content">내용</label>
-				<textarea class="form-control" rows="3" id="test_content" name="test_content">${resultClass.test_content}</textarea>
+				<textarea class="form-control" rows="3" id="test_content" name="test_content" required>${resultClass.test_content}</textarea>
 			</div>
 
 			<div class="pull-right">

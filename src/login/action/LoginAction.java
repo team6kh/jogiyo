@@ -15,10 +15,10 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 	
 	public static SqlMapClient sqlMapper;
 	
-	private String login_type;		// 로그인 타입.
-	private String login_id;		// 로그인 아이디.
-	private String login_pw;		// 로그인 비밀번호.
-	private String actionName;		// 액션 이름.
+	private String login_type;			// 로그인 타입.
+	private String login_id;			// 로그인 아이디.
+	private String login_pw;			// 로그인 비밀번호.
+	private String actionName;			// 액션 이름.
 	
 	Map sessionMap;
 	

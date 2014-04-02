@@ -4,14 +4,14 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class HomeAction extends ActionSupport {
 	
-	private String currentActionName = "home";
+	private String actionName = "home";
 
 	public String execute() throws Exception {
 		return SUCCESS;
 	}
 	
-	public String getCurrentActionName() {
-		return currentActionName;
+	public String getActionName() {
+		return actionName;
 	}
 	
 }
