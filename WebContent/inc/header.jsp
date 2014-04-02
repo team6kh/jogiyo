@@ -31,7 +31,7 @@
 			<c:when test="${empty sessionId}">
 			<form class="navbar-form navbar-right" action="/jogiyo/login.action">
 	          <div class="form-group">
-	            <input type="text" placeholder="아이디" class="form-control" name="login_id">
+	            <input type="text" placeholder="구매자" class="form-control" name="login_id">
 	          </div>
 	          <div class="form-group">
 	            <input type="password" placeholder="비밀번호" class="form-control" name="login_pw">
