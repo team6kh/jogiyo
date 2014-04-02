@@ -92,8 +92,8 @@
 		<!-- test message -->
 		<div class="test-template">
 			<h1>test template</h1>
-			<p class="lead">당신은 ${sessionType} 입니다.</p>
-			<p class="lead">${sessionName} 님 환영합니다.</p>
+			<p class="lead">당신은 "${sessionType}" 입니다.</p>
+			<p class="lead">"${sessionName}" 님 환영합니다.</p>
 			<p class="lead">sessionType : ${sessionType}</p>
 			<p class="lead">sessionId : ${sessionId}</p>
 			<p class="lead">sessionPw : ${sessionPw}</p>

@@ -45,8 +45,8 @@ public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAO
 	public String insertForm() throws Exception {
 		if (sessionMap != null) {
 			resultClass = new TestDTO();			
-			resultClass.setTest_writer_name((String) sessionMap.get("sessionName"));
-			resultClass.setTest_writer_pw((String) sessionMap.get("sessionPw"));
+			resultClass.setTest_writer_name((String) sessionMap.get("sessionName"));	// 세션이름을 작성자로 설정.
+			resultClass.setTest_writer_pw((String) sessionMap.get("sessionPw"));		// 세션비번을 글비번으로 설정..
 		}
 		return SUCCESS;
 	}
