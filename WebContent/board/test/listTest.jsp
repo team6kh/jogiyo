@@ -92,17 +92,16 @@
 		<!-- test message -->
 		<div class="test-template">
 			<h1>test template</h1>
-			<p class="lead">currentActionName:${currentActionName}</p>
-			<p class="lead">sessionBuyerId:${sessionBuyerId}</p>
-			<p class="lead">sessionScope.sessionBuyerId:${sessionScope.sessionBuyerId}</p>
-			<c:set var="sId" value="${sessionScope.sessionBuyerId}"></c:set>
-			<p class="lead">sId:${sId}</p>
-			<p class="lead">sessionBuyerName:"${sessionBuyerName}" 님 환영합니다.</p>
-			<p class="lead">
-				resultClass.buyer_name:
-				<s:property value="resultClass.buyer_name" />
-				님 환영합니다.
-			</p>
+			<p class="lead">당신은 ${sessionType} 입니다.</p>
+			<p class="lead">${sessionName} 님 환영합니다.</p>
+			<p class="lead">sessionType : ${sessionType}</p>
+			<p class="lead">sessionId : ${sessionId}</p>
+			<p class="lead">sessionPw : ${sessionPw}</p>
+			<p class="lead">sessionName : ${sessionName}</p>
+			<p class="lead">actionName : ${actionName}</p>
+			<p class="lead">sessionScope.sessionId : ${sessionScope.sessionId}</p>
+			<c:set var="sId" value="${sessionScope.sessionId}"></c:set>
+			<p class="lead">sId : ${sId}</p>
 		</div>
 		<!-- end of test message -->
 

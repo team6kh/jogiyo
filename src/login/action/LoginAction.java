@@ -8,20 +8,17 @@ import user.buyer.dto.BuyerDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.Preparable;
 
 import common.ConDAOAware;
 
-public class LoginAction implements Action, Preparable, ModelDriven,
-		ConDAOAware, SessionAware {
+public class LoginAction implements Action, ConDAOAware, SessionAware {
 	
 	public static SqlMapClient sqlMapper;
 	
-	private BuyerDTO paramClass;	// 파라미터를 저장할 객체
-	private BuyerDTO resultClass;	// 쿼리 결과 값을 저장할 객체
-	
-	private String actionName;
+	private String login_type;		// 로그인 타입.
+	private String login_id;		// 로그인 아이디.
+	private String login_pw;		// 로그인 비밀번호.
+	private String actionName;		// 액션 이름.
 	
 	Map sessionMap;
 	
@@ -39,35 +36,60 @@ public class LoginAction implements Action, Preparable, ModelDriven,
 		return SUCCESS;
 	}
 
-	// Preparable 인터페이스의 prepare
-	public void prepare() throws Exception {
-		paramClass = new BuyerDTO();
-	}
-
-	// ModelDriven 인터페이스의 getModel 구현
-	public Object getModel() {
-		return paramClass;
-	}
-
 	public String execute() throws Exception {
 		
-		resultClass = new BuyerDTO();
+		// 로그인 타입이 "구매자"
+		if (login_type.equals("buyer")){			
+			
+			BuyerDTO paramClass = new BuyerDTO();
+			BuyerDTO resultClass = new BuyerDTO();
+			
+			paramClass.setBuyer_id(getLogin_id());
+			paramClass.setBuyer_pw(getLogin_pw());
 
-		// 사용자의 비밀번호 가져오기.
-		resultClass = (BuyerDTO) sqlMapper.queryForObject(
-				"Buyer.selectWhereBuyerPw", paramClass);
+			// 사용자의 비밀번호 가져오기.
+			resultClass = (BuyerDTO) sqlMapper.queryForObject(
+					"Buyer.selectWhereBuyerPw", paramClass);
+			
+			// 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴.
+			if (resultClass != null) {				
+				
+				sessionMap.put("sessionType", getLogin_type());
+				sessionMap.put("sessionId", resultClass.getBuyer_id());
+				sessionMap.put("sessionPw", resultClass.getBuyer_pw());
+				sessionMap.put("sessionName", resultClass.getBuyer_name());
+				
+				return SUCCESS;
+			}
 
-		// 입력한 비밀번호가 틀리면 ERROR 리턴.
-		if (resultClass == null) {
-			return ERROR;
 		}
-
-		sessionMap.put("sessionBuyerId", resultClass.getBuyer_id());
-		sessionMap.put("sessionBuyerPw", resultClass.getBuyer_pw());
-		sessionMap.put("sessionBuyerName", resultClass.getBuyer_name());
-
-		return SUCCESS;
 		
+		return ERROR;
+		
+	}
+	
+	public String getLogin_type() {
+		return login_type;
+	}
+
+	public void setLogin_type(String login_type) {
+		this.login_type = login_type;
+	}
+
+	public String getLogin_id() {
+		return login_id;
+	}
+
+	public void setLogin_id(String login_id) {
+		this.login_id = login_id;
+	}
+
+	public String getLogin_pw() {
+		return login_pw;
+	}
+
+	public void setLogin_pw(String login_pw) {
+		this.login_pw = login_pw;
 	}
 
 	public String getActionName() {
@@ -76,6 +98,6 @@ public class LoginAction implements Action, Preparable, ModelDriven,
 
 	public void setActionName(String actionName) {
 		this.actionName = actionName;
-	}
+	}	
 
 }

@@ -64,8 +64,8 @@
 				</s:else>
 			</div>
 			<div class="form-group">
-				<label for="password">비밀번호</label>
-				<input type="text" class="form-control" id="test_writer_pw" name="test_writer_pw"
+				<label for="test_writer_pw">비밀번호</label>
+				<input type="password" class="form-control" id="test_writer_pw" name="test_writer_pw"
 				 placeholder="비밀번호" value="${resultClass.test_writer_pw}">
 			</div>
 			<div class="form-group">

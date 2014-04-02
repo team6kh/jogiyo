@@ -24,8 +24,6 @@
 		</action>
 		
 		<action name="login" class="login.action.LoginAction">		
-			<interceptor-ref name="prepare" />
-			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="params" />				
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="servletConfig" />

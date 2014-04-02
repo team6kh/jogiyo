@@ -3,6 +3,7 @@ package user.buyer.dto;
 import java.sql.Timestamp;
 
 public class BuyerDTO {
+	
 	private String buyer_id;
 	private String buyer_pw;
 	private String buyer_name;
