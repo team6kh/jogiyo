@@ -55,13 +55,15 @@
 		</action>
 		
 		<!-- 테스트 게시판 쓰기 액션. -->
-		<action name="insertTestForm" class="board.test.action.InsertTestAction" method="insertForm">
+		<action name="insertTestForm" class="board.test.action.InsertTestAction" method="insertForm">			
+			<interceptor-ref name="servletConfig"/>
+			<interceptor-ref name="params"/>
 			<result>/board/test/insertTest.jsp</result>
 		</action>
 		
 		<action name="insertTest" class="board.test.action.InsertTestAction">
-			<interceptor-ref name="prepare" />
-			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result type="redirect-action">

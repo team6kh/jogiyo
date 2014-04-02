@@ -38,36 +38,37 @@
 		</div>
 
 		<div class="well col-md-12">
-			<s:if test="resultClass == NULL">
-				<form action="insertTest.action" method="post"
-					enctype="multipart/form-data" onsubmit="return validation();">
-			</s:if>
-			<s:else>
-				<form action="updateTest.action" method="post"
-					enctype="multipart/form-data">
-					<s:hidden name="test_num" value="%{resultClass.test_num}" />
-					<s:hidden name="currentPage" value="%{currentPage}" />
-			</s:else>
+			<c:if test="${resultClass.test_subject eq null}">
+				<form action="insertTest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
+			</c:if>
+			<c:if test="${resultClass.test_subject ne null}">
+				<form action="updateTest.action" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="test_num" value="%{test_num}" />
+					<input type="hidden" name="currentPage" value="%{currentPage}" />
+			</c:if>
 			<div class="form-group">
 				<label for="test_subject">제목</label>
-				<input type="text" class="form-control" id="test_subject" name="test_subject"
-				 placeholder="제목" value="${resultClass.test_subject}">
+				<input type="text" class="form-control" name="test_subject" placeholder="제목" value="${resultClass.test_subject}">
 			</div>
 			<div class="form-group">
 				<label for="test_writer_name">작성자</label>
-				<s:if test="resultClass == NULL">
-					<input type="text" class="form-control" id="test_writer_name" name="test_writer_name" placeholder="작성자">
-				</s:if>
-				<s:else>
+				<c:if test="${resultClass.test_writer_name eq null}">
+					<input type="text" class="form-control" name="test_writer_name" placeholder="작성자">
+				</c:if>
+				<c:if test="${resultClass.test_writer_name ne null}">
 					<input type="text" class="form-control" value="${resultClass.test_writer_name}" disabled>
-					<input type="hidden" id="test_writer_name" name="test_writer_name" value="${resultClass.test_writer_name}">
-				</s:else>
+					<input type="hidden" name="test_writer_name" value="${resultClass.test_writer_name}">
+				</c:if>
 			</div>
-			<div class="form-group">
-				<label for="test_writer_pw">비밀번호</label>
-				<input type="password" class="form-control" id="test_writer_pw" name="test_writer_pw"
-				 placeholder="비밀번호" value="${resultClass.test_writer_pw}">
-			</div>
+			<c:if test="${resultClass.test_writer_pw eq null}">
+				<div class="form-group">
+					<label for="test_writer_pw">비밀번호</label>
+					<input type="password" class="form-control" name="test_writer_pw" placeholder="비밀번호" value="${resultClass.test_writer_pw}">
+				</div>
+			</c:if>
+			<c:if test="${resultClass.test_writer_pw ne null}">
+				<input type="hidden" name="test_writer_pw" value="${resultClass.test_writer_pw}">
+			</c:if>
 			<div class="form-group">
 				<label for="test_content">내용</label>
 				<textarea class="form-control" rows="3" id="test_content" name="test_content">${resultClass.test_content}</textarea>
@@ -75,9 +76,7 @@
 
 			<div class="pull-right">
 				<button type="submit" class="btn btn-primary">글쓰기</button>
-				<a
-					href="listTest.action?currentPage=<s:property value="currentPage"/>"
-					class="btn btn-default">목록</a>
+				<a href="listTest.action?currentPage=<s:property value="currentPage"/>" class="btn btn-default">목록</a>
 			</div>
 
 		</div>
