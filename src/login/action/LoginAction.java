@@ -55,7 +55,7 @@ public class LoginAction implements Action, Preparable, ModelDriven,
 
 		// 사용자의 비밀번호 가져오기.
 		resultClass = (BuyerDTO) sqlMapper.queryForObject(
-				"Buyer.selectBuyerPw", paramClass);
+				"Buyer.selectWhereBuyerPw", paramClass);
 
 		// 입력한 비밀번호가 틀리면 ERROR 리턴.
 		if (resultClass == null) {
