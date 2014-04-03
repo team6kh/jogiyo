@@ -88,7 +88,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		paramClass.setRest_reg_date(today.getTime());
 		
 		// [iBatis] insertRestBoard ����
-		sqlMapper.insert("Rest.insertRestBoard", paramClass);
+		sqlMapper.insert("Rest.W", paramClass);
 		
 		// ÷�������� �����ߴٸ� ������ ���ε��Ѵ�.
 		if (getUpload1() != null && getUpload2() != null) {
