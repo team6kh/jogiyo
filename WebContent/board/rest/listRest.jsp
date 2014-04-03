@@ -82,8 +82,7 @@
 
 			<div class="pull-right">
 				<a
-					href="insertTestForm.action?currentPage=<s:property value="currentPage"/>"
-					class="btn btn-primary">글쓰기</a>
+					href="insertRestForm.action" class="btn btn-primary">글쓰기</a>
 			</div>
 
 		</div>

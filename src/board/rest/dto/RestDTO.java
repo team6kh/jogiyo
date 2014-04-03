@@ -1,5 +1,6 @@
 package board.rest.dto;
 
+import java.io.File;
 import java.util.Date;
 
 public class RestDTO {
@@ -11,11 +12,13 @@ public class RestDTO {
 	private String rest_localcategory;
 	private String rest_typecategory;
 	
+	private String rest_destFile1;
 	private String rest_main_orgname;//
 	private String rest_main_savname;//
 	private String rest_content_orgname;//
 	private String rest_content_savname;//
 	
+	private String rest_destFile2;
 	private String rest_writer_name;
 	private String rest_writer_telnum;
 	private String rest_writer_mobilenum;
@@ -60,6 +63,12 @@ public class RestDTO {
 	public void setRest_typecategory(String rest_typecategory) {
 		this.rest_typecategory = rest_typecategory;
 	}
+	public String getRest_destFile1() {
+		return rest_destFile1;
+	}
+	public void setRest_destFile1(String rest_destFile1) {
+		this.rest_destFile1 = rest_destFile1;
+	}
 	public String getRest_main_orgname() {
 		return rest_main_orgname;
 	}
@@ -83,6 +92,12 @@ public class RestDTO {
 	}
 	public void setRest_content_savname(String rest_content_savname) {
 		this.rest_content_savname = rest_content_savname;
+	}
+	public String getRest_destFile2() {
+		return rest_destFile2;
+	}
+	public void setRest_destFile2(String rest_destFile2) {
+		this.rest_destFile2 = rest_destFile2;
 	}
 	public String getRest_writer_name() {
 		return rest_writer_name;
@@ -120,4 +135,5 @@ public class RestDTO {
 	public void setRest_readcount(int rest_readcount) {
 		this.rest_readcount = rest_readcount;
 	}
+	
 }
