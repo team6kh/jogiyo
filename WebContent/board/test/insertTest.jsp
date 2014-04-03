@@ -19,14 +19,14 @@
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="board/test/test-template.css" rel="stylesheet">
+<link href="common/common-template.css" rel="stylesheet">
 
 </head>
 
 <body>
 
 	<!-- header -->
-	<%@ include file="/inc/header.jsp"%>
+	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
 
 	<!-- container -->

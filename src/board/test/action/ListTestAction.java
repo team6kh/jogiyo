@@ -7,7 +7,6 @@ import common.ConDAOAware;
 import common.PagingAction;
 
 import java.util.*;
-import java.io.Reader;
 
 import board.test.dto.TestDTO;
 

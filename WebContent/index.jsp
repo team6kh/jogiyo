@@ -18,17 +18,17 @@
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="home-template.css" rel="stylesheet">
+    <link href="common/common-template.css" rel="stylesheet">
     
   </head>
 
   <body>
 
-    <%@ include file="inc/header.jsp"%>
+    <%@ include file="common/header.jsp"%>
 
     <div class="container">
 
-      <div class="home-template">
+      <div class="common-template">
         <h1>home template</h1>
         <p class="lead">Hello Home</p>
       </div>

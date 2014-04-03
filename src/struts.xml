@@ -14,31 +14,31 @@
 		<action name="checkPass" class="common.CheckPasswordAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result name="error">/board/test/checkError.jsp</result>
+			<result name="error">/common/error.jsp</result>
 			<result name="success" type="chain">${modalParam}</result>
 		</action>		
 				
 		<!-- 로그인 액션. -->
-		<action name="loginForm" class="login.action.LoginAction" method="loginForm">
-			<result>/login/loginForm.jsp</result>
+		<action name="loginForm" class="common.login.action.LoginAction" method="loginForm">
+			<result>/common/login/loginForm.jsp</result>
 		</action>
 				
-		<action name="login" class="login.action.LoginAction">		
+		<action name="login" class="common.login.action.LoginAction">		
 			<interceptor-ref name="params" />				
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="servletConfig" />
-			<result name="error">/login/loginError.jsp</result>
+			<result name="error">/common/error.jsp</result>
 			<result name="success" type="redirect-action">${actionName}</result>
 		</action>
 		
 		<!-- 로그아웃 액션. -->
-		<action name="logout" class="logout.action.LogoutAction">
+		<action name="logout" class="common.logout.action.LogoutAction">
 			<interceptor-ref name="servletConfig" />
 			<result name="success" type="redirect-action">home</result>
 		</action>
 		
 		<!-- 홈 액션. -->
-		<action name="home" class="home.action.HomeAction">
+		<action name="home" class="board.home.action.HomeAction">
 			<result>/index.jsp</result>
 		</action>
 		
@@ -85,6 +85,11 @@
 		
 		
 		
+		
+		<!-- 테스트 -->
+		<action name="testAction" class="test.action.TestAction">
+			<result>/test/test.jsp</result>
+		</action>
 		
 		<!-- 테스트 게시판 리스트 액션. -->
 		<action name="listTest" class="board.test.action.ListTestAction">

@@ -15,16 +15,19 @@
 		  	<result property="rest_amount" column="rest_amount"/>
 		  	<result property="rest_localcategory" column="rest_localcategory"/>
 		  	<result property="rest_typecategory" column="rest_typecategory"/>
+		  	<result property="rest_destFile1" column="rest_destFile1"/>
 		  	<result property="rest_main_orgname" column="rest_main_orgname"/>
 		  	<result property="rest_main_savname" column="rest_main_savname"/>
+		  	<result property="rest_destFile2" column="rest_destFile2"/>
 		  	<result property="rest_content_orgname" column="rest_content_orgname"/>
 		  	<result property="rest_content_savname" column="rest_content_savname"/>
 		  	<result property="rest_writer_name" column="rest_writer_name"/>
 		  	<result property="rest_writer_telnum" column="rest_writer_telnum"/>
 		  	<result property="rest_writer_mobilenum" column="rest_writer_mobilenum"/>
 		  	<result property="rest_writer_address" column="rest_writer_address"/>
-		  	<result property="rest_reg_date" column="rest_reg_date"/>
 		  	<result property="rest_readcount" column="rest_readcount"/>
+		  	<result property="rest_reg_date" column="rest_reg_date"/>
+		  	
 		  	
 		</resultMap>
 		

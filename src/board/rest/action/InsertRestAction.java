@@ -1,4 +1,3 @@
-//////////////////////
 package board.rest.action;
 
 import board.rest.dto.RestDTO;

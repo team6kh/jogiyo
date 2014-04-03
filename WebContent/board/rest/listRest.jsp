@@ -26,7 +26,7 @@
 <body>
 
 	<!-- header -->
-	<%@ include file="/inc/header.jsp"%>
+	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
 
 	<!-- container -->
@@ -59,7 +59,7 @@
 						</s:url>
 						<tr>
 							<td colspan="2"><s:a href="%{viewURL}">
-									<s:property value="rest_subject" />
+									<s:property value="rest_destFile1" />
 								</s:a></td>
 							<td class="text-center"><s:property value="rest_writer_name" /></td>
 							<td class="text-center"><s:property value="rest_price" /></td>
