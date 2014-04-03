@@ -18,9 +18,10 @@
             			<property name="JDBC.Username" value="${username}" />
             			<property name="JDBC.Password" value="${password}" />
 		</dataSource>
-	</transactionManager>
+	</transactionManager>	
 	
-	<sqlMap resource="/board/test/dao/TestDAO.xml"/>
 	<sqlMap resource="/user/buyer/dao/BuyerDAO.xml"/>
+	<sqlMap resource="/board/rest/dao/RestDAO.xml"/>
+	<sqlMap resource="/board/test/dao/TestDAO.xml"/>	
 	
 </sqlMapConfig>
