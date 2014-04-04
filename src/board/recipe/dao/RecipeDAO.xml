@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+<sqlMap namespace="Recipe">
+
+	<typeAlias alias="RecipeDTO" type="board.recipe.dto.RecipeDTO" />
+
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="RecipeRes" class="RecipeDTO">
+		<result property="recipe_subject" column="recipe_subject" />
+		<result property="recipe_foodkind" column="recipe_foodkind" />
+		<result property="recipe_writer" column="recipe_writer" />
+		<result property="recipe_password" column="recipe_password" />
+		<result property="recipe_method" column="recipe_method" />
+		<result property="recipe_time" column="recipe_time" />
+		<result property="recipe_price" column="recipe_price" />
+		<result property="recipe_content" column="recipe_content" />
+		<result property="recipe_file" column="recipe_file" />
+		<result property="recipe_orgfile" column="recipe_orgfile" />
+		<result property="recipe_num" column="recipe_num" />
+		<result property="recipe_readCount" column="recipe_readCount" />
+		<result property="recipe_recommand" column="recipe_recommand" />
+		<result property="recipe_reg_date" column="recipe_reg_date" />
+
+	</resultMap>
+
+	<!-- 공통으로 사용할 select 절 정의 -->
+	<sql id="select-all">
+		SELECT * FROM RECIPE_BOARD
+	</sql>
+
+	<!-- 공통으로 사용할 where-no 절 정의 -->
+	<sql id="where-recipe_num">
+		WHERE recipe_num = #recipe_num#
+	</sql>
+
+
+	<!-- select 쿼리문 정의 -->
+	<select id="selectAll" resultMap="RecipeRes">
+		SELECT * FROM RECIPE_BOARD
+		ORDER BY recipe_num DESC
+	</select>
+
+	<select id="selectOne" resultMap="RecipeRes" parameterClass="int">
+		<include refid="select-all" />
+		<include refid="where-recipe_num" />
+	</select>
+
+	<select id="selectLastRecipe_num" resultClass="RecipeDTO">
+		SELECT max(recipe_num) as recipe_num
+		FROM RECIPE_BOARD
+	</select>
+
+	<select id="selectRecipe_password" resultMap="RecipeRes">
+		<include refid="select-all" />
+		<include refid="where-recipe_num" />
+		AND recipe_password = #recipe_password#
+	</select>
+
+
+	<!-- insert 쿼리문 정의 -->
+	<insert id="insertRecipe" parameterClass="RecipeDTO">
+
+		INSERT INTO
+		RECIPE_BOARD (
+		RECIPE_NUM,
+		RECIPE_FOODKIND,
+		RECIPE_SUBJECT,
+		RECIPE_METHOD,
+		RECIPE_TIME,
+		RECIPE_PRICE,
+		RECIPE_MEMBERWRITER,
+		RECIPE_WRITER,
+		RECIPE_PASSWORD,
+		RECIPE_CONTENT,
+		RECIPE_REG_DATE
+		)
+		VALUES
+		(BOARD_NUM_SEQ.NEXTVAL,
+		#RECIPE_FOODKIND#,
+		#RECIPE_SUBJECT#,
+		#RECIPE_METHOD#,
+		#RECIPE_TIME#,
+		#RECIPE_PRICE#,
+		#RECIPE_MEMBERWRITER#,
+		#RECIPE_WRITER#,
+		#RECIPE_PASSWORD#,
+		#RECIPE_CONTENT#,
+		#RECIPE_REG_DATE#
+		)
+	</insert>
+
+
+	<!-- update 쿼리문 정의 -->
+	<update id="updateRecipe" parameterClass="RecipeDTO">
+		UPDATE RECIPE_BOARD SET RECIPE_FOODKIND = #RECIPE_FOODKIND#,
+		RECIPE_SUBJECT = #RECIPE_SUBJECT#,
+		RECIPE_METHOD =	#RECIPE_METHOD#,
+		RECIPE_TIME = #RECIPE_TIME#,
+		RRECIPE_PRICE = #RRECIPE_PRICE#,
+		RECIPE_WRITER = #RECIPE_MEMBERWRITER#,
+		RECIPE_WRITER = #RECIPE_WRITER#,
+		RECIPE_PASSWORD = #RECIPE_PASSWORD#,
+		RECIPE_CONTENT = #RECIPE_CONTENT#
+
+		<include refid="where-recipe_num" />
+	</update>
+
+	<update id="updateFile" parameterClass="RecipeDTO">
+		UPDATE RECIPE_BOARD SET RECIPE_ORGFILE = #RECIPE_ORGFILE#
+		,RECIPE_FILE =
+		#RECIPE_FILE#
+		<include refid="where-recipe_num" />
+	</update>
+
+	<update id="updateReadcount" parameterClass="RecipeDTO">
+		UPDATE RECIPE_BOARD SET recipe_readCount = recipe_readCount + 1
+		<include refid="where-recipe_num" />
+	</update>
+	
+	<update id="updateRecommand" parameterClass="RecipeDTO">
+		UPDATE RECIPE_BOARD SET recipe_recommand = recipe_recommand + 1
+		<include refid="where-recipe_num" />
+	</update>
+
+
+	<!-- delete 쿼리문 정의 -->
+	<delete id="deleteRecipe" parameterClass="RecipeDTO">
+		DELETE FROM RECIPE_BOARD
+		<include refid="where-recipe_num" />
+	</delete>
+
+</sqlMap>
+

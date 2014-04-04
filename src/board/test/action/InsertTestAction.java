@@ -24,7 +24,7 @@ public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAO
 
 	public static SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체.
 	
-	TestDTO paramClass;
+	TestDTO paramClass;    
 	TestDTO resultClass;
 
 	private int currentPage; // 현재 페이지
