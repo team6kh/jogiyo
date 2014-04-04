@@ -15,10 +15,10 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="listRest.action">REST</a></li>
-				<li><a href="/team6-struts/oard/rest/listReview.jsp">후기</a></li>
-				<li><a href="/team6-struts/board/rest/listRecipe.jsp">레시피</a></li>
-				<li><a href="/team6-struts/board/rest/listNotice.jsp">공지사항</a></li>
-				<li><a href="/team6-struts/board/rest/listQna.jsp">문의하기</a></li>
+				<li><a href="listReview.action">후기</a></li>
+				<li><a href="listRecipe.action">레시피</a></li>
+				<li><a href="listNotice.action">공지사항</a></li>
+				<li><a href="listQna.action">문의하기</a></li>
 				<!-- 테스트 -->
 				<li class="dropdown">
 	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">테스트 <b class="caret"></b></a>
