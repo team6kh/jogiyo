@@ -34,7 +34,8 @@
 
 		<!-- test message -->
 		<div class="test-template">
-			<h1>지금은 0404 베타버전입니다.</h1>
+			<h1>test message</h1>
+			<p class="lead">지금은 0404 베타입니다.</p>
 			<p class="lead">당신은 "${sessionType}" 입니다.</p>
 			<p class="lead">"${sessionName}" 님 환영합니다.</p>
 			<p class="lead">sessionType : ${sessionType}</p>
