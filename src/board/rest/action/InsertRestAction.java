@@ -1,13 +1,10 @@
 package board.rest.action;
 
 import board.rest.dto.RestDTO;
-
 import com.opensymphony.xwork2.ActionSupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
-
 import common.ConDAOAware;
 import common.Constants;
-
 import java.util.*;
 import java.io.Reader;
 import java.io.File;
@@ -77,7 +74,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		paramClass = new RestDTO();
 		resultClass = new RestDTO();
 		
-		
 		//insertRest.jsp에서 사용자가 입력한 파라미터를 get후 DTO에 set함.
 		paramClass.setRest_subject(getRest_subject());
 		paramClass.setRest_price(getRest_price());
@@ -98,28 +94,27 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 			resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
 			
 			//매인사진 파일 이름과 확장자 설정.
-			String file_name1 = "main_" + resultClass.getRest_num(); // main_112
+			String file_name1 = "main_" + resultClass.getRest_num();
 			String file_ext1 = getUpload1FileName().substring(getUpload1FileName().lastIndexOf('.') + 1, getUpload1FileName().length());
 			//컨텐트사진 파일 이름과 확장자 설정.
-			String file_name2 = "content_" + resultClass.getRest_num(); // content_112
+			String file_name2 = "content_" + resultClass.getRest_num();
 			String file_ext2 = getUpload2FileName().substring(getUpload2FileName().lastIndexOf('.') + 1, getUpload2FileName().length());
-			
 			
 			//매인사진파일 저장.
 			rest_destFile1 = new File(fileUploadPath1 + file_name1 + "."+ file_ext1); 
-			FileUtils.copyFile(getUpload1(), rest_destFile1); 
+			FileUtils.copyFile(getUpload1(), rest_destFile1);
 			//컨텐트사진파일 저장.
 			rest_destFile2 = new File(fileUploadPath2 + file_name2 + "."+ file_ext2); 
 			FileUtils.copyFile(getUpload2(), rest_destFile2); 
-
 			
-			//매인사진파일 DTO에 set
-			paramClass.setRest_destFile1(rest_destFile1.getAbsolutePath());
+			//글넘버
 			paramClass.setRest_num(resultClass.getRest_num());
+			//매인사진파일 DTO에 set
+			paramClass.setRest_destFile1(Constants.REST_MAIN_FILE_PATH+file_name1+"."+file_ext1);
 			paramClass.setRest_main_orgname(getUpload1FileName());
 			paramClass.setRest_main_savname(file_name1 + "." + file_ext1);
 			//컨텐트사진파일 DTO에 set
-			paramClass.setRest_destFile2(rest_destFile2.getAbsolutePath());
+			paramClass.setRest_destFile2(Constants.REST_CONTENT_FILE_PATH+file_name2+"."+file_ext2);
 			paramClass.setRest_content_orgname(getUpload2FileName()); 
 			paramClass.setRest_content_savname(file_name2 + "." + file_ext2);
 			

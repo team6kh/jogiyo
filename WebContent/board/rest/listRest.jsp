@@ -60,7 +60,7 @@
 						<tr>
 							<td colspan="2">
 								<s:a href="%{viewURL}">
-									<s:property value="rest_destFile1" />
+									<s:property value="rest_destFile1"/>
 								</s:a></td>
 							<td class="text-center"><s:property value="rest_writer_name" /></td>
 							<td class="text-center"><s:property value="rest_price" /></td>
