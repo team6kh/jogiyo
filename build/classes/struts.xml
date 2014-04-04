@@ -4,137 +4,166 @@
 
 <struts>
 	<package name="team6-struts" extends="struts-default">
-	
+
 		<!-- SqlMapClient 인터셉터... -->
 		<interceptors>
-			<interceptor name="conDAO" class="common.ConDAOInterceptor"/>
+			<interceptor name="conDAO" class="common.ConDAOInterceptor" />
 		</interceptors>
-		
+
 		<!-- NEW 비밀번호 체크 액션. -->
 		<action name="checkPass" class="common.CheckPasswordAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result name="error">/common/error.jsp</result>
 			<result name="success" type="chain">${modalParam}</result>
-		</action>		
-				
+		</action>
+
 		<!-- 로그인 액션. -->
-		<action name="loginForm" class="common.login.action.LoginAction" method="loginForm">
+		<action name="loginForm" class="common.login.action.LoginAction"
+			method="loginForm">
 			<result>/common/login/loginForm.jsp</result>
 		</action>
-				
-		<action name="login" class="common.login.action.LoginAction">		
-			<interceptor-ref name="params" />				
+
+		<action name="login" class="common.login.action.LoginAction">
+			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="servletConfig" />
 			<result name="error">/common/error.jsp</result>
 			<result name="success" type="redirect-action">${actionName}</result>
 		</action>
-		
+
 		<!-- 로그아웃 액션. -->
 		<action name="logout" class="common.logout.action.LogoutAction">
 			<interceptor-ref name="servletConfig" />
 			<result name="success" type="redirect-action">home</result>
 		</action>
-		
+
 		<!-- 홈 액션. -->
 		<action name="home" class="board.home.action.HomeAction">
 			<result>/index.jsp</result>
-		</action>		
-		
-		
-		
+		</action>
+
+
 		<!-- RestBoard 액션 -->
-		
+
 		<!-- 리스트에서 글쓰기 클릭시 -->
-		<action name="insertRestForm" class="board.rest.action.InsertRestAction" method="form">
+		<action name="insertRestForm" class="board.rest.action.InsertRestAction"
+			method="form">
 			<result>/board/rest/insertRest.jsp</result>
 		</action>
-		
+
 		<!-- 글쓰기에서 submit 클릭시 -->
 		<action name="insertRest" class="board.rest.action.InsertRestAction">
-			<interceptor-ref name="conDAO"/>
-			<interceptor-ref name="fileUpload"/>
-			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="params" />
 			<result type="redirect-action">
 				<param name="actionName">listRest</param>
 			</result>
-		</action>	
-	
+		</action>
+
 		<!-- 리스트 액션 -->
 		<action name="listRest" class="board.rest.action.ListRestAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result>/board/rest/listRest.jsp</result>
 		</action>
 
 		<!-- 수정 액션 -->
 		<action name="updateRest" class="board.rest.action.UpdateRestAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result>/board/rest/updateRest.jsp</result>
 		</action>
-		
-		<!-- RestBoard 끝 -->		
-		
-		
-		
+
+		<!-- RestBoard 끝 -->
+
+		<!-- Review게시판 시작 -->
+
+		<!-- 리뷰 글쓰기 폼 -->
+		<action name="insertReviewForm" class="board.review.action.InsertReviewAction"
+			method="form">
+			<result>/board/review/insertReview.jsp</result>
+		</action>
+
+		<!-- 리뷰 글쓰기 등록 -->
+		<action name="insertReviewPro" class="board.review.action.InsertReviewAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="params" />
+			<result type="redirect-action">
+				<param name="actionName">listReview</param>
+			</result>
+		</action>
+
+		<!-- 리뷰 글 목록 -->
+		<action name="listReview" class="board.review.action.ListReviewAction">
+			<result>/board/review/listReview.jsp</result>
+		</action>
+
+		<!-- Review게시판 끝 -->
+
+
+
 		<!-- 테스트 -->
 		<action name="testAction" class="test.action.TestAction">
 			<result>/test/test.jsp</result>
 		</action>
-		
+
 		<!-- 테스트 게시판 리스트 액션. -->
 		<action name="listTest" class="board.test.action.ListTestAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result>/board/test/listTest.jsp</result>
 		</action>
-		
+
 		<!-- 테스트 게시판 쓰기 액션. -->
-		<action name="insertTestForm" class="board.test.action.InsertTestAction" method="insertForm">			
-			<interceptor-ref name="servletConfig"/>
-			<interceptor-ref name="params"/>
+		<action name="insertTestForm" class="board.test.action.InsertTestAction"
+			method="insertForm">
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="params" />
 			<result>/board/test/insertTest.jsp</result>
 		</action>
-		
+
 		<action name="insertTest" class="board.test.action.InsertTestAction">
-			<interceptor-ref name="prepare"/>
-			<interceptor-ref name="modelDriven"/>
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result type="redirect-action">
 				<param name="actionName">listTest</param>
 			</result>
 		</action>
-		
+
 		<!-- 테스트 게시판 읽기 액션. -->
 		<action name="readTest" class="board.test.action.ReadTestAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result>/board/test/readTest.jsp</result>
-		</action>		
-		
+		</action>
+
 		<!-- 테스트 게시판 수정 액션. -->
 		<action name="updateTestForm" class="board.test.action.ReadTestAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result type="chain">insertTestForm</result>
 		</action>
-		
+
 		<action name="updateTest" class="board.test.action.UpdateTestAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result type="chain">readTest</result>
 		</action>
 
 		<!--테스트 게시판 삭제 액션. -->
 		<action name="deleteTest" class="board.test.action.DeleteTestAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result type="chain">listTest</result>
 		</action>
-			
+
 	</package>
 </struts>
 
