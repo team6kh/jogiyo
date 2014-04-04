@@ -37,6 +37,19 @@
 			<result name="success" type="redirect-action">home</result>
 		</action>
 		
+		<!-- 회원가입 액션. -->
+		<action name="registrationForm" class="common.registration.action.RegistrationAction" method="registrationForm">
+			<result>/common/registration/registrationForm.jsp</result>
+		</action>
+		
+		<action name="registration" class="common.registration.action.RegistrationAction">
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/test/test.jsp</result>
+		</action>
+		
 		<!-- 홈 액션. -->
 		<action name="home" class="board.home.action.HomeAction">
 			<result>/index.jsp</result>

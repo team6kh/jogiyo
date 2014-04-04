@@ -60,6 +60,8 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 				
 				return SUCCESS;
 			}
+			
+			return ERROR;
 
 		}
 		

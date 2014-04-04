@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
-<meta name="author" content="">
+<meta name="author" content="huks">
 <link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
@@ -56,8 +56,7 @@
 					<input type="text" class="form-control" name="test_writer_name" placeholder="작성자" required>
 				</c:if>
 				<c:if test="${resultClass.test_writer_name ne null}">
-					<input type="text" class="form-control" value="${resultClass.test_writer_name}" disabled>
-					<input type="hidden" name="test_writer_name" value="${resultClass.test_writer_name}">
+					<input type="text" class="form-control-static" name="test_writer_name" value="${resultClass.test_writer_name}">
 				</c:if>
 			</div>
 			<c:if test="${resultClass.test_writer_pw eq null}">

@@ -1,13 +1,13 @@
 package user.buyer.dto;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class BuyerDTO {
 	
 	private String buyer_id;
 	private String buyer_pw;
 	private String buyer_name;
-	private Timestamp buyer_reg_date;
+	private Date buyer_reg_date;
 	private String buyer_email;
 	private String buyer_phonenumber;
 	private String buyer_gender;
@@ -30,10 +30,10 @@ public class BuyerDTO {
 	public void setBuyer_name(String buyer_name) {
 		this.buyer_name = buyer_name;
 	}
-	public Timestamp getBuyer_reg_date() {
+	public Date getBuyer_reg_date() {
 		return buyer_reg_date;
 	}
-	public void setRegDate(Timestamp buyer_reg_Date) {
+	public void setBuyer_reg_date(Date buyer_reg_Date) {
 		this.buyer_reg_date = buyer_reg_Date;
 	}
 	public String getBuyer_email() {
