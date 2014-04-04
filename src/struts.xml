@@ -78,6 +78,9 @@
 
 		<!-- RestBoard 끝 -->
 
+
+
+
 		<!-- Review게시판 시작 -->
 
 		<!-- 리뷰 글쓰기 폼 -->
@@ -100,6 +103,8 @@
 
 		<!-- 리뷰 글 목록 -->
 		<action name="listReview" class="board.review.action.ListReviewAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="params" />
 			<result>/board/review/listReview.jsp</result>
 		</action>
 

@@ -50,9 +50,9 @@
 					<textarea name="review_content" rows="5" cols="50"></textarea>
 				</div>
 				<!--  이미지 파일 첨부  -->
-				<div>
-				<input id="review_file_element" type="file" name="review_files"><br/>
-				<input id="review_file_element" type="file" name="review_files"><br/>
+				<div class="common-template">
+					<input id="review_file_element" type="file" name="review_files">
+					<input id="review_file_element" type="file" name="review_files">
 				</div>
 				<!-- 리뷰 작성 완료 버튼  -->
 				<div>
