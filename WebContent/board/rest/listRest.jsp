@@ -19,7 +19,7 @@
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="board/test/test-template.css" rel="stylesheet">
+<link href="common/common-template.css" rel="stylesheet">
 
 </head>
 
@@ -34,10 +34,10 @@
 
 		<!-- test board pretty -->
 		<div class="col-md-12">
-			<h3>테스트 게시판</h3>
+			<h3>REST</h3>
 		</div>
 
-		<div class="well col-md-12">
+		<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
 				<thead>
 					<tr>
@@ -58,7 +58,8 @@
 							</s:param>
 						</s:url>
 						<tr>
-							<td colspan="2"><s:a href="%{viewURL}">
+							<td colspan="2">
+								<s:a href="%{viewURL}">
 									<s:property value="rest_destFile1" />
 								</s:a></td>
 							<td class="text-center"><s:property value="rest_writer_name" /></td>
@@ -81,8 +82,7 @@
 			</div>
 
 			<div class="pull-right">
-				<a
-					href="insertRestForm.action" class="btn btn-primary">글쓰기</a>
+				<a href="insertRestForm.action" class="btn btn-primary">글쓰기</a>
 			</div>
 
 		</div>

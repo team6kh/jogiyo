@@ -35,7 +35,7 @@
 			<h3>테스트 게시판 > 읽기</h3>
 		</div>
 
-		<div class="well col-md-12">
+		<div class="col-md-12 well">
 
 			<table class="table table-striped table-forum">
 				<thead>
@@ -75,14 +75,12 @@
 					data-target="#checkModal" data-id="deleteTest">삭제</button>
 
 				<!-- Modal -->
-				<div class="modal fade" id="checkModal" tabindex="-1" role="dialog"
-					aria-labelledby="checkModalLabel" aria-hidden="true">
+				<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<form action="checkPass.action">
 								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									<h4 class="modal-title" id="checkModalLabel">비밀번호를 입력하세요.</h4>
 								</div>
 								<div class="modal-body">
@@ -93,8 +91,7 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">닫기</button>							
+									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>							
 									<input type="hidden" name="test_num" value="${resultClass.test_num}">
 									<input type="hidden" name="currentPage" value="${currentPage}">
 									<button type="submit" class="btn btn-primary">입력</button>
@@ -104,9 +101,8 @@
 					</div>
 				</div>			
 
-				<a
-					href="listTest.action?currentPage=<s:property value="currentPage"/>"
-					class="btn btn-default">목록</a>
+				<a href="listTest.action?currentPage=<s:property value="currentPage"/>"
+			     class="btn btn-default">목록</a>
 			</div>
 
 		</div>

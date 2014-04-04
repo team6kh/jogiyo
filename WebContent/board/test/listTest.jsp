@@ -37,7 +37,7 @@
 			<h3>테스트 게시판</h3>
 		</div>
 
-		<div class="well col-md-12">
+		<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
 				<thead>
 					<tr>
@@ -81,9 +81,8 @@
 			</div>
 
 			<div class="pull-right">
-				<a
-					href="insertTestForm.action?currentPage=<s:property value="currentPage"/>"
-					class="btn btn-primary">글쓰기</a>
+				<a href="insertTestForm.action?currentPage=<s:property value="currentPage"/>"
+				 class="btn btn-primary">글쓰기</a>
 			</div>
 
 		</div>

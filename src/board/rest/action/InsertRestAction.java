@@ -4,7 +4,9 @@ import board.rest.dto.RestDTO;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
+
 import common.ConDAOAware;
+import common.Constants;
 
 import java.util.*;
 import java.io.Reader;
@@ -45,7 +47,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private File upload1;
 	private String upload1ContentType;
 	private String upload1FileName;
-	private String fileUploadPath1 = "D:\\upload\\main\\";
+	private String fileUploadPath1 = Constants.COMMON_FILE_PATH + Constants.REST_MAIN_FILE_PATH;
 										
 	
 	//컨텐트사진
@@ -55,7 +57,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private File upload2;
 	private String upload2ContentType;
 	private String upload2FileName;
-	private String fileUploadPath2 = "D:\\upload\\content\\";
+	private String fileUploadPath2 = Constants.COMMON_FILE_PATH + Constants.REST_CONTENT_FILE_PATH;
 
 	
 	//ConDAOAware 인터페이스의 메서드(인터셉터에서 호출)

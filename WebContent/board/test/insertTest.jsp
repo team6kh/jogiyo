@@ -37,7 +37,7 @@
 			<h3>테스트 게시판 > 글쓰기</h3>
 		</div>
 
-		<div class="well col-md-12">
+		<div class="col-md-12 well">
 			<c:if test="${resultClass.test_subject eq null}">
 				<form action="insertTest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
 			</c:if>

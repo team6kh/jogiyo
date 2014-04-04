@@ -31,16 +31,6 @@
 
 	<!-- container -->
 	<div class="container">
-	
-		<div class="test-template">
-			<div class="row">
-		      <div class="col-xs-6 col-md-3">
-		        <a href="#" class="thumbnail">
-		          <img src="assets/img/rest/western.jpg" alt="Generic placeholder thumbnail">
-		        </a>
-		      </div>
-		      
-		</div>	
 
 		<!-- test message -->
 		<div class="test-template">
