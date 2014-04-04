@@ -11,23 +11,15 @@
 	
 		<script type="text/javascript">
 			function validation() {
-				var frm = document.getElementById("writeRestForm");
+				var frm = document.getElementById("insertRestForm");
 				
 				if(frm.rest_subject.value == "") {
 					alert("상품명을 입력해주세요.");
 					return false;
 				} 
 				else if(frm.rest_price.value == "") {
-					alert("가격을 입력해주세요.");
+					alert("상품가격을 입력해주세요.");
 					return false;
-				}
-				else if(frm.rest_localcategory.value == "") {
-					alert("지역카테고리를 입력해주세요.");
-					return false;
-				}
-				else if(frm.rest_typecategory.value == "") {
-					alert("종류카테고리 입력해주세요.");
-					return false;			
 				}
 				else if(frm.mainphoto.value == "") {
 					alert("매인사진을 업로드해주세요.");
@@ -39,6 +31,24 @@
 				} 
 				return true;
 			}
+			
+			function optvalidation() {
+				var frm = document.getElementById("insertOptRestForm");
+				
+				if(frm.rest_subject.value == "") {
+					alert("옵션명을 입력해주세요.");
+					return false;
+				} 
+				else if(frm.rest_price.value == "") {
+					alert("옵션가격을 입력해주세요.");
+					return false;
+				}
+				return true;
+			}
+			
+			
+			
+			
 		</script>
 	</head>
   
@@ -50,13 +60,13 @@
 		</table>
 		
 		<s:if test="resultClass == NULL">
-			<form name="writeRestForm" action="insertRest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
+			<form name="insertRestForm" action="insertRest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
 			
-			<!-- 임시 히든값 -->
-			<s:hidden name="rest_writer_name" value="히든판매자이름" />
-			<s:hidden name="rest_writer_telnum" value="히든02-123-1234" />
-			<s:hidden name="rest_writer_mobilenum" value="히든010-1234-1234" />
-			<s:hidden name="rest_writer_address" value="히든서울시 영등포구" />
+				<!-- 임시 히든값 -->
+				<s:hidden name="rest_writer_name" value="히든판매자이름" />
+				<s:hidden name="rest_writer_telnum" value="히든02-123-1234" />
+				<s:hidden name="rest_writer_mobilenum" value="히든010-1234-1234" />
+				<s:hidden name="rest_writer_address" value="히든서울시 영등포구" />
 			
 			
 		</s:if>
@@ -75,8 +85,8 @@
 					</tr>
 					
 					<tr>
-						<td width="70"><font color="#FF0000">*</font>상품명</td>
-						<td width="530">
+						<td width="150"><font color="#FF0000">*</font>상품명</td>
+						<td width="450">
 							<s:textfield name="rest_subject" theme="simple" value="%{resultClass.rest_subject}" maxlength="50"/>
 						</td>
 					</tr>
@@ -129,33 +139,6 @@
 					</tr>
 					
 					
-					
-					
-					<!-- 옵션 입력 영역 -->
-					<tr>
-						<td><font color="#FF0000">*</font>옵션명</td>
-						<td>
-							옵션명 인풋태그
-						</td>
-					</tr>
-					<tr>
-						<td><font color="#FF0000">*</font>옵션추가가격</td>
-						<td>
-							옵션추가가격 인풋태그, 입력버튼
-						</td>
-					</tr>
-					<!-- 옵션 리스트 영역 -->
-					<tr>
-						<td><font color="#FF0000">*</font>옵션리스트</td>
-						<td>
-							리스트는 여기에..!
-						</td>
-					</tr>
-					
-					
-					
-					
-					
 					<tr>
 						<td>매인 사진 업로드</td>
 						<td>
@@ -196,6 +179,9 @@
 					</tr>
 				</table>
 			</form>
+			
+			
+			
 	</body>
 </html>
 

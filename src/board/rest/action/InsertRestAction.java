@@ -1,10 +1,13 @@
 package board.rest.action;
 
 import board.rest.dto.RestDTO;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
+
 import common.ConDAOAware;
 import common.Constants;
+
 import java.util.*;
 import java.io.Reader;
 import java.io.File;
@@ -21,7 +24,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	
 	//insertRest.jsp에서 넘긴 히든값
 	private int currentPage; //현재 페이지
-	private int no;
+	private int rest_num;
 	
 	
 	//insertRest.jsp에서 사용자가 입력하여 보낸 파라미터
@@ -87,7 +90,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		
 		// [iBatis] insertRestBoard 실행
 		sqlMapper.insert("Rest.insertRestBoard", paramClass);
-		
 		// 첨부파일을 선택했다면 파일을 업로드한다.
 		if (getUpload1() != null && getUpload2() != null) {
 			//등록한 글 번호 가져오기.
@@ -293,11 +295,11 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 
 	
 	//insertRest.jsp에서 넘긴 히든값
-	public int getNo() {
-		return no;
+	public int getRest_num() {
+		return rest_num;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setRest_num(int rest_num) {
+		this.rest_num = rest_num;
 	}
 	public int getCurrentPage() {
 		return currentPage;

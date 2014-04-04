@@ -79,6 +79,20 @@
 		
 		
 		
+		
+		<!-- RestOptBoard 액션 -->
+		<action name="insertOpt" class="board.rest.action.InsertRestAction" method="insertOpt">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/board/rest/updateRest.jsp</result>
+		</action>
+		
+		
+		<!-- RestOptBoard 끝 -->
+		
+		
+		
+		
 		<!-- 테스트 -->
 		<action name="testAction" class="test.action.TestAction">
 			<result>/test/test.jsp</result>
