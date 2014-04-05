@@ -22,6 +22,7 @@
 	
 	<sqlMap resource="/user/buyer/dao/BuyerDAO.xml"/>
 	<sqlMap resource="/board/rest/dao/RestDAO.xml"/>
-	<sqlMap resource="/board/test/dao/TestDAO.xml"/>	
+	<sqlMap resource="/board/test/dao/TestDAO.xml"/>
+	<sqlMap resource="/board/qna/dao/QnaDAO.xml"/>	
 	
 </sqlMapConfig>
