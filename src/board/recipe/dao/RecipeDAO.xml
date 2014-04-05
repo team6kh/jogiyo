@@ -17,7 +17,7 @@
 		<result property="recipe_file" column="recipe_file" />
 		<result property="recipe_orgfile" column="recipe_orgfile" />
 		<result property="recipe_num" column="recipe_num" />
-		<result property="recipe_readCount" column="recipe_readCount" />
+		<result property="recipe_readcount" column="recipe_readcount" />
 		<result property="recipe_recommand" column="recipe_recommand" />
 		<result property="recipe_reg_date" column="recipe_reg_date" />
 
@@ -75,45 +75,45 @@
 		RECIPE_REG_DATE
 		)
 		VALUES
-		(BOARD_NUM_SEQ.NEXTVAL,
-		#RECIPE_FOODKIND#,
-		#RECIPE_SUBJECT#,
-		#RECIPE_METHOD#,
-		#RECIPE_TIME#,
-		#RECIPE_PRICE#,
-		#RECIPE_MEMBERWRITER#,
-		#RECIPE_WRITER#,
-		#RECIPE_PASSWORD#,
-		#RECIPE_CONTENT#,
-		#RECIPE_REG_DATE#
+		(recipe_seq.NEXTVAL,
+		#recipe_foodkind#,
+		#recipe_subject#,
+		#recipe_method#,
+		#recipe_time#,
+		#recipe_price#,
+		#recipe_memberwriter#,
+		#recipe_writer#,
+		#recipe_password#,
+		#recipe_content#,
+		#recipe_reg_date#
 		)
 	</insert>
 
 
 	<!-- update 쿼리문 정의 -->
 	<update id="updateRecipe" parameterClass="RecipeDTO">
-		UPDATE RECIPE_BOARD SET RECIPE_FOODKIND = #RECIPE_FOODKIND#,
-		RECIPE_SUBJECT = #RECIPE_SUBJECT#,
-		RECIPE_METHOD =	#RECIPE_METHOD#,
-		RECIPE_TIME = #RECIPE_TIME#,
-		RRECIPE_PRICE = #RRECIPE_PRICE#,
-		RECIPE_WRITER = #RECIPE_MEMBERWRITER#,
-		RECIPE_WRITER = #RECIPE_WRITER#,
-		RECIPE_PASSWORD = #RECIPE_PASSWORD#,
-		RECIPE_CONTENT = #RECIPE_CONTENT#
+		UPDATE RECIPE_BOARD SET RECIPE_FOODKIND = #recipe_foodkind#,
+		RECIPE_SUBJECT = #recipe_subject#,
+		RECIPE_METHOD =	#recipe_method#,
+		RECIPE_TIME = #recipe_time#,
+		RRECIPE_PRICE = #recipe_price#,
+		RECIPE_WRITER = #recipe_memberwriter#,
+		RECIPE_WRITER = #recipe_writer#,
+		RECIPE_PASSWORD = #recipe_password#,
+		RECIPE_CONTENT = #recipe_content#
 
 		<include refid="where-recipe_num" />
 	</update>
 
 	<update id="updateFile" parameterClass="RecipeDTO">
-		UPDATE RECIPE_BOARD SET RECIPE_ORGFILE = #RECIPE_ORGFILE#
+		UPDATE RECIPE_BOARD SET RECIPE_ORGFILE = #recipe_orgfile#
 		,RECIPE_FILE =
-		#RECIPE_FILE#
+		#recipe_file#
 		<include refid="where-recipe_num" />
 	</update>
 
 	<update id="updateReadcount" parameterClass="RecipeDTO">
-		UPDATE RECIPE_BOARD SET recipe_readCount = recipe_readCount + 1
+		UPDATE RECIPE_BOARD SET recipe_readcount = recipe_readcount + 1
 		<include refid="where-recipe_num" />
 	</update>
 	

@@ -79,12 +79,20 @@
 
 		<!-- RestBoard 끝 -->
 
+
+
+
 		<!-- 레시피 -->
-		<action name="insertRecipeForm" class="board.recipe.action.InsertRecipeAction" method="form">
+		<!-- insertRecipeForm 액션 -->
+		<action name="insertRecipeForm" class="board.recipe.action.InsertRecipeAction"
+			method="form">
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="params" />
 			<result>/board/recipe/insertRecipe.jsp</result>
 		</action>
 
-		<action name="insertRecipe" class="board.recipe.action.InsertRecipeAction">			
+		<!-- insertRecipe 액션 -->
+		<action name="insertRecipe" class="board.recipe.action.InsertRecipeAction">
 			<interceptor-ref name="prepare" />
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="params" />
@@ -93,13 +101,31 @@
 				<param name="actionName">listRecipe</param>
 			</result>
 		</action>
-		
+
 		<!-- recipe 리스트 액션 -->
 		<action name="listRecipe" class="board.recipe.action.ListRecipeAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
 
+		<!-- recipe read 액션 -->
+		<action name="readRecipe" class="board.recipe.action.ReadRecipeAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/board/recipe/readRecipe.jsp</result>
+		</action>
+
 		<!-- 레시피 끝 -->
+
+
+
+
+
+
+
+
+
 
 		<!-- 테스트 -->
 		<action name="testAction" class="test.action.TestAction">

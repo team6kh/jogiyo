@@ -1,6 +1,7 @@
 package board.recipe.action;
 
 import java.io.File;
+import java.util.Calendar;
 
 import org.apache.commons.io.FileUtils;
 
@@ -13,10 +14,11 @@ import com.opensymphony.xwork2.Preparable;
 
 import common.ConDAOAware;
 
-public class InsertRecipeAction implements Action, Preparable, ModelDriven, ConDAOAware {
+public class InsertRecipeAction implements Action, Preparable, ModelDriven,
+		ConDAOAware {
 
 	SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 SqlMapper
-											// 객체
+							// 객체
 
 	RecipeDTO paramClass;
 	RecipeDTO resultClass;
@@ -31,7 +33,12 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven, ConD
 	private String recipe_fileContentType; // 컨텐츠 타입
 	private String recipe_fileFileName; // 파일 이름
 
-	// Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기.
+	Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기.
+	
+	public void setConDAO(SqlMapClient sqlMapper) {
+		this.sqlMapper = sqlMapper;
+
+	}
 
 	public String form() throws Exception {
 		// 등록 폼
@@ -50,9 +57,9 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven, ConD
 
 	// insertRecipe 액션
 	public String execute() throws Exception {
-		System.out.println("sqlMapper:"+sqlMapper);
-		System.out.println("paramClass:"+paramClass);
-		
+		System.out.println("sqlMapper:" + sqlMapper);
+		System.out.println("paramClass:" + paramClass);
+
 		// sqlMapper=conDAO.getCon();
 		// //파라미터와 리절트 객체 생성.
 		// paramClass = new RecipeDTO();
@@ -67,7 +74,7 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven, ConD
 		// paramClass.setRecipe_time(getRecipe_time());
 		// paramClass.setRecipe_price(getRecipe_price());
 		// paramClass.setRecipe_content(getRecipe_content());
-		// paramClass.setRegdate(today.getTime());
+		paramClass.setRecipe_reg_date(today.getTime());
 
 		// 등록 쿼리 수행.
 		sqlMapper.insert("Recipe.insertRecipe", paramClass);
@@ -76,7 +83,8 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven, ConD
 		if (getRecipe_file() != null) {
 
 			// 등록한 글 번호 가져오기.
-			paramClass = (RecipeDTO) sqlMapper.queryForObject("Recipe.selectLastRecipe_num");
+			paramClass = (RecipeDTO) sqlMapper
+					.queryForObject("Recipe.selectLastRecipe_num");
 
 			// 실제 서버에 저장될 파일 이름과 확장자 설정.
 			String file_name = "file_" + paramClass.getRecipe_num();
@@ -153,10 +161,6 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven, ConD
 
 	private String fileUploadPath = "D:\\김경남\\Java\\upload\\"; // 업로드 경로.
 
-
-	public void setConDAO(SqlMapClient sqlMapper) {
-		this.sqlMapper = sqlMapper;
-		
-	}
+	
 
 }
