@@ -102,8 +102,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		
 		// 첨부파일을 선택했다면 파일을 업로드한다.
 		if (getUpload1() != null && getUpload2() != null) {
-			//등록한 글 번호 가져오기.
-			//resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
 			
 			//매인사진 파일 이름과 확장자 설정.
 			String file_name1 = "main_" + resultClass.getRest_num();
@@ -115,18 +113,20 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 			//매인사진파일 저장.
 			rest_destFile1 = new File(fileUploadPath1 + file_name1 + "."+ file_ext1); 
 			FileUtils.copyFile(getUpload1(), rest_destFile1);
+			
 			//컨텐트사진파일 저장.
 			rest_destFile2 = new File(fileUploadPath2 + file_name2 + "."+ file_ext2); 
 			FileUtils.copyFile(getUpload2(), rest_destFile2); 
 			
+			
 			//글넘버
 			paramClass.setRest_num(resultClass.getRest_num());
 			//매인사진파일 DTO에 set
-			paramClass.setRest_destFile1(Constants.REST_MAIN_FILE_PATH+file_name1+"."+file_ext1);
+			paramClass.setRest_destFile1(rest_destFile1.getPath().replace('\\', '/').substring(27));
 			paramClass.setRest_main_orgname(getUpload1FileName());
 			paramClass.setRest_main_savname(file_name1 + "." + file_ext1);
 			//컨텐트사진파일 DTO에 set
-			paramClass.setRest_destFile2(Constants.REST_CONTENT_FILE_PATH+file_name2+"."+file_ext2);
+			paramClass.setRest_destFile2(rest_destFile1.getPath().replace('\\', '/').substring(27));
 			paramClass.setRest_content_orgname(getUpload2FileName()); 
 			paramClass.setRest_content_savname(file_name2 + "." + file_ext2);
 			
