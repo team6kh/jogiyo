@@ -47,18 +47,26 @@
 					<input type="hidden" name="currentPage" value="%{currentPage}" />
 			</c:if>
 			<div class="form-group">
-				<label for="test_subject">제목</label>
+				<label>제목</label>
 				<input type="text" class="form-control" name="test_subject" placeholder="제목" value="${resultClass.test_subject}" required>
 			</div>
-			<div class="form-group">
-				<label for="test_writer_name">작성자</label>
-				<c:if test="${resultClass.test_writer_name eq null}">
+			<c:if test="${resultClass.test_writer_name eq null}">
+				<div class="form-group">
+					<label>작성자</label>
 					<input type="text" class="form-control" name="test_writer_name" placeholder="작성자" required>
-				</c:if>
-				<c:if test="${resultClass.test_writer_name ne null}">
-					<input type="text" class="form-control-static" name="test_writer_name" value="${resultClass.test_writer_name}">
-				</c:if>
-			</div>
+				</div>
+			</c:if>
+			<c:if test="${resultClass.test_writer_name ne null}">
+				<div class="form-horizontal">
+	  				<div class="form-group">
+	    				<label class="col-sm-1 control-label">작성자</label>
+	    				<div class="col-sm-11">
+	      					<p class="form-control-static">${resultClass.test_writer_name}</p>
+	      					<input type="hidden" name="test_writer_name" value="${resultClass.test_writer_name}">
+	    				</div>
+	 			 	</div>
+	 			 </div>					
+			</c:if>			
 			<c:if test="${resultClass.test_writer_pw eq null}">
 				<div class="form-group">
 					<label for="test_writer_pw">비밀번호</label>
