@@ -37,7 +37,7 @@
 	<!-- 해당 식당에 관한 리뷰 글 목록 -->
 	<select id="selectReviewList" resultMap="reviewRes" parameterClass="java.lang.String">
 		<include refid="select-all" />
-		where REVIEW_REST=#review_rest# ORDER BY REVIEW_REG_DATE
+		where REVIEW_REST=#review_rest# ORDER BY REVIEW_REG_DATE DESC
 	</select>
 
 	<select id="selectReviewOne" resultClass="reviewDTO">

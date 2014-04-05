@@ -40,26 +40,28 @@
 					<table class="table table-striped table-forum">
 						<tr>
 							<th>별점</th>
-							<td class="text-center"><input type="radio" name="review_rating" value="1" />
-								1점 <input type="radio" name="review_rating" value="2" /> 2점 <input
-								type="radio" name="review_rating" value="3" /> 3점 <input
-								type="radio" name="review_rating" value="4" /> 4점 <input
-								type="radio" name="review_rating" value="5" /> 5점</td>
+							<td class="text-center"><input type="radio"
+								name="review_rating" value="1" /> 1점 <input type="radio"
+								name="review_rating" value="2" /> 2점 <input type="radio"
+								name="review_rating" value="3" /> 3점 <input type="radio"
+								name="review_rating" value="4" /> 4점 <input type="radio"
+								name="review_rating" value="5" /> 5점</td>
 						</tr>
 						<!--  리뷰 content -->
 						<tr>
-							<td class="text-center" colspan="2"><textarea name="review_content" rows="5"
-									cols="50"></textarea></td>
+							<td class="text-center" colspan="2"><textarea
+									name="review_content" rows="5" cols="50"></textarea></td>
 						</tr>
 						<!--  이미지 파일 첨부  -->
 						<tr>
-							<td class="text-center" colspan="2"><input id="review_file_element" type="file"
-								name="review_files"> <input id="review_file_element"
-								type="file" name="review_files"></td>
+							<td class="text-center" colspan="2"><input
+								id="review_file_element" type="file" name="review_files">
+								<input id="review_file_element" type="file" name="review_files"></td>
 						</tr>
 						<!-- 리뷰 작성 완료 버튼  -->
 						<tr>
-							<td class="text-center" colspan="2"><input type="submit" value="리뷰 등록" /></td>
+							<td class="text-center" colspan="2"><input type="submit"
+								value="리뷰 등록" /></td>
 						</tr>
 					</table>
 				</div>

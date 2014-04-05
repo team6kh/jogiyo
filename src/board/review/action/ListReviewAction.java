@@ -16,10 +16,15 @@ public class ListReviewAction implements Action, ConDAOAware {
 	// DAO 관련 변수
 	public static SqlMapClient sqlMapper;
 
+	// 해당 글을 추출해내기 위해 받아야 할 파라미터값(임시값 test_Rest)
+	private String review_rest;
+
 	// 추출해낸 리뷰글들을 저장할 변수
 	private List<ReviewDTO> reviewRes = new ArrayList<ReviewDTO>();
-	// 받아야 할 파라미터값(임시값 test_Rest)
-	private String review_rest;
+
+	// 첨부파일을 위한 변수
+	String[] fileName;
+	private List<String> file_Path_List = new ArrayList<String>();
 
 	// PagingAction 관련 변수
 	private int currentPage = 1; // 현재 페이지
@@ -36,8 +41,24 @@ public class ListReviewAction implements Action, ConDAOAware {
 		review_rest = "test_Rest";
 
 		// 해당식당에 관한 리뷰 글만 가져와 List 타입 인스턴스에 저장
-		reviewRes = sqlMapper.queryForList("Review.selectReviewList", review_rest);
+		reviewRes = sqlMapper.queryForList("Review.selectReviewList",
+				review_rest);
 
+		// String으로 연결해놓은 파일 경로를 분리하여 List 타입으로 저장하기 위한 코드
+		if (reviewRes != null) {
+			for (int i = 0; i < reviewRes.size(); i++) {
+				// 반복문을 이용하여 순차적으로 review_file 값을 꺼내어 저장
+				if (reviewRes.get(i).getReview_file() != null) {
+					String saveFileName = reviewRes.get(i).getReview_file();
+					// 저장한 첨부파일명을 구분자를 "공백"으로 나누어 배열로 저장
+					fileName = saveFileName.split(" ");
+					// 배열 타입으로 저장한 파일명을 순차적으로 뽑아 경로와 연결
+			
+				}
+			}
+		}
+
+		// 페이징 관련 코드
 		totalCount = reviewRes.size();
 		page = new PagingAction(actionName, currentPage, totalCount,
 				blockCount, blockPage); // pagingAction 객체 생성.
@@ -72,6 +93,16 @@ public class ListReviewAction implements Action, ConDAOAware {
 
 	public void setReview_rest(String review_rest) {
 		this.review_rest = review_rest;
+	}
+
+	// 파일 경로 getter & setter
+
+	public List<String> getFile_Path_List() {
+		return file_Path_List;
+	}
+
+	public void setFile_Path_List(List<String> file_Path_List) {
+		this.file_Path_List = file_Path_List;
 	}
 
 	// pagingAction 관련 변수 getter & setter

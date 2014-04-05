@@ -45,35 +45,38 @@
 
 				<!--  리뷰글이 없는 경우 -->
 				<c:if test="${totalCount == '0'}">
-					<div>등록된 글이 없습니다.</div>
+					<div class="col-md-12 well">등록된 글이 없습니다.</div>
 				</c:if>
 				<!--  리뷰글이 있는 경우 -->
 				<c:if test="${totalCount !='0' }">
 
 					<div class="col-md-12 well">
 						<table class="table table-striped table-forum">
-							<thead>
+							<!--  리뷰글 목록 -->
+							<c:forEach var="reviewDTO" items="${reviewRes}">
 								<tr>
 									<th class="text-center" style="width: 100px;">작성자</th>
+									<td class="text-center">${reviewDTO.review_writer}</td>
 									<th class="text-center" style="width: 200px;">작성일</th>
-									<th class="text-center" colspan="2">내용</th>
-									<th class="text-center" style="width: 100px;">별점</th>
+									<td class="text-center"><fmt:formatDate
+											value="${reviewDTO.review_reg_date}" type="date" /></td>
 								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="reviewDTO" items="${reviewRes}">
+								<th class="text-center" style="width: 100px;">별점</th>
+								<td colspan="3">${reviewDTO.review_rating }</td>
+								<tr>
+									<td colspan="4" class="text-center">${reviewDTO.review_content}</td>
+								</tr>
+								<!-- 첨부파일을 위한 반복문  -->
+								<c:if test="${reviewDTO.review_file !=null }">
 									<tr>
-										<td class="text-center">${reviewDTO.review_writer}</td>
-										<td class="text-center"><fmt:formatDate
-												value="${reviewDTO.review_reg_date}" type="date" /></td>
-										<!-- 별점 부분 : 나중에 이미지로 바꾸어야.. -->
-										<td class="text-center">${reviewDTO.review_content}</td>
-										<!-- 첨부파일 나중에 구현 : 일단 값 출력만 확인  -->
-										<td class="text-center">${reviewDTO.review_file}</td>
-										<td class="text-center">${reviewDTO.review_rating}</td>
+										<td colspan="4" class="text-center"><c:forEach
+												var="review_file_path" items="${File_Path_List}">
+												<img src="${review_file_path}" width="300px" height="400px">
+											</c:forEach> <!-- 첨부파일 반복문 끝  --></td>
 									</tr>
-								</c:forEach>
-								<!--  반복문 종료 -->
+								</c:if>
+							</c:forEach>
+							<!--  리뷰글 목록 반복문 종료 -->
 							</tbody>
 						</table>
 					</div>
