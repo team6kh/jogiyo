@@ -48,6 +48,8 @@
 		
 		<!-- 리스트에서 글쓰기 클릭시 -->
 		<action name="insertRestForm" class="board.rest.action.InsertRestAction" method="form">
+			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params"/>
 			<result>/board/rest/insertRest.jsp</result>
 		</action>
 		

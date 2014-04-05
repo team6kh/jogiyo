@@ -4,10 +4,8 @@ import board.rest.dto.RestDTO;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
-
 import common.ConDAOAware;
 import common.Constants;
-
 import java.util.*;
 import java.io.Reader;
 import java.io.File;
@@ -18,14 +16,12 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 
 	public static Reader reader; 
 	public static SqlMapClient sqlMapper;
-	private RestDTO paramClass;
-	private RestDTO resultClass;
-	
+	private RestDTO paramClass = new RestDTO();
+	private RestDTO resultClass = new RestDTO();
 	
 	//insertRest.jsp에서 넘긴 히든값
 	private int currentPage; //현재 페이지
 	private int rest_num;
-	
 	
 	//insertRest.jsp에서 사용자가 입력하여 보낸 파라미터
 	private String rest_subject;
@@ -38,7 +34,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private String rest_writer_mobilenum;//임시히든
 	private String rest_writer_address;//임시히든
 	Calendar today = Calendar.getInstance();
-	
 	
 	//매인사진
 	private File rest_destFile1;
@@ -59,7 +54,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private String upload2FileName;
 	private String fileUploadPath2 = Constants.COMMON_FILE_PATH + Constants.REST_CONTENT_FILE_PATH;
 
-	
 	//ConDAOAware 인터페이스의 메서드(인터셉터에서 호출)
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
@@ -67,17 +61,30 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	
 	//최초 insert액션 호출시 (폼제공)
 	public String form() throws Exception {
+		//rest_num 실질적값 // 이외 기본값 정의 (not null)
+		paramClass.setRest_subject("subject");
+		paramClass.setRest_price(0);
+		paramClass.setRest_localcategory("10");
+		paramClass.setRest_typecategory("20");
+		paramClass.setRest_writer_name("Rest_writer_name");
+		paramClass.setRest_writer_telnum("Rest_writer_telnum");
+		paramClass.setRest_writer_mobilenum("Rest_writer_mobilenum");
+		paramClass.setRest_writer_address("Rest_writer_address");
+		paramClass.setRest_reg_date(today.getTime());
+		
+		sqlMapper.insert("Rest.insertRest_num", paramClass);
+		
 		return SUCCESS;
 	}
 
 	//사용자가 글 등록(submit)했을시
 	public String execute() throws Exception {
 		
-		//파라미터와 리절트 객체 생성.
-		paramClass = new RestDTO();
-		resultClass = new RestDTO();
+		//아래의 파라미터 업데이트
+		//insertRest.jsp에서 사용자가 입력한 파라미터를 get후 DTO에 set함. 덮어쓰기
+		resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
+		paramClass.setRest_num(resultClass.getRest_num());
 		
-		//insertRest.jsp에서 사용자가 입력한 파라미터를 get후 DTO에 set함.
 		paramClass.setRest_subject(getRest_subject());
 		paramClass.setRest_price(getRest_price());
 		paramClass.setRest_localcategory(getRest_localcategory());
@@ -88,12 +95,15 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		paramClass.setRest_writer_address(getRest_writer_address());
 		paramClass.setRest_reg_date(today.getTime());
 		
-		// [iBatis] insertRestBoard 실행
-		sqlMapper.insert("Rest.insertRestBoard", paramClass);
+		
+		// [iBatis] updateRestBoard 실행
+		sqlMapper.update("Rest.updateRestBoard", paramClass);
+		
+		
 		// 첨부파일을 선택했다면 파일을 업로드한다.
 		if (getUpload1() != null && getUpload2() != null) {
 			//등록한 글 번호 가져오기.
-			resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
+			//resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
 			
 			//매인사진 파일 이름과 확장자 설정.
 			String file_name1 = "main_" + resultClass.getRest_num();

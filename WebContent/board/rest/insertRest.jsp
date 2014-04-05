@@ -17,7 +17,7 @@
 					alert("상품명을 입력해주세요.");
 					return false;
 				} 
-				else if(frm.rest_price.value == "") {
+				else if(frm.rest_price.value == "0") {
 					alert("상품가격을 입력해주세요.");
 					return false;
 				}
@@ -55,13 +55,16 @@
 	<body>
 		<table width="600" border="0" cellspacing="0" cellpadding="2">
 			<tr>
-				<td align="center"><h2>상품 등록 페이지</h2></td>
+				<td align="center">
+					<h2>상품 등록 페이지</h2>
+				</td>
 			</tr>
 		</table>
 		
-		<s:if test="resultClass == NULL">
+		
+		
+		<s:if test="rest_price == 0">
 			<form name="insertRestForm" action="insertRest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
-			
 				<!-- 임시 히든값 -->
 				<s:hidden name="rest_writer_name" value="히든판매자이름" />
 				<s:hidden name="rest_writer_telnum" value="히든02-123-1234" />
@@ -163,11 +166,6 @@
 					</tr>
 					<tr>
 						<td height="1" colspan="2"></td>	
-					</tr>
-					
-					
-					<tr>
-						<td height="10" colspan="2"></td>
 					</tr>
 					
 					
