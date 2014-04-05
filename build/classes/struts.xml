@@ -78,6 +78,12 @@
 		<!-- RestBoard 끝 -->		
 		
 		
+		<!-- QnA -->
+		<action name="insertQna" class="board.qna.action.InsertQnaAction">
+			<result>/board/qna/test.jsp</result>
+		</action>
+		<!-- QnA 끝 -->	
+		
 		
 		<!-- 테스트 -->
 		<action name="testAction" class="test.action.TestAction">
