@@ -22,7 +22,7 @@ import user.buyer.dto.BuyerDTO;
 
 public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAOAware, SessionAware {
 
-	public static SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체.
+	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체.
 	
 	TestDTO paramClass;
 	TestDTO resultClass;

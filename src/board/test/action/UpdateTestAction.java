@@ -11,8 +11,9 @@ import common.ConDAOAware;
 import java.io.Reader;
 import java.io.IOException;
 
-public class UpdateTestAction extends ActionSupport implements ConDAOAware {	
-	public static SqlMapClient sqlMapper;
+public class UpdateTestAction extends ActionSupport implements ConDAOAware {
+	
+	private SqlMapClient sqlMapper;
 
 	private TestDTO paramClass = new TestDTO();		// 파라미터를 저장할 객체
 	private TestDTO resultClass = new TestDTO();	// 쿼리 결과 값을 저장할 객체

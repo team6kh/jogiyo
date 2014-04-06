@@ -3,6 +3,7 @@
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +22,58 @@
 <!-- Custom styles for this template -->
 <link href="common/registration/registration.css" rel="stylesheet">
 
+<!-- 실시간 아이디 중복체크 -->
+<script type="text/javascript">
+	var xmlReq; // 전역변수로 지정.
+	// Ajax 객체 생성 과정
+	function createAjax() {
+		xmlReq = new XMLHttpRequest();
+	}
+
+	// Ajax 객체를 이용한 데이터 전송 과정
+	function checkDupAjax() {
+		createAjax();
+		var reg_id = document.getElementById("reg_id").value;
+		xmlReq.onreadystatechange = callBack; // 괄호 열고닫고가 틀리다.!
+		xmlReq.open("GET", "checkDup.action?reg_id=" + reg_id, true);
+		xmlReq.send(null);
+		// send가 끝나고나면 비동기식이기 때문에 프로그램이 계속 진행된다.
+	}
+
+	// 콜백 함수 과정
+	function callBack() {
+		if (xmlReq.readyState == 4) {
+			if (xmlReq.status == 200) {
+				printData();
+			}
+		}
+	}
+
+	// 결과 출력 과정
+	function printData() {
+		var result = xmlReq.responseXML;
+
+		var rootNode = result.documentElement;
+		// <root>true</root> , <root>false</root>
+		var rootValue = rootNode.firstChild.nodeValue;
+		var rootTag = document.getElementById("result");
+
+		var idNode = rootNode.getElementsByTagName("id");
+		var idValue = idNode.item(0).firstChild.nodeValue;
+		var idTag = document.getElementById("idTxt");
+
+		if (rootValue == "true") {
+			rootTag.innerHTML = "사용 가능한 아이디";
+			idTag.innerHTML = "<br>" + idValue;
+		} else {
+			rootTag.innerHTML = "중복된 아이디";
+			idTag.innerHTML = "<br>" + idValue;
+		}
+	}
+</script>
+
+<s:head /> 
+<sx:head />
 </head>
 
 <body>
@@ -32,7 +85,7 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" action="registration.action">
+		<form class="form-signup" method="post" action="registration.action">
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">
 			  <label>가입유형을 선택하세요.</label>
@@ -43,8 +96,9 @@
 			</div>
 			<div class="form-group">
 			  <label>아이디</label>
-			  <input type="text" class="form-control" name="reg_id" required autofocus>
+			  <input type="text" class="form-control" id="reg_id" name="reg_id" onkeyup="checkDupAjax()" required autofocus>
 			</div>
+			<!-- testing here -->
 			<div class="form-group">
 			  <label>이름</label>
 			  <input type="text" class="form-control" name="reg_name" required>
@@ -78,9 +132,8 @@
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<!-- Placed at the end of the document so the pages load faster -->	
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 </body>
 </html>

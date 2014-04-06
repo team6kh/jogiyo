@@ -55,7 +55,7 @@
 						VALUES (#buyer_id#,
 								#buyer_pw#,
 								#buyer_name#,
-								sysdate,
+								#buyer_reg_date#,
 								#buyer_email#,
 								#buyer_phonenumber#,
 								#buyer_gender#

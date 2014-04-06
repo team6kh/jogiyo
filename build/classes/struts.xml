@@ -38,7 +38,7 @@
 		</action>
 		
 		<!-- 회원가입 액션. -->
-		<action name="registrationForm" class="common.registration.action.RegistrationAction" method="registrationForm">
+		<action name="registrationForm" class="common.registration.action.RegistrationFormAction">
 			<result>/common/registration/registrationForm.jsp</result>
 		</action>
 		
@@ -50,12 +50,19 @@
 			<result>/test/test.jsp</result>
 		</action>
 		
+		<!-- 아이디 중복체크 액션. -->
+		<action name="testForm" class="test.action.TestFormAction">
+			<result>/test/testForm.jsp</result>
+		</action>
+		
+		<action name="checkDup" class="common.CheckDuplicateAction">
+			<result>/test/checkDup.jsp</result>
+		</action>	
+		
 		<!-- 홈 액션. -->
 		<action name="home" class="board.home.action.HomeAction">
 			<result>/index.jsp</result>
 		</action>		
-		
-		
 		
 		<!-- RestBoard 액션 -->
 		
@@ -89,8 +96,6 @@
 		</action>
 		
 		<!-- RestBoard 끝 -->		
-		
-		
 		
 		<!-- 테스트 -->
 		<action name="testAction" class="test.action.TestAction">

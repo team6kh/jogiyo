@@ -12,7 +12,7 @@ import board.test.dto.TestDTO;
 
 public class ListTestAction extends ActionSupport implements ConDAOAware {
 
-	public static SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체.
+	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체.
 
 	private List<TestDTO> list = new ArrayList<TestDTO>();
 	

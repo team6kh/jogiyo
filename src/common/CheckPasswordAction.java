@@ -3,11 +3,11 @@ package common;
 import board.test.dto.TestDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Action;
 
-public class CheckPasswordAction extends ActionSupport implements ConDAOAware {
+public class CheckPasswordAction implements Action, ConDAOAware {
 	
-	public static SqlMapClient sqlMapper;
+	private SqlMapClient sqlMapper;
 	
 	private TestDTO paramClass = new TestDTO(); // 파라미터를 저장할 객체
 	private TestDTO resultClass = new TestDTO(); // 쿼리 결과 값을 저장할 객체

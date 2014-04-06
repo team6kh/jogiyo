@@ -13,7 +13,7 @@ import common.ConDAOAware;
 
 public class LoginAction implements Action, ConDAOAware, SessionAware {
 	
-	public static SqlMapClient sqlMapper;
+	private SqlMapClient sqlMapper;
 	
 	private String login_type;			// 로그인 타입.
 	private String login_id;			// 로그인 아이디.

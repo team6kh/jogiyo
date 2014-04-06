@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class ReadTestAction implements Action, ConDAOAware {
 	
-	public static SqlMapClient sqlMapper;
+	private SqlMapClient sqlMapper;
 
 	private TestDTO paramClass = new TestDTO();		// 파라미터를 저장할 객체
 	private TestDTO resultClass = new TestDTO();	// 쿼리 결과 값을 저장할 객체
@@ -79,6 +79,7 @@ public class ReadTestAction implements Action, ConDAOAware {
 		this.test_num = test_num;
 	}
 
+	/*
 	public InputStream getInputStream() {
 		return inputStream;
 	}
@@ -101,6 +102,7 @@ public class ReadTestAction implements Action, ConDAOAware {
 
 	public void setContentLength(long contentLength) {
 		this.contentLength = contentLength;
-	}	
+	}
+	*/	
 	
 }
