@@ -34,8 +34,8 @@
 		} else {
 			var hanchk = hanCheck();
 
-			if (userinput.reg_id.value.length < 7 && hanchk) {
-				feedbackRegId.innerHTML = "<font color=red>아이디는 7자 이상이여야합니다.</font>";
+			if (userinput.reg_id.value.length < 4 && hanchk) {
+				feedbackRegId.innerHTML = "<font color=red>아이디는 4자 이상이여야합니다.</font>";
 				regForm.feedbackRegId.value = "0";
 				return false;
 			} else if (hanchk) {
@@ -77,7 +77,7 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" method="post" action="registration.action" name="regForm">
+		<form class="form-signup" method="post" action="registration.action" name="regForm" onsubmit="return checkIt()">
 			<input type="hidden" name="feedbackRegId" value="0" />
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">
@@ -87,10 +87,10 @@
 			      <option value="seller">판매자</option>
 			    </select>			  
 			</div>
-			<div class="form-group">
+			<div id="div_regid" class="form-group">
 			  <label>아이디</label>
 			  <!-- testing here -->
-			  <input type="text" class="form-control" name="reg_id" onkeyup="validateRegId(this.form);">
+			  <input type="text" class="form-control" name="reg_id" onkeyup="validateRegId(this.form);" required autofocus>
 			  <p class="help-block" id="feedbackRegId">아이디를 입력해주세요.</p>
 			  <iframe src="blink.html" id="resultCheckDup" style="display:none;"></iframe>			  
 			</div>						

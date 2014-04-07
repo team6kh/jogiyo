@@ -56,6 +56,8 @@
 		</action>
 		
 		<action name="checkDup" class="common.CheckDuplicateAction">
+			<interceptor-ref name="params" />				
+			<interceptor-ref name="conDAO" />
 			<result>/test/checkDup.jsp</result>
 		</action>	
 		
