@@ -10,6 +10,21 @@
 		<title>상품 등록 페이지</title>
 	
 		<script type="text/javascript">
+			var fields = 1;
+		
+			function addInput() {
+				if (fields != 16) {
+					document.getElementById('text').innerHTML += "옵션명"+fields+".&nbsp&nbsp <input type='text' name='restopt_subject"+fields+"' value=''/> <br/>"
+																+"옵션가"+fields+".&nbsp&nbsp <input type='text' name='restopt_priceplus"+fields+"' value=''/> 원<br/>";
+					fields += 1;
+					optMap.put("restopt_subject"+fields,"restopt_priceplus"+fields);
+				} else {
+					document.getElementById('stop').innerHTML += "<font color='#FF0000'>옵션은 최대 15개만 등록할 수 있습니다.</font><br/>";
+					document.form.add.disabled=true;
+				}
+			}
+		
+		
 			function validation() {
 				var frm = document.getElementById("insertRestForm");
 				
@@ -103,6 +118,28 @@
 							<s:textfield name="rest_price" theme="simple" value="%{resultClass.rest_price}" maxlength="20"/>
 						</td>
 					</tr>
+					
+					<tr>
+						<td>
+							<input type="button"  name="add" value="옵션추가" onclick="addInput()"/>
+						</td>
+						<td>
+							<div id="stop"></div>
+							<font color='#BDBDBD'>옵션명과 옵션가를 정의하세요.</font>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+						</td>
+						<td>
+							<div id="text">
+								<!-- 옵션추가 클릭시 여기에 태그 추가 -->
+							</div>
+						</td>
+					</tr>
+					
+					
 					<tr>
 						<td height="1" colspan="2"></td>	
 					</tr>

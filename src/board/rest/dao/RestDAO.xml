@@ -3,6 +3,7 @@
 <sqlMap namespace="Rest">
 
 	<typeAlias alias="RestDTO" type="board.rest.dto.RestDTO" />
+	<typeAlias alias="RestoptDTO" type="board.restopt.dto.RestoptDTO" />
 
 
 
@@ -30,7 +31,12 @@
 		  	
 		</resultMap>
 		
-		
+		<resultMap id="RestoptBoard" class="RestoptDTO">
+			<result property="restopt_num" column="restopt_num"/>
+			<result property="restopt_rest_num" column="restopt_rest_num"/>
+			<result property="restopt_subject" column="restopt_subject"/>
+			<result property="restopt_priceplus" column="restopt_priceplus"/>
+		</resultMap>
 		
 		
 		
@@ -52,6 +58,12 @@
 			INSERT INTO Rest_board (rest_num, rest_subject, rest_price, rest_localcategory, rest_typecategory, rest_writer_name, rest_writer_telnum, rest_writer_mobilenum, rest_writer_address, rest_reg_date)
 			VALUES (rest_seq_num.NEXTVAL, #rest_subject#, #rest_price#, #rest_localcategory#, #rest_typecategory#, #rest_writer_name#, #rest_writer_telnum#, #rest_writer_mobilenum#, #rest_writer_address#, #rest_reg_date#)
 		</insert>
+		
+		<insert id="insertRestopt" parameterClass="RestoptDTO">
+			INSERT INTO RestOpt_Board (restopt_num, restopt_rest_num, restopt_subject, restopt_priceplus)
+			VALUES (restopt_seq_num.NEXTVAL, #restopt_rest_num#, #restopt_subject#, #restopt_priceplus#)
+		</insert>
+		
 		
 		<update id="updateRestBoard" parameterClass="RestDTO">
    			UPDATE Rest_board SET rest_subject = #rest_subject#,
