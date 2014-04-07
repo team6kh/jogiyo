@@ -39,31 +39,11 @@ public class CheckDuplicateAction implements Action, ConDAOAware {
 		
 		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerId", buyerDTO);
 		
-		System.out.println("aaa");
-		System.out.println("bb"+buyerDTO);
-		
-		sb = new StringBuffer();
-		sb.append("<?xml version='1.0' encoding='euc-kr'?>");
-		sb.append("<root>");
-		if (!(reg_id.equals("adminadmin") || reg_id.equals("test"))) {
-			sb.append("true");
-			isDup = 0;
-			check = 1;
-		} else {
-			sb.append("false");
+		if(buyerDTO != null) {
 			isDup = 1;
-			check = 0;
+		} else {
+			isDup = 0;
 		}
-		
-		sb.append("<id>" + reg_id + "</id>");
-		sb.append("</root>");
-
-		// response.setContentType("text/xml;charset=euc-kr");
-		// response.getWriter().write(sb.toString());
-		
-		
-		System.out.println("isDup:"+isDup);
-		System.out.println("check:"+check);
 		
 		return SUCCESS;
 		
