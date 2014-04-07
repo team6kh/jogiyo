@@ -50,24 +50,21 @@
 			<result>/test/test.jsp</result>
 		</action>
 		
-		<!-- 아이디 중복체크 액션. -->
-		<action name="testForm" class="test.action.TestFormAction">
-			<result>/test/testForm.jsp</result>
-		</action>
-		
+		<!-- 아이디 중복체크 액션. -->		
 		<action name="checkDup" class="common.CheckDuplicateAction">
 			<interceptor-ref name="params" />				
 			<interceptor-ref name="conDAO" />
 			<result>/test/checkDup.jsp</result>
 		</action>	
 		
+		
 		<!-- 홈 액션. -->
 		<action name="home" class="board.home.action.HomeAction">
 			<result>/index.jsp</result>
 		</action>		
 		
-		<!-- RestBoard 액션 -->
 		
+		<!-- RestBoard 액션 -->		
 		<!-- 리스트에서 글쓰기 클릭시 -->
 		<action name="insertRestForm" class="board.rest.action.InsertRestAction" method="form">
 			<result>/board/rest/insertRest.jsp</result>
@@ -96,8 +93,9 @@
 			<interceptor-ref name="conDAO"/>
 			<result>/board/rest/updateRest.jsp</result>
 		</action>		
-		
 		<!-- RestBoard 끝 -->
+		
+		
 		<!-- QnA -->
 		<!-- QnA 리스트 -->
 		<action name="listQna" class="board.qna.action.ListQnaAction">
@@ -158,6 +156,7 @@
 		<action name="testAction" class="test.action.TestAction">
 			<result>/test/test.jsp</result>
 		</action>
+		
 		
 		<!-- 테스트 게시판 리스트 액션. -->
 		<action name="listTest" class="board.test.action.ListTestAction">

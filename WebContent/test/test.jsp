@@ -31,20 +31,11 @@
 
 	<!-- container -->
 	<div class="container">
-	
-		<div class="row">
-		  <div class="col-xs-6 col-md-3">
-		    <a href="#" class="thumbnail">
-		      <img src="assets/rest/chinese.jpg" alt="...">
-		    </a>
-		  </div>
-		  ...
-		</div>
 
 		<!-- test message -->
 		<div class="test-template">
 			<h1>test message</h1>
-			<p class="lead">지금은 develop branch 입니다.</p>
+			<p class="lead">지금은 4월 7일 release branch 입니다.</p>
 			<p class="lead">당신은 "${sessionType}" 입니다.</p>
 			<p class="lead">"${sessionName}" 님 환영합니다.</p>
 			<p class="lead">sessionType : ${sessionType}</p>
