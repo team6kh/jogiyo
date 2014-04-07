@@ -11,92 +11,110 @@
   
   
 	<body>
-		<table border="1" cellspacing="0" cellpadding="2">
-			<tr>
-				<td align="center"><h2>상품 상세보기</h2></td>
-			</tr>
-			<tr>
-				<td height="20"></td>
-			</tr>
-		</table>
 		
-		<table width="600" border="0" cellspacing="0" cellpadding="0">
-			<tr bgcolor="#777777">
-				<td height="1" colspan="2"></td>
+		<table border="1" >
+			<tr>
+				<td align=left>
+					<s:if test="resultClass.rest_localcategory == 11">
+						서울특별시
+					</s:if>
+					<s:elseif test="resultClass.rest_localcategory == 12">
+						경기/인천
+					</s:elseif>
+					<s:elseif test="resultClass.rest_localcategory == 13">
+						부산/경남
+					</s:elseif>
+					<s:elseif test="resultClass.rest_localcategory == 14">
+						대구/경북
+					</s:elseif>
+					<s:elseif test="resultClass.rest_localcategory == 15">
+						대전/전북
+					</s:elseif>
+					<s:elseif test="resultClass.rest_localcategory == 16">
+						광주/전남
+					</s:elseif>
+					<s:elseif test="resultClass.rest_localcategory == 17">
+						그 외 지역
+					</s:elseif>
+				</td>
+				<td align=left>
+					<s:if test="resultClass.rest_typecategory == 21">
+						한식
+					</s:if>
+					<s:elseif test="resultClass.rest_typecategory == 22">
+						양식
+					</s:elseif>
+					<s:elseif test="resultClass.rest_typecategory == 23">
+						중식
+					</s:elseif>
+					<s:elseif test="resultClass.rest_typecategory == 24">
+						일식
+					</s:elseif>
+					<s:elseif test="resultClass.rest_typecategory == 25">
+						기타
+					</s:elseif>
+				</td>
+				<td></td> <td></td> <td></td> <td></td>
 			</tr>
 			<tr>
-				<td bgcolor="#F4F4F4">  상품번호 </td>
-				<td bgcolor="#FFFFFF">
-				&nbsp;&nbsp;<s:property value="resultClass.rest_num" />
+				<td>
+					상품번호
 				</td>
-			</tr>
-			<tr bgcolor="#777777">
-  				<td height="1" colspan="2"></td>	
-			</tr>
-			<tr>
-				<td width="100" bgcolor="#F4F4F4">  상품명</td>
-				<td width="500" bgcolor="#FFFFFF">
-				&nbsp;&nbsp;<s:property value="resultClass.rest_subject" />
+				<td>
+					<s:property value="resultClass.rest_num" />
 				</td>
-			</tr>
-			<tr bgcolor="#777777">
-				<td height="1" colspan="2"></td>
-			</tr>
-			<tr>
-				<td bgcolor="#F4F4F4">  판매자명 </td>
-				<td bgcolor="#FFFFFF">
-					&nbsp;&nbsp;<s:property value="resultClass.rest_writer_name" />
-				</td>
-			</tr>
-			<tr bgcolor="#777777">
-				<td height="1" colspan="2"></td>	
-			</tr>
-
-			<tr>
-				<td bgcolor="#F4F4F4">매인사진</td>
-				<td bgcolor="#FFFFFF">
-					<img src = "<s:property value="resultClass.rest_destFile1" />"/>
-				</td>
-			</tr>
-			<tr bgcolor="#777777">
-				<td height="1" colspan="2"></td>
-			</tr>
-			<tr>
-				<td bgcolor="#F4F4F4">  조회수 </td>
-				<td bgcolor="#FFFFFF">
-					&nbsp;&nbsp;<s:property value="resultClass.rest_readcount" />
-				</td>
-			</tr>
-			<tr bgcolor="#777777">
-				<td height="1" colspan="2"></td>	
-			</tr>
-			<tr>
-				<td bgcolor="#F4F4F4">  등록날짜 </td>
-				<td bgcolor="#FFFFFF">
-					&nbsp;&nbsp;<s:property value="resultClass.rest_reg_date" />
-				</td>
-			</tr>
-			<tr bgcolor="#777777">
-				<td height="1" colspan="2"></td>	
-			</tr>
-			<tr>
-				<td bgcolor="#F4F4F4">  상세사진 </td>
-				<td bgcolor="#FFFFFF">
-					<img src = "<s:property value="resultClass.rest_destFile2" />"/>
-				</td>
+				<td></td> <td></td> <td></td> <td></td>
 			</tr>
 			
 			
-			<tr bgcolor="#777777">
-				<td height="1" colspan="2"></td>	
-			</tr>
-			<tr>
-				<td height="10" colspan="2"></td>
-			</tr>
+			
+			
+			
+			
+			
+		<TABLE border=1>
+			<TR align=center>
+				<td>카테고리</td>
+				<td>1</TD>
+				<td>2</TD>
+				<td>3</TD>
+			</TR>
+			<TR>
+				<TD>상품번호</TD>
+				<td>1</TD>
+				<td>2</TD>
+				<td>3</TD>
+			<TR>
+				<TD colspan=3 align=center bgcolor=eeffff>
+					매인사진
+				</TD>
+				<TD>
+					테스트중...
+				</TD>
+				<td>
+				</td>
+			</TR>
+		</TABLE>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
 
 			<tr>
-				<td align="right" colspan="2">
+				<td align="right" colspan="6">
 					<!--
 					<input name="list" type="button" value="수정" class="inputb" onClick="javascript:location.href='modifyRest.action?rest_num=<s:property value="rest_num" />&currentPage=<s:property value="currentPage" />'">
 					<input name="list" type="button" value="삭제" class="inputb" onClick="javascript:location.href='deleteRest.action?rest_num=<s:property value="rest_num" />&currentPage=<s:property value="currentPage" />'">
