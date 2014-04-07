@@ -1,101 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
-<sqlMap>
+<sqlMap namespace="Qna">
 
-	<typeAlias alias="board" type="QnaDTO" />
+	<typeAlias alias="qnaBoard" type="board.qna.dto.QnaDTO" />
 
-		<!-- 리절트 맵 정의 -->
-	  	<resultMap id="boardRes" class="board">
-		  	<result property="qna_num" column="qna_num"/>
-		  	<result property="qna_id" column="qna_id"/>
-		  	<result property="qna_subject" column="qna_subject"/>
-		  	<result property="qna_isprivate" column="qna_isprivate"/>
-		  	<result property="qna_content" column="qna_content"/>		  	
-		  	<result property="qna_readcount" column="qna_readcount"/>
-		  	<result property="qna_reg_date" column="qna_reg_date"/>
-		  	<result property="qna_ref" column="qna_ref"/>
-		  	<result property="qna_ref_step" column="qna_ref_step"/>
-		  	<result property="qna_ref_level" column="qna_ref_level"/>
-		</resultMap>
-		
-		<!-- 공통으로 사용할 select 절 정의 -->
-		<sql id="select-all">
-			SELECT * FROM qna_board
-		</sql>
-		
-		<!-- 공통으로 사용할 where-no 절 정의 -->
-		<sql id="where-num">
-			WHERE num = #num#
-		</sql>
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="boardRes" class="qnaBoard">
+		<result property="qna_num" column="qna_num" />
+		<result property="qna_id" column="qna_id" />
+		<result property="qna_subject" column="qna_subject" />
+		<result property="qna_isprivate" column="qna_isprivate" />
+		<result property="qna_content" column="qna_content" />
+		<result property="qna_readcount" column="qna_readcount" />
+		<result property="qna_reg_date" column="qna_reg_date" />
+		<result property="qna_ref" column="qna_ref" />
+		<result property="qna_ref_step" column="qna_ref_step" />
+		<result property="qna_ref_level" column="qna_ref_level" />
+	</resultMap>
 	
+	<resultMap id="boardRes1" class="qnaBoard">
+		<result property="qna_num" column="qna_num" />
+		<result property="qna_subject" column="qna_subject" />
+		<result property="qna_readcount" column="qna_readcount" />
+		<result property="qna_reg_date" column="qna_reg_date" />
+	</resultMap>
 	
-		<!-- select 쿼리문 정의 -->
-		<select id="selectAll" resultMap="boardRes" parameterClass="int">
-			<include refid="select-all" />
-			ORDER BY no DESC
-		</select>
-		
-		<select id="selectOne" resultMap="boardRes" parameterClass="int">
-			<include refid="select-all" />
-			<include refid="where-num" />
-		</select>
-		
-		<select id="selectLastNo" resultClass="board" parameterClass="int">
-			SELECT max(no) as num FROM qna_board 
-		</select>
-		
-				
-		
-		<!-- insert 쿼리문 정의 -->
-		<insert id="insertBoard" parameterClass="board">
-		
-      		INSERT INTO qna_board (
-      							qna_num,
-      							qna_id,
-      							qna_subject,
-      							qna_isprivate,
-      							qna_category,
-      							qna_content,      							
-      							qna_readcount,
-      							qna_reg_date,
-      							qna_ref,
-      							qna_ref_step,
-      							qna_ref_level
-                         )
-                	 VALUES (qna_board_NO_SEQ.NEXTVAL,
-                	 		#qna_num#,
-                         	#qna_id#,
-                        	#qna_subject#,
-                         	#qna_isprivate#,
-                         	#qna_category#,
-                         	#qna_content#,                         	
-                         	#qna_readcount#,
-                         	#qna_reg_date#,
-                         	#qna_ref#,
-                         	#qna_ref_step#,
-                         	#qna_ref_level#
-                         )
-		</insert>
-		
-		
-		<!-- update 쿼리문 정의 -->
-		<update id="updateBoard" parameterClass="board">
-    		UPDATE qna_board SET SUBJECT = #subject#,
-                     		     qna_isprivate = #qna_isprivate#,
-                       		     qna_category = #qna_category#,
-                       		     qna_content = #qna_content#
-                       		    
-                       		    
-		<include refid="where-num" />
-   		</update>
-    
-   
+	<resultMap id="boardRes2" class="qnaBoard">
+		<result property="qna_num" column="qna_num" />
+		<result property="qna_subject" column="qna_subject" />
+		<result property="qna_content" column="qna_content" />
+		<result property="qna_readcount" column="qna_readcount" />
+		<result property="qna_reg_date" column="qna_reg_date" />
+	</resultMap>
 
-		<!-- delete 쿼리문 정의 -->
-  		  <delete id="deleteBoard" parameterClass="board">
-			DELETE FROM qna_board 
-			<include refid="where-num" />
-   		 </delete>
+	<select id="qnaList" resultMap="boardRes1">
+		select 
+			qna_num, qna_subject, qna_readcount, qna_reg_date	
+		from qna_board
+	</select>
+	
+	<select id="qnaDetail" parameterClass="int" resultMap="boardRes2">
+		select 
+			qna_num, qna_content, qna_readcount, qna_reg_date, qna_subject	
+		from qna_board
+		where qna_num = #qna_num#
+	</select>
+	
+	<insert id="insertQnaBoard" parameterClass="qnaBoard">
+		insert into qna_board (qna_num, qna_subject, qna_content)
+		values(
+			(select nvl(max(qna_num) + 1, 1) from qna_board),
+			#qna_subject#,
+			#qna_content#
+		)
+	</insert>
+	
+	<update id="updateQna" parameterClass="qnaBoard">
+		update qna_board
+		set qna_subject = #qna_subject#,
+			qna_content = #qna_content#
+		where qna_num = #qna_num#
+	</update>
+	
+	<delete id="deleteQna" parameterClass="qnaBoard">
+		delete qna_board where qna_num = #qna_num#
+	</delete>
 
 </sqlMap>
 
