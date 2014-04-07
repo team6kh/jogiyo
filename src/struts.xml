@@ -10,6 +10,8 @@
 			<interceptor name="conDAO" class="common.ConDAOInterceptor"/>
 		</interceptors>
 		
+		
+		
 		<!-- NEW 비밀번호 체크 액션. -->
 		<action name="checkPass" class="common.CheckPasswordAction">
 			<interceptor-ref name="params"/>
@@ -69,28 +71,16 @@
 			<interceptor-ref name="conDAO"/>
 			<result>/board/rest/listRest.jsp</result>
 		</action>
-
-		<!-- 수정 액션 -->
-		<action name="updateRest" class="board.rest.action.UpdateRestAction">
+		
+		<!-- 리드 액션 -->
+		<action name="readRest" class="board.rest.action.ReadRestAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result>/board/rest/updateRest.jsp</result>
+			<result>/board/rest/readRest.jsp</result>
 		</action>
-		
+
 		<!-- RestBoard 끝 -->		
 		
-		
-		
-		
-		<!-- RestOptBoard 액션 -->
-		<action name="insertOpt" class="board.rest.action.InsertRestAction" method="insertOpt">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
-			<result>/board/rest/updateRest.jsp</result>
-		</action>
-		
-		
-		<!-- RestOptBoard 끝 -->
 		
 		
 		

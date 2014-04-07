@@ -65,6 +65,32 @@
 		</insert>
 		
 		
+		
+		
+		
+		<select id="selectLastNo" resultClass="RestDTO" parameterClass="int">
+			SELECT max(rest_num) as rest_num FROM Rest_board 
+		</select>
+		
+		<select id="selectAll" resultMap="RestBoard" parameterClass="int">
+			<include refid="select-all" />
+			ORDER BY rest_num DESC
+		</select>
+		
+		<select id="selectRestOne" resultMap="RestBoard" parameterClass="int">
+			<include refid="select-all" />
+			<include refid="where-num" />
+		</select>
+		
+		<select id="selectRestoptOne" resultMap="RestoptBoard" parameterClass="int">
+			select * from RestOpt_Board
+			where restopt_rest_num = #restopt_rest_num#
+		</select>
+		
+		
+		
+		
+		
 		<update id="updateRestBoard" parameterClass="RestDTO">
    			UPDATE Rest_board SET rest_subject = #rest_subject#,
    								rest_price = #rest_price#, 
@@ -78,10 +104,6 @@
 			<include refid="where-num" />
    		</update>
 		
-		<select id="selectLastNo" resultClass="RestDTO" parameterClass="int">
-			SELECT max(rest_num) as rest_num FROM Rest_board 
-		</select>
-		
 		<update id="updateFile" parameterClass="RestDTO">
    			UPDATE Rest_board SET rest_destFile1 = #rest_destFile1#,
    								rest_main_orgname = #rest_main_orgname#, 
@@ -91,16 +113,11 @@
    								rest_content_savname = #rest_content_savname#
 			<include refid="where-num" />
    		</update>
-   		
-   		
-   		
-		
-		
-   		<select id="selectAll" resultMap="RestBoard" parameterClass="int">
-			<include refid="select-all" />
-			ORDER BY rest_num DESC
-		</select>
 	
+		<update id="updateRest_readcount" parameterClass="RestDTO">
+ 			UPDATE Rest_board SET rest_readcount = rest_readcount + 1
+			<include refid="where-num" />
+		</update>
 	
 	
 	

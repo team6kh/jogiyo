@@ -9,7 +9,6 @@ import common.Constants;
 import java.util.*;
 import java.io.Reader;
 import java.io.File;
-
 import org.apache.commons.io.FileUtils;
 
 public class InsertRestAction extends ActionSupport implements ConDAOAware{
@@ -272,7 +271,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 			paramClass.setRest_main_orgname(getUpload1FileName());
 			paramClass.setRest_main_savname(file_name1 + "." + file_ext1);
 			//컨텐트사진파일 DTO에 set
-			paramClass.setRest_destFile2(rest_destFile1.getPath().replace('\\', '/').substring(27));
+			paramClass.setRest_destFile2(rest_destFile2.getPath().replace('\\', '/').substring(27));
 			paramClass.setRest_content_orgname(getUpload2FileName()); 
 			paramClass.setRest_content_savname(file_name2 + "." + file_ext2);
 			

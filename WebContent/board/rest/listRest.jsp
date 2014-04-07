@@ -49,9 +49,9 @@
 				</thead>
 				<tbody>
 					<s:iterator value="list" status="stat">
-						<s:url id="viewURL" action="readRest">
-							<s:param name="test_num">
-								<s:property value="test_num" />
+						<s:url id="readURL" action="readRest">
+							<s:param name="rest_num">
+								<s:property value="rest_num" />
 							</s:param>
 							<s:param name="currentPage">
 								<s:property value="currentPage" />
@@ -59,7 +59,7 @@
 						</s:url>
 						<tr>
 							<td colspan="2">
-								<s:a href="%{viewURL}">
+								<s:a href="%{readURL}">
 									<img src = "<s:property value="rest_destFile1"/>"/>
 								</s:a></td>
 							<td class="text-center"><s:property value="rest_writer_name" /></td>
