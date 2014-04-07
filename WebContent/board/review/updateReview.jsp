@@ -33,7 +33,7 @@
 	<div class="container">
 		<div class="common-template">
 			<!-- 리뷰 쓰기 폼(review)  -->
-			<form method="post" action="insertReviewPro.action"
+			<form method="post" action=""
 				enctype="multipart/form-data">
 				<div class="col-md-12 well">
 					<!--  별점(review_rating) : radio 타입으로  -->

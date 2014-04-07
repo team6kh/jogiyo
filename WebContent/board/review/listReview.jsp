@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,13 +33,19 @@
 	<div class="container">
 
 		<div class="common-template">
-			<h2>Review 게시판입니다</h2>
+			<h3>Review 게시판입니다</h3>
 
 
-			<!-- 식당 확인: 임시조건문, 후에 필요 없어지면 삭제 -->
+			<!-- 해당 식당에 구매내역이 있는 회원이라면 리뷰글 쓸 수 있도록  -->
+
+
+
+			<!-- 식당 확인: 임시조건문, 후에 삭제 -->
+			<!--  식당코드가 맞지 않는 경우 -->
 			<c:if test="${review_rest != 'test_Rest' }">
 				<div>이 식당이 아닌뎁쇼??</div>
 			</c:if>
+			<!-- 식당코드가 맞는 경우 -->
 			<c:if test="${review_rest == 'test_Rest' }">
 
 				<!--  리뷰글이 없는 경우 -->
@@ -63,39 +68,44 @@
 								</tr>
 								<th class="text-center" style="width: 100px;">별점</th>
 								<td colspan="3">${reviewDTO.review_rating }</td>
+
+								<!-- 첨부파일 관련 코드  -->
+								<c:if test="${reviewDTO.review_file != null }">
+									<tr>
+										<td class="text-center" colspan="4"><c:forTokens
+												var="reviewFileNames" items="${reviewDTO.review_file}"
+												delims="' '">
+												<c:forEach var="reviewFileName" items="${reviewFileNames}">
+												<img src="${reviewFile_Path}${reviewFileName}" width="300px"><br/>
+												</c:forEach>
+
+											</c:forTokens></td>
+									</tr>
+								</c:if>
+								<!-- 첨부파일 관련 코드 끝  -->
 								<tr>
 									<td colspan="4" class="text-center">${reviewDTO.review_content}</td>
 								</tr>
-								<!-- 첨부파일을 위한 반복문  -->
-								<c:if test="${reviewDTO.review_file !=null }">
-									<tr>
-										<td colspan="4" class="text-center"><c:forEach
-												var="review_file_path" items="${File_Path_List}">
-												<img src="${review_file_path}" width="300px" height="400px">
-											</c:forEach> <!-- 첨부파일 반복문 끝  --></td>
-									</tr>
-								</c:if>
 							</c:forEach>
 							<!--  리뷰글 목록 반복문 종료 -->
-							</tbody>
+
 						</table>
 					</div>
-					<div class="text-center">
-						<ul class="pagination pagination-sm">
-							<s:property value="pagingHtml" escape="false" />
-						</ul>
-					</div>
-					<div class="pull-right">
-						<a href="insertReviewForm.action" class="btn btn-primary">글쓰기</a>
-					</div>
-
 				</c:if>
-				<!--  리뷰 글 개수 조건문 종료 -->
+				<!--  리뷰글이 있는지 확인하는 조건문 종료-->
 			</c:if>
-			<!-- 식당 확인 조건문 종료  -->
+			<!--  식당코드가 맞는 경우의 조건문 종료 -->
+
+			<!--  리뷰 글 목록 페이지 -->
+			<div class="text-center">
+				<ul class="pagination pagination-sm">
+					<s:property value="review_pagingHtml" escape="false" />
+				</ul>
+			</div>
+			<!--  리뷰글 목록 페이지 종료 -->
+
 
 		</div>
-
 	</div>
 	<!-- /.container -->
 

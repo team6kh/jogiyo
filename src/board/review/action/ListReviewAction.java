@@ -14,7 +14,7 @@ import common.PagingAction;
 public class ListReviewAction implements Action, ConDAOAware {
 
 	// DAO 관련 변수
-	public static SqlMapClient sqlMapper;
+	private SqlMapClient sqlMapper;
 
 	// 해당 글을 추출해내기 위해 받아야 할 파라미터값(임시값 test_Rest)
 	private String review_rest;
@@ -23,19 +23,24 @@ public class ListReviewAction implements Action, ConDAOAware {
 	private List<ReviewDTO> reviewRes = new ArrayList<ReviewDTO>();
 
 	// 첨부파일을 위한 변수
-	String[] fileName;
-	private List<String> file_Path_List = new ArrayList<String>();
 
-	// PagingAction 관련 변수
-	private int currentPage = 1; // 현재 페이지
-	private int totalCount; // 총 게시물의 수
-	private int blockCount = 5; // 한 페이지의 게시물의 수
-	private int blockPage = 5; // 한 화면에 보여줄 페이지 수
-	private String pagingHtml; // 페이징을 구현한 HTML
-	private PagingAction page; // 페이징 클래스
-	private String actionName = "listReview";
+	private String reviewFile_Path = common.Constants.COMMON_FILE_PATH
+			+ common.Constants.REVIEW_FILE_PATH;
+
+	// 페이징 관련 변수
+	private int review_currentPage = 1; // 현재 페이지
+	private int review_totalCount; // 총 게시물의 수
+	private int review_blockCount = 5; // 한 페이지의 게시물의 수
+	private int review_blockPage = 5; // 한 화면에 보여줄 페이지 수
+	private String review_pagingHtml; // 페이징을 구현한 HTML
+	private PagingAction review_page; // 페이징 클래스
+
+	private String actionName = "listReview"; // 페이징액션과 로그인액션에서 쓰인다...
 
 	public String execute() throws Exception {
+
+		// 파일경로 역슬러시 변경
+		reviewFile_Path.replace("\\", "/");
 
 		// review_Rest 임시값 설정(나중에 변경)
 		review_rest = "test_Rest";
@@ -44,35 +49,24 @@ public class ListReviewAction implements Action, ConDAOAware {
 		reviewRes = sqlMapper.queryForList("Review.selectReviewList",
 				review_rest);
 
-		// String으로 연결해놓은 파일 경로를 분리하여 List 타입으로 저장하기 위한 코드
-		if (reviewRes != null) {
-			for (int i = 0; i < reviewRes.size(); i++) {
-				// 반복문을 이용하여 순차적으로 review_file 값을 꺼내어 저장
-				if (reviewRes.get(i).getReview_file() != null) {
-					String saveFileName = reviewRes.get(i).getReview_file();
-					// 저장한 첨부파일명을 구분자를 "공백"으로 나누어 배열로 저장
-					fileName = saveFileName.split(" ");
-					// 배열 타입으로 저장한 파일명을 순차적으로 뽑아 경로와 연결
-			
-				}
-			}
-		}
-
+	
 		// 페이징 관련 코드
-		totalCount = reviewRes.size();
-		page = new PagingAction(actionName, currentPage, totalCount,
-				blockCount, blockPage); // pagingAction 객체 생성.
-		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
+		review_totalCount = reviewRes.size();
+		review_page = new PagingAction(actionName, review_currentPage,
+				review_totalCount, review_blockCount, review_blockPage);
+		review_pagingHtml = review_page.getPagingHtml().toString();
 
-		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
-		int lastCount = totalCount;
+		// 현재 페이지에서 보여줄 마지막 글의 번호 설정
+		int review_lastCount = review_totalCount;
 
 		// 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
-		if (page.getEndCount() < totalCount)
-			lastCount = page.getEndCount() + 1;
+
+		if (review_page.getEndCount() < review_totalCount)
+			review_lastCount = review_page.getEndCount() + 1;
 
 		// 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
-		reviewRes = reviewRes.subList(page.getStartCount(), lastCount);
+		reviewRes = reviewRes.subList(review_page.getStartCount(),
+				review_lastCount);
 
 		return SUCCESS;
 	}
@@ -86,7 +80,7 @@ public class ListReviewAction implements Action, ConDAOAware {
 		this.reviewRes = reviewRes;
 	}
 
-	// review_rest 변수의 getter & setter
+	// 히든값 : review_rest 변수의 getter & setter
 	public String getReview_rest() {
 		return review_rest;
 	}
@@ -95,64 +89,58 @@ public class ListReviewAction implements Action, ConDAOAware {
 		this.review_rest = review_rest;
 	}
 
-	// 파일 경로 getter & setter
-
-	public List<String> getFile_Path_List() {
-		return file_Path_List;
+	// 파일 경로 getter
+	public String getReviewFile_Path() {
+		return reviewFile_Path;
 	}
 
-	public void setFile_Path_List(List<String> file_Path_List) {
-		this.file_Path_List = file_Path_List;
+	// 페이징 관련 getter & setter
+	public int getReview_currentPage() {
+		return review_currentPage;
 	}
 
-	// pagingAction 관련 변수 getter & setter
-
-	public int getCurrentPage() {
-		return currentPage;
+	public void setReview_currentPage(int review_currentPage) {
+		this.review_currentPage = review_currentPage;
 	}
 
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
+	public int getReview_totalCount() {
+		return review_totalCount;
 	}
 
-	public int getTotalCount() {
-		return totalCount;
+	public void setReview_totalCount(int review_totalCount) {
+		this.review_totalCount = review_totalCount;
 	}
 
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
+	public int getReview_blockCount() {
+		return review_blockCount;
 	}
 
-	public int getBlockCount() {
-		return blockCount;
+	public void setReview_blockCount(int review_blockCount) {
+		this.review_blockCount = review_blockCount;
 	}
 
-	public void setBlockCount(int blockCount) {
-		this.blockCount = blockCount;
+	public int getReview_blockPage() {
+		return review_blockPage;
 	}
 
-	public int getBlockPage() {
-		return blockPage;
+	public void setReview_blockPage(int review_blockPage) {
+		this.review_blockPage = review_blockPage;
 	}
 
-	public void setBlockPage(int blockPage) {
-		this.blockPage = blockPage;
+	public String getReview_pagingHtml() {
+		return review_pagingHtml;
 	}
 
-	public String getPagingHtml() {
-		return pagingHtml;
+	public void setReview_pagingHtml(String review_pagingHtml) {
+		this.review_pagingHtml = review_pagingHtml;
 	}
 
-	public void setPagingHtml(String pagingHtml) {
-		this.pagingHtml = pagingHtml;
+	public PagingAction getReview_page() {
+		return review_page;
 	}
 
-	public PagingAction getPage() {
-		return page;
-	}
-
-	public void setPage(PagingAction page) {
-		this.page = page;
+	public void setReview_page(PagingAction review_page) {
+		this.review_page = review_page;
 	}
 
 	public String getActionName() {

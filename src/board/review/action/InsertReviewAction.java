@@ -58,12 +58,8 @@ public class InsertReviewAction implements Action, Preparable,
 				// DB 수정 및 파일 이름 변경을 위해, 해당 레코드의 review_num 값을 가져온다.
 				reviewDTO = (ReviewDTO) sqlMapper
 						.queryForObject("Review.selectLastNum");
-				fileName = "review_" + reviewDTO.getReview_num() + "_" + i; // ex.
-																			// review_1(review_num값)_0(
-																			// i
-																			// 값
-																			// )
-
+				fileName = "review_" + reviewDTO.getReview_num() + "_" + i; 
+																		
 				// 업로드된 파일들의 이름을 저장한 파일 List로부터 파일 이름들을 차례로 꺼내서 각각 파일을 생성한다.
 				File destFile = new File(fileUploadPath + fileName + "."
 						+ fileExt);
