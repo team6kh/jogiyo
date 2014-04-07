@@ -7,31 +7,31 @@ public class CheckDuplicateAction implements Action {
 	private String reg_id;
 	private StringBuffer sb;
 	private String isDup;
-
-	public String getReg_id() {
-		return reg_id;
-	}
+	private int check;	
+	
 	public void setReg_id(String reg_id) {
 		this.reg_id = reg_id;
 	}
-	public String getSb() {
-		return sb.toString();
-	}
-	public String getIsDup() {
-		return isDup;
-	}
 	
+	public int getCheck() {
+		return check;
+	}
+
 	public String execute() throws Exception {
+		
+		System.out.println("aaa");
 		
 		sb = new StringBuffer();
 		sb.append("<?xml version='1.0' encoding='euc-kr'?>");
 		sb.append("<root>");
-		if (!(reg_id.equals("admin") || reg_id.equals("test"))) {
+		if (!(reg_id.equals("adminadmin") || reg_id.equals("test"))) {
 			sb.append("true");
-			isDup = "true";
+			isDup = "false";
+			check = 1;
 		} else {
 			sb.append("false");
-			isDup = "false";
+			isDup = "true";
+			check = 0;
 		}
 		
 		sb.append("<id>" + reg_id + "</id>");
@@ -40,10 +40,12 @@ public class CheckDuplicateAction implements Action {
 		// response.setContentType("text/xml;charset=euc-kr");
 		// response.getWriter().write(sb.toString());
 		
+		System.out.println("reg_id:"+reg_id);
 		System.out.println("isDup:"+isDup);
+		System.out.println("check:"+check);
 		
 		return SUCCESS;
 		
 	}
-
+	
 }

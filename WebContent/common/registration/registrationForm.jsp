@@ -22,54 +22,46 @@
 <!-- Custom styles for this template -->
 <link href="common/registration/registration.css" rel="stylesheet">
 
-<!-- 실시간 아이디 중복체크 -->
 <script type="text/javascript">
-	var xmlReq; // 전역변수로 지정.
-	// Ajax 객체 생성 과정
-	function createAjax() {
-		xmlReq = new XMLHttpRequest();
-	}
 
-	// Ajax 객체를 이용한 데이터 전송 과정
-	function checkDupAjax() {
-		createAjax();
-		var reg_id = document.getElementById("reg_id").value;
-		xmlReq.onreadystatechange = callBack; // 괄호 열고닫고가 틀리다.!
-		xmlReq.open("GET", "checkDup.action?reg_id=" + reg_id, true);
-		xmlReq.send(null);
-		// send가 끝나고나면 비동기식이기 때문에 프로그램이 계속 진행된다.
-	}
+	//실시간 ID validation
+	function validateRegId(userinput) {
+		if (userinput.reg_id.value == "") {
+			feedbackRegId.innerHTML = "<font color=red>아이디를 입력해주세요.</font>";
+			regForm.feedbackRegId.value = "0";
+			//alert("아이디를 입력하세요");
+			return;
+		} else {
+			var hanchk = hanCheck();
 
-	// 콜백 함수 과정
-	function callBack() {
-		if (xmlReq.readyState == 4) {
-			if (xmlReq.status == 200) {
-				printData();
+			if (userinput.reg_id.value.length < 7 && hanchk) {
+				feedbackRegId.innerHTML = "<font color=red>아이디는 7자 이상이여야합니다.</font>";
+				regForm.feedbackRegId.value = "0";
+				return false;
+			} else if (hanchk) {
+				url = "checkDup.action?reg_id=" + userinput.reg_id.value;
+				document.getElementById('resultCheckDup').contentWindow.location.href = url;
+			}
+			regForm.feedbackRegId.value = "1";
+		}
+
+		// open(url, "confirm", "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,width=300, height=200");
+
+	}
+	
+	function hanCheck() {
+		for (i = 0; i < regForm.reg_id.value.length; i++) {
+			var a = regForm.reg_id.value.charCodeAt(i);
+			if (a > 128) {
+				feedbackRegId.innerHTML = "ID 는 영문, 숫자만 사용하세요.";
+				regForm.feedbackRegId.value = "0";
+				regForm.reg_id.focus();
+				return false;
 			}
 		}
+		return true;
 	}
-
-	// 결과 출력 과정
-	function printData() {
-		var result = xmlReq.responseXML;
-
-		var rootNode = result.documentElement;
-		// <root>true</root> , <root>false</root>
-		var rootValue = rootNode.firstChild.nodeValue;
-		var rootTag = document.getElementById("result");
-
-		var idNode = rootNode.getElementsByTagName("id");
-		var idValue = idNode.item(0).firstChild.nodeValue;
-		var idTag = document.getElementById("idTxt");
-
-		if (rootValue == "true") {
-			rootTag.innerHTML = "사용 가능한 아이디";
-			idTag.innerHTML = "<br>" + idValue;
-		} else {
-			rootTag.innerHTML = "중복된 아이디";
-			idTag.innerHTML = "<br>" + idValue;
-		}
-	}
+	
 </script>
 
 <s:head /> 
@@ -85,7 +77,8 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" method="post" action="registration.action">
+		<form class="form-signup" method="post" action="registration.action" name="regForm">
+			<input type="hidden" name="feedbackRegId" value="0" />
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">
 			  <label>가입유형을 선택하세요.</label>
@@ -96,9 +89,11 @@
 			</div>
 			<div class="form-group">
 			  <label>아이디</label>
-			  <input type="text" class="form-control" id="reg_id" name="reg_id" onkeyup="checkDupAjax()" required autofocus>
-			</div>
-			<!-- testing here -->
+			  <!-- testing here -->
+			  <input type="text" class="form-control" name="reg_id" onkeyup="validateRegId(this.form);">
+			  <p class="help-block" id="feedbackRegId">아이디를 입력해주세요.</p>
+			  <iframe src="blink.html" id="resultCheckDup" style="display:none;"></iframe>			  
+			</div>						
 			<div class="form-group">
 			  <label>이름</label>
 			  <input type="text" class="form-control" name="reg_name" required>
@@ -125,7 +120,6 @@
 			
         	<button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>
       	</form>
-
 	</div>
 	<!-- /.container -->
 
