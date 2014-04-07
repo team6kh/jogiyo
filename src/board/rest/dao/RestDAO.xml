@@ -87,8 +87,7 @@
 			where restopt_rest_num = #restopt_rest_num#
 		</select>
 		
-		
-		
+
 		
 		
 		<update id="updateRestBoard" parameterClass="RestDTO">
