@@ -1,0 +1,16 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+	<field name="name">
+		<field-validator type="requiredstring">
+			<message>이름을 반드시 입력해야 합니다.</message>
+		</field-validator>
+	</field>
+	<field name="age">
+		<field-validator type="int">
+			<param name="min">20</param>
+			<param name="max">30</param>
+			<message>20 ~ 30 나이에 해당하는 사람만 퀴즈에 응답할 수 있습니다.</message>
+		</field-validator>
+	</field>
+</validators>
