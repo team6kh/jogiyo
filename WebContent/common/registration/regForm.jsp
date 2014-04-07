@@ -62,6 +62,18 @@
 		return true;
 	}
 	
+    function optionCheck(){
+        var option = document.getElementById("reg_type").value;
+        if(option == "buyer"){
+        	url = "registrationForm.action?reg_type=" + option;
+        	document.location.href = url;
+        }
+        if(option == "seller"){
+        	url = "registrationForm.action?reg_type=" + option;
+			document.location.href = url;
+        }
+    }
+	
 </script>
 
 <s:head /> 
@@ -82,7 +94,7 @@
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">
 			  <label>가입유형을 선택하세요.</label>
-			    <select class="form-control" name="reg_type">
+			    <select class="form-control" id="reg_type" name="reg_type" onchange="optionCheck()">
 			      <option value="buyer">구매자</option>
 			      <option value="seller">판매자</option>
 			    </select>			  
@@ -116,6 +128,20 @@
 			      <option value="female">여성</option>
 			      <option value="male">남성</option>
 			    </select>			  
+			</div>
+			<div id="hiddenDiv" style="visibility:hidden;">
+				<div class="form-group">
+				  <label>MOAR</label>
+				  <input type="text" class="form-control" placeholder="MOAR INPUT" name="" required>
+				</div>
+				<div class="form-group">
+				  <label>MOAR</label>
+				  <input type="text" class="form-control" placeholder="MOAR INPUT" name="" required>
+				</div>
+				<div class="form-group">
+				  <label>MOAR</label>
+				  <input type="text" class="form-control" placeholder="MOAR INPUT" name="" required>
+				</div>
 			</div>
 			
         	<button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>

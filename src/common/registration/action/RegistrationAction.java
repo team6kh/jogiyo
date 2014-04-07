@@ -43,10 +43,21 @@ public class RegistrationAction implements Action, Preparable, ModelDriven, ConD
 			buyerDTO.setBuyer_phonenumber(regDTO.getReg_phonenumber());
 			buyerDTO.setBuyer_gender(regDTO.getReg_gender());
 			
-			sqlMapper.insert("Buyer.insert", buyerDTO);
+			sqlMapper.insert("Buyer.insertBuyer", buyerDTO);
 			
 			return SUCCESS;
-		} 
+		} else if (regDTO.getReg_type().equals("seller")){
+			SellerDTO sellerDTO = new SellerDTO();			
+			sellerDTO.setSeller_id(regDTO.getReg_id());
+			sellerDTO.setSeller_pw(regDTO.getReg_pw());
+			sellerDTO.setSeller_name(regDTO.getReg_name());
+			sellerDTO.setSeller_reg_date(today.getTime());
+			sellerDTO.setSeller_email(regDTO.getReg_email());
+			sellerDTO.setSeller_phonenumber(regDTO.getReg_phonenumber());
+			sellerDTO.setSeller_gender(regDTO.getReg_gender());
+			
+			sqlMapper.insert("Seller.insert", sellerDTO);
+		}
 		
 		return ERROR;
 		
