@@ -6,6 +6,7 @@
 
 	<!-- 구매자 리절트 맵 정의 -->
 	<resultMap id="BuyerResult" class="BuyerDTO">
+		<result property="user_seq" column="user_seq" />
 		<result property="buyer_id" column="buyer_id" />
 		<result property="buyer_pw" column="buyer_pw" />
 		<result property="buyer_name" column="buyer_name" />
@@ -44,7 +45,8 @@
 
 	<!-- insert 쿼리문 정의 -->
 	<insert id="insertBuyer" parameterClass="BuyerDTO">
-		INSERT INTO buyer_table (buyer_id,
+		INSERT INTO buyer_table (user_seq,
+								buyer_id,
 								buyer_pw,
 								buyer_name,
 								buyer_reg_date,
@@ -52,7 +54,8 @@
 								buyer_phonenumber,
 								buyer_gender
 								)
-						VALUES (#buyer_id#,
+						VALUES (user_seq.nextval,
+								#buyer_id#,
 								#buyer_pw#,
 								#buyer_name#,
 								#buyer_reg_date#,

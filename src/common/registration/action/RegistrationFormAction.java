@@ -14,7 +14,7 @@ public class RegistrationFormAction implements Action {
 			return "seller";
 		}
 		
-		return SUCCESS;
+		return SUCCESS; // 최초 로딩시에는 BUYER 로.
 	}
 
 	

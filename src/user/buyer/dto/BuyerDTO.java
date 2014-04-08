@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class BuyerDTO {
 	
+	private int user_seq;
 	private String buyer_id;
 	private String buyer_pw;
 	private String buyer_name;
@@ -12,6 +13,12 @@ public class BuyerDTO {
 	private String buyer_phonenumber;
 	private String buyer_gender;
 	
+	public int getUser_seq() {
+		return user_seq;
+	}
+	public void setUser_seq(int user_seq) {
+		this.user_seq = user_seq;
+	}
 	public String getBuyer_id() {
 		return buyer_id;
 	}
@@ -53,6 +60,6 @@ public class BuyerDTO {
 	}
 	public void setBuyer_gender(String buyer_gender) {
 		this.buyer_gender = buyer_gender;
-	}
+	}	
 	
 }

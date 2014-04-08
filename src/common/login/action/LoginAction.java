@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import user.buyer.dto.BuyerDTO;
+import user.seller.dto.SellerDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
@@ -63,6 +64,29 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 			
 			return ERROR;
 
+		} else if (login_type.equals("seller")){
+			
+			SellerDTO paramClass = new SellerDTO();
+			SellerDTO resultClass = new SellerDTO();
+			
+			paramClass.setSeller_id(getLogin_id());
+			paramClass.setSeller_pw(getLogin_pw());
+
+			// 사용자의 비밀번호 가져오기.
+			resultClass = (SellerDTO) sqlMapper.queryForObject("Seller.selectWhereSellerPw", paramClass);
+			
+			// 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴.
+			if (resultClass != null) {				
+				
+				sessionMap.put("sessionType", getLogin_type());
+				sessionMap.put("sessionId", resultClass.getSeller_id());
+				sessionMap.put("sessionPw", resultClass.getSeller_pw());
+				sessionMap.put("sessionName", resultClass.getSeller_name());
+				
+				return SUCCESS;
+			}
+			
+			return ERROR;
 		}
 		
 		return ERROR;

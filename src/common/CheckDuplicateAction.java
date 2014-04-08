@@ -10,9 +10,7 @@ public class CheckDuplicateAction implements Action, ConDAOAware {
 	private SqlMapClient sqlMapper;
 	
 	private String reg_id;
-	private StringBuffer sb;
 	private int isDup;
-	private int check;
 	
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
@@ -26,15 +24,10 @@ public class CheckDuplicateAction implements Action, ConDAOAware {
 		return isDup;
 	}
 	
-	public int getCheck() {
-		return check;
-	}
-
 	public String execute() throws Exception {
 		
 		BuyerDTO buyerDTO = new BuyerDTO();
 		
-		System.out.println("reg_id:"+reg_id);
 		buyerDTO.setBuyer_id(reg_id);
 		
 		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerId", buyerDTO);
