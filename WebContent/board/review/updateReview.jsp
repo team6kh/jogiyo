@@ -32,8 +32,8 @@
 	<!-- container -->
 	<div class="container">
 		<div class="common-template">
-			<!-- 리뷰 쓰기 폼(review)  -->
-			<form method="post" action=""
+			<!-- 리뷰 수정 폼(review)  -->
+			<form method="post" action="updateReviewPro.action"
 				enctype="multipart/form-data">
 				<div class="col-md-12 well">
 					<!--  별점(review_rating) : radio 타입으로  -->
@@ -50,9 +50,10 @@
 						<!--  리뷰 content -->
 						<tr>
 							<td class="text-center" colspan="2"><textarea
-									name="review_content" rows="5" cols="50"></textarea></td>
+									name="review_content" rows="5" cols="50">${reviewDTO.review_content}</textarea></td>
 						</tr>
 						<!--  이미지 파일 첨부  -->
+						
 						<tr>
 							<td class="text-center" colspan="2"><input
 								id="review_file_element" type="file" name="review_files">
@@ -60,20 +61,21 @@
 						</tr>
 						<!-- 리뷰 작성 완료 버튼  -->
 						<tr>
-							<td class="text-center" colspan="2"><input type="submit"
-								value="리뷰 등록" /></td>
+							<td class="text-center" colspan="2"><input type="button"
+								value="취   소" onclick="javascript:document.location.href="> <input
+								type="submit" value="수정 완료" /></td>
 						</tr>
 					</table>
 				</div>
-				<!-- 같이 보내줘야 할 파라미터 : 판매자 / 구매자 정보 -->
-				<input type="hidden" name="review_rest" value="test_Rest" /> <input
-					type="hidden" name="review_writer" value="test_Customer " />
+				<!-- 같이 보내줘야 할 파라미터 : 리뷰글 번호(pk) / 페이지정보(currentPage) -->
+				<input type="hidden" name="review_num"
+					value="${reviewDTO.review_num}" /> <input type="hidden"
+					name="ccp" value="${ccp}" />
 			</form>
 		</div>
 	</div>
 	<!-- /.container -->
-
-
+	
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

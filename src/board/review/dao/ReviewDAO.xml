@@ -35,41 +35,52 @@
 	<!-- SELECT 쿼리문 정의 -->
 
 	<!-- 해당 식당에 관한 리뷰 글 목록 -->
-	<select id="selectReviewList" resultMap="reviewRes" parameterClass="java.lang.String">
+	<select id="selectReviewList" resultMap="reviewRes"
+		parameterClass="java.lang.String">
 		<include refid="select-all" />
 		where REVIEW_REST=#review_rest# ORDER BY REVIEW_REG_DATE DESC
 	</select>
 
-	<select id="selectReviewOne" resultClass="reviewDTO">
+	<select id="selectReviewOne" resultClass="reviewDTO"
+		parameterClass="int">
 		<include refid="select-all" />
 		<include refid="where_review_num" />
 	</select>
 
 	<select id="selectLastNum" resultClass="reviewDTO">
-		SELECT max(review_num) as review_num FROM Review_Board
+		SELECT max(review_num) as
+		review_num FROM Review_Board
 	</select>
 
 	<!-- INSERT 쿼리문 정의 -->
 	<insert id="insertReview" parameterClass="reviewDTO">
-		INSERT INTO Review_Board (
-			review_num,
-			review_rest,
-			review_writer,
-			review_content,
-			review_reg_date,
-			review_rating
+		INSERT INTO
+		Review_Board (
+		review_num,
+		review_rest,
+		review_writer,
+		review_content,
+		review_reg_date,
+		review_rating
 		)
 		VALUES(
-			review_seq.nextval,
-			#review_rest#,
-			#review_writer#,
-			#review_content#,
-			#review_reg_date#,
-			#review_rating#
+		review_seq.nextval,
+		#review_rest#,
+		#review_writer#,
+		#review_content#,
+		#review_reg_date#,
+		#review_rating#
 		)
 	</insert>
 
 	<!-- UPDATE 쿼리문 정의 -->
+	<!-- 리뷰글 수정 -->
+
+	<update id="updateReview" parameterClass="reviewDTO">
+		UPDATE review_board SET REVIEW_RATING = #review_rating#,
+		REVIEW_CONTENT = #review_content#
+		<include refid="where_review_num" />
+	</update>
 
 	<!-- 첨부파일을 위한 쿼리문 -->
 	<update id="updateReviewFile" parameterClass="reviewDTO">

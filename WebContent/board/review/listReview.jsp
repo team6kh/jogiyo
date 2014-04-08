@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,80 +33,126 @@
 	<!-- container -->
 	<div class="container">
 
-		<div class="common-template">
-			<h3>Review 게시판입니다</h3>
 
+		<div class="col-md-12">
+			<h3>review 게시판</h3>
+		</div>
 
-			<!-- 해당 식당에 구매내역이 있는 회원이라면 리뷰글 쓸 수 있도록  -->
+		<div class="col-md-12 well">
 
+			<!--  리뷰 쓰기 권한에 관한 조건문 미구현 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
 
+			<!-- 리뷰 쓰기 폼 시작  -->
+			<form name="insertReview" method="post"
+				action="insertReviewPro.action" enctype="multipart/form-data">
+				<table class="table table-striped table-forum">
+					<tr>
+						<th>별점</th>
+						<td class="text-center"><input type="radio"
+							name="review_rating" value="1" /> 1점 <input type="radio"
+							name="review_rating" value="2" /> 2점 <input type="radio"
+							name="review_rating" value="3" /> 3점 <input type="radio"
+							name="review_rating" value="4" /> 4점 <input type="radio"
+							name="review_rating" value="5" /> 5점</td>
+					</tr>
+					<!--  리뷰 content -->
+					<tr>
+						<td class="text-center" colspan="2"><textarea
+								name="review_content" rows="5" cols="50"></textarea></td>
+					</tr>
+					<!--  이미지 파일 첨부(2개)  -->
+					<tr>
+						<td class="text-center" colspan="2"><input
+							id="review_file_element" type="file" name="review_files">
+							<input id="review_file_element" type="file" name="review_files"></td>
+					</tr>
+					<!-- 리뷰 작성 완료 버튼  -->
+					<tr>
+						<th class="text-center" colspan="2"><input type="submit"
+							value="리뷰 등록" /></th>
+					</tr>
+				</table>
+				<!-- 보내줘야 할 파라미터 : 식당코드(식당 테이블) / 구매자 정보(로그인 아이디 세션값 or 구매(결제) 테이블의 주문자 정보 -->
+				<input type="hidden" name="review_rest" value="test_Rest" /> <input
+					type="hidden" name="review_writer" value="test_Customer" />
+			</form>
+		</div>
+		<!-- 리뷰 쓰기 폼 끝  -->
 
-			<!-- 식당 확인: 임시조건문, 후에 삭제 -->
-			<!--  식당코드가 맞지 않는 경우 -->
-			<c:if test="${review_rest != 'test_Rest' }">
-				<div>이 식당이 아닌뎁쇼??</div>
-			</c:if>
-			<!-- 식당코드가 맞는 경우 -->
-			<c:if test="${review_rest == 'test_Rest' }">
-
-				<!--  리뷰글이 없는 경우 -->
-				<c:if test="${totalCount == '0'}">
-					<div class="col-md-12 well">등록된 글이 없습니다.</div>
-				</c:if>
-				<!--  리뷰글이 있는 경우 -->
-				<c:if test="${totalCount !='0' }">
-
-					<div class="col-md-12 well">
-						<table class="table table-striped table-forum">
-							<!--  리뷰글 목록 -->
-							<c:forEach var="reviewDTO" items="${reviewRes}">
+		<!-- 리뷰 글 보기 시작 -->
+		<div class="col-md-12 well">
+			<table class="table table-striped table-forum">
+				<c:forEach var="reviewDTO" items="${reviewRes}">
+					<!--  리뷰글 작성자 & 작성일 -->
+					<tr>
+						<td class="text-center">${reviewDTO.review_writer}</td>
+						<td class="text-center"><fmt:formatDate
+								value="${reviewDTO.review_reg_date}" pattern="yyyy-MM-dd" /></td>
+					</tr>
+					<!--  리뷰글 별점 : 후에 이미지로 대체해야 -->
+					<tr>
+						<td class="text-center" colspan="2">${reviewDTO.review_rating}</td>
+					</tr>
+					<!-- 리뷰글 내용 -->
+					<tr>
+						<td class="text-center" colspan="2">${reviewDTO.review_content }</td>
+					</tr>
+					<!-- 리뷰글 첨부사진 : 첨부사진이 있을 때만 보이도록 -->
+					<c:if test="${!empty reviewDTO.review_file}">
+						<c:forTokens var="reviewFileNames"
+							items="${reviewDTO.review_file }" delims="' '">
+							<c:forEach var="reviewFileName" items="${reviewFileNames}">
 								<tr>
-									<th class="text-center" style="width: 100px;">작성자</th>
-									<td class="text-center">${reviewDTO.review_writer}</td>
-									<th class="text-center" style="width: 200px;">작성일</th>
-									<td class="text-center"><fmt:formatDate
-											value="${reviewDTO.review_reg_date}" type="date" /></td>
-								</tr>
-								<th class="text-center" style="width: 100px;">별점</th>
-								<td colspan="3">${reviewDTO.review_rating }</td>
-
-								<!-- 첨부파일 관련 코드  -->
-								<c:if test="${reviewDTO.review_file != null }">
-									<tr>
-										<td class="text-center" colspan="4"><c:forTokens
-												var="reviewFileNames" items="${reviewDTO.review_file}"
-												delims="' '">
-												<c:forEach var="reviewFileName" items="${reviewFileNames}">
-												<img src="${reviewFile_Path}${reviewFileName}" width="300px"><br/>
-												</c:forEach>
-
-											</c:forTokens></td>
-									</tr>
-								</c:if>
-								<!-- 첨부파일 관련 코드 끝  -->
-								<tr>
-									<td colspan="4" class="text-center">${reviewDTO.review_content}</td>
+									<td class="text-center" colspan="2">
+										${reviewFile_Path}${reviewFileName}<img
+										src="${reviewFile_Path}${reviewFileName}" width="400px">
+										<br />
+									</td>
 								</tr>
 							</c:forEach>
-							<!--  리뷰글 목록 반복문 종료 -->
+						</c:forTokens>
+					</c:if>
 
-						</table>
-					</div>
-				</c:if>
-				<!--  리뷰글이 있는지 확인하는 조건문 종료-->
-			</c:if>
-			<!--  식당코드가 맞는 경우의 조건문 종료 -->
-
-			<!--  리뷰 글 목록 페이지 -->
+					<!--  리뷰글 수정/ 삭제  -->
+					<!-- 작성자인지 확인하는 조건문 임시로 test_Customer  -->
+					<c:if test="${reviewDTO.review_writer == 'test_Customer'}">
+						<tr>
+							<th class="text-center" colspan="2"><a
+								href="updateReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}">
+									수정 </a> &nbsp;&nbsp; <a
+								href="deleteReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}">
+									삭제 </a></th>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</table>
+			<!--  리뷰 글 페이지 -->
 			<div class="text-center">
 				<ul class="pagination pagination-sm">
-					<s:property value="review_pagingHtml" escape="false" />
+					<s:property value="pagingHtml" escape="false" />
 				</ul>
 			</div>
-			<!--  리뷰글 목록 페이지 종료 -->
-
-
 		</div>
+		<!-- 리뷰 글 보기 끝 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</div>
 	<!-- /.container -->
 
