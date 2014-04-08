@@ -37,7 +37,7 @@
 	function initialize() {
 		var latlng = new google.maps.LatLng(37.5240220, 126.9265940);
 		var myOptions = {
-			zoom : 10,
+			zoom : 15,
 			center : latlng,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
@@ -46,9 +46,7 @@
 				myOptions);
 		geocoder = new google.maps.Geocoder();
 		google.maps.event.addListener(map, 'click', codeCoordinate);
-		/*아랫글에서 설명한 event를 이용 지도를 'click'하면 codeCoordinate함수를 실행합니다.
-		   codeCoordinate함수는 클릭한 지점의 좌표를 가지고 주소를 찾는 함수입니다. */
-		//function codeAddress();
+		codeAddress();
 	}
 
 	function Setmarker(latLng) {
@@ -58,23 +56,16 @@
 		// marker.length는 marker라는 배열의 원소의 개수입니다.
 		// 만약 이 개수가 0이 아니라면 marker를 map에 표시되지 않게 합니다.
 		// 이는 다른 지점을 클릭할 때 기존의 마커를 제거하기 위함입니다.
-
 		marker = [];
 		marker.length = 0;
-		// marker를 빈 배열로 만들고, marker 배열의 개수를 0개로 만들어 marker 배열을 초기화합니다.
-
+		// marker를 빈 배열로 만들고, marker 배열의 개수를 0개로 만들어 marker 배열을 초기화
 		marker.push(new google.maps.Marker({
 			position : latLng,
 			map : map
 		}));
-		// marker 배열에 새 marker object를 push 함수로 추가합니다.
+		// marker 배열에 새 marker object를 push 함수로 추가
 	}
 
-	/*클릭한 지점에 마커를 표시하는 함수입니다.
-	   그런데 이 함수를 잘 봐야 하는 것이 바로 marker를 생성하지 않고 marker라는 배열 안에 Marker 
-	 obejct  원소를 계속 추가하고 있습니다. 이는 매번 클릭할 때마다 새로운 마커를 생성하기 위함입니다. */
-
-	//입력 받은 주소를 지오코딩 요청하고 결과를 마커로 지도에 표시합니다.
 	function codeAddress(event) {
 		if (geocodemarker.length > 0) {
 			for (var i = 0; i < geocodemarker.length; i++) {
@@ -84,9 +75,10 @@
 			geocodemarker = [];
 			geocodemarker.length = 0;
 		}
-		//이 부분도 위와 같이 주소를 입력할 때 표시되는 marker가 매번 새로 나타나게 하기 위함입니다.
 
-		var address = "대전"; // rest_writer_address 변수(판매자 테이블의 주소 컬럼)
+		//var address = "대한민국 서울특별시 영등포구 당산로49길"; // rest_writer_address 변수(판매자 테이블의 주소 컬럼)
+		var address = document.getElementById("rest_writer_address").value;
+		
 		
 		geocoder.geocode({
 			'address' : address
@@ -110,12 +102,8 @@
 
 	}
 
-	//클릭 이벤트 발생 시 그 좌표를 주소로 변환하는 함수입니다.
 	function codeCoordinate(event) {
 		Setmarker(event.latLng);
-		//이벤트 발생 시 그 좌표에 마커를 생성합니다.
-		// 좌표를 받아 reverse geocoding(좌표를 주소로 바꾸기)를 실행합니다.
-
 		geocoder.geocode({
 			'latLng' : event.latLng
 		}, function(results, status) {
@@ -123,7 +111,6 @@
 				if (results[1]) {
 					infowindow.setContent(results[1].formatted_address);
 					infowindow.open(map, marker[0]);
-					//infowindow로 주소를 표시합니다.
 				}
 			}
 		});
@@ -238,8 +225,8 @@
 		<tr></tr>
 		<tr>
 			<td colspan=4 align="right">
-				<input name="submit" type="submit" value="구매하기" />
-				<input name="list" type="button" value="장바구니담기" onClick="javascript:location.href='ListRestAction.action?currentPage=<s:property value="currentPage"/>'" />
+				<input name="submit" type="submit" value="구매하기" onClick="javascript:location.href=payRest.action" />
+				<input name="list" type="button" value="장바구니담기" onClick="javascript:location.href='ListRest.action?currentPage=<s:property value="currentPage"/>'" />
 			</td>
 		</tr>
 		<tr>
@@ -252,16 +239,15 @@
 		<tr>
 			<td colspan=4>
 				<img src = "<s:property value="resultClass.rest_destFile2"/>"/>
+				<input type ="hidden" id="rest_writer_address" value="<s:property value="resultClass.rest_writer_address" />" />
 			</td>
 		</tr>
 	</table>
 	
 	<div id="map_canvas" style="width: 80%; height: 60%"></div>
-		<input name="submit" type="submit" value="매장위치보기" onclick='codeAddress(); return false;' />
 	<br>
 	
 	
-		
 	<table>
 		<tr>
 			<td align="right" colspan="6">
