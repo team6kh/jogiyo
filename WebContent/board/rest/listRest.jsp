@@ -35,45 +35,39 @@
 		<!-- test board pretty -->
 		<div class="col-md-12">
 			<h3>REST</h3>
-		</div>
+		</div>		
 
 		<div class="col-md-12 well">
-			<table class="table table-striped table-forum">
-				<thead>
-					<tr>
-						<th class="text-center" colspan="2">제목</th>
-						<th class="text-center" style="width: 200px;">작성자</th>
-						<th class="text-center" style="width: 100px;">가격</th>
-						<th class="text-center" style="width: 100px;">작성일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<s:iterator value="list" status="stat">
-						<s:url id="readURL" action="readRest">
-							<s:param name="rest_num">
-								<s:property value="rest_num" />
-							</s:param>
-							<s:param name="currentPage">
-								<s:property value="currentPage" />
-							</s:param>
-						</s:url>
-						<tr>
-							<td colspan="2">
-								<s:a href="%{readURL}">
-									<img src = "<s:property value="rest_destFile1"/>"/>
-								</s:a></td>
-							<td class="text-center"><s:property value="rest_writer_name" /></td>
-							<td class="text-center"><s:property value="rest_price" /></td>
-							<td class="text-center"><s:property value="rest_reg_date" /></td>
-						</tr>
-					</s:iterator>
-					<s:if test="list.size() <= 0">
-						<tr>
-							<td colspan="5">등록된 게시물이 없습니다.</td>
-						</tr>
-					</s:if>
-				</tbody>
-			</table>
+		
+			<div class="col-md-12">
+		
+			<c:forEach var="list" items="${list}">
+			
+				<c:url var="url" value="readRest.action">
+					<c:param name="rest_num" value="${list.rest_num}"/>
+					<c:param name="currentPage" value="${currentPage}"/>
+				</c:url>			
+						
+				<div class="col-sm-4 col-md-3">					
+			    	<div class="thumbnail">
+			      		<a href="${url}">
+			      		<img src="${list.rest_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
+			      		</a>
+			      		<div class="caption">
+			        		<h3>${list.rest_subject}</h3>
+			        		<p>${list.rest_price}</p>
+			      		</div>
+			    	</div>
+		      	</div>		      			      	
+			</c:forEach>
+			
+			</div>
+			
+			<c:if test="${list eq null}">
+			<div class="text-center">
+				<p>등록된 게시물이 없습니다.</p>
+			</div>
+			</c:if>
 
 			<div class="text-center">
 				<ul class="pagination pagination-sm">

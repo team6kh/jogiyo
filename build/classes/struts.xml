@@ -9,13 +9,7 @@
 		<interceptors>
 			<interceptor name="conDAO" class="common.ConDAOInterceptor"/>
 		</interceptors>
-<<<<<<< HEAD
-
-=======
 		
-		
-		
->>>>>>> origin/jaewook
 		<!-- NEW 비밀번호 체크 액션. -->
 		<action name="checkPass" class="common.CheckPasswordAction">
 			<interceptor-ref name="params"/>
@@ -117,9 +111,8 @@
 		<action name="readRest" class="board.rest.action.ReadRestAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-<<<<<<< HEAD
-			<result>/board/rest/updateRest.jsp</result>
-		</action>		
+			<result>/board/rest/readRest.jsp</result>
+		</action>	
 		<!-- RestBoard 끝 -->
 
 
@@ -177,19 +170,8 @@
 			</result>
 		</action>
 		<!-- QnA 끝 -->		
-
-
-=======
-			<result>/board/rest/readRest.jsp</result>
-		</action>
-
-		<!-- RestBoard 끝 -->		
 		
 		
-		
-		
-		
->>>>>>> origin/jaewook
 		<!-- 테스트 -->
 		<action name="testAction" class="test.action.TestAction">
 			<result>/test/test.jsp</result>

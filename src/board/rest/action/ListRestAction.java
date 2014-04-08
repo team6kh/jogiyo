@@ -15,7 +15,7 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	
 	private int currentPage = 1;			// 현재 페이지
 	private int totalCount;					// 총 게시물의 수
-	private int blockCount = 10;			// 한 페이지의 게시물의 수
+	private int blockCount = 12;			// 한 페이지의 게시물의 수
 	private int blockPage = 5;				// 한 화면에 보여줄 페이지 수
 	private String pagingHtml;				// 페이징을 구현한 HTML
 	private PagingAction page;				// 페이징 클래스
