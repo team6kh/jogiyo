@@ -109,7 +109,7 @@
 			</div>				
 			<div class="form-group">
 			  <label>전화번호</label>
-			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="reg_telnum" required>
+			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="seller_rest_telnum" required>
 			</div>
 			<div id="div_regid" class="form-group">
 			  <label> 판매자 아이디</label>
@@ -127,11 +127,11 @@
 			</div>			
 			<div class="form-group">
 			  <label>휴대폰</label>
-			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="reg_mobilenum" required>
+			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="seller_rest_mobilenum" required>
 			</div>
 			<div class="form-group">
 			  <label>이메일</label>
-			  <input type="email" class="form-control" placeholder="you@jogiyo.com" name="reg_email" required>
+			  <input type="email" class="form-control" placeholder="you@jogiyo.com" name="seller_rest_email" required>
 			</div>					
 			
         	<button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>
