@@ -1,14 +1,16 @@
 package board.rest.action;
 
-import java.io.InputStream;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+
 import common.ConDAOAware;
 import board.rest.dto.RestDTO;
 import board.restopt.dto.RestoptDTO;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
+
 import common.Constants;
 
 public class ReadRestAction extends ActionSupport implements ConDAOAware{
@@ -24,15 +26,11 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 	private RestoptDTO paramClass1 = new RestoptDTO();
 	private RestoptDTO resultClass1 = new RestoptDTO();
 	private List<RestoptDTO> list = new ArrayList<RestoptDTO>();
-	
+
 	//수정시(파일관련)
 	private String fileUploadPath1 = Constants.COMMON_FILE_PATH + Constants.REST_MAIN_FILE_PATH;
 	private String fileUploadPath2 = Constants.COMMON_FILE_PATH + Constants.REST_CONTENT_FILE_PATH;
 	
-	//파일다운로드 관련
-	private InputStream inputStream;
-	private String contentDisposition;
-	private long contentLength;
 	
 	
 	public void setConDAO(SqlMapClient sqlMapper) { 
@@ -47,16 +45,15 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 		
 		//해당글번호의 레코드를 가져옴(상품테이블, 옵션테이블)
 		resultClass = (RestDTO)sqlMapper.queryForObject("Rest.selectRestOne", getRest_num());
-		//list로 받기.
-		//resultClass1 = (RestoptDTO)sqlMapper.queryForObject("Rest.selectRestoptOne", getRest_num());
-		list = (List<RestoptDTO>) sqlMapper.queryForObject("Rest.selectRestoptOne", getRest_num());
-		
+		//댓글들
+		list = (List<RestoptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
 		
 		return SUCCESS;
 	}
 	
 	
 	//옵션 테이블 list
+	
 	public List<RestoptDTO> getList() {
 		return list;
 	}
