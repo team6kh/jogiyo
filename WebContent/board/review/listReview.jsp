@@ -101,20 +101,18 @@
 					<c:if test="${!empty reviewDTO.review_file}">
 						<c:forTokens var="reviewFileNames"
 							items="${reviewDTO.review_file }" delims="' '">
-							<c:forEach var="reviewFileName" items="${reviewFileNames}">
-								<tr>
-									<td class="text-center" colspan="2">
-										${reviewFile_Path}${reviewFileName}<img
-										src="${reviewFile_Path}${reviewFileName}" width="400px">
+							<tr>
+								<td class="text-center" colspan="2"><c:forEach
+										var="reviewFileName" items="${reviewFileNames}">
+										<img src="${reviewFile_Path}${reviewFileName}" width="400px">
 										<br />
-									</td>
-								</tr>
-							</c:forEach>
+									</c:forEach></td>
+							</tr>
 						</c:forTokens>
 					</c:if>
 
 					<!--  리뷰글 수정/ 삭제  -->
-					<!-- 작성자인지 확인하는 조건문 임시로 test_Customer  -->
+					<!-- 작성자인지 확인하는 조건문 임시로 test_Customer  : sessionId 값과 일치하면 됨 -->
 					<c:if test="${reviewDTO.review_writer == 'test_Customer'}">
 						<tr>
 							<th class="text-center" colspan="2"><a

@@ -26,17 +26,11 @@ public class UpdateReviewAction implements Action, Preparable,
 	// 받아야 하는 파라미터
 	private int ccp;
 	private int review_num;
-	
-		
+
 	// 첨부파일 업로드 관련 변수
-		private String fileUploadPath = Constants.COMMON_FILE_PATH
-				+ Constants.REVIEW_FILE_PATH;
-		private List<File> review_files = new ArrayList<File>();
-		private List<String> review_filesFileName = new ArrayList<String>();
-		private List<String> review_filesContentType = new ArrayList<String>();
-		private String saveFileName = "";
-	
-	
+	private List<File> review_files = new ArrayList<File>();
+	private List<String> review_filesFileName = new ArrayList<String>();
+	private List<String> review_filesContentType = new ArrayList<String>();
 
 	// 리뷰 글 수정 폼
 	public String form() throws Exception {
@@ -49,16 +43,45 @@ public class UpdateReviewAction implements Action, Preparable,
 
 	// 리뷰글 수정 update 처리
 	public String execute() throws Exception {
+
+		// 다른 항목 업데이트 처리
 		sqlMapper.update("Review.updateReview", reviewDTO);
-		
+
 		// 첨부파일이 있는 경우
-		if(review_files != null) {
-			
-			
-			
+		if (review_files != null) {
+
+			// 첨부파일 업로드 경로
+			String fileUploadPath = Constants.COMMON_FILE_PATH
+					+ Constants.REVIEW_FILE_PATH;
+
+			// 기존 업로드된 첨부파일 삭제
+			reviewDTO = (ReviewDTO) sqlMapper.queryForObject(
+					"Review.selectReviewOne", reviewDTO);
+		
+			String[] reviewFileNames = reviewDTO.getReview_file().split(" ");
+			System.out.println("reviewFileNames :" + reviewFileNames.toString());
+
+			for (int i = 0; i < reviewFileNames.length; i++) {
+				File deleteFile = new File(fileUploadPath + reviewFileNames[i]);
+				deleteFile.delete();
+			}
+
+			// 새로 업로드된 첨부파일로 업데이트
+			// 파일명 변경시 공통으로 붙여줄 이름
+			String fileRename = "review_" + reviewDTO.getReview_num();
+
+			// 새로운 첨부파일로 업로드 진행
+			FileUpload fileUpload = new FileUpload();
+			String saveFileName = fileUpload.uploadFiles(review_files,
+					review_filesFileName, fileUploadPath, fileRename);
+			System.out.println("saveFileName :" + saveFileName);
+
+			// setReview_file 메서드로 값 설정
+			reviewDTO.setReview_file(saveFileName);
+			// DB update 진행
+			sqlMapper.update("Review.updateReviewFile", reviewDTO);
+
 		}
-		
-		
 
 		return SUCCESS;
 	}
@@ -72,9 +95,7 @@ public class UpdateReviewAction implements Action, Preparable,
 		this.reviewDTO = reviewDTO;
 	}
 
-	
 	// 첨부파일 관련 getter & setter
-	
 	public List<File> getReview_files() {
 		return review_files;
 	}
@@ -98,11 +119,7 @@ public class UpdateReviewAction implements Action, Preparable,
 	public void setReview_filesContentType(List<String> review_filesContentType) {
 		this.review_filesContentType = review_filesContentType;
 	}
-	
-	
-	
-	
-	
+
 	// 파라미터 getter & setter
 	public int getCcp() {
 		return ccp;

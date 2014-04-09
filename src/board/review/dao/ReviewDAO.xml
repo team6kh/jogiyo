@@ -41,12 +41,13 @@
 		where REVIEW_REST=#review_rest# ORDER BY REVIEW_REG_DATE DESC
 	</select>
 
-	<select id="selectReviewOne" resultClass="reviewDTO"
-		parameterClass="int">
+	<!-- review_num으로 리뷰글 하나 추출하는 쿼리문 -->
+	<select id="selectReviewOne" resultClass="reviewDTO">
 		<include refid="select-all" />
 		<include refid="where_review_num" />
 	</select>
 
+	<!-- 제일 마지막으로 작성된 리뷰글의 글번호 가져오기 -->
 	<select id="selectLastNum" resultClass="reviewDTO">
 		SELECT max(review_num) as
 		review_num FROM Review_Board
@@ -74,8 +75,8 @@
 	</insert>
 
 	<!-- UPDATE 쿼리문 정의 -->
-	<!-- 리뷰글 수정 -->
 
+	<!-- 리뷰글 수정을 위한 쿼리문 -->
 	<update id="updateReview" parameterClass="reviewDTO">
 		UPDATE review_board SET REVIEW_RATING = #review_rating#,
 		REVIEW_CONTENT = #review_content#

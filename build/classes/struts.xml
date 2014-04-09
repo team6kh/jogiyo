@@ -86,7 +86,8 @@
 		<!-- 리뷰 글쓰기 폼 -->
 		<action name="insertReviewForm" class="board.review.action.InsertReviewAction"
 			method="form">
-			<result>/board/review/insertReview.jsp</result>
+			<interceptor-ref name="chain" />
+			<result>/board/review/listReview.jsp</result>
 		</action>
 
 		<!-- 리뷰 글쓰기 등록 -->
@@ -106,7 +107,9 @@
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="chain" />
 			<interceptor-ref name="params" />
-			<result>/board/review/listReview.jsp</result>
+			<result type="chain">
+				<param name="actionName">insertReviewForm</param>
+			</result>
 		</action>
 
 		<!-- 리뷰 글 수정 폼 -->
