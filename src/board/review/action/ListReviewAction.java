@@ -10,7 +10,6 @@ import com.opensymphony.xwork2.Action;
 
 import common.ConDAOAware;
 import common.Constants;
-import common.PagingAction;
 
 public class ListReviewAction implements Action, ConDAOAware {
 
@@ -34,7 +33,7 @@ public class ListReviewAction implements Action, ConDAOAware {
 	private int blockCount = 5; // 한 페이지의 게시물의 수
 	private int blockPage = 5; // 한 화면에 보여줄 페이지 수
 	private String pagingHtml; // 페이징을 구현한 HTML
-	private PagingAction page; // 페이징 클래스
+	private PagingReviewAction page; // 페이징 클래스
 
 	private String actionName = "listReview"; // 페이징액션과 로그인액션에서 쓰인다...
 
@@ -52,7 +51,7 @@ public class ListReviewAction implements Action, ConDAOAware {
 
 		// 페이징 관련 코드
 		totalCount = reviewRes.size();
-		page = new PagingAction(actionName, ccp, totalCount, blockCount,
+		page = new PagingReviewAction(actionName, ccp, totalCount, blockCount,
 				blockPage);
 		pagingHtml = page.getPagingHtml().toString();
 
@@ -135,11 +134,11 @@ public class ListReviewAction implements Action, ConDAOAware {
 		this.pagingHtml = pagingHtml;
 	}
 
-	public PagingAction getPage() {
+	public PagingReviewAction getPage() {
 		return page;
 	}
 
-	public void setPage(PagingAction page) {
+	public void setPage(PagingReviewAction page) {
 		this.page = page;
 	}
 

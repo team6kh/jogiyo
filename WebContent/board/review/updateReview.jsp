@@ -33,7 +33,7 @@
 	<div class="container">
 		<div class="common-template">
 			<!-- 리뷰 수정 폼(review)  -->
-			<form method="post" action="updateReviewPro.action"
+			<form method="post" action="updateReviewPro.action?ccp=${ccp}&review_num=${review_num}"
 				enctype="multipart/form-data">
 				<div class="col-md-12 well">
 					<!--  별점(review_rating) : radio 타입으로  -->
@@ -67,10 +67,6 @@
 						</tr>
 					</table>
 				</div>
-				<!-- 같이 보내줘야 할 파라미터 : 리뷰글 번호(pk) / 페이지정보(currentPage) -->
-				<input type="hidden" name="review_num"
-					value="${reviewDTO.review_num}" /> <input type="hidden"
-					name="ccp" value="${ccp}" />
 			</form>
 		</div>
 	</div>
