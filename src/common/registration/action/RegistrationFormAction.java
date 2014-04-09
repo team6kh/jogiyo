@@ -14,14 +14,13 @@ public class RegistrationFormAction implements Action {
 			return "seller";
 		}
 		
-		return SUCCESS; // 최초 로딩시에는 BUYER 로.
+		return SUCCESS; // 최초 로딩시에는 BUYER 로
 	}
 
 	
 	public void setReg_type(String reg_type) {
 		this.reg_type = reg_type;
-	}
-	
+	}	
 	public String getReg_type() {
 		return reg_type;
 	}	

@@ -14,7 +14,7 @@ public class ListTestAction extends ActionSupport implements ConDAOAware {
 
 	private String actionName = "listTest";	// 페이징액션과 로그인액션에서 쓰인다...
 	
-	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체.
+	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체
 
 	private List<TestDTO> list = new ArrayList<TestDTO>();
 	
@@ -29,7 +29,7 @@ public class ListTestAction extends ActionSupport implements ConDAOAware {
 		this.sqlMapper = sqlMapper;
 	}	
 
-	// 게시판 LIST 액션.
+	// 게시판 LIST 액션
 	public String execute() throws Exception {
 
 		// 모든 글을 가져와 list에 넣는다.
@@ -52,6 +52,7 @@ public class ListTestAction extends ActionSupport implements ConDAOAware {
 		return SUCCESS;
 	}
 
+	// getter & setter
 	public List<TestDTO> getList() {
 		return list;
 	}
@@ -108,7 +109,7 @@ public class ListTestAction extends ActionSupport implements ConDAOAware {
 		this.page = page;
 	}
 
-	public String getActionName() { // 일단 get만...
+	public String getActionName() { // 일단 getter만...
 		return actionName;
 	}
 	

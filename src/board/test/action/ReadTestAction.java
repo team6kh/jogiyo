@@ -18,21 +18,21 @@ import java.io.IOException;
 
 public class ReadTestAction implements Action, ConDAOAware {
 	
-	private SqlMapClient sqlMapper;
+	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체
 
 	private TestDTO testDTO = new TestDTO();
 
-	private int test_num;	
-	private int currentPage;		
+	private int test_num;		// 해당 글 고유넘버	
+	private int currentPage;	// 현재 페이지		
 	
 	public void setConDAO(SqlMapClient sqlMapper){
 		this.sqlMapper = sqlMapper;
 	}
 
-	// 게시판 상세보기 액션.
+	// 게시글 상세보기 액션
 	public String execute() throws Exception {
 
-		// 해당 글의 조회수 +1.
+		// 해당 글의 조회수 +1
 		testDTO.setTest_num(getTest_num());
 		sqlMapper.update("Test.updateReadcount", testDTO);
 
@@ -42,6 +42,7 @@ public class ReadTestAction implements Action, ConDAOAware {
 		return SUCCESS;
 	}
 	
+	// getter & setter
 	public TestDTO getTestDTO() {
 		return testDTO;
 	}

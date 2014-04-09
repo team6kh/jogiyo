@@ -14,14 +14,12 @@ public class RegistrationAction implements Action {
 			return "seller";
 		}
 		
-		return ERROR;
-		
+		return ERROR;		
 	}
 
 	public void setReg_type(String reg_type) {
 		this.reg_type = reg_type;
-	}	
-	
+	}		
 	public String getReg_type() {
 		return reg_type;
 	}	

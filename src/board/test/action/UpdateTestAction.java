@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	
-	private SqlMapClient sqlMapper;
+	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체
 
 	private TestDTO testDTO = new TestDTO();
 
@@ -29,7 +29,7 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 		this.sqlMapper = sqlMapper;
 	}
 	
-	// UPDATE 폼
+	// 게시글 UPDATE 폼
 	public String updateForm() throws Exception {
 		
 		// 해당 번호의 글을 가져온다.
@@ -38,7 +38,7 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 		return SUCCESS;
 	}
 
-	// 게시글 UPDATE 액션.
+	// 게시글 UPDATE 액션
 	public String execute() throws Exception {
 
 		// 수정할 항목 설정. 여기서는 인터셉터를 사용하지 않고 직접(?) 설정해보자.
@@ -56,6 +56,7 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 		return SUCCESS;
 	}
 	
+	// getter & setter
 	public TestDTO getTestDTO() {
 		return testDTO;
 	}

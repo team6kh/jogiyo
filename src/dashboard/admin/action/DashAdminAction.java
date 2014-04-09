@@ -45,6 +45,7 @@ public class DashAdminAction implements Action, ConDAOAware {
 		return SUCCESS;
 	}
 
+	// getter & setter
 	public String getActionName() {
 		return actionName;
 	}	

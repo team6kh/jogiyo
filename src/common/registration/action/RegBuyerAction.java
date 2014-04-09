@@ -13,9 +13,9 @@ import common.ConDAOAware;
 
 public class RegBuyerAction implements Action, Preparable, ModelDriven, ConDAOAware {
 	
-	BuyerDTO buyerDTO;
-	Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기.
 	private SqlMapClient sqlMapper;
+	private BuyerDTO buyerDTO;
+	private Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기	
 	
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;		
@@ -36,7 +36,6 @@ public class RegBuyerAction implements Action, Preparable, ModelDriven, ConDAOAw
 		sqlMapper.insert("Buyer.insertBuyer", buyerDTO);
 		
 		return SUCCESS;		
-		
 	}	
 	
 }

@@ -19,23 +19,24 @@ public class CheckPasswordAction implements Action, ConDAOAware {
 		this.sqlMapper = sqlMapper;
 	}	
 
-	// 테스트 게시판 비밀번호 체크 액션
+	// 테스트 게시판 글 비밀번호 체크 액션
 	public String execute() throws Exception {
 
-		// 파라미터 설정.
+		// 파라미터 설정
 		testDTO.setTest_num(getTest_num());
 		testDTO.setTest_writer_pw(getTest_writer_pw());
 
-		// 해당 글의 비밀번호 가져오기.
+		// 해당 글의 비밀번호 가져오기
 		testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectTestWriterPw",	testDTO);
 
-		// 입력한 비밀번호가 틀리면(없으면) ERROR 리턴.
+		// 입력한 비밀번호가 틀리면(없으면) ERROR 리턴
 		if (testDTO == null)
 			return ERROR;
 
 		return SUCCESS;
 	}
 	
+	// getter & setter	
 	public String getModalParam() {
 		return modalParam;
 	}
@@ -49,7 +50,6 @@ public class CheckPasswordAction implements Action, ConDAOAware {
 		this.testDTO = testDTO;
 	}	
 	public int getTest_num() {
-		System.out.println("CheckPasswordAction.return test_num:"+test_num);
 		return test_num;
 	}
 	public void setTest_num(int test_num) {

@@ -16,12 +16,12 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 	
 	private SqlMapClient sqlMapper;
 	
-	private String login_type;			// 로그인 타입.
-	private String login_id;			// 로그인 아이디.
-	private String login_pw;			// 로그인 비밀번호.
-	private String actionName;			// 액션 이름.
+	private String login_type;			// 로그인 타입
+	private String login_id;			// 로그인 아이디
+	private String login_pw;			// 로그인 비밀번호
+	private String actionName;			// 액션 이름
 	
-	Map sessionMap;
+	private Map sessionMap;
 	
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
@@ -39,6 +39,10 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 
 	public String execute() throws Exception {
 		
+		/*
+		 * 이 액션에서는 paramClass와 resultClass로 나누어 구현하였다.
+		 */
+		
 		// 로그인 타입이 "구매자"
 		if (login_type.equals("buyer")){			
 			
@@ -48,10 +52,10 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 			paramClass.setBuyer_id(getLogin_id());
 			paramClass.setBuyer_pw(getLogin_pw());
 
-			// 사용자의 비밀번호 가져오기.
+			// 사용자의 비밀번호 가져오기
 			resultClass = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerPw", paramClass);
 			
-			// 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴.
+			// 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴
 			if (resultClass != null) {				
 				
 				sessionMap.put("sessionType", getLogin_type());
@@ -64,6 +68,7 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 			
 			return ERROR;
 
+			// 로그인 타입이 "판매자"
 		} else if (login_type.equals("seller")){
 			
 			SellerDTO paramClass = new SellerDTO();
@@ -72,10 +77,10 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 			paramClass.setSeller_id(getLogin_id());
 			paramClass.setSeller_pw(getLogin_pw());
 
-			// 사용자의 비밀번호 가져오기.
+			// 사용자의 비밀번호 가져오기
 			resultClass = (SellerDTO) sqlMapper.queryForObject("Seller.selectWhereSellerPw", paramClass);
 			
-			// 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴.
+			// 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴
 			if (resultClass != null) {				
 				
 				sessionMap.put("sessionType", getLogin_type());
@@ -89,10 +94,11 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 			return ERROR;
 		}
 		
-		return ERROR;
-		
+		return ERROR;		
 	}
 	
+	
+	// getter & setter
 	public String getLogin_type() {
 		return login_type;
 	}
@@ -121,6 +127,7 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 		return actionName;
 	}
 
+	// 로그인을 실행한 액션의 actionName(로그인 후 리턴할 주소)이 설정되어 있지 않을 경우 home으로 설정(리턴)한다.
 	public void setActionName(String actionName) {
 		if (actionName.equals("")) {
 			this.actionName = "home";

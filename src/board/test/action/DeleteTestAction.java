@@ -15,29 +15,30 @@ import java.io.IOException;
 
 public class DeleteTestAction extends ActionSupport implements ConDAOAware {
 	
-	private SqlMapClient sqlMapper;
+	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체
 
 	private TestDTO testDTO = new TestDTO();
 	
-	private int test_num;		// 현재 글 고유넘버	
+	private int test_num;		// 해당 글 고유넘버	
 	private int currentPage;	// 현재 페이지		
 		
 	public void setConDAO(SqlMapClient sqlMapper){
 		this.sqlMapper = sqlMapper;
 	}
 
-	// 게시글 DELETE 액션.
+	// 게시글 DELETE 액션
 	public String execute() throws Exception {
 		
-		// 삭제할 항목 설정.
+		// 삭제할 항목 설정
 		testDTO.setTest_num(getTest_num());
 				
-		// 삭제 쿼리 수행.
+		// 삭제 쿼리 수행
 		sqlMapper.update("Test.deleteBoard", testDTO);
 
 		return SUCCESS;
 	}
 
+	// getter & setter
 	public int getTest_num() {
 		return test_num;
 	}

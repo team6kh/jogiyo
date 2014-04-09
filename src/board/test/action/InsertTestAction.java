@@ -15,13 +15,13 @@ import org.apache.struts2.interceptor.SessionAware;
 
 public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAOAware, SessionAware {
 
-	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체.
+	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체
 	
 	private TestDTO testDTO;
 	
-	private int test_num;	 // 현재 글 고유넘버
+	private int test_num;	 // 해당 글 고유넘버
 	private int currentPage; // 현재 페이지	
-	private Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기.
+	private Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기
 	
 	private Map sessionMap = null;
 
@@ -33,7 +33,7 @@ public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAO
 		this.sessionMap = sessionMap;
 	}
 
-	// INSERT 폼
+	// 게시글 INSERT 폼
 	public String insertForm() throws Exception {
 				
 		return SUCCESS;
@@ -49,18 +49,19 @@ public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAO
 		return testDTO;
 	}
 
-	// 게시글 INSERT 액션.
+	// 게시글 INSERT 액션
 	public String execute() throws Exception {
 
-		// 등록할 항목 수동 설정.
+		// 등록할 항목 수동 설정
 		testDTO.setTest_reg_date(today.getTime());
 
-		// 등록 쿼리 수행.
+		// 등록 쿼리 수행
 		sqlMapper.insert("Test.insertBoard", testDTO);
 
 		return SUCCESS;
 	}	
 
+	// getter & setter
 	public int getTest_num() {
 		return test_num;
 	}

@@ -61,7 +61,7 @@
 			<interceptor-ref name="modelDriven"/>
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result>/test/test.jsp</result>
+			<result type="redirect-action">home</result>			
 		</action>
 
 		<!-- 판매자 가입 액션 -->
@@ -71,7 +71,7 @@
 			<interceptor-ref name="modelDriven"/>
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result>/test/test.jsp</result>
+			<result type="redirect-action">home</result>	
 		</action>
 
 		<!-- 아이디 중복체크 액션 -->		

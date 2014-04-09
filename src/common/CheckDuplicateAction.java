@@ -7,7 +7,7 @@ import com.opensymphony.xwork2.Action;
 
 public class CheckDuplicateAction implements Action, ConDAOAware {
 	
-	private SqlMapClient sqlMapper;
+	private SqlMapClient sqlMapper; 
 	
 	private String reg_id;
 	private int isDup;
@@ -38,8 +38,7 @@ public class CheckDuplicateAction implements Action, ConDAOAware {
 			isDup = 0;
 		}
 		
-		return SUCCESS;
-		
+		return SUCCESS;		
 	}
 	
 }

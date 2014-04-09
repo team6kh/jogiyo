@@ -14,4 +14,6 @@ public class HomeAction extends ActionSupport {
 		return actionName;
 	}
 	
+	// no setter
+	
 }

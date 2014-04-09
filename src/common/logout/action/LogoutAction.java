@@ -8,7 +8,7 @@ import com.opensymphony.xwork2.Action;
 
 public class LogoutAction implements Action, SessionAware {
 
-	Map sessionMap;
+	private Map sessionMap;
 	
 	public void setSession(Map sessionMap) {
 		this.sessionMap = sessionMap;		
