@@ -231,7 +231,7 @@
 		</tr>
 		<tr>
 			<td colspan=2>
-				<font color="#FF3636"><b>상품 상세 설명</b></font>				
+				<font color="#FF3636"><b>상품 상세설명</b></font>				
 			</td>
 			<td></td><td></td>
 		</tr>
