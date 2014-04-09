@@ -6,73 +6,79 @@
 
 
 
-		<!-- 리절트 맵 정의 -->
-	  	<resultMap id="RestBoard" class="RestDTO">
-			
-		  	<result property="rest_num" column="rest_num"/>
-		  	<result property="rest_subject" column="rest_subject"/>
-		  	<result property="rest_price" column="rest_price"/>
-		  	<result property="rest_amount" column="rest_amount"/>
-		  	<result property="rest_localcategory" column="rest_localcategory"/>
-		  	<result property="rest_typecategory" column="rest_typecategory"/>
-		  	<result property="rest_destFile1" column="rest_destFile1"/>
-		  	<result property="rest_main_orgname" column="rest_main_orgname"/>
-		  	<result property="rest_main_savname" column="rest_main_savname"/>
-		  	<result property="rest_destFile2" column="rest_destFile2"/>
-		  	<result property="rest_content_orgname" column="rest_content_orgname"/>
-		  	<result property="rest_content_savname" column="rest_content_savname"/>
-		  	<result property="rest_writer_name" column="rest_writer_name"/>
-		  	<result property="rest_writer_telnum" column="rest_writer_telnum"/>
-		  	<result property="rest_writer_mobilenum" column="rest_writer_mobilenum"/>
-		  	<result property="rest_writer_address" column="rest_writer_address"/>
-		  	<result property="rest_readcount" column="rest_readcount"/>
-		  	<result property="rest_reg_date" column="rest_reg_date"/>
-		  	
-		  	
-		</resultMap>
-		
-		
-		
-		
-		
-		
-		<!-- 공통정의 -->
-		<sql id="select-all">
-			select * from Rest_board 
-		</sql>
-		
-		<sql id="where-num">
-			where rest_num = #rest_num#
-		</sql>
-	
-	
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="RestBoard" class="RestDTO">
 
-	
-		<!-- 쿼리문 -->
-		<insert id="insertRestBoard" parameterClass="RestDTO">
-      		INSERT INTO Rest_board (rest_num, rest_subject, rest_price, rest_localcategory, rest_typecategory, rest_writer_name, rest_writer_telnum, rest_writer_mobilenum, rest_writer_address, rest_reg_date)
-			VALUES (rest_seq_num.NEXTVAL, #rest_subject#, #rest_price#, #rest_localcategory#, #rest_typecategory#, #rest_writer_name#, #rest_writer_telnum#, #rest_writer_mobilenum#, #rest_writer_address#, #rest_reg_date#)
-		</insert>
-		<select id="selectLastNo" resultClass="RestDTO" parameterClass="int">
-			SELECT max(rest_num) as rest_num FROM Rest_board 
-		</select>
-		<update id="updateFile" parameterClass="RestDTO">
-   			UPDATE Rest_board SET rest_destFile1 = #rest_destFile1#,
-   								rest_main_orgname = #rest_main_orgname#, 
-   								rest_main_savname = #rest_main_savname#,
-   								rest_destFile2 = #rest_destFile2#, 
-   								rest_content_orgname = #rest_content_orgname#, 
-   								rest_content_savname = #rest_content_savname#
-			<include refid="where-num" />
-   		</update>
-   		<select id="selectAll" resultMap="RestBoard" parameterClass="int">
-			<include refid="select-all" />
-			ORDER BY rest_num DESC
-		</select>
-	
-	
-	
-	
+		<result property="rest_num" column="rest_num" />
+		<result property="rest_subject" column="rest_subject" />
+		<result property="rest_price" column="rest_price" />
+		<result property="rest_amount" column="rest_amount" />
+		<result property="rest_localcategory" column="rest_localcategory" />
+		<result property="rest_typecategory" column="rest_typecategory" />
+		<result property="rest_destFile1" column="rest_destFile1" />
+		<result property="rest_main_orgname" column="rest_main_orgname" />
+		<result property="rest_main_savname" column="rest_main_savname" />
+		<result property="rest_destFile2" column="rest_destFile2" />
+		<result property="rest_content_orgname" column="rest_content_orgname" />
+		<result property="rest_content_savname" column="rest_content_savname" />
+		<result property="rest_writer_name" column="rest_writer_name" />
+		<result property="rest_writer_telnum" column="rest_writer_telnum" />
+		<result property="rest_writer_mobilenum" column="rest_writer_mobilenum" />
+		<result property="rest_writer_address" column="rest_writer_address" />
+		<result property="rest_readcount" column="rest_readcount" />
+		<result property="rest_reg_date" column="rest_reg_date" />
+
+
+	</resultMap>
+
+
+
+
+
+
+	<!-- 공통정의 -->
+	<sql id="select-all">
+		select * from Rest_board
+	</sql>
+
+	<sql id="where-num">
+		where rest_num = #rest_num#
+	</sql>
+
+
+
+
+	<!-- 쿼리문 -->
+	<insert id="insertRestBoard" parameterClass="RestDTO">
+		INSERT INTO Rest_board (rest_num, rest_subject, rest_price,
+		rest_localcategory, rest_typecategory, rest_writer_name,
+		rest_writer_telnum, rest_writer_mobilenum, rest_writer_address,
+		rest_reg_date)
+		VALUES (rest_seq_num.NEXTVAL, #rest_subject#, #rest_price#,
+		#rest_localcategory#, #rest_typecategory#, #rest_writer_name#,
+		#rest_writer_telnum#, #rest_writer_mobilenum#, #rest_writer_address#,
+		#rest_reg_date#)
+	</insert>
+	<select id="selectLastNo" resultClass="RestDTO" parameterClass="int">
+		SELECT max(rest_num) as rest_num FROM Rest_board
+	</select>
+	<update id="updateFile" parameterClass="RestDTO">
+		UPDATE Rest_board SET rest_destFile1 = #rest_destFile1#,
+		rest_main_orgname = #rest_main_orgname#,
+		rest_main_savname = #rest_main_savname#,
+		rest_destFile2 = #rest_destFile2#,
+		rest_content_orgname = #rest_content_orgname#,
+		rest_content_savname = #rest_content_savname#
+		<include refid="where-num" />
+	</update>
+	<select id="selectAll" resultMap="RestBoard" parameterClass="int">
+		<include refid="select-all" />
+		ORDER BY rest_num DESC
+	</select>
+
+
+
+
 
 </sqlMap>
 

@@ -131,6 +131,21 @@
 				<param name="actionName">listReview</param>
 			</result>
 		</action>
+		
+		<!--  리뷰글 삭제 폼 -->
+		<action name="deleteReviewForm" class="board.review.action.DeleteReviewAction" method="form">
+		<interceptor-ref name="params"/>
+		<result>/board/review/deleteReview.jsp</result>
+		</action>
+
+		<!-- 리뷰 글 삭제 처리 -->
+		<action name="deleteReviewPro" class="board.review.action.DeleteReviewAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="params" />
+			<result type="chain">
+				<param name="actionName">listReview</param>
+			</result>
+		</action>
 
 		<!-- Review게시판 끝 -->
 

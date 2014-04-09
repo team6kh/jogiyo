@@ -19,7 +19,7 @@
 	<sql id="select-all">
 		SELECT * FROM buyer_table
 	</sql>
-	
+
 	<!-- 공통으로 사용할 where-user_id 절 정의 -->
 	<sql id="where-buyer_id">
 		WHERE buyer_id = #buyer_id#
@@ -30,8 +30,9 @@
 		<include refid="select-all" />
 		ORDER BY buyer_reg_date DESC
 	</select>
-	
-	<select id="selectWhereBuyerId" resultMap="BuyerResult" parameterClass="BuyerDTO">
+
+	<select id="selectWhereBuyerId" resultMap="BuyerResult"
+		parameterClass="BuyerDTO">
 		<include refid="select-all" />
 		<include refid="where-buyer_id" />
 	</select>
@@ -44,30 +45,31 @@
 
 	<!-- insert 쿼리문 정의 -->
 	<insert id="insert" parameterClass="BuyerDTO">
-		INSERT INTO buyer_table (buyer_id,
-								buyer_pw,
-								buyer_name,
-								buyer_reg_date,
-								buyer_email,
-								buyer_phonenumber,
-								buyer_gender
-								)
-						VALUES (#buyer_id#,
-								#buyer_pw#,
-								#buyer_name#,
-								sysdate,
-								#buyer_email#,
-								#buyer_phonenumber#,
-								#buyer_gender#
-								)
+		INSERT INTO buyer_table
+		(buyer_id,
+		buyer_pw,
+		buyer_name,
+		buyer_reg_date,
+		buyer_email,
+		buyer_phonenumber,
+		buyer_gender
+		)
+		VALUES (#buyer_id#,
+		#buyer_pw#,
+		#buyer_name#,
+		sysdate,
+		#buyer_email#,
+		#buyer_phonenumber#,
+		#buyer_gender#
+		)
 	</insert>
 
 	<!-- update 쿼리문 정의 -->
 	<update id="update" parameterClass="BuyerDTO">
 		UPDATE buyer_table SET buyer_pw = #buyer_pw#,
-								buyer_name = #buyer_name#,
-								buyer_email = #buyer_email#,
-								buyer_phonenumber = #buyer_phonenumber#
+		buyer_name = #buyer_name#,
+		buyer_email = #buyer_email#,
+		buyer_phonenumber = #buyer_phonenumber#
 		<include refid="where-buyer_id" />
 	</update>
 

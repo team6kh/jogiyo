@@ -85,13 +85,29 @@
 				<c:forEach var="reviewDTO" items="${reviewRes}">
 					<!--  리뷰글 작성자 & 작성일 -->
 					<tr>
-						<td class="text-center">${reviewDTO.review_writer}</td>
-						<td class="text-center"><fmt:formatDate
-								value="${reviewDTO.review_reg_date}" pattern="yyyy-MM-dd" /></td>
+						<td class="text-center"><label> 작성자 </label>
+							&nbsp;&nbsp;&nbsp; ${reviewDTO.review_writer} <input
+							type="hidden" name="review_num" value="${reviewDTO.review_num}" />
+						</td>
+						<td class="text-center"><label>작성일</label> &nbsp;&nbsp;&nbsp;
+							<fmt:formatDate value="${reviewDTO.review_reg_date}"
+								pattern="yyyy-MM-dd" /></td>
 					</tr>
-					<!--  리뷰글 별점 : 후에 이미지로 대체해야 -->
+					<!-- 해당글 작성자일 경우 수정/삭제 버튼  -->
+					<!-- 임시값 "test_Customer" sessionId 값으로 교체 -->
+					<c:if test="${reviewDTO.review_writer == 'test_Customer'}">
+						<tr>
+							<td class="text-right" colspan="2"><input type="button"
+								value="수정"
+								onclick="javascript:location.href='updateReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}'">
+								<input type="button" value="삭제"
+								onclick="javascript:open('deleteReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=200')" /></td>
+						</tr>
+					</c:if>
+					<!--  리뷰글 별점 : 후에 이미지로 대체 -->
 					<tr>
-						<td class="text-center" colspan="2">${reviewDTO.review_rating}</td>
+						<td class="text-center" colspan="2"><label>별점</label>
+							&nbsp;&nbsp;&nbsp; ${reviewDTO.review_rating}</td>
 					</tr>
 					<!-- 리뷰글 내용 -->
 					<tr>
@@ -110,18 +126,6 @@
 							</tr>
 						</c:forTokens>
 					</c:if>
-
-					<!--  리뷰글 수정/ 삭제  -->
-					<!-- 작성자인지 확인하는 조건문 임시로 test_Customer  : sessionId 값과 일치하면 됨 -->
-					<c:if test="${reviewDTO.review_writer == 'test_Customer'}">
-						<tr>
-							<th class="text-center" colspan="2"><a
-								href="updateReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}">
-									수정 </a> &nbsp;&nbsp; <a
-								href="deleteReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}">
-									삭제 </a></th>
-						</tr>
-					</c:if>
 				</c:forEach>
 			</table>
 			<!--  리뷰 글 페이지 -->
@@ -132,9 +136,11 @@
 			</div>
 		</div>
 		<!-- 리뷰 글 보기 끝 -->
-		
+
 	</div>
 	<!-- /.container -->
+
+
 
 
 	<!-- Bootstrap core JavaScript

@@ -42,7 +42,8 @@
 			<p class="lead">sessionPw : ${sessionPw}</p>
 			<p class="lead">sessionName : ${sessionName}</p>
 			<p class="lead">actionName : ${actionName}</p>
-			<p class="lead">sessionScope.sessionId : ${sessionScope.sessionId}</p>
+			<p class="lead">sessionScope.sessionId :
+				${sessionScope.sessionId}</p>
 			<c:set var="sId" value="${sessionScope.sessionId}"></c:set>
 			<p class="lead">sId : ${sId}</p>
 		</div>

@@ -19,7 +19,7 @@
 
 	<!-- 공통으로 사용할 select절 정의 -->
 	<sql id="select-all">
-		SELECT * FROM Review_Board
+		SELECT * FROM review_board
 	</sql>
 
 	<!-- 공통으로 사용할 where_review_num절 정의 -->
@@ -50,13 +50,13 @@
 	<!-- 제일 마지막으로 작성된 리뷰글의 글번호 가져오기 -->
 	<select id="selectLastNum" resultClass="reviewDTO">
 		SELECT max(review_num) as
-		review_num FROM Review_Board
+		review_num FROM review_board
 	</select>
 
 	<!-- INSERT 쿼리문 정의 -->
 	<insert id="insertReview" parameterClass="reviewDTO">
 		INSERT INTO
-		Review_Board (
+		review_board (
 		review_num,
 		review_rest,
 		review_writer,
@@ -90,7 +90,7 @@
 	</update>
 
 	<!-- DELETE 쿼리문 정의 -->
-	<delete id="deleteReview" parameterClass="reviewDTO">
+	<delete id="deleteReview">
 		DELETE FROM review_board
 		<include refid="where_review_num" />
 	</delete>
