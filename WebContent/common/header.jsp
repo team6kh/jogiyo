@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -14,14 +15,35 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="listRest.action">REST</a></li>
+				<li class="dropdown">
+	              <a href="listRest.action" class="dropdown-toggle" data-toggle="dropdown">지역별<b class="caret"></b></a>
+	              <ul class="dropdown-menu">
+	                <li><a href="#">서울특별시</a></li>
+	                <li><a href="#">경기/인천</a></li>
+	                <li><a href="#">부산/경남</a></li>
+	                <li><a href="#">대구/경북</a></li>
+	                <li><a href="#">대전/전북</a></li>
+	                <li><a href="#">광주/전남</a></li>
+	                <li><a href="#">그 외 지역</a></li>
+	              </ul>
+	            </li>
+	            <li class="dropdown">
+	              <a href="listRest.action" class="dropdown-toggle" data-toggle="dropdown">종류별<b class="caret"></b></a>
+	              <ul class="dropdown-menu">
+	                <li><a href="#">한식</a></li>
+	                <li><a href="#">양식</a></li>
+	                <li><a href="#">중식</a></li>
+	                <li><a href="#">일식</a></li>
+	                <li><a href="#">기타</a></li>
+	              </ul>
+	            </li>
 				<li><a href="listReview.action">후기</a></li>
 				<li><a href="listRecipe.action">레시피</a></li>
 				<li><a href="listNotice.action">공지사항</a></li>
 				<li><a href="listQna.action">문의하기</a></li>
 				<!-- 테스트 -->
 				<li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">테스트 <b class="caret"></b></a>
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">테스트<b class="caret"></b></a>
 	              <ul class="dropdown-menu">
 	                <li><a href="testAction.action#">테스트 메시지</a></li>
 	                <li><a href="listTest.action">테스트 게시판</a></li>
