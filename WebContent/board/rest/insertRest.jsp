@@ -10,24 +10,31 @@
 		<title>상품 등록 페이지</title>
 	
 		<script type="text/javascript">
+			var fields = 1;
+		
+			function addInput() {
+				if (fields != 16) {
+					document.getElementById('text').innerHTML += "옵션명"+fields+".&nbsp&nbsp <input type='text' name='restopt_subject"+fields+"' value=''/> <br/>"
+																+"옵션가"+fields+".&nbsp&nbsp <input type='text' name='restopt_priceplus"+fields+"' value=''/> 원<br/>";
+					fields += 1;
+					optMap.put("restopt_subject"+fields,"restopt_priceplus"+fields);
+				} else {
+					document.getElementById('stop').innerHTML += "<font color='#FF0000'>옵션은 최대 15개만 등록할 수 있습니다.</font><br/>";
+					document.form.add.disabled=true;
+				}
+			}
+		
+		
 			function validation() {
-				var frm = document.getElementById("writeRestForm");
+				var frm = document.getElementById("insertRestForm");
 				
 				if(frm.rest_subject.value == "") {
 					alert("상품명을 입력해주세요.");
 					return false;
 				} 
-				else if(frm.rest_price.value == "") {
-					alert("가격을 입력해주세요.");
+				else if(frm.rest_price.value == "0") {
+					alert("상품가격을 입력해주세요.");
 					return false;
-				}
-				else if(frm.rest_localcategory.value == "") {
-					alert("지역카테고리를 입력해주세요.");
-					return false;
-				}
-				else if(frm.rest_typecategory.value == "") {
-					alert("종류카테고리 입력해주세요.");
-					return false;			
 				}
 				else if(frm.mainphoto.value == "") {
 					alert("매인사진을 업로드해주세요.");
@@ -39,24 +46,45 @@
 				} 
 				return true;
 			}
+			
+			function optvalidation() {
+				var frm = document.getElementById("insertOptRestForm");
+				
+				if(frm.rest_subject.value == "") {
+					alert("옵션명을 입력해주세요.");
+					return false;
+				} 
+				else if(frm.rest_price.value == "") {
+					alert("옵션가격을 입력해주세요.");
+					return false;
+				}
+				return true;
+			}
+			
+			
+			
+			
 		</script>
 	</head>
   
 	<body>
 		<table width="600" border="0" cellspacing="0" cellpadding="2">
 			<tr>
-				<td align="center"><h2>상품 등록 페이지</h2></td>
+				<td align="center">
+					<h2>상품 등록 페이지</h2>
+				</td>
 			</tr>
 		</table>
 		
-		<s:if test="resultClass == NULL">
-			<form name="writeRestForm" action="insertRest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
-			
-			<!-- 임시 히든값 -->
-			<s:hidden name="rest_writer_name" value="히든판매자이름" />
-			<s:hidden name="rest_writer_telnum" value="히든02-123-1234" />
-			<s:hidden name="rest_writer_mobilenum" value="히든010-1234-1234" />
-			<s:hidden name="rest_writer_address" value="히든서울시 영등포구" />
+		
+		
+		<s:if test="rest_price == 0">
+			<form name="insertRestForm" action="insertRest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
+				<!-- 임시 히든값 -->
+				<s:hidden name="rest_writer_name" value="히든판매자이름" />
+				<s:hidden name="rest_writer_telnum" value="히든02-123-1234" />
+				<s:hidden name="rest_writer_mobilenum" value="히든010-1234-1234" />
+				<s:hidden name="rest_writer_address" value="대한민국 서울특별시 영등포구 당산로 241" />
 			
 			
 		</s:if>
@@ -75,8 +103,8 @@
 					</tr>
 					
 					<tr>
-						<td width="70"><font color="#FF0000">*</font>상품명</td>
-						<td width="530">
+						<td width="150"><font color="#FF0000">*</font>상품명</td>
+						<td width="450">
 							<s:textfield name="rest_subject" theme="simple" value="%{resultClass.rest_subject}" maxlength="50"/>
 						</td>
 					</tr>
@@ -90,6 +118,28 @@
 							<s:textfield name="rest_price" theme="simple" value="%{resultClass.rest_price}" maxlength="20"/>
 						</td>
 					</tr>
+					
+					<tr>
+						<td>
+							<input type="button"  name="add" value="옵션추가" onclick="addInput()"/>
+						</td>
+						<td>
+							<div id="stop"></div>
+							<font color='#BDBDBD'>옵션명과 옵션가를 정의하세요.</font>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+						</td>
+						<td>
+							<div id="text">
+								<!-- 옵션추가 클릭시 여기에 태그 추가 -->
+							</div>
+						</td>
+					</tr>
+					
+					
 					<tr>
 						<td height="1" colspan="2"></td>	
 					</tr>
@@ -129,33 +179,6 @@
 					</tr>
 					
 					
-					
-					
-					<!-- 옵션 입력 영역 -->
-					<tr>
-						<td><font color="#FF0000">*</font>옵션명</td>
-						<td>
-							옵션명 인풋태그
-						</td>
-					</tr>
-					<tr>
-						<td><font color="#FF0000">*</font>옵션추가가격</td>
-						<td>
-							옵션추가가격 인풋태그, 입력버튼
-						</td>
-					</tr>
-					<!-- 옵션 리스트 영역 -->
-					<tr>
-						<td><font color="#FF0000">*</font>옵션리스트</td>
-						<td>
-							리스트는 여기에..!
-						</td>
-					</tr>
-					
-					
-					
-					
-					
 					<tr>
 						<td>매인 사진 업로드</td>
 						<td>
@@ -184,11 +207,6 @@
 					
 					
 					<tr>
-						<td height="10" colspan="2"></td>
-					</tr>
-					
-					
-					<tr>
 						<td align="right" colspan="2">
 							<input name="submit" type="submit" value="상품 등록" />
 							<input name="list" type="button" value="상품 등록 취소" onClick="javascript:location.href='ListRestAction.action?currentPage=<s:property value="currentPage"/>'" />
@@ -196,6 +214,8 @@
 					</tr>
 				</table>
 			</form>
+			
+			
+			
 	</body>
 </html>
-

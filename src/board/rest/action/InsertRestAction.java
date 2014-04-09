@@ -1,31 +1,30 @@
 package board.rest.action;
 
 import board.rest.dto.RestDTO;
-
+import board.restopt.dto.RestoptDTO;
 import com.opensymphony.xwork2.ActionSupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
-
 import common.ConDAOAware;
 import common.Constants;
-
 import java.util.*;
 import java.io.Reader;
 import java.io.File;
-
 import org.apache.commons.io.FileUtils;
 
 public class InsertRestAction extends ActionSupport implements ConDAOAware{
 
 	public static Reader reader; 
 	public static SqlMapClient sqlMapper;
-	private RestDTO paramClass;
-	private RestDTO resultClass;
-	
+	//RestBoard
+	private RestDTO paramClass = new RestDTO();
+	private RestDTO resultClass = new RestDTO();
+	//RestoptBoard
+	private RestoptDTO paramClass1 = new RestoptDTO();
+	private RestoptDTO resultClass1 = new RestoptDTO();
 	
 	//insertRest.jsp에서 넘긴 히든값
 	private int currentPage; //현재 페이지
-	private int no;
-	
+	private int rest_num;
 	
 	//insertRest.jsp에서 사용자가 입력하여 보낸 파라미터
 	private String rest_subject;
@@ -39,6 +38,40 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private String rest_writer_address;//임시히든
 	Calendar today = Calendar.getInstance();
 	
+	//insertRest.jsp에서 사용자가 입력한 옵션명 파라미터
+	private String restopt_subject1;
+	private String restopt_subject2;
+	private String restopt_subject3;
+	private String restopt_subject4;
+	private String restopt_subject5;
+	private String restopt_subject6;
+	private String restopt_subject7;
+	private String restopt_subject8;
+	private String restopt_subject9;
+	private String restopt_subject10;
+	private String restopt_subject11;
+	private String restopt_subject12;
+	private String restopt_subject13;
+	private String restopt_subject14;
+	private String restopt_subject15;
+	
+	//insertRest.jsp에서 사용자가 입력한 옵션가 파라미터
+	private int restopt_priceplus1;
+	private int restopt_priceplus2;
+	private int restopt_priceplus3;
+	private int restopt_priceplus4;
+	private int restopt_priceplus5;
+	private int restopt_priceplus6;
+	private int restopt_priceplus7;
+	private int restopt_priceplus8;
+	private int restopt_priceplus9;
+	private int restopt_priceplus10;
+	private int restopt_priceplus11;
+	private int restopt_priceplus12;
+	private int restopt_priceplus13;
+	private int restopt_priceplus14;
+	private int restopt_priceplus15;
+	
 	
 	//매인사진
 	private File rest_destFile1;
@@ -48,7 +81,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private String upload1ContentType;
 	private String upload1FileName;
 	private String fileUploadPath1 = Constants.COMMON_FILE_PATH + Constants.REST_MAIN_FILE_PATH;
-										
 	
 	//컨텐트사진
 	private File rest_destFile2;
@@ -59,7 +91,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private String upload2FileName;
 	private String fileUploadPath2 = Constants.COMMON_FILE_PATH + Constants.REST_CONTENT_FILE_PATH;
 
-	
 	//ConDAOAware 인터페이스의 메서드(인터셉터에서 호출)
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
@@ -67,18 +98,30 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	
 	//최초 insert액션 호출시 (폼제공)
 	public String form() throws Exception {
+		//rest_num 실질적값 // 이외 기본값 정의 (not null)
+		paramClass.setRest_subject("subject");
+		paramClass.setRest_price(0); //0으로 초기화
+		paramClass.setRest_localcategory("10");
+		paramClass.setRest_typecategory("20");
+		paramClass.setRest_writer_name("Rest_writer_name");
+		paramClass.setRest_writer_telnum("Rest_writer_telnum");
+		paramClass.setRest_writer_mobilenum("Rest_writer_mobilenum");
+		paramClass.setRest_writer_address("Rest_writer_address");
+		paramClass.setRest_reg_date(today.getTime());
+		
+		sqlMapper.insert("Rest.insertRest_num", paramClass);
+		
 		return SUCCESS;
 	}
 
 	//사용자가 글 등록(submit)했을시
 	public String execute() throws Exception {
 		
-		//파라미터와 리절트 객체 생성.
-		paramClass = new RestDTO();
-		resultClass = new RestDTO();
+		//아래의 파라미터 업데이트
+		//insertRest.jsp에서 사용자가 입력한 파라미터를 get후 DTO에 set함. 덮어쓰기
+		resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
+		paramClass.setRest_num(resultClass.getRest_num());
 		
-		
-		//insertRest.jsp에서 사용자가 입력한 파라미터를 get후 DTO에 set함.
 		paramClass.setRest_subject(getRest_subject());
 		paramClass.setRest_price(getRest_price());
 		paramClass.setRest_localcategory(getRest_localcategory());
@@ -89,37 +132,146 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		paramClass.setRest_writer_address(getRest_writer_address());
 		paramClass.setRest_reg_date(today.getTime());
 		
-		// [iBatis] insertRestBoard 실행
-		sqlMapper.insert("Rest.insertRestBoard", paramClass);
+		// [iBatis] updateRestBoard 실행
+		sqlMapper.update("Rest.updateRestBoard", paramClass);
+		
+		
+		
+		// num, resnum, 옵션명, 옵션가 insert
+		if(getRestopt_subject1() != null && getRestopt_priceplus1() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject1);
+			paramClass1.setRestopt_priceplus(restopt_priceplus1);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject2() != null && getRestopt_priceplus2() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject2);
+			paramClass1.setRestopt_priceplus(restopt_priceplus2);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject3() != null && getRestopt_priceplus3() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject3);
+			paramClass1.setRestopt_priceplus(restopt_priceplus3);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject4() != null && getRestopt_priceplus4() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject4);
+			paramClass1.setRestopt_priceplus(restopt_priceplus4);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject5() != null && getRestopt_priceplus5() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject5);
+			paramClass1.setRestopt_priceplus(restopt_priceplus5);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject6() != null && getRestopt_priceplus6() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject6);
+			paramClass1.setRestopt_priceplus(restopt_priceplus6);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject7() != null && getRestopt_priceplus7() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject7);
+			paramClass1.setRestopt_priceplus(restopt_priceplus7);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject8() != null && getRestopt_priceplus8() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject8);
+			paramClass1.setRestopt_priceplus(restopt_priceplus8);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject9() != null && getRestopt_priceplus9() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject9);
+			paramClass1.setRestopt_priceplus(restopt_priceplus9);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject10() != null && getRestopt_priceplus10() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject10);
+			paramClass1.setRestopt_priceplus(restopt_priceplus10);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject11() != null && getRestopt_priceplus11() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject11);
+			paramClass1.setRestopt_priceplus(restopt_priceplus11);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject12() != null && getRestopt_priceplus12() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject12);
+			paramClass1.setRestopt_priceplus(restopt_priceplus12);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject13() != null && getRestopt_priceplus13() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject13);
+			paramClass1.setRestopt_priceplus(restopt_priceplus13);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject14() != null && getRestopt_priceplus14() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject14);
+			paramClass1.setRestopt_priceplus(restopt_priceplus14);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		if(getRestopt_subject15() != null && getRestopt_priceplus15() != 0){
+			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_subject(restopt_subject15);
+			paramClass1.setRestopt_priceplus(restopt_priceplus15);
+			
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		
 		
 		// 첨부파일을 선택했다면 파일을 업로드한다.
 		if (getUpload1() != null && getUpload2() != null) {
-			//등록한 글 번호 가져오기.
-			resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
 			
 			//매인사진 파일 이름과 확장자 설정.
-			String file_name1 = "main_" + resultClass.getRest_num(); // main_112
+			String file_name1 = "main_" + resultClass.getRest_num();
 			String file_ext1 = getUpload1FileName().substring(getUpload1FileName().lastIndexOf('.') + 1, getUpload1FileName().length());
 			//컨텐트사진 파일 이름과 확장자 설정.
-			String file_name2 = "content_" + resultClass.getRest_num(); // content_112
+			String file_name2 = "content_" + resultClass.getRest_num();
 			String file_ext2 = getUpload2FileName().substring(getUpload2FileName().lastIndexOf('.') + 1, getUpload2FileName().length());
-			
 			
 			//매인사진파일 저장.
 			rest_destFile1 = new File(fileUploadPath1 + file_name1 + "."+ file_ext1); 
-			FileUtils.copyFile(getUpload1(), rest_destFile1); 
+			FileUtils.copyFile(getUpload1(), rest_destFile1);
 			//컨텐트사진파일 저장.
 			rest_destFile2 = new File(fileUploadPath2 + file_name2 + "."+ file_ext2); 
 			FileUtils.copyFile(getUpload2(), rest_destFile2); 
-
 			
-			//매인사진파일 DTO에 set
-			paramClass.setRest_destFile1(rest_destFile1.getAbsolutePath());
+			
+			//글넘버
 			paramClass.setRest_num(resultClass.getRest_num());
+			//매인사진파일 DTO에 set
+			paramClass.setRest_destFile1(rest_destFile1.getPath().replace('\\', '/').substring(27));
 			paramClass.setRest_main_orgname(getUpload1FileName());
 			paramClass.setRest_main_savname(file_name1 + "." + file_ext1);
 			//컨텐트사진파일 DTO에 set
-			paramClass.setRest_destFile2(rest_destFile2.getAbsolutePath());
+			paramClass.setRest_destFile2(rest_destFile2.getPath().replace('\\', '/').substring(27));
 			paramClass.setRest_content_orgname(getUpload2FileName()); 
 			paramClass.setRest_content_savname(file_name2 + "." + file_ext2);
 			
@@ -207,6 +359,195 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	public void setToday(Calendar today) {
 		this.today = today;
 	}
+	
+	
+	
+	//옵션명에 대한 메서드
+	public String getRestopt_subject1() {
+		return restopt_subject1;
+	}
+	public void setRestopt_subject1(String restopt_subject1) {
+		this.restopt_subject1 = restopt_subject1;
+	}
+	public String getRestopt_subject2() {
+		return restopt_subject2;
+	}
+	public void setRestopt_subject2(String restopt_subject2) {
+		this.restopt_subject2 = restopt_subject2;
+	}
+	public String getRestopt_subject3() {
+		return restopt_subject3;
+	}
+	public void setRestopt_subject3(String restopt_subject3) {
+		this.restopt_subject3 = restopt_subject3;
+	}
+	public String getRestopt_subject4() {
+		return restopt_subject4;
+	}
+	public void setRestopt_subject4(String restopt_subject4) {
+		this.restopt_subject4 = restopt_subject4;
+	}
+	public String getRestopt_subject5() {
+		return restopt_subject5;
+	}
+	public void setRestopt_subject5(String restopt_subject5) {
+		this.restopt_subject5 = restopt_subject5;
+	}
+	public String getRestopt_subject6() {
+		return restopt_subject6;
+	}
+	public void setRestopt_subject6(String restopt_subject6) {
+		this.restopt_subject6 = restopt_subject6;
+	}
+	public String getRestopt_subject7() {
+		return restopt_subject7;
+	}
+	public void setRestopt_subject7(String restopt_subject7) {
+		this.restopt_subject7 = restopt_subject7;
+	}
+	public String getRestopt_subject8() {
+		return restopt_subject8;
+	}
+	public void setRestopt_subject8(String restopt_subject8) {
+		this.restopt_subject8 = restopt_subject8;
+	}
+	public String getRestopt_subject9() {
+		return restopt_subject9;
+	}
+	public void setRestopt_subject9(String restopt_subject9) {
+		this.restopt_subject9 = restopt_subject9;
+	}
+	public String getRestopt_subject10() {
+		return restopt_subject10;
+	}
+	public void setRestopt_subject10(String restopt_subject10) {
+		this.restopt_subject10 = restopt_subject10;
+	}
+	public String getRestopt_subject11() {
+		return restopt_subject11;
+	}
+	public void setRestopt_subject11(String restopt_subject11) {
+		this.restopt_subject11 = restopt_subject11;
+	}
+	public String getRestopt_subject12() {
+		return restopt_subject12;
+	}
+	public void setRestopt_subject12(String restopt_subject12) {
+		this.restopt_subject12 = restopt_subject12;
+	}
+	public String getRestopt_subject13() {
+		return restopt_subject13;
+	}
+	public void setRestopt_subject13(String restopt_subject13) {
+		this.restopt_subject13 = restopt_subject13;
+	}
+	public String getRestopt_subject14() {
+		return restopt_subject14;
+	}
+	public void setRestopt_subject14(String restopt_subject14) {
+		this.restopt_subject14 = restopt_subject14;
+	}
+	public String getRestopt_subject15() {
+		return restopt_subject15;
+	}
+	public void setRestopt_subject15(String restopt_subject15) {
+		this.restopt_subject15 = restopt_subject15;
+	}
+	
+	
+	
+	//옵션가에 대한 메서드
+	public int getRestopt_priceplus1() {
+		return restopt_priceplus1;
+	}
+	public void setRestopt_priceplus1(int restopt_priceplus1) {
+		this.restopt_priceplus1 = restopt_priceplus1;
+	}
+	public int getRestopt_priceplus2() {
+		return restopt_priceplus2;
+	}
+	public void setRestopt_priceplus2(int restopt_priceplus2) {
+		this.restopt_priceplus2 = restopt_priceplus2;
+	}
+	public int getRestopt_priceplus3() {
+		return restopt_priceplus3;
+	}
+	public void setRestopt_priceplus3(int restopt_priceplus3) {
+		this.restopt_priceplus3 = restopt_priceplus3;
+	}
+	public int getRestopt_priceplus4() {
+		return restopt_priceplus4;
+	}
+	public void setRestopt_priceplus4(int restopt_priceplus4) {
+		this.restopt_priceplus4 = restopt_priceplus4;
+	}
+	public int getRestopt_priceplus5() {
+		return restopt_priceplus5;
+	}
+	public void setRestopt_priceplus5(int restopt_priceplus5) {
+		this.restopt_priceplus5 = restopt_priceplus5;
+	}
+	public int getRestopt_priceplus6() {
+		return restopt_priceplus6;
+	}
+	public void setRestopt_priceplus6(int restopt_priceplus6) {
+		this.restopt_priceplus6 = restopt_priceplus6;
+	}
+	public int getRestopt_priceplus7() {
+		return restopt_priceplus7;
+	}
+	public void setRestopt_priceplus7(int restopt_priceplus7) {
+		this.restopt_priceplus7 = restopt_priceplus7;
+	}
+	public int getRestopt_priceplus8() {
+		return restopt_priceplus8;
+	}
+	public void setRestopt_priceplus8(int restopt_priceplus8) {
+		this.restopt_priceplus8 = restopt_priceplus8;
+	}
+	public int getRestopt_priceplus9() {
+		return restopt_priceplus9;
+	}
+	public void setRestopt_priceplus9(int restopt_priceplus9) {
+		this.restopt_priceplus9 = restopt_priceplus9;
+	}
+	public int getRestopt_priceplus10() {
+		return restopt_priceplus10;
+	}
+	public void setRestopt_priceplus10(int restopt_priceplus10) {
+		this.restopt_priceplus10 = restopt_priceplus10;
+	}
+	public int getRestopt_priceplus11() {
+		return restopt_priceplus11;
+	}
+	public void setRestopt_priceplus11(int restopt_priceplus11) {
+		this.restopt_priceplus11 = restopt_priceplus11;
+	}
+	public int getRestopt_priceplus12() {
+		return restopt_priceplus12;
+	}
+	public void setRestopt_priceplus12(int restopt_priceplus12) {
+		this.restopt_priceplus12 = restopt_priceplus12;
+	}
+	public int getRestopt_priceplus13() {
+		return restopt_priceplus13;
+	}
+	public void setRestopt_priceplus13(int restopt_priceplus13) {
+		this.restopt_priceplus13 = restopt_priceplus13;
+	}
+	public int getRestopt_priceplus14() {
+		return restopt_priceplus14;
+	}
+	public void setRestopt_priceplus14(int restopt_priceplus14) {
+		this.restopt_priceplus14 = restopt_priceplus14;
+	}
+	public int getRestopt_priceplus15() {
+		return restopt_priceplus15;
+	}
+	public void setRestopt_priceplus15(int restopt_priceplus15) {
+		this.restopt_priceplus15 = restopt_priceplus15;
+	}
+	
 	
 	
 	//매인사진파일
@@ -298,11 +639,11 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 
 	
 	//insertRest.jsp에서 넘긴 히든값
-	public int getNo() {
-		return no;
+	public int getRest_num() {
+		return rest_num;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setRest_num(int rest_num) {
+		this.rest_num = rest_num;
 	}
 	public int getCurrentPage() {
 		return currentPage;

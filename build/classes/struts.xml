@@ -9,7 +9,7 @@
 		<interceptors>
 			<interceptor name="conDAO" class="common.ConDAOInterceptor"/>
 		</interceptors>
-
+		
 		<!-- NEW 비밀번호 체크 액션. -->
 		<action name="checkPass" class="common.CheckPasswordAction">
 			<interceptor-ref name="params"/>
@@ -85,6 +85,8 @@
 		<!-- RestBoard 액션 -->		
 		<!-- 리스트에서 글쓰기 클릭시 -->
 		<action name="insertRestForm" class="board.rest.action.InsertRestAction" method="form">
+			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params"/>
 			<result>/board/rest/insertRest.jsp</result>
 		</action>
 
@@ -104,13 +106,13 @@
 			<interceptor-ref name="conDAO"/>
 			<result>/board/rest/listRest.jsp</result>
 		</action>
-
-		<!-- 수정 액션 -->
-		<action name="updateRest" class="board.rest.action.UpdateRestAction">
+		
+		<!-- 리드 액션 -->
+		<action name="readRest" class="board.rest.action.ReadRestAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result>/board/rest/updateRest.jsp</result>
-		</action>		
+			<result>/board/rest/readRest.jsp</result>
+		</action>	
 		<!-- RestBoard 끝 -->
 
 
@@ -168,8 +170,8 @@
 			</result>
 		</action>
 		<!-- QnA 끝 -->		
-
-
+		
+		
 		<!-- 테스트 -->
 		<action name="testAction" class="test.action.TestAction">
 			<result>/test/test.jsp</result>
