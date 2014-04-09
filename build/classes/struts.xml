@@ -178,8 +178,8 @@
 		
 		<!-- 테스트 -->
 		<!-- 테스트 페이지 -->
-		<action name="testPage" class="test.action.TestPageAction">
-			<result>/test/testPage.jsp</result>
+		<action name="pageTest" class="test.action.TestPageAction">
+			<result>/test/pageTest.jsp</result>
 		</action>
 
 		<!-- 테스트 게시판 리스트 액션. -->
