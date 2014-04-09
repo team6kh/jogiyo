@@ -173,8 +173,8 @@
 		
 		
 		<!-- 테스트 -->
-		<action name="testAction" class="test.action.TestAction">
-			<result>/test/test.jsp</result>
+		<action name="testPage" class="test.action.TestPageAction">
+			<result>/test/testPage.jsp</result>
 		</action>
 
 

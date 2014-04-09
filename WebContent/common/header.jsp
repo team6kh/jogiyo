@@ -51,7 +51,7 @@
 				<li class="dropdown">
 	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">테스트<b class="caret"></b></a>
 	              <ul class="dropdown-menu">
-	                <li><a href="testAction.action#">테스트 메시지</a></li>
+	                <li><a href="testPage.action#">테스트 페이지</a></li>
 	                <li><a href="listTest.action">테스트 게시판</a></li>
 	              </ul>
 	            </li>
