@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:if test="${isDup==1}">
 <script type="text/javascript">
-	parent.feedbackRegId.innerHTML = "ÀÌ¹Ì »ç¿ëÁßÀÎ ¾ÆÀÌµğÀÔ´Ï´Ù..";
+	parent.feedbackRegId.innerHTML = "ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ì•„ì´ë””ì…ë‹ˆë‹¤..";
 	parent.$('div.div_regid').addClass('error');
 </script>
 
 </c:if>
 <c:if test="${isDup==0}">
 <script type="text/javascript">
-		parent.feedbackRegId.innerHTML = "<font color=green>»ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.</font>";
+		parent.feedbackRegId.innerHTML = "<font color=green>ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.</font>";
 </script>
 
 </c:if>

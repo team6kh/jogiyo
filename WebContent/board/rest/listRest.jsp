@@ -51,7 +51,7 @@
 				<div class="col-sm-4 col-md-3">					
 			    	<div class="thumbnail">
 			      		<a href="${url}">
-			      		<img src="${list.rest_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
+			      		<img src="${list.rest_destFile1}" alt="N/A" class="img-responsive" style="min-height:125px;height:125px;">
 			      		</a>
 			      		<div class="caption">
 			        		<h3>${list.rest_subject}</h3>

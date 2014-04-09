@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
+
 import common.ConDAOAware;
 
 import java.io.Reader;
@@ -15,11 +16,10 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	
 	private SqlMapClient sqlMapper;
 
-	private TestDTO paramClass = new TestDTO();		// 파라미터를 저장할 객체
-	private TestDTO resultClass = new TestDTO();	// 쿼리 결과 값을 저장할 객체
+	private TestDTO testDTO = new TestDTO();
 
-	private int currentPage;	// 현재 페이지	
 	private int test_num;		// 현재 글 고유넘버
+	private int currentPage;	// 현재 페이지		
 	
 	private String test_writer_pw;
 	private String test_subject;
@@ -28,77 +28,69 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	public void setConDAO(SqlMapClient sqlMapper){
 		this.sqlMapper = sqlMapper;
 	}
+	
+	// UPDATE 폼
+	public String updateForm() throws Exception {
+		
+		// 해당 번호의 글을 가져온다.
+		testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
+
+		return SUCCESS;
+	}
 
 	// 게시글 UPDATE 액션.
 	public String execute() throws Exception {
 
 		// 수정할 항목 설정. 여기서는 인터셉터를 사용하지 않고 직접(?) 설정해보자.
-		paramClass.setTest_num(getTest_num());
-		paramClass.setTest_writer_pw(getTest_writer_pw());
-		paramClass.setTest_subject(getTest_subject());
-		paramClass.setTest_content(getTest_content());
+		testDTO.setTest_num(getTest_num());
+		testDTO.setTest_writer_pw(getTest_writer_pw());
+		testDTO.setTest_subject(getTest_subject());
+		testDTO.setTest_content(getTest_content());
 
 		// 일단 항목만 수정한다.
-		sqlMapper.update("Test.updateBoard", paramClass);		
+		sqlMapper.update("Test.updateBoard", testDTO);		
 
 		// 수정이 끝나면 view 페이지로 이동.
-		resultClass = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
+		testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
 
 		return SUCCESS;
 	}
-
-	public TestDTO getParamClass() {
-		return paramClass;
+	
+	public TestDTO getTestDTO() {
+		return testDTO;
 	}
-
-	public void setParamClass(TestDTO paramClass) {
-		this.paramClass = paramClass;
-	}
-
-	public TestDTO getResultClass() {
-		return resultClass;
-	}
-
-	public void setResultClass(TestDTO resultClass) {
-		this.resultClass = resultClass;
-	}
-
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
+	public void setTestDTO(TestDTO testDTO) {
+		this.testDTO = testDTO;
+	}	
 	public int getTest_num() {
 		return test_num;
 	}
-
 	public void setTest_num(int test_num) {
 		this.test_num = test_num;
 	}
-
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	
+	// 여기서는 인터셉터를 사용하지 않고 직접(?) 설정해보자.
 	public String getTest_writer_pw() {
 		return test_writer_pw;
 	}
-
 	public void setTest_writer_pw(String test_writer_pw) {
 		this.test_writer_pw = test_writer_pw;
 	}
-
 	public String getTest_subject() {
 		return test_subject;
 	}
-
 	public void setTest_subject(String test_subject) {
 		this.test_subject = test_subject;
 	}
-
 	public String getTest_content() {
 		return test_content;
 	}
-
 	public void setTest_content(String test_content) {
 		this.test_content = test_content;
 	}

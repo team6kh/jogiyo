@@ -37,48 +37,34 @@
 		</div>
 
 		<div class="col-md-12 well">
-			<form action="insertTest.action" method="post" enctype="multipart/form-data">
+			<form action="updateTest.action" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="test_num" value="${test_num}" />
+				<input type="hidden" name="currentPage" value="${currentPage}" />
 				<div class="form-group">
 					<label>제목</label>
-					<input type="text" class="form-control" name="test_subject" placeholder="제목" required>
+					<input type="text" class="form-control" name="test_subject" placeholder="제목" value="${testDTO.test_subject}" required>
 				</div>
-				<c:if test="${sessionName eq null}">
-				<div class="form-group">
-					<label>작성자</label>
-					<input type="text" class="form-control" name="test_writer_name" placeholder="작성자" required>
-				</div>
-				</c:if>
-				<c:if test="${sessionName ne null}">
 				<div class="form-horizontal">
-					<div class="form-group">
+	  				<div class="form-group">
 	    				<label class="col-sm-1 control-label">작성자</label>
 	    				<div class="col-sm-11">
-	      					<p class="form-control-static">${sessionName}</p>
-	      					<input type="hidden" name="test_writer_name" value="${sessionName}">
+	      					<p class="form-control-static">${testDTO.test_writer_name}</p>
+	      					<input type="hidden" name="test_writer_name" value="${testDTO.test_writer_name}">
 	    				</div>
 	 			 	</div>
-	 			</div>					
-				</c:if>			
-				<c:if test="${sessionPw eq null}">
-				<div class="form-group">
-					<label for="test_writer_pw">비밀번호</label>
-					<input type="password" class="form-control" name="test_writer_pw" placeholder="비밀번호" required>
-				</div>
-				</c:if>
-				<c:if test="${sessionPw ne null}">
-				<input type="hidden" name="test_writer_pw" value="${sessionPw}">
-				</c:if>
+	 			 </div>			
+				<input type="hidden" name="test_writer_pw" value="${testDTO.test_writer_pw}">
 				<div class="form-group">
 					<label for="test_content">내용</label>
-					<textarea class="form-control" rows="3" id="test_content" name="test_content" required></textarea>
+					<textarea class="form-control" rows="3" id="test_content" name="test_content" required>${testDTO.test_content}</textarea>
 				</div>
 	
 				<div class="pull-right">
 					<button type="submit" class="btn btn-primary">글쓰기</button>
 					<a href="listTest.action?currentPage=${currentPage}" class="btn btn-default">목록</a>
-				</div>
+				</div>				
 			</form>
-
+			
 		</div>
 		<!-- end of test board pretty -->
 

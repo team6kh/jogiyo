@@ -15,7 +15,9 @@
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result name="error">/common/error.jsp</result>
-			<result name="success" type="chain">${modalParam}</result>
+			<result name="success" type="chain">
+				<param name="actionName">${modalParam}</param>
+			</result>
 		</action>		
 
 		<!-- 로그인 폼 -->
@@ -178,24 +180,30 @@
 		
 		<!-- 테스트 -->
 		<!-- 테스트 페이지 -->
-		<action name="pageTest" class="test.action.TestPageAction">
+		<action name="pageTest" class="test.action.PageTestAction">
 			<result>/test/pageTest.jsp</result>
 		</action>
-
-		<!-- 테스트 게시판 리스트 액션. -->
+		
+		<!-- 관리자 대시보드 -->
+		<action name="dashAdmin" class="dashboard.admin.action.DashAdminAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/dashboard/dashAdmin.jsp</result>
+		</action>
+		
+		<!-- 테스트 게시판 리스트 액션 -->
 		<action name="listTest" class="board.test.action.ListTestAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/board/test/listTest.jsp</result>
 		</action>
 
-		<!-- 테스트 게시판 쓰기 액션. -->
-		<action name="insertTestForm" class="board.test.action.InsertTestAction" method="insertForm">			
-			<interceptor-ref name="servletConfig"/>
-			<interceptor-ref name="params"/>
+		<!-- 테스트 게시판 쓰기 폼 -->
+		<action name="insertTestForm" class="board.test.action.InsertTestAction" method="insertForm">
 			<result>/board/test/insertTest.jsp</result>
 		</action>
 
+		<!-- 테스트 게시판 쓰기 액션 -->
 		<action name="insertTest" class="board.test.action.InsertTestAction">
 			<interceptor-ref name="prepare"/>
 			<interceptor-ref name="modelDriven"/>
@@ -206,31 +214,36 @@
 			</result>
 		</action>
 
-		<!-- 테스트 게시판 읽기 액션. -->
+		<!-- 테스트 게시판 읽기 액션 -->
 		<action name="readTest" class="board.test.action.ReadTestAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/board/test/readTest.jsp</result>
 		</action>		
 
-		<!-- 테스트 게시판 수정 액션. -->
-		<action name="updateTestForm" class="board.test.action.ReadTestAction">
+		<!-- 테스트 게시판 수정 폼 -->
+		<action name="updateTestForm" class="board.test.action.UpdateTestAction" method="updateForm">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result type="chain">insertTestForm</result>
+			<result>/board/test/updateTest.jsp</result>
 		</action>
 
+		<!-- 테스트 게시판 수정 액션 -->
 		<action name="updateTest" class="board.test.action.UpdateTestAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result type="chain">readTest</result>
+			<result type="chain">
+				<param name="actionName">readTest</param>
+			</result>
 		</action>
 
 		<!--테스트 게시판 삭제 액션. -->
 		<action name="deleteTest" class="board.test.action.DeleteTestAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result type="chain">listTest</result>
+			<result type="chain">
+				<param name="actionName">listTest</param>
+			</result>
 		</action>
 		<!-- 테스트  끝-->
 

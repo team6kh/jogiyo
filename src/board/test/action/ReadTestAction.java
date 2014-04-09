@@ -20,15 +20,10 @@ public class ReadTestAction implements Action, ConDAOAware {
 	
 	private SqlMapClient sqlMapper;
 
-	private TestDTO paramClass = new TestDTO();		// 파라미터를 저장할 객체
-	private TestDTO resultClass = new TestDTO();	// 쿼리 결과 값을 저장할 객체
+	private TestDTO testDTO = new TestDTO();
 
-	private int currentPage;	
 	private int test_num;	
-
-	private InputStream inputStream;
-	private String contentDisposition;
-	private long contentLength;
+	private int currentPage;		
 	
 	public void setConDAO(SqlMapClient sqlMapper){
 		this.sqlMapper = sqlMapper;
@@ -38,71 +33,32 @@ public class ReadTestAction implements Action, ConDAOAware {
 	public String execute() throws Exception {
 
 		// 해당 글의 조회수 +1.
-		paramClass.setTest_num(getTest_num());
-		sqlMapper.update("Test.updateReadcount", paramClass);
+		testDTO.setTest_num(getTest_num());
+		sqlMapper.update("Test.updateReadcount", testDTO);
 
 		// 해당 번호의 글을 가져온다.
-		resultClass = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
+		testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
 
 		return SUCCESS;
-	}	
-
-	public TestDTO getParamClass() {
-		return paramClass;
 	}
-
-	public void setParamClass(TestDTO paramClass) {
-		this.paramClass = paramClass;
+	
+	public TestDTO getTestDTO() {
+		return testDTO;
 	}
-
-	public TestDTO getResultClass() {
-		return resultClass;
+	public void setTestDTO(TestDTO testDTO) {
+		this.testDTO = testDTO;
 	}
-
-	public void setResultClass(TestDTO resultClass) {
-		this.resultClass = resultClass;
-	}
-
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
 	public int getTest_num() {
 		return test_num;
 	}
-
 	public void setTest_num(int test_num) {
 		this.test_num = test_num;
 	}
-
-	/*
-	public InputStream getInputStream() {
-		return inputStream;
+	public int getCurrentPage() {
+		return currentPage;
 	}
-
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
 	}
-
-	public String getContentDisposition() {
-		return contentDisposition;
-	}
-
-	public void setContentDisposition(String contentDisposition) {
-		this.contentDisposition = contentDisposition;
-	}
-
-	public long getContentLength() {
-		return contentLength;
-	}
-
-	public void setContentLength(long contentLength) {
-		this.contentLength = contentLength;
-	}
-	*/	
 	
 }

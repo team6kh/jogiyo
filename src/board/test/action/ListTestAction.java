@@ -12,6 +12,8 @@ import board.test.dto.TestDTO;
 
 public class ListTestAction extends ActionSupport implements ConDAOAware {
 
+	private String actionName = "listTest";	// 페이징액션과 로그인액션에서 쓰인다...
+	
 	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체.
 
 	private List<TestDTO> list = new ArrayList<TestDTO>();
@@ -21,9 +23,7 @@ public class ListTestAction extends ActionSupport implements ConDAOAware {
 	private int blockCount = 10;			// 한 페이지의 게시물의 수
 	private int blockPage = 5;				// 한 화면에 보여줄 페이지 수
 	private String pagingHtml;				// 페이징을 구현한 HTML
-	private PagingAction page;				// 페이징 클래스
-	
-	private String actionName = "listTest";	// 페이징액션과 로그인액션에서 쓰인다...
+	private PagingAction page;				// 페이징 클래스	
 
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;

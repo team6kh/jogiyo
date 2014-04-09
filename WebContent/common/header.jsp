@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
 .dropdown:hover .dropdown-menu {
@@ -53,7 +53,7 @@
 	              <ul class="dropdown-menu">
 	                <li><a href="pageTest.action">테스트 페이지</a></li>
 	                <li><a href="listTest.action">테스트 게시판</a></li>
-	                <li><a href="pageAdmin.action">관리자 페이지</a></li>
+	                <li><a href="dashAdmin.action">관리자 대시보드</a></li>
 	              </ul>
 	            </li>
 				<!-- end 테스트 -->

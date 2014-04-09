@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,34 +44,30 @@
 					<tr>
 						<th class="text-center" colspan="2">제목</th>
 						<th class="text-center" style="width: 200px;">작성자</th>
-						<th class="text-center" style="width: 100px;">작성일</th>
+						<th class="text-center" style="width: 200px;">작성일</th>
 						<th class="text-center" style="width: 100px;">조회</th>
 					</tr>
 				</thead>
 				<tbody>
-					<s:iterator value="list" status="stat">
-						<s:url id="viewURL" action="readTest">
-							<s:param name="test_num">
-								<s:property value="test_num" />
-							</s:param>
-							<s:param name="currentPage">
-								<s:property value="currentPage" />
-							</s:param>
-						</s:url>
+					<c:forEach var="list" items="${list}">			
+						<c:url var="url" value="readTest.action">
+							<c:param name="test_num" value="${list.test_num}"/>
+							<c:param name="currentPage" value="${currentPage}"/>
+						</c:url>
 						<tr>
-							<td colspan="2"><s:a href="%{viewURL}">
-									<s:property value="test_subject" />
-								</s:a></td>
-							<td class="text-center"><s:property value="test_writer_name" /></td>
-							<td class="text-center"><s:property value="test_reg_date" /></td>
-							<td class="text-center"><s:property value="test_readcount" /></td>
+							<td colspan="2"><a href="${url}">${list.test_subject}</a></td>
+							<td class="text-center">${list.test_writer_name}</td>
+							<td class="text-center"><fmt:formatDate value="${list.test_reg_date}" type="date" /></td>
+							<td class="text-center">${list.test_readcount}</td>
 						</tr>
-					</s:iterator>
-					<s:if test="list.size() <= 0">
+					</c:forEach>
+					
+					<c:if test="${list eq null}">
 						<tr>
 							<td colspan="5">등록된 게시물이 없습니다.</td>
 						</tr>
-					</s:if>
+					</c:if>		
+					
 				</tbody>
 			</table>
 
@@ -95,8 +92,7 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 </body>
 </html>
