@@ -19,11 +19,12 @@
             			<property name="JDBC.Password" value="${password}" />
 		</dataSource>
 	</transactionManager>		
-	
+
 	<sqlMap resource="/user/buyer/dao/BuyerDAO.xml"/>
 	<sqlMap resource="/user/seller/dao/SellerDAO.xml"/>
 	<sqlMap resource="/board/rest/dao/RestDAO.xml"/>
+	<sqlMap resource="/board/review/dao/ReviewDAO.xml"/>
 	<sqlMap resource="/board/qna/dao/QnaDAO.xml"/>
 	<sqlMap resource="/board/test/dao/TestDAO.xml"/>			
-	
+
 </sqlMapConfig>

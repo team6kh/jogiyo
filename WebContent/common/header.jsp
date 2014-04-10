@@ -4,8 +4,8 @@
 
 <style>
 .dropdown:hover .dropdown-menu {
-    display: block;
- }
+	display: block;
+}
 </style>
 
 <div class="navbar navbar-inverse navbar-fixed-top">

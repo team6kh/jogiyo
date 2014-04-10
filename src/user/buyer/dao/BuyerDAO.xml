@@ -20,7 +20,7 @@
 	<sql id="select-all">
 		SELECT * FROM buyer_table
 	</sql>
-	
+
 	<!-- 공통으로 사용할 where-user_id 절 정의 -->
 	<sql id="where-buyer_id">
 		WHERE buyer_id = #buyer_id#
@@ -31,7 +31,7 @@
 		<include refid="select-all" />
 		ORDER BY buyer_reg_date DESC
 	</select>
-	
+
 	<select id="selectWhereBuyerId" resultMap="BuyerResult" parameterClass="BuyerDTO">
 		<include refid="select-all" />
 		<include refid="where-buyer_id" />

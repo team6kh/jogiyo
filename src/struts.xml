@@ -9,7 +9,7 @@
 		<interceptors>
 			<interceptor name="conDAO" class="common.ConDAOInterceptor"/>
 		</interceptors>
-		
+
 		<!-- NEW 비밀번호 체크 액션 -->
 		<action name="checkPass" class="common.CheckPasswordAction">
 			<interceptor-ref name="params"/>
@@ -24,7 +24,7 @@
 		<action name="loginForm" class="common.login.action.LoginAction" method="loginForm">
 			<result>/common/login/loginForm.jsp</result>
 		</action>
-		
+
 		<!-- 로그인 액션 -->
 		<action name="login" class="common.login.action.LoginAction">		
 			<interceptor-ref name="params" />				
@@ -46,14 +46,14 @@
 			<result name="seller">/common/registration/regFormSeller.jsp</result>
 			<result>/common/registration/regFormBuyer.jsp</result>
 		</action>
-		
+
 		<!-- 회원가입 액션 : 구매자, 판매자로 chain -->
 		<action name="registration" class="common.registration.action.RegistrationAction">
 			<result name="buyer" type="chain">regBuyer</result>
 			<result name="seller" type="chain">regSeller</result>
 			<result name="error">/common/error.jsp</result>
 		</action>
-		
+
 		<!-- 구매자 가입 액션 -->
 		<action name="regBuyer" class="common.registration.action.RegBuyerAction">
 			<interceptor-ref name="chain"/>
@@ -112,7 +112,7 @@
 			<interceptor-ref name="conDAO"/>
 			<result>/board/rest/listRest.jsp</result>
 		</action>
-		
+
 		<!-- 리드 액션 -->
 		<action name="readRest" class="board.rest.action.ReadRestAction">
 			<interceptor-ref name="params"/>
@@ -120,6 +120,73 @@
 			<result>/board/rest/readRest.jsp</result>
 		</action>	
 		<!-- RestBoard 끝 -->
+		
+		
+		<!-- Review게시판 시작 -->
+		<!-- 리뷰 글쓰기 폼 -->
+		<action name="insertReviewForm" class="board.review.action.InsertReviewAction"
+			method="form">
+			<interceptor-ref name="chain" />
+			<result>/board/review/listReview.jsp</result>
+		</action>
+
+		<!-- 리뷰 글쓰기 등록 -->
+		<action name="insertReviewPro" class="board.review.action.InsertReviewAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="params" />
+			<result type="redirect-action">
+				<param name="actionName">listReview</param>
+			</result>
+		</action>
+
+		<!-- 리뷰 글목록 보기 -->
+		<action name="listReview" class="board.review.action.ListReviewAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="params" />
+			<result type="chain">
+				<param name="actionName">insertReviewForm</param>
+			</result>
+		</action>
+
+		<!-- 리뷰 글 수정 폼 -->
+		<action name="updateReviewForm" class="board.review.action.UpdateReviewAction"
+			method="form">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="params" />
+			<result>/board/review/updateReview.jsp</result>
+		</action>
+
+		<!-- 리뷰 글 수정 처리 -->
+		<action name="updateReviewPro" class="board.review.action.UpdateReviewAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="params" />
+			<result type="chain">
+				<param name="actionName">listReview</param>
+			</result>
+		</action>
+		
+		<!--  리뷰글 삭제 폼 -->
+		<action name="deleteReviewForm" class="board.review.action.DeleteReviewAction" method="form">
+		<interceptor-ref name="params"/>
+		<result>/board/review/deleteReview.jsp</result>
+		</action>
+
+		<!-- 리뷰 글 삭제 처리 -->
+		<action name="deleteReviewPro" class="board.review.action.DeleteReviewAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="params" />
+			<result type="chain">
+				<param name="actionName">listReview</param>
+			</result>
+		</action>
+		<!-- Review게시판 끝 -->
 
 
 		<!-- QnA -->
@@ -176,21 +243,21 @@
 			</result>
 		</action>
 		<!-- QnA 끝 -->		
-		
-		
+
+
 		<!-- 테스트 -->
 		<!-- 테스트 페이지 -->
 		<action name="pageTest" class="test.action.PageTestAction">
 			<result>/test/pageTest.jsp</result>
 		</action>
-		
+
 		<!-- 관리자 대시보드 -->
 		<action name="dashAdmin" class="dashboard.admin.action.DashAdminAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/dashboard/dashAdmin.jsp</result>
 		</action>
-		
+
 		<!-- 테스트 게시판 리스트 액션 -->
 		<action name="listTest" class="board.test.action.ListTestAction">
 			<interceptor-ref name="params"/>

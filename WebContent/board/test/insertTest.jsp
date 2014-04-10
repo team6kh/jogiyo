@@ -72,7 +72,7 @@
 					<label for="test_content">내용</label>
 					<textarea class="form-control" rows="3" id="test_content" name="test_content" required></textarea>
 				</div>
-	
+
 				<div class="pull-right">
 					<button type="submit" class="btn btn-primary">글쓰기</button>
 					<a href="listTest.action?currentPage=${currentPage}" class="btn btn-default">목록</a>

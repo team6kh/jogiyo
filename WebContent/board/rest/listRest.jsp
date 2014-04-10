@@ -38,16 +38,16 @@
 		</div>		
 
 		<div class="col-md-12 well">
-		
+
 			<div class="col-md-12">
-		
+
 			<c:forEach var="list" items="${list}">
-			
+
 				<c:url var="url" value="readRest.action">
 					<c:param name="rest_num" value="${list.rest_num}"/>
 					<c:param name="currentPage" value="${currentPage}"/>
 				</c:url>			
-						
+
 				<div class="col-sm-4 col-md-3">					
 			    	<div class="thumbnail">
 			      		<a href="${url}">
@@ -60,9 +60,9 @@
 			    	</div>
 		      	</div>		      			      	
 			</c:forEach>
-			
+
 			</div>
-			
+
 			<c:if test="${list eq null}">
 			<div class="text-center">
 				<p>등록된 게시물이 없습니다.</p>
@@ -84,7 +84,7 @@
 
 	</div>
 	<!-- /.container -->
-	
+
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
