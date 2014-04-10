@@ -89,7 +89,16 @@
 			<interceptor-ref name="params"/>
 			<result>/board/rest/insertRest.jsp</result>
 		</action>
-
+		
+		<!-- 글쓰기에서 취소 클릭시 -->
+		<action name="insertCancelRestForm" class="board.rest.action.InsertRestAction" method="cancel">
+			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params"/>
+			<result type="redirect-action">
+				<param name="actionName">listRest</param>
+			</result>
+		</action>
+		
 		<!-- 글쓰기에서 submit 클릭시 -->
 		<action name="insertRest" class="board.rest.action.InsertRestAction">
 			<interceptor-ref name="conDAO"/>
@@ -98,8 +107,8 @@
 			<result type="redirect-action">
 				<param name="actionName">listRest</param>
 			</result>
-		</action>	
-
+		</action>
+		
 		<!-- 리스트 액션 -->
 		<action name="listRest" class="board.rest.action.ListRestAction">
 			<interceptor-ref name="params"/>
@@ -112,7 +121,16 @@
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/board/rest/readRest.jsp</result>
-		</action>	
+		</action>
+		
+		<!-- 결제 액션 -->
+		<action name="payRest" class="board.rest.action.PayRestAction">
+			<interceptor-ref name="params"/>
+			<result>/agspay/readyPayment.jsp</result>
+		</action>
+		
+		
+		
 		<!-- RestBoard 끝 -->
 
 

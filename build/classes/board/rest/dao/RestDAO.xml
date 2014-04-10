@@ -122,6 +122,15 @@
  			UPDATE Rest_board SET rest_readcount = rest_readcount + 1
 			<include refid="where-num" />
 		</update>
+		
+		
+		
+		
+		<!-- delete -->
+		<delete id="tempArticleDelete" parameterClass="RestDTO">
+			DELETE FROM Rest_board
+			<include refid="where-num" />
+   		 </delete>
 	
 	
 	

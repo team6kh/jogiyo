@@ -209,7 +209,7 @@
 					<tr>
 						<td align="right" colspan="2">
 							<input name="submit" type="submit" value="상품 등록" />
-							<input name="list" type="button" value="상품 등록 취소" onClick="javascript:location.href='ListRestAction.action?currentPage=<s:property value="currentPage"/>'" />
+							<input name="cancel" type="button" value="상품 등록 취소" onClick="javascript:location.href='insertCancelRestForm.action'" />
 						</td>
 					</tr>
 				</table>

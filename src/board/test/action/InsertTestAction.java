@@ -26,6 +26,7 @@ public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAO
 	
 	TestDTO paramClass;
 	TestDTO resultClass;
+	
 
 	private int currentPage; // 현재 페이지
 	private int test_num;	 // 현재 글 고유넘버
@@ -43,11 +44,16 @@ public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAO
 
 	// 등록 폼.
 	public String insertForm() throws Exception {
+		
+		
+		
 		if (sessionMap != null) {
 			resultClass = new TestDTO();			
 			resultClass.setTest_writer_name((String) sessionMap.get("sessionName"));	// 세션이름을 작성자로 설정.
 			resultClass.setTest_writer_pw((String) sessionMap.get("sessionPw"));		// 세션비번을 글비번으로 설정..
 		}
+		
+		
 		return SUCCESS;
 	}
 

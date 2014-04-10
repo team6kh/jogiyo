@@ -113,6 +113,16 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		
 		return SUCCESS;
 	}
+	
+	
+	public String cancel() throws Exception{
+		resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
+		paramClass.setRest_num(resultClass.getRest_num());
+		
+		sqlMapper.delete("Rest.tempArticleDelete", paramClass); //temp article delete
+		return SUCCESS;
+	}
+	
 
 	//사용자가 글 등록(submit)했을시
 	public String execute() throws Exception {
