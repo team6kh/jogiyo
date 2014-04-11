@@ -45,7 +45,7 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 		
 		//해당글번호의 레코드를 가져옴(상품테이블, 옵션테이블)
 		resultClass = (RestDTO)sqlMapper.queryForObject("Rest.selectRestOne", getRest_num());
-		//댓글들
+		//옵션들
 		list = (List<RestoptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
 		
 		return SUCCESS;

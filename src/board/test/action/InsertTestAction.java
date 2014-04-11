@@ -16,26 +16,26 @@ import org.apache.struts2.interceptor.SessionAware;
 public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAOAware, SessionAware {
 
 	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체
-	
+
 	private TestDTO testDTO;
-	
+
 	private int test_num;	 // 해당 글 고유넘버
 	private int currentPage; // 현재 페이지	
 	private Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기
-	
+
 	private Map sessionMap = null;
 
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
 	}
-	
+
 	public void setSession(Map sessionMap) {
 		this.sessionMap = sessionMap;
 	}
 
 	// 게시글 INSERT 폼
 	public String insertForm() throws Exception {
-				
+
 		return SUCCESS;
 	}
 

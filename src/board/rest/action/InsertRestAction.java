@@ -22,6 +22,10 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private RestoptDTO paramClass1 = new RestoptDTO();
 	private RestoptDTO resultClass1 = new RestoptDTO();
 	
+	//폼으로 넘길 넘버
+	int temp;
+	int virRest_num;
+	
 	//insertRest.jsp에서 넘긴 히든값
 	private int currentPage; //현재 페이지
 	private int rest_num;
@@ -98,30 +102,30 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	
 	//최초 insert액션 호출시 (폼제공)
 	public String form() throws Exception {
-		//rest_num 실질적값 // 이외 기본값 정의 (not null)
-		paramClass.setRest_subject("subject");
-		paramClass.setRest_price(0); //0으로 초기화
-		paramClass.setRest_localcategory("10");
-		paramClass.setRest_typecategory("20");
-		paramClass.setRest_writer_name("Rest_writer_name");
-		paramClass.setRest_writer_telnum("Rest_writer_telnum");
-		paramClass.setRest_writer_mobilenum("Rest_writer_mobilenum");
-		paramClass.setRest_writer_address("Rest_writer_address");
-		paramClass.setRest_reg_date(today.getTime());
-		
-		sqlMapper.insert("Rest.insertRest_num", paramClass);
+		//가상 Rest_num을 만들어 virRest_num 이라는 이름으로 넘김
+		Integer count = (Integer)sqlMapper.queryForObject("Rest.selectCount");
+		if( count != 0){
+			resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
+			temp = (int)(resultClass.getRest_num());
+			virRest_num = temp+1; // 앞으로 만들어질 시퀀스 넘버
+		}else{
+			virRest_num = 1;
+		}
 		
 		return SUCCESS;
 	}
+	
+	
+
+	public String cancel() throws Exception{
+		return SUCCESS;
+	}
+	
 
 	//사용자가 글 등록(submit)했을시
 	public String execute() throws Exception {
 		
-		//아래의 파라미터 업데이트
-		//insertRest.jsp에서 사용자가 입력한 파라미터를 get후 DTO에 set함. 덮어쓰기
-		resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
-		paramClass.setRest_num(resultClass.getRest_num());
-		
+		//아래의 파라미터 insert
 		paramClass.setRest_subject(getRest_subject());
 		paramClass.setRest_price(getRest_price());
 		paramClass.setRest_localcategory(getRest_localcategory());
@@ -132,112 +136,111 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		paramClass.setRest_writer_address(getRest_writer_address());
 		paramClass.setRest_reg_date(today.getTime());
 		
-		// [iBatis] updateRestBoard 실행
-		sqlMapper.update("Rest.updateRestBoard", paramClass);
+		sqlMapper.insert("Rest.insertRest_board", paramClass);
 		
 		
 		
 		// num, resnum, 옵션명, 옵션가 insert
 		if(getRestopt_subject1() != null && getRestopt_priceplus1() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject1);
 			paramClass1.setRestopt_priceplus(restopt_priceplus1);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject2() != null && getRestopt_priceplus2() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject2);
 			paramClass1.setRestopt_priceplus(restopt_priceplus2);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject3() != null && getRestopt_priceplus3() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject3);
 			paramClass1.setRestopt_priceplus(restopt_priceplus3);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject4() != null && getRestopt_priceplus4() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject4);
 			paramClass1.setRestopt_priceplus(restopt_priceplus4);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject5() != null && getRestopt_priceplus5() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject5);
 			paramClass1.setRestopt_priceplus(restopt_priceplus5);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject6() != null && getRestopt_priceplus6() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject6);
 			paramClass1.setRestopt_priceplus(restopt_priceplus6);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject7() != null && getRestopt_priceplus7() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject7);
 			paramClass1.setRestopt_priceplus(restopt_priceplus7);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject8() != null && getRestopt_priceplus8() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject8);
 			paramClass1.setRestopt_priceplus(restopt_priceplus8);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject9() != null && getRestopt_priceplus9() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject9);
 			paramClass1.setRestopt_priceplus(restopt_priceplus9);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject10() != null && getRestopt_priceplus10() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject10);
 			paramClass1.setRestopt_priceplus(restopt_priceplus10);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject11() != null && getRestopt_priceplus11() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject11);
 			paramClass1.setRestopt_priceplus(restopt_priceplus11);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject12() != null && getRestopt_priceplus12() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject12);
 			paramClass1.setRestopt_priceplus(restopt_priceplus12);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject13() != null && getRestopt_priceplus13() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject13);
 			paramClass1.setRestopt_priceplus(restopt_priceplus13);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject14() != null && getRestopt_priceplus14() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject14);
 			paramClass1.setRestopt_priceplus(restopt_priceplus14);
 			
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject15() != null && getRestopt_priceplus15() != 0){
-			paramClass1.setRestopt_rest_num(resultClass.getRest_num());
+			paramClass1.setRestopt_rest_num(getVirRest_num());
 			paramClass1.setRestopt_subject(restopt_subject15);
 			paramClass1.setRestopt_priceplus(restopt_priceplus15);
 			
@@ -245,9 +248,9 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		}
 		
 		
-		
 		// 첨부파일을 선택했다면 파일을 업로드한다.
 		if (getUpload1() != null && getUpload2() != null) {
+			resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
 			
 			//매인사진 파일 이름과 확장자 설정.
 			String file_name1 = "main_" + resultClass.getRest_num();
@@ -282,6 +285,13 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		return SUCCESS;
 	}
 
+	//form으로 넘길 가상 seq넘버(for opt)
+	public int getVirRest_num() {
+		return virRest_num;
+	}
+	public void setVirRest_num(int virRest_num) {
+		this.virRest_num = virRest_num;
+	}
 	
 	
 	public RestDTO getParamClass() {
