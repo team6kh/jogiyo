@@ -124,20 +124,6 @@
 			      <option value="male">남성</option>
 			    </select>			  
 			</div>
-			<div id="hiddenDiv" style="visibility:hidden;">
-				<div class="form-group">
-				  <label>MOAR</label>
-				  <input type="text" class="form-control" placeholder="MOAR INPUT" name="" required>
-				</div>
-				<div class="form-group">
-				  <label>MOAR</label>
-				  <input type="text" class="form-control" placeholder="MOAR INPUT" name="" required>
-				</div>
-				<div class="form-group">
-				  <label>MOAR</label>
-				  <input type="text" class="form-control" placeholder="MOAR INPUT" name="" required>
-				</div>
-			</div>
 			
         	<button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>
       	</form>

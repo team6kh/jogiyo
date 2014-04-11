@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +17,8 @@
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="common/common-template.css" rel="stylesheet">
+<link href="common/registration/registration.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -28,44 +28,45 @@
 	<!-- end of header -->
 
 	<!-- container -->
-	<div class="container">
-
-		<!-- test form pretty -->
-		<div class="col-md-12">
-			<h3>테스트 게시판 > 읽기</h3>
-		</div>
-
-		<div class="col-md-12 well">
-
-			<table class="table table-striped table-forum">
-				<thead>
-					<tr>
-						<th colspan="2">${testDTO.test_subject}</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- Post -->
-					<tr>
-						<td class="text-center"><span
-							class="glyphicon glyphicon-user"></span> &nbsp; <strong>${testDTO.test_writer_name}</strong></td>
-						<td>등록일 : <em>${testDTO.test_reg_date}</em></td>
-					</tr>
-					<tr>
-						<td class="text-center" style="width: 12%;">
-							<!-- 공백 -->
-						</td>
-						<td>
-							<p>이 글의 비밀번호는 ${testDTO.test_writer_pw} 입니다. 밑에서부터는 글 내용입니다.</p>
-							<p>${testDTO.test_content}</p>
-						</td>
-					</tr>
-					<!-- end Post -->
-
-				</tbody>
-			</table>
-
+	<div class="container">		
+		<form class="form-signup">
+	       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>			
+			<div class="form-group">
+			  <label>가입유형</label>
+			    <select class="form-control" id="userType" disabled>
+			      <option value="buyer">구매자</option>
+			      <option value="seller">판매자</option>
+			    </select>			  
+			</div>
+			<div id="div_regid" class="form-group">
+			  <label>아이디</label>
+			  <input type="text" class="form-control" value="${buyerDTO.buyer_id}" disabled>		  
+			</div>						
+			<div class="form-group">
+			  <label>이름</label>
+			   <input type="text" class="form-control" value="${buyerDTO.buyer_name}" disabled>
+			</div>
+			<div class="form-group">
+			  <label>비밀번호</label>
+			   <input type="password" class="form-control" value="${buyerDTO.buyer_pw}" disabled>
+			</div>			
+			<div class="form-group">
+			  <label>이메일</label>
+			   <input type="text" class="form-control" value="${buyerDTO.buyer_email}" disabled>
+			</div>
+			<div class="form-group">
+			  <label>휴대폰</label>
+			   <input type="text" class="form-control" value="${buyerDTO.buyer_phonenumber}" disabled>
+			</div>
+			<div class="form-group">
+			  <label>성별</label>
+			    <select class="form-control" id="userGender" disabled>
+			      <option value="female">여성</option>
+			      <option value="male">남성</option>
+			    </select>			  
+			</div>
+			
 			<div class="pull-right">
-
 				<!-- Button trigger modal : 수정 -->
 				<button class="btn btn-default insertModalParam" data-toggle="modal"
 					data-target="#checkModal" data-id="updateTestForm">수정</button>
@@ -73,7 +74,8 @@
 				<!-- Button trigger modal : 삭제 -->
 				<button class="btn btn-default insertModalParam" data-toggle="modal"
 					data-target="#checkModal" data-id="deleteTest">삭제</button>
-
+					
+				
 				<!-- Modal -->
 				<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
@@ -86,41 +88,36 @@
 								<div class="modal-body">
 									<div class="form-group">
 										<label>비밀번호</label>
-										<input type="password" class="form-control" name="modalParam_pw">										
+										<input type="password" class="form-control" name="test_writer_pw">
+										<input type="hidden" name="modalParam" id="modalParam">	
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
-									<input type="hidden" name="modalParam" id="modalParam">						
-									<input type="hidden" name="modalParam_num" value="${test_num}">
-									<input type="hidden" name="currentPage" value="${currentPage}">									
+									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>							
+									<input type="hidden" name="test_num" value="${test_num}">
+									<input type="hidden" name="currentPage" value="${currentPage}">
 									<button type="submit" class="btn btn-primary">입력</button>
 								</div>
 							</form>
 						</div>
 					</div>
-				</div><!-- END of Modal -->			
-
-				<a href="listTest.action?currentPage=${currentPage}" class="btn btn-default">목록</a>
+				</div><!-- END of Modal -->						
+										
 			</div>
-
-		</div>
-		<!-- end of test board pretty -->
-
+			
+       	</form>
 	</div>
 	<!-- /.container -->
 
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- Placed at the end of the document so the pages load faster -->	
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script>
-		$(document).on("click", ".insertModalParam", function() {
-			var thisModalParam = $(this).data('id');
-			$(".modal-footer #modalParam").val(thisModalParam);
-		});
+		$("#userType").val("seller");
+		$("#userGender").val("${buyerDTO.buyer_gender}");
 	</script>
 </body>
 </html>

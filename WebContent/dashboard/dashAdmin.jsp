@@ -68,7 +68,9 @@
                 <tr>
                   <th>user_seq</th>
                   <th>buyer_id</th>
+                  <th>buyer_pw</th>
                   <th>buyer_name</th>
+                  <th>buyer_gender</th>
                   <th>buyer_reg_date</th>
                 </tr>
               </thead>
@@ -77,7 +79,9 @@
                 <tr>
                   <td>${listBuyer.user_seq}</td>
                   <td>${listBuyer.buyer_id}</td>
+                  <td>${listBuyer.buyer_pw}</td>
                   <td>${listBuyer.buyer_name}</td>
+                  <td>${listBuyer.buyer_gender}</td>
                   <td>${listBuyer.buyer_reg_date}</td>
                 </tr>
                 </c:forEach>
@@ -94,10 +98,11 @@
                 <tr>
                   <th>user_seq</th>
                   <th>seller_id</th>
+                  <th>seller_pw</th>
                   <th>seller_name</th>
-                  <th>seller_reg_date</th>
                   <th>seller_rest_name</th>
-                  <th>seller_rest_address</th>
+                  <th>seller_rest_address</th>                  
+                  <th>seller_reg_date</th>
                 </tr>
               </thead>
               <tbody>
@@ -105,10 +110,11 @@
                 <tr>
                   <td>${listSeller.user_seq}</td>
                   <td>${listSeller.seller_id}</td>
+                  <td>${listSeller.seller_pw}</td>
                   <td>${listSeller.seller_name}</td>
-                  <td>${listSeller.seller_reg_date}</td>
                   <td>${listSeller.seller_rest_name}</td>
-                  <td>${listSeller.seller_rest_address}</td>
+                  <td>${listSeller.seller_rest_address}</td>                  
+                  <td>${listSeller.seller_reg_date}</td>
                 </tr>
                 </c:forEach>
               </tbody>

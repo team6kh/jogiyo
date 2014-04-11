@@ -17,10 +17,10 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체
 
 	private TestDTO testDTO = new TestDTO();
-
-	private int test_num;		// 현재 글 고유넘버
-	private int currentPage;	// 현재 페이지		
 	
+	private int modalParam_num;
+	private int test_num;		// 현재 글 고유넘버
+	private int currentPage;	// 현재 페이지			
 	private String test_writer_pw;
 	private String test_subject;
 	private String test_content;
@@ -32,6 +32,8 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	// 게시글 UPDATE 폼
 	public String updateForm() throws Exception {
 		
+		setTest_num(getModalParam_num()); // modalParam_num을 Test_num에...
+		
 		// 해당 번호의 글을 가져온다.
 		testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
 
@@ -40,7 +42,7 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 
 	// 게시글 UPDATE 액션
 	public String execute() throws Exception {
-
+		
 		// 수정할 항목 설정. 여기서는 인터셉터를 사용하지 않고 직접(?) 설정해보자.
 		testDTO.setTest_num(getTest_num());
 		testDTO.setTest_writer_pw(getTest_writer_pw());
@@ -54,8 +56,8 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 		testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
 
 		return SUCCESS;
-	}
-	
+	}	
+
 	// getter & setter
 	public TestDTO getTestDTO() {
 		return testDTO;
@@ -94,6 +96,14 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	}
 	public void setTest_content(String test_content) {
 		this.test_content = test_content;
+	}
+	
+	// modalParam
+	public int getModalParam_num() {
+		return modalParam_num;
+	}
+	public void setModalParam_num(int modalParam_num) {
+		this.modalParam_num = modalParam_num;
 	}
 	
 }

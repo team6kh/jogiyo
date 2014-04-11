@@ -15,10 +15,10 @@
 		<action name="checkPass" class="common.CheckPasswordAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result name="error">/common/error.jsp</result>
 			<result name="success" type="chain">
 				<param name="actionName">${modalParam}</param>
-			</result>
+			</result>			
+			<result name="error">/common/error.jsp</result>
 		</action>		
 
 		<!-- 로그인 폼 -->
@@ -47,6 +47,13 @@
 			<result name="seller">/common/registration/regFormSeller.jsp</result>
 			<result>/common/registration/regFormBuyer.jsp</result>
 		</action>
+		
+		<!-- 아이디 중복체크 액션 -->		
+		<action name="checkDup" class="common.CheckDuplicateAction">
+			<interceptor-ref name="params" />				
+			<interceptor-ref name="conDAO" />
+			<result>/common/registration/checkDup.jsp</result>
+		</action>	
 
 		<!-- 회원가입 액션 : 구매자, 판매자로 chain -->
 		<action name="registration" class="common.registration.action.RegistrationAction">
@@ -74,13 +81,19 @@
 			<interceptor-ref name="conDAO"/>
 			<result type="redirect-action">home</result>	
 		</action>
-
-		<!-- 아이디 중복체크 액션 -->		
-		<action name="checkDup" class="common.CheckDuplicateAction">
-			<interceptor-ref name="params" />				
-			<interceptor-ref name="conDAO" />
-			<result>/common/registration/checkDup.jsp</result>
-		</action>	
+		
+		<!-- 유저정보 액션 -->
+		<action name="readUser" class="common.registration.action.ReadUserAction">
+			<result name="buyer" type="chain">readBuyer</result>
+			<result name="seller" type="chain">readSeller</result>
+			<result name="error">/common/error.jsp</result>
+		</action>
+		
+		<action name="readBuyer" class="common.registration.action.ReadBuyerAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/common/registration/readBuyer.jsp</result>
+		</action>
 
 
 		<!-- 홈 액션 -->
@@ -375,13 +388,15 @@
 
 		<!-- 테스트 게시판 수정 폼 -->
 		<action name="updateTestForm" class="board.test.action.UpdateTestAction" method="updateForm">
+			<interceptor-ref name="chain" />
 			<interceptor-ref name="params"/>
+			
 			<interceptor-ref name="conDAO"/>
 			<result>/board/test/updateTest.jsp</result>
 		</action>
 
 		<!-- 테스트 게시판 수정 액션 -->
-		<action name="updateTest" class="board.test.action.UpdateTestAction">
+		<action name="updateTest" class="board.test.action.UpdateTestAction">			
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result type="chain">

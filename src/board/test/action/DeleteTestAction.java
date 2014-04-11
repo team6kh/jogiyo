@@ -19,6 +19,7 @@ public class DeleteTestAction extends ActionSupport implements ConDAOAware {
 
 	private TestDTO testDTO = new TestDTO();
 	
+	private int modalParam_num;
 	private int test_num;		// 해당 글 고유넘버	
 	private int currentPage;	// 현재 페이지		
 		
@@ -28,6 +29,8 @@ public class DeleteTestAction extends ActionSupport implements ConDAOAware {
 
 	// 게시글 DELETE 액션
 	public String execute() throws Exception {
+		
+		setTest_num(getModalParam_num()); // modalParam_num을 Test_num에...
 		
 		// 삭제할 항목 설정
 		testDTO.setTest_num(getTest_num());
@@ -50,6 +53,14 @@ public class DeleteTestAction extends ActionSupport implements ConDAOAware {
 	}
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
-	}				
+	}
+	
+	// modalParam
+	public int getModalParam_num() {
+		return modalParam_num;
+	}
+	public void setModalParam_num(int modalParam_num) {
+		this.modalParam_num = modalParam_num;
+	}
 
 }
