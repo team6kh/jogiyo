@@ -44,10 +44,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- Post -->
 					<tr>
-						<td class="text-center"><span
-							class="glyphicon glyphicon-user"></span> &nbsp; <strong>${testDTO.test_writer_name}</strong></td>
+						<td class="text-center">
+							<span class="glyphicon glyphicon-user"></span> &nbsp; <strong>${testDTO.test_writer_name}</strong></td>
 						<td>등록일 : <em>${testDTO.test_reg_date}</em></td>
 					</tr>
 					<tr>
@@ -92,7 +91,7 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
 									<input type="hidden" name="modalParam" id="modalParam">						
-									<input type="hidden" name="modalParam_num" value="${test_num}">
+									<input type="hidden" name="modalParam_key" value="${test_num}">
 									<input type="hidden" name="currentPage" value="${currentPage}">									
 									<button type="submit" class="btn btn-primary">입력</button>
 								</div>

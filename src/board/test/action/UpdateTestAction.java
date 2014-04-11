@@ -18,7 +18,7 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 
 	private TestDTO testDTO = new TestDTO();
 	
-	private int modalParam_num;
+	private String modalParam_key;
 	private int test_num;		// 현재 글 고유넘버
 	private int currentPage;	// 현재 페이지			
 	private String test_writer_pw;
@@ -32,7 +32,7 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	// 게시글 UPDATE 폼
 	public String updateForm() throws Exception {
 		
-		setTest_num(getModalParam_num()); // modalParam_num을 Test_num에...
+		setTest_num(Integer.parseInt(getModalParam_key())); // modalParam_key를 Test_num에...
 		
 		// 해당 번호의 글을 가져온다.
 		testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
@@ -99,11 +99,10 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	}
 	
 	// modalParam
-	public int getModalParam_num() {
-		return modalParam_num;
+	public String getModalParam_key() {
+		return modalParam_key;
 	}
-	public void setModalParam_num(int modalParam_num) {
-		this.modalParam_num = modalParam_num;
+	public void setModalParam_key(String modalParam_key) {
+		this.modalParam_key = modalParam_key;
 	}
-	
 }

@@ -1,0 +1,98 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>	
+	<package name="struts_notice" extends="struts-default">
+
+		<!-- SqlMapClient 인터셉터 -->
+		<interceptors>
+			<interceptor name="conDAO" class="common.ConDAOInterceptor"/>
+		</interceptors>		
+		
+		<!-- 공지사항게시판 -->
+		<action name="listNotice" class="board.notice.action.ListNoticeAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<result>/board/notice/listNotice.jsp</result>
+		</action>
+
+		<!-- 게시판 쓰기 액션. -->
+		<action name="insertNoticeForm" class="board.notice.action.InsertNoticeAction"
+			method="form">
+			<result>/board/notice/insertNoticeForm.jsp</result>
+		</action>
+
+		<action name="insertNoticeAction" class="board.notice.action.InsertNoticeAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<result type="redirect-action">
+				<param name="actionName">listNotice</param>
+			</result>
+		</action>
+
+		<!-- 게시판 상세보기 액션. -->
+		<action name="readNoticeAction" class="board.notice.action.ReadNoticeAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<result>/board/notice/readNotice.jsp</result>
+		</action>
+
+		<!-- 파일 다운로드 액션. -->
+		<action name="fileDownloadAction" class="board.notice.action.ReadNoticeAction"
+			method="download">
+			<result name="success" type="stream">
+				<param name="contentType">binary/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">${contentDisposition}</param>
+				<param name="contentLength">${contentLength}</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<action name="checkAction" class="board.notice.action.ReadNoticeAction"
+			method="checkAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<result name="error">/notice/checkError.jsp</result>
+			<result>/board/notice/checkSuccess.jsp</result>
+		</action>
+
+		<!-- 게시판 수정 액션. -->
+		<action name="updateNoticeForm" class="board.notice.action.ReadNoticeAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<result type="chain">insertNoticeForm</result>
+		</action>
+
+		<action name="updateNoticeAction" class="board.notice.action.UpdateNoticeAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<result type="chain">readNoticeAction</result>
+		</action>
+
+		<!-- 게시판 삭제 액션. -->
+		<action name="deleteNoticeAction" class="board.notice.action.DeleteNoticeAction">
+			<interceptor-ref name="conDAO" />
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<result type="chain">listNotice</result>
+		</action>
+		
+		<!-- 공지사항게시판 끝 -->	
+
+	</package>
+</struts>

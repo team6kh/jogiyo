@@ -1,0 +1,77 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>	
+	<package name="struts_qna" extends="struts-default">
+
+		<!-- SqlMapClient 인터셉터 -->
+		<interceptors>
+			<interceptor name="conDAO" class="common.ConDAOInterceptor"/>
+		</interceptors>	
+
+		<!-- QnA -->
+		
+		<!-- QnA 리스트 -->
+		<action name="listQna" class="board.qna.action.ListQnaAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/board/qna/listQna.jsp</result>
+		</action>
+		
+		<!-- QNA 상세 -->
+		<action name="detailQna" class="board.qna.action.ListQnaAction" method="detail">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/board/qna/viewQna.jsp</result>
+		</action>
+		
+		<!-- QNA 수정화면 이동 -->
+		<action name="updateQnaForm" class="board.qna.action.ListQnaAction" method="detail">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/board/qna/insertQna.jsp</result>
+		</action>
+		
+		<!-- 등록화면 -->
+			<action name="insertQnaForm" class="board.qna.action.InsertQnaAction" method="insertForm">
+			<result>/board/qna/insertQna.jsp</result>
+			</action>
+			
+		<!-- Qna 등록 -->
+		<action name="insertQna" class="board.qna.action.InsertQnaAction">
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result type="redirect-action">
+			<param name="actionName">listQna</param>
+			</result>
+		</action>
+		
+		<!-- Qna 수정 -->
+		<action name="updateQna" class="board.qna.action.InsertQnaAction" method="update">
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result type="redirect-action">
+			<param name="actionName">listQna</param>
+			</result>
+		</action>
+		
+		<!-- Qna 삭제 -->
+		<action name="deleteQna" class="board.qna.action.InsertQnaAction" method="delete">
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result type="redirect-action">
+			<param name="actionName">listQna</param>
+			</result>
+		</action>
+		
+		<!-- QnA 끝 -->		
+
+	</package>
+</struts>

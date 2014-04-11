@@ -1,5 +1,6 @@
 package common;
 
+import user.buyer.dto.BuyerDTO;
 import board.test.dto.TestDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -10,9 +11,7 @@ public class CheckPasswordAction implements Action, ConDAOAware {
 	private SqlMapClient sqlMapper;
 	
 	private String modalParam; // modal에서 가져오는 파라미터 : 타겟 액션 이름
-	
-	// private TestDTO testDTO = new TestDTO();	
-	private int modalParam_num;
+	private String modalParam_key;
 	private String modalParam_pw;		
 	
 	public void setConDAO(SqlMapClient sqlMapper){
@@ -27,9 +26,9 @@ public class CheckPasswordAction implements Action, ConDAOAware {
 			
 			// 객체 생성
 			TestDTO testDTO = new TestDTO();
-			
+						
 			// 파라미터 설정
-			testDTO.setTest_num(getModalParam_num());
+			testDTO.setTest_num(Integer.parseInt(getModalParam_key()));
 			testDTO.setTest_writer_pw(getModalParam_pw());
 			
 			// 해당 글의 비밀번호 가져오기
@@ -39,7 +38,26 @@ public class CheckPasswordAction implements Action, ConDAOAware {
 			if (testDTO != null) {
 				return SUCCESS;
 			} else { return ERROR; }
+			
+		} else if (getModalParam().equals("updateBuyerForm")) {
+			
+			// 객체 생성
+			BuyerDTO buyerDTO = new BuyerDTO();
+						
+			// 파라미터 설정
+			buyerDTO.setBuyer_id(getModalParam_key());
+			buyerDTO.setBuyer_pw(getModalParam_pw());
+			
+			// 해당 유저의 비밀번호 가져오기
+			buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerPw", buyerDTO);
+
+			// 입력한 비밀번호가 틀리면(없으면) ERROR 리턴
+			if (buyerDTO != null) {
+				return SUCCESS;
+			} else { return ERROR; }
+			
 		}
+		
 		return ERROR;
 	}
 	
@@ -50,17 +68,11 @@ public class CheckPasswordAction implements Action, ConDAOAware {
 	public void setModalParam(String modalParam) {
 		this.modalParam = modalParam;
 	}	
-//	public TestDTO getTestDTO() {
-//		return testDTO;
-//	}
-//	public void setTestDTO(TestDTO testDTO) {
-//		this.testDTO = testDTO;
-//	}	
-	public int getModalParam_num() {
-		return modalParam_num;
+	public String getModalParam_key() {
+		return modalParam_key;
 	}
-	public void setModalParam_num(int modalParam_num) {
-		this.modalParam_num = modalParam_num;
+	public void setModalParam_key(String modalParam_key) {
+		this.modalParam_key = modalParam_key;
 	}
 	public String getModalParam_pw() {
 		return modalParam_pw;

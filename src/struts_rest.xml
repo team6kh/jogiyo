@@ -1,0 +1,49 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>	
+	<package name="struts_rest" extends="struts-default">
+
+		<!-- SqlMapClient 인터셉터 -->
+		<interceptors>
+			<interceptor name="conDAO" class="common.ConDAOInterceptor"/>
+		</interceptors>
+
+		<!-- RestBoard 액션 -->
+				
+		<!-- 리스트에서 글쓰기 클릭시 -->
+		<action name="insertRestForm" class="board.rest.action.InsertRestAction" method="form">
+			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params"/>
+			<result>/board/rest/insertRest.jsp</result>
+		</action>
+
+		<!-- 글쓰기에서 submit 클릭시 -->
+		<action name="insertRest" class="board.rest.action.InsertRestAction">
+			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="fileUpload"/>
+			<interceptor-ref name="params"/>
+			<result type="redirect-action">
+				<param name="actionName">listRest</param>
+			</result>
+		</action>	
+
+		<!-- 리스트 액션 -->
+		<action name="listRest" class="board.rest.action.ListRestAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/board/rest/listRest.jsp</result>
+		</action>
+
+		<!-- 리드 액션 -->
+		<action name="readRest" class="board.rest.action.ReadRestAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/board/rest/readRest.jsp</result>
+		</action>	
+		
+		<!-- RestBoard 끝 -->
+
+	</package>
+</struts>

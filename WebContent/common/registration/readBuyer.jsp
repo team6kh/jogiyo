@@ -29,7 +29,7 @@
 
 	<!-- container -->
 	<div class="container">		
-		<form class="form-signup">
+		<div class="form-signup">
 	       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>			
 			<div class="form-group">
 			  <label>가입유형</label>
@@ -69,12 +69,11 @@
 			<div class="pull-right">
 				<!-- Button trigger modal : 수정 -->
 				<button class="btn btn-default insertModalParam" data-toggle="modal"
-					data-target="#checkModal" data-id="updateTestForm">수정</button>
+					data-target="#checkModal" data-id="updateBuyerForm">수정</button>
 					
 				<!-- Button trigger modal : 삭제 -->
 				<button class="btn btn-default insertModalParam" data-toggle="modal"
-					data-target="#checkModal" data-id="deleteTest">삭제</button>
-					
+					data-target="#checkModal" data-id="deleteTest">삭제</button>					
 				
 				<!-- Modal -->
 				<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
@@ -88,24 +87,23 @@
 								<div class="modal-body">
 									<div class="form-group">
 										<label>비밀번호</label>
-										<input type="password" class="form-control" name="test_writer_pw">
-										<input type="hidden" name="modalParam" id="modalParam">	
+										<input type="password" class="form-control" name="modalParam_pw">										
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>							
-									<input type="hidden" name="test_num" value="${test_num}">
-									<input type="hidden" name="currentPage" value="${currentPage}">
+									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
+									<input type="hidden" name="modalParam" id="modalParam">						
+									<input type="hidden" name="modalParam_key" value="${buyerDTO.buyer_id}">								
 									<button type="submit" class="btn btn-primary">입력</button>
 								</div>
 							</form>
 						</div>
 					</div>
-				</div><!-- END of Modal -->						
+				</div><!-- END of Modal -->					
 										
-			</div>
+			</div><!-- END of pull-right -->
 			
-       	</form>
+       	</div><!-- END of form-signup -->
 	</div>
 	<!-- /.container -->
 
@@ -118,6 +116,11 @@
 	<script>
 		$("#userType").val("seller");
 		$("#userGender").val("${buyerDTO.buyer_gender}");
+		
+		$(document).on("click", ".insertModalParam", function() {
+			var thisModalParam = $(this).data('id');
+			$(".modal-footer #modalParam").val(thisModalParam);
+		});
 	</script>
 </body>
 </html>
