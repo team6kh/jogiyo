@@ -1,38 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
     
-    <%
-    	response.sendRedirect("agspay/AGS_pay.jsp");
-    %>
-
-    <!-- 차후에 forward로 파라미터 값 넘기기~~ -->
-    
-    <!-- 이 페이지에서 받아야 할 필요 파라미터 목록들
-    	
-    	액션에서 해당 rest_num인 레코드 다..
-    	
-    	rest_num // 상품번호  ㅇㅇ
-    	rest_subject//상품명 ㅇㅇ
-    	rest_price//상품가격
-    	
-    	restopt_subject//상품옵션 ㅇㅇ
-    	restopt_priceplus//옵션가격
-    	
-    	rest_price + restopt_priceplus//합계ㅇㅇ
-    	
-    	//세션 회원 아이디
-    	//세션 로그인자 의 이메일
-    	
+    ${rest_num} <br/>
+    ${rest_subject} <br/>
+    ${rest_price} <br/>
+    ${restopt_subject} <br/>
+    ${restopt_priceplus} <br/>
     
     
+    <jsp:forward page="AGS_pay.jsp"> 
+       <jsp:param name="rest_num" value="${rest_num}" />
+       <jsp:param name="rest_subject" value="${rest_subject}" /> 
+       <jsp:param name="rest_price" value="${rest_price}" /> 
+       <jsp:param name="restopt_subject" value="${restopt_subject}" /> 
+       <jsp:param name="restopt_priceplus" value="${restopt_priceplus}" /> 
+	</jsp:forward>
     
     
-    
-    
-     -->
-    
-    <!-- 
-    <form method="post" action="payAction.action" name="readyPaymentForm" >
-   		<input type="submit"  value="결제" />
-   	</form>
-   	 -->
+  

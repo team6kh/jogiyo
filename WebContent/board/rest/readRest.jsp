@@ -168,7 +168,10 @@
 			</tr>
 			<tr>
 				<td align=left><font color="#FF3636"><b>상품번호</b></font></td>
-				<td align=left><s:property value="resultClass.rest_num" /></TD>
+				<td align=left>
+					<s:property value="resultClass.rest_num" />
+					<input type="hidden" name="rest_num" value=<s:property value="resultClass.rest_num" /> /> 
+				</TD>
 				<td colspan=2></TD>
 			<tr></tr>
 			<tr></tr>
@@ -184,6 +187,7 @@
 							</td>
 							<td align="left" >
 								&nbsp;&nbsp;&nbsp;&nbsp;<font size="7"><s:property value="resultClass.rest_subject" /></font>
+								<input type="hidden" name="rest_subject" value=<s:property value="resultClass.rest_subject" />  />
 							</td>
 						</tr>
 						<tr>
@@ -192,6 +196,7 @@
 							</td>
 							<td align="left">
 								&nbsp;&nbsp;&nbsp;&nbsp;<font size="7"><s:property value="resultClass.rest_price" /></font>
+								<input type="hidden" name="rest_price" value=<s:property value="resultClass.rest_price" /> />
 							</td>
 						</tr>
 						<tr>
@@ -210,9 +215,9 @@
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								
 								<td>
-									<select name="optionPrice">
+									<select name="restopt_set">
 										<s:iterator value="list" status="stat">
-											<option value="<s:property value="restopt_priceplus"/>"> 
+											<option value="<s:property value="restopt_subject"/>a<s:property value="restopt_priceplus" />">
 												<s:property value="restopt_subject" /> (가격 : <s:property value="restopt_priceplus" />) 
 											</option>
 										</s:iterator>
@@ -245,8 +250,6 @@
 				</td>
 			</tr>
 		</table>
-		
-		
 		
 		
 		<table>

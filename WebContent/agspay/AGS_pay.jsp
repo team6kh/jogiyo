@@ -1,6 +1,8 @@
-<%@ page import="java.security.MessageDigest"  %>
+<%@ page import="java.security.MessageDigest"  contentType="text/html; charset=UTF-8" %>
 
 <%
+	request.setCharacterEncoding("UTF-8");
+
 	/* 해쉬 암호화 적용( StoreId + OrdNo + Amt)
 	 * StoreId          : 상점아이디		form.StoreId.value
 	 * OrdNo          : 주문번호			form.OrdNo.value
@@ -16,6 +18,14 @@
 	 String StoreId = "aegis";
 	 String OrdNo = "1000000001";
 	 String Amt = "1000";
+	 
+	 
+	 int rest_num =  Integer.parseInt(request.getParameter("rest_num"));
+	 String rest_subject =  request.getParameter("rest_subject");
+	 int rest_price =  Integer.parseInt(request.getParameter("rest_price"));
+	 String restopt_subject =  request.getParameter("restopt_subject");
+	 int restopt_priceplus =  Integer.parseInt(request.getParameter("restopt_priceplus"));
+	 
 	 
 	 StringBuffer sb = new StringBuffer();
 	 sb.append(StoreId);
@@ -310,25 +320,37 @@ function Display(form){
 					<tr>
 						<td class=clsleft><font color=red>*</font> 상품번호</td>
 						<td colspan=2>
-							<input type=text style=width:100px name=OrdNo maxlength=40 value="138">
+							${rest_num}
+							<input type=hidden style=width:100px name=OrdNo maxlength=40 value=${rest_num} />
 						</td>
 					</tr>
 					<tr>
 						<td class=clsleft><font color=red>*</font> 상품명</td>
 						<td colspan=2>
-							<input type=text style=width:300px name=StoreNm value="교촌치킨">
+							${rest_subject}
+							<input type=hidden style=width:300px name=StoreNm value=${rest_subject}>
 						</td>
 					</tr>
 					<tr>
 						<td class=clsleft><font color=red>*</font>상품옵션</td>
 						<td colspan=2>
-							<input type=text style=width:300px name=ProdNm maxlength=300 value="간장치킨">
+							${restopt_subject}
+							<input type=hidden style=width:300px name=ProdNm maxlength=300 value=${restopt_subject}>
 						</td>
 					</tr>
 					<tr>
 						<td class=clsleft><font color=red>*</font> 상품가</td>
 						<td>
-							<input type=text style=width:100px name=Amt maxlength=12 value="1000">원
+							${restopt_priceplus}
+							<input type=hidden style=width:100px name=Amt maxlength=12 value=${restopt_priceplus}/>원
+						</td>
+						<td class=clsleft></td>
+					</tr>
+					<tr>
+						<td class=clsleft><font color=red>*</font> 총 합계</td>
+						<td>
+							${restopt_priceplus+rest_price}
+							<input type=hidden style=width:100px name=totalPrice maxlength=12 value="${restopt_priceplus+rest_price}"/>원
 						</td>
 						<td class=clsleft></td>
 					</tr>
