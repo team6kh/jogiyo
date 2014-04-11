@@ -38,46 +38,49 @@
 			<h3>review 게시판</h3>
 		</div>
 
-		<div class="col-md-12 well">
-
-			<!--  리뷰 쓰기 권한에 관한 조건문 미구현 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
-
-			<!-- 리뷰 쓰기 폼 시작  -->
-			<form name="insertReview" method="post"
-				action="insertReviewPro.action" enctype="multipart/form-data">
-				<table class="table table-striped table-forum">
-					<tr>
-						<th>별점</th>
-						<td class="text-center"><input type="radio"
-							name="review_rating" value="1" /> 1점 <input type="radio"
-							name="review_rating" value="2" /> 2점 <input type="radio"
-							name="review_rating" value="3" /> 3점 <input type="radio"
-							name="review_rating" value="4" /> 4점 <input type="radio"
-							name="review_rating" value="5" /> 5점</td>
-					</tr>
-					<!--  리뷰 content -->
-					<tr>
-						<td class="text-center" colspan="2"><textarea
-								name="review_content" rows="5" cols="50"></textarea></td>
-					</tr>
-					<!--  이미지 파일 첨부(2개)  -->
-					<tr>
-						<td class="text-center" colspan="2"><input
-							id="review_file_element" type="file" name="review_files">
-							<input id="review_file_element" type="file" name="review_files"></td>
-					</tr>
-					<!-- 리뷰 작성 완료 버튼  -->
-					<tr>
-						<th class="text-center" colspan="2"><input type="submit"
-							value="리뷰 등록" /></th>
-					</tr>
-				</table>
-				<!-- 보내줘야 할 파라미터 : 식당코드(식당 테이블) / 구매자 정보(로그인 아이디 세션값 or 구매(결제) 테이블의 주문자 정보 -->
-				<input type="hidden" name="review_rest" value="test_Rest" /> <input
-					type="hidden" name="review_writer" value="test_Customer" />
-			</form>
-		</div>
+		<!--  리뷰 쓰기 권한에 관한 조건문 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
+		<!--  일단 로그인을 하지 않으면 리뷰 쓰기 폼이 보이지 않도록 조건문 설정  -->
+		<!-- 리뷰 쓰기 폼 시작  -->
+		<c:if test="${!empty sessionScope.sessionId}">
+			<div class="col-md-12 well">
+				<form name="insertReview" method="post"
+					action="insertReviewPro.action" enctype="multipart/form-data">
+					<table class="table table-striped table-forum">
+						<tr>
+							<th>별점</th>
+							<td class="text-center"><input type="radio"
+								name="review_rating" value="1" /> 1점 <input type="radio"
+								name="review_rating" value="2" /> 2점 <input type="radio"
+								name="review_rating" value="3" /> 3점 <input type="radio"
+								name="review_rating" value="4" /> 4점 <input type="radio"
+								name="review_rating" value="5" /> 5점</td>
+						</tr>
+						<!--  리뷰 content -->
+						<tr>
+							<td class="text-center" colspan="2"><textarea
+									name="review_content" rows="5" cols="50"></textarea></td>
+						</tr>
+						<!--  이미지 파일 첨부(2개)  -->
+						<tr>
+							<td class="text-center" colspan="2"><input
+								id="review_file_element" type="file" name="review_files" multiple="multiple" size="">
+								<input id="review_file_element" type="file" name="review_files"></td>
+						</tr>
+						<!-- 리뷰 작성 완료 버튼  -->
+						<tr>
+							<th class="text-center" colspan="2"><input type="submit"
+								value="리뷰 등록" /></th>
+						</tr>
+					</table>
+					<!-- 보내줘야 할 파라미터 : 식당코드(식당 테이블) / 구매자(= 회원 = 글 작성자) 정보 -->
+					<input type="hidden" name="review_rest" value="test_Rest" /> <input
+						type="hidden" name="review_writer"
+						value="${sessionScope.sessionId }" />
+				</form>
+			</div>
+		</c:if>
 		<!-- 리뷰 쓰기 폼 끝  -->
+
 
 		<!-- 리뷰 글 보기 시작 -->
 		<div class="col-md-12 well">
@@ -95,7 +98,7 @@
 					</tr>
 					<!-- 해당글 작성자일 경우 수정/삭제 버튼  -->
 					<!-- 임시값 "test_Customer" sessionId 값으로 교체 -->
-					<c:if test="${reviewDTO.review_writer == 'test_Customer'}">
+					<c:if test="${reviewDTO.review_writer == sessionScope.sessionId}">
 						<tr>
 							<td class="text-right" colspan="2"><input type="button"
 								value="수정"
@@ -107,7 +110,11 @@
 					<!--  리뷰글 별점 : 후에 이미지로 대체 -->
 					<tr>
 						<td class="text-center" colspan="2"><label>별점</label>
-							&nbsp;&nbsp;&nbsp; ${reviewDTO.review_rating}</td>
+							&nbsp;&nbsp;&nbsp; <c:forEach begin="1"
+								end="${reviewDTO.review_rating}">
+								<img src="assets/img/review/ratingimage/ico.png" width="30px"
+									height="30px">
+							</c:forEach></td>
 					</tr>
 					<!-- 리뷰글 내용 -->
 					<tr>
