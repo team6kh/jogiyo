@@ -43,7 +43,8 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 		//System.out.println("getActionName:"+getActionName());
 		
 		// 로그인을 실행한 액션의 actionName(로그인 후 리턴할 주소)이 설정되어 있지 않을 경우 home으로 설정(리턴)한다.
-		if (getActionName() == null) {
+		/* 이 방법 밖에는 없는건가? */
+		if (getActionName() == null || getActionName().equals("")) {
 			//System.out.println("no actionName");
 			setActionName("home");
 		}		
