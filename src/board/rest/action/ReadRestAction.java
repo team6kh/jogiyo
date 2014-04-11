@@ -48,6 +48,7 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 		//옵션들
 		list = (List<RestoptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
 		
+		System.out.println("list출력"+list);
 		return SUCCESS;
 	}
 	

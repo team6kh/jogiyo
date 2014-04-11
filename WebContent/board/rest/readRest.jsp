@@ -222,9 +222,7 @@
 											</option>
 										</s:iterator>
 									</select>
-									
 								</td>
-							</td>
 						</tr>
 					</table>
 				</td>

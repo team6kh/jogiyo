@@ -24,7 +24,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	
 	//폼으로 넘길 넘버
 	int temp;
-	int virRest_num = 1;
+	int virRest_num;
 	
 	//insertRest.jsp에서 넘긴 히든값
 	private int currentPage; //현재 페이지
@@ -108,7 +108,11 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 			resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
 			temp = (int)(resultClass.getRest_num());
 			virRest_num = temp+1; // 앞으로 만들어질 시퀀스 넘버
+		}else{
+			virRest_num = 1;
 		}
+		
+		
 		return SUCCESS;
 	}
 	

@@ -16,6 +16,7 @@ public class PayRestAction extends ActionSupport {
 	
 	public String execute() throws Exception {
 		//restopt_set에서 받은걸 옵션명과 옵션가격을 분리 시킴.
+		System.out.println("이거 왜 안떠?"+getRestopt_set()); // 정상 : 후라이드a1000
 		restopt_subject = getRestopt_set().substring(0, getRestopt_set().indexOf('a'));
 		restopt_priceplus = Integer.parseInt(getRestopt_set().substring(getRestopt_set().indexOf('a')+1));
 			
