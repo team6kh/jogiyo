@@ -84,7 +84,7 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" method="post" action="registration.action" name="regForm" onsubmit="return checkIt()">
+		<form class="form-signup" method="post" action="registration.action" name="regForm">
 			<input type="hidden" name="feedbackRegId" value="0" />
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">

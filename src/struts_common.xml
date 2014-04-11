@@ -18,7 +18,8 @@
 		</action>
 
 		<!-- 로그인 액션 -->
-		<action name="login" class="common.login.action.LoginAction">		
+		<action name="login" class="common.login.action.LoginAction">
+			<interceptor-ref name="chain"/>		
 			<interceptor-ref name="params" />				
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="servletConfig" />
@@ -28,6 +29,7 @@
 
 		<!-- 로그아웃 액션 -->
 		<action name="logout" class="common.logout.action.LogoutAction">
+			<interceptor-ref name="chain"/>	
 			<interceptor-ref name="servletConfig" />
 			<result name="success" type="redirect-action">home</result>
 		</action>
@@ -36,9 +38,9 @@
 
 		<!-- 회원가입 폼 -->
 		<action name="registrationForm" class="common.registration.action.RegistrationFormAction">
-			<result name="buyer">/common/registration/regFormBuyer.jsp</result>
-			<result name="seller">/common/registration/regFormSeller.jsp</result>
-			<result>/common/registration/regFormBuyer.jsp</result>
+			<result name="buyer">/common/registration/regBuyerForm.jsp</result>
+			<result name="seller">/common/registration/regSellerForm.jsp</result>
+			<result>/common/registration/regBuyerForm.jsp</result>
 		</action>
 		
 		<!-- 아이디 중복체크 액션 -->		
@@ -62,7 +64,9 @@
 			<interceptor-ref name="modelDriven"/>
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result type="redirect-action">home</result>			
+			<result name="success" type="chain">
+          		<param name="actionName">login</param>
+        	</result>	
 		</action>
 
 		<!-- 판매자 가입 액션 -->
@@ -75,7 +79,7 @@
 			<result type="redirect-action">home</result>	
 		</action>
 		
-		<!-- 유저정보 액션 -->
+		<!-- 유저정보 액션 : 구매자, 판매자로 chain -->
 		<action name="readUser" class="common.registration.action.ReadUserAction">
 			<result name="buyer" type="chain">readBuyer</result>
 			<result name="seller" type="chain">readSeller</result>
@@ -89,9 +93,27 @@
 			<result>/common/registration/readBuyer.jsp</result>
 		</action>
 		
+		<!-- 구매자정보 수정 폼 -->
+		<action name="updateBuyerForm" class="common.registration.action.UpdateBuyerAction" method="updateForm">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/common/registration/updateBuyerForm.jsp</result>
+		</action>
+		
 		<!-- 구매자정보 수정 액션 -->
-		<action name="updateBuyerForm" class="common.registration.action.UpdateBuyerAction">
-			<result>/common/error.jsp</result>
+		<action name="updateBuyer" class="common.registration.action.UpdateBuyerAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/common/registration/readBuyer.jsp</result>
+		</action>
+		
+		<!-- 구매자정보 삭제 (탈퇴) 액션 -->
+		<action name="deleteBuyer" class="common.registration.action.DeleteBuyerAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result name="success" type="chain">
+          		<param name="actionName">logout</param>
+        	</result>	
 		</action>
 		
 		<!-- HOME -->

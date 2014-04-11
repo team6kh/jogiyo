@@ -39,7 +39,7 @@ public class CheckPasswordAction implements Action, ConDAOAware {
 				return SUCCESS;
 			} else { return ERROR; }
 			
-		} else if (getModalParam().equals("updateBuyerForm")) {
+		} else if (getModalParam().equals("updateBuyerForm") || getModalParam().equals("deleteBuyer")) {
 			
 			// 객체 생성
 			BuyerDTO buyerDTO = new BuyerDTO();

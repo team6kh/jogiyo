@@ -20,7 +20,8 @@ public class UpdateTestAction extends ActionSupport implements ConDAOAware {
 	
 	private String modalParam_key;
 	private int test_num;		// 현재 글 고유넘버
-	private int currentPage;	// 현재 페이지			
+	private int currentPage;	// 현재 페이지
+	
 	private String test_writer_pw;
 	private String test_subject;
 	private String test_content;

@@ -65,9 +65,7 @@
 		<action name="updateTest" class="board.test.action.UpdateTestAction">			
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result type="chain">
-				<param name="actionName">readTest</param>
-			</result>
+			<result>/board/test/readTest.jsp</result>
 		</action>
 
 		<!--테스트 게시판 삭제 액션. -->

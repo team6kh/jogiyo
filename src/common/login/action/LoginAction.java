@@ -39,6 +39,15 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 
 	public String execute() throws Exception {
 		
+		//System.out.println("LoginAction");
+		//System.out.println("getActionName:"+getActionName());
+		
+		// 로그인을 실행한 액션의 actionName(로그인 후 리턴할 주소)이 설정되어 있지 않을 경우 home으로 설정(리턴)한다.
+		if (getActionName() == null) {
+			//System.out.println("no actionName");
+			setActionName("home");
+		}		
+		
 		/*
 		 * 이 액션에서는 paramClass와 resultClass로 나누어 구현하였다.
 		 */
@@ -127,13 +136,8 @@ public class LoginAction implements Action, ConDAOAware, SessionAware {
 		return actionName;
 	}
 
-	// 로그인을 실행한 액션의 actionName(로그인 후 리턴할 주소)이 설정되어 있지 않을 경우 home으로 설정(리턴)한다.
 	public void setActionName(String actionName) {
-		if (actionName.equals("")) {
-			this.actionName = "home";
-		} else {
-			this.actionName = actionName;
-		}		
+		this.actionName = actionName;
 	}	
 
 }

@@ -71,9 +71,9 @@
 				<button class="btn btn-default insertModalParam" data-toggle="modal"
 					data-target="#checkModal" data-id="updateBuyerForm">수정</button>
 					
-				<!-- Button trigger modal : 삭제 -->
+				<!-- Button trigger modal : 탈퇴 -->
 				<button class="btn btn-default insertModalParam" data-toggle="modal"
-					data-target="#checkModal" data-id="deleteTest">삭제</button>					
+					data-target="#checkModal" data-id="deleteBuyer">탈퇴</button>					
 				
 				<!-- Modal -->
 				<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
