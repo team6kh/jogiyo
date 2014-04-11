@@ -1,28 +1,28 @@
-<%@ page import="aegis.pgclient.*,java.text.*,java.net.*,java.lang.*" contentType="text/html; charset=euc-kr" %>
+<%@ page import="aegis.pgclient.*,java.text.*,java.net.*,java.lang.*" contentType="text/html; charset=UTF-8" %>
 
 <%
 /**********************************************************************************************
 *
-* ÆÄÀÏ¸í : AGS_pay_ing.jsp
-* ÃÖÁ¾¼öÁ¤ÀÏÀÚ : 2009/5/12
+* íŒŒì¼ëª… : AGS_pay_ing.jsp
+* ìµœì¢…ìˆ˜ì •ì¼ìž : 2009/5/12
 *
-* ¿Ã´õ°ÔÀÌÆ® ÇÃ·¯±×ÀÎ¿¡¼­ ¸®ÅÏµÈ µ¥ÀÌÅ¸¸¦ ¹Þ¾Æ¼­ ¼ÒÄÏ°áÁ¦¿äÃ»À» ÇÕ´Ï´Ù.
+* ì˜¬ë”ê²Œì´íŠ¸ í”ŒëŸ¬ê·¸ì¸ì—ì„œ ë¦¬í„´ëœ ë°ì´íƒ€ë¥¼ ë°›ì•„ì„œ ì†Œì¼“ê²°ì œìš”ì²­ì„ í•©ë‹ˆë‹¤.
 *
 * Copyright AEGIS ENTERPRISE.Co.,Ltd. All rights reserved.
 *
 *
-*  ¡Ø À¯ÀÇ»çÇ× ¡Ø
-*  1.  "|"(ÆÄÀÌÇÁ) °ªÀº °áÁ¦Ã³¸® Áß ±¸ºÐÀÚ·Î »ç¿ëÇÏ´Â ¹®ÀÚÀÌ¹Ç·Î °áÁ¦ µ¥ÀÌÅÍ¿¡ "|"ÀÌ ÀÖÀ»°æ¿ì
-*   °áÁ¦°¡ Á¤»óÀûÀ¸·Î Ã³¸®µÇÁö ¾Ê½À´Ï´Ù.(¼ö½Å µ¥ÀÌÅÍ ±æÀÌ ¿¡·¯ µîÀÇ »çÀ¯)	
+*  â€» ìœ ì˜ì‚¬í•­ â€»
+*  1.  "|"(íŒŒì´í”„) ê°’ì€ ê²°ì œì²˜ë¦¬ ì¤‘ êµ¬ë¶„ìžë¡œ ì‚¬ìš©í•˜ëŠ” ë¬¸ìžì´ë¯€ë¡œ ê²°ì œ ë°ì´í„°ì— "|"ì´ ìžˆì„ê²½ìš°
+*   ê²°ì œê°€ ì •ìƒì ìœ¼ë¡œ ì²˜ë¦¬ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.(ìˆ˜ì‹  ë°ì´í„° ê¸¸ì´ ì—ëŸ¬ ë“±ì˜ ì‚¬ìœ )	
 **********************************************************************************************/
 
 	/****************************************************************************
 	*
-	* [1] ¿Ã´õ°ÔÀÌÆ® °áÁ¦½Ã »ç¿ëÇÒ ·ÎÄÃ Åë½Å¼­¹ö IP/Port ¹øÈ£
+	* [1] ì˜¬ë”ê²Œì´íŠ¸ ê²°ì œì‹œ ì‚¬ìš©í•  ë¡œì»¬ í†µì‹ ì„œë²„ IP/Port ë²ˆí˜¸
 	*
-	* ENCTYPE		: °áÁ¦ Á¾·ù¿¡ µû¸¥ ±¸ºÐ(0:¾È½ÉÅ¬¸¯,ÀÏ¹Ý°áÁ¦ 2:ISP)
-	* LOCALADDR		: PG¼­¹ö¿Í Åë½ÅÀ» ´ã´çÇÏ´Â ¾ÏÈ£È­Process°¡ À§Ä¡ÇØ ÀÖ´Â IP
-	* LOCALPORT		: Æ÷Æ®
+	* ENCTYPE		: ê²°ì œ ì¢…ë¥˜ì— ë”°ë¥¸ êµ¬ë¶„(0:ì•ˆì‹¬í´ë¦­,ì¼ë°˜ê²°ì œ 2:ISP)
+	* LOCALADDR		: PGì„œë²„ì™€ í†µì‹ ì„ ë‹´ë‹¹í•˜ëŠ” ì•”í˜¸í™”Processê°€ ìœ„ì¹˜í•´ ìžˆëŠ” IP
+	* LOCALPORT		: í¬íŠ¸
 	*
 	****************************************************************************/
 
@@ -32,7 +32,7 @@
 
 	/****************************************************************************
 	*
-	* [2]½ÂÀÎ/Ãë¼Ò¿¡ »ç¿ëµÉ Å¬·¡½º °´Ã¼ »ý¼º
+	* [2]ìŠ¹ì¸/ì·¨ì†Œì— ì‚¬ìš©ë  í´ëž˜ìŠ¤ ê°ì²´ ìƒì„±
 	*
 	****************************************************************************/
 
@@ -40,121 +40,121 @@
 
 	/****************************************************************************
 	*
-	* [3] AGS_pay.html ·Î ºÎÅÍ ³Ñ°Ü¹ÞÀ» µ¥ÀÌÅ¸
+	* [3] AGS_pay.html ë¡œ ë¶€í„° ë„˜ê²¨ë°›ì„ ë°ì´íƒ€
 	*
 	****************************************************************************/
 
-	/*°øÅë»ç¿ë*/
-	//agspay.setValue("AgsPayHome","C:/htdocs/agspay40/jsp");			//¿Ã´õ°ÔÀÌÆ® °áÁ¦¼³Ä¡ µð·ºÅä¸® (»óÁ¡¿¡ ¸Â°Ô ¼öÁ¤)
-	agspay.setValue("AgsPayHome","/home/local_docs/agspay40/jsp");		//¿Ã´õ°ÔÀÌÆ® °áÁ¦¼³Ä¡ µð·ºÅä¸® (»óÁ¡¿¡ ¸Â°Ô ¼öÁ¤)
-	agspay.setValue("log","true");										//true : ·Î±×±â·Ï, false : ·Î±×±â·Ï¾ÈÇÔ.
-	agspay.setValue("logLevel","INFO");									//·Î±×·¹º§ : DEBUG, INFO, WARN, ERROR, FATAL (ÇØ´ç ·¹º§ÀÌ»óÀÇ ·Î±×¸¸ ±â·ÏµÊ)
-	agspay.setValue("UseNetCancel","true");								//true : ¸ÁÃë¼Ò »ç¿ë. false: ¸ÁÃë¼Ò ¹Ì»ç¿ë
-	agspay.setValue("Type", "Pay");										//°íÁ¤°ª(¼öÁ¤ºÒ°¡)
-	agspay.setValue("AuthTy", request.getParameter("AuthTy"));			//°áÁ¦ÇüÅÂ
-	agspay.setValue("SubTy", request.getParameter("SubTy"));			//¼­ºê°áÁ¦ÇüÅÂ
-	agspay.setValue("StoreId", request.getParameter("StoreId"));		//»óÁ¡¾ÆÀÌµð
-	agspay.setValue("OrdNo", request.getParameter("OrdNo"));			//ÁÖ¹®¹øÈ£
-	agspay.setValue("Amt", request.getParameter("Amt"));				//±Ý¾×
-	agspay.setValue("UserEmail", request.getParameter("UserEmail"));	//ÁÖ¹®ÀÚÀÌ¸ÞÀÏ
-	agspay.setValue("ProdNm", request.getParameter("ProdNm"));			//»óÇ°¸í
+	/*ê³µí†µì‚¬ìš©*/
+	//agspay.setValue("AgsPayHome","C:/htdocs/agspay40/jsp");			//ì˜¬ë”ê²Œì´íŠ¸ ê²°ì œì„¤ì¹˜ ë””ë ‰í† ë¦¬ (ìƒì ì— ë§žê²Œ ìˆ˜ì •)
+	agspay.setValue("AgsPayHome","/home/local_docs/agspay40/jsp");		//ì˜¬ë”ê²Œì´íŠ¸ ê²°ì œì„¤ì¹˜ ë””ë ‰í† ë¦¬ (ìƒì ì— ë§žê²Œ ìˆ˜ì •)
+	agspay.setValue("log","true");										//true : ë¡œê·¸ê¸°ë¡, false : ë¡œê·¸ê¸°ë¡ì•ˆí•¨.
+	agspay.setValue("logLevel","INFO");									//ë¡œê·¸ë ˆë²¨ : DEBUG, INFO, WARN, ERROR, FATAL (í•´ë‹¹ ë ˆë²¨ì´ìƒì˜ ë¡œê·¸ë§Œ ê¸°ë¡ë¨)
+	agspay.setValue("UseNetCancel","true");								//true : ë§ì·¨ì†Œ ì‚¬ìš©. false: ë§ì·¨ì†Œ ë¯¸ì‚¬ìš©
+	agspay.setValue("Type", "Pay");										//ê³ ì •ê°’(ìˆ˜ì •ë¶ˆê°€)
+	agspay.setValue("AuthTy", request.getParameter("AuthTy"));			//ê²°ì œí˜•íƒœ
+	agspay.setValue("SubTy", request.getParameter("SubTy"));			//ì„œë¸Œê²°ì œí˜•íƒœ
+	agspay.setValue("StoreId", request.getParameter("StoreId"));		//ìƒì ì•„ì´ë””
+	agspay.setValue("OrdNo", request.getParameter("OrdNo"));			//ì£¼ë¬¸ë²ˆí˜¸
+	agspay.setValue("Amt", request.getParameter("Amt"));				//ê¸ˆì•¡
+	agspay.setValue("UserEmail", request.getParameter("UserEmail"));	//ì£¼ë¬¸ìžì´ë©”ì¼
+	agspay.setValue("ProdNm", request.getParameter("ProdNm"));			//ìƒí’ˆëª…
 
-	/*½Å¿ëÄ«µå&°¡»ó°èÁÂ»ç¿ë*/
-	agspay.setValue("MallUrl", request.getParameter("MallUrl"));		//»óÁ¡URLÁÖ¼Ò
-	agspay.setValue("UserId", request.getParameter("UserId"));			//È¸¿ø¾ÆÀÌµð
+	/*ì‹ ìš©ì¹´ë“œ&ê°€ìƒê³„ì¢Œì‚¬ìš©*/
+	agspay.setValue("MallUrl", request.getParameter("MallUrl"));		//ìƒì URLì£¼ì†Œ
+	agspay.setValue("UserId", request.getParameter("UserId"));			//íšŒì›ì•„ì´ë””
 
-	/*½Å¿ëÄ«µå»ç¿ë*/
-	agspay.setValue("OrdNm", request.getParameter("OrdNm"));			//ÁÖ¹®ÀÚ¸í
-	agspay.setValue("OrdPhone", request.getParameter("OrdPhone") );		//ÁÖ¹®ÀÚ¿¬¶ôÃ³
-	agspay.setValue("OrdAddr", request.getParameter("OrdAddr"));		//ÁÖ¹®ÀÚÁÖ¼Ò
-	agspay.setValue("RcpNm", request.getParameter("RcpNm"));			//¼ö½ÅÀÚ¸í
-	agspay.setValue("RcpPhone", request.getParameter("RcpPhone") );		//¼ö½ÅÀÚ¿¬¶ôÃ³
-	agspay.setValue("DlvAddr", request.getParameter("DlvAddr"));		//¹è¼ÛÁöÁÖ¼Ò
-	agspay.setValue("Remark", request.getParameter("Remark"));			//±âÅ¸¿ä±¸»çÇ×
-	agspay.setValue("DeviId", request.getParameter("DeviId") );			//´Ü¸»±â¾ÆÀÌµð
-	agspay.setValue("AuthYn", request.getParameter("AuthYn") );			//ÀÎÁõ¿©ºÎ
-	agspay.setValue("Instmt", request.getParameter("Instmt") );			//ÇÒºÎ°³¿ù¼ö
-	agspay.setValue("UserIp",request.getRemoteAddr());					//È¸¿ø IP
+	/*ì‹ ìš©ì¹´ë“œì‚¬ìš©*/
+	agspay.setValue("OrdNm", request.getParameter("OrdNm"));			//ì£¼ë¬¸ìžëª…
+	agspay.setValue("OrdPhone", request.getParameter("OrdPhone") );		//ì£¼ë¬¸ìžì—°ë½ì²˜
+	agspay.setValue("OrdAddr", request.getParameter("OrdAddr"));		//ì£¼ë¬¸ìžì£¼ì†Œ
+	agspay.setValue("RcpNm", request.getParameter("RcpNm"));			//ìˆ˜ì‹ ìžëª…
+	agspay.setValue("RcpPhone", request.getParameter("RcpPhone") );		//ìˆ˜ì‹ ìžì—°ë½ì²˜
+	agspay.setValue("DlvAddr", request.getParameter("DlvAddr"));		//ë°°ì†¡ì§€ì£¼ì†Œ
+	agspay.setValue("Remark", request.getParameter("Remark"));			//ê¸°íƒ€ìš”êµ¬ì‚¬í•­
+	agspay.setValue("DeviId", request.getParameter("DeviId") );			//ë‹¨ë§ê¸°ì•„ì´ë””
+	agspay.setValue("AuthYn", request.getParameter("AuthYn") );			//ì¸ì¦ì—¬ë¶€
+	agspay.setValue("Instmt", request.getParameter("Instmt") );			//í• ë¶€ê°œì›”ìˆ˜
+	agspay.setValue("UserIp",request.getRemoteAddr());					//íšŒì› IP
 
-	/*½Å¿ëÄ«µå(ISP)*/
-	agspay.setValue("partial_mm", request.getParameter("partial_mm") );			//ÀÏ¹ÝÇÒºÎ±â°£
-	agspay.setValue("noIntMonth", request.getParameter("noIntMonth") );			//¹«ÀÌÀÚÇÒºÎ±â°£
-	agspay.setValue("KVP_CURRENCY", request.getParameter("KVP_CURRENCY") );		//KVP_ÅëÈ­ÄÚµå
-	agspay.setValue("KVP_CARDCODE", request.getParameter("KVP_CARDCODE") );		//KVP_Ä«µå»çÄÚµå
+	/*ì‹ ìš©ì¹´ë“œ(ISP)*/
+	agspay.setValue("partial_mm", request.getParameter("partial_mm") );			//ì¼ë°˜í• ë¶€ê¸°ê°„
+	agspay.setValue("noIntMonth", request.getParameter("noIntMonth") );			//ë¬´ì´ìží• ë¶€ê¸°ê°„
+	agspay.setValue("KVP_CURRENCY", request.getParameter("KVP_CURRENCY") );		//KVP_í†µí™”ì½”ë“œ
+	agspay.setValue("KVP_CARDCODE", request.getParameter("KVP_CARDCODE") );		//KVP_ì¹´ë“œì‚¬ì½”ë“œ
 	agspay.setValue("KVP_SESSIONKEY", request.getParameter("KVP_SESSIONKEY") );	//KVP_SESSIONKEY
 	agspay.setValue("KVP_ENCDATA", request.getParameter("KVP_ENCDATA") );		//KVP_ENCDATA
-	agspay.setValue("KVP_CONAME", request.getParameter("KVP_CONAME") );			//KVP_Ä«µå¸í
-	agspay.setValue("KVP_NOINT", request.getParameter("KVP_NOINT") );			//KVP_¹«ÀÌÀÚ=1 ÀÏ¹Ý=0
-	agspay.setValue("KVP_QUOTA", request.getParameter("KVP_QUOTA") );			//KVP_ÇÒºÎ°³¿ù
+	agspay.setValue("KVP_CONAME", request.getParameter("KVP_CONAME") );			//KVP_ì¹´ë“œëª…
+	agspay.setValue("KVP_NOINT", request.getParameter("KVP_NOINT") );			//KVP_ë¬´ì´ìž=1 ì¼ë°˜=0
+	agspay.setValue("KVP_QUOTA", request.getParameter("KVP_QUOTA") );			//KVP_í• ë¶€ê°œì›”
 
-	/*½Å¿ëÄ«µå(¾È½É)*/
-	agspay.setValue("CardNo", request.getParameter("CardNo") );			//Ä«µå¹øÈ£
+	/*ì‹ ìš©ì¹´ë“œ(ì•ˆì‹¬)*/
+	agspay.setValue("CardNo", request.getParameter("CardNo") );			//ì¹´ë“œë²ˆí˜¸
 	agspay.setValue("MPI_CAVV",request.getParameter("MPI_CAVV") );		//MPI_CAVV
 	agspay.setValue("MPI_ECI",request.getParameter("MPI_ECI") );		//MPI_ECI
 	agspay.setValue("MPI_MD64",request.getParameter("MPI_MD64") );		//MPI_MD64
 
-	/*½Å¿ëÄ«µå(ÀÏ¹Ý)*/
-	agspay.setValue("ExpMon", request.getParameter("ExpMon") );			//À¯È¿±â°£(¿ù)
-	agspay.setValue("ExpYear", request.getParameter("ExpYear") );		//À¯È¿±â°£(³â)
-	agspay.setValue("Passwd", request.getParameter("Passwd") );			//ºñ¹Ð¹øÈ£
-	agspay.setValue("SocId", request.getParameter("SocId") );			//ÁÖ¹Îµî·Ï¹øÈ£/»ç¾÷ÀÚµî·Ï¹øÈ£
+	/*ì‹ ìš©ì¹´ë“œ(ì¼ë°˜)*/
+	agspay.setValue("ExpMon", request.getParameter("ExpMon") );			//ìœ íš¨ê¸°ê°„(ì›”)
+	agspay.setValue("ExpYear", request.getParameter("ExpYear") );		//ìœ íš¨ê¸°ê°„(ë…„)
+	agspay.setValue("Passwd", request.getParameter("Passwd") );			//ë¹„ë°€ë²ˆí˜¸
+	agspay.setValue("SocId", request.getParameter("SocId") );			//ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸/ì‚¬ì—…ìžë“±ë¡ë²ˆí˜¸
 
-	/*°èÁÂÀÌÃ¼»ç¿ë*/
-	agspay.setValue("ICHE_OUTBANKNAME", request.getParameter("ICHE_OUTBANKNAME"));		//ÀÌÃ¼ÀºÇà¸í
-	agspay.setValue("ICHE_OUTACCTNO", request.getParameter("ICHE_OUTACCTNO") );			//ÀÌÃ¼°èÁÂ¹øÈ£
-	agspay.setValue("ICHE_OUTBANKMASTER", request.getParameter("ICHE_OUTBANKMASTER"));	//ÀÌÃ¼°èÁÂ¼ÒÀ¯ÁÖ
-	agspay.setValue("ICHE_AMOUNT", request.getParameter("ICHE_AMOUNT") );													//ÀÌÃ¼±Ý¾×
+	/*ê³„ì¢Œì´ì²´ì‚¬ìš©*/
+	agspay.setValue("ICHE_OUTBANKNAME", request.getParameter("ICHE_OUTBANKNAME"));		//ì´ì²´ì€í–‰ëª…
+	agspay.setValue("ICHE_OUTACCTNO", request.getParameter("ICHE_OUTACCTNO") );			//ì´ì²´ê³„ì¢Œë²ˆí˜¸
+	agspay.setValue("ICHE_OUTBANKMASTER", request.getParameter("ICHE_OUTBANKMASTER"));	//ì´ì²´ê³„ì¢Œì†Œìœ ì£¼
+	agspay.setValue("ICHE_AMOUNT", request.getParameter("ICHE_AMOUNT") );													//ì´ì²´ê¸ˆì•¡
 
-	/*ÇÚµåÆù»ç¿ë*/
-	agspay.setValue("HP_SERVERINFO", request.getParameter("HP_SERVERINFO") );	//SERVER_INFO(ÇÚµåÆù°áÁ¦)
-	agspay.setValue("HP_HANDPHONE", request.getParameter("HP_HANDPHONE") );		//HANDPHONE(ÇÚµåÆù°áÁ¦)
-	agspay.setValue("HP_COMPANY", request.getParameter("HP_COMPANY") );			//COMPANY(ÇÚµåÆù°áÁ¦)
-	agspay.setValue("HP_ID", request.getParameter("HP_ID") );					//HP_ID(ÇÚµåÆù°áÁ¦)
-	agspay.setValue("HP_SUBID", request.getParameter("HP_SUBID") );				//HP_SUBID(ÇÚµåÆù°áÁ¦)
-	agspay.setValue("HP_UNITType", request.getParameter("HP_UNITType") );		//HP_UNITType(ÇÚµåÆù°áÁ¦)
-	agspay.setValue("HP_IDEN", request.getParameter("HP_IDEN") );				//HP_IDEN(ÇÚµåÆù°áÁ¦)
-	agspay.setValue("HP_IPADDR", request.getParameter("HP_IPADDR") );			//HP_IPADDR(ÇÚµåÆù°áÁ¦)
+	/*í•¸ë“œí°ì‚¬ìš©*/
+	agspay.setValue("HP_SERVERINFO", request.getParameter("HP_SERVERINFO") );	//SERVER_INFO(í•¸ë“œí°ê²°ì œ)
+	agspay.setValue("HP_HANDPHONE", request.getParameter("HP_HANDPHONE") );		//HANDPHONE(í•¸ë“œí°ê²°ì œ)
+	agspay.setValue("HP_COMPANY", request.getParameter("HP_COMPANY") );			//COMPANY(í•¸ë“œí°ê²°ì œ)
+	agspay.setValue("HP_ID", request.getParameter("HP_ID") );					//HP_ID(í•¸ë“œí°ê²°ì œ)
+	agspay.setValue("HP_SUBID", request.getParameter("HP_SUBID") );				//HP_SUBID(í•¸ë“œí°ê²°ì œ)
+	agspay.setValue("HP_UNITType", request.getParameter("HP_UNITType") );		//HP_UNITType(í•¸ë“œí°ê²°ì œ)
+	agspay.setValue("HP_IDEN", request.getParameter("HP_IDEN") );				//HP_IDEN(í•¸ë“œí°ê²°ì œ)
+	agspay.setValue("HP_IPADDR", request.getParameter("HP_IPADDR") );			//HP_IPADDR(í•¸ë“œí°ê²°ì œ)
 
-	/*ARS»ç¿ë*/
-	agspay.setValue("ARS_NAME", request.getParameter("ARS_NAME"));			//ARS_NAME(ARS°áÁ¦)
-	agspay.setValue("ARS_PHONE", request.getParameter("ARS_PHONE") );		//ARS_PHONE(ARS°áÁ¦)
+	/*ARSì‚¬ìš©*/
+	agspay.setValue("ARS_NAME", request.getParameter("ARS_NAME"));			//ARS_NAME(ARSê²°ì œ)
+	agspay.setValue("ARS_PHONE", request.getParameter("ARS_PHONE") );		//ARS_PHONE(ARSê²°ì œ)
 
-	/*°¡»ó°èÁÂ»ç¿ë*/
-	agspay.setValue("VIRTUAL_CENTERCD", request.getParameter("VIRTUAL_CENTERCD"));	//ÀºÇàÄÚµå
-	agspay.setValue("VIRTUAL_DEPODT", request.getParameter("VIRTUAL_DEPODT") );		//ÀÔ±Ý¿¹Á¤ÀÏ
-	agspay.setValue("ZuminCode", request.getParameter("ZuminCode") );				//ÁÖ¹Î¹øÈ£
-	agspay.setValue("MallPage", request.getParameter("MallPage"));					//»óÁ¡ ÀÔ/Ãâ±Ý Åëº¸ ÆäÀÌÁö
-	agspay.setValue("VIRTUAL_NO", request.getParameter("VIRTUAL_NO") );				//°¡»ó°èÁÂ¹øÈ£
+	/*ê°€ìƒê³„ì¢Œì‚¬ìš©*/
+	agspay.setValue("VIRTUAL_CENTERCD", request.getParameter("VIRTUAL_CENTERCD"));	//ì€í–‰ì½”ë“œ
+	agspay.setValue("VIRTUAL_DEPODT", request.getParameter("VIRTUAL_DEPODT") );		//ìž…ê¸ˆì˜ˆì •ì¼
+	agspay.setValue("ZuminCode", request.getParameter("ZuminCode") );				//ì£¼ë¯¼ë²ˆí˜¸
+	agspay.setValue("MallPage", request.getParameter("MallPage"));					//ìƒì  ìž…/ì¶œê¸ˆ í†µë³´ íŽ˜ì´ì§€
+	agspay.setValue("VIRTUAL_NO", request.getParameter("VIRTUAL_NO") );				//ê°€ìƒê³„ì¢Œë²ˆí˜¸
 
-	/*ÀÌÁö½º¿¡½ºÅ©·Î»ç¿ë*/
-	agspay.setValue("ES_SENDNO", request.getParameter("ES_SENDNO") );				//ÀÌÁö½º¿¡½ºÅ©·Î(Àü¹®ÃßÀû¹øÈ£)
+	/*ì´ì§€ìŠ¤ì—ìŠ¤í¬ë¡œì‚¬ìš©*/
+	agspay.setValue("ES_SENDNO", request.getParameter("ES_SENDNO") );				//ì´ì§€ìŠ¤ì—ìŠ¤í¬ë¡œ(ì „ë¬¸ì¶”ì ë²ˆí˜¸)
 
-	/*°èÁÂÀÌÃ¼(¼ÒÄÏ) °áÁ¦ »ç¿ë º¯¼ö*/
-	agspay.setValue("ICHE_SOCKETYN", request.getParameter("ICHE_SOCKETYN"));		//°èÁÂÀÌÃ¼(¼ÒÄÏ) »ç¿ë ¿©ºÎ
-	agspay.setValue("ICHE_POSMTID", request.getParameter("ICHE_POSMTID"));			//°èÁÂÀÌÃ¼(¼ÒÄÏ) ÀÌ¿ë±â°üÁÖ¹®¹øÈ£
-	agspay.setValue("ICHE_FNBCMTID", request.getParameter("ICHE_FNBCMTID"));		//°èÁÂÀÌÃ¼(¼ÒÄÏ) FNBC°Å·¡¹øÈ£
-	agspay.setValue("ICHE_APTRTS", request.getParameter("ICHE_APTRTS"));			//°èÁÂÀÌÃ¼(¼ÒÄÏ) ÀÌÃ¼ ½Ã°¢
-	agspay.setValue("ICHE_REMARK1", request.getParameter("ICHE_REMARK1"));			//°èÁÂÀÌÃ¼(¼ÒÄÏ) ±âÅ¸»çÇ×1
-	agspay.setValue("ICHE_REMARK2", request.getParameter("ICHE_REMARK2"));			//°èÁÂÀÌÃ¼(¼ÒÄÏ) ±âÅ¸»çÇ×2
-	agspay.setValue("ICHE_ECWYN", request.getParameter("ICHE_ECWYN"));				//°èÁÂÀÌÃ¼(¼ÒÄÏ) ¿¡½ºÅ©·Î¿©ºÎ
-	agspay.setValue("ICHE_ECWID", request.getParameter("ICHE_ECWID"));				//°èÁÂÀÌÃ¼(¼ÒÄÏ) ¿¡½ºÅ©·ÎID
-	agspay.setValue("ICHE_ECWAMT1", request.getParameter("ICHE_ECWAMT1"));			//°èÁÂÀÌÃ¼(¼ÒÄÏ) ¿¡½ºÅ©·Î°áÁ¦±Ý¾×1
-	agspay.setValue("ICHE_ECWAMT2", request.getParameter("ICHE_ECWAMT2"));			//°èÁÂÀÌÃ¼(¼ÒÄÏ) ¿¡½ºÅ©·Î°áÁ¦±Ý¾×2
-	agspay.setValue("ICHE_CASHYN", request.getParameter("ICHE_CASHYN"));			//°èÁÂÀÌÃ¼(¼ÒÄÏ) Çö±Ý¿µ¼öÁõ¹ßÇà¿©ºÎ
-	agspay.setValue("ICHE_CASHGUBUN_CD", request.getParameter("ICHE_CASHGUBUN_CD"));	//°èÁÂÀÌÃ¼(¼ÒÄÏ) Çö±Ý¿µ¼öÁõ±¸ºÐ
-	agspay.setValue("ICHE_CASHID_NO", request.getParameter("ICHE_CASHID_NO"));		//°èÁÂÀÌÃ¼(¼ÒÄÏ) Çö±Ý¿µ¼öÁõ½ÅºÐÈ®ÀÎ¹øÈ£
+	/*ê³„ì¢Œì´ì²´(ì†Œì¼“) ê²°ì œ ì‚¬ìš© ë³€ìˆ˜*/
+	agspay.setValue("ICHE_SOCKETYN", request.getParameter("ICHE_SOCKETYN"));		//ê³„ì¢Œì´ì²´(ì†Œì¼“) ì‚¬ìš© ì—¬ë¶€
+	agspay.setValue("ICHE_POSMTID", request.getParameter("ICHE_POSMTID"));			//ê³„ì¢Œì´ì²´(ì†Œì¼“) ì´ìš©ê¸°ê´€ì£¼ë¬¸ë²ˆí˜¸
+	agspay.setValue("ICHE_FNBCMTID", request.getParameter("ICHE_FNBCMTID"));		//ê³„ì¢Œì´ì²´(ì†Œì¼“) FNBCê±°ëž˜ë²ˆí˜¸
+	agspay.setValue("ICHE_APTRTS", request.getParameter("ICHE_APTRTS"));			//ê³„ì¢Œì´ì²´(ì†Œì¼“) ì´ì²´ ì‹œê°
+	agspay.setValue("ICHE_REMARK1", request.getParameter("ICHE_REMARK1"));			//ê³„ì¢Œì´ì²´(ì†Œì¼“) ê¸°íƒ€ì‚¬í•­1
+	agspay.setValue("ICHE_REMARK2", request.getParameter("ICHE_REMARK2"));			//ê³„ì¢Œì´ì²´(ì†Œì¼“) ê¸°íƒ€ì‚¬í•­2
+	agspay.setValue("ICHE_ECWYN", request.getParameter("ICHE_ECWYN"));				//ê³„ì¢Œì´ì²´(ì†Œì¼“) ì—ìŠ¤í¬ë¡œì—¬ë¶€
+	agspay.setValue("ICHE_ECWID", request.getParameter("ICHE_ECWID"));				//ê³„ì¢Œì´ì²´(ì†Œì¼“) ì—ìŠ¤í¬ë¡œID
+	agspay.setValue("ICHE_ECWAMT1", request.getParameter("ICHE_ECWAMT1"));			//ê³„ì¢Œì´ì²´(ì†Œì¼“) ì—ìŠ¤í¬ë¡œê²°ì œê¸ˆì•¡1
+	agspay.setValue("ICHE_ECWAMT2", request.getParameter("ICHE_ECWAMT2"));			//ê³„ì¢Œì´ì²´(ì†Œì¼“) ì—ìŠ¤í¬ë¡œê²°ì œê¸ˆì•¡2
+	agspay.setValue("ICHE_CASHYN", request.getParameter("ICHE_CASHYN"));			//ê³„ì¢Œì´ì²´(ì†Œì¼“) í˜„ê¸ˆì˜ìˆ˜ì¦ë°œí–‰ì—¬ë¶€
+	agspay.setValue("ICHE_CASHGUBUN_CD", request.getParameter("ICHE_CASHGUBUN_CD"));	//ê³„ì¢Œì´ì²´(ì†Œì¼“) í˜„ê¸ˆì˜ìˆ˜ì¦êµ¬ë¶„
+	agspay.setValue("ICHE_CASHID_NO", request.getParameter("ICHE_CASHID_NO"));		//ê³„ì¢Œì´ì²´(ì†Œì¼“) í˜„ê¸ˆì˜ìˆ˜ì¦ì‹ ë¶„í™•ì¸ë²ˆí˜¸
 
-	/*°èÁÂÀÌÃ¼-ÅÚ·¡¹ðÅ·(¼ÒÄÏ) °áÁ¦ »ç¿ë º¯¼ö*/
-	agspay.setValue("ICHEARS_SOCKETYN", request.getParameter("ICHEARS_SOCKETYN"));		//ÅÚ·¹¹ðÅ·°èÁÂÀÌÃ¼(¼ÒÄÏ) »ç¿ë ¿©ºÎ
-	agspay.setValue("ICHEARS_ADMNO", request.getParameter("ICHEARS_ADMNO"));			//ÅÚ·¹¹ðÅ·°èÁÂÀÌÃ¼ ½ÂÀÎ¹øÈ£       
-	agspay.setValue("ICHEARS_POSMTID", request.getParameter("ICHEARS_POSMTID"));		//ÅÚ·¹¹ðÅ·°èÁÂÀÌÃ¼ ÀÌ¿ë±â°üÁÖ¹®¹øÈ£
-	agspay.setValue("ICHEARS_CENTERCD", request.getParameter("ICHEARS_CENTERCD"));		//ÅÚ·¹¹ðÅ·°èÁÂÀÌÃ¼ ÀºÇàÄÚµå      
-	agspay.setValue("ICHEARS_HPNO", request.getParameter("ICHEARS_HPNO"));				//ÅÚ·¹¹ðÅ·°èÁÂÀÌÃ¼ ÈÞ´ëÆù¹øÈ£   
-	agspay.setValue("AGS_HASHDATA", request.getParameter("AGS_HASHDATA"));				// Àü¿ª ÇØ½¬ º¯¼ö 
+	/*ê³„ì¢Œì´ì²´-í…”ëž˜ë±…í‚¹(ì†Œì¼“) ê²°ì œ ì‚¬ìš© ë³€ìˆ˜*/
+	agspay.setValue("ICHEARS_SOCKETYN", request.getParameter("ICHEARS_SOCKETYN"));		//í…”ë ˆë±…í‚¹ê³„ì¢Œì´ì²´(ì†Œì¼“) ì‚¬ìš© ì—¬ë¶€
+	agspay.setValue("ICHEARS_ADMNO", request.getParameter("ICHEARS_ADMNO"));			//í…”ë ˆë±…í‚¹ê³„ì¢Œì´ì²´ ìŠ¹ì¸ë²ˆí˜¸       
+	agspay.setValue("ICHEARS_POSMTID", request.getParameter("ICHEARS_POSMTID"));		//í…”ë ˆë±…í‚¹ê³„ì¢Œì´ì²´ ì´ìš©ê¸°ê´€ì£¼ë¬¸ë²ˆí˜¸
+	agspay.setValue("ICHEARS_CENTERCD", request.getParameter("ICHEARS_CENTERCD"));		//í…”ë ˆë±…í‚¹ê³„ì¢Œì´ì²´ ì€í–‰ì½”ë“œ      
+	agspay.setValue("ICHEARS_HPNO", request.getParameter("ICHEARS_HPNO"));				//í…”ë ˆë±…í‚¹ê³„ì¢Œì´ì²´ íœ´ëŒ€í°ë²ˆí˜¸   
+	agspay.setValue("AGS_HASHDATA", request.getParameter("AGS_HASHDATA"));				// ì „ì—­ í•´ì‰¬ ë³€ìˆ˜ 
 	
 	/****************************************************************************
 	*
-	* [4] ¿Ã´õ°ÔÀÌÆ® °áÁ¦¼­¹ö·Î °áÁ¦¸¦ ¿äÃ»ÇÕ´Ï´Ù.
+	* [4] ì˜¬ë”ê²Œì´íŠ¸ ê²°ì œì„œë²„ë¡œ ê²°ì œë¥¼ ìš”ì²­í•©ë‹ˆë‹¤.
 	*
 	****************************************************************************/
 
@@ -162,106 +162,106 @@
 
 	/****************************************************************************
 	*
-	* [5] °áÁ¦°á°ú¿¡ µû¸¥ »óÁ¡DB ÀúÀå ¹× ±âÅ¸ ÇÊ¿äÇÑ Ã³¸®ÀÛ¾÷À» ¼öÇàÇÏ´Â ºÎºÐÀÔ´Ï´Ù.
+	* [5] ê²°ì œê²°ê³¼ì— ë”°ë¥¸ ìƒì DB ì €ìž¥ ë° ê¸°íƒ€ í•„ìš”í•œ ì²˜ë¦¬ìž‘ì—…ì„ ìˆ˜í–‰í•˜ëŠ” ë¶€ë¶„ìž…ë‹ˆë‹¤.
 	*
-	*	¾Æ·¡ÀÇ °á°ú°ªµéÀ» ÅëÇÏ¿© °¢ °áÁ¦¼ö´Üº° °áÁ¦°á°ú°ªÀ» »ç¿ëÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
+	*	ì•„ëž˜ì˜ ê²°ê³¼ê°’ë“¤ì„ í†µí•˜ì—¬ ê° ê²°ì œìˆ˜ë‹¨ë³„ ê²°ì œê²°ê³¼ê°’ì„ ì‚¬ìš©í•˜ì‹¤ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
 	*	
-	*	-- °øÅë»ç¿ë --
-	*	¾÷Ã¼ID : agspay.getResult("rStoreId")
-	*	ÁÖ¹®¹øÈ£ : agspay.getResult("rOrdNo")
-	*	»óÇ°¸í : agspay.getResult("rProdNm")
-	*	°Å·¡±Ý¾× : agspay.getResult("rAmt")
-	*	¼º°ø¿©ºÎ : agspay.getResult("rSuccYn") (¼º°ø:y ½ÇÆÐ:n)
-	*	°á°ú¸Þ½ÃÁö : agspay.getResult("rResMsg")
+	*	-- ê³µí†µì‚¬ìš© --
+	*	ì—…ì²´ID : agspay.getResult("rStoreId")
+	*	ì£¼ë¬¸ë²ˆí˜¸ : agspay.getResult("rOrdNo")
+	*	ìƒí’ˆëª… : agspay.getResult("rProdNm")
+	*	ê±°ëž˜ê¸ˆì•¡ : agspay.getResult("rAmt")
+	*	ì„±ê³µì—¬ë¶€ : agspay.getResult("rSuccYn") (ì„±ê³µ:y ì‹¤íŒ¨:n)
+	*	ê²°ê³¼ë©”ì‹œì§€ : agspay.getResult("rResMsg")
 	*
-	*	1. ½Å¿ëÄ«µå
+	*	1. ì‹ ìš©ì¹´ë“œ
 	*	
-	*	Àü¹®ÄÚµå : agspay.getResult("rBusiCd")
-	*	°Å·¡¹øÈ£ : agspay.getResult("rDealNo")
-	*	½ÂÀÎ¹øÈ£ : agspay.getResult("rApprNo")
-	*	ÇÒºÎ°³¿ù : agspay.getResult("rInstmt")
-	*	½ÂÀÎ½Ã°¢ : agspay.getResult("rApprTm")
-	*	Ä«µå»çÄÚµå : agspay.getResult("rCardCd")
+	*	ì „ë¬¸ì½”ë“œ : agspay.getResult("rBusiCd")
+	*	ê±°ëž˜ë²ˆí˜¸ : agspay.getResult("rDealNo")
+	*	ìŠ¹ì¸ë²ˆí˜¸ : agspay.getResult("rApprNo")
+	*	í• ë¶€ê°œì›” : agspay.getResult("rInstmt")
+	*	ìŠ¹ì¸ì‹œê° : agspay.getResult("rApprTm")
+	*	ì¹´ë“œì‚¬ì½”ë“œ : agspay.getResult("rCardCd")
 	*
-	*	2.°èÁÂÀÌÃ¼(ÀÎÅÍ³Ý¹ðÅ·/ÅÚ·¹¹ðÅ·)
-	*	¿¡½ºÅ©·ÎÁÖ¹®¹øÈ£ : agspay.getResult("ES_SENDNO") (¿¡½ºÅ©·Î °áÁ¦½Ã)
+	*	2.ê³„ì¢Œì´ì²´(ì¸í„°ë„·ë±…í‚¹/í…”ë ˆë±…í‚¹)
+	*	ì—ìŠ¤í¬ë¡œì£¼ë¬¸ë²ˆí˜¸ : agspay.getResult("ES_SENDNO") (ì—ìŠ¤í¬ë¡œ ê²°ì œì‹œ)
 	*
-	*	3.°¡»ó°èÁÂ
-	*	°¡»ó°èÁÂÀÇ °áÁ¦¼º°øÀº °¡»ó°èÁÂ¹ß±ÞÀÇ ¼º°ø¸¸À» ÀÇ¹ÌÇÏ¸ç ÀÔ±Ý´ë±â»óÅÂ·Î ½ÇÁ¦ °í°´ÀÌ ÀÔ±ÝÀ» ¿Ï·áÇÑ °ÍÀº ¾Æ´Õ´Ï´Ù.
-	*	µû¶ó¼­ °¡»ó°èÁÂ °áÁ¦¿Ï·á½Ã °áÁ¦¿Ï·á·Î Ã³¸®ÇÏ¿© »óÇ°À» ¹è¼ÛÇÏ½Ã¸é ¾ÈµË´Ï´Ù.
-	*	°áÁ¦ÈÄ °í°´ÀÌ ¹ß±Þ¹ÞÀº °èÁÂ·Î ÀÔ±ÝÀÌ ¿Ï·áµÇ¸é MallPage(»óÁ¡ ÀÔ±ÝÅëº¸ ÆäÀÌÁö(°¡»ó°èÁÂ))·Î ÀÔ±Ý°á°ú°¡ Àü¼ÛµÇ¸ç
-	*	ÀÌ¶§ ºñ·Î¼Ò °áÁ¦°¡ ¿Ï·áµÇ°Ô µÇ¹Ç·Î °áÁ¦¿Ï·á¿¡ ´ëÇÑ Ã³¸®(¹è¼Û¿äÃ» µî)Àº  MallPage¿¡ ÀÛ¾÷ÇØÁÖ¼Å¾ß ÇÕ´Ï´Ù.
-	*	°áÁ¦Á¾·ù : agspay.getResult("rAuthTy") (°¡»ó°èÁÂ ÀÏ¹Ý : vir_n À¯Å¬¸¯ : vir_u ¿¡½ºÅ©·Î : vir_s)
-	*	½ÂÀÎÀÏÀÚ : agspay.getResult("rApprTm")
-	*	°¡»ó°èÁÂ¹øÈ£ : agspay.getResult("rVirNo")
+	*	3.ê°€ìƒê³„ì¢Œ
+	*	ê°€ìƒê³„ì¢Œì˜ ê²°ì œì„±ê³µì€ ê°€ìƒê³„ì¢Œë°œê¸‰ì˜ ì„±ê³µë§Œì„ ì˜ë¯¸í•˜ë©° ìž…ê¸ˆëŒ€ê¸°ìƒíƒœë¡œ ì‹¤ì œ ê³ ê°ì´ ìž…ê¸ˆì„ ì™„ë£Œí•œ ê²ƒì€ ì•„ë‹™ë‹ˆë‹¤.
+	*	ë”°ë¼ì„œ ê°€ìƒê³„ì¢Œ ê²°ì œì™„ë£Œì‹œ ê²°ì œì™„ë£Œë¡œ ì²˜ë¦¬í•˜ì—¬ ìƒí’ˆì„ ë°°ì†¡í•˜ì‹œë©´ ì•ˆë©ë‹ˆë‹¤.
+	*	ê²°ì œí›„ ê³ ê°ì´ ë°œê¸‰ë°›ì€ ê³„ì¢Œë¡œ ìž…ê¸ˆì´ ì™„ë£Œë˜ë©´ MallPage(ìƒì  ìž…ê¸ˆí†µë³´ íŽ˜ì´ì§€(ê°€ìƒê³„ì¢Œ))ë¡œ ìž…ê¸ˆê²°ê³¼ê°€ ì „ì†¡ë˜ë©°
+	*	ì´ë•Œ ë¹„ë¡œì†Œ ê²°ì œê°€ ì™„ë£Œë˜ê²Œ ë˜ë¯€ë¡œ ê²°ì œì™„ë£Œì— ëŒ€í•œ ì²˜ë¦¬(ë°°ì†¡ìš”ì²­ ë“±)ì€  MallPageì— ìž‘ì—…í•´ì£¼ì…”ì•¼ í•©ë‹ˆë‹¤.
+	*	ê²°ì œì¢…ë¥˜ : agspay.getResult("rAuthTy") (ê°€ìƒê³„ì¢Œ ì¼ë°˜ : vir_n ìœ í´ë¦­ : vir_u ì—ìŠ¤í¬ë¡œ : vir_s)
+	*	ìŠ¹ì¸ì¼ìž : agspay.getResult("rApprTm")
+	*	ê°€ìƒê³„ì¢Œë²ˆí˜¸ : agspay.getResult("rVirNo")
 	*
-	*	4.ÇÚµåÆù°áÁ¦
-	*	ÇÚµåÆù°áÁ¦ÀÏ : agspay.getResult("rHP_DATE")
-	*	ÇÚµåÆù°áÁ¦ TID : agspay.getResult("rHP_TID")
+	*	4.í•¸ë“œí°ê²°ì œ
+	*	í•¸ë“œí°ê²°ì œì¼ : agspay.getResult("rHP_DATE")
+	*	í•¸ë“œí°ê²°ì œ TID : agspay.getResult("rHP_TID")
 	*
-	*	5.ARS°áÁ¦
-	*	ARS°áÁ¦ÀÏ : agspay.getResult("rHP_DATE")
-	*	ARS°áÁ¦ TID : agspay.getResult("rHP_TID")
+	*	5.ARSê²°ì œ
+	*	ARSê²°ì œì¼ : agspay.getResult("rHP_DATE")
+	*	ARSê²°ì œ TID : agspay.getResult("rHP_TID")
 	*
 	****************************************************************************/
 	
 	if(agspay.getResult("rSuccYn").equals("y"))
 	{ 
 		if( agspay.getResult("AuthTy").equals("virtual") ){
-			//°¡»ó°èÁÂ°áÁ¦ÀÇ °æ¿ì ÀÔ±ÝÀÌ ¿Ï·áµÇÁö ¾ÊÀº ÀÔ±Ý´ë±â»óÅÂ(°¡»ó°èÁÂ ¹ß±Þ¼º°ø)ÀÌ¹Ç·Î »óÇ°À» ¹è¼ÛÇÏ½Ã¸é ¾ÈµË´Ï´Ù. 
+			//ê°€ìƒê³„ì¢Œê²°ì œì˜ ê²½ìš° ìž…ê¸ˆì´ ì™„ë£Œë˜ì§€ ì•Šì€ ìž…ê¸ˆëŒ€ê¸°ìƒíƒœ(ê°€ìƒê³„ì¢Œ ë°œê¸‰ì„±ê³µ)ì´ë¯€ë¡œ ìƒí’ˆì„ ë°°ì†¡í•˜ì‹œë©´ ì•ˆë©ë‹ˆë‹¤. 
 
 		}else{
-			// °áÁ¦¼º°ø¿¡ µû¸¥ »óÁ¡Ã³¸®ºÎºÐ
-			//out.println ("°áÁ¦°¡ ¼º°øÃ³¸®µÇ¾ú½À´Ï´Ù. [" + agspay.getResult("rSuccYn") + "]" + agspay.getResult("rResMsg"));
+			// ê²°ì œì„±ê³µì— ë”°ë¥¸ ìƒì ì²˜ë¦¬ë¶€ë¶„
+			//out.println ("ê²°ì œê°€ ì„±ê³µì²˜ë¦¬ë˜ì—ˆìŠµë‹ˆë‹¤. [" + agspay.getResult("rSuccYn") + "]" + agspay.getResult("rResMsg"));
 		}
 	}
 	else
 	{
-		// °áÁ¦½ÇÆÐ¿¡ µû¸¥ »óÁ¡Ã³¸®ºÎºÐ
-		//out.println ("°áÁ¦°¡ ½ÇÆÐÃ³¸®µÇ¾ú½À´Ï´Ù. [" + agspay.getResult("rSuccYn") + "]" + agspay.getResult("rResMsg"));
+		// ê²°ì œì‹¤íŒ¨ì— ë”°ë¥¸ ìƒì ì²˜ë¦¬ë¶€ë¶„
+		//out.println ("ê²°ì œê°€ ì‹¤íŒ¨ì²˜ë¦¬ë˜ì—ˆìŠµë‹ˆë‹¤. [" + agspay.getResult("rSuccYn") + "]" + agspay.getResult("rResMsg"));
 	}
 	
 
 	/*******************************************************************
-	* [6] °áÁ¦°¡ Á¤»óÃ³¸®µÇÁö ¸øÇßÀ» °æ¿ì agspay.getResult("NetCancID") °ªÀ» ÀÌ¿ëÇÏ¿©                                     
-	* °áÁ¦°á°ú¿¡ ´ëÇÑ ÀçÈ®ÀÎ¿äÃ»À» ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+	* [6] ê²°ì œê°€ ì •ìƒì²˜ë¦¬ë˜ì§€ ëª»í–ˆì„ ê²½ìš° agspay.getResult("NetCancID") ê°’ì„ ì´ìš©í•˜ì—¬                                     
+	* ê²°ì œê²°ê³¼ì— ëŒ€í•œ ìž¬í™•ì¸ìš”ì²­ì„ í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
 	* 
-	* Ãß°¡ µ¥ÀÌÅÍ¼Û¼ö½ÅÀÌ ¹ß»ýÇÏ¹Ç·Î °áÁ¦°¡ Á¤»óÃ³¸®µÇÁö ¾Ê¾ÒÀ» °æ¿ì¿¡¸¸ »ç¿ëÇÏ½Ã±â ¹Ù¶ø´Ï´Ù. 
+	* ì¶”ê°€ ë°ì´í„°ì†¡ìˆ˜ì‹ ì´ ë°œìƒí•˜ë¯€ë¡œ ê²°ì œê°€ ì •ìƒì²˜ë¦¬ë˜ì§€ ì•Šì•˜ì„ ê²½ìš°ì—ë§Œ ì‚¬ìš©í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤. 
 	*
-	* »ç¿ë¹æ¹ý :
+	* ì‚¬ìš©ë°©ë²• :
 	* agspay.checkPayResult(agspay.getResult("NetCancID"));
 	* 
 	*******************************************************************/
 
 	
-	//agspay.setValue("Type", "Pay"); // °íÁ¤
+	//agspay.setValue("Type", "Pay"); // ê³ ì •
 	//agspay.checkPayResult(agspay.getResult("NetCancID"));
 	
 	
 	/*******************************************************************
-	* [7] »óÁ¡DB ÀúÀå ¹× ±âÅ¸ Ã³¸®ÀÛ¾÷ ¼öÇà½ÇÆÐ½Ã °­Á¦Ãë¼Ò                                      
+	* [7] ìƒì DB ì €ìž¥ ë° ê¸°íƒ€ ì²˜ë¦¬ìž‘ì—… ìˆ˜í–‰ì‹¤íŒ¨ì‹œ ê°•ì œì·¨ì†Œ                                      
 	*   
-	* cancelReq : "true" °­Á¦Ãë¼Ò½ÇÇà, "false" °­Á¦Ãë¼Ò½ÇÇà¾ÈÇÔ.
+	* cancelReq : "true" ê°•ì œì·¨ì†Œì‹¤í–‰, "false" ê°•ì œì·¨ì†Œì‹¤í–‰ì•ˆí•¨.
 	*
-	* °áÁ¦°á°ú¿¡ µû¸¥ »óÁ¡Ã³¸®ºÎºÐ ¼öÇà Áß ½ÇÆÐÇÏ´Â °æ¿ì    
-	* ¾Æ·¡ÀÇ ÄÚµå¸¦ ÂüÁ¶ÇÏ¿© °Å·¡¸¦ Ãë¼ÒÇÒ ¼ö ÀÖ½À´Ï´Ù.
-	*	Ãë¼Ò¼º°ø¿©ºÎ : agspay.getResult("rCancelSuccYn") (¼º°ø:y ½ÇÆÐ:n)
-	*	Ãë¼Ò°á°ú¸Þ½ÃÁö : agspay.getResult("rCancelResMsg")
+	* ê²°ì œê²°ê³¼ì— ë”°ë¥¸ ìƒì ì²˜ë¦¬ë¶€ë¶„ ìˆ˜í–‰ ì¤‘ ì‹¤íŒ¨í•˜ëŠ” ê²½ìš°    
+	* ì•„ëž˜ì˜ ì½”ë“œë¥¼ ì°¸ì¡°í•˜ì—¬ ê±°ëž˜ë¥¼ ì·¨ì†Œí•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
+	*	ì·¨ì†Œì„±ê³µì—¬ë¶€ : agspay.getResult("rCancelSuccYn") (ì„±ê³µ:y ì‹¤íŒ¨:n)
+	*	ì·¨ì†Œê²°ê³¼ë©”ì‹œì§€ : agspay.getResult("rCancelResMsg")
 	*                                                      
-	* À¯ÀÇ»çÇ× :
-	* °¡»ó°èÁÂ(virtual)´Â °­Á¦Ãë¼Ò ±â´ÉÀÌ Áö¿øµÇÁö ¾Ê½À´Ï´Ù.
+	* ìœ ì˜ì‚¬í•­ :
+	* ê°€ìƒê³„ì¢Œ(virtual)ëŠ” ê°•ì œì·¨ì†Œ ê¸°ëŠ¥ì´ ì§€ì›ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
 	*******************************************************************/
 	
-	// »óÁ¡Ã³¸®ºÎºÐ ¼öÇà½ÇÆÐ½Ã cancelReq¸¦ "true"·Î º¯°æÇÏ¿© 
-	// °áÁ¦Ãë¼Ò¸¦ ¼öÇàµÇµµ·Ï ÇÒ ¼ö ÀÖ½À´Ï´Ù.
-	// cancelReqÀÇ "true"°ªÀ¸·Î º¯°æÁ¶°ÇÀº »óÁ¡¿¡¼­ ÆÇ´ÜÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+	// ìƒì ì²˜ë¦¬ë¶€ë¶„ ìˆ˜í–‰ì‹¤íŒ¨ì‹œ cancelReqë¥¼ "true"ë¡œ ë³€ê²½í•˜ì—¬ 
+	// ê²°ì œì·¨ì†Œë¥¼ ìˆ˜í–‰ë˜ë„ë¡ í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
+	// cancelReqì˜ "true"ê°’ìœ¼ë¡œ ë³€ê²½ì¡°ê±´ì€ ìƒì ì—ì„œ íŒë‹¨í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.
 	/*
 	String cancelReq = "false";
 
 	if( cancelReq.equals("true") )
 	{
-		agspay.setValue("Type", "Cancel"); // °íÁ¤
-		agspay.setValue("CancelMsg", "DB FAIL"); // Ãë¼Ò»çÀ¯
+		agspay.setValue("Type", "Cancel"); // ê³ ì •
+		agspay.setValue("CancelMsg", "DB FAIL"); // ì·¨ì†Œì‚¬ìœ 
 		agspay.startPay();
 	}
 	*/
@@ -274,55 +274,55 @@
 <body onload="javascript:frmAGS_pay_ing.submit();">
 <form name=frmAGS_pay_ing method=post action=AGS_pay_result.jsp>
 
-<!-- °¢ °áÁ¦ °øÅë »ç¿ë º¯¼ö -->
-<input type=hidden name=AuthTy value="<%=agspay.getResult("AuthTy")%>">		<!-- °áÁ¦ÇüÅÂ -->
-<input type=hidden name=SubTy value="<%=agspay.getResult("SubTy")%>">		<!-- ¼­ºê°áÁ¦ÇüÅÂ -->
-<input type=hidden name=rStoreId value="<%=agspay.getResult("rStoreId")%>">	<!-- »óÁ¡¾ÆÀÌµð -->
-<input type=hidden name=rOrdNo value="<%=agspay.getResult("rOrdNo")%>">		<!-- ÁÖ¹®¹øÈ£ -->
-<input type=hidden name=rProdNm value="<%=agspay.getResult("ProdNm")%>">	<!-- »óÇ°¸í -->
-<input type=hidden name=rAmt value="<%=agspay.getResult("rAmt")%>">			<!-- °áÁ¦±Ý¾× -->
-<input type=hidden name=rOrdNm value="<%=agspay.getResult("OrdNm")%>">		<!-- ÁÖ¹®ÀÚ¸í -->
+<!-- ê° ê²°ì œ ê³µí†µ ì‚¬ìš© ë³€ìˆ˜ -->
+<input type=hidden name=AuthTy value="<%=agspay.getResult("AuthTy")%>">		<!-- ê²°ì œí˜•íƒœ -->
+<input type=hidden name=SubTy value="<%=agspay.getResult("SubTy")%>">		<!-- ì„œë¸Œê²°ì œí˜•íƒœ -->
+<input type=hidden name=rStoreId value="<%=agspay.getResult("rStoreId")%>">	<!-- ìƒì ì•„ì´ë”” -->
+<input type=hidden name=rOrdNo value="<%=agspay.getResult("rOrdNo")%>">		<!-- ì£¼ë¬¸ë²ˆí˜¸ -->
+<input type=hidden name=rProdNm value="<%=agspay.getResult("ProdNm")%>">	<!-- ìƒí’ˆëª… -->
+<input type=hidden name=rAmt value="<%=agspay.getResult("rAmt")%>">			<!-- ê²°ì œê¸ˆì•¡ -->
+<input type=hidden name=rOrdNm value="<%=agspay.getResult("OrdNm")%>">		<!-- ì£¼ë¬¸ìžëª… -->
 
-<input type=hidden name=AGS_HASHDATA value="<%=agspay.getResult("AGS_HASHDATA")%>">		<!-- Àü¿ª ÇØ½¬ º¯¼ö -->
+<input type=hidden name=AGS_HASHDATA value="<%=agspay.getResult("AGS_HASHDATA")%>">		<!-- ì „ì—­ í•´ì‰¬ ë³€ìˆ˜ -->
 
-<input type=hidden name=rSuccYn value="<%=agspay.getResult("rSuccYn")%>">	<!-- ¼º°ø¿©ºÎ -->
-<input type=hidden name=rResMsg value="<%=agspay.getResult("rResMsg")%>">	<!-- °á°ú¸Þ½ÃÁö -->
-<input type=hidden name=rApprTm value="<%=agspay.getResult("rApprTm")%>">	<!-- °áÁ¦½Ã°£ -->
+<input type=hidden name=rSuccYn value="<%=agspay.getResult("rSuccYn")%>">	<!-- ì„±ê³µì—¬ë¶€ -->
+<input type=hidden name=rResMsg value="<%=agspay.getResult("rResMsg")%>">	<!-- ê²°ê³¼ë©”ì‹œì§€ -->
+<input type=hidden name=rApprTm value="<%=agspay.getResult("rApprTm")%>">	<!-- ê²°ì œì‹œê°„ -->
 
-<!-- ½Å¿ëÄ«µå °áÁ¦ »ç¿ë º¯¼ö -->
-<input type=hidden name=rBusiCd value="<%=agspay.getResult("rBusiCd")%>">	<!-- (½Å¿ëÄ«µå°øÅë)Àü¹®ÄÚµå -->
-<input type=hidden name=rApprNo value="<%=agspay.getResult("rApprNo")%>">	<!-- (½Å¿ëÄ«µå°øÅë)½ÂÀÎ¹øÈ£ -->
-<input type=hidden name=rCardCd value="<%=agspay.getResult("rCardCd")%>">	<!-- (½Å¿ëÄ«µå°øÅë)Ä«µå»çÄÚµå -->
-<input type=hidden name=rDealNo value="<%=agspay.getResult("rDealNo")%>">	<!-- (½Å¿ëÄ«µå°øÅë)°Å·¡¹øÈ£ -->
+<!-- ì‹ ìš©ì¹´ë“œ ê²°ì œ ì‚¬ìš© ë³€ìˆ˜ -->
+<input type=hidden name=rBusiCd value="<%=agspay.getResult("rBusiCd")%>">	<!-- (ì‹ ìš©ì¹´ë“œê³µí†µ)ì „ë¬¸ì½”ë“œ -->
+<input type=hidden name=rApprNo value="<%=agspay.getResult("rApprNo")%>">	<!-- (ì‹ ìš©ì¹´ë“œê³µí†µ)ìŠ¹ì¸ë²ˆí˜¸ -->
+<input type=hidden name=rCardCd value="<%=agspay.getResult("rCardCd")%>">	<!-- (ì‹ ìš©ì¹´ë“œê³µí†µ)ì¹´ë“œì‚¬ì½”ë“œ -->
+<input type=hidden name=rDealNo value="<%=agspay.getResult("rDealNo")%>">	<!-- (ì‹ ìš©ì¹´ë“œê³µí†µ)ê±°ëž˜ë²ˆí˜¸ -->
 
-<input type=hidden name=rCardNm value="<%=agspay.getResult("rCardNm")%>">	<!-- (¾È½ÉÅ¬¸¯,ÀÏ¹Ý»ç¿ë)Ä«µå»ç¸í -->
-<input type=hidden name=rMembNo value="<%=agspay.getResult("rMembNo")%>">	<!-- (¾È½ÉÅ¬¸¯,ÀÏ¹Ý»ç¿ë)°¡¸ÍÁ¡¹øÈ£ -->
-<input type=hidden name=rAquiCd value="<%=agspay.getResult("rAquiCd")%>">	<!-- (¾È½ÉÅ¬¸¯,ÀÏ¹Ý»ç¿ë)¸ÅÀÔ»çÄÚµå -->
-<input type=hidden name=rAquiNm value="<%=agspay.getResult("rAquiNm")%>">	<!-- (¾È½ÉÅ¬¸¯,ÀÏ¹Ý»ç¿ë)¸ÅÀÔ»ç¸í -->
+<input type=hidden name=rCardNm value="<%=agspay.getResult("rCardNm")%>">	<!-- (ì•ˆì‹¬í´ë¦­,ì¼ë°˜ì‚¬ìš©)ì¹´ë“œì‚¬ëª… -->
+<input type=hidden name=rMembNo value="<%=agspay.getResult("rMembNo")%>">	<!-- (ì•ˆì‹¬í´ë¦­,ì¼ë°˜ì‚¬ìš©)ê°€ë§¹ì ë²ˆí˜¸ -->
+<input type=hidden name=rAquiCd value="<%=agspay.getResult("rAquiCd")%>">	<!-- (ì•ˆì‹¬í´ë¦­,ì¼ë°˜ì‚¬ìš©)ë§¤ìž…ì‚¬ì½”ë“œ -->
+<input type=hidden name=rAquiNm value="<%=agspay.getResult("rAquiNm")%>">	<!-- (ì•ˆì‹¬í´ë¦­,ì¼ë°˜ì‚¬ìš©)ë§¤ìž…ì‚¬ëª… -->
 
 
-<!-- °èÁÂÀÌÃ¼ °áÁ¦ »ç¿ë º¯¼ö -->
-<input type=hidden name=ICHE_OUTBANKNAME value="<%=agspay.getResult("ICHE_OUTBANKNAME")%>">		<!-- ÀÌÃ¼ÀºÇà¸í -->
-<input type=hidden name=ICHE_OUTBANKMASTER value="<%=agspay.getResult("ICHE_OUTBANKMASTER")%>">	<!-- ÀÌÃ¼°èÁÂ¿¹±ÝÁÖ -->
-<input type=hidden name=ICHE_AMOUNT value="<%=agspay.getResult("ICHE_AMOUNT")%>">				<!-- ÀÌÃ¼±Ý¾× -->
+<!-- ê³„ì¢Œì´ì²´ ê²°ì œ ì‚¬ìš© ë³€ìˆ˜ -->
+<input type=hidden name=ICHE_OUTBANKNAME value="<%=agspay.getResult("ICHE_OUTBANKNAME")%>">		<!-- ì´ì²´ì€í–‰ëª… -->
+<input type=hidden name=ICHE_OUTBANKMASTER value="<%=agspay.getResult("ICHE_OUTBANKMASTER")%>">	<!-- ì´ì²´ê³„ì¢Œì˜ˆê¸ˆì£¼ -->
+<input type=hidden name=ICHE_AMOUNT value="<%=agspay.getResult("ICHE_AMOUNT")%>">				<!-- ì´ì²´ê¸ˆì•¡ -->
 
-<!-- ÇÚµåÆù °áÁ¦ »ç¿ë º¯¼ö -->
-<input type=hidden name=rHP_HANDPHONE value="<%=agspay.getResult("HP_HANDPHONE")%>">			<!-- ÇÚµåÆù¹øÈ£ -->
-<input type=hidden name=rHP_COMPANY value="<%=agspay.getResult("HP_COMPANY")%>">				<!-- Åë½Å»ç¸í(SKT,KTF,LGT) -->
-<input type=hidden name=rHP_TID value="<%=agspay.getResult("rHP_TID")%>">						<!-- °áÁ¦TID -->
-<input type=hidden name=rHP_DATE value="<%=agspay.getResult("rHP_DATE")%>">						<!-- °áÁ¦ÀÏÀÚ -->
+<!-- í•¸ë“œí° ê²°ì œ ì‚¬ìš© ë³€ìˆ˜ -->
+<input type=hidden name=rHP_HANDPHONE value="<%=agspay.getResult("HP_HANDPHONE")%>">			<!-- í•¸ë“œí°ë²ˆí˜¸ -->
+<input type=hidden name=rHP_COMPANY value="<%=agspay.getResult("HP_COMPANY")%>">				<!-- í†µì‹ ì‚¬ëª…(SKT,KTF,LGT) -->
+<input type=hidden name=rHP_TID value="<%=agspay.getResult("rHP_TID")%>">						<!-- ê²°ì œTID -->
+<input type=hidden name=rHP_DATE value="<%=agspay.getResult("rHP_DATE")%>">						<!-- ê²°ì œì¼ìž -->
 
-<!-- ARS °áÁ¦ »ç¿ë º¯¼ö -->
-<input type=hidden name=rARS_PHONE value="<%=agspay.getResult("ARS_PHONE")%>">							<!-- ARS¹øÈ£ -->
+<!-- ARS ê²°ì œ ì‚¬ìš© ë³€ìˆ˜ -->
+<input type=hidden name=rARS_PHONE value="<%=agspay.getResult("ARS_PHONE")%>">							<!-- ARSë²ˆí˜¸ -->
 
-<!-- °¡»ó°èÁÂ °áÁ¦ »ç¿ë º¯¼ö -->
-<input type=hidden name=rVirNo value="<%=agspay.getResult("rVirNo")%>">							<!-- °¡»ó°èÁÂ¹øÈ£ -->
-<input type=hidden name=VIRTUAL_CENTERCD value="<%=agspay.getResult("VIRTUAL_CENTERCD")%>">		<!-- ÀÔ±Ý°¡»ó°èÁÂÀºÇàÄÚµå(¿ì¸®ÀºÇà:20,½ÅÇÑÀºÇà:88) -->
+<!-- ê°€ìƒê³„ì¢Œ ê²°ì œ ì‚¬ìš© ë³€ìˆ˜ -->
+<input type=hidden name=rVirNo value="<%=agspay.getResult("rVirNo")%>">							<!-- ê°€ìƒê³„ì¢Œë²ˆí˜¸ -->
+<input type=hidden name=VIRTUAL_CENTERCD value="<%=agspay.getResult("VIRTUAL_CENTERCD")%>">		<!-- ìž…ê¸ˆê°€ìƒê³„ì¢Œì€í–‰ì½”ë“œ(ìš°ë¦¬ì€í–‰:20,ì‹ í•œì€í–‰:88) -->
 
 <input type=hidden name=mTId value="<%=agspay.getResult("mTId")%>">								
 
-<!-- ÀÌÁö½º¿¡½ºÅ©·Î °áÁ¦ »ç¿ë º¯¼ö -->
-<input type=hidden name=ES_SENDNO value="<%=agspay.getResult("ES_SENDNO")%>">					<!-- ÀÌÁö½º¿¡½ºÅ©·Î(Àü¹®¹øÈ£) -->
+<!-- ì´ì§€ìŠ¤ì—ìŠ¤í¬ë¡œ ê²°ì œ ì‚¬ìš© ë³€ìˆ˜ -->
+<input type=hidden name=ES_SENDNO value="<%=agspay.getResult("ES_SENDNO")%>">					<!-- ì´ì§€ìŠ¤ì—ìŠ¤í¬ë¡œ(ì „ë¬¸ë²ˆí˜¸) -->
 
 </form>
 </body>

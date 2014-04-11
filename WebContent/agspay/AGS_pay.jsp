@@ -342,7 +342,7 @@ function Display(form){
 						<td class=clsleft><font color=red>*</font> 상품가</td>
 						<td>
 							${restopt_priceplus}
-							<input type=hidden style=width:100px name=Amt maxlength=12 value=${restopt_priceplus}/>원
+							<input type=hidden style=width:100px name=restopt_priceplus maxlength=12 value=${restopt_priceplus}/>원
 						</td>
 						<td class=clsleft></td>
 					</tr>
@@ -350,7 +350,7 @@ function Display(form){
 						<td class=clsleft><font color=red>*</font> 총 합계</td>
 						<td>
 							${restopt_priceplus+rest_price}
-							<input type=hidden style=width:100px name=totalPrice maxlength=12 value="${restopt_priceplus+rest_price}"/>원
+							<input type=hidden style=width:100px name=Amt maxlength=12 value="${restopt_priceplus+rest_price}"/>원
 						</td>
 						<td class=clsleft></td>
 					</tr>

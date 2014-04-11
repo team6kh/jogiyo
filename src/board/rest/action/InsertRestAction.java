@@ -112,7 +112,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 			virRest_num = 1;
 		}
 		
-		
 		return SUCCESS;
 	}
 	
