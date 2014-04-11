@@ -109,8 +109,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 			temp = (int)(resultClass.getRest_num());
 			virRest_num = temp+1; // 앞으로 만들어질 시퀀스 넘버
 		}
-		
-		
 		return SUCCESS;
 	}
 	
