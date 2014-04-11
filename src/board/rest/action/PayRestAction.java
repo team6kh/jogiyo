@@ -2,7 +2,6 @@ package board.rest.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-
 public class PayRestAction extends ActionSupport {
 
 	private int rest_num;

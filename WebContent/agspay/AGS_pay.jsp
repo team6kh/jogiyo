@@ -198,7 +198,7 @@ function Pay(form){
 				if(MakePayMessage(form) == true){
 					Disable_Flag(form);
 					
-					var openwin = window.open("AGS_progress.html","popup","width=300,height=160"); //"지불처리중"이라는 팝업창연결 부분
+					var openwin = window.open("/jogiyo/agspay/AGS_progress.html","popup","width=300,height=160"); //"지불처리중"이라는 팝업창연결 부분
 					
 					form.submit();
 				}else{
@@ -279,7 +279,7 @@ function Display(form){
 <!-- 주의) onload 이벤트에서 아래와 같이 javascript 함수를 호출하지 마십시오. -->
 <!-- onload="javascript:Enable_Flag(frmAGS_pay);Pay(frmAGS_pay);" -->
 <body topmargin=0 leftmargin=0 rightmargin=0 bottommargin=0 onload="javascript:Enable_Flag(frmAGS_pay);">
-<form name=frmAGS_pay method=post action=AGS_pay_ing.jsp>
+<form name=frmAGS_pay method=post action=/jogiyo/agspay/AGS_pay_ing.jsp>
 <table border=0 width=100% height=100% cellpadding=0 cellspacing=0>
 	<tr>
 		<td align=center>

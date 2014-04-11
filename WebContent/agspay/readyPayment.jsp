@@ -8,7 +8,7 @@
     ${restopt_priceplus} <br/>
     
     
-    <jsp:forward page="AGS_pay.jsp"> 
+    <jsp:forward page="/agspay/AGS_pay.jsp"> 
        <jsp:param name="rest_num" value="${rest_num}" />
        <jsp:param name="rest_subject" value="${rest_subject}" /> 
        <jsp:param name="rest_price" value="${rest_price}" /> 
