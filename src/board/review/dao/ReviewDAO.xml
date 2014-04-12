@@ -35,14 +35,13 @@
 	<!-- SELECT 쿼리문 정의 -->
 
 	<!-- 해당 식당에 관한 리뷰 글 목록 -->
-	<select id="selectReviewList" resultMap="reviewRes"
-		parameterClass="java.lang.String">
+	<select id="selectReviewList" resultMap="reviewRes" parameterClass="java.lang.String">
 		<include refid="select-all" />
-		where REVIEW_REST=#review_rest# ORDER BY REVIEW_REG_DATE DESC
+		where REVIEW_REST=#review_rest# ORDER BY REVIEW_REG_DATE DESC 
 	</select>
 
 	<!-- review_num으로 리뷰글 하나 추출하는 쿼리문 -->
-	<select id="selectReviewOne" resultClass="reviewDTO">
+	<select id="selectReviewOne" resultClass="reviewDTO" >
 		<include refid="select-all" />
 		<include refid="where_review_num" />
 	</select>

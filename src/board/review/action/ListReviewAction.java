@@ -46,8 +46,7 @@ public class ListReviewAction implements Action, ConDAOAware {
 		review_rest = "test_Rest";
 
 		// 해당식당에 관한 리뷰 글만 가져와 List 타입 인스턴스에 저장
-		reviewRes = sqlMapper.queryForList("Review.selectReviewList",
-				review_rest);
+		reviewRes = sqlMapper.queryForList("Review.selectReviewList", review_rest);
 
 		// 페이징 관련 코드
 		totalCount = reviewRes.size();

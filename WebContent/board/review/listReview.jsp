@@ -50,11 +50,12 @@
 							<th>별점</th>
 							<td class="text-center"><input type="radio"
 								name="review_rating" value="1" /> 1점 <input type="radio"
-								name="review_rating" value="2" /> 2점 <input type="radio"
-								name="review_rating" value="3" /> 3점 <input type="radio"
-								name="review_rating" value="4" /> 4점 <input type="radio"
-								name="review_rating" value="5" /> 5점</td>
+								name="review_rating" value="2" />2점 <input type="radio"
+								name="review_rating" value="3" />3점 <input type="radio"
+								name="review_rating" value="4" />4점 <input type="radio"
+								name="review_rating" value="5" />5점</td>
 						</tr>
+
 						<!--  리뷰 content -->
 						<tr>
 							<td class="text-center" colspan="2"><textarea
@@ -63,8 +64,9 @@
 						<!--  이미지 파일 첨부(2개)  -->
 						<tr>
 							<td class="text-center" colspan="2"><input
-								id="review_file_element" type="file" name="review_files" multiple="multiple" size="">
-								<input id="review_file_element" type="file" name="review_files"></td>
+								id="review_file_element" type="file" name="review_files"
+								multiple="multiple" size=""> <input
+								id="review_file_element" type="file" name="review_files"></td>
 						</tr>
 						<!-- 리뷰 작성 완료 버튼  -->
 						<tr>
@@ -93,8 +95,9 @@
 							type="hidden" name="review_num" value="${reviewDTO.review_num}" />
 						</td>
 						<td class="text-center"><label>작성일</label> &nbsp;&nbsp;&nbsp;
+							<s:date name="reviewDTO.review_reg_date" format="yyyy-MM-dd" /> <!--  -->
 							<fmt:formatDate value="${reviewDTO.review_reg_date}"
-								pattern="yyyy-MM-dd" /></td>
+								pattern="yyyy-MM-dd" /> --></td>
 					</tr>
 					<!-- 해당글 작성자일 경우 수정/삭제 버튼  -->
 					<!-- 임시값 "test_Customer" sessionId 값으로 교체 -->
@@ -107,13 +110,13 @@
 								onclick="javascript:open('deleteReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=200')" /></td>
 						</tr>
 					</c:if>
-					<!--  리뷰글 별점 : 후에 이미지로 대체 -->
+					<!--  리뷰글 별점 -->
 					<tr>
 						<td class="text-center" colspan="2"><label>별점</label>
 							&nbsp;&nbsp;&nbsp; <c:forEach begin="1"
 								end="${reviewDTO.review_rating}">
-								<img src="assets/img/review/ratingimage/ico.png" width="30px"
-									height="30px">
+								<img src="assets/img/review/ratingimage/ico.png" width="25px"
+									height="25px">
 							</c:forEach></td>
 					</tr>
 					<!-- 리뷰글 내용 -->

@@ -66,7 +66,7 @@ public class InsertReviewAction implements Action, Preparable,
 			String saveFileName = fileUpload.uploadFiles(review_files,
 					review_filesFileName, fileUploadPath, fileRename);
 	
-			System.out.println("saveFileName : " + saveFileName);
+		
 		
 			// setReview_file 메서드로 값 설정
 			reviewDTO.setReview_file(saveFileName);

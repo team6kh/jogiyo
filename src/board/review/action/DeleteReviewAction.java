@@ -46,6 +46,7 @@ public class DeleteReviewAction implements Action, ConDAOAware {
 			fileUpload.deleteFiles(filesName, fileUploadPath);
 
 		}
+	
 
 		// DB에서 레코드 삭제
 		sqlMapper.delete("Review.deleteReview", reviewDTO);
