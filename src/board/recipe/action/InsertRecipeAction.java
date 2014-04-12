@@ -21,17 +21,20 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven,
 							// 객체
 
 	RecipeDTO paramClass;
-	RecipeDTO resultClass;
+	
 
 	// private RecipeDTO paramClass; // 파라미터를 저장할 객체
 	// private RecipeDTO resultClass; //쿼리 결과 값을 저장할 객체
-
+	
+	
 	private int currentPage; // 현재 페이지
 	private int recipe_num; // 현재 글 고유 번호
 
 	private File recipe_file; // 파일 객체
 	private String recipe_fileContentType; // 컨텐츠 타입
 	private String recipe_fileFileName; // 파일 이름
+	private String fileUploadPath = "D:\\김경남\\Java\\upload\\"; // 업로드 경로.
+
 
 	Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기.
 	
@@ -47,6 +50,7 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven,
 
 	public void prepare() throws Exception { // Preparable 인터페이스의 prepare
 		paramClass = new RecipeDTO();
+		
 
 	}
 
@@ -57,13 +61,11 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven,
 
 	// insertRecipe 액션
 	public String execute() throws Exception {
-		System.out.println("sqlMapper:" + sqlMapper);
-		System.out.println("paramClass:" + paramClass);
-
+		
 		// sqlMapper=conDAO.getCon();
 		// //파라미터와 리절트 객체 생성.
 		// paramClass = new RecipeDTO();
-		// resultClass = new RecipeDTO();
+		
 		//
 		// // 등록할 항목 설정.
 		// paramClass.setRecipe_foodkind(getRecipe_foodkind());
@@ -83,8 +85,7 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven,
 		if (getRecipe_file() != null) {
 
 			// 등록한 글 번호 가져오기.
-			paramClass = (RecipeDTO) sqlMapper
-					.queryForObject("Recipe.selectLastRecipe_num");
+			paramClass = (RecipeDTO) sqlMapper.queryForObject("Recipe.selectLastRecipe_num");
 
 			// 실제 서버에 저장될 파일 이름과 확장자 설정.
 			String file_name = "file_" + paramClass.getRecipe_num();
@@ -111,6 +112,30 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven,
 		return SUCCESS;
 	}
 
+	public String getFileUploadPath() {
+		return fileUploadPath;
+	}
+
+	public void setFileUploadPath(String fileUploadPath) {
+		this.fileUploadPath = fileUploadPath;
+	}
+
+	public Calendar getToday() {
+		return today;
+	}
+
+	public void setToday(Calendar today) {
+		this.today = today;
+	}
+
+	public RecipeDTO getParamClass() {
+		return paramClass;
+	}
+
+	public void setParamClass(RecipeDTO paramClass) {
+		this.paramClass = paramClass;
+	}
+
 	public File getRecipe_file() {
 		return recipe_file;
 	}
@@ -134,15 +159,7 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven,
 	public void setRecipe_fileFileName(String recipe_fileFileName) {
 		this.recipe_fileFileName = recipe_fileFileName;
 	}
-
-	public RecipeDTO getResultClass() {
-		return resultClass;
-	}
-
-	public void setResultClass(RecipeDTO resultClass) {
-		this.resultClass = resultClass;
-	}
-
+	
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -159,7 +176,7 @@ public class InsertRecipeAction implements Action, Preparable, ModelDriven,
 		this.recipe_num = recipe_num;
 	}
 
-	private String fileUploadPath = "D:\\김경남\\Java\\upload\\"; // 업로드 경로.
+	
 
 	
 

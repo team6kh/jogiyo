@@ -43,7 +43,7 @@
 
 						if ((sel == "recipe_time" || sel == "recipe_price")) {
 							frm.innerHTML = "<input type=text name=key1>~<input type=text name=key2><input type=submit value=검색>";
-						} else if((sel == "recipe_subject,content" || sel == "recipe_writer" || sel=="recipe_foodkind")){
+						} else if((sel == "recipe_subject,content" || sel=="recipe_foodkind")){
 							frm.innerHTML = "<input type=text name=key1><input type=submit value=검색>";
 						}else if((sel == "recipe_searchselect")){
 							frm.innerHTML = "<input type=submit value=검색>";
@@ -54,11 +54,10 @@
 			</header>
 			<table width="750" border="0" cellspacing="0" cellpadding="2">
 				<tr>
-					<td align="center"><h2>Recipe 게시판</h2></td>
+					<td align="center"><h2> MyRecipe 목록</h2></td>
 				</tr>
 				<tr>
-					<td height="1" bgcolor="#BDBDBD" align="center">알고 있는 요리 레시피를
-						올려주세요~~! 혼자만 알고 있음, 안~돼!!</td>
+					<td height="1" bgcolor="#BDBDBD" align="center">내가 올린 레시피~~!!</td>
 				</tr>
 				<tr>
 					<td height="20"></td>
@@ -128,11 +127,9 @@
 				</tr>
 
 				<tr align="right">
-					<td colspan="8"><input type="button" value="글쓰기"
-						class="inputb"
-						onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
-						<input type="button" value="새로고침" class="inputb"
-						onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />';">
+					<td colspan="8">
+					    <input type="button" value="글쓰기"  onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
+						<input type="button" value="새로고침"  onClick="javascript:location.href='myListRecipe.action?currentPage=<s:property value="currentPage" />';">
 					</td>
 				</tr>
 			</table>
@@ -141,16 +138,15 @@
 			<table width="750" border="0" cellspacing="0" cellpadding="2">
 				<tr>
 					<td colspan="8" align="center">
-						<!-- 검색 jsp --> <select name="recipe_search_target"
-						id="recipe_search_target" title="검색" onchange="searchtype()">
+						<!-- 검색 jsp --> 
+						<select name="recipe_search_target" id="recipe_search_target" title="검색" onchange="searchtype()">
 							<option value="recipe_searchselect">검색[선택]</option>
 							<option value="recipe_foodkind">종류[한식,양식,중식,일식,기타]</option>
 							<option value="recipe_subject,content">내용+제목</option>
 							<option value="recipe_time">소요시간</option>
 							<option value="recipe_price">비용</option>
-							<option value="recipe_writer">작성자</option>
-					</select> <span id="recipe_search_input" class="btn_s_skin"> </span> <input name="mylist"
-							type="button" value="내가쓴글" class="inputb" onClick="javascript:location.href='recipe_mylsit.action?recipe_writer=<s:property value="recipe_writer" />'">
+							
+					</select> <span id="recipe_search_input" > </span><input type="button" value="전체목록보기"  onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />';"> 
 					</td>
 				</tr>
 			</table>

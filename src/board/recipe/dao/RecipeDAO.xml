@@ -8,6 +8,7 @@
 	<resultMap id="RecipeRes" class="RecipeDTO">
 		<result property="recipe_subject" column="recipe_subject" />
 		<result property="recipe_foodkind" column="recipe_foodkind" />
+		<result property="recipe_memberwriter" column="recipe_memberwriter"/>
 		<result property="recipe_writer" column="recipe_writer" />
 		<result property="recipe_password" column="recipe_password" />
 		<result property="recipe_method" column="recipe_method" />
@@ -28,7 +29,7 @@
 		SELECT * FROM RECIPE_BOARD
 	</sql>
 
-	<!-- 공통으로 사용할 where-no 절 정의 -->
+	<!-- 공통으로 사용할 where-recipe_num 절 정의 -->
 	<sql id="where-recipe_num">
 		WHERE recipe_num = #recipe_num#
 	</sql>
@@ -50,12 +51,13 @@
 		FROM RECIPE_BOARD
 	</select>
 
-	<select id="selectRecipe_password" resultMap="RecipeRes">
+	<select id="selectRecipe_password" resultMap="RecipeRes" parameterClass="RecipeDTO">
 		<include refid="select-all" />
 		<include refid="where-recipe_num" />
 		AND recipe_password = #recipe_password#
 	</select>
-
+	
+	
 
 	<!-- insert 쿼리문 정의 -->
 	<insert id="insertRecipe" parameterClass="RecipeDTO">
@@ -96,8 +98,8 @@
 		RECIPE_SUBJECT = #recipe_subject#,
 		RECIPE_METHOD =	#recipe_method#,
 		RECIPE_TIME = #recipe_time#,
-		RRECIPE_PRICE = #recipe_price#,
-		RECIPE_WRITER = #recipe_memberwriter#,
+		RECIPE_PRICE = #recipe_price#,
+		RECIPE_MEMBERWRITER = #recipe_memberwriter#,
 		RECIPE_WRITER = #recipe_writer#,
 		RECIPE_PASSWORD = #recipe_password#,
 		RECIPE_CONTENT = #recipe_content#
@@ -107,8 +109,7 @@
 
 	<update id="updateFile" parameterClass="RecipeDTO">
 		UPDATE RECIPE_BOARD SET RECIPE_ORGFILE = #recipe_orgfile#
-		,RECIPE_FILE =
-		#recipe_file#
+		,RECIPE_FILE = #recipe_file#
 		<include refid="where-recipe_num" />
 	</update>
 
@@ -121,6 +122,11 @@
 		UPDATE RECIPE_BOARD SET recipe_recommand = recipe_recommand + 1
 		<include refid="where-recipe_num" />
 	</update>
+	
+	<!-- myListRecipe 쿼리문 정의 -->
+	<select id="myListRecipe" parameterClass="RecipeDTO">
+	    SELECT * FROM RECIPE_BOARD WHERE recipe_writer = #recipe_writer#
+	</select>
 
 
 	<!-- delete 쿼리문 정의 -->
