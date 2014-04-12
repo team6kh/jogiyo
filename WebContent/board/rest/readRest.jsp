@@ -1,10 +1,28 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%-- <%@ page isELIgnored="false" %> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+
+<title>JOGIYO</title>
+
+<!-- Bootstrap core CSS -->
+<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="common/common-template.css" rel="stylesheet">
+
 <style type="text/css">
 	html {
 		height: 100%
@@ -119,6 +137,9 @@
 </head>
 
 <body onload="initialize()">
+	<!-- header -->
+	<%@ include file="/common/header.jsp"%>
+	<!-- end of header -->
 	
 	<form name="readRestForm" action="payRest.action" method="post" >
 		<TABLE border=0 width=90%>
@@ -253,6 +274,67 @@
 			</tr>
 		</table>
 	</form>
+	
+	
+	
+	
+	
+	//리스트
+	<!-- container -->
+	<div class="container">
+
+		<!-- test board pretty -->
+		<div class="col-md-12">
+			<h3>REST</h3>
+		</div>		
+
+		<div class="col-md-12 well">
+		
+			<div class="col-md-12">
+		
+			<c:forEach var="list" items="${list}">
+			
+						
+				<div class="col-sm-4 col-md-3">					
+			    	<div class="thumbnail">
+			      		<a href="www.naver.com">
+			      		<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
+			      		</a>
+			      		<div class="caption">
+			        		<h3>${list.restopt_subject}</h3>
+			      		</div>
+			    	</div>
+		      	</div>		      			      	
+			</c:forEach>
+			
+			</div>
+			
+			<c:if test="${list eq null}">
+			<div class="text-center">
+				<p>등록된 게시물이 없습니다.</p>
+			</div>
+			</c:if>
+		</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<div id="map_canvas" style="width: 80%; height: 60%"></div>
 </body>
