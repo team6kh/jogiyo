@@ -13,66 +13,76 @@ import java.util.*;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAOAware, SessionAware {
+public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAOAware, SessionAware
+{
+    private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체
 
-	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체
+    private TestDTO testDTO;
 
-	private TestDTO testDTO;
+    private int test_num; // 해당 글 고유넘버
+    private int currentPage; // 현재 페이지
+    private Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기
 
-	private int test_num;	 // 해당 글 고유넘버
-	private int currentPage; // 현재 페이지	
-	private Calendar today = Calendar.getInstance(); // 오늘 날짜 구하기
+    private Map sessionMap = null;
 
-	private Map sessionMap = null;
+    public void setConDAO(SqlMapClient sqlMapper)
+    {
+        this.sqlMapper = sqlMapper;
+    }
 
-	public void setConDAO(SqlMapClient sqlMapper) {
-		this.sqlMapper = sqlMapper;
-	}
+    public void setSession(Map sessionMap)
+    {
+        this.sessionMap = sessionMap;
+    }
 
-	public void setSession(Map sessionMap) {
-		this.sessionMap = sessionMap;
-	}
+    // 게시글 INSERT 폼
+    public String insertForm() throws Exception
+    {
+        return SUCCESS;
+    }
 
-	// 게시글 INSERT 폼
-	public String insertForm() throws Exception {
+    // Preparable 인터페이스의 prepare
+    public void prepare() throws Exception
+    {
+        testDTO = new TestDTO();
+    }
 
-		return SUCCESS;
-	}
+    // ModelDriven 인터페이스의 getModel 구현
+    public Object getModel()
+    {
+        return testDTO;
+    }
 
-	// Preparable 인터페이스의 prepare
-	public void prepare() throws Exception {
-		testDTO = new TestDTO();
-	}
+    // 게시글 INSERT 액션
+    public String execute() throws Exception
+    {
+        // 등록할 항목 설정
+        testDTO.setTest_reg_date(today.getTime());
 
-	// ModelDriven 인터페이스의 getModel 구현
-	public Object getModel() {
-		return testDTO;
-	}
+        // 등록 쿼리 수행
+        sqlMapper.insert("Test.insertBoard", testDTO);
 
-	// 게시글 INSERT 액션
-	public String execute() throws Exception {
+        return SUCCESS;
+    }
 
-		// 등록할 항목 수동 설정
-		testDTO.setTest_reg_date(today.getTime());
+    // getter & setter
+    public int getTest_num()
+    {
+        return test_num;
+    }
 
-		// 등록 쿼리 수행
-		sqlMapper.insert("Test.insertBoard", testDTO);
+    public void setTest_num(int test_num)
+    {
+        this.test_num = test_num;
+    }
 
-		return SUCCESS;
-	}	
+    public int getCurrentPage()
+    {
+        return currentPage;
+    }
 
-	// getter & setter
-	public int getTest_num() {
-		return test_num;
-	}
-	public void setTest_num(int test_num) {
-		this.test_num = test_num;
-	}	
-	public int getCurrentPage() {
-		return currentPage;
-	}
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
+    public void setCurrentPage(int currentPage)
+    {
+        this.currentPage = currentPage;
+    }
 }

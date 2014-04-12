@@ -11,13 +11,19 @@ import javax.mail.internet.MimeMessage;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class Emailer extends ActionSupport
-{
+{    
+    private String verification_code; // verification code
+    
+    /* emailer 액션으로 넘어오는 파라미터 */
+    private String buyer_name;
+    private String buyer_email;    
+    /**/
 
-    private String from;
-    private String password;
-    private String to;
-    private String subject;
-    private String body;
+    private String from; // The email address of the sender
+    private String password; // The password of the above account
+    private String to; // Who to send the email to?
+    private String subject; // subject of the email
+    private String body; // The actual email message
 
     static Properties properties = new Properties();
     static
@@ -45,11 +51,19 @@ public class Emailer extends ActionSupport
 
             Message message = new MimeMessage(session);
             /* 파라미터 임시 설정 */
+            setVerification_code("1234");
             setFrom("team6kh@gmail.com");
             setPassword("dkagh1234.");
-            setTo("huks7417@gmail.com");
-            setSubject("Hello World!");
-            setBody("Taz'dingo");
+            setTo(getBuyer_email());
+            setSubject("[JOGIYO] Please verify your email '" + getBuyer_email() + "'");
+            setBody("Taz'dingo, we want to verify that you are indeed \""
+                    + getBuyer_name() 
+                    + "\". if that's the case, please type the following verification code: "
+                    + getVerification_code()
+                    + ". if you're not "
+                    + getBuyer_name()
+                    + " or didn't request verification, you can ignore this email."
+                    );
             /* 파라미터 임시 설정 끝 */
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
@@ -122,5 +136,37 @@ public class Emailer extends ActionSupport
     public static void setProperties(Properties properties)
     {
         Emailer.properties = properties;
+    }
+
+    /* emailer 액션으로 넘어오는 파라미터 */
+    public String getBuyer_name()
+    {
+        return buyer_name;
+    }
+
+    public void setBuyer_name(String buyer_name)
+    {
+        this.buyer_name = buyer_name;
+    }
+    
+    public String getBuyer_email()
+    {
+        return buyer_email;
+    }
+
+    public void setBuyer_email(String buyer_email)
+    {
+        this.buyer_email = buyer_email;
+    }
+    /**/
+
+    public String getVerification_code()
+    {
+        return verification_code;
+    }
+
+    public void setVerification_code(String verification_code)
+    {
+        this.verification_code = verification_code;
     }
 }

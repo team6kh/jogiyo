@@ -9,7 +9,6 @@ import common.ConDAOAware;
 
 public class DeleteBuyerAction implements Action, ConDAOAware
 {
-
 	private SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체
 
 	private BuyerDTO buyerDTO = new BuyerDTO();
@@ -23,7 +22,6 @@ public class DeleteBuyerAction implements Action, ConDAOAware
 
 	public String execute() throws Exception
 	{
-
 		// 삭제할 항목 설정
 		buyerDTO.setBuyer_id(getModalParam_key());
 
@@ -52,5 +50,4 @@ public class DeleteBuyerAction implements Action, ConDAOAware
 	{
 		this.modalParam_key = modalParam_key;
 	}
-
 }

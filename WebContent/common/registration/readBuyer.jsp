@@ -29,13 +29,13 @@
 
 	<!-- container -->
 	<div class="container">	
-		<div class="form-signup">
+		<form class="form-signup" id="form-signup" action="emailer.action" method="post">
 			<br />
 		  	<!-- 인증이 되지 않았을 시 뜬다. -->		  	
 			<c:if test="${buyerDTo.buyer_verification eq no}">						
 			<div class="alert alert-info alert-dismissable">			  
 			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			  <a href="emailer.action" class="alert-link">이메일을 인증해주세요.</a>
+			  <a href="#" class="alert-link" onclick="document.getElementById('form-signup').submit(); return false">이메일을 인증해주세요.</a>
 			</div>
 			</c:if>	   			
 	       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>			
@@ -53,6 +53,7 @@
 			<div class="form-group">
 			  <label>이름</label>
 			  <input type="text" class="form-control" value="${buyerDTO.buyer_name}" disabled>
+			  <input type="hidden" name="buyer_name" value="${buyerDTO.buyer_name}">
 			</div>
 			<div class="form-group">
 			  <label>비밀번호</label>
@@ -61,6 +62,7 @@
 			<div class="form-group">
 			  <label>이메일</label>
 			  <input type="text" class="form-control" value="${buyerDTO.buyer_email}" disabled>
+			  <input type="hidden" name="buyer_email" value="${buyerDTO.buyer_email}">
 			</div>
 			<!-- 인증번호 -->
 			<c:if test="${buyerDTo.buyer_verification eq no}">
@@ -114,7 +116,7 @@
 										
 			</div><!-- END of pull-right -->
 			
-       	</div><!-- END of form-signup -->
+       	</form><!-- END of form-signup -->
 	</div>
 	<!-- /.container -->
 

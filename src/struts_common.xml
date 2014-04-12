@@ -132,8 +132,18 @@
 		
 		<!-- 이메일 인증 서비스 -->
 		<action name="emailer" class="common.Emailer">
-			<result name="success">/common/welcome.jsp</result>
+			<result name="success" type="chain">
+				<param name="actionName">insertEvr</param>
+			</result>
 			<result name="error">/common/error.jsp</result>
+		</action>
+		
+		<!-- 이메일 인증 요청 저장소 -->
+		<action name="insertEv" class="common.InsertEmailVerification">
+			<interceptor-ref name="chain"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/common/welcome.jsp</result>
 		</action>
 		
 		<!-- NEW 비밀번호 체크 액션 -->

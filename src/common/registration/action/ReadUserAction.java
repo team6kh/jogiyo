@@ -1,38 +1,42 @@
 package common.registration.action;
 
-import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Action;
 
-public class ReadUserAction extends ActionSupport {
-	
-	private String userType;
-	private String userId;
-	
-	public String execute() throws Exception {		
-		
-		if (getUserType().equals("buyer")) {
-			return "buyer";
-		} else if(getUserType().equals("seller")) {
-			return "seller";
-		}
-		
-		return ERROR;		
-	}
+public class ReadUserAction implements Action
+{
+    private String userType;
+    private String userId;
 
-	// getter & setter
-	public String getUserType() {
-		return userType;
-	}
+    public String execute() throws Exception
+    {
+        if (getUserType().equals("buyer"))
+        {
+            return "buyer";
+        } else if (getUserType().equals("seller"))
+        {
+            return "seller";
+        }
+        return ERROR;
+    }
 
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
+    // getter & setter
+    public String getUserType()
+    {
+        return userType;
+    }
 
-	public String getUserId() {
-		return userId;
-	}
+    public void setUserType(String userType)
+    {
+        this.userType = userType;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}	
+    public String getUserId()
+    {
+        return userId;
+    }
 
+    public void setUserId(String userId)
+    {
+        this.userId = userId;
+    }
 }

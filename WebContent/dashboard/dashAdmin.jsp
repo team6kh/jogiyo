@@ -38,25 +38,20 @@
           <h1 class="page-header">관리자 대시보드</h1>      
           
           <div class="row placeholders">
-          	<!-- REST 글 갯수 -->
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <h1>${countRest}</h1>
-              <span class="text-muted">REST 글 갯수</span>
-            </div>
-            <!-- QnA 글 갯수 -->
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <h1>${countQna}</h1>
-              <span class="text-muted">QnA 글 갯수</span>
-            </div>
             <!-- 구매자 수 -->
-            <div class="col-xs-6 col-sm-3 placeholder">
+            <div class="col-xs-6 col-sm-4 placeholder">
               <h1>${fn:length(listBuyer)}</h1>
               <span class="text-muted">구매자 수</span>
             </div>
             <!-- 판매자 수 -->
-            <div class="col-xs-6 col-sm-3 placeholder">
+            <div class="col-xs-6 col-sm-4 placeholder">
               <h1>${fn:length(listSeller)}</h1>
               <span class="text-muted">판매자 수</span>
+            </div>            
+          	<!-- TEST 글 갯수 -->
+            <div class="col-xs-6 col-sm-4 placeholder">
+              <h1>${countTest}</h1>
+              <span class="text-muted">TEST 글 갯수</span>
             </div>
           </div>          
 

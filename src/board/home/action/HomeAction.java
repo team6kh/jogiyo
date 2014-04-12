@@ -1,23 +1,26 @@
 package board.home.action;
 
-import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Action;
 
-public class HomeAction extends ActionSupport {
-	
-	private String actionName = "home";
-	
-	public String welcome() throws Exception {
-		return SUCCESS;
-	}
+public class HomeAction implements Action
+{
+    private String actionName = "home";
 
-	public String execute() throws Exception {
-		return SUCCESS;
-	}
-	
-	public String getActionName() {
-		return actionName;
-	}
-	
-	// no setter
-	
+    // 환영 페이지
+    public String welcome() throws Exception
+    {
+        return SUCCESS;
+    }
+
+    public String execute() throws Exception
+    {
+        return SUCCESS;
+    }
+
+    public String getActionName()
+    {
+        return actionName;
+    }
+
+    // no setter
 }

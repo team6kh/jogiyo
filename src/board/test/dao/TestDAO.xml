@@ -25,14 +25,14 @@
 		WHERE test_num = #test_num#
 	</sql>
 
-
 	<!-- select 쿼리문 정의 -->
 	<select id="selectAll" resultMap="TestResult" parameterClass="int">
 		<include refid="select-all" />
 		ORDER BY test_num DESC
 	</select>
 
-	<select id="selectWhereTestNum" resultMap="TestResult" parameterClass="int">
+	<select id="selectWhereTestNum" resultMap="TestResult"
+		parameterClass="int">
 		<include refid="select-all" />
 		<include refid="where-test_num" />
 	</select>
@@ -69,7 +69,8 @@
 	<!-- update 쿼리문 정의 -->
 	<update id="updateBoard" parameterClass="TestDTO">
 		UPDATE test_board SET test_writer_pw = #test_writer_pw#,
-		test_subject = #test_subject#,
+		test_subject =
+		#test_subject#,
 		test_content = #test_content#
 		<include refid="where-test_num" />
 	</update>
