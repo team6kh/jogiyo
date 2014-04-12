@@ -70,7 +70,7 @@
                   <th>buyer_id</th>
                   <th>buyer_pw</th>
                   <th>buyer_name</th>
-                  <th>buyer_gender</th>
+                  <th>buyer_verification</th>
                   <th>buyer_reg_date</th>
                 </tr>
               </thead>
@@ -81,7 +81,7 @@
                   <td>${listBuyer.buyer_id}</td>
                   <td>${listBuyer.buyer_pw}</td>
                   <td>${listBuyer.buyer_name}</td>
-                  <td>${listBuyer.buyer_gender}</td>
+                  <td>${listBuyer.buyer_verification}</td>
                   <td>${listBuyer.buyer_reg_date}</td>
                 </tr>
                 </c:forEach>

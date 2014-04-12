@@ -123,7 +123,18 @@
 			<result>/index.jsp</result>
 		</action>
 		
+		<!-- welocme 액션 -->
+		<action name="welcome" class="board.home.action.HomeAction" method="welcome">
+			<result>/common/welcome.jsp</result>
+		</action>
+		
 		<!-- 공통기능(?) -->
+		
+		<!-- 이메일 인증 서비스 -->
+		<action name="emailer" class="common.Emailer">
+			<result name="success">/common/welcome.jsp</result>
+			<result name="error">/common/error.jsp</result>
+		</action>
 		
 		<!-- NEW 비밀번호 체크 액션 -->
 		<action name="checkPass" class="common.CheckPasswordAction">

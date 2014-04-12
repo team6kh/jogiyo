@@ -28,8 +28,16 @@
 	<!-- end of header -->
 
 	<!-- container -->
-	<div class="container">		
+	<div class="container">	
 		<div class="form-signup">
+			<br />
+		  	<!-- 인증이 되지 않았을 시 뜬다. -->		  	
+			<c:if test="${buyerDTo.buyer_verification eq no}">						
+			<div class="alert alert-info alert-dismissable">			  
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  <a href="emailer.action" class="alert-link">이메일을 인증해주세요.</a>
+			</div>
+			</c:if>	   			
 	       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>			
 			<div class="form-group">
 			  <label>가입유형</label>
@@ -44,26 +52,29 @@
 			</div>						
 			<div class="form-group">
 			  <label>이름</label>
-			   <input type="text" class="form-control" value="${buyerDTO.buyer_name}" disabled>
+			  <input type="text" class="form-control" value="${buyerDTO.buyer_name}" disabled>
 			</div>
 			<div class="form-group">
 			  <label>비밀번호</label>
-			   <input type="password" class="form-control" value="${buyerDTO.buyer_pw}" disabled>
+			  <input type="password" class="form-control" value="${buyerDTO.buyer_pw}" disabled>
 			</div>			
 			<div class="form-group">
 			  <label>이메일</label>
-			   <input type="text" class="form-control" value="${buyerDTO.buyer_email}" disabled>
+			  <input type="text" class="form-control" value="${buyerDTO.buyer_email}" disabled>
 			</div>
+			<!-- 인증번호 -->
+			<c:if test="${buyerDTo.buyer_verification eq no}">
+			<div class="form-group">
+			  <label>인증번호</label>
+			  <div class="input-group">
+			    <input type="text" class="form-control">
+			    <span class="input-group-addon btn btn-default">전송</span>
+			  </div>
+			</div>
+			</c:if>	
 			<div class="form-group">
 			  <label>휴대폰</label>
-			   <input type="text" class="form-control" value="${buyerDTO.buyer_phonenumber}" disabled>
-			</div>
-			<div class="form-group">
-			  <label>성별</label>
-			    <select class="form-control" id="userGender" disabled>
-			      <option value="female">여성</option>
-			      <option value="male">남성</option>
-			    </select>			  
+			  <input type="text" class="form-control" value="${buyerDTO.buyer_phonenumber}" disabled>
 			</div>
 			
 			<div class="pull-right">
@@ -115,7 +126,6 @@
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script>
 		$("#userType").val("seller");
-		$("#userGender").val("${buyerDTO.buyer_gender}");
 		
 		$(document).on("click", ".insertModalParam", function() {
 			var thisModalParam = $(this).data('id');

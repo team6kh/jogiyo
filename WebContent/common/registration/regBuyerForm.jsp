@@ -109,19 +109,16 @@
 			  <input type="password" class="form-control" placeholder="4~20자로 입력해주세요." name="buyer_pw" required>
 			</div>
 			<div class="form-group">
+			  <label>비밀번호 확인</label>
+			  <input type="password" class="form-control" placeholder="비밀번호를 재입력 해주세요." required>
+			</div>
+			<div class="form-group">
 			  <label>휴대폰</label>
 			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="buyer_phonenumber" required>
 			</div>			
 			<div class="form-group">
 			  <label>이메일</label>
 			  <input type="email" class="form-control" placeholder="you@jogiyo.com" name="buyer_email" required>
-			</div>			
-			<div class="form-group">
-			  <label>성별을 선택하세요.</label>
-			    <select class="form-control" name="buyer_gender">
-			      <option value="female">여성</option>
-			      <option value="male">남성</option>
-			    </select>			  
 			</div>
 			
         	<button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>

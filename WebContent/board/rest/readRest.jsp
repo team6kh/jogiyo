@@ -1,27 +1,30 @@
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<style type="text/css">
-	html {
-		height: 100%
-	}
-	body {
-		height: 100%;
-		margin: 3% 0% 0% 1.5%;
-		padding: 0
-	}
-	#map_canvas {
-		height: 100%
-	}
-</style>
-<script type="text/javascript"
-	src="http://maps.googleapis.com/maps/api/js?sensor=true">
-</script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="huks">
+<link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
+<title>JOGIYO</title>
+
+<!-- Bootstrap core CSS -->
+<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="common/common-template.css" rel="stylesheet">
+
+<!-- 구글 맵 API -->
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
+<!-- 구글 맵 스크립트 -->
 <script type="text/javascript">
 	var map;
 	var infowindow = new google.maps.InfoWindow();
@@ -116,152 +119,156 @@
 		});
 	}
 </script>
+
 </head>
 
 <body onload="initialize()">
 
-	<form name="readRestForm" action="payRest.action" method="post" >
-		<TABLE border=0 width=90%>
-			<tr align=center>
-				<td align=left width=10%> <font color="#FF3636"><b>카테고리</b></font></td>
-				<td align=left width=12%>
-					<s:if test="resultClass.rest_localcategory == 11">
-						서울특별시
-					</s:if>
-					<s:elseif test="resultClass.rest_localcategory == 12">
-						경기/인천
-					</s:elseif>
-					<s:elseif test="resultClass.rest_localcategory == 13">
-						부산/경남
-					</s:elseif>
-					<s:elseif test="resultClass.rest_localcategory == 14">
-						대구/경북
-					</s:elseif>
-					<s:elseif test="resultClass.rest_localcategory == 15">
-						대전/전북
-					</s:elseif>
-					<s:elseif test="resultClass.rest_localcategory == 16">
-						광주/전남
-					</s:elseif>
-					<s:elseif test="resultClass.rest_localcategory == 17">
-						그 외 지역
-					</s:elseif>
-				</td>
-				<td align=left width=10%>
-					<s:if test="resultClass.rest_typecategory == 21">
-						한식
-					</s:if>
-					<s:elseif test="resultClass.rest_typecategory == 22">
-						양식
-					</s:elseif>
-					<s:elseif test="resultClass.rest_typecategory == 23">
-						중식
-					</s:elseif>
-					<s:elseif test="resultClass.rest_typecategory == 24">
-						일식
-					</s:elseif>
-					<s:elseif test="resultClass.rest_typecategory == 25">
-						기타
-					</s:elseif>
-				</td>
-				<td width=68%></td>
-			</tr>
-			<tr>
-				<td align=left><font color="#FF3636"><b>상품번호</b></font></td>
-				<td align=left>
-					<s:property value="resultClass.rest_num" />
-					<input type="hidden" name="rest_num" value=<s:property value="resultClass.rest_num" /> /> 
-				</TD>
-				<td colspan=2></TD>
-			<tr></tr>
-			<tr></tr>
-			<tr>
-				<td colspan=3 align=left>
-					<img src = "<s:property value="resultClass.rest_destFile1"/>"/>
-				</td>
-				<td align=right>
-					<table width=70%>
-						<tr>
-							<td align="right" width=30%>
-								<font color="#FF3636"><b>상품명</b></font>
-							</td>
-							<td align="left" >
-								&nbsp;&nbsp;&nbsp;&nbsp;<font size="7"><s:property value="resultClass.rest_subject" /></font>
-								<input type="hidden" name="rest_subject" value=<s:property value="resultClass.rest_subject" />  />
-							</td>
-						</tr>
-						<tr>
-							<td align="right" width=30%>
-								<font color="#FF3636"><b>상품가</b></font>
-							</td>
-							<td align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;<font size="7"><s:property value="resultClass.rest_price" /></font>
-								<input type="hidden" name="rest_price" value=<s:property value="resultClass.rest_price" /> />
-							</td>
-						</tr>
-						<tr>
-							<td align="right" width=30%>
-								<font color="#FF3636"><b>구매개수</b></font>
-							</td>
-							<td align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield name="rest_amount" theme="simple" value="%{resultClass.rest_amount}" size="2" maxlength="4"/>
-							</td>
-						</tr>
-						<tr>
-							<td align="right" width=30%>
-								<font color="#FF3636"><b>옵션</b></font>
-							</td>
-							<td align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;
+	<!-- header -->
+	<%@ include file="/common/header.jsp"%>
+	<!-- end of header -->
 
-								<td>
-									<select name="restopt_set">
-										<s:iterator value="list" status="stat">
-											<option value="<s:property value="restopt_subject"/>a<s:property value="restopt_priceplus" />">
-												<s:property value="restopt_subject" /> (가격 : <s:property value="restopt_priceplus" />) 
-											</option>
-										</s:iterator>
-									</select>
-								</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr>
-				<td colspan=4 align="right">
-					<input name="submit" type="submit" value="구매하기"  />
+	<!-- container -->
+	<div class="container">
+
+		<!-- test message -->
+		<div class="common-template">
+		
+			<div class="col-md-12">
+			 	<div class="col-md-6"><s:property value="resultClass.rest_localcategory" /></div>	
+				<div class="col-md-6"><s:property value="resultClass.rest_typecategory" /></div>	
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-2"><s:property value="resultClass.rest_num" /></div>
+				<div class="col-md-10"><s:property value="resultClass.rest_subject" /></div>
+			</div>
+			<div class="col-md-12">
+				<p class="lead"><s:property value="resultClass.rest_destFile1" /></p>
+				<p class="lead"><s:property value="resultClass.rest_destFile2" /></p>
+			</div>
+			<div class="col-md-12">
+				<!-- 업소상세정보 및 장바구니 영역 : S -->
+				<div class="side-info col-xs-12 col-sm-12 col-md-3 col-lg-3 col-md-push-9 col-lg-push-9">
+					<!-- 우측 업소상세정보 : S -->
+					<section class="shop-det-info box">
+						<h2 class="bold tog" onclick="toggleLayer('sinfo','tog');">업소상세정보</h2>
+						<u class="mod-info" id="mod_info">정보수정요청</u>
+						<dl class="dl-horizontal sinfo xsmall">
+							<dt>최소금액</dt>
+							<dd>15,000원 부터</dd>
+							<dt>운영시간</dt>
+							<dd>24시간 운영</dd>
+	<dt>전화번호</dt>
+	<dd><strong class="text-primary">050-4822-2619</strong></dd>
+							<dt>업소소개</dt>
+							<dd><div id="intro"></div>
+						</dl>
+						<!-- 정보수정요청 : S -->
+						<fieldset class="mod-info-area">
+							<h2 class="small">정보수정요청</h2>
+							<button type="button" class="close-mod-area" onclick="fn_closeModInfo();return false;">닫기</button>
+							<div class="modify small">
+								<span class="tit">홍차이나</span> <em class="text-muted">| 서울특별시 마포구 용강동</em>
+								<div class="row">
+								  <label for="tel" class="col-lg-4 p0"><input type="checkbox" name="claim" id="tel" value="1"> 전화번호</label>
+								  <label for="shopnm" class="col-lg-8 p0"><input type="checkbox" name="claim" id="shopnm" value="2"> 상호</label>
+								  <label for="delivery" class="col-lg-4 p0"><input type="checkbox" name="claim" id="delivery" value="4"> 배달여부</label>
+								  <label for="addr" class="col-lg-4 p0"><input type="checkbox" name="claim" id="addr" value="8"> 주소</label>
+								  <label for="etc" class="col-lg-4 p0"><input type="checkbox" name="claim" id="etc" value="16"> 기타</label>
+								</div>
+								<textarea class="form-control" rows="4" id="claim_cont"></textarea>
+								<p class="mod-info-note">배달시간, 카드결제유무 등 자세한<br>수정 내용을 적어주세요.<br>사진은 <a href="mailto:CS@woowahan.com">CS@woowahan.com</a> 으로 보내주세요.<br>수정내용은 확인하여 빠른 시간 내에<br>반영하겠습니다.</p>
+							</div> <!--/.modify -->
+							<div class="btn-group p0">
+ 								<button type="submit" class="btn btn-success" onclick="fn_shop_claim_opt();"><span class="btn-modify">수정요청하기</span></button>
+ 								<button type="button" class="btn btn-default" onclick="fn_closeModInfo();return false;"><span class="btn-mod-cancel">취소</span></button>
+							</div> <!--./btn-group -->
+						</fieldset> <!--/.mod-info-area -->
+					</section> <!--/.shop-det-info -->
+
+					<!-- 장바구니 // 내역 불러오기 : S -->
+					<section class="cart box" id="cart_pause" style="display:none">
+						<h2 class="bold" onclick="$(this).next().toggleClass('hidden-xs');">장바구니</h2>
+						<div class="login hidden-xs hidden-sm">
+							<p class="notice small text-center" >장바구니 내역을 불러오고 있습니다.</p>
+						</div>
+					</section>
+					<section class="cart box" id="cart_ui" style="display:none">
+					</section> <!--/.cart -->
+
+				</div> <!--/.side-info -->
+			</div>
+			<p class="lead"><s:property value="resultClass.rest_price" /></p>
+			<p class="lead"><s:property value="resultClass.rest_amount" /></p>
+			<p class="lead"><s:property value="resultClass.rest_writer_address" /></p>
+			<p class="lead">option?
+			<select name="restopt_set">
+				<s:iterator value="list" status="stat">
+					<option value="<s:property value="restopt_subject"/>a<s:property value="restopt_priceplus" />">
+						<s:property value="restopt_subject" /> (가격 : <s:property value="restopt_priceplus" />) 
+					</option>
+				</s:iterator>
+			</select>
+			<input name="submit" type="submit" value="구매하기"  />
 					<input name="list" type="button" value="장바구니담기" onClick="javascript:location.href='ListRest.action?currentPage=<s:property value="currentPage"/>'" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan=2>
-					<font color="#FF3636"><b>상품 상세설명</b></font>				
-				</td>
-				<td></td><td></td>
-			</tr>
-			<tr></tr>
-			<tr>
-				<td colspan=4>
-					<img src = "<s:property value="resultClass.rest_destFile2"/>"/>
-					<input type ="hidden" id="rest_writer_address" value="<s:property value="resultClass.rest_writer_address" />" />
-				</td>
-			</tr>
-		</table>
+		</div>
+		<!-- end of test message -->
+
+	</div>
+	<!-- /.container -->
 
 
-		<table>
-			<tr>
-				<td align="right" colspan="6">
-					<!--
-					<input name="list" type="button" value="수정" class="inputb" onClick="javascript:location.href='modifyRest.action?rest_num=<s:property value="rest_num" />&currentPage=<s:property value="currentPage" />'">
-					<input name="list" type="button" value="삭제" class="inputb" onClick="javascript:location.href='deleteRest.action?rest_num=<s:property value="rest_num" />&currentPage=<s:property value="currentPage" />'">
-					 -->
-					<input name="list" type="button" value="목록"  onClick="javascript:location.href='listRest.action?currentPage=<s:property value="currentPage" />'">
-				</td>
-			</tr>
-		</table>
-	</form>
-
-	<div id="map_canvas" style="width: 80%; height: 60%"></div>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+	//------------------------------------------------------------------------------
+	//PURPOSE : 우측 따라다니는 장바구니
+	//CREATE  : 2013-11-20
+	//MODIFY  :
+	//------------------------------------------------------------------------------
+	var cw, cl;
+	line = 660;
+	$(document).ready(function(){
+		$(window).on('resize', function() {
+			fn_getPosCart();
+		}).trigger('resize');
+	});
+	
+	function fn_getPosCart() {
+		cw = $('.side-info').width() + 2;
+		cl = $('.side-info').offset().left;
+	
+		$('#cart_ui').css('width',cw);
+	}
+	
+	var browser = "Chrome";
+	
+	$(window).scroll(function() {
+		//사파리 안되게
+		if ( browser != 'Safari' )
+		{
+			if($(window).width() > 768) {
+				if($(window).scrollTop() > line) {
+					$('#cart_ui').css({
+						'position' : 'fixed',
+						'left' : cl,
+						'top' : 10
+					});
+				} else {
+					$('#cart_ui').css({
+						'position' : 'inherit',
+						'left' : 0,
+						'top' : 0
+					});
+				}
+			}
+		}
+	});
+	</script>
+	
 </body>
+</html>

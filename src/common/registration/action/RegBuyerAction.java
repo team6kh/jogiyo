@@ -24,6 +24,8 @@ public class RegBuyerAction implements Action, Preparable, ModelDriven, ConDAOAw
 	private String login_id;	// 넘길 아이디
 	private String login_pw;	// 넘길 패스워드
 	
+	private String actionName;	// 가입 후 보여질 환영 페이지
+	
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;		
 	}
@@ -39,6 +41,7 @@ public class RegBuyerAction implements Action, Preparable, ModelDriven, ConDAOAw
 	public String execute() throws Exception {		
 		
 		buyerDTO.setBuyer_reg_date(today.getTime());
+		buyerDTO.setBuyer_verification("no"); // 가입시 인증값은 no
 		
 		sqlMapper.insert("Buyer.insertBuyer", buyerDTO);
 		
@@ -50,9 +53,11 @@ public class RegBuyerAction implements Action, Preparable, ModelDriven, ConDAOAw
 		//System.out.println("getLogin_id():"+getLogin_id());
 		//System.out.println("getLogin_pw():"+getLogin_pw());
 		
+		setActionName("welcome"); // 가입 후 보여질 환영 페이지
+		
 		return SUCCESS;		
 	}	
-	
+
 	// 가입 후 바로 로그인을 위한 getter & setter	
 	public String getReg_type() {
 		return reg_type;
@@ -84,6 +89,15 @@ public class RegBuyerAction implements Action, Preparable, ModelDriven, ConDAOAw
 
 	public void setLogin_pw(String login_pw) {
 		this.login_pw = login_pw;
+	}
+	
+	// 가입 후 보여질 환영 페이지
+	public String getActionName() {
+		return actionName;
+	}
+	
+	public void setActionName(String actionName) {
+		this.actionName = actionName;
 	}
 
 }

@@ -11,7 +11,7 @@ public class BuyerDTO {
 	private Date buyer_reg_date;
 	private String buyer_email;
 	private String buyer_phonenumber;
-	private String buyer_gender;
+	private String buyer_verification;
 	
 	public int getUser_seq() {
 		return user_seq;
@@ -55,11 +55,11 @@ public class BuyerDTO {
 	public void setBuyer_phonenumber(String buyer_phonenumber) {
 		this.buyer_phonenumber = buyer_phonenumber;
 	}
-	public String getBuyer_gender() {
-		return buyer_gender;
+	public String getBuyer_verification() {
+		return buyer_verification;
 	}
-	public void setBuyer_gender(String buyer_gender) {
-		this.buyer_gender = buyer_gender;
+	public void setBuyer_verification(String buyer_verification) {
+		this.buyer_verification = buyer_verification;
 	}	
 	
 }

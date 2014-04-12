@@ -59,14 +59,7 @@
 			<div class="form-group">
 			  <label>이메일</label>
 			  <input type="email" class="form-control" placeholder="you@jogiyo.com" name="buyer_email" value="${buyerDTO.buyer_email}" required>
-			</div>			
-			<div class="form-group">
-			  <label>성별</label>
-			    <select class="form-control" id="userGender" disabled>
-			      <option value="female">여성</option>
-			      <option value="male">남성</option>
-			    </select>			  
-			</div>
+			</div>	
 			
         	<button class="btn btn-lg btn-primary btn-block" type="submit">수정</button>
       	</form>

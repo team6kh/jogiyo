@@ -13,7 +13,7 @@
 		<result property="buyer_reg_date" column="buyer_reg_date" />
 		<result property="buyer_email" column="buyer_email" />
 		<result property="buyer_phonenumber" column="buyer_phonenumber" />
-		<result property="buyer_gender" column="buyer_gender" />
+		<result property="buyer_verification" column="buyer_verification" />
 	</resultMap>
 
 	<!-- 공통으로 사용할 select 절 정의 -->
@@ -52,7 +52,7 @@
 								buyer_reg_date,
 								buyer_email,
 								buyer_phonenumber,
-								buyer_gender
+								buyer_verification
 								)
 						VALUES (user_seq.nextval,
 								#buyer_id#,
@@ -61,7 +61,7 @@
 								#buyer_reg_date#,
 								#buyer_email#,
 								#buyer_phonenumber#,
-								#buyer_gender#
+								#buyer_verification#
 								)
 	</insert>
 
