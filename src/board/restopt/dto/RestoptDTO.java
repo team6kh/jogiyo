@@ -6,6 +6,10 @@ public class RestoptDTO {
 	private int restopt_rest_num; // rest테이블의 시퀀스넘
 	private String restopt_subject; //옵션명
 	private int restopt_priceplus; //옵션가
+
+	private String restopt_destFile1; //옵션의 사진 경로 // jsp의 img src 태그사용 용도
+	private String restopt_orgname;  //옵션 사진 파일 오리지날
+	private String restopt_savname; //옵션 사진 파일 세이브
 	
 	
 	public int getRestopt_num() {
@@ -32,4 +36,23 @@ public class RestoptDTO {
 	public void setRestopt_priceplus(int restopt_priceplus) {
 		this.restopt_priceplus = restopt_priceplus;
 	}
+	public String getRestopt_destFile1() {
+		return restopt_destFile1;
+	}
+	public void setRestopt_destFile1(String restopt_destFile1) {
+		this.restopt_destFile1 = restopt_destFile1;
+	}
+	public String getRestopt_orgname() {
+		return restopt_orgname;
+	}
+	public void setRestopt_orgname(String restopt_orgname) {
+		this.restopt_orgname = restopt_orgname;
+	}
+	public String getRestopt_savname() {
+		return restopt_savname;
+	}
+	public void setRestopt_savname(String restopt_savname) {
+		this.restopt_savname = restopt_savname;
+	}
+	
 }

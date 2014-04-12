@@ -192,15 +192,6 @@
 						</tr>
 						<tr>
 							<td align="right" width=30%>
-								<font color="#FF3636"><b>상품가</b></font>
-							</td>
-							<td align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;<font size="7"><s:property value="resultClass.rest_price" /></font>
-								<input type="hidden" name="rest_price" value=<s:property value="resultClass.rest_price" /> />
-							</td>
-						</tr>
-						<tr>
-							<td align="right" width=30%>
 								<font color="#FF3636"><b>구매개수</b></font>
 							</td>
 							<td align="left">

@@ -8,8 +8,6 @@
 
 
 
-
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,7 +30,8 @@
 			function addInput() {
 				if (fields != 16) {
 					document.getElementById('text').innerHTML += "옵션명"+fields+".&nbsp&nbsp <input type='text' name='restopt_subject"+fields+"' value=''/> <br/>"
-																+"옵션가"+fields+".&nbsp&nbsp <input type='text' name='restopt_priceplus"+fields+"' value=''/> 원<br/>";
+																+"옵션가"+fields+".&nbsp&nbsp <input type='text' name='restopt_priceplus"+fields+"' value=''/> 원<br/>"
+																+"옵션사진"+fields+".&nbsp&nbsp <input type='file' name='optupload"+fields+"' />";
 					fields += 1;
 					optMap.put("restopt_subject"+fields,"restopt_priceplus"+fields);
 				} else {
@@ -41,6 +40,7 @@
 				}
 			}
 		
+			
 		
 			function validation() {
 				var frm = document.getElementById("insertRestForm");
@@ -49,10 +49,6 @@
 					alert("상품명을 입력해주세요.");
 					return false;
 				} 
-				else if(frm.rest_price.value == "0") {
-					alert("상품가격을 입력해주세요.");
-					return false;
-				}
 				else if(frm.mainphoto.value == "") {
 					alert("매인사진을 업로드해주세요.");
 					return false;			
@@ -67,11 +63,11 @@
 			function optvalidation() {
 				var frm = document.getElementById("insertOptRestForm");
 				
-				if(frm.rest_subject.value == "") {
+				if(frm.restopt_subject.value == "") {
 					alert("옵션명을 입력해주세요.");
 					return false;
 				} 
-				else if(frm.rest_price.value == "") {
+				else if(frm.restopt_priceplus.value == "") {
 					alert("옵션가격을 입력해주세요.");
 					return false;
 				}
@@ -101,7 +97,7 @@
 				</tr>
 			</table>
 			
-			<s:if test="rest_price == 0">
+			<s:if test="rest_num == 0">
 				<form name="insertRestForm" action="insertRest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
 					<!-- 임시 히든값 -->
 					<s:hidden name="rest_writer_name" value="히든판매자이름" />
@@ -132,13 +128,6 @@
 						</tr>
 						<tr>
 							<td height="1" colspan="2"></td>
-						</tr>
-						
-						<tr>
-							<td><font color="#FF0000">*</font>상품가격</td>
-							<td>
-								<s:textfield name="rest_price" theme="simple" value="%{resultClass.rest_price}" maxlength="20"/>
-							</td>
 						</tr>
 						
 						<tr>
@@ -236,7 +225,12 @@
 							</td>
 						</tr>
 					</table>
+					
+					
 				</form>
+				
+				
+				
 				
 		</div>
 	</body>

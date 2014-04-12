@@ -6,7 +6,6 @@ public class PayRestAction extends ActionSupport {
 
 	private int rest_num;
 	private String rest_subject;
-	private int rest_price;
 	
 	private String restopt_set;
 	private String restopt_subject;
@@ -54,11 +53,5 @@ public class PayRestAction extends ActionSupport {
 	}
 	public void setRest_subject(String rest_subject) {
 		this.rest_subject = rest_subject;
-	}
-	public int getRest_price() {
-		return rest_price;
-	}
-	public void setRest_price(int rest_price) {
-		this.rest_price = rest_price;
 	}
 }
