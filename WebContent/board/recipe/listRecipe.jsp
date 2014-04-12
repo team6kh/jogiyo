@@ -150,7 +150,7 @@
 							<option value="recipe_price">비용</option>
 							<option value="recipe_writer">작성자</option>
 					</select> <span id="recipe_search_input" class="btn_s_skin"> </span> <input name="mylist"
-							type="button" value="내가쓴글" class="inputb" onClick="javascript:location.href='recipe_mylsit.action?recipe_writer=<s:property value="recipe_writer" />'">
+							type="button" value="내가쓴글"  onClick="javascript:location.href='recipe_mylsit.action?recipe_memberwriter=<s:property value="recipe_memberwriter" />';">
 					</td>
 				</tr>
 			</table>

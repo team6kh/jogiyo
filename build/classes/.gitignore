@@ -1,8 +1,3 @@
 /board
 /common
-/dbconnect.properties
-/rebel.xml
-/sqlMapConfig.xml
-/struts.xml
 /test
-/user

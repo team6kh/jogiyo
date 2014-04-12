@@ -124,7 +124,7 @@
 	</update>
 	
 	<!-- myListRecipe 쿼리문 정의 -->
-	<select id="myListRecipe" parameterClass="RecipeDTO">
+	<select id="myListRecipe" resultMap="RecipeRes"  parameterClass="java.lang.String">
 	    SELECT * FROM RECIPE_BOARD WHERE recipe_writer = #recipe_writer#
 	</select>
 
