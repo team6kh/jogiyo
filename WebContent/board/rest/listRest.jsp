@@ -57,7 +57,6 @@
 			      		</a>
 			      		<div class="caption">
 			        		<h3>${list.rest_subject}</h3>
-			        		<p>${list.rest_price}</p>
 			      		</div>
 			    	</div>
 		      	</div>		      			      	
