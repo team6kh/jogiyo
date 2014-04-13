@@ -141,11 +141,22 @@
 	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
 	
-	<form name="readRestForm" action="payRest.action" method="post" >
-		<TABLE border=0 width=90%>
-			<tr align=center>
-				<td align=left width=10%> <font color="#FF3636"><b>카테고리</b></font></td>
-				<td align=left width=12%>
+	
+	<!-- container -->
+	<div class="container">
+	
+		<!-- test board pretty -->
+		<div class="col-md-12">
+			<h3>READ</h3>
+		</div>
+		
+		<div class="col-md-12 well">
+			
+			<div class="col-md-12 well">
+				<div class="col-md-1">
+					<font color="#FF3636"><b>카테고리</b></font>
+				</div>
+				<div class="col-md-11">
 					<s:if test="resultClass.rest_localcategory == 11">
 						서울특별시
 					</s:if>
@@ -167,95 +178,149 @@
 					<s:elseif test="resultClass.rest_localcategory == 17">
 						그 외 지역
 					</s:elseif>
-				</td>
-				<td align=left width=10%>
+					
 					<s:if test="resultClass.rest_typecategory == 21">
-						한식
+						- 한식
 					</s:if>
 					<s:elseif test="resultClass.rest_typecategory == 22">
-						양식
+						- 양식
 					</s:elseif>
 					<s:elseif test="resultClass.rest_typecategory == 23">
-						중식
+						- 중식
 					</s:elseif>
 					<s:elseif test="resultClass.rest_typecategory == 24">
-						일식
+						- 일식
 					</s:elseif>
 					<s:elseif test="resultClass.rest_typecategory == 25">
-						기타
+						- 기타
 					</s:elseif>
-				</td>
-				<td width=68%></td>
-			</tr>
-			<tr>
-				<td align=left><font color="#FF3636"><b>상품번호</b></font></td>
-				<td align=left>
+				</div>
+				
+				<div class="col-md-1">
+					<font color="#FF3636"><b>상품번호</b></font>
+				</div>
+				<div class="col-md-1">
 					<s:property value="resultClass.rest_num" />
-					<input type="hidden" name="rest_num" value=<s:property value="resultClass.rest_num" /> /> 
-				</TD>
-				<td colspan=2></TD>
-			<tr></tr>
-			<tr></tr>
+					<input type="hidden" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
+				</div>
+			</div>
+			
+			<div class="col-md-12 well">
+				<div class="col-sm-4 col-md-5">
+					<img src="${resultClass.rest_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
+				</div>
+				<div class="col-md-7">
+					<br/>
+					<font size="4">상품명</font> <br/>
+					<font size="7" color = "red"><s:property value="resultClass.rest_subject" /></font>
+				</div>
+			</div>
+			
+			<div class="col-md-12 well">
+				<font size="3" color = "red"><b>&nbsp;&nbsp;&nbsp;상품 상세 설명</b></font>
+				
+				<br/><br/>
+				<div class="thumbnail">
+					<img src="${resultClass.rest_destFile2}" alt="N/A" >
+				</div>	
+				<br/><br/>
+				
+				<div class="col-md-12">
+					<c:forEach var="list" items="${list}">
+						<div class="col-sm-4 col-md-3">					
+					    	<div class="thumbnail">
+					      		<a href="${list.restopt_destFile1}">
+					      		<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
+					      		</a>
+					      		<div class="caption">
+					        		<h3>${list.restopt_subject}</h3>
+					        		<h3>${list.restopt_priceplus}</h3>
+					      		</div>
+					    	</div>
+				      	</div>		      			      	
+					</c:forEach>
+					
+					</div>
+					
+					<c:if test="${list eq null}">
+						<div class="text-center">
+							<p>등록된 게시물이 없습니다.</p>
+						</div>
+					</c:if>
+			</div>
+			
+			<div class="col-md-12 well">
+				<div class="col-md-12">
+					<font size="3" color = "red"><b>&nbsp;&nbsp;&nbsp;판매자 정보</b></font>
+				</div>
+				
+				<div class="col-md-3">
+					<font color="#FF3636"><b>&nbsp;&nbsp;&nbsp;판매자</b></font>
+				</div>
+				<div class="col-md-9">
+					${resultClass.rest_writer_name}
+				</div>
+				
+				<div class="col-md-3">
+					<font color="#FF3636"><b>&nbsp;&nbsp;&nbsp;전화번호</b></font>
+				</div>
+				<div class="col-md-9">
+					${resultClass.rest_writer_telnum}
+				</div>
+				
+				<div class="col-md-3">
+					<font color="#FF3636"><b>&nbsp;&nbsp;&nbsp;핸드폰</b></font>
+				</div>
+				<div class="col-md-9">
+					${resultClass.rest_writer_mobilenum}
+				</div>
+				
+				<div class="col-md-3">
+					<font color="#FF3636"><b>&nbsp;&nbsp;&nbsp;반품주소</b></font>
+				</div>
+				<div class="col-md-9">
+					${resultClass.rest_writer_address}
+				</div>
+			</div>
+				
+		</div>
+		
+		
+		
+	</div>
+	
+	<div id="map_canvas" style="width: 30%; height: 60%"></div>
+			
+
+				
+	
+	
+	
+	
+	<!-- 임시 사용 -->
+	<form name="readRestForm" action="payRest.action" method="post" >
+		<TABLE border=0 width=90%>
 			<tr>
-				<td colspan=3 align=left>
-					<img src = "<s:property value="resultClass.rest_destFile1"/>"/>
-				</td>
-				<td align=right>
-					<table width=70%>
-						<tr>
-							<td align="right" width=30%>
-								<font color="#FF3636"><b>상품명</b></font>
-							</td>
-							<td align="left" >
-								&nbsp;&nbsp;&nbsp;&nbsp;<font size="7"><s:property value="resultClass.rest_subject" /></font>
-								<input type="hidden" name="rest_subject" value=<s:property value="resultClass.rest_subject" />  />
-							</td>
-						</tr>
-						<tr>
-							<td align="right" width=30%>
-								<font color="#FF3636"><b>구매개수</b></font>
-							</td>
-							<td align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield name="rest_amount" theme="simple" value="%{resultClass.rest_amount}" size="2" maxlength="4"/>
-							</td>
-						</tr>
-						<tr>
-							<td align="right" width=30%>
-								<font color="#FF3636"><b>옵션</b></font>
-							</td>
-							<td align="left">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								
-								<td>
-									<select name="restopt_set">
-										<s:iterator value="list" status="stat">
-											<option value="<s:property value="restopt_subject"/>a<s:property value="restopt_priceplus" />">
-												<s:property value="restopt_subject" /> (가격 : <s:property value="restopt_priceplus" />) 
-											</option>
-										</s:iterator>
-									</select>
-								</td>
-						</tr>
-					</table>
+				<td>-테스트용-</td>
+			</tr>
+			<tr>
+				<td>
+					옵션<br/>
+					<select name="restopt_set">
+						<s:iterator value="list" status="stat">
+							<option value="<s:property value="restopt_subject"/>a<s:property value="restopt_priceplus" />">
+								<s:property value="restopt_subject" /> (가격 : <s:property value="restopt_priceplus" />) 
+							</option>
+						</s:iterator>
+					</select>
 				</td>
 			</tr>
 			<tr></tr>
 			<tr>
-				<td colspan=4 align="right">
+				<td>
 					<input name="submit" type="submit" value="구매하기"  />
 					<input name="list" type="button" value="장바구니담기" onClick="javascript:location.href='ListRest.action?currentPage=<s:property value="currentPage"/>'" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan=2>
-					<font color="#FF3636"><b>상품 상세설명</b></font>				
-				</td>
-				<td></td><td></td>
-			</tr>
-			<tr></tr>
-			<tr>
-				<td colspan=4>
-					<img src = "<s:property value="resultClass.rest_destFile2"/>"/>
+					
 					<input type ="hidden" id="rest_writer_address" value="<s:property value="resultClass.rest_writer_address" />" />
 				</td>
 			</tr>
@@ -264,78 +329,14 @@
 		
 		<table>
 			<tr>
-				<td align="right" colspan="6">
-					<!--
+				<td align="right">
 					<input name="list" type="button" value="수정" class="inputb" onClick="javascript:location.href='modifyRest.action?rest_num=<s:property value="rest_num" />&currentPage=<s:property value="currentPage" />'">
 					<input name="list" type="button" value="삭제" class="inputb" onClick="javascript:location.href='deleteRest.action?rest_num=<s:property value="rest_num" />&currentPage=<s:property value="currentPage" />'">
-					 -->
 					<input name="list" type="button" value="목록"  onClick="javascript:location.href='listRest.action?currentPage=<s:property value="currentPage" />'">
 				</td>
 			</tr>
 		</table>
 	</form>
-	
-	
-	
-	
-	
-	//리스트
-	<!-- container -->
-	<div class="container">
-
-		<!-- test board pretty -->
-		<div class="col-md-12">
-			<h3>REST</h3>
-		</div>		
-
-		<div class="col-md-12 well">
 		
-			<div class="col-md-12">
-		
-			<c:forEach var="list" items="${list}">
-			
-						
-				<div class="col-sm-4 col-md-3">					
-			    	<div class="thumbnail">
-			      		<a href="www.naver.com">
-			      		<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
-			      		</a>
-			      		<div class="caption">
-			        		<h3>${list.restopt_subject}</h3>
-			      		</div>
-			    	</div>
-		      	</div>		      			      	
-			</c:forEach>
-			
-			</div>
-			
-			<c:if test="${list eq null}">
-			<div class="text-center">
-				<p>등록된 게시물이 없습니다.</p>
-			</div>
-			</c:if>
-		</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div id="map_canvas" style="width: 80%; height: 60%"></div>
 </body>
 

@@ -22,7 +22,6 @@
 	 
 	 int rest_num =  Integer.parseInt(request.getParameter("rest_num"));
 	 String rest_subject =  request.getParameter("rest_subject");
-	 int rest_price =  Integer.parseInt(request.getParameter("rest_price"));
 	 String restopt_subject =  request.getParameter("restopt_subject");
 	 int restopt_priceplus =  Integer.parseInt(request.getParameter("restopt_priceplus"));
 	 
@@ -349,8 +348,8 @@ function Display(form){
 					<tr>
 						<td class=clsleft><font color=red>*</font> 총 합계</td>
 						<td>
-							${restopt_priceplus+rest_price}
-							<input type=hidden style=width:100px name=Amt maxlength=12 value="${restopt_priceplus+rest_price}"/>원
+							${restopt_priceplus}
+							<input type=hidden style=width:100px name=Amt maxlength=12 value="${restopt_priceplus}"/>원
 						</td>
 						<td class=clsleft></td>
 					</tr>
