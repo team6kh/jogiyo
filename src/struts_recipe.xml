@@ -1,0 +1,116 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>	
+	<package name="struts_recipe" extends="struts-default">
+	
+		<!-- SqlMapClient 인터셉터 -->
+		<interceptors>
+			<interceptor name="conDAO" class="common.ConDAOInterceptor"/>
+		</interceptors>
+
+		<!-- 레시피 -->
+		
+		<!-- insertRecipeForm 액션 -->
+		<action name="insertRecipeForm" class="board.recipe.action.InsertRecipeAction"
+			method="form">
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="params" />
+			<result>/board/recipe/insertRecipe.jsp</result>
+		</action>
+
+		<!-- insertRecipe 액션 -->
+		<action name="insertRecipe" class="board.recipe.action.InsertRecipeAction">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result type="redirect-action">
+				<param name="actionName">listRecipe</param>
+			</result>
+		</action>
+
+		<!-- recipe 리스트 액션 -->
+		<action name="listRecipe" class="board.recipe.action.ListRecipeAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/board/recipe/listRecipe.jsp</result>
+		</action>
+
+		<!-- recipe read 액션 -->
+		<action name="readRecipe" class="board.recipe.action.ReadRecipeAction">
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/board/recipe/readRecipe.jsp</result>
+		</action>
+
+		<!-- recipe delete 액션. -->
+		<action name="deleteRecipe" class="board.recipe.action.DeleteRecipeAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result type="chain">listRecipe</result>
+		</action>
+
+		<!-- recipe update 액션. -->
+		<action name="updateRecipeForm" class="board.recipe.action.UpdateRecipeAction"
+			method="updateRecipeForm">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result type="chain">insertRecipeForm</result>
+		</action>
+
+		<action name="updateRecipe" class="board.recipe.action.UpdateRecipeAction">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result type="chain">readRecipe</result>
+		</action>
+
+		<!-- 파일 다운로드 액션. -->
+		<action name="fileDownloadAction" class="board.recipe.action.ReadRecipeAction"
+			method="download">
+			<result name="success" type="stream">
+				<param name="contentType">binary/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">${contentDisposition}</param>
+				<param name="contentLength">${contentLength}</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<!-- 비밀번호 체크 액션. -->
+		<action name="checkForm" class="board.recipe.action.ReadRecipeAction"
+			method="checkForm">
+			<result>/board/recipe/checkPassword.jsp</result>
+		</action>
+
+		<action name="checkAction" class="board.recipe.action.ReadRecipeAction"
+			method="checkAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result name="error">/board/recipe/checkError.jsp</result>
+			<result>/board/recipe/checkSuccess.jsp</result>
+		</action>
+
+		<!-- recommand 액션 -->
+		<action name="recommand" class="board.recipe.action.ReadRecipeAction"
+			method="recommandAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/board/recipe/readRecipe.jsp</result>
+		</action>
+		
+		<!-- recipe_mylsit 액션 -->
+		<action name="recipe_mylsit" class="board.recipe.action.MyListRecipeAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/board/recipe/myListRecipe.jsp</result>
+		</action>
+
+		<!-- 레시피 끝 -->
+
+	</package>
+</struts>
