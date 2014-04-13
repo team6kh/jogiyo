@@ -49,12 +49,24 @@
 		<div class="col-md-12 well">
 		<form action="updateQnaForm.action" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="qna_num" value="${resultClass.qna_num }"/>
+		<div class="form-group">
+				<label for="qna_category">카테고리:</label>
+					<c:choose>
+						<c:when test="${resultClass.qna_category eq '01' }">회원가입</c:when>
+						<c:when test="${resultClass.qna_category eq '02' }">바로결제</c:when>
+						<c:when test="${resultClass.qna_category eq '03' }">리뷰</c:when>
+						<c:when test="${resultClass.qna_category eq '04' }">이용문의</c:when>
+						<c:when test="${resultClass.qna_category eq '05' }">광고문의</c:when>
+						<c:when test="${resultClass.qna_category eq '06' }">기타</c:when>
+						<c:otherwise>전체</c:otherwise>
+					</c:choose>
+			</div>
 			<div class="form-group">
-				<label for="qna_subject">제목</label>
+				<label for="qna_subject">제목:</label>
 				${resultClass.qna_subject }
 			</div>
 			<div class="form-group">
-				<label for="qna_content">내용</label>
+				<label for="qna_content">내용:</label>
 				${resultClass.qna_content }
 			</div>
 
