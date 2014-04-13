@@ -23,7 +23,10 @@
 	function requestEv()
 	{
 		document.getElementById('form-signup').submit();
-		document.getElementById('readBuyerAlert').innerHTML = "전송 중...";
+		$('#divAlert').removeClass('alert-info');
+		$('#divAlert').addClass('alert-warning');
+		document.getElementById('aAlert').innerHTML = "인증번호 전송 중...";
+		
 		return false;
 	}
 </script>
@@ -42,16 +45,16 @@
 			<br />
 		  	<!-- 인증이 되지 않았을 시 뜬다. -->		  	
 			<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq null}">						
-			<div class="alert alert-info alert-dismissable">			  
+			<div class="alert alert-info alert-dismissable" id="divAlert">			  
 			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			  <a href="#" class="alert-link" id="readBuyerAlert" onclick="requestEv()">이메일을 인증해주세요.</a>
+			  <a href="#" class="alert-link" id="aAlert" onclick="requestEv()">이메일을 인증해주세요.</a>
 			  <iframe src="blink.html" id="insertEv" style="display:none;"></iframe>
 			</div>
 			</c:if>
 			<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq 'evRequested'}">
-			<div class="alert alert-info alert-dismissable">
+			<div class="alert alert-success alert-dismissable">
 			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			  <a href="#" class="alert-link">전송했습니다.</a>
+			  <a href="#" class="alert-link">인증번호를 전송했습니다.</a>
 			</div>
 			</c:if>
 	       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>			

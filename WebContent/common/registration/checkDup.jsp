@@ -5,13 +5,15 @@
 <c:if test="${isDup==1}">
 <script type="text/javascript">
 	parent.feedbackRegId.innerHTML = "이미 사용중인 아이디입니다..";
-	parent.$('div_regid').addClass('error');
+	parent.$('#divRegId').addClass('has-error'); // bootstrap validation
 </script>
 </c:if>
 
 <c:if test="${isDup==0}">
 <script type="text/javascript">
-	parent.feedbackRegId.innerHTML = "<font color=green>사용 가능한 아이디입니다.</font>";
+	parent.feedbackRegId.innerHTML = "사용 가능한 아이디입니다.";
+	parent.$('#divRegId').removeClass('has-error'); // bootstrap validation
+	parent.$('#divRegId').addClass('has-success'); // bootstrap validation
 </script>
 </c:if>
 

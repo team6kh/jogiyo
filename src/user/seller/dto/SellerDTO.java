@@ -14,7 +14,8 @@ public class SellerDTO
     private String seller_rest_email;
     private String seller_rest_mobilenum;
     private String seller_rest_telnum;
-
+    private String seller_verification;
+    
     public int getUser_seq()
     {
         return user_seq;
@@ -113,5 +114,15 @@ public class SellerDTO
     public void setSeller_rest_telnum(String seller_rest_telnum)
     {
         this.seller_rest_telnum = seller_rest_telnum;
+    }
+
+    public String getSeller_verification()
+    {
+        return seller_verification;
+    }
+
+    public void setSeller_verification(String seller_verification)
+    {
+        this.seller_verification = seller_verification;
     }
 }

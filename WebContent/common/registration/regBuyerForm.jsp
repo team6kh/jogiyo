@@ -20,23 +20,27 @@
 <link href="common/registration/registration.css" rel="stylesheet">
 
 <script type="text/javascript">
-
+		
 	//실시간 ID validation
 	function validateRegId(userinput) {
 		if (userinput.buyer_id.value == "") {
-			feedbackRegId.innerHTML = "<font color=red>아이디를 입력해주세요.</font>";
+			feedbackRegId.innerHTML = "아이디를 입력해주세요.";
 			regForm.feedbackRegId.value = "0";
 			//alert("아이디를 입력하세요");
+			$('#divRegId').removeClass('has-error'); // bootstrap validation
+			$('#divRegId').removeClass('has-success'); // bootstrap validation
 			return;
 		} else {
 			var hanchk = hanCheck();
 
 			if (userinput.buyer_id.value.length < 4 && hanchk) {
-				feedbackRegId.innerHTML = "<font color=red>아이디는 4자 이상이여야합니다.</font>";
+				feedbackRegId.innerHTML = "아이디는 4자 이상이여야합니다.";
 				regForm.feedbackRegId.value = "0";
+				$('#divRegId').addClass('has-error'); // bootstrap validation
 				return false;
 			} else if (hanchk) {
-				url = "checkDup.action?reg_id=" + userinput.buyer_id.value;
+				var reg_type = document.getElementById("reg_type").value;
+				url = "checkDup.action?reg_id="+userinput.buyer_id.value+"&reg_type="+reg_type;
 				document.getElementById('checkDup').contentWindow.location.href = url;
 			}
 			regForm.feedbackRegId.value = "1";
@@ -53,6 +57,7 @@
 				feedbackRegId.innerHTML = "ID 는 영문, 숫자만 사용하세요.";
 				regForm.feedbackRegId.value = "0";
 				regForm.buyer_id.focus();
+				$('#divRegId').addClass('has-error'); // bootstrap validation
 				return false;
 			}
 		}
@@ -94,7 +99,7 @@
 			      <option value="seller">판매자</option>
 			    </select>		  
 			</div>
-			<div id="div_regid" class="form-group">
+			<div id="divRegId" class="form-group">
 			  <label>구매자 아이디</label>
 			  <input type="text" class="form-control" name="buyer_id" onkeyup="validateRegId(this.form);" required autofocus>
 			  <p class="help-block" id="feedbackRegId">아이디를 입력해주세요.</p>

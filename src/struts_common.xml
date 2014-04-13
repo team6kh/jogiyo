@@ -76,7 +76,9 @@
 			<interceptor-ref name="modelDriven"/>
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result type="redirect-action">home</result>	
+			<result name="success" type="chain">
+          		<param name="actionName">login</param>
+        	</result>	
 		</action>
 		
 		<!-- 유저정보 액션 : 구매자, 판매자로 chain -->

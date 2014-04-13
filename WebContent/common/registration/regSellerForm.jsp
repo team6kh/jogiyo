@@ -24,20 +24,24 @@
 	//실시간 ID validation
 	function validateRegId(userinput) {
 		if (userinput.seller_id.value == "") {
-			feedbackRegId.innerHTML = "<font color=red>아이디를 입력해주세요.</font>";
+			feedbackRegId.innerHTML = "아이디를 입력해주세요.";
 			regForm.feedbackRegId.value = "0";
 			//alert("아이디를 입력하세요");
+			$('#divRegId').removeClass('has-error'); // bootstrap validation
+			$('#divRegId').removeClass('has-success'); // bootstrap validation
 			return;
 		} else {
 			var hanchk = hanCheck();
 
 			if (userinput.seller_id.value.length < 4 && hanchk) {
-				feedbackRegId.innerHTML = "<font color=red>아이디는 4자 이상이여야합니다.</font>";
+				feedbackRegId.innerHTML = "아이디는 4자 이상이여야합니다.";
 				regForm.feedbackRegId.value = "0";
+				$('#divRegId').addClass('has-error'); // bootstrap validation
 				return false;
 			} else if (hanchk) {
-				url = "checkDup.action?reg_id=" + userinput.seller_id.value;
-				document.getElementById('resultCheckDup').contentWindow.location.href = url;
+				var reg_type = document.getElementById("reg_type").value;
+				url = "checkDup.action?reg_id="+userinput.seller_id.value+"&reg_type="+reg_type;
+				document.getElementById('checkDup').contentWindow.location.href = url;
 			}
 			regForm.feedbackRegId.value = "1";
 		}
@@ -53,6 +57,7 @@
 				feedbackRegId.innerHTML = "ID 는 영문, 숫자만 사용하세요.";
 				regForm.feedbackRegId.value = "0";
 				regForm.seller_id.focus();
+				$('#divRegId').addClass('has-error'); // bootstrap validation
 				return false;
 			}
 		}
@@ -96,7 +101,7 @@
 			</div>
 			<div class="form-group">
 			  <label>상호명</label>
-			  <input type="text" class="form-control" name="seller_rest_name" required>
+			  <input type="text" class="form-control" name="seller_rest_name" required autofocus>
 			</div>
 			<div class="form-group">
 			  <label>주소</label>
@@ -106,11 +111,11 @@
 			  <label>전화번호</label>
 			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="seller_rest_telnum" required>
 			</div>
-			<div id="div_regid" class="form-group">
+			<div id="divRegId" class="form-group">
 			  <label> 판매자 아이디</label>
-			  <input type="text" class="form-control" name="seller_id" onkeyup="validateRegId(this.form);" required autofocus>
+			  <input type="text" class="form-control" name="seller_id" onkeyup="validateRegId(this.form);" required>
 			  <p class="help-block" id="feedbackRegId">아이디를 입력해주세요.</p>
-			  <iframe src="blink.html" id="resultCheckDup" style="display:none;"></iframe>			  
+			  <iframe src="blink.html" id="checkDup" style="display:none;"></iframe>			  
 			</div>						
 			<div class="form-group">
 			  <label>이름</label>
