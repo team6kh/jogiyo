@@ -1,4 +1,4 @@
-package common;
+package common.verification.action;
 
 import java.util.Properties;
 import javax.mail.Message;
@@ -12,18 +12,24 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class Emailer extends ActionSupport
 {    
-    private String verification_code; // verification code
+    private String ev_code; // email verification code
     
     /* emailer 액션으로 넘어오는 파라미터 */
+    private String userType;
+    private String userId;
+    
     private String buyer_name;
-    private String buyer_email;    
+    private String buyer_email;
+    
+    private String seller_name;
+    private String seller_email;
     /**/
 
     private String from; // The email address of the sender
     private String password; // The password of the above account
     private String to; // Who to send the email to?
     private String subject; // subject of the email
-    private String body; // The actual email message
+    private String body; // The actual email message   
 
     static Properties properties = new Properties();
     static
@@ -51,15 +57,21 @@ public class Emailer extends ActionSupport
 
             Message message = new MimeMessage(session);
             /* 파라미터 임시 설정 */
-            setVerification_code("1234");
+            setEv_code("1234");
             setFrom("team6kh@gmail.com");
             setPassword("dkagh1234.");
-            setTo(getBuyer_email());
+            if (getBuyer_email() != null)
+            {
+                setTo(getBuyer_email());
+            } else if (getSeller_email() != null)
+            {
+                setTo(getSeller_email());
+            }
             setSubject("[JOGIYO] Please verify your email '" + getBuyer_email() + "'");
             setBody("Taz'dingo, we want to verify that you are indeed \""
                     + getBuyer_name() 
                     + "\". if that's the case, please type the following verification code: "
-                    + getVerification_code()
+                    + getEv_code()
                     + ". if you're not "
                     + getBuyer_name()
                     + " or didn't request verification, you can ignore this email."
@@ -69,6 +81,8 @@ public class Emailer extends ActionSupport
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
             message.setText(body);
+            //System.out.println("getUserType():"+getUserType());
+            //System.out.println("getUserId():"+getUserId());
             Transport.send(message);
         } catch (Exception e)
         {
@@ -139,6 +153,26 @@ public class Emailer extends ActionSupport
     }
 
     /* emailer 액션으로 넘어오는 파라미터 */
+    public String getUserType()
+    {
+        return userType;
+    }
+
+    public void setUserType(String userType)
+    {
+        this.userType = userType;
+    }
+    
+    public String getUserId()
+    {
+        return userId;
+    }
+
+    public void setUserId(String userId)
+    {
+        this.userId = userId;
+    }
+
     public String getBuyer_name()
     {
         return buyer_name;
@@ -158,15 +192,35 @@ public class Emailer extends ActionSupport
     {
         this.buyer_email = buyer_email;
     }
-    /**/
-
-    public String getVerification_code()
+    
+    public String getSeller_name()
     {
-        return verification_code;
+        return seller_name;
     }
 
-    public void setVerification_code(String verification_code)
+    public void setSeller_name(String seller_name)
     {
-        this.verification_code = verification_code;
+        this.seller_name = seller_name;
+    }
+
+    public String getSeller_email()
+    {
+        return seller_email;
+    }
+
+    public void setSeller_email(String seller_email)
+    {
+        this.seller_email = seller_email;
+    }        
+    /**/    
+
+    public String getEv_code()
+    {
+        return ev_code;
+    }
+
+    public void setEv_code(String ev_code)
+    {
+        this.ev_code = ev_code;
     }
 }

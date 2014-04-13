@@ -44,7 +44,7 @@
 		</action>
 		
 		<!-- 아이디 중복체크 액션 -->		
-		<action name="checkDup" class="common.CheckDuplicateAction">
+		<action name="checkDup" class="common.registration.action.CheckDuplicateAction">
 			<interceptor-ref name="params" />				
 			<interceptor-ref name="conDAO" />
 			<result>/common/registration/checkDup.jsp</result>
@@ -131,19 +131,26 @@
 		<!-- 공통기능(?) -->
 		
 		<!-- 이메일 인증 서비스 -->
-		<action name="emailer" class="common.Emailer">
+		<action name="emailer" class="common.verification.action.Emailer">
 			<result name="success" type="chain">
-				<param name="actionName">insertEvr</param>
+				<param name="actionName">insertEv</param>
 			</result>
 			<result name="error">/common/error.jsp</result>
 		</action>
 		
 		<!-- 이메일 인증 요청 저장소 -->
-		<action name="insertEv" class="common.InsertEmailVerification">
-			<interceptor-ref name="chain"/>
+		<action name="insertEv" class="common.verification.action.InsertEmailVerification">
+			<param name="aliases">#{'to' : 'ev_requested'}</param>
+			<interceptor-ref name="alias"/>	
+			<interceptor-ref name="chain"/>					
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result>/common/welcome.jsp</result>
+			<result name="success" type="redirect-action">
+				<param name="actionName">readUser</param>
+				<param name="userType">${userType}</param>
+				<param name="userId">${userId}</param>
+				<param name="actionStatus">evRequested</param>
+			</result>
 		</action>
 		
 		<!-- NEW 비밀번호 체크 액션 -->

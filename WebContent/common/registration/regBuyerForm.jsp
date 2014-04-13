@@ -37,7 +37,7 @@
 				return false;
 			} else if (hanchk) {
 				url = "checkDup.action?reg_id=" + userinput.buyer_id.value;
-				document.getElementById('resultCheckDup').contentWindow.location.href = url;
+				document.getElementById('checkDup').contentWindow.location.href = url;
 			}
 			regForm.feedbackRegId.value = "1";
 		}
@@ -98,7 +98,7 @@
 			  <label>구매자 아이디</label>
 			  <input type="text" class="form-control" name="buyer_id" onkeyup="validateRegId(this.form);" required autofocus>
 			  <p class="help-block" id="feedbackRegId">아이디를 입력해주세요.</p>
-			  <iframe src="blink.html" id="resultCheckDup" style="display:none;"></iframe>			  
+			  <iframe src="blink.html" id="checkDup" style="display:none;"></iframe>			  
 			</div>						
 			<div class="form-group">
 			  <label>이름</label>

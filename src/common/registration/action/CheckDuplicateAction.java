@@ -1,9 +1,10 @@
-package common;
+package common.registration.action;
 
 import user.buyer.dto.BuyerDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
+import common.ConDAOAware;
 
 public class CheckDuplicateAction implements Action, ConDAOAware
 {

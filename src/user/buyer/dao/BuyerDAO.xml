@@ -45,31 +45,34 @@
 
 	<!-- insert 쿼리문 정의 -->
 	<insert id="insertBuyer" parameterClass="BuyerDTO">
-		INSERT INTO buyer_table (user_seq,
-								buyer_id,
-								buyer_pw,
-								buyer_name,
-								buyer_reg_date,
-								buyer_email,
-								buyer_phonenumber,
-								buyer_verification
-								)
-						VALUES (user_seq.nextval,
-								#buyer_id#,
-								#buyer_pw#,
-								#buyer_name#,
-								#buyer_reg_date#,
-								#buyer_email#,
-								#buyer_phonenumber#,
-								#buyer_verification#
-								)
+		INSERT INTO buyer_table
+			(user_seq,
+			buyer_id,
+			buyer_pw,
+			buyer_name,
+			buyer_reg_date,
+			buyer_email,
+			buyer_phonenumber,
+			buyer_verification
+			)
+		VALUES 
+			(user_seq.nextval,
+			#buyer_id#,
+			#buyer_pw#,
+			#buyer_name#,
+			#buyer_reg_date#,
+			#buyer_email#,
+			#buyer_phonenumber#,
+			#buyer_verification#
+			)
 	</insert>
 
 	<!-- update 쿼리문 정의 -->
 	<update id="updateBuyer" parameterClass="BuyerDTO">
-		UPDATE buyer_table SET buyer_pw = #buyer_pw#,
-								buyer_email = #buyer_email#,
-								buyer_phonenumber = #buyer_phonenumber#
+		UPDATE buyer_table SET
+			buyer_pw = #buyer_pw#,
+			buyer_email = #buyer_email#,
+			buyer_phonenumber = #buyer_phonenumber#
 		<include refid="where-buyer_id" />
 	</update>
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ page isELIgnored="false" %> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +19,15 @@
 <!-- Custom styles for this template -->
 <link href="common/registration/registration.css" rel="stylesheet">
 
+<script type="text/javascript">
+	function requestEv()
+	{
+		document.getElementById('form-signup').submit();
+		document.getElementById('readBuyerAlert').innerHTML = "전송 중...";
+		return false;
+	}
+</script>
+
 </head>
 
 <body>
@@ -32,23 +41,32 @@
 		<form class="form-signup" id="form-signup" action="emailer.action" method="post">
 			<br />
 		  	<!-- 인증이 되지 않았을 시 뜬다. -->		  	
-			<c:if test="${buyerDTo.buyer_verification eq no}">						
+			<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq null}">						
 			<div class="alert alert-info alert-dismissable">			  
 			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			  <a href="#" class="alert-link" onclick="document.getElementById('form-signup').submit(); return false">이메일을 인증해주세요.</a>
+			  <a href="#" class="alert-link" id="readBuyerAlert" onclick="requestEv()">이메일을 인증해주세요.</a>
+			  <iframe src="blink.html" id="insertEv" style="display:none;"></iframe>
 			</div>
-			</c:if>	   			
+			</c:if>
+			<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq 'evRequested'}">
+			<div class="alert alert-info alert-dismissable">
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  <a href="#" class="alert-link">전송했습니다.</a>
+			</div>
+			</c:if>
 	       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>			
 			<div class="form-group">
 			  <label>가입유형</label>
 			    <select class="form-control" id="userType" disabled>
 			      <option value="buyer">구매자</option>
 			      <option value="seller">판매자</option>
-			    </select>			  
+			    </select>
+			    <input type="hidden" name="userType" value="${sessionType}">			  
 			</div>
 			<div id="div_regid" class="form-group">
 			  <label>아이디</label>
-			  <input type="text" class="form-control" value="${buyerDTO.buyer_id}" disabled>		  
+			  <input type="text" class="form-control" value="${buyerDTO.buyer_id}" disabled>
+			  <input type="hidden" name="userId" value="${buyerDTO.buyer_id}">		  
 			</div>						
 			<div class="form-group">
 			  <label>이름</label>

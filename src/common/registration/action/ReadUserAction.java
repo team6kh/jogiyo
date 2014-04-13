@@ -6,6 +6,8 @@ public class ReadUserAction implements Action
 {
     private String userType;
     private String userId;
+    
+    private String actionStatus;
 
     public String execute() throws Exception
     {
@@ -38,5 +40,15 @@ public class ReadUserAction implements Action
     public void setUserId(String userId)
     {
         this.userId = userId;
+    }
+
+    public String getActionStatus()
+    {
+        return actionStatus;
+    }
+
+    public void setActionStatus(String actionStatus)
+    {
+        this.actionStatus = actionStatus;
     }
 }

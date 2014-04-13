@@ -47,34 +47,36 @@
 
 	<!-- insert 쿼리문 정의 -->
 	<insert id="insertSeller" parameterClass="SellerDTO">
-		INSERT INTO seller_table (user_seq,
-								seller_id,
-								seller_pw,
-								seller_name,
-								seller_reg_date,
-								seller_rest_name,
-								seller_rest_address,
-								seller_rest_email,
-								seller_rest_mobilenum,
-								seller_rest_telnum
-								)
-						VALUES (user_seq.nextval,
-								#seller_id#,
-								#seller_pw#,
-								#seller_name#,
-								#seller_reg_date#,
-								#seller_rest_name#,
-								#seller_rest_address#,
-								#seller_rest_email#,
-								#seller_rest_mobilenum#,
-								#seller_rest_telnum#
-								)
+		INSERT INTO seller_table
+			(user_seq,
+			seller_id,
+			seller_pw,
+			seller_name,
+			seller_reg_date,
+			seller_rest_name,
+			seller_rest_address,
+			seller_rest_email,
+			seller_rest_mobilenum,
+			seller_rest_telnum
+			)
+		VALUES (user_seq.nextval,
+			#seller_id#,
+			#seller_pw#,
+			#seller_name#,
+			#seller_reg_date#,
+			#seller_rest_name#,
+			#seller_rest_address#,
+			#seller_rest_email#,
+			#seller_rest_mobilenum#,
+			#seller_rest_telnum#
+			)
 	</insert>
 
 	<!-- update 쿼리문 정의 -->
 	<update id="updateSeller" parameterClass="SellerDTO">
-		UPDATE seller_table SET seller_pw = #seller_pw#,
-								seller_rest_address = #seller_rest_address#
+		UPDATE seller_table SET
+			seller_pw = #seller_pw#,
+			seller_rest_address = #seller_rest_address#
 		<include refid="where-seller_id" />
 	</update>
 

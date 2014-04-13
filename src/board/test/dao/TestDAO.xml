@@ -50,28 +50,29 @@
 	<!-- insert 쿼리문 정의 -->
 	<insert id="insertBoard" parameterClass="TestDTO">
 		INSERT INTO test_board
-		(test_num,
-		test_writer_name,
-		test_writer_pw,
-		test_subject,
-		test_content,
-		test_reg_date
-		)
-		VALUES (test_board_seq.nextval,
-		#test_writer_name#,
-		#test_writer_pw#,
-		#test_subject#,
-		#test_content#,
-		#test_reg_date#
-		)
+			(test_num,
+			test_writer_name,
+			test_writer_pw,
+			test_subject,
+			test_content,
+			test_reg_date
+			)
+		VALUES
+			(test_board_seq.nextval,
+			#test_writer_name#,
+			#test_writer_pw#,
+			#test_subject#,
+			#test_content#,
+			#test_reg_date#
+			)
 	</insert>
 
 	<!-- update 쿼리문 정의 -->
 	<update id="updateBoard" parameterClass="TestDTO">
-		UPDATE test_board SET test_writer_pw = #test_writer_pw#,
-		test_subject =
-		#test_subject#,
-		test_content = #test_content#
+		UPDATE test_board SET
+			test_writer_pw = #test_writer_pw#,
+			test_subject = #test_subject#,
+			test_content = #test_content#
 		<include refid="where-test_num" />
 	</update>
 
