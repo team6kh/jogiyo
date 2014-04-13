@@ -6,7 +6,6 @@ public class PayRestAction extends ActionSupport {
 
 	private int rest_num;
 	private String rest_subject;
-	
 	private String restopt_set;
 	private String restopt_subject;
 	private int restopt_priceplus;
