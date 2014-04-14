@@ -4,11 +4,14 @@ package board.recipe.action;
 
 
 import java.util.*;
+
 import board.recipe.dto.RecipeDTO;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
+
 import common.ConDAOAware;
-import common.PagingAction;
+import common.action.PagingAction;
 
 
 

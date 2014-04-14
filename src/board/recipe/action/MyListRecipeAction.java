@@ -11,7 +11,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
 import common.ConDAOAware;
-import common.PagingAction;
+import common.action.PagingAction;
 
 public class MyListRecipeAction extends ActionSupport implements ConDAOAware {
 	public static SqlMapClient sqlMapper;

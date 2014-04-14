@@ -25,9 +25,9 @@
 	<sqlMap resource="/board/recipe/dao/RecipeDAO.xml"/>
 	<sqlMap resource="/board/rest/dao/RestDAO.xml"/>
 	<sqlMap resource="/board/review/dao/ReviewDAO.xml"/>	
-	<sqlMap resource="/board/test/dao/TestDAO.xml"/>
-	<sqlMap resource="/common/verification/dao/EvDAO.xml"/>
+	<sqlMap resource="/board/test/dao/TestDAO.xml"/>	
 	<sqlMap resource="/user/buyer/dao/BuyerDAO.xml"/>
+	<sqlMap resource="/user/common/verification/dao/EvDAO.xml"/>	
 	<sqlMap resource="/user/seller/dao/SellerDAO.xml"/>				
 
 </sqlMapConfig>
