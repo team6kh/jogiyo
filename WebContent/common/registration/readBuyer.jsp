@@ -21,13 +21,21 @@
 
 <script type="text/javascript">
 	function requestEv()
-	{
-		document.getElementById('form-signup').submit();
+	{				
 		$('#divAlert').removeClass('alert-info');
 		$('#divAlert').addClass('alert-warning');
 		document.getElementById('aAlert').innerHTML = "인증번호 전송 중...";
+		document.getElementById('form-signup').submit();
 		
 		return false;
+	}
+	
+	function checkPass(form)
+	{
+		form.action="checkPass.action";
+		form.submit();
+		
+		return true;
 	}
 </script>
 
@@ -38,7 +46,7 @@
 	<!-- header -->
 	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
-
+	
 	<!-- container -->
 	<div class="container">	
 		<form class="form-signup" id="form-signup" action="emailer.action" method="post">
@@ -113,7 +121,7 @@
 				<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form action="checkPass.action" method="post">
+							
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									<h4 class="modal-title" id="checkModalLabel">비밀번호를 입력하세요.</h4>
@@ -128,9 +136,9 @@
 									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
 									<input type="hidden" name="modalParam" id="modalParam">						
 									<input type="hidden" name="modalParam_key" value="${buyerDTO.buyer_id}">								
-									<button type="submit" class="btn btn-primary">입력</button>
+									<button class="btn btn-primary" onclick="checkPass(this.form)">입력</button>
 								</div>
-							</form>
+							
 						</div>
 					</div>
 				</div><!-- END of Modal -->					

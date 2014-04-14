@@ -74,7 +74,6 @@
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script>
 		$("#userType").val("seller");
-		$("#userGender").val("${buyerDTO.buyer_gender}");
 	</script>
 </body>
 </html>
