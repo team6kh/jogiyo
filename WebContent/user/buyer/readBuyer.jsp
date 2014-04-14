@@ -110,7 +110,7 @@
 			<div class="form-group">
 			  <label>인증번호</label>
 			  <div class="input-group">
-			    <input type="text" class="form-control">
+			    <input type="text" class="form-control" name="ev_code">
 			    <span class="input-group-addon btn btn-default" onclick="checkEv()">전송</span>
 			  </div>
 			</div>
