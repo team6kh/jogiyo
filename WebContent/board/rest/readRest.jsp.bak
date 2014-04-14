@@ -134,14 +134,16 @@
 		});
 	}
 	
-	function insertCart(form) {
+	function insertCart() {
 		alert("insertCart");
 		var rest_num = document.getElementById("rest_num").value;
 		var rest_subject = document.getElementById("rest_subject").value;
+		var restopt_destFile1 = document.getElementById("restopt_destFile1").value;
+		var restopt_subject = document.getElementById("restopt_subject").value;
+		var restopt_priceplus = document.getElementById("restopt_priceplus").value;
 		var session_id = document.getElementById("session_id").value;
-		var restopt_destFile1 = form.restopt_destFile1.value;
-		var restopt_subject = form.restopt_subject.value;
-		var restopt_priceplus = form.restopt_priceplus.value;
+		
+		
 		
 		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&cart_session_id="+session_id;
 		document.getElementById("cartFrame").contentWindow.location.href=url;
@@ -232,7 +234,6 @@
 					<font size="4">상품명</font> <br/>
 					<font size="7" color = "red"><s:property value="resultClass.rest_subject" /></font>
 					<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
-					<input type="hidden" id="session_id" name="session_id" value="test"/>
 				</div>
 			</div>
 
@@ -284,15 +285,14 @@
 									      		<div class="caption" align="center">
 									        		<font size="2" color="green"><b>${list.restopt_subject}</b></font> <br/>
 									        		<font size="3" color="red">${list.restopt_priceplus}</font> 원
-									        		<input type="hidden" id="restopt_subject" name="restopt_subject" value="${list.restopt_subject}" />
+									        		<input type="text" id="restopt_subject" name="restopt_subject" value="${list.restopt_subject}" />
 									        		<input type="hidden" id="restopt_priceplus" name="restopt_priceplus" value="${list.restopt_priceplus}" />
-									        		
+									        		<input type="hidden" id="session_id" name="session_id" value="tempSessionID" />
 									      		</div>
 							
 									      		<!-- 장바구니 담기 버튼 -->
-									      		<button type="button" class="btn btn-default btn-lg" onclick="insertCart(this.form)">
-													<span class="glyphicon glyphicon-shopping-cart"></span>
-												</button>
+									      		<input type="button" onclick="abc(this.form)" value="버튼" />
+									      		
 
 									    	</div>
 								      	</form>		      			      	
