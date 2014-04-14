@@ -43,6 +43,8 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 		
 		sqlMapper.insert("Rest.insertCart_board", paramClass);
 		
+		
+		
 		return SUCCESS;
 	}
 	
