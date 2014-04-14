@@ -94,6 +94,13 @@
 			<include refid="select-all" />
 			ORDER BY rest_num DESC
 		</select>
+		
+		<select id="selectCartAll" resultMap="CartBoard" parameterClass="int">
+			select * from Cart_board
+			ORDER BY cart_num DESC
+		</select>
+		
+		
 
 		<select id="selectRestOne" resultMap="RestBoard" parameterClass="int">
 			<include refid="select-all" />

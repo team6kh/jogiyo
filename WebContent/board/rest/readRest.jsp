@@ -150,8 +150,8 @@
 			<h3>READ</h3>
 		</div>
 
-		<div class="col-md-12 well">
-
+		<div class="col-md-9 well">
+		
 			<div class="col-md-12 well">
 				<div class="col-md-2">
 					<font color="#FF3636"><b>카테고리</b></font>
@@ -230,7 +230,7 @@
 							</h4>
 						</div>
 
-						<div id="collapseOne" class="panel-collapse collapse in">
+						<div id="collapseOne" class="panel-collapse collapse">
 							<div class="panel-body">
 
 								<div class="thumbnail">
@@ -247,7 +247,7 @@
 									href="#collapseTwo"> 상품 옵션 </a>
 							</h4>
 						</div>
-						<div id="collapseTwo" class="panel-collapse collapse">
+						<div id="collapseTwo" class="panel-collapse collapse in">
 							<div class="panel-body">
 
 								<div class="col-md-12">
@@ -261,8 +261,8 @@
 									      		</a>
 
 									      		<div class="caption" align="center">
-									        		<font size="4" color="green"><b>${list.restopt_subject}</b></font> <br/>
-									        		<font size="5" color="red">${list.restopt_priceplus}</font> 원
+									        		<font size="2" color="green"><b>${list.restopt_subject}</b></font> <br/>
+									        		<font size="3" color="red">${list.restopt_priceplus}</font> 원
 									      		</div>
 
 									      		<!-- 장바구니 담기 버튼 -->
@@ -291,6 +291,8 @@
 				<!-- end -->
 
 			</div>
+			
+			
 
 			<!-- HERE -->
 			<div class="tabbable">
@@ -354,7 +356,17 @@
 			</div>
 
 		</div>
-
+		
+		<!-- 장바구니 -->
+	    <div class="col-md-3">
+	         <div id="sidebar" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
+	               장바구니
+	          </div>      
+	     </div>
+	     
+	     
+	    -- 장바구니 --
+	     <%@ include file="/board/rest/listCart.jsp"%>
 
 	</div>
 
