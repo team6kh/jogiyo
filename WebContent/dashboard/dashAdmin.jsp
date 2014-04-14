@@ -65,6 +65,7 @@
                   <th>buyer_id</th>
                   <th>buyer_pw</th>
                   <th>buyer_name</th>
+                  <th>buyer_email</th>
                   <th>buyer_verification</th>
                   <th>buyer_reg_date</th>
                 </tr>
@@ -76,6 +77,7 @@
                   <td>${listBuyer.buyer_id}</td>
                   <td>${listBuyer.buyer_pw}</td>
                   <td>${listBuyer.buyer_name}</td>
+                  <td>${listBuyer.buyer_email}</td>
                   <td>${listBuyer.buyer_verification}</td>
                   <td>${listBuyer.buyer_reg_date}</td>
                 </tr>
@@ -96,7 +98,9 @@
                   <th>seller_pw</th>
                   <th>seller_name</th>
                   <th>seller_rest_name</th>
-                  <th>seller_rest_address</th>                  
+                  <th>seller_rest_address</th>
+                  <th>seller_email</th>
+                  <th>seller_verification</th>                  
                   <th>seller_reg_date</th>
                 </tr>
               </thead>
@@ -108,7 +112,9 @@
                   <td>${listSeller.seller_pw}</td>
                   <td>${listSeller.seller_name}</td>
                   <td>${listSeller.seller_rest_name}</td>
-                  <td>${listSeller.seller_rest_address}</td>                  
+                  <td>${listSeller.seller_rest_address}</td>
+                  <td>${listSeller.seller_email}</td>
+                  <td>${listSeller.seller_verification}</td>                  
                   <td>${listSeller.seller_reg_date}</td>
                 </tr>
                 </c:forEach>
