@@ -11,10 +11,11 @@ public class SellerDTO
     private Date seller_reg_date;
     private String seller_rest_name;
     private String seller_rest_address;
-    private String seller_rest_email;
+    private String seller_email;
     private String seller_rest_mobilenum;
     private String seller_rest_telnum;
-
+    private String seller_verification;
+    
     public int getUser_seq()
     {
         return user_seq;
@@ -85,14 +86,14 @@ public class SellerDTO
         this.seller_rest_address = seller_rest_address;
     }
 
-    public String getSeller_rest_email()
+    public String getSeller_email()
     {
-        return seller_rest_email;
+        return seller_email;
     }
 
-    public void setSeller_rest_email(String seller_rest_email)
+    public void setSeller_email(String seller_email)
     {
-        this.seller_rest_email = seller_rest_email;
+        this.seller_email = seller_email;
     }
 
     public String getSeller_rest_mobilenum()
@@ -113,5 +114,15 @@ public class SellerDTO
     public void setSeller_rest_telnum(String seller_rest_telnum)
     {
         this.seller_rest_telnum = seller_rest_telnum;
+    }
+
+    public String getSeller_verification()
+    {
+        return seller_verification;
+    }
+
+    public void setSeller_verification(String seller_verification)
+    {
+        this.seller_verification = seller_verification;
     }
 }

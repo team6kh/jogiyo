@@ -13,9 +13,10 @@
 		<result property="seller_reg_date" column="seller_reg_date" />
 		<result property="seller_rest_name" column="seller_rest_name" />
 		<result property="seller_rest_address" column="seller_rest_address" />
-		<result property="seller_rest_email" column="seller_rest_email" />
+		<result property="seller_email" column="seller_email" />
 		<result property="seller_rest_mobilenum" column="seller_rest_mobilenum" />
 		<result property="seller_rest_telnum" column="seller_rest_telnum" />
+		<result property="seller_verification" column="seller_verification" />
 	</resultMap>
 
 	<!-- 공통으로 사용할 select 절 정의 -->
@@ -55,9 +56,10 @@
 			seller_reg_date,
 			seller_rest_name,
 			seller_rest_address,
-			seller_rest_email,
+			seller_email,
 			seller_rest_mobilenum,
-			seller_rest_telnum
+			seller_rest_telnum,
+			seller_verification
 			)
 		VALUES (user_seq.nextval,
 			#seller_id#,
@@ -66,9 +68,10 @@
 			#seller_reg_date#,
 			#seller_rest_name#,
 			#seller_rest_address#,
-			#seller_rest_email#,
+			#seller_email#,
 			#seller_rest_mobilenum#,
-			#seller_rest_telnum#
+			#seller_rest_telnum#,
+			#seller_verification#
 			)
 	</insert>
 
