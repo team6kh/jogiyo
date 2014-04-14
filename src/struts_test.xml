@@ -18,10 +18,10 @@
 		</action>	
 		
 		<!-- 관리자 대시보드 -->
-		<action name="dashAdmin" class="dashboard.admin.action.DashAdminAction">
+		<action name="dashAdmin" class="user.admin.action.DashAdminAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result>/dashboard/dashAdmin.jsp</result>
+			<result>/user/admin/dashAdmin.jsp</result>
 		</action>			
 		
 		<!-- 테스트 게시판 리스트 액션 -->

@@ -9,7 +9,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
 
 import common.ConDAOAware;
-import common.PagingAction;
+import common.action.PagingAction;
 
 
 public class ListQnaAction implements Action, ConDAOAware{

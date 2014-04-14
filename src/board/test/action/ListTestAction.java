@@ -4,7 +4,7 @@ import com.opensymphony.xwork2.Action;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import common.ConDAOAware;
-import common.PagingAction;
+import common.action.PagingAction;
 
 import java.util.*;
 
