@@ -4,7 +4,7 @@
 
 	<typeAlias alias="RestDTO" type="board.rest.dto.RestDTO" />
 	<typeAlias alias="RestoptDTO" type="board.restopt.dto.RestoptDTO" />
-
+	<typeAlias alias="CartDTO" type="board.cart.dto.CartDTO" />
 
 		<!-- 리절트 맵 정의 -->
 	  	<resultMap id="RestBoard" class="RestDTO">
@@ -39,6 +39,15 @@
 		</resultMap>
 		
 		
+		<resultMap id="CartBoard" class="CartDTO">
+			<result property="cart_num" column="cart_num"/>
+			<result property="cart_rest_num" column="cart_rest_num"/>
+			<result property="cart_rest_subject" column="cart_rest_subject"/>
+			<result property="cart_restopt_destFile1" column="cart_restopt_destFile1"/>
+			<result property="cart_restopt_subject" column="cart_restopt_subject"/>
+			<result property="cart_restopt_priceplus" column="cart_restopt_priceplus"/>
+			<result property="session_id" column="session_id"/>
+		</resultMap>
 		
 		
 		
@@ -67,6 +76,10 @@
 			VALUES (restopt_seq_num.NEXTVAL, #restopt_rest_num#, #restopt_subject#, #restopt_priceplus#, #restopt_destFile1#, #restopt_orgname#, #restopt_savname#)
 		</insert>
 		
+		<insert id="insertCart_board" parameterClass="CartDTO">
+			INSERT INTO Cart_board (cart_num, cart_rest_num, cart_rest_subject, cart_restopt_destFile1, cart_restopt_subject, cart_restopt_priceplus, session_id)
+			VALUES (cart_seq_num.NEXTVAL, #cart_rest_num#, #cart_rest_subject#, #cart_restopt_destFile1#, #cart_restopt_subject#, #cart_restopt_priceplus#, #session_id#)
+		</insert>
 		
 		
 		

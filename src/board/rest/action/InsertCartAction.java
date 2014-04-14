@@ -33,15 +33,15 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 	
 	
 	public String execute() throws Exception {
-		System.out.println("getCart_rest_num() 값 : "+getCart_rest_num());
-		System.out.println("getCart_rest_subject() 값 : "+getCart_rest_subject());
-		System.out.println("getCart_restopt_destFile1() 값 : "+getCart_restopt_destFile1());
-		System.out.println("getCart_restopt_subject() 값 : "+getCart_restopt_subject());
-		System.out.println("getCart_restopt_priceplus() 값 : "+getCart_restopt_priceplus());
-		System.out.println("getSession_id() 값 : "+getSession_id());
 		
+		paramClass.setCart_rest_num(getCart_rest_num());
+		paramClass.setCart_rest_subject(getCart_rest_subject());
+		paramClass.setCart_restopt_destFile1(getCart_restopt_destFile1());
+		paramClass.setCart_restopt_subject(getCart_restopt_subject());
+		paramClass.setCart_restopt_priceplus(getCart_restopt_priceplus());
+		paramClass.setSession_id(getSession_id());
 		
-		
+		sqlMapper.insert("Rest.insertCart_board", paramClass);
 		
 		return SUCCESS;
 	}
