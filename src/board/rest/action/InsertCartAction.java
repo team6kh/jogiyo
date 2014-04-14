@@ -1,6 +1,7 @@
 package board.rest.action;
 
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import board.cart.dto.CartDTO;
@@ -17,6 +18,8 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 	
 	private CartDTO paramClass = new CartDTO();
 	private CartDTO resultClass = new CartDTO();
+	
+	private List<CartDTO> list = new ArrayList<CartDTO>();
 	
 	//readRest.jsp 에서 a링크로 넘어오는 파라미터들
 	private int cart_rest_num;
@@ -43,13 +46,25 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 		
 		sqlMapper.insert("Rest.insertCart_board", paramClass);
 		
-		
+		list = sqlMapper.queryForList("Rest.selectCartAll");
 		
 		return SUCCESS;
 	}
 	
 	
-	public CartDTO getParamClass() {
+	
+	
+	public List<CartDTO> getList()
+    {
+        return list;
+    }
+    public void setList(List<CartDTO> list)
+    {
+        this.list = list;
+    }
+
+
+    public CartDTO getParamClass() {
 		return paramClass;
 	}
 	public void setParamClass(CartDTO paramClass) {
