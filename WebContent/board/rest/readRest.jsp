@@ -133,6 +133,24 @@
 			}
 		});
 	}
+	
+	function insertCart(form) {
+		alert("insertCart");
+		var rest_num = document.getElementById("rest_num").value;
+		var rest_subject = document.getElementById("rest_subject").value;
+		var session_id = document.getElementById("session_id").value;
+		var restopt_destFile1 = form.restopt_destFile1.value;
+		var restopt_subject = form.restopt_subject.value;
+		var restopt_priceplus = form.restopt_priceplus.value;
+		
+		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
+		document.getElementById("cartFrame").contentWindow.location.href=url;
+		return false;
+	}
+	
+	function abc(aa){
+		alert("aa>"+aa.restopt_subject.value);
+	}
 </script>
 </head>
 
@@ -201,7 +219,7 @@
 				</div>
 				<div class="col-md-10">
 					<s:property value="resultClass.rest_num" />
-					<input type="hidden" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
+					<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
 				</div>
 			</div>
 
@@ -213,6 +231,8 @@
 					<br/>
 					<font size="4">상품명</font> <br/>
 					<font size="7" color = "red"><s:property value="resultClass.rest_subject" /></font>
+					<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
+					<input type="text" id="session_id" name="session_id" value="test" />
 				</div>
 			</div>
 
@@ -252,28 +272,30 @@
 
 								<div class="col-md-12">
 									<c:forEach var="list" items="${list}">
-										<div class="col-sm-4 col-md-3">					
+										<form class="col-sm-4 col-md-3" id="cartForm" name="test">					
 									    	<div class="thumbnail">
 
 									    		<!-- 옵션 -->
 									      		<a href="${list.restopt_destFile1}">
 									      			<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
 									      		</a>
+									      		<input type="hidden" id="restopt_destFile1" name="restopt_destFile1" value="${list.restopt_destFile1}" />
 
 									      		<div class="caption" align="center">
 									        		<font size="2" color="green"><b>${list.restopt_subject}</b></font> <br/>
 									        		<font size="3" color="red">${list.restopt_priceplus}</font> 원
+									        		<input type="hidden" id="restopt_subject" name="restopt_subject" value="${list.restopt_subject}" />
+									        		<input type="hidden" id="restopt_priceplus" name="restopt_priceplus" value="${list.restopt_priceplus}" />
+									        		
 									      		</div>
-
+							
 									      		<!-- 장바구니 담기 버튼 -->
-									      		<a href="insertCart.action?cart_rest_num=${resultClass.rest_num}&cart_rest_subject=${resultClass.rest_subject}&cart_restopt_destFile1=${list.restopt_destFile1}&cart_restopt_subject=${list.restopt_subject}&cart_restopt_priceplus=${list.restopt_priceplus}&session_id='SessionForTest' ">
-										      		<button type="button" class="btn btn-default btn-lg" >
-														<span class="glyphicon glyphicon-shopping-cart"></span>
-													</button>
-												</a>
+									      		<button type="button" class="btn btn-default btn-lg" onclick="insertCart(this.form)">
+													<span class="glyphicon glyphicon-shopping-cart"></span>
+												</button>
 
 									    	</div>
-								      	</div>		      			      	
+								      	</form>		      			      	
 									</c:forEach>
 
 									</div>
@@ -359,14 +381,13 @@
 		
 		<!-- 장바구니 -->
 	    <div class="col-md-3">
-	         <div id="sidebar" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
-	               장바구니
-	          </div>      
-	     </div>
+	    	<div id="sidebar" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
+	    		여기에 장바구니
+	    		<iframe id="cartFrame" src="listCart.action"></iframe>
+	    		
+	        </div>      
+	    </div>	     
 	     
-	     
-	    -- 장바구니 --
-	     <%@ include file="/board/rest/listCart.jsp"%>
 
 	</div>
 
@@ -423,5 +444,7 @@
 	<script src="dist/js/bootstrap.min.js"></script>
 
 
-
 </body>
+
+
+

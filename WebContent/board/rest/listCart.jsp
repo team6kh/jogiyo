@@ -23,6 +23,7 @@
 </head>
 
 
+
     <h2>cart페이지 for 배너</h2>
     
     
@@ -38,3 +39,4 @@
 	    	</div>
       	</div>		      			      	
 	</c:forEach>
+	
