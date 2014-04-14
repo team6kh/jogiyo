@@ -18,14 +18,13 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 	private CartDTO paramClass = new CartDTO();
 	private CartDTO resultClass = new CartDTO();
 	
+	//readRest.jsp 에서 a링크로 넘어오는 파라미터들
 	private int cart_rest_num;
 	private String cart_rest_subject;
-	
 	private String cart_restopt_destFile1;
 	private String cart_restopt_subject;
 	private String cart_restopt_priceplus;
 	private String session_id;
-	
 	
 
 	public void setConDAO(SqlMapClient sqlMapper) { 
@@ -40,6 +39,8 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 		System.out.println("getCart_restopt_subject() 값 : "+getCart_restopt_subject());
 		System.out.println("getCart_restopt_priceplus() 값 : "+getCart_restopt_priceplus());
 		System.out.println("getSession_id() 값 : "+getSession_id());
+		
+		
 		
 		
 		return SUCCESS;
