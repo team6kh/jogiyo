@@ -35,6 +35,10 @@
 	#map_canvas {
 		height: 400px
 	}
+	#cartFrame {
+		height: 450px
+	}
+	
 </style>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=true">
@@ -232,7 +236,7 @@
 					<font size="4">상품명</font> <br/>
 					<font size="7" color = "red"><s:property value="resultClass.rest_subject" /></font>
 					<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
-					<input type="text" id="session_id" name="session_id" value="test" />
+					<input type="hidden" id="session_id" name="session_id" value="test" />
 				</div>
 			</div>
 
@@ -380,14 +384,11 @@
 		</div>
 		
 		<!-- 장바구니 -->
-	    <div class="col-md-3">
+	    <div  id="cart" class="col-md-3">
 	    	<div id="sidebar" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
-	    		여기에 장바구니
 	    		<iframe id="cartFrame" src="listCart.action"></iframe>
-	    		
 	        </div>      
 	    </div>	     
-	     
 
 	</div>
 

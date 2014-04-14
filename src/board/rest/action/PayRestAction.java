@@ -4,11 +4,15 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PayRestAction extends ActionSupport {
 
-	private int rest_num;
-	private String rest_subject;
+    //장바구니에서 아래의 파라미터이름으로 value 를 넘겨야 함. + 세션id 추가
+    
+	private int rest_num;//cart_rest_num
+	private String rest_subject;//cart_rest_subject
+	
 	private String restopt_set;
-	private String restopt_subject;
-	private int restopt_priceplus;
+	
+	private String restopt_subject;//cart_restopt_subject
+	private int restopt_priceplus;//cart_restopt_priceplus
 	
 	
 	public String execute() throws Exception {
@@ -34,6 +38,7 @@ public class PayRestAction extends ActionSupport {
 	public void setRestopt_priceplus(int restopt_priceplus) {
 		this.restopt_priceplus = restopt_priceplus;
 	}
+	
 	//readRest.jsp에서 들어온 상품정보
 	public String getRestopt_set() {
 		return restopt_set;

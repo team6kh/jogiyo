@@ -19,24 +19,37 @@
 
 <!-- Custom styles for this template -->
 <link href="common/common-template.css" rel="stylesheet">
-
 </head>
 
-
-
-    <h2>cart페이지 for 배너</h2>
-    
+	<div align="center">
+		<font size=5 ><b>장 바 구 니♥</b></font>
+    </div>
     
     <c:forEach var="list" items="${list}">
-		<div class="col-sm-4 col-md-3">					
+    
+		<div class="col-sm-3 col-md-2">					
 	    	<div class="thumbnail">
+	        	<!-- 
 	        	${list.cart_rest_num} <br/>
 			    ${list.cart_rest_subject} <br/>
-			    <img src="${list.cart_restopt_destFile1}" /> <br/>
-			    ${list.cart_restopt_subject} <br/>
-			    ${list.cart_restopt_priceplus} <br/>
 			    ${list.session_id} <br/>
+			    -->
+			    <input type="checkbox" name="isCheck" value="checked" />
+			    <img src="${list.cart_restopt_destFile1}" alt="N/A" style="min-height:100px;height:100px;" /> <br/>
+			   
+			    <div class="caption" align="center">
+		    		<font size=3 color=green>${list.cart_restopt_subject}</font> <br/>
+				    <font size=3 color=red >${list.cart_restopt_priceplus}</font> <br/>
+	    		</div>
 	    	</div>
-      	</div>		      			      	
+      	</div>	
+      		      			      	
 	</c:forEach>
+	
+	
+	<!-- 장바구니 결제 버튼 -->
+	<div align="center">
+		<button type="button" class="btn btn-success">구매하기</button>
+		<button type="button" class="btn btn-danger">선택제거</button>
+	</div>
 	
