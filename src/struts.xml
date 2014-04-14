@@ -129,7 +129,12 @@
 			<result>/agspay/readyPayment.jsp</result>
 		</action>
 		
-		
+		<!-- 장바구니 액션 -->
+		<action name="insertCart" class="board.rest.action.InsertCartAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/board/rest/listCart.jsp</result>
+		</action>
 		
 		<!-- RestBoard 끝 -->
 

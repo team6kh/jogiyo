@@ -254,13 +254,24 @@
 									<c:forEach var="list" items="${list}">
 										<div class="col-sm-4 col-md-3">					
 									    	<div class="thumbnail">
+									    		
+									    		<!-- 옵션 -->
 									      		<a href="${list.restopt_destFile1}">
-									      		<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
+									      			<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
 									      		</a>
+									      		
 									      		<div class="caption" align="center">
 									        		<font size="4" color="green"><b>${list.restopt_subject}</b></font> <br/>
 									        		<font size="5" color="red">${list.restopt_priceplus}</font> 원
 									      		</div>
+									      		
+									      		<!-- 장바구니 담기 버튼 -->
+									      		<a href="insertCart.action?cart_rest_num=${resultClass.rest_num}&cart_rest_subject=${resultClass.rest_subject}&cart_restopt_destFile1=${list.restopt_destFile1}&cart_restopt_subject=${list.restopt_subject}&cart_restopt_priceplus=${list.restopt_priceplus}&session_id='SessionForTest' ">
+										      		<button type="button" class="btn btn-default btn-lg" >
+														<span class="glyphicon glyphicon-shopping-cart"></span>
+													</button>
+												</a>
+									      		
 									    	</div>
 								      	</div>		      			      	
 									</c:forEach>
@@ -343,7 +354,7 @@
 			</div>
 			
 		</div>
-
+		
 
 	</div>
 	
