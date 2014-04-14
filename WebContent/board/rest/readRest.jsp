@@ -257,9 +257,9 @@
 									      		<a href="${list.restopt_destFile1}">
 									      		<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
 									      		</a>
-									      		<div class="caption">
-									        		<font size="3" color="green">${list.restopt_subject}</font> <br/>
-									        		<font size="4" color="red">${list.restopt_priceplus}</font>원
+									      		<div class="caption" align="center">
+									        		<font size="4" color="green"><b>${list.restopt_subject}</b></font> <br/>
+									        		<font size="5" color="red">${list.restopt_priceplus}</font> 원
 									      		</div>
 									    	</div>
 								      	</div>		      			      	
