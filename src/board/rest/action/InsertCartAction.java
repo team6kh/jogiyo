@@ -36,6 +36,8 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 	
 	
 	public String execute() throws Exception {
+	    
+	    System.out.println("getSession_id():"+getSession_id());
 		
 		paramClass.setCart_rest_num(getCart_rest_num());
 		paramClass.setCart_rest_subject(getCart_rest_subject());

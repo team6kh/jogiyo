@@ -143,7 +143,7 @@
 		var restopt_subject = form.restopt_subject.value;
 		var restopt_priceplus = form.restopt_priceplus.value;
 		
-		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&cart_session_id="+session_id;
+		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
 		document.getElementById("cartFrame").contentWindow.location.href=url;
 		return false;
 	}
@@ -232,7 +232,7 @@
 					<font size="4">상품명</font> <br/>
 					<font size="7" color = "red"><s:property value="resultClass.rest_subject" /></font>
 					<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
-					<input type="hidden" id="session_id" name="session_id" value="test"/>
+					<input type="text" id="session_id" name="session_id" value="test" />
 				</div>
 			</div>
 
