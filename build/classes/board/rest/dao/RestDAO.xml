@@ -10,7 +10,6 @@
 	  	<resultMap id="RestBoard" class="RestDTO">
 		  	<result property="rest_num" column="rest_num"/>
 		  	<result property="rest_subject" column="rest_subject"/>
-		  	<result property="rest_amount" column="rest_amount"/>
 		  	<result property="rest_localcategory" column="rest_localcategory"/>
 		  	<result property="rest_typecategory" column="rest_typecategory"/>
 		  	<result property="rest_destFile1" column="rest_destFile1"/>
@@ -33,6 +32,7 @@
 			<result property="restopt_rest_num" column="restopt_rest_num"/>
 			<result property="restopt_subject" column="restopt_subject"/>
 			<result property="restopt_priceplus" column="restopt_priceplus"/>
+			<result property="restopt_amount" column="restopt_amount"/>
 			<result property="restopt_destFile1" column="restopt_destFile1"/>
 			<result property="restopt_orgname" column="restopt_orgname"/>
 			<result property="restopt_savname" column="restopt_savname"/>

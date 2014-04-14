@@ -6,12 +6,18 @@ public class RestoptDTO {
 	private int restopt_rest_num; // rest테이블의 시퀀스넘
 	private String restopt_subject; //옵션명
 	private int restopt_priceplus; //옵션가
-
+	private int restopt_amount; //옵션 수량
 	private String restopt_destFile1; //옵션의 사진 경로 // jsp의 img src 태그사용 용도
 	private String restopt_orgname;  //옵션 사진 파일 오리지날
 	private String restopt_savname; //옵션 사진 파일 세이브
 	
 	
+	public int getRestopt_amount() {
+		return restopt_amount;
+	}
+	public void setRestopt_amount(int restopt_amount) {
+		this.restopt_amount = restopt_amount;
+	}
 	public int getRestopt_num() {
 		return restopt_num;
 	}

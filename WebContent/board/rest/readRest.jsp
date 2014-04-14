@@ -258,8 +258,8 @@
 									      		<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
 									      		</a>
 									      		<div class="caption">
-									        		<h3>${list.restopt_subject}</h3>
-									        		<h3>${list.restopt_priceplus}</h3>
+									        		<font size="3" color="green">${list.restopt_subject}</font> <br/>
+									        		<font size="4" color="red">${list.restopt_priceplus}</font>원
 									      		</div>
 									    	</div>
 								      	</div>		      			      	

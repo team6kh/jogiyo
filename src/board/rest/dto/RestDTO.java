@@ -7,7 +7,6 @@ public class RestDTO {
 	
 	private int rest_num;//
 	private String rest_subject;
-	private int rest_amount;
 	private String rest_localcategory;
 	private String rest_typecategory;
 	
@@ -37,12 +36,6 @@ public class RestDTO {
 	}
 	public void setRest_subject(String rest_subject) {
 		this.rest_subject = rest_subject;
-	}
-	public int getRest_amount() {
-		return rest_amount;
-	}
-	public void setRest_amount(int rest_amount) {
-		this.rest_amount = rest_amount;
 	}
 	public String getRest_localcategory() {
 		return rest_localcategory;
