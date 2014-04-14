@@ -7,6 +7,7 @@
 	<!-- 리절트 맵 정의 -->
 	<resultMap id="RecipeRes" class="RecipeDTO">
 		<result property="recipe_subject" column="recipe_subject" />
+		<result property="recipe_foodsubject" column="recipe_foodsubject" />
 		<result property="recipe_foodkind" column="recipe_foodkind" />
 		<result property="recipe_memberwriter" column="recipe_memberwriter"/>
 		<result property="recipe_writer" column="recipe_writer" />
@@ -67,6 +68,7 @@
 		RECIPE_NUM,
 		RECIPE_FOODKIND,
 		RECIPE_SUBJECT,
+		RECIPE_FOODSUBJECT,
 		RECIPE_METHOD,
 		RECIPE_TIME,
 		RECIPE_PRICE,
@@ -80,6 +82,7 @@
 		(recipe_seq.NEXTVAL,
 		#recipe_foodkind#,
 		#recipe_subject#,
+		#recipe_foodsubject#,
 		#recipe_method#,
 		#recipe_time#,
 		#recipe_price#,
@@ -96,6 +99,7 @@
 	<update id="updateRecipe" parameterClass="RecipeDTO">
 		UPDATE RECIPE_BOARD SET RECIPE_FOODKIND = #recipe_foodkind#,
 		RECIPE_SUBJECT = #recipe_subject#,
+		RECIPE_FOODSUBJECT = #recipe_foodsubject#,
 		RECIPE_METHOD =	#recipe_method#,
 		RECIPE_TIME = #recipe_time#,
 		RECIPE_PRICE = #recipe_price#,

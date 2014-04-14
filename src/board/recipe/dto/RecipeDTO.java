@@ -6,6 +6,7 @@ public class RecipeDTO {
 	private int recipe_num;
 	private String recipe_foodkind;
 	private String recipe_subject;
+	private String recipe_foodsubject;
 	private String recipe_method;
 	private int recipe_time;
 	private int recipe_price;
@@ -41,6 +42,14 @@ public class RecipeDTO {
 
 	public void setRecipe_subject(String recipe_subject) {
 		this.recipe_subject = recipe_subject;
+	}
+
+	public String getRecipe_foodsubject() {
+		return recipe_foodsubject;
+	}
+
+	public void setRecipe_foodsubject(String recipe_foodsubject) {
+		this.recipe_foodsubject = recipe_foodsubject;
 	}
 
 	public String getRecipe_method() {

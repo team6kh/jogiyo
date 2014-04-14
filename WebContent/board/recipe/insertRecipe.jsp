@@ -51,6 +51,11 @@
 							alert("제목을 입력해주세요.");
 							return false;
 						}
+						
+						else if (frm.recipe_foodsubject.value == "") {
+							alert("요리명을 입력해주세요.");
+							return false;
+						}
 
 						else if (frm.recipe_writer.value == "") {
 							alert("작성자를 입력해주세요.");
@@ -118,6 +123,11 @@
 						<td width="100" bgcolor="" align="center">제목</td>
 						<td width="300" colspan="3" align="left">
 						   <input type="text" name="recipe_subject" value="${resultClass.recipe_subject}" /></td>
+					</tr>
+					<tr>
+						<td width="100" bgcolor="" align="center">요리명</td>
+						<td width="300" colspan="3" align="left">
+						   <input type="text" name="recipe_foodsubject" value="${resultClass.recipe_foodsubject}" /></td>
 					</tr>
 					<tr>
 						<td width="100" bgcolor="" align="center">작성자</td>
