@@ -33,7 +33,7 @@
 		padding: 0
 	}
 	#map_canvas {
-		height: 100%
+		height: 400px
 	}
 </style>
 <script type="text/javascript"
@@ -153,10 +153,10 @@
 		<div class="col-md-12 well">
 
 			<div class="col-md-12 well">
-				<div class="col-md-1">
+				<div class="col-md-2">
 					<font color="#FF3636"><b>카테고리</b></font>
 				</div>
-				<div class="col-md-11">
+				<div class="col-md-10">
 					<s:if test="resultClass.rest_localcategory == 11">
 						서울특별시
 					</s:if>
@@ -196,10 +196,10 @@
 					</s:elseif>
 				</div>
 
-				<div class="col-md-1">
+				<div class="col-md-2">
 					<font color="#FF3636"><b>상품번호</b></font>
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-10">
 					<s:property value="resultClass.rest_num" />
 					<input type="hidden" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
 				</div>
@@ -219,80 +219,144 @@
 			<div class="col-md-12 well">
 				<font size="3" color = "red"><b>&nbsp;&nbsp;&nbsp;상품 상세 설명</b></font>
 
-				<br/><br/>
-				<div class="thumbnail">
-					<img src="${resultClass.rest_destFile2}" alt="N/A" >
-				</div>	
-				<br/><br/>
-
-				<div class="col-md-12">
-					<c:forEach var="list" items="${list}">
-						<div class="col-sm-4 col-md-3">					
-					    	<div class="thumbnail">
-					      		<a href="${list.restopt_destFile1}">
-					      		<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
-					      		</a>
-					      		<div class="caption">
-					        		<h3>${list.restopt_subject}</h3>
-					        		<h3>${list.restopt_priceplus}</h3>
-					      		</div>
-					    	</div>
-				      	</div>		      			      	
-					</c:forEach>
-
-					</div>
-
-					<c:if test="${list eq null}">
-						<div class="text-center">
-							<p>등록된 게시물이 없습니다.</p>
+				<!-- 여기서 부터 -->
+				<!-- start -->
+				<div class="panel-group" id="accordion">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion"
+									href="#collapseOne"> 상품 상세 설명 </a>
+							</h4>
 						</div>
-					</c:if>
+
+						<div id="collapseOne" class="panel-collapse collapse in">
+							<div class="panel-body">
+
+								<div class="thumbnail">
+									<img src="${resultClass.rest_destFile2}" alt="N/A" >
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion"
+									href="#collapseTwo"> 상품 옵션 </a>
+							</h4>
+						</div>
+						<div id="collapseTwo" class="panel-collapse collapse">
+							<div class="panel-body">
+
+								<div class="col-md-12">
+									<c:forEach var="list" items="${list}">
+										<div class="col-sm-4 col-md-3">					
+									    	<div class="thumbnail">
+
+									    		<!-- 옵션 -->
+									      		<a href="${list.restopt_destFile1}">
+									      			<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
+									      		</a>
+
+									      		<div class="caption" align="center">
+									        		<font size="4" color="green"><b>${list.restopt_subject}</b></font> <br/>
+									        		<font size="5" color="red">${list.restopt_priceplus}</font> 원
+									      		</div>
+
+									      		<!-- 장바구니 담기 버튼 -->
+									      		<a href="insertCart.action?cart_rest_num=${resultClass.rest_num}&cart_rest_subject=${resultClass.rest_subject}&cart_restopt_destFile1=${list.restopt_destFile1}&cart_restopt_subject=${list.restopt_subject}&cart_restopt_priceplus=${list.restopt_priceplus}&session_id='SessionForTest' ">
+										      		<button type="button" class="btn btn-default btn-lg" >
+														<span class="glyphicon glyphicon-shopping-cart"></span>
+													</button>
+												</a>
+
+									    	</div>
+								      	</div>		      			      	
+									</c:forEach>
+
+									</div>
+
+									<c:if test="${list eq null}">
+										<div class="text-center">
+											<p>등록된 게시물이 없습니다.</p>
+										</div>
+									</c:if>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end -->
+
 			</div>
 
-			<div class="col-md-12 well">
-				<div class="col-md-12">
-					<font size="3" color = "red"><b>&nbsp;&nbsp;&nbsp;판매자 정보</b></font>
-				</div>
+			<!-- HERE -->
+			<div class="tabbable">
+				<!-- Only required for left/right tabs -->
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#tab1" data-toggle="tab">
+							지도보기
+						</a>
+					</li>
+					<li>
+						<a href="#tab2" data-toggle="tab">
+							판매자 정보
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab1">						
+							<div class="col-md-7 well">
+								<!-- Here's map area -->
+								<div id="map_canvas" class="map col-md-12"></div>
+							</div>	
+					</div>
+					<div class="tab-pane" id="tab2">
 
-				<div class="col-md-3">
-					<font color="#FF3636"><b>&nbsp;&nbsp;&nbsp;판매자</b></font>
-				</div>
-				<div class="col-md-9">
-					${resultClass.rest_writer_name}
-				</div>
+							<div class="col-md-12 well">
+								<div class="col-md-12">
+									<font size="3" color = "red"><b>판매자 정보</b></font>
+								</div>
 
-				<div class="col-md-3">
-					<font color="#FF3636"><b>&nbsp;&nbsp;&nbsp;전화번호</b></font>
-				</div>
-				<div class="col-md-9">
-					${resultClass.rest_writer_telnum}
-				</div>
+								<div class="col-md-3">
+									<font color="#FF3636"><b>판매자</b></font>
+								</div>
+								<div class="col-md-9">
+									${resultClass.rest_writer_name}
+								</div>
 
-				<div class="col-md-3">
-					<font color="#FF3636"><b>&nbsp;&nbsp;&nbsp;핸드폰</b></font>
-				</div>
-				<div class="col-md-9">
-					${resultClass.rest_writer_mobilenum}
-				</div>
+								<div class="col-md-3">
+									<font color="#FF3636"><b>전화번호</b></font>
+								</div>
+								<div class="col-md-9">
+									${resultClass.rest_writer_telnum}
+								</div>
 
-				<div class="col-md-3">
-					<font color="#FF3636"><b>&nbsp;&nbsp;&nbsp;반품주소</b></font>
-				</div>
-				<div class="col-md-9">
-					${resultClass.rest_writer_address}
+								<div class="col-md-3">
+									<font color="#FF3636"><b>핸드폰</b></font>
+								</div>
+								<div class="col-md-9">
+									${resultClass.rest_writer_mobilenum}
+								</div>
+
+								<div class="col-md-3">
+									<font color="#FF3636"><b>반품주소</b></font>
+								</div>
+								<div class="col-md-9">
+									${resultClass.rest_writer_address}
+								</div>
+							</div>
+					</div>
 				</div>
 			</div>
 
 		</div>
 
 
-
 	</div>
-
-	<div id="map_canvas" style="width: 30%; height: 60%"></div>
-
-
-
 
 
 
@@ -337,5 +401,15 @@
 			</tr>
 		</table>
 	</form>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
+
+
 
 </body>

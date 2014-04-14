@@ -4,19 +4,18 @@ import java.io.File;
 import java.util.Date;
 
 public class RestDTO {
-	
+
 	private int rest_num;//
 	private String rest_subject;
-	private int rest_amount;
 	private String rest_localcategory;
 	private String rest_typecategory;
-	
+
 	private String rest_destFile1;
 	private String rest_main_orgname;//
 	private String rest_main_savname;//
 	private String rest_content_orgname;//
 	private String rest_content_savname;//
-	
+
 	private String rest_destFile2;
 	private String rest_writer_name;
 	private String rest_writer_telnum;
@@ -24,8 +23,8 @@ public class RestDTO {
 	private String rest_writer_address;
 	private Date rest_reg_date;
 	private int rest_readcount;//
-	
-	
+
+
 	public int getRest_num() {
 		return rest_num;
 	}
@@ -37,12 +36,6 @@ public class RestDTO {
 	}
 	public void setRest_subject(String rest_subject) {
 		this.rest_subject = rest_subject;
-	}
-	public int getRest_amount() {
-		return rest_amount;
-	}
-	public void setRest_amount(int rest_amount) {
-		this.rest_amount = rest_amount;
 	}
 	public String getRest_localcategory() {
 		return rest_localcategory;
@@ -128,5 +121,5 @@ public class RestDTO {
 	public void setRest_readcount(int rest_readcount) {
 		this.rest_readcount = rest_readcount;
 	}
-	
+
 }
