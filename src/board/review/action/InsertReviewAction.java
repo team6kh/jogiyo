@@ -28,17 +28,13 @@ public class InsertReviewAction implements Action, Preparable,
 	private List<String> review_filesFileName = new ArrayList<String>();
 	private List<String> review_filesContentType = new ArrayList<String>();
 
-	// 리뷰 글쓰기 폼
-	public String form() throws Exception {
 
-		// 해당회원이 해당 식당에서 구매한 내역이 있는지 없는지 논리값
-		// 받아야할 파라메터 : 식당코드, 세션아이디값
-
-		return SUCCESS;
-	}
 
 	// 리뷰 글쓰기 등록
 	public String execute() throws Exception {
+	    // 필요한 param : 식당코드, 세션아이디값
+	    // 두 param을 이용해 해당회원이 해당 식당에서 구매한 내역이 있는지 없는지 논리값을 구할 것
+        
 
 		// 작성일에 현재 시간 설정
 		reviewDTO.setReview_reg_date(today.getTime());
@@ -65,9 +61,9 @@ public class InsertReviewAction implements Action, Preparable,
 			// 파일업로드 메서드 실행
 			String saveFileName = fileUpload.uploadFiles(review_files,
 					review_filesFileName, fileUploadPath, fileRename);
-	
-		
-		
+
+
+
 			// setReview_file 메서드로 값 설정
 			reviewDTO.setReview_file(saveFileName);
 			// DB update 진행
