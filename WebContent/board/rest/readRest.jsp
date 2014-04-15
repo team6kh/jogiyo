@@ -396,7 +396,21 @@
 		
 		
 		
-		<!-- review -->
+
+		
+		
+		
+		
+		<!-- 장바구니 -->
+	    <div  id="cart" class="col-md-3">
+	    	<div id="sidebar" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
+	    		<iframe id="cartFrame" src="listCart.action" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
+	        </div>      
+	    </div>	     
+
+	</div>
+	
+	<!-- review -->
 		<div class="container well">
 	
 	
@@ -462,11 +476,6 @@
 		
 		
 		
-		
-		
-		
-		
-		
 		<!-- 리뷰 글 보기 시작 -->
 		<c:forEach var="reviewDTO" items="${reviewRes}">
 			<div class="text-center">
@@ -529,23 +538,7 @@
 				</ul>
 		</div>
 		<!--  리뷰 글 페이지 -->
-
-	<!-- 리뷰 글 보기 끝 -->
-
-
-
-		
-		
-		
-		
-		<!-- 장바구니 -->
-	    <div  id="cart" class="col-md-3">
-	    	<div id="sidebar" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
-	    		<iframe id="cartFrame" src="listCart.action" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
-	        </div>      
-	    </div>	     
-
-	</div>
+		<!-- 리뷰 글 보기 끝 -->
 
 
 
