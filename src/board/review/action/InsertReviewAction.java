@@ -13,14 +13,13 @@ import com.opensymphony.xwork2.Preparable;
 import common.ConDAOAware;
 import common.Constants;
 
-public class InsertReviewAction implements Action, Preparable,
-        ModelDriven<ReviewDTO>, ConDAOAware
+public class InsertReviewAction implements Action, Preparable,  ModelDriven<ReviewDTO>, ConDAOAware
 {
 
     // DAO 관련 변수
     SqlMapClient sqlMapper;
     
-    private int review_rest_num;
+    private int rest_num;
     private int review_rest_currentPage; 
 
     
@@ -57,7 +56,7 @@ public class InsertReviewAction implements Action, Preparable,
             
             // 파일명 변경 시 공통으로 붙여줄 이름 설정
             String fileRename = "review_" + reviewDTO.getReview_num();
-
+            
             // 파일업로드를 위해 FileUpload 클래스의 인스턴스 생성
             FileUpload fileUpload = new FileUpload();
             // 파일업로드 메서드 실행
@@ -115,13 +114,13 @@ public class InsertReviewAction implements Action, Preparable,
 
 
 
-    public int getReview_rest_num()
+    public int getRest_num()
     {
-        return review_rest_num;
+        return rest_num;
     }
-    public void setReview_rest_num(int review_rest_num)
+    public void setRest_num(int rest_num)
     {
-        this.review_rest_num = review_rest_num;
+        this.rest_num = rest_num;
     }
     public int getReview_rest_currentPage()
     {

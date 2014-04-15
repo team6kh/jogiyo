@@ -1,21 +1,17 @@
 package board.rest.action;
 
-import java.io.File;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import common.ConDAOAware;
 import board.rest.dto.RestDTO;
 import board.restopt.dto.RestoptDTO;
-import board.review.action.FileUpload;
+import common.action.PagingAction;
 import board.review.action.PagingReviewAction;
 import board.review.dto.ReviewDTO;
 
-import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
 import common.Constants;
@@ -51,7 +47,7 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
     private int blockPage = 5; // 한 화면에 보여줄 페이지 수
     private String pagingHtml; // 페이징을 구현한 HTML
     private PagingReviewAction page; // 페이징 클래스
-    private String actionName = "listReview"; // 페이징액션과 로그인액션에서 쓰인다...
+    private String actionName = "readRest"; // 페이징액션과 로그인액션에서 쓰인다...
 
 	
 	
@@ -73,17 +69,18 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 		
 		
 		
+		
 		//후기리스트
-		reviewFile_Path = reviewFile_Path.replace("\\", "/").substring(27);
         review_rest = getRest_num();
-
-        // 해당식당에 관한 리뷰 글만 가져와 List 타입 인스턴스에 저장
         reviewRes = sqlMapper.queryForList("Review.selectReviewList", review_rest);
-
+        
+        reviewFile_Path = reviewFile_Path.replace("\\", "/").substring(27);
+        
         // 페이징 관련 코드
         totalCount = reviewRes.size();
-        page = new PagingReviewAction(actionName, ccp, totalCount, blockCount, blockPage);
+        page = new PagingReviewAction(actionName, ccp, totalCount, blockCount, blockPage, rest_num, currentPage);
         pagingHtml = page.getPagingHtml().toString();
+        
         int lastCount = totalCount; // 현재 페이지에서 보여줄 마지막 글의 번호 설정
 
         // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.

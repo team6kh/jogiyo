@@ -29,9 +29,8 @@
 	<div class="container">
 		<div class="common-template">
 			<!-- 리뷰 수정 폼(review)  -->
-			<form name="updateReviewForm" method="post"
-				action="updateReviewPro.action?ccp=${ccp}&review_num=${review_num}"
-				enctype="multipart/form-data" onsubmit="updateReview()">
+			<form name="updateReviewForm" method="post" action="updateReviewPro.action?review_rest_currentPage=${review_rest_currentPage}&rest_num=${rest_num}&ccp=${ccp}&review_num=${review_num}" enctype="multipart/form-data" onsubmit="updateReview()">
+				
 				<div class="col-md-12 well">
 					<!--  별점(review_rating) : radio 타입으로  -->
 					<table class="table table-striped table-forum">
@@ -66,12 +65,13 @@
 						</tr>
 						<!-- 리뷰 작성 완료 버튼  -->
 						<tr>
-							<td class="text-center" colspan="2"><input type="button"
-								value="취   소" onclick="javascript:history.go(-1)"> 
-								<input type="submit" value="수정 완료" /></td>
+							<td class="text-center" colspan="2"><input type="button" value="취   소" onclick="javascript:history.go(-1)"> 
+								<input type="submit" value="수정 완료" />
+							</td>
 						</tr>
 					</table>
 				</div>
+				
 			</form>
 		</div>
 	</div>

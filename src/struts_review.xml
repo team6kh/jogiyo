@@ -37,9 +37,7 @@
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="fileUpload" />
 			<interceptor-ref name="params" />
-			<result type="redirect-action">
-				<param name="actionName">listReview</param>
-			</result>
+			<result >board/review/goReadRest.jsp</result>
 		</action>
 
 		<!-- 리뷰글 삭제 폼 -->
@@ -52,9 +50,7 @@
 		<action name="deleteReviewPro" class="board.review.action.DeleteReviewAction">
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="params" />
-			<result type="redirect-action">
-				<param name="actionName">listReview</param>
-			</result>
+			<result >board/review/goReadRest.jsp</result>
 		</action>
 
 		<!-- Review게시판 끝 -->

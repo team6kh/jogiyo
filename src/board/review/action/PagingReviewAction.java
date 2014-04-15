@@ -12,18 +12,25 @@ public class PagingReviewAction {
 	private int endCount; // 한 페이지에서 보여줄 게시글의 끝 번호
 	private int startPage; // 시작 페이지
 	private int endPage; // 마지막 페이지
+	
+	private int rest_num;
+	private int currentPage;
 
-	private StringBuffer pagingHtml;
+	
+
+    private StringBuffer pagingHtml;
 
 	// 페이징 생성자
-	public PagingReviewAction(String actionName, int ccp, int totalCount,
-			int blockCount, int blockPage) {
+	public PagingReviewAction(String actionName, int ccp, int totalCount, int blockCount, int blockPage, int rest_num, int currentPage) {
 
 		this.actionName = actionName;
 		this.blockCount = blockCount;
 		this.blockPage = blockPage;
 		this.ccp = ccp;
 		this.totalCount = totalCount;
+		
+		this.rest_num = rest_num;
+		this.currentPage = currentPage;
 
 		// 전체 페이지 수
 		totalPage = (int) Math.ceil((double) totalCount / blockCount);
@@ -52,8 +59,8 @@ public class PagingReviewAction {
 		// 이전 block 페이지
 		pagingHtml = new StringBuffer();
 		if (ccp > blockPage) {
-			pagingHtml.append("<li><a href=" + actionName + ".action?ccp="
-					+ (startPage - 1) + ">");
+		    
+			pagingHtml.append("<li><a href=" + actionName + ".action?rest_num="+rest_num+"&currentPage="+currentPage+"&ccp="+ (startPage - 1) + ">");
 			pagingHtml.append("이전");
 			pagingHtml.append("</a></li>");
 		}
@@ -68,7 +75,7 @@ public class PagingReviewAction {
 				pagingHtml.append(i);
 				pagingHtml.append("</a></li>");
 			} else {
-				pagingHtml.append("<li><a href=" + actionName + ".action?ccp=");
+				pagingHtml.append("<li><a href=" + actionName + ".action?rest_num="+rest_num+"&currentPage="+currentPage+"&ccp=");
 				pagingHtml.append(i);
 				pagingHtml.append(">");
 				pagingHtml.append(i);
@@ -79,7 +86,7 @@ public class PagingReviewAction {
 
 		// 다음 block 페이지
 		if (totalPage - startPage >= blockPage) {
-			pagingHtml.append("<li><a href=" + actionName + ".action?ccp="
+			pagingHtml.append("<li><a href=" + actionName + ".action?rest_num="+rest_num+"&currentPage="+currentPage+"&ccp="
 					+ (endPage + 1) + ">");
 			pagingHtml.append("다음");
 			pagingHtml.append("</a></li>");
@@ -170,5 +177,22 @@ public class PagingReviewAction {
 	public String getActionName() {
 		return actionName;
 	}
+	public int getRest_num()
+    {
+        return rest_num;
+    }
 
+
+    public void setRest_num(int rest_num)
+    {
+        this.rest_num = rest_num;
+    }
+    public int getCurrentPage()
+    {
+        return currentPage;
+    }
+    public void setCurrentPage(int currentPage)
+    {
+        this.currentPage = currentPage;
+    }
 }

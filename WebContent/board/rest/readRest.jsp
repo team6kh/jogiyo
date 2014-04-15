@@ -443,21 +443,21 @@
 									<input type="submit" value="리뷰 등록" /></th>
 								</tr>
 							</table>
+							
 							<!-- 보내줘야 할 파라미터 : 식당코드(식당 테이블) / 구매자(= 회원 = 글 작성자) 정보 -->
 							<input type="hidden" name="review_rest_currentPage" value="${currentPage}" />
-							<input type="hidden" name="review_rest_num" value="${rest_num}" /> 
+							<input type="hidden" name="review_rest" value="${rest_num}" />
+							 <input type="hidden" name="rest_num" value="${rest_num}" />
 							<input type="hidden" name="review_writer" value="${sessionScope.sessionId }" />
+							
 						</form>
 					</div>
 				</c:if>
 			</div>
 			<!-- 리뷰 쓰기 폼 끝  -->
 	
-			<div class="text-center">
-				<ul class="pagination pagination-sm">
-					<s:property value="pagingHtml" escape="false" />
-				</ul>
-			</div>
+			
+			
 		</div>
 		
 		
@@ -486,8 +486,8 @@
 					<c:if test="${reviewDTO.review_writer == sessionScope.sessionId}">
 						<tr>
 							<td class="text-right" colspan="2">
-								<input type="button"value="수정" onclick="javascript:open('updateReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=500, height=500')">
-								<input type="button" value="삭제" onclick="javascript:open('deleteReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=200')" />
+								<input type="button"value="수정" onclick="javascript:open('updateReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=500, height=500')">
+								<input type="button" value="삭제" onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=200')" />
 							</td>
 						</tr>
 					</c:if>
@@ -522,6 +522,12 @@
 				</table>
 			</div>
 		</c:forEach>
+		
+		<div class="text-center">
+				<ul class="pagination pagination-sm">
+					<s:property value="pagingHtml" escape="false" />
+				</ul>
+		</div>
 		<!--  리뷰 글 페이지 -->
 
 	<!-- 리뷰 글 보기 끝 -->

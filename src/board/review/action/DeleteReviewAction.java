@@ -12,24 +12,27 @@ public class DeleteReviewAction implements Action, ConDAOAware {
 
 	// DAO 관련 변수
 	private SqlMapClient sqlMapper;
+	
+	private int rest_num;
+    private int review_rest_currentPage; 
+    private int ccp;
+    private int review_num;
+    
 
 	// DTO 관련 변수
 	private ReviewDTO reviewDTO;
 
-	// param
-	private int ccp;
-	private int review_num;
 
 	public String form() throws Exception {
-
+	    
+	    
 		return SUCCESS;
 	}
 
 	public String execute() throws Exception {
-
+	    
 		// 첨부파일 삭제를 위해 DB에서 해당 글을 가져옴
-		reviewDTO = (ReviewDTO) sqlMapper.queryForObject(
-				"Review.selectReviewOne", review_num);
+		reviewDTO = (ReviewDTO) sqlMapper.queryForObject("Review.selectReviewOne", review_num);
 
 		// 첨부파일명 값을 꺼냄
 		String filesName = reviewDTO.getReview_file();
@@ -72,6 +75,27 @@ public class DeleteReviewAction implements Action, ConDAOAware {
 		this.review_num = review_num;
 	}
 
+	public int getRest_num()
+    {
+        return rest_num;
+    }
+
+    public void setRest_num(int rest_num)
+    {
+        this.rest_num = rest_num;
+    }
+
+    public int getReview_rest_currentPage()
+    {
+        return review_rest_currentPage;
+    }
+
+    public void setReview_rest_currentPage(int review_rest_currentPage)
+    {
+        this.review_rest_currentPage = review_rest_currentPage;
+    }
+	
+	
 	// ConDAOAware 인터페이스
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;

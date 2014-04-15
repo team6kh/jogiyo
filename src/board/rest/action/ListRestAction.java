@@ -38,7 +38,6 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // pagingAction 객체 생성.
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
 
-		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
 		int lastCount = totalCount;
 		// 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
 		if (page.getEndCount() < totalCount)
