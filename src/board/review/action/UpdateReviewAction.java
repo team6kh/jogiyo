@@ -48,13 +48,13 @@ public class UpdateReviewAction implements Action, Preparable,
 		sqlMapper.update("Review.updateReview", reviewDTO);
 
 		// 첨부파일이 있는 경우
-		if (review_files != null) {
+		if (!review_files.isEmpty()) {
 			// 첨부파일 저장된 경로
 			String fileUploadPath = Constants.COMMON_FILE_PATH
 					+ Constants.REVIEW_FILE_PATH;
 			// 파일업로드, 파일삭제 메서드를 이용하기 위해 객체 생성
 			FileUpload fileUpload = new FileUpload();
-		
+
 			// 기존 업로드된 첨부파일 삭제 시작
 
 			// 첨부파일 삭제를 위해 DB에서 해당 글을 가져옴
@@ -66,20 +66,20 @@ public class UpdateReviewAction implements Action, Preparable,
 			fileUpload.deleteFiles(filesName, fileUploadPath);
 
 			// 기존 업로드된 첨부파일 삭제 종료
-			
-			
+
+
 			// 새로 첨부된 파일 업로드 시작
-			
+
 			// 파일명 변경시 공통으로 붙여줄 이름
 			String fileRename = "review_" + reviewDTO.getReview_num();
 			// 첨부파일 업로드 메서드 호출
 			String saveFileName = fileUpload.uploadFiles(review_files,
 					review_filesFileName, fileUploadPath, fileRename);
 			System.out.println("saveFileName :" + saveFileName);
-			
+
 			// 새로 첨부된 파일 업로드 종료
-			
-			
+
+
 			// setReview_file 메서드로 값 설정
 			reviewDTO.setReview_file(saveFileName);
 			// DB file update 진행
