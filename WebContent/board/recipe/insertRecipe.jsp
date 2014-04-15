@@ -52,6 +52,11 @@
 							return false;
 						}
 
+						else if (frm.recipe_foodsubject.value == "") {
+							alert("요리명을 입력해주세요.");
+							return false;
+						}
+
 						else if (frm.recipe_writer.value == "") {
 							alert("작성자를 입력해주세요.");
 							return false;
@@ -120,13 +125,18 @@
 						   <input type="text" name="recipe_subject" value="${resultClass.recipe_subject}" /></td>
 					</tr>
 					<tr>
+						<td width="100" bgcolor="" align="center">요리명</td>
+						<td width="300" colspan="3" align="left">
+						   <input type="text" name="recipe_foodsubject" value="${resultClass.recipe_foodsubject}" /></td>
+					</tr>
+					<tr>
 						<td width="100" bgcolor="" align="center">작성자</td>
 						<td width="100" align="left">
-						 
+
 						   <input type="text" name="recipe_writer" value="${resultClass.recipe_writer}" /></td>
 						<td width="100" bgcolor="" align="center">비밀번호</td>
 						<td width="100" align="left">
-						 
+
 						   <input type="password" name="recipe_password" value="${resultClass.recipe_password}" /></td>
 					</tr>
 					<tr>
@@ -151,7 +161,7 @@
 						<td width="100" bgcolor="" align="center">첨부파일</td>
 						<td width="300" colspan="3" align="left">
 						        <s:file name="recipe_file" theme="simple" /> 
-								
+
 								<s:if test="resultClass.recipe_orgfile != NULL">
 		                     &nbsp;  <s:property value="resultClass.recipe_orgfile" /> 파일이 등록되어 있습니다. 다시 업로드하면 기존의 파일은 삭제됩니다.
 	                            </s:if>
