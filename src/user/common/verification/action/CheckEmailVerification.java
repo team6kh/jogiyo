@@ -1,5 +1,7 @@
 package user.common.verification.action;
 
+import user.common.verification.dto.EvDTO;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
 
@@ -9,7 +11,10 @@ public class CheckEmailVerification implements Action, ConDAOAware
 {
     private SqlMapClient sqlMapper;
     
-    private String buyer_email;
+    //EvDTO evDTO = new EvDTO();  
+
+    //private String buyer_email;
+    private String ev_requested;
     private String ev_code;
     
     public void setConDAO(SqlMapClient sqlMapper)
@@ -18,23 +23,56 @@ public class CheckEmailVerification implements Action, ConDAOAware
     }
 
     public String execute() throws Exception
-    {
-        System.out.println("getBuyer_email():"+getBuyer_email());
+    {       
+        //System.out.println("getBuyer_email():"+getBuyer_email());
+        System.out.println("getEv_requested():"+getEv_requested());
         System.out.println("getEv_code():"+getEv_code());
         
-        return SUCCESS;
+        EvDTO evDTO = new EvDTO();
+        
+        evDTO.setEv_requested(getEv_requested());
+        evDTO.setEv_code(getEv_code());
+        
+        evDTO = (EvDTO) sqlMapper.queryForObject("Ev.selectLatestEvCode", evDTO);
+        
+        if (evDTO != null)
+        {
+            return SUCCESS;
+        }
+        
+        return ERROR;
     }
+    
+//    public EvDTO getEvDTO()
+//    {
+//        return evDTO;
+//    }
+//
+//    public void setEvDTO(EvDTO evDTO)
+//    {
+//        this.evDTO = evDTO;
+//    }
 
-    public String getBuyer_email()
+//    public String getBuyer_email()
+//    {
+//        return buyer_email;
+//    }
+//
+//    public void setBuyer_email(String buyer_email)
+//    {
+//        this.buyer_email = buyer_email;
+//    }
+
+    public String getEv_requested()
     {
-        return buyer_email;
+        return ev_requested;
     }
 
-    public void setBuyer_email(String buyer_email)
+    public void setEv_requested(String ev_requested)
     {
-        this.buyer_email = buyer_email;
+        this.ev_requested = ev_requested;
     }
-
+    
     public String getEv_code()
     {
         return ev_code;

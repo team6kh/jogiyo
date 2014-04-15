@@ -158,9 +158,12 @@
 		</action>
 		
 		<action name="checkEv" class="user.common.verification.action.CheckEmailVerification">
+			<param name="aliases">#{'buyer_email' : 'ev_requested'}</param>
+			<interceptor-ref name="alias"/>	
 			<interceptor-ref name="chain"/>					
 			<interceptor-ref name="params"/>
-			<result>test.jsp</result>
+			<result name="success">test.jsp</result>
+			<result name="error">/common/error.jsp</result>
 		</action>
 		
 		<!-- NEW 비밀번호 체크 액션 -->
