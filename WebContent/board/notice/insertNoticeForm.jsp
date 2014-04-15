@@ -104,7 +104,7 @@
 		    var sHTML = '<img src="<%=request.getContextPath()%>/board/se2/upload/'+filepath+'">';
 		    oEditors.getById["notice_content"].exec("PASTE_HTML", [sHTML]); 
 		}
-		 
+		  
 	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
