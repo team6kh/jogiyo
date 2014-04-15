@@ -23,12 +23,7 @@
 
 </head>
 
-
 <body onload="ratingck()">
-
-	<!-- header -->
-	<%@ include file="/common/header.jsp"%>
-	<!-- end of header -->
 
 	<!-- container -->
 	<div class="container">
@@ -36,7 +31,7 @@
 			<!-- 리뷰 수정 폼(review)  -->
 			<form name="updateReviewForm" method="post"
 				action="updateReviewPro.action?ccp=${ccp}&review_num=${review_num}"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data" onsubmit="updateReview()">
 				<div class="col-md-12 well">
 					<!--  별점(review_rating) : radio 타입으로  -->
 					<table class="table table-striped table-forum">
@@ -60,16 +55,20 @@
 						<!--  이미지 파일 첨부  -->
 						<tr>
 							<td class="text-center" colspan="2">이미지파일을 첨부하시면 기존에 첨부하신
-								파일은 삭제됩니다. <br /> <input id="review_file_element" type="file"
-								name="review_files"> <input id="review_file_element"
-								type="file" name="review_files">
+								파일은 삭제됩니다. <br /> 
+								<input id="review_file_element" type="file" name="review_files"> 
+								
+								<s:if test="resultClass.review_files != NULL">
+									&nbsp; * <s:property value="resultClass.review_files" /> 재업로드시 기존파일은 삭제됩니다.
+								</s:if>
+								
 							</td>
 						</tr>
 						<!-- 리뷰 작성 완료 버튼  -->
 						<tr>
 							<td class="text-center" colspan="2"><input type="button"
-								value="취   소" onclick="javascript:history.go(-1)"> <input
-								type="submit" value="수정 완료" /></td>
+								value="취   소" onclick="javascript:history.go(-1)"> 
+								<input type="submit" value="수정 완료" /></td>
 						</tr>
 					</table>
 				</div>

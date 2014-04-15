@@ -24,7 +24,7 @@
 
 <script>
 function check(){
-    cbox = input_form.isCheck;
+    cbox = input_form.cart_isCheck;
     if(cbox.length) {  // 여러 개일 경우
         for(var i = 0; i<cbox.length;i++) {
             cbox[i].checked=input_form.all.checked;
@@ -51,7 +51,7 @@ function check(){
 				    ${list.cart_rest_subject} <br/>
 				    ${list.session_id} <br/>
 				    -->
-				    <input type="checkbox" name="isCheck" value="checked" color="white">
+				    <input type="checkbox" name="cart_isCheck" value="checked" color="white">
 				    <img src="${list.cart_restopt_destFile1}" alt="N/A" style="min-height:100px;height:100px;" /> <br/>
 				   
 				    <div class="caption" align="center">
