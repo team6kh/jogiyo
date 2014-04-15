@@ -30,11 +30,6 @@ public class InsertNoticeAction extends ActionSupport implements ConDAOAware,
 
 	Calendar today = Calendar.getInstance(); //오늘 날짜 구하기
 
-	private File upload; //파일 객체
-	private String uploadContentType; //컨텐츠 타입
-	private String uploadFileName; //파일 이름
-	private String fileUploadPath = "D:\\오택근\\upload\\"; //업로드 경로
-
 	public String form() throws Exception {
 		//등록 폼
 		return SUCCESS;
@@ -49,66 +44,10 @@ public class InsertNoticeAction extends ActionSupport implements ConDAOAware,
 		//등록 쿼리 수행
 		sqlMapper.insert("Notice.insertNotice", noticeDTO);
 
-		//첨부파일을 선택했다면 파일을 업로드 한다
-		if (getUpload() != null) {
-
-			//등록한 글 번호 가져오기
-			noticeDTO = (NoticeDTO) sqlMapper.queryForObject("Notice.selectLastNo");
-
-			//실제 서버에 저장될 파일 이름과 확장자 설정
-			String file_name = "file_" + noticeDTO.getNotice_num();
-			String file_ext = getUploadFileName().substring(
-					getUploadFileName().lastIndexOf('.') + 1,
-					getUploadFileName().length());
-
-			//서버에 파일 저장
-			File destFile = new File(fileUploadPath + file_name + "."
-					+ file_ext);
-			FileUtils.copyFile(getUpload(), destFile);
-
-			noticeDTO.setNotice_file(file_name + "." + file_ext); 
-
-			//파일 정보 업데이트
-			sqlMapper.update("Notice.updateFile", noticeDTO);
-		}
-
 		return SUCCESS;
-	}
-
-	public File getUpload() {
-		return upload;
-	}
-
-	public void setUpload(File upload) {
-		this.upload = upload;
-	}
-
-	public String getUploadContentType() {
-		return uploadContentType;
-	}
-
-	public void setUploadContentType(String uploadContentType) {
-		this.uploadContentType = uploadContentType;
-	}
-
-	public String getUploadFileName() {
-		return uploadFileName;
-	}
-
-	public void setUploadFileName(String uploadFileName) {
-		this.uploadFileName = uploadFileName;
-	}
-
-	public String getFileUploadPath() {
-		return fileUploadPath;
-	}
-
-	public void setFileUploadPath(String fileUploadPath) {
-		this.fileUploadPath = fileUploadPath;
-	}
-
+	}	
 	
-		public int getCurrentPage() {
+	public int getCurrentPage() {
 		return currentPage;
 	}
 

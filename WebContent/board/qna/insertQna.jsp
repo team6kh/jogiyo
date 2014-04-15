@@ -51,6 +51,18 @@
 		<input type="hidden" name="qna_num" value="${resultClass.qna_num }"/>
 	
 			<div class="form-group">
+				<label for="qna_category">카테고리</label>
+				<select name="qna_category" id="qna_category">
+					<option value="">전체</option>
+					<option value="01" <c:if test="${resultClass.qna_category eq '01'}">selected</c:if>>회원가입</option>
+					<option value="02" <c:if test="${resultClass.qna_category eq '02'}">selected</c:if>>바로결제</option>
+					<option value="03" <c:if test="${resultClass.qna_category eq '03'}">selected</c:if>>리뷰</option>
+					<option value="04" <c:if test="${resultClass.qna_category eq '04'}">selected</c:if>>이용문의</option>
+					<option value="05" <c:if test="${resultClass.qna_category eq '05'}">selected</c:if>>광고문의</option>
+					<option value="06" <c:if test="${resultClass.qna_category eq '06'}">selected</c:if>>기타</option>
+				</select>
+			</div>
+			<div class="form-group">
 				<label for="qna_subject">제목</label>
 				<input type="text" class="form-control" name="qna_subject" placeholder="제목" value="${resultClass.qna_subject }" required>
 			</div>
@@ -58,7 +70,6 @@
 				<label for="qna_content">글내용</label>
 				<textarea class="form-control" rows="3" id="qna_content" name="qna_content" placeholder="글내용" required>${resultClass.qna_content }</textarea>
 			</div>
-
 			<div class="pull-right">
 				<button type="submit" class="btn btn-primary">${textName }</button>
 				<a href="listQna.action" class="btn btn-default">글목록</a>
