@@ -43,11 +43,6 @@ public class UpdateReviewAction implements Action, Preparable, ModelDriven<Revie
 
 	// 리뷰글 수정 update 처리
 	public String execute() throws Exception {
-	    System.out.println("rest_num : "+getRest_num());
-	    System.out.println("Review_rest_currentPage : "+getReview_rest_currentPage());
-	    
-	    
-	    
 		// 다른 항목 업데이트 처리
 		sqlMapper.update("Review.updateReview", reviewDTO);
 

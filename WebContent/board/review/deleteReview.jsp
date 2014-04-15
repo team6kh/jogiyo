@@ -21,7 +21,7 @@
 
 <body>
 
-	<form method="post" action="deleteReviewPro.action" >
+	<form method="post" onsubmit="confirm()">
 	
 		<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
 		<input type="hidden" id="review_rest_currentPage" name="review_rest_currentPage" value="${review_rest_currentPage}" />
@@ -40,6 +40,18 @@
 			</tr>
 		</table>
 	</form>
+	
+	<script type="text/javascript">
+		function confirm() {
+			var rest_num = document.getElementById("rest_num").value;
+			var review_rest_currentPage = document.getElementById("review_rest_currentPage").value;
+			var ccp = document.getElementById("ccp").value;
+			var review_num = document.getElementById("review_num").value;
+			
+			opener.window.location.href = "deleteReviewPro.action?rest_num="+rest_num+"&review_rest_currentPage="+review_rest_currentPage+"&ccp="+ccp+"&review_num="+review_num;
+			self.close();
+		}
+	</script>
 
 </body>
 </html>
