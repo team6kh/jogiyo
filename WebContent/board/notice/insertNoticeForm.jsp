@@ -33,67 +33,47 @@
 	<!-- container -->
 	<div class="container">
  
-		<div class="common-template">
-		<!-- 밑으로 view 꾸미기 -->
-		<table align="center" width="800" border="0" cellspacing="0" cellpadding="2">
-			<tr>
-  				<td align="left"><h1>공지사항/이벤트</h1></td>
-  			</tr>
-  		</table>
-  	
+	<!-- 밑으로 view 꾸미기 -->
+	<div class="col-md-12">
+		<h3>공지사항/이벤트</h3>
+	</div>
+	
+  	<div class="col-md-12 well">
   		<s:if test="resultClass == NULL">
 			<form name="f" action="insertNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
 		</s:if>
-		
 		<s:else>
-		  <form name="u" action="updateNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
-		  <s:hidden name="notice_num" value="%{notice_num}" />
-		  <s:hidden name="currentPage" value="%{currentPage}" />
-		  <s:hidden name="notice_file" value="%{notice_file}" />
+		  	<form name="u" action="updateNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
+		  	<s:hidden name="notice_num" value="%{notice_num}" />
+		  	<s:hidden name="currentPage" value="%{currentPage}" />
+		  	<s:hidden name="notice_file" value="%{notice_file}" />
 		</s:else>
 		
-  		<table align="center" width="800" border="0" cellspacing="0" cellpadding="0">
-  			<tr bgcolor="#777777">
-        		<td height="2" colspan="3"></td>
-      	    </tr>
-  			<tr>
-  				<td width="100" bgcolor="#F3F3F3" align="center">제목</td>
-  				<td width="100" align="center">
-  					<select name="notice_headtag" theme="simple" value="%{resultClass.notice_headtag}">
-  						<option>-----------------</option>
-  						<option>[공지]</option>
-  						<option>[이벤트]</option>
-  						<option>[스마트팁]</option>
-  					</select>
-  				</td>
-  				<td width="600" align="center">
-  					<s:textfield name="notice_subject" theme="simple" value="%{resultClass.notice_subject}" cssStyle="width:600px" maxlength="100"/>
-  				</td>
-  			</tr>
-  			<tr bgcolor="#777777">
-        		<td height="2" colspan="3"></td>
-      	    </tr>
-  			<tr>
-  			<td width="100" bgcolor="#F3F3F3" align="center">내용</td>
-  				<td width="700" colspan="2">
-  					<s:textarea name="notice_content" id="notice_content" theme="simple" value="%{resultClass.notice_content}" cssStyle="width:700px" rows="20" />
-  				</td>
-  			</tr>
+  		<div class="form-group">
+			<label>제목</label><br/>
+			<div style="float:left;">
+  			<select name="notice_headtag" style="width: 200px;" class="form-control">
+  				<option>-----------------</option>
+  				<option>[공지]</option>
+  				<option>[이벤트]</option>
+  				<option>[스마트팁]</option>
+  			</select>
+  			</div>
+  			<input type="text" class="form-control" style="width: 898px;" name="notice_subject" value="${resultClass.notice_subject}" placeholder="제목" required>
+  		</div>
+  			
+  		<div class="form-group">
+			<label for="test_content">내용</label>
+  			<s:textarea name="notice_content" id="notice_content" theme="simple" value="%{resultClass.notice_content}" cssStyle="width:1098px" rows="20" />
+  		</div>
       	    
-  			<tr bgcolor="#777777">
-        		<td height="2" colspan="3"></td>
-      	    </tr>
-  			<tr>
-  				<td align="right" colspan="3" width="471">
-  					<input type="submit" name="submit" value="완료" />
-  					<input type="button" name="notice" value="목록" class="inputb" onClick="javascript:location.href='listNotice.action?currentPage=<s:property value="currentPage" />'"/>
-  				</td>
-  			</tr>
-  	</table>
+  		<div class="pull-right">
+  			<button type="submit" class="btn btn-primary">완료</button>
+  			<a href="listNotice.action?currentPage=${currentPage}" class="btn btn-default">목록</a>
+  		</div>  	
   	
-  	
-		<!-- 꾸미기 끝 -->
-		</div>
+	<!-- 꾸미기 끝 -->
+	</div>
 
 	</div>
 	<!-- /.container -->
@@ -124,6 +104,7 @@
 		    var sHTML = '<img src="<%=request.getContextPath()%>/board/se2/upload/'+filepath+'">';
 		    oEditors.getById["notice_content"].exec("PASTE_HTML", [sHTML]); 
 		}
+		  
 	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

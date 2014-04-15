@@ -44,18 +44,7 @@
 			<result>/board/notice/readNotice.jsp</result>
 		</action>
 
-		<!-- 파일 다운로드 액션. -->
-		<action name="fileDownloadAction" class="board.notice.action.ReadNoticeAction"
-			method="download">
-			<result name="success" type="stream">
-				<param name="contentType">binary/octet-stream</param>
-				<param name="inputName">inputStream</param>
-				<param name="contentDisposition">${contentDisposition}</param>
-				<param name="contentLength">${contentLength}</param>
-				<param name="bufferSize">4096</param>
-			</result>
-		</action>
-
+		<!-- 게시판 오류 액션 -->
 		<action name="checkAction" class="board.notice.action.ReadNoticeAction"
 			method="checkAction">
 			<interceptor-ref name="conDAO" />
@@ -92,7 +81,7 @@
 			<result type="chain">listNotice</result>
 		</action>
 		
-		<!-- 공지사항게시판 끝 -->	
+		<!-- 공지사항게시판 끝 -->
 
 	</package>
 </struts>
