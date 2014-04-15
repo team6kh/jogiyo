@@ -19,7 +19,8 @@
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="fileUpload" />
 			<interceptor-ref name="params" />
-			<result>/board/review/listReview.jsp</result>
+			<result type="chain">
+			<param name="actionName">listReview</param></result>
 		</action>
 
 		<!-- 리뷰 글목록 보기 -->

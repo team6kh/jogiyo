@@ -23,12 +23,7 @@
 
 </head>
 
-
 <body onload="ratingck()">
-
-	<!-- header -->
-	<%@ include file="/common/header.jsp"%>
-	<!-- end of header -->
 
 	<!-- container -->
 	<div class="container">
@@ -36,7 +31,7 @@
 			<!-- 리뷰 수정 폼(review)  -->
 			<form name="updateReviewForm" method="post"
 				action="updateReviewPro.action?ccp=${ccp}&review_num=${review_num}"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data" onsubmit="updateReview()">
 				<div class="col-md-12 well">
 					<!--  별점(review_rating) : radio 타입으로  -->
 					<table class="table table-striped table-forum">
@@ -87,6 +82,10 @@
 					review_rating[i].checked = true;
 				}
 			}
+		}
+		function updateReview() {
+			opener.location.reload();
+			self.close();
 		}
 	</script>
 

@@ -48,7 +48,7 @@ public class UpdateReviewAction implements Action, Preparable,
 		sqlMapper.update("Review.updateReview", reviewDTO);
 
 		// 첨부파일이 있는 경우
-		if (review_files != null) {
+		if (!review_files.isEmpty()) {
 			// 첨부파일 저장된 경로
 			String fileUploadPath = Constants.COMMON_FILE_PATH
 					+ Constants.REVIEW_FILE_PATH;

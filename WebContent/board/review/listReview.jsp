@@ -110,7 +110,7 @@
 						<tr>
 							<td class="text-right" colspan="2"><input type="button"
 								value="수정"
-								onclick="javascript:location.href='updateReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}'">
+								onclick="javascript:open('updateReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=500, height=500')">
 								<input type="button" value="삭제"
 								onclick="javascript:open('deleteReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=200')" /></td>
 						</tr>
