@@ -105,14 +105,6 @@
 		    oEditors.getById["notice_content"].exec("PASTE_HTML", [sHTML]); 
 		}
 		
-		function contentup(){
-			if(notice_content >= 4000){
-				alert('4000자 이하로 작성해주세요.');
-			}
-			else{
-				f.submit();
-			}
-		}
 	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
