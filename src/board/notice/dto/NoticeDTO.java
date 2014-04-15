@@ -9,7 +9,6 @@ public class NoticeDTO {
 	private String notice_subject;
 	private String notice_content;
 	private Date notice_reg_date;
-	private String notice_file;
 	private int notice_readcount;
 	
 	public int getNotice_num() {
@@ -41,12 +40,6 @@ public class NoticeDTO {
 	}
 	public void setNotice_reg_date(Date notice_reg_date) {
 		this.notice_reg_date = notice_reg_date;
-	}
-	public String getNotice_file() {
-		return notice_file;
-	}
-	public void setNotice_file(String notice_file) {
-		this.notice_file = notice_file;
 	}
 	public int getNotice_readcount() {
 		return notice_readcount;

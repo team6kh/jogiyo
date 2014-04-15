@@ -54,9 +54,7 @@
 					</tr>
 
 					<tr>
-						<td height="20" align="right"><input name="list"
-							type="button" value="추천" class="inputb"
-							onClick="javascript:location.href='recommand.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />'"></td>
+						<td height="20" align="right"><input name="list" type="button" value="추천" onClick="javascript:location.href='recommand.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />'"></td>
 					</tr>
 				</table>
 
@@ -68,8 +66,7 @@
 
 					<tr>
 						<td bgcolor="#F4F4F4">번호</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_num" />
+						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property value="resultClass.recipe_num" />
 						</td>
 					</tr>
 					<tr bgcolor="#777777">
@@ -101,6 +98,16 @@
 						<td bgcolor="#F4F4F4">제목</td>
 						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
 								value="resultClass.recipe_subject" />
+						</td>
+					</tr>
+
+					<tr bgcolor="#777777">
+						<td height="1" colspan="2"></td>
+					</tr>
+					<tr>
+						<td bgcolor="#F4F4F4">요리명</td>
+						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
+								value="resultClass.recipe_foodsubject" />
 						</td>
 					</tr>
 					<tr bgcolor="#777777">

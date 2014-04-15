@@ -17,25 +17,25 @@ import common.ConDAOAware;
 public class InsertQnaAction implements Action, Preparable, ModelDriven, ConDAOAware, SessionAware {
 
 	public static SqlMapClient sqlMapper; 
-	
+
 	QnaDTO paramClass;    
 	QnaDTO resultClass;
 
 	private int currentPage;
 	private int qna_num;
 	Calendar today = Calendar.getInstance();
-	
+
 	Map sessionMap;
 
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
 	}
-	
+
 	public void setSession(Map sessionMap) {
 		this.sessionMap = sessionMap;
 	}
 
-	
+
 	/**
 	 * 등록화면으로 이동
 	 * @return
@@ -50,7 +50,7 @@ public class InsertQnaAction implements Action, Preparable, ModelDriven, ConDAOA
 		return SUCCESS;
 	}
 
-	
+
 	public void prepare() throws Exception {
 		paramClass = new QnaDTO();
 	}
@@ -59,27 +59,28 @@ public class InsertQnaAction implements Action, Preparable, ModelDriven, ConDAOA
 		return paramClass;
 	}
 
-	
+
 	/**
 	 * Insert 실행
 	 */
 	public String execute() throws Exception {
 
+
 		sqlMapper.insert("Qna.insertQnaBoard", paramClass);
-		
+
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * update 실행
 	 * @return
 	 * @throws Exception
 	 */
 	public String update() throws Exception{
-		
-	
+
+
 		sqlMapper.update("Qna.updateQna", paramClass);
-		
+
 		return SUCCESS;
 	}
 	/**
@@ -88,12 +89,12 @@ public class InsertQnaAction implements Action, Preparable, ModelDriven, ConDAOA
 	 * @throws Exception
 	 */
 	public String delete() throws Exception{
-		
+
 		sqlMapper.delete("Qna.deleteQna", paramClass);
-		
+
 		return SUCCESS;
 	}
-	
+
 	public QnaDTO getResultClass() {
 		return resultClass;
 	}
