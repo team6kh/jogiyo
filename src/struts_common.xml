@@ -96,6 +96,11 @@
 		</action>
 		
 		<!-- 판매자정보 읽기 액션 -->
+		<action name="readSeller" class="user.seller.action.ReadSellerAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/user/seller/readSeller.jsp</result>
+		</action>
 		
 		<!-- 구매자정보 수정 폼 -->
 		<action name="updateBuyerForm" class="user.buyer.action.UpdateBuyerAction" method="updateForm">
