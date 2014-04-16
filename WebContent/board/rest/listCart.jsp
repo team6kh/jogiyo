@@ -36,7 +36,7 @@
 	<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
 	<input type="hidden" id="rest_subject" name="rest_subject"
 		value="${rest_subject}" /> <input type="hidden" id="session_id"
-		name="session_id" value="${sessionScope.sessionId}" />
+		name="session_id" value="${sessionScope.session_id}" />
 
 
 	<div align="center">

@@ -195,43 +195,19 @@ body {
 					<font color="#FF3636"><b>카테고리</b></font>
 				</div>
 				<div class="col-md-10">
-					<s:if test="resultClass.rest_localcategory == 11">
-서울특별시
-</s:if>
-					<s:elseif test="resultClass.rest_localcategory == 12">
-경기/인천
-</s:elseif>
-					<s:elseif test="resultClass.rest_localcategory == 13">
-부산/경남
-</s:elseif>
-					<s:elseif test="resultClass.rest_localcategory == 14">
-대구/경북
-</s:elseif>
-					<s:elseif test="resultClass.rest_localcategory == 15">
-대전/전북
-</s:elseif>
-					<s:elseif test="resultClass.rest_localcategory == 16">
-광주/전남
-</s:elseif>
-					<s:elseif test="resultClass.rest_localcategory == 17">
-그 외 지역
-</s:elseif>
+					<s:if test="resultClass.rest_localcategory == 11">서울특별시</s:if>
+					<s:elseif test="resultClass.rest_localcategory == 12">경기/인천</s:elseif>
+					<s:elseif test="resultClass.rest_localcategory == 13">부산/경남</s:elseif>
+					<s:elseif test="resultClass.rest_localcategory == 14">대구/경북</s:elseif>
+					<s:elseif test="resultClass.rest_localcategory == 15">대전/전북</s:elseif>
+					<s:elseif test="resultClass.rest_localcategory == 16">광주/전남</s:elseif>
+					<s:elseif test="resultClass.rest_localcategory == 17">그 외 지역</s:elseif>
 
-					<s:if test="resultClass.rest_typecategory == 21">
-- 한식
-</s:if>
-					<s:elseif test="resultClass.rest_typecategory == 22">
-- 양식
-</s:elseif>
-					<s:elseif test="resultClass.rest_typecategory == 23">
-- 중식
-</s:elseif>
-					<s:elseif test="resultClass.rest_typecategory == 24">
-- 일식
-</s:elseif>
-					<s:elseif test="resultClass.rest_typecategory == 25">
-- 기타
-</s:elseif>
+					<s:if test="resultClass.rest_typecategory == 21">- 한식</s:if>
+					<s:elseif test="resultClass.rest_typecategory == 22">- 양식</s:elseif>
+					<s:elseif test="resultClass.rest_typecategory == 23">- 중식</s:elseif>
+					<s:elseif test="resultClass.rest_typecategory == 24">- 일식</s:elseif>
+					<s:elseif test="resultClass.rest_typecategory == 25">- 기타</s:elseif>
 				</div>
 
 				<div class="col-md-2">
@@ -239,8 +215,7 @@ body {
 				</div>
 				<div class="col-md-10">
 					<s:property value="resultClass.rest_num" />
-					<input type="hidden" id="rest_num" name="rest_num"
-						value=<s:property value="resultClass.rest_num" /> />
+					<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
 				</div>
 			</div>
 
@@ -250,12 +225,12 @@ body {
 						style="min-height: 125px; height: 125px;">
 				</div>
 				<div class="col-md-7">
-					<br /> <font size="4">상품명</font> <br /> <font size="7" color="red"><s:property
-							value="resultClass.rest_subject" /></font> <input type="hidden"
-						id="rest_subject" name="rest_subject"
+					<br /> <font size="4">상품명</font> <br /> <font size="7"
+						color="red"><s:property value="resultClass.rest_subject" /></font>
+					<input type="hidden" id="rest_subject" name="rest_subject"
 						value=<s:property value="resultClass.rest_subject" /> /> <input
 						type="hidden" id="session_id" name="session_id"
-						value="${sessionScope.sessionId}" />
+						value="${sessionScope.session_id}" />
 				</div>
 			</div>
 
@@ -418,10 +393,10 @@ body {
 
 			<div class="col-md-12 well">
 
-				<c:if test="${empty sessionScope.sessionId}">
+				<c:if test="${empty sessionScope.session_id}">
 글을 쓰시려면 로그인을 하세요
 </c:if>
-				<c:if test="${!empty sessionScope.sessionId}">
+				<c:if test="${!empty sessionScope.session_id}">
 					<div class="text-center">
 						<button onclick="return reviewForm()">리뷰 글 쓰기</button>
 					</div>
@@ -462,7 +437,7 @@ body {
 								value="${currentPage}" /> <input type="hidden"
 								name="review_rest" value="${rest_num}" /> <input type="hidden"
 								name="rest_num" value="${rest_num}" /> <input type="hidden"
-								name="review_writer" value="${sessionScope.sessionId }" />
+								name="review_writer" value="${sessionScope.session_id }" />
 
 						</form>
 					</div>
@@ -489,8 +464,8 @@ body {
 									value="${reviewDTO.review_reg_date}" pattern="yyyy-MM-dd" /></td>
 						</tr>
 						<!-- 해당글 작성자일 경우 수정/삭제 버튼 -->
-						<!-- 임시값 "test_Customer" sessionId 값으로 교체 -->
-						<c:if test="${reviewDTO.review_writer == sessionScope.sessionId}">
+						<!-- 임시값 "test_Customer" session_id 값으로 교체 -->
+						<c:if test="${reviewDTO.review_writer == sessionScope.session_id}">
 							<tr>
 								<td class="text-right" colspan="2"><input type="button"
 									value="수정"
