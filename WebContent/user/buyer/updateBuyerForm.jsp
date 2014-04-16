@@ -34,7 +34,7 @@
         	<h2 class="form-signup-heading">계정을 수정합니다.</h2>			
 			<div class="form-group">
 			  <label>가입유형</label>
-			    <select class="form-control" id="userType" disabled>
+			    <select class="form-control" id="user_type" disabled>
 			      <option value="buyer">구매자</option>
 			      <option value="seller">판매자</option>
 			    </select>			  
@@ -73,7 +73,7 @@
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script>
-		$("#userType").val("seller");
+		$("#user_type").val("seller");
 	</script>
 </body>
 </html>

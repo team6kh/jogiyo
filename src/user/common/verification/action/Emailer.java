@@ -1,6 +1,7 @@
 package user.common.verification.action;
 
 import java.util.Properties;
+
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -9,14 +10,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.opensymphony.xwork2.ActionSupport;
+import common.RNG;
 
 public class Emailer extends ActionSupport
 {    
     private String ev_code; // email verification code
     
     /* emailer 액션으로 넘어오는 파라미터 */
-    private String userType;
-    private String userId;
+    private String user_type;
+    private String user_id;
     
     private String buyer_name;
     private String buyer_email;
@@ -58,8 +60,9 @@ public class Emailer extends ActionSupport
                     });
 
             Message message = new MimeMessage(session);
-            /* 파라미터 임시 설정 */
-            setEv_code("1234");
+            /* 파라미터 설정 */
+            RNG rng = new RNG();            
+            setEv_code(rng.sEv_code());
             setFrom("team6kh@gmail.com");
             setPassword("dkagh1234.");
             if (getBuyer_email() != null)
@@ -70,15 +73,17 @@ public class Emailer extends ActionSupport
                 setTo(getSeller_email());
             }
             setSubject("[JOGIYO] Please verify your email '" + getBuyer_email() + "'");
-            setBody("Taz'dingo, we want to verify that you are indeed \""
-                    + getBuyer_name() 
-                    + "\". if that's the case, please type the following verification code: "
-                    + getEv_code()
-                    + ". if you're not "
-                    + getBuyer_name()
-                    + " or didn't request verification, you can ignore this email."
-                    );
-            /* 파라미터 임시 설정 끝 */
+            /* StringBuffer를 사용해 body를 작성한다. */
+            StringBuffer sbBody = new StringBuffer();
+            sbBody.append("Taz'dingo, we want to verify that you are indeed \"");
+            sbBody.append(getBuyer_name());
+            sbBody.append("\". if that's the case, please type the following verification code: ");
+            sbBody.append(getEv_code());
+            sbBody.append(". if you're not ");
+            sbBody.append(getBuyer_name());
+            sbBody.append(" or didn't request verification, you can ignore this email.");
+            /* END StringBuffer */
+            setBody(sbBody.toString());
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
@@ -155,24 +160,24 @@ public class Emailer extends ActionSupport
     }
 
     /* emailer 액션으로 넘어오는 파라미터 */
-    public String getUserType()
+    public String getUser_type()
     {
-        return userType;
+        return user_type;
     }
 
-    public void setUserType(String userType)
+    public void setUser_type(String user_type)
     {
-        this.userType = userType;
+        this.user_type = user_type;
     }
     
-    public String getUserId()
+    public String getUser_id()
     {
-        return userId;
+        return user_id;
     }
 
-    public void setUserId(String userId)
+    public void setUser_id(String user_id)
     {
-        this.userId = userId;
+        this.user_id = user_id;
     }
 
     public String getBuyer_name()

@@ -10,7 +10,7 @@ public class ReadBuyerAction implements Action, ConDAOAware
 {
     private SqlMapClient sqlMapper;
     private BuyerDTO buyerDTO = new BuyerDTO();
-    private String userId;
+    private String user_id;
 
     public void setConDAO(SqlMapClient sqlMapper)
     {
@@ -19,7 +19,7 @@ public class ReadBuyerAction implements Action, ConDAOAware
 
     public String execute() throws Exception
     {
-        buyerDTO.setBuyer_id(getUserId());
+        buyerDTO.setBuyer_id(getUser_id());
 
         // 해당 유저의 정보를 가져온다.
         buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerId", buyerDTO);
@@ -37,13 +37,13 @@ public class ReadBuyerAction implements Action, ConDAOAware
         this.buyerDTO = buyerDTO;
     }
 
-    public String getUserId()
+    public String getUser_id()
     {
-        return userId;
+        return user_id;
     }
 
-    public void setUserId(String userId)
+    public void setUser_id(String user_id)
     {
-        this.userId = userId;
+        this.user_id = user_id;
     }
 }

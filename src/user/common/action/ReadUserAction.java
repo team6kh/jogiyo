@@ -4,8 +4,8 @@ import com.opensymphony.xwork2.Action;
 
 public class ReadUserAction implements Action
 {
-    private String userType;
-    private String userId;
+    private String user_type;
+    private String user_id;
     
     private String actionStatus;
 
@@ -13,10 +13,10 @@ public class ReadUserAction implements Action
     {
         System.out.println("ReadUserAction execute()");
         
-        if (getUserType().equals("buyer"))
+        if (getUser_type().equals("buyer"))
         {
             return "buyer";
-        } else if (getUserType().equals("seller"))
+        } else if (getUser_type().equals("seller"))
         {
             return "seller";
         }
@@ -24,24 +24,24 @@ public class ReadUserAction implements Action
     }
 
     // getter & setter
-    public String getUserType()
+    public String getUser_type()
     {
-        return userType;
+        return user_type;
     }
 
-    public void setUserType(String userType)
+    public void setUser_type(String user_type)
     {
-        this.userType = userType;
+        this.user_type = user_type;
     }
 
-    public String getUserId()
+    public String getUser_id()
     {
-        return userId;
+        return user_id;
     }
 
-    public void setUserId(String userId)
+    public void setUser_id(String user_id)
     {
-        this.userId = userId;
+        this.user_id = user_id;
     }
 
     public String getActionStatus()

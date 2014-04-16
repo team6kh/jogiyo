@@ -151,8 +151,8 @@
 			<interceptor-ref name="conDAO"/>
 			<result name="success" type="redirect-action">
 				<param name="actionName">readUser</param>
-				<param name="userType">${userType}</param>
-				<param name="userId">${userId}</param>
+				<param name="user_type">${user_type}</param>
+				<param name="user_id">${user_id}</param>
 				<param name="actionStatus">evRequested</param>
 			</result>
 		</action>

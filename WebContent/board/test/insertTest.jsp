@@ -42,31 +42,31 @@
 					<label>제목</label>
 					<input type="text" class="form-control" name="test_subject" placeholder="제목" required>
 				</div>
-				<c:if test="${sessionName eq null}">
+				<c:if test="${session_name eq null}">
 				<div class="form-group">
 					<label>작성자</label>
 					<input type="text" class="form-control" name="test_writer_name" placeholder="작성자" required>
 				</div>
 				</c:if>
-				<c:if test="${sessionName ne null}">
+				<c:if test="${session_name ne null}">
 				<div class="form-horizontal">
 					<div class="form-group">
 	    				<label class="col-sm-1 control-label">작성자</label>
 	    				<div class="col-sm-11">
-	      					<p class="form-control-static">${sessionName}</p>
-	      					<input type="hidden" name="test_writer_name" value="${sessionName}">
+	      					<p class="form-control-static">${session_name}</p>
+	      					<input type="hidden" name="test_writer_name" value="${session_name}">
 	    				</div>
 	 			 	</div>
 	 			</div>					
 				</c:if>			
-				<c:if test="${sessionPw eq null}">
+				<c:if test="${session_pw eq null}">
 				<div class="form-group">
 					<label for="test_writer_pw">비밀번호</label>
 					<input type="password" class="form-control" name="test_writer_pw" placeholder="비밀번호" required>
 				</div>
 				</c:if>
-				<c:if test="${sessionPw ne null}">
-				<input type="hidden" name="test_writer_pw" value="${sessionPw}">
+				<c:if test="${session_pw ne null}">
+				<input type="hidden" name="test_writer_pw" value="${session_pw}">
 				</c:if>
 				<div class="form-group">
 					<label for="test_content">내용</label>

@@ -18,8 +18,8 @@ public class CheckEmailVerification implements Action, ConDAOAware
     private String ev_code_input; // 사용자가 입력한 ev_code
     
     // 액션 실행 후 redirect-action을 위한 파라미터
-    private String userType;
-    private String userId;
+    private String user_type;
+    private String user_id;
     private int isSuccess;
     
     public void setConDAO(SqlMapClient sqlMapper)
@@ -92,24 +92,24 @@ public class CheckEmailVerification implements Action, ConDAOAware
         this.ev_code_input = ev_code_input;
     }
 
-    public String getUserType()
+    public String getUser_type()
     {
-        return userType;
+        return user_type;
     }
 
-    public void setUserType(String userType)
+    public void setUser_type(String user_type)
     {
-        this.userType = userType;
+        this.user_type = user_type;
     }
 
-    public String getUserId()
+    public String getUser_id()
     {
-        return userId;
+        return user_id;
     }
 
-    public void setUserId(String userId)
+    public void setUser_id(String user_id)
     {
-        this.userId = userId;
+        this.user_id = user_id;
     }
 
     public int getIsSuccess()

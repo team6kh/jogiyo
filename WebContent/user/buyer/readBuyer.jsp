@@ -25,7 +25,7 @@
 		alert("requstEv");
 		$('#alert_div').removeClass('alert-info');
 		$('#alert_div').addClass('alert-warning');
-		document.getElementById('alert_place_holder').innerHTML = "Loading...";
+		document.getElementById('alert_placeholder').innerHTML = "Loading...";
 		form=document.getElementById('form-signup');
 		form.action="emailer.action";
 		form.submit();
@@ -91,16 +91,16 @@
 	       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>			
 			<div class="form-group">
 			  <label>가입유형</label>
-			    <select class="form-control" id="userType" disabled>
+			    <select class="form-control" id="user_type" disabled>
 			      <option value="buyer">구매자</option>
 			      <option value="seller">판매자</option>
 			    </select>
-			    <input type="hidden" name="userType" value="${sessionType}">			  
+			    <input type="hidden" name="user_type" value="${session_type}">			  
 			</div>
 			<div id="div_regid" class="form-group">
 			  <label>아이디</label>
 			  <input type="text" class="form-control" value="${buyerDTO.buyer_id}" disabled>
-			  <input type="hidden" name="userId" value="${buyerDTO.buyer_id}">		  
+			  <input type="hidden" name="user_id" value="${buyerDTO.buyer_id}">		  
 			</div>						
 			<div class="form-group">
 			  <label>이름</label>
@@ -182,7 +182,7 @@
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script>
-		$("#userType").val("seller");
+		$("#user_type").val("seller");
 		
 		$(document).on("click", ".insertModalParam", function() {
 			var thisModalParam = $(this).data('id');
