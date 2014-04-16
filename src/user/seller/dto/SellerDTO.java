@@ -125,4 +125,5 @@ public class SellerDTO
     {
         this.seller_verification = seller_verification;
     }
+    
 }

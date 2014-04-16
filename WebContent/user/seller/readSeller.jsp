@@ -51,7 +51,7 @@
 	{
 		//var modalParam = document.getElementById("modalParam").value;
 		//var modalParam_key = document.getElementById("modalParam_key").value;
-		//var modalParam_pw = document.getElementById("modalParam-pw").value;		
+		//var modalParam_pw = document.getElementById("modalParam_pw").value;		
 		form.action="checkPass.action";
 		form.submit();
 		
@@ -89,7 +89,7 @@
 			<!-- 숨겨진 iframe -->
 			<iframe src="blink.html" id="checkEv" style="display:none;"></iframe>
 			<!-- END 숨겨진 iframe -->
-	       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>
+	       	<h2 class="form-signup-heading">${sellerDTO.seller_name} 님의 정보</h2>
 	       	<!-- disabled는 정보출력스타일을 폼으로 유지하기 위해 사용. 값은 액션으로 안 넘어간다. -->			
 			<div class="form-group">
 			  <label>가입유형</label>
@@ -180,7 +180,7 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
 									<input type="hidden" id="modalParam" name="modalParam">						
-									<input type="hidden" id="modalParam_key" name="modalParam_key" value="${buyerDTO.buyer_id}">								
+									<input type="hidden" id="modalParam_key" name="modalParam_key" value="${sellerDTO.seller_id}">								
 									<button class="btn btn-primary" onclick="checkPass(this.form)">입력</button>
 								</div>							
 							</div>

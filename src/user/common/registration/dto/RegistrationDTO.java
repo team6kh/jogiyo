@@ -79,4 +79,5 @@ public class RegistrationDTO
     {
         this.reg_gender = reg_gender;
     }
+    
 }

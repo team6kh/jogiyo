@@ -230,4 +230,5 @@ public class Emailer extends ActionSupport
     {
         this.ev_code = ev_code;
     }
+    
 }

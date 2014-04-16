@@ -189,7 +189,7 @@
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script>
-		$("#user_type").val("seller");
+		$("#user_type").val("buyer");
 		
 		$(document).on("click", ".insertModalParam", function() {
 			var thisModalParam = $(this).data('id');

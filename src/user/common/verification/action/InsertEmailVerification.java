@@ -68,4 +68,5 @@ public class InsertEmailVerification implements Action, ConDAOAware
     {
         this.ev_code = ev_code;
     }
+    
 }

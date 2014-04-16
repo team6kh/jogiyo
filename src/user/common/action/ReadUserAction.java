@@ -19,6 +19,9 @@ public class ReadUserAction implements Action
         } else if (getUser_type().equals("seller"))
         {
             return "seller";
+        } else if (getUser_type().equals("admin"))
+        {
+            return "admin";
         }
         return ERROR;
     }
@@ -53,4 +56,5 @@ public class ReadUserAction implements Action
     {
         this.actionStatus = actionStatus;
     }
+    
 }

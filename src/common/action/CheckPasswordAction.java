@@ -1,10 +1,12 @@
 package common.action;
 
 import user.buyer.dto.BuyerDTO;
+import user.seller.dto.SellerDTO;
 import board.test.dto.TestDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
+
 import common.ConDAOAware;
 
 public class CheckPasswordAction implements Action, ConDAOAware
@@ -46,6 +48,7 @@ public class CheckPasswordAction implements Action, ConDAOAware
             {
                 return ERROR;
             }
+        // 구매자 정보 수정/삭제
         } else if (getModalParam().equals("updateBuyerForm") || getModalParam().equals("deleteBuyer"))
         {
             // 객체 생성
@@ -64,6 +67,34 @@ public class CheckPasswordAction implements Action, ConDAOAware
                 return SUCCESS;
             } else
             {
+                return ERROR;
+            }
+        // 판매자 정보 수정/삭제
+        } else if (getModalParam().equals("updateSellerForm") || getModalParam().equals("deleteSeller"))
+        {
+            System.out.println("getModalParam():"+getModalParam());
+            
+            // 객체 생성
+            SellerDTO sellerDTO = new SellerDTO();
+            
+            // 파라미터 설정
+            sellerDTO.setSeller_id(getModalParam_key());
+            sellerDTO.setSeller_pw(getModalParam_pw());
+            
+            System.out.println("getModalParam_key():"+getModalParam_key());
+            System.out.println("getModalParam_pw()():"+getModalParam_pw());
+            
+            // 해당 유저의 비밀번호 가져오기
+            sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectWhereSellerPw", sellerDTO);
+            
+            // 입력한 비밀번호가 틀리면(없으면) ERROR 리턴
+            if (sellerDTO != null)
+            {
+                System.out.println("sellerDTO not null");
+                return SUCCESS;
+            } else
+            {
+                System.out.println("sellerDTO null");
                 return ERROR;
             }
         }
@@ -100,4 +131,5 @@ public class CheckPasswordAction implements Action, ConDAOAware
     {
         this.modalParam_pw = modalParam_pw;
     }
+    
 }
