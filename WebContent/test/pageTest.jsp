@@ -34,16 +34,16 @@
 		<!-- test message -->
 		<div class="common-template">
 			<h1>test message</h1>
-			<p class="lead">지금은 release 04.14.01 입니다.</p>
-			<p class="lead">당신은 "${sessionType}" 입니다.</p>
-			<p class="lead">"${sessionName}" 님 환영합니다.</p>
-			<p class="lead">sessionType : ${sessionType}</p>
-			<p class="lead">sessionId : ${sessionId}</p>
-			<p class="lead">sessionPw : ${sessionPw}</p>
-			<p class="lead">sessionName : ${sessionName}</p>
+			<p class="lead">지금은 release 04.15.01 입니다.</p>
+			<p class="lead">당신은 "${session_type}" 입니다.</p>
+			<p class="lead">"${session_name}" 님 환영합니다.</p>
+			<p class="lead">session_type : ${session_type}</p>
+			<p class="lead">session_id : ${session_id}</p>
+			<p class="lead">session_pw : ${session_pw}</p>
+			<p class="lead">session_name : ${session_name}</p>
 			<p class="lead">actionName : ${actionName}</p>
-			<p class="lead">sessionScope.sessionId :
-				${sessionScope.sessionId}</p>
+			<p class="lead">sessionScope.session_id :
+				${sessionScope.session_id}</p>
 			<c:set var="sId" value="${sessionScope.sessionId}"></c:set>
 			<p class="lead">sId : ${sId}</p>
 		</div>

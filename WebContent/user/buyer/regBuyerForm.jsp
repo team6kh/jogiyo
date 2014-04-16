@@ -104,7 +104,7 @@
 			</div>
 			<div id="divRegId" class="form-group">
 			  <label>구매자 아이디</label>
-			  <input type="text" class="form-control" name="buyer_id" onkeyup="validateRegId(this.form);" required autofocus>
+			  <input type="text" class="form-control" id="buyer_id" name="buyer_id" onkeyup="validateRegId(this.form);" required autofocus>
 			  <p class="help-block" id="feedbackRegId">아이디를 입력해주세요.</p>
 			  <iframe src="blink.html" id="checkDup" style="display:none;"></iframe>			  
 			</div>						
@@ -140,5 +140,18 @@
 	<!-- Placed at the end of the document so the pages load faster -->	
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+	// disable spaces in input
+	$("input#buyer_id").on({
+		  keydown: function(e) {
+		    if (e.which === 32)
+		      return false;
+		  },
+		  change: function() {
+		    this.value = this.value.replace(/\s/g, "");
+		  }
+		});
+	</script>
 </body>
 </html>

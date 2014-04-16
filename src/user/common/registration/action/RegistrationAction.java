@@ -27,4 +27,5 @@ public class RegistrationAction implements Action
     {
         return reg_type;
     }
+    
 }

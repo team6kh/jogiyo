@@ -18,5 +18,3 @@
 	parent.$('#btnSubmit').prop('disabled', false);
 </script>
 </c:if>
-
-</body>

@@ -85,6 +85,7 @@
 		<action name="readUser" class="user.common.action.ReadUserAction">
 			<result name="buyer" type="chain">readBuyer</result>
 			<result name="seller" type="chain">readSeller</result>
+			<result name="admin" type="redirect-action">dashAdmin</result>
 			<result name="error">/common/error.jsp</result>
 		</action>
 		
@@ -96,6 +97,11 @@
 		</action>
 		
 		<!-- 판매자정보 읽기 액션 -->
+		<action name="readSeller" class="user.seller.action.ReadSellerAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/user/seller/readSeller.jsp</result>
+		</action>
 		
 		<!-- 구매자정보 수정 폼 -->
 		<action name="updateBuyerForm" class="user.buyer.action.UpdateBuyerAction" method="updateForm">
@@ -111,13 +117,36 @@
 			<result>/user/buyer/readBuyer.jsp</result>
 		</action>
 		
-		<!-- 구매자정보 삭제 (탈퇴) 액션 -->
+		<!-- 판매자정보 수정 폼 -->
+		<action name="updateSellerForm" class="user.seller.action.UpdateSellerAction" method="updateForm">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/user/seller/updateSellerForm.jsp</result>
+		</action>
+		
+		<!-- 판매자정보 수정 액션 -->
+		<action name="updateSeller" class="user.seller.action.UpdateSellerAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/user/seller/readSeller.jsp</result>
+		</action>
+		
+		<!-- 구매자정보 삭제(탈퇴) 액션 -->
 		<action name="deleteBuyer" class="user.buyer.action.DeleteBuyerAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result name="success" type="chain">
           		<param name="actionName">logout</param>
         	</result>	
+		</action>
+		
+		<!-- 판매자정보 삭제(탈퇴) 액션 -->
+		<action name="deleteSeller" class="user.seller.action.DeleteSellerAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result name="success" type="chain">
+          		<param name="actionName">logout</param>
+        	</result>
 		</action>
 		
 		<!-- HOME -->
@@ -151,14 +180,20 @@
 			<interceptor-ref name="conDAO"/>
 			<result name="success" type="redirect-action">
 				<param name="actionName">readUser</param>
-				<param name="userType">${userType}</param>
-				<param name="userId">${userId}</param>
+				<param name="user_type">${user_type}</param>
+				<param name="user_id">${user_id}</param>
 				<param name="actionStatus">evRequested</param>
 			</result>
 		</action>
 		
+		<!-- 이메일 인증 체크 -->
 		<action name="checkEv" class="user.common.verification.action.CheckEmailVerification">
-			<result>test.jsp</result>
+			<param name="aliases">#{'buyer_email' : 'ev_requested','seller_email' : 'ev_requested'}</param>
+			<interceptor-ref name="alias"/>	
+			<interceptor-ref name="chain"/>					
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/user/common/verification/checkEv.jsp</result>
 		</action>
 		
 		<!-- NEW 비밀번호 체크 액션 -->

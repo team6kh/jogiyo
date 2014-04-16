@@ -21,54 +21,52 @@
 
 
 <script type="text/javascript">
-
 	function goPayment(form) {
-			form.action =  "payRest.action";
-			form.submit();
-			
-			return false;
+		form.action = "payRest.action";
+		form.submit();
+
+		return false;
 	}
-	
 </script>
 </head>
 
 
 
-<form id="cartForm" name="cartForm" target="_parent" >
+<form id="cartForm" name="cartForm" target="_parent">
 	<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
-	<input type="hidden" id="rest_subject" name="rest_subject" value="${rest_subject}" />
-	<input type="hidden" id="session_id" name="session_id" value="${sessionScope.sessionId}" />
-	
-	
+	<input type="hidden" id="rest_subject" name="rest_subject"
+		value="${rest_subject}" /> <input type="hidden" id="session_id"
+		name="session_id" value="${sessionScope.session_id}" />
+
+
 	<div align="center">
-		<font size=5 ><b>장 바 구 니♥</b></font>
-    </div>
-    
-    
-    <!-- 장바구니 list -->
-    <c:forEach var="list" items="${list}">
-		<div class="col-sm-3 col-md-2">					
-	    	<div class="thumbnail">
-	    	
-			    <img src="${list.cart_restopt_destFile1}" alt="N/A" style="min-height:100px;height:100px;" /> <br/>
-			   
-			    <div class="caption" align="center">
-		    		<font size=3 color=green>${list.cart_restopt_subject}</font> <br/>
-				    <font size=3 color=red >${list.cart_restopt_priceplus}</font> <br/>
-	    		</div>
-	    		
-	    	</div>
-      	</div>
+		<font size=5><b>장 바 구 니♥</b></font>
+	</div>
+
+
+	<!-- 장바구니 list -->
+	<c:forEach var="list" items="${list}">
+		<div class="col-sm-3 col-md-2">
+			<div class="thumbnail">
+
+				<img src="${list.cart_restopt_destFile1}" alt="N/A"
+					style="min-height: 100px; height: 100px;" /> <br />
+
+				<div class="caption" align="center">
+					<font size=3 color=green>${list.cart_restopt_subject}</font> <br />
+					<font size=3 color=red>${list.cart_restopt_priceplus}</font> <br />
+				</div>
+
+			</div>
+		</div>
 	</c:forEach>
-	
-	
+
+
 	<!-- 장바구니 결제 버튼 -->
 	<div align="center">
-		<button type="button" class="btn btn-success" onclick="goPayment(this.form)">구매하기</button>
+		<button type="button" class="btn btn-success"
+			onclick="goPayment(this.form)">구매하기</button>
 		<button type="button" class="btn btn-danger">모두제거</button>
 	</div>
-	
+
 </form>
-
-
-

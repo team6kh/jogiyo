@@ -1,6 +1,6 @@
 <!DOCTYPE struts PUBLIC
-    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-    "http://struts.apache.org/dtds/struts-2.0.dtd">
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
 	<package name="struts_review" extends="struts-default">
@@ -19,12 +19,12 @@
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="fileUpload" />
 			<interceptor-ref name="params" />
-			<result >board/review/goReadRest.jsp</result>
+			<result>board/review/goReadRest.jsp</result>
 		</action>
 
-
 		<!-- 리뷰 글 수정 폼 -->
-		<action name="updateReviewForm" class="board.review.action.UpdateReviewAction" method="form">
+		<action name="updateReviewForm" class="board.review.action.UpdateReviewAction"
+			method="form">
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="params" />
 			<result>/board/review/updateReview.jsp</result>
@@ -37,11 +37,12 @@
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="fileUpload" />
 			<interceptor-ref name="params" />
-			<result >board/review/goReadRest.jsp</result>
+			<result>board/review/goReadRest.jsp</result>
 		</action>
 
 		<!-- 리뷰글 삭제 폼 -->
-		<action name="deleteReviewForm" class="board.review.action.DeleteReviewAction" method="form">
+		<action name="deleteReviewForm" class="board.review.action.DeleteReviewAction"
+			method="form">
 			<interceptor-ref name="params" />
 			<result>/board/review/deleteReview.jsp</result>
 		</action>
@@ -50,7 +51,7 @@
 		<action name="deleteReviewPro" class="board.review.action.DeleteReviewAction">
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="params" />
-			<result >board/review/goReadRest.jsp</result>
+			<result>board/review/goReadRest.jsp</result>
 		</action>
 
 		<!-- Review게시판 끝 -->

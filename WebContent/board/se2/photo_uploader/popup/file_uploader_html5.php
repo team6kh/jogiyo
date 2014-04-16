@@ -24,7 +24,7 @@
 	if(file_put_contents($newPath, $file->content)) {
 		$sFileInfo .= "&bNewLine=true";
 		$sFileInfo .= "&sFileName=".$file->name;
-		$sFileInfo .= "&sFileURL=/smarteditor/demo/upload/".$file->name;
+		$sFileInfo .= "&sFileURL=/se2/upload/".$file->name;
 	}
 	
 	echo $sFileInfo;

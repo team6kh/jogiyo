@@ -64,4 +64,5 @@ public class ReadTestAction implements Action, ConDAOAware
     {
         this.currentPage = currentPage;
     }
+    
 }

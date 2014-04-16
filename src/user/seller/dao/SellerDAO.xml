@@ -79,7 +79,11 @@
 	<update id="updateSeller" parameterClass="SellerDTO">
 		UPDATE seller_table SET
 			seller_pw = #seller_pw#,
-			seller_rest_address = #seller_rest_address#
+			seller_rest_name = #seller_rest_name#,
+			seller_rest_address = #seller_rest_address#,
+			seller_email = #seller_email#,
+			seller_rest_mobilenum = #seller_rest_mobilenum#,
+			seller_rest_telnum = #seller_rest_telnum#
 		<include refid="where-seller_id" />
 	</update>
 

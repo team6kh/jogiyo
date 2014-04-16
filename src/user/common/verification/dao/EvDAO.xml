@@ -16,6 +16,11 @@
 	<sql id="select-all">
 		SELECT * FROM ev_table
 	</sql>
+	
+	<sql id="select-rownum=1">
+		SELECT * FROM (
+			SELECT * FROM (SELECT * FROM ev_table ORDER BY ev_reg_date DESC) WHERE rownum = 1)
+	</sql>
 
 	<!-- 공통으로 사용할 where-user_id 절 정의 -->
 	<sql id="where-ev_requested">
@@ -33,9 +38,9 @@
 		<include refid="where-ev_requested" />
 	</select>
 
-	<select id="selectWhereEvCode" resultMap="EvResult">
-		<include refid="select-all" />
-		<include refid="where-ev_requested" />
+	<select id="selectLatestEvCode" resultMap="EvResult">
+		<include refid="select-rownum=1" />
+		WHERE ev_requested = #ev_requested#
 		AND ev_code = #ev_code#
 	</select>
 

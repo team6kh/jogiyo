@@ -92,4 +92,5 @@ public class BuyerDTO
     {
         this.buyer_verification = buyer_verification;
     }
+    
 }

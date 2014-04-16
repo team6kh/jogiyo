@@ -48,8 +48,8 @@
 	<%@ include file="/common/header.jsp"%>
 	<!-- container -->
 	<div class="container">
-	
-		
+
+
 
 		<!-- test board pretty -->
 		<div class="col-md-12">
@@ -128,7 +128,7 @@
 						<th class="text-center" style="width: 100px;" >力格</th>
 						<th class="text-center" style="width: 100px;">累己老</th>
 						<th class="text-center" style="width: 100px;">炼雀荐</th>
-					
+
 					</tr>
 				</thead>
 				<tbody>
@@ -155,8 +155,8 @@
 							</td>
 							<td class="text-center"><c:out value="${list.qna_reg_date }" /></td>
 							<td class="text-center"><c:out value="${list.qna_readcount }" /></td>
-						
-														
+
+
 						</tr>
 					</c:forEach>
 					<c:if test="${empty list}">
@@ -190,7 +190,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
-	
-	
+
+
 </body>
 </html>

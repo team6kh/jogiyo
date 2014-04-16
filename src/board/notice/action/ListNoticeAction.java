@@ -3,24 +3,19 @@ package board.notice.action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient; 
-import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
 import common.ConDAOAware;
 
 import java.util.*;
-import java.io.Reader;
-import java.io.IOException;
 
-import board.notice.action.PagingAction;
+import common.action.PagingAction;
 import board.notice.dto.*;
 
-public class ListNoticeAction extends ActionSupport implements ConDAOAware,
-	Preparable, ModelDriven {
+public class ListNoticeAction extends ActionSupport implements ConDAOAware,	Preparable, ModelDriven {
 	
 	public static SqlMapClient sqlMapper;	//SqlMapClient API를 사용하기 위한 sqlMapper 객체.
-	private List<NoticeDTO> list = new ArrayList<NoticeDTO>();;	 
+	private List<NoticeDTO> list = new ArrayList<NoticeDTO>();	 
 	
 	NoticeDTO noticeDTO;
 	
@@ -31,6 +26,7 @@ public class ListNoticeAction extends ActionSupport implements ConDAOAware,
 	private String pagingHtml; 	//페이징을 구현한 HTML
 	private PagingAction page; 	// 페이징 클래스
 	
+	private String actionName = "listNotice"; //페이징액션과 로그인액션에서 쓰인다
 
 	// 게시판 LIST 액션
 	public String execute() throws Exception {
@@ -39,7 +35,7 @@ public class ListNoticeAction extends ActionSupport implements ConDAOAware,
 		list = sqlMapper.queryForList("Notice.selectAll");
 
 		totalCount = list.size(); // 전체 글 갯수를 구한다.
-		page = new PagingAction(currentPage, totalCount, blockCount, blockPage); // pagingAction 객체 생성.
+		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // pagingAction 객체 생성.
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
 
 		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
@@ -123,7 +119,5 @@ public class ListNoticeAction extends ActionSupport implements ConDAOAware,
 	public void prepare() throws Exception {
 		noticeDTO = new NoticeDTO();
 	}
-
 	
 }
-

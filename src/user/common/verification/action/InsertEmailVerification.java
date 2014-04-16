@@ -27,8 +27,8 @@ public class InsertEmailVerification implements Action, ConDAOAware
 
     public String execute() throws Exception
     {
-        //System.out.println("getEv_requested():"+getEv_requested());
-        //System.out.println("getEv_code():"+getEv_code());
+        System.out.println("getEv_requested():"+getEv_requested());
+        System.out.println("getEv_code():"+getEv_code());
         
         evDTO.setEv_requested(getEv_requested());        
         evDTO.setEv_code(getEv_code());
@@ -68,4 +68,5 @@ public class InsertEmailVerification implements Action, ConDAOAware
     {
         this.ev_code = ev_code;
     }
+    
 }

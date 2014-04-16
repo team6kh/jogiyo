@@ -59,13 +59,13 @@
 				<!-- end 테스트 -->
 			</ul>
 			<c:choose>
-				<c:when test="${not empty sessionId}">
+				<c:when test="${not empty session_id}">
 					<form class="navbar-form navbar-right" action="/jogiyo/logout.action">
-						<a href="readUser.action?userType=${sessionType}&userId=${sessionId}">${sessionName} 님 환영합니다.</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="readUser.action?user_type=${session_type}&user_id=${session_id}">${session_name} 님 환영합니다.</a>&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="submit" class="btn btn-danger">로그아웃</button>
 					</form>
 				</c:when>
-				<c:when test="${empty sessionId}">
+				<c:when test="${empty session_id}">
 					<div class="navbar-form navbar-right">						
 						<a href="registrationForm.action" class="btn btn-default">회원가입</a>
 						<a href="loginForm.action?actionName=${actionName}" class="btn btn-primary">로그인</a>

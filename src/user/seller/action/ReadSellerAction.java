@@ -1,40 +1,40 @@
-package user.buyer.action;
+package user.seller.action;
 
-import user.buyer.dto.BuyerDTO;
+import user.seller.dto.SellerDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
 import common.ConDAOAware;
 
-public class ReadBuyerAction implements Action, ConDAOAware
+public class ReadSellerAction implements Action, ConDAOAware
 {
     private SqlMapClient sqlMapper;
-    private BuyerDTO buyerDTO = new BuyerDTO();
+    private SellerDTO sellerDTO = new SellerDTO();
     private String user_id; // jsp에서 넘어오는 user_id
-
+    
     public void setConDAO(SqlMapClient sqlMapper)
     {
         this.sqlMapper = sqlMapper;
     }
-
+    
     public String execute() throws Exception
     {
-        buyerDTO.setBuyer_id(getUser_id());
-
+        sellerDTO.setSeller_id(getUser_id());
+        
         // 해당 유저의 정보를 가져온다.
-        buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerId", buyerDTO);
-
+        sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectWhereSellerId", sellerDTO);
+        
         return SUCCESS;
     }
 
-    public BuyerDTO getBuyerDTO()
+    public SellerDTO getSellerDTO()
     {
-        return buyerDTO;
+        return sellerDTO;
     }
 
-    public void setBuyerDTO(BuyerDTO buyerDTO)
+    public void setSellerDTO(SellerDTO sellerDTO)
     {
-        this.buyerDTO = buyerDTO;
+        this.sellerDTO = sellerDTO;
     }
 
     public String getUser_id()
@@ -46,5 +46,5 @@ public class ReadBuyerAction implements Action, ConDAOAware
     {
         this.user_id = user_id;
     }
-    
+
 }

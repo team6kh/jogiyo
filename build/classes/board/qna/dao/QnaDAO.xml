@@ -17,7 +17,7 @@
 		<result property="qna_ref_step" column="qna_ref_step" />
 		<result property="qna_ref_level" column="qna_ref_level" />
 	</resultMap>
-	
+
 	<resultMap id="boardRes1" class="qnaBoard">
 		<result property="qna_num" column="qna_num" />
 		<result property="qna_category" column="qna_category" />		
@@ -25,7 +25,7 @@
 		<result property="qna_readcount" column="qna_readcount" />
 		<result property="qna_reg_date" column="qna_reg_date" />
 	</resultMap>
-	
+
 	<resultMap id="boardRes2" class="qnaBoard">
 		<result property="qna_num" column="qna_num" />
 		<result property="qna_category" column="qna_category" />
@@ -34,7 +34,7 @@
 		<result property="qna_readcount" column="qna_readcount" />
 		<result property="qna_reg_date" column="qna_reg_date" />
 	</resultMap>
-	
+
 	<resultMap id="boardTopRes" class="qnaBoard">
 		<result property="qna_num" column="qna_num" />
 		<result property="qna_category" column="qna_category" />		
@@ -56,7 +56,7 @@
 		</isNotEmpty>
 		order by qna_reg_date desc
 	</select>
-	
+
 	<select id="qnaTopList" resultClass="qnaBoard">
 		SELECT 
 			ROWNUM AS QNA_NUM, QNA_CONTENT, QNA_SUBJECT, QNA_CATEGORY
@@ -68,14 +68,14 @@
 		)
 		WHERE ROWNUM <![CDATA[ < ]]> 11
 	</select>
-	
+
 	<select id="qnaDetail" parameterClass="int" resultMap="boardRes2">
 		select 
 			qna_num, qna_content, qna_readcount, qna_reg_date, qna_subject, qna_category	
 		from qna_board
 		where qna_num = #qna_num#
 	</select>
-	
+
 	<insert id="insertQnaBoard" parameterClass="qnaBoard">
 		insert into qna_board (qna_num, qna_subject, qna_content,qna_category, qna_reg_date)
 		values(
@@ -86,13 +86,13 @@
 			sysdate
 		)
 	</insert>
-	
+
 	<update id="updateReadCount" parameterClass="int">
 		update qna_board
 		set qna_readcount = (select qna_readcount+1 from qna_board where qna_num = #qna_num#)
 		where qna_num = #qna_num#
 	</update>
-	
+
 	<update id="updateQna" parameterClass="qnaBoard">
 		update qna_board
 		set qna_category = #qna_category#,
@@ -100,10 +100,9 @@
 			qna_content = #qna_content#
 		where qna_num = #qna_num#
 	</update>
-	
+
 	<delete id="deleteQna" parameterClass="qnaBoard">
 		delete qna_board where qna_num = #qna_num#
 	</delete>
 
 </sqlMap>
-

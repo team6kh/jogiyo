@@ -50,4 +50,5 @@ public class DeleteBuyerAction implements Action, ConDAOAware
 	{
 		this.modalParam_key = modalParam_key;
 	}
+	
 }

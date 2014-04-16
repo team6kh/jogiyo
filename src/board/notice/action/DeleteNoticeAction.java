@@ -22,17 +22,12 @@ public class DeleteNoticeAction extends ActionSupport implements ConDAOAware,
 	NoticeDTO noticeDTO;
 
 	private int currentPage;	//현재 페이지
-	private String fileUploadPath = "D:\\오택근\\upload\\";
 
 	// 게시글 삭제
 	public String execute() throws Exception {
 		
 		//해당 번호의 글을 가져온다
 		resultClass = (NoticeDTO) sqlMapper.queryForObject("Notice.selectOne", noticeDTO.getNotice_num());
-
-		//서버 파일 삭제
-		File deleteFile = new File(fileUploadPath + noticeDTO.getNotice_file());
-		deleteFile.delete();
 				
 		//삭제 쿼리 수행
 		sqlMapper.update("Notice.deleteNotice", noticeDTO);
