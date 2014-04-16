@@ -20,6 +20,9 @@ public class UpdateReviewAction implements Action, Preparable,
 	// DAO 관련 변수
 	SqlMapClient sqlMapper;
 
+	private int rest_num;
+	private int review_rest_currentPage;
+
 	// DTO 관련 변수
 	private ReviewDTO reviewDTO;
 
@@ -34,16 +37,13 @@ public class UpdateReviewAction implements Action, Preparable,
 
 	// 리뷰 글 수정 폼
 	public String form() throws Exception {
-
 		reviewDTO = (ReviewDTO) sqlMapper.queryForObject(
 				"Review.selectReviewOne", review_num);
-
 		return SUCCESS;
 	}
 
 	// 리뷰글 수정 update 처리
 	public String execute() throws Exception {
-
 		// 다른 항목 업데이트 처리
 		sqlMapper.update("Review.updateReview", reviewDTO);
 
@@ -64,21 +64,15 @@ public class UpdateReviewAction implements Action, Preparable,
 			String filesName = reviewDTO.getReview_file();
 			// 첨부파일 삭제 메서드 호출
 			fileUpload.deleteFiles(filesName, fileUploadPath);
-
 			// 기존 업로드된 첨부파일 삭제 종료
 
-
 			// 새로 첨부된 파일 업로드 시작
-
 			// 파일명 변경시 공통으로 붙여줄 이름
 			String fileRename = "review_" + reviewDTO.getReview_num();
 			// 첨부파일 업로드 메서드 호출
 			String saveFileName = fileUpload.uploadFiles(review_files,
 					review_filesFileName, fileUploadPath, fileRename);
 			System.out.println("saveFileName :" + saveFileName);
-
-			// 새로 첨부된 파일 업로드 종료
-
 
 			// setReview_file 메서드로 값 설정
 			reviewDTO.setReview_file(saveFileName);
@@ -156,4 +150,22 @@ public class UpdateReviewAction implements Action, Preparable,
 	public void prepare() throws Exception {
 		reviewDTO = new ReviewDTO();
 	}
+
+	// 페이지 돌아가기
+	public int getRest_num() {
+		return rest_num;
+	}
+
+	public void setRest_num(int rest_num) {
+		this.rest_num = rest_num;
+	}
+
+	public int getReview_rest_currentPage() {
+		return review_rest_currentPage;
+	}
+
+	public void setReview_rest_currentPage(int review_rest_currentPage) {
+		this.review_rest_currentPage = review_rest_currentPage;
+	}
+
 }

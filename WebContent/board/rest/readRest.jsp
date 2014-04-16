@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,20 +25,27 @@
 <link href="common/common-template.css" rel="stylesheet">
 
 <style type="text/css">
-	html {
-		height: 100%
-	}
-	body {
-		height: 100%;
-		margin: 3% 0% 0% 1.5%;
-		padding: 0
-	}
-	#map_canvas {
-		height: 400px
-	}
+html {
+	height: 100%
+}
+
+body {
+	height: 100%;
+	margin: 3% 0% 0% 1.5%;
+	padding: 0
+}
+
+#map_canvas {
+	height: 400px
+}
+
+#cartFrame {
+	height: 450px
+}
 </style>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=true">
+	
 </script>
 
 <script type="text/javascript">
@@ -97,7 +105,6 @@
 		//var address = "대한민국 서울특별시 영등포구 당산로49길"; // rest_writer_address 변수(판매자 테이블의 주소 컬럼)
 		var address = document.getElementById("rest_writer_address").value;
 
-
 		geocoder.geocode({
 			'address' : address
 		}, function(results, status) {
@@ -133,23 +140,36 @@
 			}
 		});
 	}
-	
+
 	function insertCart(form) {
 		alert("insertCart");
 		var rest_num = document.getElementById("rest_num").value;
 		var rest_subject = document.getElementById("rest_subject").value;
 		var session_id = document.getElementById("session_id").value;
+
+		var restopt_num = form.restopt_num.value;
 		var restopt_destFile1 = form.restopt_destFile1.value;
 		var restopt_subject = form.restopt_subject.value;
 		var restopt_priceplus = form.restopt_priceplus.value;
-		
-		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
-		document.getElementById("cartFrame").contentWindow.location.href=url;
+
+		var url = "insertCart.action?cart_rest_num=" + rest_num
+				+ "&cart_rest_subject=" + rest_subject
+				+ "&cart_restopt_destFile1=" + restopt_destFile1
+				+ "&cart_restopt_num=" + restopt_num + "&cart_restopt_subject="
+				+ restopt_subject + "&cart_restopt_priceplus="
+				+ restopt_priceplus + "&session_id=" + session_id;
+		document.getElementById("cartFrame").contentWindow.location.href = url;
 		return false;
 	}
-	
-	function abc(aa){
-		alert("aa>"+aa.restopt_subject.value);
+
+	function reviewForm() {
+
+		var reviewform = document.insertReviewForm;
+		if (reviewform.style.display == "none") {
+			reviewform.style.display = "block";
+		} else {
+			reviewform.style.display = "none";
+		}
 	}
 </script>
 </head>
@@ -169,49 +189,49 @@
 		</div>
 
 		<div class="col-md-9 well">
-		
+
 			<div class="col-md-12 well">
 				<div class="col-md-2">
 					<font color="#FF3636"><b>카테고리</b></font>
 				</div>
 				<div class="col-md-10">
 					<s:if test="resultClass.rest_localcategory == 11">
-						서울특별시
-					</s:if>
+서울특별시
+</s:if>
 					<s:elseif test="resultClass.rest_localcategory == 12">
-						경기/인천
-					</s:elseif>
+경기/인천
+</s:elseif>
 					<s:elseif test="resultClass.rest_localcategory == 13">
-						부산/경남
-					</s:elseif>
+부산/경남
+</s:elseif>
 					<s:elseif test="resultClass.rest_localcategory == 14">
-						대구/경북
-					</s:elseif>
+대구/경북
+</s:elseif>
 					<s:elseif test="resultClass.rest_localcategory == 15">
-						대전/전북
-					</s:elseif>
+대전/전북
+</s:elseif>
 					<s:elseif test="resultClass.rest_localcategory == 16">
-						광주/전남
-					</s:elseif>
+광주/전남
+</s:elseif>
 					<s:elseif test="resultClass.rest_localcategory == 17">
-						그 외 지역
-					</s:elseif>
+그 외 지역
+</s:elseif>
 
 					<s:if test="resultClass.rest_typecategory == 21">
-						- 한식
-					</s:if>
+- 한식
+</s:if>
 					<s:elseif test="resultClass.rest_typecategory == 22">
-						- 양식
-					</s:elseif>
+- 양식
+</s:elseif>
 					<s:elseif test="resultClass.rest_typecategory == 23">
-						- 중식
-					</s:elseif>
+- 중식
+</s:elseif>
 					<s:elseif test="resultClass.rest_typecategory == 24">
-						- 일식
-					</s:elseif>
+- 일식
+</s:elseif>
 					<s:elseif test="resultClass.rest_typecategory == 25">
-						- 기타
-					</s:elseif>
+- 기타
+</s:elseif>
 				</div>
 
 				<div class="col-md-2">
@@ -219,25 +239,28 @@
 				</div>
 				<div class="col-md-10">
 					<s:property value="resultClass.rest_num" />
-					<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
+					<input type="hidden" id="rest_num" name="rest_num"
+						value=<s:property value="resultClass.rest_num" /> />
 				</div>
 			</div>
 
 			<div class="col-md-12 well">
 				<div class="col-sm-4 col-md-5">
-					<img src="${resultClass.rest_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
+					<img src="${resultClass.rest_destFile1}" alt="N/A"
+						style="min-height: 125px; height: 125px;">
 				</div>
 				<div class="col-md-7">
-					<br/>
-					<font size="4">상품명</font> <br/>
-					<font size="7" color = "red"><s:property value="resultClass.rest_subject" /></font>
-					<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
-					<input type="text" id="session_id" name="session_id" value="test" />
+					<br /> <font size="4">상품명</font> <br /> <font size="7" color="red"><s:property
+							value="resultClass.rest_subject" /></font> <input type="hidden"
+						id="rest_subject" name="rest_subject"
+						value=<s:property value="resultClass.rest_subject" /> /> <input
+						type="hidden" id="session_id" name="session_id"
+						value="${sessionScope.sessionId}" />
 				</div>
 			</div>
 
 			<div class="col-md-12 well">
-				<font size="3" color = "red"><b>&nbsp;&nbsp;&nbsp;상품 상세 설명</b></font>
+				<font size="3" color="red"><b>&nbsp;&nbsp;&nbsp;상품 상세 설명</b></font>
 
 				<!-- 여기서 부터 -->
 				<!-- start -->
@@ -254,7 +277,7 @@
 							<div class="panel-body">
 
 								<div class="thumbnail">
-									<img src="${resultClass.rest_destFile2}" alt="N/A" >
+									<img src="${resultClass.rest_destFile2}" alt="N/A">
 								</div>
 
 							</div>
@@ -272,39 +295,45 @@
 
 								<div class="col-md-12">
 									<c:forEach var="list" items="${list}">
-										<form class="col-sm-4 col-md-3" id="cartForm" name="test">					
-									    	<div class="thumbnail">
+										<form class="col-sm-4 col-md-3" id="cartForm" name="test">
+											<div class="thumbnail">
 
-									    		<!-- 옵션 -->
-									      		<a href="${list.restopt_destFile1}">
-									      			<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
-									      		</a>
-									      		<input type="hidden" id="restopt_destFile1" name="restopt_destFile1" value="${list.restopt_destFile1}" />
+												<!-- 옵션 -->
+												<a href="${list.restopt_destFile1}"> <img
+													src="${list.restopt_destFile1}" alt="N/A"
+													style="min-height: 125px; height: 125px;">
+												</a> <input type="hidden" id="restopt_destFile1"
+													name="restopt_destFile1" value="${list.restopt_destFile1}" />
 
-									      		<div class="caption" align="center">
-									        		<font size="2" color="green"><b>${list.restopt_subject}</b></font> <br/>
-									        		<font size="3" color="red">${list.restopt_priceplus}</font> 원
-									        		<input type="hidden" id="restopt_subject" name="restopt_subject" value="${list.restopt_subject}" />
-									        		<input type="hidden" id="restopt_priceplus" name="restopt_priceplus" value="${list.restopt_priceplus}" />
-									        		
-									      		</div>
-							
-									      		<!-- 장바구니 담기 버튼 -->
-									      		<button type="button" class="btn btn-default btn-lg" onclick="insertCart(this.form)">
+												<div class="caption" align="center">
+													<font size="2" color="green"><b>${list.restopt_subject}</b></font>
+													<br /> <font size="3" color="red">${list.restopt_priceplus}</font>
+													원 <input type="hidden" id="restopt_num" name="restopt_num"
+														value="${list.restopt_num}" /> <input type="hidden"
+														id="restopt_subject" name="restopt_subject"
+														value="${list.restopt_subject}" /> <input type="hidden"
+														id="restopt_priceplus" name="restopt_priceplus"
+														value="${list.restopt_priceplus}" />
+
+												</div>
+
+												<!-- 장바구니 담기 버튼 -->
+												<button type="button" class="btn btn-default btn-lg"
+													onclick="insertCart(this.form)">
 													<span class="glyphicon glyphicon-shopping-cart"></span>
 												</button>
 
-									    	</div>
-								      	</form>		      			      	
+											</div>
+										</form>
 									</c:forEach>
 
-									</div>
+								</div>
 
-									<c:if test="${list eq null}">
-										<div class="text-center">
-											<p>등록된 게시물이 없습니다.</p>
-										</div>
-									</c:if>
+								<c:if test="${list eq null}">
+									<div class="text-center">
+										<p>등록된 게시물이 없습니다.</p>
+									</div>
+								</c:if>
 
 							</div>
 						</div>
@@ -313,138 +342,223 @@
 				<!-- end -->
 
 			</div>
-			
-			
+
+
 
 			<!-- HERE -->
 			<div class="tabbable">
 				<!-- Only required for left/right tabs -->
 				<ul class="nav nav-tabs">
-					<li class="active">
-						<a href="#tab1" data-toggle="tab">
-							지도보기
-						</a>
-					</li>
-					<li>
-						<a href="#tab2" data-toggle="tab">
-							판매자 정보
-						</a>
-					</li>
+					<li class="active"><a href="#tab1" data-toggle="tab"> 지도보기
+					</a></li>
+					<li><a href="#tab2" data-toggle="tab"> 판매자 정보 </a></li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane active" id="tab1">						
-							<div class="col-md-7 well">
-								<!-- Here's map area -->
-								<div id="map_canvas" class="map col-md-12"></div>
-							</div>	
+					<div class="tab-pane active" id="tab1">
+						<div class="col-md-7 well">
+							<!-- Here's map area -->
+							<div id="map_canvas" class="map col-md-12"></div>
+						</div>
 					</div>
 					<div class="tab-pane" id="tab2">
 
-							<div class="col-md-12 well">
-								<div class="col-md-12">
-									<font size="3" color = "red"><b>판매자 정보</b></font>
-								</div>
-
-								<div class="col-md-3">
-									<font color="#FF3636"><b>판매자</b></font>
-								</div>
-								<div class="col-md-9">
-									${resultClass.rest_writer_name}
-								</div>
-
-								<div class="col-md-3">
-									<font color="#FF3636"><b>전화번호</b></font>
-								</div>
-								<div class="col-md-9">
-									${resultClass.rest_writer_telnum}
-								</div>
-
-								<div class="col-md-3">
-									<font color="#FF3636"><b>핸드폰</b></font>
-								</div>
-								<div class="col-md-9">
-									${resultClass.rest_writer_mobilenum}
-								</div>
-
-								<div class="col-md-3">
-									<font color="#FF3636"><b>반품주소</b></font>
-								</div>
-								<div class="col-md-9">
-									${resultClass.rest_writer_address}
-								</div>
+						<div class="col-md-12 well">
+							<div class="col-md-12">
+								<font size="3" color="red"><b>판매자 정보</b></font>
 							</div>
+
+							<div class="col-md-3">
+								<font color="#FF3636"><b>판매자</b></font>
+							</div>
+							<div class="col-md-9">${resultClass.rest_writer_name}</div>
+
+							<div class="col-md-3">
+								<font color="#FF3636"><b>전화번호</b></font>
+							</div>
+							<div class="col-md-9">${resultClass.rest_writer_telnum}</div>
+
+							<div class="col-md-3">
+								<font color="#FF3636"><b>핸드폰</b></font>
+							</div>
+							<div class="col-md-9">${resultClass.rest_writer_mobilenum}
+							</div>
+
+							<div class="col-md-3">
+								<font color="#FF3636"><b>반품주소</b></font>
+							</div>
+							<div class="col-md-9">${resultClass.rest_writer_address}</div>
+						</div>
 					</div>
 				</div>
 			</div>
 
+
+
+			<!-- 장바구니 -->
+			<div id="cart" class="col-md-3">
+				<div id="sidebar" data-spy="affix" data-offset-top="0"
+					data-offset-bottom="0"></div>
+			</div>
+
+
 		</div>
-		
-		<!-- 장바구니 -->
-	    <div class="col-md-3">
-	    	<div id="sidebar" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
-	    		여기에 장바구니
-	    		<iframe id="cartFrame" src="listCart.action"></iframe>
-	    		
-	        </div>      
-	    </div>	     
-	     
-
-	</div>
 
 
+		<!-- review -->
+		<div class="container well">
+
+			<div class="col-md-12">
+				<h3>review 게시판</h3>
+			</div>
+
+			<!-- 리뷰 쓰기 권한에 관한 조건문 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
+			<!-- 일단은 로그인을 하지 않으면 리뷰 쓰기 폼이 보이지 않도록 조건문 설정 -->
+
+			<!-- 리뷰 쓰기 폼 시작 -->
+
+			<div class="col-md-12 well">
+
+				<c:if test="${empty sessionScope.sessionId}">
+글을 쓰시려면 로그인을 하세요
+</c:if>
+				<c:if test="${!empty sessionScope.sessionId}">
+					<div class="text-center">
+						<button onclick="return reviewForm()">리뷰 글 쓰기</button>
+					</div>
+					<div class="text-center">
+						<form name="insertReviewForm" method="post"
+							action="insertReviewPro.action" enctype="multipart/form-data"
+							style="display: none">
+							<table class="table table-striped table-forum">
+								<tr>
+									<th>별점</th>
+									<td class="text-center"><input type="radio"
+										name="review_rating" value="1" /> 1점 <input type="radio"
+										name="review_rating" value="2" />2점 <input type="radio"
+										name="review_rating" value="3" />3점 <input type="radio"
+										name="review_rating" value="4" />4점 <input type="radio"
+										name="review_rating" value="5" />5점</td>
+								</tr>
+								<!-- 리뷰 content -->
+								<tr>
+									<td class="text-center" colspan="2"><textarea
+											name="review_content" rows="5" cols="50"></textarea></td>
+								</tr>
+								<!-- 이미지 파일 첨부 : 첨부 개수 제한/ 용량 제한 필요 -->
+								<tr>
+									<td class="text-center" colspan="2"><input
+										id="review_file_element" type="file" name="review_files"
+										multiple="multiple" />
+								</tr>
+								<!-- 리뷰 작성 완료 버튼 -->
+								<tr>
+									<th class="text-center" colspan="2"><input type="submit"
+										value="리뷰 등록" /></th>
+								</tr>
+							</table>
+
+							<!-- 보내줘야 할 파라미터 : 식당코드(식당 테이블) / 구매자(= 회원 = 글 작성자) 정보 -->
+							<input type="hidden" name="review_rest_currentPage"
+								value="${currentPage}" /> <input type="hidden"
+								name="review_rest" value="${rest_num}" /> <input type="hidden"
+								name="rest_num" value="${rest_num}" /> <input type="hidden"
+								name="review_writer" value="${sessionScope.sessionId }" />
+
+						</form>
+					</div>
+				</c:if>
+			</div>
+			<!-- 리뷰 쓰기 폼 끝 -->
+
+		</div>
 
 
-	<!-- 임시 사용 -->
-	<form name="readRestForm" action="payRest.action" method="post" >
-		<TABLE border=0 width=90%>
-			<tr>
-				<td>-테스트용-</td>
-			</tr>
-			<tr>
-				<td>
-					옵션<br/>
-					<select name="restopt_set">
-						<s:iterator value="list" status="stat">
-							<option value="<s:property value="restopt_subject"/>a<s:property value="restopt_priceplus" />">
-								<s:property value="restopt_subject" /> (가격 : <s:property value="restopt_priceplus" />) 
-							</option>
-						</s:iterator>
-					</select>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr>
-				<td>
-					<input name="submit" type="submit" value="구매하기"  />
-					<input name="list" type="button" value="장바구니담기" onClick="javascript:location.href='ListRest.action?currentPage=<s:property value="currentPage"/>'" />
+		<!-- 리뷰 글 보기 시작 -->
+		<div class="col-md-12 well">
+			<c:forEach var="reviewDTO" items="${reviewRes}">
+				<div class="text-center">
+					<table class="table table-striped table-forum">
 
-					<input type ="hidden" id="rest_writer_address" value="<s:property value="resultClass.rest_writer_address" />" />
-				</td>
-			</tr>
-		</table>
+						<!-- 리뷰글 작성자 & 작성일 -->
+						<tr>
+							<td class="text-center"><label> 작성자 </label>
+								&nbsp;&nbsp;&nbsp; ${reviewDTO.review_writer} <input
+								type="hidden" name="review_num" value="${reviewDTO.review_num}" /></td>
+							<td class="text-center"><label>작성일</label>
+								&nbsp;&nbsp;&nbsp; <fmt:formatDate
+									value="${reviewDTO.review_reg_date}" pattern="yyyy-MM-dd" /></td>
+						</tr>
+						<!-- 해당글 작성자일 경우 수정/삭제 버튼 -->
+						<!-- 임시값 "test_Customer" sessionId 값으로 교체 -->
+						<c:if test="${reviewDTO.review_writer == sessionScope.sessionId}">
+							<tr>
+								<td class="text-right" colspan="2"><input type="button"
+									value="수정"
+									onclick="javascript:open('updateReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=500, height=500')">
+									<input type="button" value="삭제"
+									onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=200')" />
+								</td>
+							</tr>
+						</c:if>
+						<!-- 리뷰글 별점 -->
+
+						<tr>
+							<td class="text-center" colspan="2"><label>별점</label>
+								&nbsp;&nbsp;&nbsp; <c:forEach begin="1"
+									end="${reviewDTO.review_rating}">
+									<img src="assets/img/review/ratingimage/ico.png" width="25px"
+										height="25px">
+								</c:forEach></td>
+						</tr>
+						<!-- 리뷰글 내용 -->
+						<tr>
+							<td class="text-center" colspan="2">${reviewDTO.review_content }</td>
+						</tr>
+						<!-- 리뷰글 첨부사진 : 첨부사진이 있을 때만 보이도록 -->
+						<c:if test="${!empty reviewDTO.review_file}">
+							<c:forTokens var="reviewFileNames"
+								items="${reviewDTO.review_file }" delims="' '">
+								<tr>
+									<td class="text-center" colspan="2"><c:forEach
+											var="reviewFileName" items="${reviewFileNames}">
+											<img src="${reviewFile_Path}${reviewFileName}" width="400px">
+											<br />
+										</c:forEach></td>
+								</tr>
+							</c:forTokens>
+						</c:if>
+
+					</table>
+				</div>
+			</c:forEach>
+
+			<div class="text-center">
+				<ul class="pagination pagination-sm">
+					<s:property value="pagingHtml" escape="false" />
+				</ul>
+			</div>
+		</div>
+		<!-- 리뷰 글 페이지 -->
+		<!-- 리뷰 글 보기 끝 -->
 
 
-		<table>
-			<tr>
-				<td align="right">
-					<input name="list" type="button" value="수정" class="inputb" onClick="javascript:location.href='modifyRest.action?rest_num=<s:property value="rest_num" />&currentPage=<s:property value="currentPage" />'">
-					<input name="list" type="button" value="삭제" class="inputb" onClick="javascript:location.href='deleteRest.action?rest_num=<s:property value="rest_num" />&currentPage=<s:property value="currentPage" />'">
-					<input name="list" type="button" value="목록"  onClick="javascript:location.href='listRest.action?currentPage=<s:property value="currentPage" />'">
-				</td>
-			</tr>
-		</table>
-	</form>
 
 
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
+
+		<iframe id="cartFrame"
+			src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}"
+			frameborder=0 framespacing=0 marginheight=0 marginwidth=0
+			scrolling=yes vspace=0></iframe>
 
 
+
+
+
+
+		<!-- Bootstrap core JavaScript
+================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="dist/js/bootstrap.min.js"></script>
 </body>
-
-
-

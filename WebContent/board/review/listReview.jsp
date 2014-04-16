@@ -30,7 +30,7 @@
 	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
 
-	<!-- container -->
+	<!-- review -->
 	<div class="container">
 
 
@@ -38,10 +38,10 @@
 			<h3>review 게시판</h3>
 		</div>
 
-		<!--  리뷰 쓰기 권한에 관한 조건문 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
-		<!--  일단은 로그인을 하지 않으면 리뷰 쓰기 폼이 보이지 않도록 조건문 설정  -->
+		<!-- 리뷰 쓰기 권한에 관한 조건문 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
+		<!-- 일단은 로그인을 하지 않으면 리뷰 쓰기 폼이 보이지 않도록 조건문 설정 -->
 
-		<!-- 리뷰 쓰기 폼 시작  -->
+		<!-- 리뷰 쓰기 폼 시작 -->
 
 
 		<div class="col-md-12 well">
@@ -63,18 +63,18 @@
 									name="review_rating" value="4" />4점 <input type="radio"
 									name="review_rating" value="5" />5점</td>
 							</tr>
-							<!--  리뷰 content -->
+							<!-- 리뷰 content -->
 							<tr>
 								<td class="text-center" colspan="2"><textarea
 										name="review_content" rows="5" cols="50"></textarea></td>
 							</tr>
-							<!--  이미지 파일 첨부 : 첨부 개수 제한/ 용량 제한 필요  -->
+							<!-- 이미지 파일 첨부 : 첨부 개수 제한/ 용량 제한 필요 -->
 							<tr>
 								<td class="text-center" colspan="2"><input
 									id="review_file_element" type="file" name="review_files"
 									multiple="multiple" />
 							</tr>
-							<!-- 리뷰 작성 완료 버튼  -->
+							<!-- 리뷰 작성 완료 버튼 -->
 							<tr>
 								<th class="text-center" colspan="2"><input type="submit"
 									value="리뷰 등록" /></th>
@@ -88,14 +88,14 @@
 				</div>
 			</c:if>
 		</div>
-		<!-- 리뷰 쓰기 폼 끝  -->
+		<!-- 리뷰 쓰기 폼 끝 -->
 
 		<!-- 리뷰 글 보기 시작 -->
 		<c:forEach var="reviewDTO" items="${reviewRes}">
 			<div class="text-center">
 				<table class="table table-striped table-forum">
 
-					<!--  리뷰글 작성자 & 작성일 -->
+					<!-- 리뷰글 작성자 & 작성일 -->
 					<tr>
 						<td class="text-center"><label> 작성자 </label>
 							&nbsp;&nbsp;&nbsp; ${reviewDTO.review_writer} <input
@@ -104,7 +104,7 @@
 							<fmt:formatDate value="${reviewDTO.review_reg_date}"
 								pattern="yyyy-MM-dd" /></td>
 					</tr>
-					<!-- 해당글 작성자일 경우 수정/삭제 버튼  -->
+					<!-- 해당글 작성자일 경우 수정/삭제 버튼 -->
 					<!-- 임시값 "test_Customer" sessionId 값으로 교체 -->
 					<c:if test="${reviewDTO.review_writer == sessionScope.sessionId}">
 						<tr>
@@ -112,10 +112,11 @@
 								value="수정"
 								onclick="javascript:open('updateReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=500, height=500')">
 								<input type="button" value="삭제"
-								onclick="javascript:open('deleteReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=200')" /></td>
+								onclick="javascript:open('deleteReviewForm.action?ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=200')" />
+							</td>
 						</tr>
 					</c:if>
-					<!--  리뷰글 별점 -->
+					<!-- 리뷰글 별점 -->
 
 					<tr>
 						<td class="text-center" colspan="2"><label>별점</label>
@@ -146,7 +147,7 @@
 				</table>
 			</div>
 		</c:forEach>
-		<!--  리뷰 글 페이지 -->
+		<!-- 리뷰 글 페이지 -->
 		<div class="text-center">
 			<ul class="pagination pagination-sm">
 				<s:property value="pagingHtml" escape="false" />
@@ -178,14 +179,14 @@
 	</script>
 
 
-	<!-- /.container -->
+	<!-- /.review -->
 
 
 
 
 
 	<!-- Bootstrap core JavaScript
-    ================================================== -->
+================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

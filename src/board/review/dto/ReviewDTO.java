@@ -5,7 +5,7 @@ import java.util.Date;
 public class ReviewDTO {
 	
 	private int review_num;  // 글번호(PK)
-	private String review_rest; // 식당코드 (FK - 식당테이블의 식당 정보) : 임시값 설정 test_Rest
+	private int review_rest; // 식당코드 (FK - 식당테이블의 식당 정보) : 임시값 설정 test_Rest
 	private String review_writer;  //작성자 (FK - 결제테이블의 주문자 정보) : 임시값 설정 test_Customer 
 	private String review_content;  // 글내용
 	private String review_file; // 첨부 사진
@@ -20,10 +20,10 @@ public class ReviewDTO {
 	public void setReview_num(int review_num) {
 		this.review_num = review_num;
 	}
-	public String getReview_rest() {
+	public int getReview_rest() {
 		return review_rest;
 	}
-	public void setReview_rest(String review_rest) {
+	public void setReview_rest(int review_rest) {
 		this.review_rest = review_rest;
 	}
 	public String getReview_writer() {

@@ -35,7 +35,7 @@
 	<!-- SELECT 쿼리문 정의 -->
 
 	<!-- 해당 식당에 관한 리뷰 글 목록 -->
-	<select id="selectReviewList" resultMap="reviewRes" parameterClass="java.lang.String">
+	<select id="selectReviewList" resultMap="reviewRes" parameterClass="int">
 		<include refid="select-all" />
 		where REVIEW_REST=#review_rest# ORDER BY REVIEW_REG_DATE DESC 
 	</select>
@@ -78,7 +78,7 @@
 	<!-- 리뷰글 수정을 위한 쿼리문 -->
 	<update id="updateReview" parameterClass="reviewDTO">
 		UPDATE review_board SET REVIEW_RATING = #review_rating#,
-		REVIEW_CONTENT = #review_content#
+											REVIEW_CONTENT = #review_content#
 		<include refid="where_review_num" />
 	</update>
 

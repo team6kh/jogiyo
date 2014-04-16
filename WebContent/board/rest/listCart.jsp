@@ -1,20 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
-<body>
-    cart페이지 for 배너
-    
-    <c:forEach var="list" items="${list}">
-		<div class="col-sm-4 col-md-3">					
-	    	<div class="thumbnail">
-	        	${list.cart_rest_num} <br/>
-			    ${list.cart_rest_subject} <br/>
-			    <img src="${list.cart_restopt_destFile1}" /> <br/>
-			    ${list.cart_restopt_subject} <br/>
-			    ${list.cart_restopt_priceplus} <br/>
-			    ${list.session_id} <br/>
-	    	</div>
-      	</div>		      			      	
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+
+
+<!-- Bootstrap core CSS -->
+<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="common/common-template.css" rel="stylesheet">
+
+
+<script type="text/javascript">
+	function goPayment(form) {
+		form.action = "payRest.action";
+		form.submit();
+
+		return false;
+	}
+</script>
+</head>
+
+
+
+<form id="cartForm" name="cartForm" target="_parent">
+	<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
+	<input type="hidden" id="rest_subject" name="rest_subject"
+		value="${rest_subject}" /> <input type="hidden" id="session_id"
+		name="session_id" value="${sessionScope.sessionId}" />
+
+
+	<div align="center">
+		<font size=5><b>장 바 구 니♥</b></font>
+	</div>
+
+
+	<!-- 장바구니 list -->
+	<c:forEach var="list" items="${list}">
+		<div class="col-sm-3 col-md-2">
+			<div class="thumbnail">
+
+				<img src="${list.cart_restopt_destFile1}" alt="N/A"
+					style="min-height: 100px; height: 100px;" /> <br />
+
+				<div class="caption" align="center">
+					<font size=3 color=green>${list.cart_restopt_subject}</font> <br />
+					<font size=3 color=red>${list.cart_restopt_priceplus}</font> <br />
+				</div>
+
+			</div>
+		</div>
 	</c:forEach>
-	</body>
+
+
+	<!-- 장바구니 결제 버튼 -->
+	<div align="center">
+		<button type="button" class="btn btn-success"
+			onclick="goPayment(this.form)">구매하기</button>
+		<button type="button" class="btn btn-danger">모두제거</button>
+	</div>
+
+</form>
