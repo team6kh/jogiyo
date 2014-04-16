@@ -43,6 +43,7 @@
 			<result property="cart_num" column="cart_num"/>
 			<result property="cart_rest_num" column="cart_rest_num"/>
 			<result property="cart_rest_subject" column="cart_rest_subject"/>
+			<result property="cart_restopt_num" column="cart_restopt_num"/>
 			<result property="cart_restopt_destFile1" column="cart_restopt_destFile1"/>
 			<result property="cart_restopt_subject" column="cart_restopt_subject"/>
 			<result property="cart_restopt_priceplus" column="cart_restopt_priceplus"/>
@@ -77,9 +78,10 @@
 		</insert>
 
 		<insert id="insertCart_board" parameterClass="CartDTO">
-			INSERT INTO Cart_board (cart_num, cart_rest_num, cart_rest_subject, cart_restopt_destFile1, cart_restopt_subject, cart_restopt_priceplus, session_id)
-			VALUES (cart_seq_num.NEXTVAL, #cart_rest_num#, #cart_rest_subject#, #cart_restopt_destFile1#, #cart_restopt_subject#, #cart_restopt_priceplus#, #session_id#)
+			INSERT INTO Cart_board (cart_num, cart_rest_num, cart_rest_subject, cart_restopt_num, cart_restopt_destFile1, cart_restopt_subject, cart_restopt_priceplus, session_id)
+			VALUES (cart_seq_num.NEXTVAL, #cart_rest_num#, #cart_rest_subject#, #cart_restopt_num#, #cart_restopt_destFile1#, #cart_restopt_subject#, #cart_restopt_priceplus#, #session_id#)
 		</insert>
+
 
 
 
@@ -87,9 +89,11 @@
 		<select id="selectLastNo" resultClass="RestDTO" parameterClass="int">
 			SELECT max(rest_num) as rest_num FROM Rest_board 
 		</select>
+		
 		<select id="selectCount" resultClass="int" >
 			SELECT count(*) FROM Rest_board 
 		</select>
+		
 		<select id="selectAll" resultMap="RestBoard" parameterClass="int">
 			<include refid="select-all" />
 			ORDER BY rest_num DESC
@@ -99,8 +103,6 @@
 			select * from Cart_board
 			ORDER BY cart_num DESC
 		</select>
-		
-		
 
 		<select id="selectRestOne" resultMap="RestBoard" parameterClass="int">
 			<include refid="select-all" />
@@ -111,6 +113,12 @@
 			select * from RestOpt_Board
 			where restopt_rest_num = #restopt_rest_num#
 		</select>
+
+		<select id="selectForPayment" resultMap="CartBoard" parameterClass="CartDTO">
+			select * from Cart_board
+			where cart_rest_num = #cart_rest_num# and session_id = #session_id#
+		</select>
+
 
 
 
@@ -130,6 +138,7 @@
  			UPDATE Rest_board SET rest_readcount = rest_readcount + 1
 			<include refid="where-num" />
 		</update>
+
 
 
 

@@ -4,13 +4,23 @@ public class CartDTO {
 	int cart_num;
 	int cart_rest_num;
 	String cart_rest_subject;
+	
+	String cart_restopt_num;
 	String cart_restopt_destFile1;
 	String cart_restopt_subject;
 	String cart_restopt_priceplus;
 	String session_id;
 	
 	
-	public int getCart_num() {
+	public String getCart_restopt_num()
+    {
+        return cart_restopt_num;
+    }
+    public void setCart_restopt_num(String cart_restopt_num)
+    {
+        this.cart_restopt_num = cart_restopt_num;
+    }
+    public int getCart_num() {
 		return cart_num;
 	}
 	public void setCart_num(int cart_num) {

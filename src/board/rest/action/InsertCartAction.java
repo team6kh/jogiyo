@@ -22,8 +22,9 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 	private List<CartDTO> list = new ArrayList<CartDTO>();
 	
 	//readRest.jsp 에서 a링크로 넘어오는 파라미터들
-	private int cart_rest_num;
+	private int cart_rest_num; //상품
 	private String cart_rest_subject;
+	private String cart_restopt_num; //여기서부터 옵션
 	private String cart_restopt_destFile1;
 	private String cart_restopt_subject;
 	private String cart_restopt_priceplus;
@@ -39,6 +40,7 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 		
 		paramClass.setCart_rest_num(getCart_rest_num());
 		paramClass.setCart_rest_subject(getCart_rest_subject());
+		paramClass.setCart_restopt_num(getCart_restopt_num());
 		paramClass.setCart_restopt_destFile1(getCart_restopt_destFile1());
 		paramClass.setCart_restopt_subject(getCart_restopt_subject());
 		paramClass.setCart_restopt_priceplus(getCart_restopt_priceplus());
@@ -112,5 +114,11 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 	public void setSession_id(String session_id) {
 		this.session_id = session_id;
 	}
+    public String getCart_restopt_num(){
+        return cart_restopt_num;
+    }
+    public void setCart_restopt_num(String cart_restopt_num){
+        this.cart_restopt_num = cart_restopt_num;
+    }
 
 }

@@ -22,7 +22,6 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 	private int currentPage;
 	private int rest_num;
 	
-	public static Reader reader;
 	public static SqlMapClient sqlMapper;
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();

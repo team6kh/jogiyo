@@ -144,11 +144,13 @@
 		var rest_num = document.getElementById("rest_num").value;
 		var rest_subject = document.getElementById("rest_subject").value;
 		var session_id = document.getElementById("session_id").value;
+		
+		var restopt_num = form.restopt_num.value;
 		var restopt_destFile1 = form.restopt_destFile1.value;
 		var restopt_subject = form.restopt_subject.value;
 		var restopt_priceplus = form.restopt_priceplus.value;
 		
-		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
+		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_num="+restopt_num+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
 		document.getElementById("cartFrame").contentWindow.location.href=url;
 		return false;
 	}
@@ -247,7 +249,7 @@
 					<font size="4">상품명</font> <br/>
 					<font size="7" color = "red"><s:property value="resultClass.rest_subject" /></font>
 					<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
-					<input type="hidden" id="session_id" name="session_id" value="test" />
+					<input type="hidden" id="session_id" name="session_id" value="${sessionScope.sessionId}" />
 				</div>
 			</div>
 
@@ -299,6 +301,8 @@
 									      		<div class="caption" align="center">
 									        		<font size="2" color="green"><b>${list.restopt_subject}</b></font> <br/>
 									        		<font size="3" color="red">${list.restopt_priceplus}</font> 원
+									        		
+									        		<input type="hidden" id="restopt_num" name="restopt_num" value="${list.restopt_num}" />
 									        		<input type="hidden" id="restopt_subject" name="restopt_subject" value="${list.restopt_subject}" />
 									        		<input type="hidden" id="restopt_priceplus" name="restopt_priceplus" value="${list.restopt_priceplus}" />
 									        		
@@ -395,12 +399,6 @@
 		</div>
 		
 		
-		
-
-		
-		
-		
-		
 		<!-- 장바구니 -->
 	    <div  id="cart" class="col-md-3">
 	    	<div id="sidebar" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
@@ -410,77 +408,78 @@
 
 	</div>
 	
+	
 	<!-- review -->
-		<div class="container well">
-	
-	
-			<div class="col-md-12">
-				<h3>review 게시판</h3>
-			</div>
-	
-			<!--  리뷰 쓰기 권한에 관한 조건문 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
-			<!--  일단은 로그인을 하지 않으면 리뷰 쓰기 폼이 보이지 않도록 조건문 설정  -->
-	
-			<!-- 리뷰 쓰기 폼 시작  -->
-	
-	
-			<div class="col-md-12 well">
-				<c:if test="${!empty sessionScope.sessionId}">
-					<div class="text-center">
-						<button onclick="return reviewForm()">리뷰 글 쓰기</button>
-					</div>
-					<div class="text-center">
-						<form name="insertReviewForm" method="post" action="insertReviewPro.action" enctype="multipart/form-data" style="display: none">
-							<table class="table table-striped table-forum">
-								<tr>
-									<th>별점</th>
-									<td class="text-center"><input type="radio"
-										name="review_rating" value="1" /> 1점 <input type="radio"
-										name="review_rating" value="2" />2점 <input type="radio"
-										name="review_rating" value="3" />3점 <input type="radio"
-										name="review_rating" value="4" />4점 <input type="radio"
-										name="review_rating" value="5" />5점</td>
-								</tr>
-								<!--  리뷰 content -->
-								<tr>
-									<td class="text-center" colspan="2"><textarea
-											name="review_content" rows="5" cols="50"></textarea></td>
-								</tr>
-								<!--  이미지 파일 첨부 : 첨부 개수 제한/ 용량 제한 필요  -->
-								<tr>
-									<td class="text-center" colspan="2"><input
-										id="review_file_element" type="file" name="review_files" multiple="multiple" />
-								</tr>
-								<!-- 리뷰 작성 완료 버튼  -->
-								<tr>
-									<th class="text-center" colspan="2">
-									<input type="submit" value="리뷰 등록" /></th>
-								</tr>
-							</table>
-							
-							<!-- 보내줘야 할 파라미터 : 식당코드(식당 테이블) / 구매자(= 회원 = 글 작성자) 정보 -->
-							<input type="hidden" name="review_rest_currentPage" value="${currentPage}" />
-							<input type="hidden" name="review_rest" value="${rest_num}" />
-							 <input type="hidden" name="rest_num" value="${rest_num}" />
-							<input type="hidden" name="review_writer" value="${sessionScope.sessionId }" />
-							
-						</form>
-					</div>
-				</c:if>
-			</div>
-			<!-- 리뷰 쓰기 폼 끝  -->
-	
-			
-			
+	<div class="container well">
+
+		<div class="col-md-12">
+			<h3>review 게시판</h3>
 		</div>
+
+		<!--  리뷰 쓰기 권한에 관한 조건문 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
+		<!--  일단은 로그인을 하지 않으면 리뷰 쓰기 폼이 보이지 않도록 조건문 설정  -->
+
+		<!-- 리뷰 쓰기 폼 시작  -->
+
+		<div class="col-md-12 well">
 		
-		
-		
-		<!-- 리뷰 글 보기 시작 -->
+			<c:if test="${empty sessionScope.sessionId}">
+				글을 쓰시려면 로그인을 하세요
+			</c:if>
+			<c:if test="${!empty sessionScope.sessionId}">
+				<div class="text-center">
+					<button onclick="return reviewForm()">리뷰 글 쓰기</button>
+				</div>
+				<div class="text-center">
+					<form name="insertReviewForm" method="post" action="insertReviewPro.action" enctype="multipart/form-data" style="display: none">
+						<table class="table table-striped table-forum">
+							<tr>
+								<th>별점</th>
+								<td class="text-center"><input type="radio"
+									name="review_rating" value="1" /> 1점 <input type="radio"
+									name="review_rating" value="2" />2점 <input type="radio"
+									name="review_rating" value="3" />3점 <input type="radio"
+									name="review_rating" value="4" />4점 <input type="radio"
+									name="review_rating" value="5" />5점</td>
+							</tr>
+							<!--  리뷰 content -->
+							<tr>
+								<td class="text-center" colspan="2"><textarea
+										name="review_content" rows="5" cols="50"></textarea></td>
+							</tr>
+							<!--  이미지 파일 첨부 : 첨부 개수 제한/ 용량 제한 필요  -->
+							<tr>
+								<td class="text-center" colspan="2"><input
+									id="review_file_element" type="file" name="review_files" multiple="multiple" />
+							</tr>
+							<!-- 리뷰 작성 완료 버튼  -->
+							<tr>
+								<th class="text-center" colspan="2">
+								<input type="submit" value="리뷰 등록" /></th>
+							</tr>
+						</table>
+						
+						<!-- 보내줘야 할 파라미터 : 식당코드(식당 테이블) / 구매자(= 회원 = 글 작성자) 정보 -->
+						<input type="hidden" name="review_rest_currentPage" value="${currentPage}" />
+						<input type="hidden" name="review_rest" value="${rest_num}" />
+						 <input type="hidden" name="rest_num" value="${rest_num}" />
+						<input type="hidden" name="review_writer" value="${sessionScope.sessionId }" />
+						
+					</form>
+				</div>
+			</c:if>
+		</div>
+		<!-- 리뷰 쓰기 폼 끝  -->
+
+	</div>
+	
+	
+	<!-- 리뷰 글 보기 시작 -->
+	<div class="col-md-12 well">
 		<c:forEach var="reviewDTO" items="${reviewRes}">
 			<div class="text-center">
 				<table class="table table-striped table-forum">
-
+	
 					<!--  리뷰글 작성자 & 작성일 -->
 					<tr>
 						<td class="text-center"><label> 작성자 </label>
@@ -501,7 +500,7 @@
 						</tr>
 					</c:if>
 					<!--  리뷰글 별점 -->
-
+	
 					<tr>
 						<td class="text-center" colspan="2"><label>별점</label>
 							&nbsp;&nbsp;&nbsp; <c:forEach begin="1"
@@ -527,7 +526,7 @@
 							</tr>
 						</c:forTokens>
 					</c:if>
-
+	
 				</table>
 			</div>
 		</c:forEach>
@@ -537,8 +536,9 @@
 					<s:property value="pagingHtml" escape="false" />
 				</ul>
 		</div>
-		<!--  리뷰 글 페이지 -->
-		<!-- 리뷰 글 보기 끝 -->
+	</div>
+	<!--  리뷰 글 페이지 -->
+	<!-- 리뷰 글 보기 끝 -->
 
 
 

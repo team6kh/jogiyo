@@ -14,6 +14,9 @@ public class ListCartAction implements Action, ConDAOAware
 {
     private SqlMapClient sqlMapper;
     private List<CartDTO> list = new ArrayList<CartDTO>();
+    private int rest_num;
+    
+    
     
     //ConDAOAware 인터페이스의 메서드(인터셉터에서 호출)
     public void setConDAO(SqlMapClient sqlMapper) { 
@@ -23,15 +26,20 @@ public class ListCartAction implements Action, ConDAOAware
     public String execute() throws Exception {
         list = sqlMapper.queryForList("Rest.selectCartAll");
         
+        rest_num = list.get(0).getCart_rest_num();
+        
         return SUCCESS;
     }
 
+    
     public List<CartDTO> getList(){
         return list;
     }
-
     public void setList(List<CartDTO> list){
         this.list = list;
     }
-
+	public int getRest_num() {
+		return rest_num;
+	}
+    
 }
