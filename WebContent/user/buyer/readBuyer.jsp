@@ -23,9 +23,9 @@
 	function requestEv()
 	{	
 		alert("requstEv");
-		$('#divAlert').removeClass('alert-info');
-		$('#divAlert').addClass('alert-warning');
-		document.getElementById('aAlert').innerHTML = "Loading...";
+		$('#alert_div').removeClass('alert-info');
+		$('#alert_div').addClass('alert-warning');
+		document.getElementById('alert_place_holder').innerHTML = "Loading...";
 		form=document.getElementById('form-signup');
 		form.action="emailer.action";
 		form.submit();
@@ -73,9 +73,9 @@
 			<br />
 		  	<!-- 인증이 되지 않았을 시 뜬다. -->		  	
 			<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq null}">						
-			<div class="alert alert-info alert-dismissable" id="divAlert">			  
+			<div class="alert alert-info alert-dismissable" id="alert_div">			  
 			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			  <a href="#" class="alert-link" id="aAlert" onclick="requestEv()">이메일을 인증해주세요.</a>			  
+			  <a href="#" class="alert-link" id="alert_placeholder" onclick="requestEv()">이메일을 인증해주세요.</a>			  
 			</div>
 			</c:if>
 			<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq 'evRequested'}">

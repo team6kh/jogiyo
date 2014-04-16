@@ -71,10 +71,10 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
             // 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴
             if (resultClass != null)
             {
-                sessionMap.put("sessionType", getLogin_type());
-                sessionMap.put("sessionId", resultClass.getBuyer_id());
-                sessionMap.put("sessionPw", resultClass.getBuyer_pw());
-                sessionMap.put("sessionName", resultClass.getBuyer_name());
+                sessionMap.put("session_type", getLogin_type());
+                sessionMap.put("session_id", resultClass.getBuyer_id());
+                sessionMap.put("session_pw", resultClass.getBuyer_pw());
+                sessionMap.put("session_name", resultClass.getBuyer_name());
 
                 return SUCCESS;
             }
@@ -94,10 +94,10 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
             // 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴
             if (resultClass != null)
             {
-                sessionMap.put("sessionType", getLogin_type());
-                sessionMap.put("sessionId", resultClass.getSeller_id());
-                sessionMap.put("sessionPw", resultClass.getSeller_pw());
-                sessionMap.put("sessionName", resultClass.getSeller_name());
+                sessionMap.put("session_type", getLogin_type());
+                sessionMap.put("session_id", resultClass.getSeller_id());
+                sessionMap.put("session_pw", resultClass.getSeller_pw());
+                sessionMap.put("session_name", resultClass.getSeller_name());
 
                 return SUCCESS;
             }
