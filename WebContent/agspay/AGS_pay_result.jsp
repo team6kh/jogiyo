@@ -14,5 +14,5 @@ String rOrdNo = request.getParameter("rOrdNo");
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Refresh" content="0; URL=http://localhost:8000/jogiyo/payRestResult.action?rest_num=<%=rOrdNo%>&session_id=${sessionScope.sessionId}">
+<meta http-equiv="Refresh" content="0; URL=http://localhost:8000/jogiyo/payRestResult.action?rest_num=<%=rOrdNo%>&session_id=${sessionScope.session_id}">
 
