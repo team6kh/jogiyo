@@ -11,6 +11,7 @@
 * Copyright AEGIS ENTERPRISE.Co.,Ltd. All rights reserved.
 *
 **********************************************************************************************/
+request.setCharacterEncoding("UTF-8");
 
 //공통사용
 String AuthTy 		= request.getParameter("AuthTy");												//결제형태

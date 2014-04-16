@@ -23,7 +23,7 @@
 <script type="text/javascript">
 
 	function goPayment(form) {
-			form.action = "payRest.action";
+			form.action =  "payRest.action";
 			form.submit();
 			
 			return false;
@@ -34,7 +34,7 @@
 
 
 
-<form id="cartForm" name="cartForm">
+<form id="cartForm" name="cartForm" target="_parent" >
 	<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
 	<input type="hidden" id="rest_subject" name="rest_subject" value="${rest_subject}" />
 	<input type="hidden" id="session_id" name="session_id" value="${sessionScope.sessionId}" />

@@ -155,9 +155,6 @@
 		return false;
 	}
 	
-	function abc(aa){
-		alert("aa>"+aa.restopt_subject.value);
-	}
 	
 	function reviewForm() {
 
