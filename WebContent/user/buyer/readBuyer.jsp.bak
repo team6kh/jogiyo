@@ -21,8 +21,7 @@
 
 <script type="text/javascript">
 	function requestEv()
-	{	
-		alert("requstEv");
+	{				
 		$('#divAlert').removeClass('alert-info');
 		$('#divAlert').addClass('alert-warning');
 		document.getElementById('aAlert').innerHTML = "Loading...";
@@ -47,11 +46,10 @@
 		return true;
 	}
 	
-	function checkPass(form)
+	function checkPass()
 	{
-		//var modalParam = document.getElementById("modalParam").value;
-		//var modalParam_key = document.getElementById("modalParam_key").value;
-		//var modalParam_pw = document.getElementById("modalParam-pw").value;		
+		alert("checkPass() alert");
+		form=document.getElementById('form-signup');
 		form.action="checkPass.action";
 		form.submit();
 		
@@ -75,7 +73,8 @@
 			<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq null}">						
 			<div class="alert alert-info alert-dismissable" id="divAlert">			  
 			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			  <a href="#" class="alert-link" id="aAlert" onclick="requestEv()">이메일을 인증해주세요.</a>			  
+			  <a href="#" class="alert-link" id="aAlert" onclick="requestEv()">이메일을 인증해주세요.</a>
+			  
 			</div>
 			</c:if>
 			<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq 'evRequested'}">
@@ -129,11 +128,8 @@
 			<div class="form-group">
 			  <label>휴대폰</label>
 			  <input type="text" class="form-control" value="${buyerDTO.buyer_phonenumber}" disabled>
-			</div>			
-		</form><!-- END of form-signup -->
-		
-		<!-- form-signup looklike div -->
-		<div class="form-signup">			
+			</div>
+			
 			<div class="pull-right">
 				<!-- Button trigger modal : 수정 -->
 				<button class="btn btn-default insertModalParam" data-toggle="modal"
@@ -146,32 +142,30 @@
 				<!-- Modal -->
 				<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
-						<form id="checkPass" method="post">
-							<div class="modal-content">							
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="checkModalLabel">비밀번호를 입력하세요.</h4>
-								</div>
-								<div class="modal-body">
-									<div class="form-group">
-										<label>비밀번호</label>
-										<input type="password" class="form-control" id="modalParam_pw" name="modalParam_pw">										
-									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
-									<input type="hidden" id="modalParam" name="modalParam">						
-									<input type="hidden" id="modalParam_key" name="modalParam_key" value="${buyerDTO.buyer_id}">								
-									<button class="btn btn-primary" onclick="checkPass(this.form)">입력</button>
-								</div>							
+						<div class="modal-content">							
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="checkModalLabel">비밀번호를 입력하세요.</h4>
 							</div>
-						</form>
+							<div class="modal-body">
+								<div class="form-group">
+									<label>비밀번호</label>
+									<input type="password" class="form-control" name="modalParam_pw">										
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
+								<input type="hidden" name="modalParam" id="modalParam">						
+								<input type="hidden" name="modalParam_key" value="${buyerDTO.buyer_id}">								
+								<button class="btn btn-primary" onclick="wtf()">입력</button>
+							</div>							
+						</div>
 					</div>
 				</div><!-- END of Modal -->					
 										
 			</div><!-- END of pull-right -->
 			
-       	</div><!-- END of form-signup looklike div -->
+       	</form><!-- END of form-signup -->
 	</div>
 	<!-- /.container -->
 

@@ -162,8 +162,8 @@
 			<interceptor-ref name="alias"/>	
 			<interceptor-ref name="chain"/>					
 			<interceptor-ref name="params"/>
-			<result name="success">test.jsp</result>
-			<result name="error">/common/error.jsp</result>
+			<interceptor-ref name="conDAO"/>
+			<result>/user/common/verification/checkEv.jsp</result>
 		</action>
 		
 		<!-- NEW 비밀번호 체크 액션 -->

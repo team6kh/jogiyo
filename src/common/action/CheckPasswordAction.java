@@ -23,6 +23,8 @@ public class CheckPasswordAction implements Action, ConDAOAware
     // 테스트 게시판 글 비밀번호 체크 액션
     public String execute() throws Exception
     {
+        System.out.println("CheckPasswordAction execute()");
+        
         // 테스트 게시판 글 수정/삭제 요청
         if (getModalParam().equals("updateTestForm") || getModalParam().equals("deleteTest"))
         {

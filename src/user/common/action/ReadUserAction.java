@@ -11,6 +11,8 @@ public class ReadUserAction implements Action
 
     public String execute() throws Exception
     {
+        System.out.println("ReadUserAction execute()");
+        
         if (getUserType().equals("buyer"))
         {
             return "buyer";

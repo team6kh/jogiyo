@@ -36,9 +36,7 @@
 	<select id="selectLatestEvCode" resultMap="EvResult">
 		<include refid="select-all" />
 		<include refid="where-ev_requested" />
-		AND ev_code = #ev_code#
-		AND rownum = 1
-		ORDER BY ev_reg_date
+		AND ev_code = #ev_code# AND rownum = 1 ORDER BY ev_reg_date
 	</select>
 
 	<!-- insert 쿼리문 정의 -->
