@@ -81,4 +81,5 @@ public class TestDTO
     {
         this.test_reg_date = test_reg_date;
     }
+    
 }

@@ -77,4 +77,5 @@ public class DashAdminAction implements Action, ConDAOAware
     {
         this.countTest = countRest;
     }
+    
 }

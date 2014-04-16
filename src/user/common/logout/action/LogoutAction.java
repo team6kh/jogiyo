@@ -20,4 +20,5 @@ public class LogoutAction implements Action, SessionAware
         sessionMap.clear(); // 세션을 지운다.
         return SUCCESS;
     }
+    
 }

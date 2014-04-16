@@ -112,4 +112,5 @@ public class RegBuyerAction implements Action, Preparable, ModelDriven, ConDAOAw
     {
         this.actionName = actionName;
     }
+    
 }

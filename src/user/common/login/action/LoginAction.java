@@ -57,7 +57,7 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
          */
 
         // 로그인 타입이 "구매자"
-        if (login_type.equals("buyer"))
+        if (getLogin_type().equals("buyer"))
         {
             BuyerDTO paramClass = new BuyerDTO();
             BuyerDTO resultClass = new BuyerDTO();
@@ -71,16 +71,16 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
             // 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴
             if (resultClass != null)
             {
-                sessionMap.put("sessionType", getLogin_type());
-                sessionMap.put("sessionId", resultClass.getBuyer_id());
-                sessionMap.put("sessionPw", resultClass.getBuyer_pw());
-                sessionMap.put("sessionName", resultClass.getBuyer_name());
+                sessionMap.put("session_type", getLogin_type());
+                sessionMap.put("session_id", resultClass.getBuyer_id());
+                sessionMap.put("session_pw", resultClass.getBuyer_pw());
+                sessionMap.put("session_name", resultClass.getBuyer_name());
 
                 return SUCCESS;
             }
             return ERROR;
         // 로그인 타입이 "판매자"
-        } else if (login_type.equals("seller"))
+        } else if (getLogin_type().equals("seller"))
         {
             SellerDTO paramClass = new SellerDTO();
             SellerDTO resultClass = new SellerDTO();
@@ -94,11 +94,23 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
             // 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴
             if (resultClass != null)
             {
-                sessionMap.put("sessionType", getLogin_type());
-                sessionMap.put("sessionId", resultClass.getSeller_id());
-                sessionMap.put("sessionPw", resultClass.getSeller_pw());
-                sessionMap.put("sessionName", resultClass.getSeller_name());
+                sessionMap.put("session_type", getLogin_type());
+                sessionMap.put("session_id", resultClass.getSeller_id());
+                sessionMap.put("session_pw", resultClass.getSeller_pw());
+                sessionMap.put("session_name", resultClass.getSeller_name());
 
+                return SUCCESS;
+            }
+            return ERROR;
+        } else if (getLogin_type().equals("admin"))
+        {
+            if (getLogin_id() != "admin" && getLogin_pw() != "1234")
+            {
+                sessionMap.put("session_type", getLogin_type());
+                sessionMap.put("session_id", "admin");
+                sessionMap.put("session_pw", "1234");
+                sessionMap.put("session_name", "관리자");
+                
                 return SUCCESS;
             }
             return ERROR;
@@ -146,4 +158,5 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
     {
         this.actionName = actionName;
     }
+    
 }

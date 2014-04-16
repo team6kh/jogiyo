@@ -15,9 +15,9 @@ public class UpdateBuyerAction implements Action, ConDAOAware
     private BuyerDTO buyerDTO = new BuyerDTO();
 
     private String modalParam_key;
-    private String buyer_id;
-
+    
     // UPDATE에 쓰이는 파라미터들
+    private String buyer_id;
     private String buyer_pw;
     private String buyer_phonenumber;
     private String buyer_email;
@@ -31,7 +31,7 @@ public class UpdateBuyerAction implements Action, ConDAOAware
     {
         buyerDTO.setBuyer_id(getModalParam_key());
 
-        // 해당 유저의의 정보를 가져온다.
+        // 해당 유저의 정보를 가져온다.
         setBuyerDTO((BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerId", buyerDTO));
 
         return SUCCESS;
@@ -73,6 +73,7 @@ public class UpdateBuyerAction implements Action, ConDAOAware
         this.modalParam_key = modalParam_key;
     }
 
+    // UPDATE에 쓰이는 getter & setter
     public String getBuyer_id()
     {
         return buyer_id;
@@ -82,8 +83,7 @@ public class UpdateBuyerAction implements Action, ConDAOAware
     {
         this.buyer_id = buyer_id;
     }
-
-    // UPDATE에 쓰이는 getter & setter
+    
     public String getBuyer_pw()
     {
         return buyer_pw;
@@ -113,4 +113,5 @@ public class UpdateBuyerAction implements Action, ConDAOAware
     {
         this.buyer_email = buyer_email;
     }
+    
 }

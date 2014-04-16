@@ -41,4 +41,5 @@ public class EvDTO
     {
         this.ev_reg_date = ev_reg_date;
     }
+    
 }

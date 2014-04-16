@@ -36,6 +36,7 @@
 			<select class="form-control" name="login_type">
 				<option value="buyer">구매자</option>
 				<option value="seller">판매자</option>
+				<option value="admin">관리자</option>
 			</select> <input type="text" class="form-control" placeholder="아이디"
 				name="login_id" required autofocus> <input type="password"
 				class="form-control" placeholder="비밀번호" name="login_pw" required>
