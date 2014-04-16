@@ -27,7 +27,7 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 	private String cart_restopt_num; //여기서부터 옵션
 	private String cart_restopt_destFile1;
 	private String cart_restopt_subject;
-	private String cart_restopt_priceplus;
+	private int cart_restopt_priceplus;
 	private String session_id;
 	
 
@@ -102,10 +102,10 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware{
 	public void setCart_restopt_subject(String cart_restopt_subject) {
 		this.cart_restopt_subject = cart_restopt_subject;
 	}
-	public String getCart_restopt_priceplus() {
+	public int getCart_restopt_priceplus() {
 		return cart_restopt_priceplus;
 	}
-	public void setCart_restopt_priceplus(String cart_restopt_priceplus) {
+	public void setCart_restopt_priceplus(int cart_restopt_priceplus) {
 		this.cart_restopt_priceplus = cart_restopt_priceplus;
 	}
 	public String getSession_id() {

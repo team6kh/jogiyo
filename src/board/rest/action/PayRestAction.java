@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import board.cart.dto.CartDTO;
-import board.restopt.dto.RestoptDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,8 +16,16 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 	private List<CartDTO> list = new ArrayList<CartDTO>();
 	private CartDTO paramClass = new CartDTO();
 	
-	private int rest_num;//cart_rest_num
+	private int rest_num;
+	private String rest_subject;
 	private String session_id;//cart_restopt_priceplus
+	
+	
+	//pay용 파라미터 변수
+	private int pay_num;
+	private String pay_rest_subject; //완료
+	private String pay_restopt_subject; //완료
+	private int pay_pricetotal; //완료
 	
 	
 	public void setConDAO(SqlMapClient sqlMapper) { 
@@ -28,21 +35,25 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 	
 	public String execute() throws Exception {
 		
-		//rest_num 이 1이고
-		//session_id 가 water 인 글들을 cart보드 에서 select함   -> 리스트에 담음   
-		//-> readyPayment로 리스트넘김  -> 리스트를 pay로 forward 시킴 -> pay에서 리스트를 뿌려줌.
-		
 		paramClass.setCart_rest_num(getRest_num());
 		paramClass.setSession_id(getSession_id());
 		
 		//현재 카트에 담긴 레코드를 리스트에 담음 (상품넘버and세션아이디)
 		list = sqlMapper.queryForList("Rest.selectForPayment",paramClass);
 		
+		//결제 필수 4종 파라미터 생성, and get() to AGS_pay.jsp
+		pay_num = getRest_num();
+		pay_rest_subject = getRest_subject();
 		
-		return SUCCESS; // readyPayment.jsp
+		for(int i=0; i<list.size(); i++){
+			pay_restopt_subject += list.get(i).getCart_restopt_subject()+", ";
+			pay_pricetotal += list.get(i).getCart_restopt_priceplus();
+		}
+		
+		return SUCCESS; // AGS_pay.jsp
 	}
 
-
+	//list 글 get용
 	public int getRest_num() {
 		return rest_num;
 	}
@@ -56,7 +67,7 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 		this.session_id = session_id;
 	}
 
-
+	//AGS_pay 에서 쓰일 주문한 장바구니 list
 	public List<CartDTO> getList() {
 		return list;
 	}
@@ -68,6 +79,27 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 	}
 	public void setParamClass(CartDTO paramClass) {
 		this.paramClass = paramClass;
+	}
+	
+	
+	//AGS_pay.jsp로 보내질 파라미터 (=결제모듈 필수 파라미터)
+	public int getPay_num() {
+		return pay_num;
+	}
+	public String getPay_rest_subject() {
+		return pay_rest_subject;
+	}
+	public String getPay_restopt_subject() {
+		return pay_restopt_subject;
+	}
+	public int getPay_pricetotal() {
+		return pay_pricetotal;
+	}
+	public String getRest_subject() {
+		return rest_subject;
+	}
+	public void setRest_subject(String rest_subject) {
+		this.rest_subject = rest_subject;
 	}
 	
 

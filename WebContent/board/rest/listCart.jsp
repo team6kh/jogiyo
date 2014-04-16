@@ -23,12 +23,6 @@
 <script type="text/javascript">
 
 	function goPayment(form) {
-			
-			//var rest_num = document.getElementById("rest_num").value;
-			//var session_id = document.getElementById("session_id").value;
-			
-			//var url = "payRest.action?cart_rest_num="+rest_num+"&session_id="+session_id;
-			
 			form.action = "payRest.action";
 			form.submit();
 			
@@ -41,8 +35,8 @@
 
 
 <form id="cartForm" name="cartForm">
-
 	<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
+	<input type="hidden" id="rest_subject" name="rest_subject" value="${rest_subject}" />
 	<input type="hidden" id="session_id" name="session_id" value="${sessionScope.sessionId}" />
 	
 	

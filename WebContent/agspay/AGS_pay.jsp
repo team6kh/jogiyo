@@ -1,4 +1,9 @@
-<%@ page import="java.security.MessageDigest"  contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.security.MessageDigest"  contentType="text/html; charset=UTF-8" 
+		import="java.util.ArrayList"
+		import="java.util.List"
+		import="board.cart.dto.CartDTO"
+%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -20,10 +25,13 @@
 	 String Amt = "1000";
 	 
 	 
-	 int rest_num =  Integer.parseInt(request.getParameter("rest_num"));
-	 String rest_subject =  request.getParameter("rest_subject");
-	 String restopt_subject =  request.getParameter("restopt_subject");
-	 int restopt_priceplus =  Integer.parseInt(request.getParameter("restopt_priceplus"));
+	 //List<CartDTO> list = new ArrayList<CartDTO>();
+	 //list = (CartDTO> request.getParameter("list");
+	 
+	 //int rest_num =  Integer.parseInt(request.getParameter("rest_num"));
+	 //String rest_subject =  request.getParameter("rest_subject");
+	 //String restopt_subject =  request.getParameter("restopt_subject");
+	 //int restopt_priceplus =  Integer.parseInt(request.getParameter("restopt_priceplus"));
 	 
 	 
 	 StringBuffer sb = new StringBuffer();
@@ -310,49 +318,51 @@ function Display(form){
 			<tr>
 				<td>
 				<table width=650 border=0 cellpadding=0 cellspacing=0>
+					
 					<tr>
-						<td class=clsleft colspan=3></td>
+						<td class=clsleft colspan=5></td>
 					</tr>
 					<tr>
-						<td class=clsleft colspan=3><font color=#006C6C size=3><br/><b>주문상품정보</b></font></td>
+						<td class=clsleft colspan=5><font color=#006C6C size=3><br/><b>주문상품정보</b></font></td>
 					</tr>
-					<tr>
-						<td class=clsleft><font color=red>*</font> 상품번호</td>
-						<td colspan=2>
-							${rest_num}
-							<input type=hidden style=width:100px name=OrdNo maxlength=40 value=${rest_num} />
-						</td>
-					</tr>
-					<tr>
-						<td class=clsleft><font color=red>*</font> 상품명</td>
-						<td colspan=2>
-							${rest_subject}
-							<input type=hidden style=width:300px name=StoreNm value=${rest_subject}>
-						</td>
-					</tr>
-					<tr>
-						<td class=clsleft><font color=red>*</font>상품옵션</td>
-						<td colspan=2>
-							${restopt_subject}
-							<input type=hidden style=width:300px name=ProdNm maxlength=300 value=${restopt_subject}>
-						</td>
-					</tr>
-					<tr>
-						<td class=clsleft><font color=red>*</font> 상품가</td>
-						<td>
-							${restopt_priceplus}
-							<input type=hidden style=width:100px name=restopt_priceplus maxlength=12 value=${restopt_priceplus}/>원
-						</td>
-						<td class=clsleft></td>
-					</tr>
+					
+					<c:forEach var="list" items="${list}">
+						<tr>
+							<td>
+								<font color=red>*</font> 상품번호&nbsp;
+								${list.cart_rest_num}
+							</td>
+							<td>
+								<font color=red>*</font> 상품명&nbsp;
+								${list.cart_rest_subject}
+							</td>
+							<td>
+								<font color=red>*</font> 상품옵션&nbsp;
+								${list.cart_restopt_subject}
+							</td>
+							<td>
+								<font color=red>*</font> 상품옵션가&nbsp;
+								${list.cart_restopt_priceplus}
+							</td>
+						</tr>
+					</c:forEach>
+
+					
 					<tr>
 						<td class=clsleft><font color=red>*</font> 총 합계</td>
 						<td>
-							${restopt_priceplus}
-							<input type=hidden style=width:100px name=Amt maxlength=12 value="${restopt_priceplus}"/>원
+							${pay_pricetotal}원
+							
+							<input type=hidden style=width:100px name=OrdNo maxlength=40 value="${pay_num}" />
+							<input type=hidden style=width:300px name=StoreNm value="${pay_rest_subject}"/>
+							<input type=hidden style=width:300px name=ProdNm maxlength=300 value="${pay_restopt_subject}">
+							<input type=hidden style=width:100px name=Amt maxlength=12 value="${pay_pricetotal}"/>
+							
 						</td>
 						<td class=clsleft></td>
 					</tr>
+					
+					
 					<tr>
 						<td class=clsleft colspan=3></td>
 					</tr>

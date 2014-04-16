@@ -4,11 +4,10 @@ public class CartDTO {
 	int cart_num;
 	int cart_rest_num;
 	String cart_rest_subject;
-	
 	String cart_restopt_num;
 	String cart_restopt_destFile1;
 	String cart_restopt_subject;
-	String cart_restopt_priceplus;
+	int cart_restopt_priceplus;
 	String session_id;
 	
 	
@@ -50,10 +49,10 @@ public class CartDTO {
 	public void setCart_restopt_subject(String cart_restopt_subject) {
 		this.cart_restopt_subject = cart_restopt_subject;
 	}
-	public String getCart_restopt_priceplus() {
+	public int getCart_restopt_priceplus() {
 		return cart_restopt_priceplus;
 	}
-	public void setCart_restopt_priceplus(String cart_restopt_priceplus) {
+	public void setCart_restopt_priceplus(int cart_restopt_priceplus) {
 		this.cart_restopt_priceplus = cart_restopt_priceplus;
 	}
 	public String getSession_id() {

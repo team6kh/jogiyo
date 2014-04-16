@@ -56,7 +56,7 @@
 		<action name="payRest" class="board.rest.action.PayRestAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result>/agspay/readyPayment.jsp</result>
+			<result>/agspay/AGS_pay.jsp</result>
 		</action>
 		
 		<!-- 장바구니 리스트 -->

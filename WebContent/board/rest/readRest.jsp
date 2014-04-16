@@ -396,15 +396,15 @@
 				</div>
 			</div>
 
-		</div>
 		
 		
 		<!-- 장바구니 -->
-	    <div  id="cart" class="col-md-3">
+		 <div  id="cart" class="col-md-3">
 	    	<div id="sidebar" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
-	    		<iframe id="cartFrame" src="listCart.action" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
+	    		
 	        </div>      
-	    </div>	     
+	    </div>	   
+	     
 
 	</div>
 	
@@ -540,80 +540,16 @@
 	<!--  리뷰 글 페이지 -->
 	<!-- 리뷰 글 보기 끝 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!-- 임시 사용 -->
-	<form name="readRestForm" action="payRest.action" method="post" >
-		<TABLE border=0 width=90%>
-			<tr>
-				<td>
-					-테스트용- <br/>
-					레스트넘${rest_num} 커런트페이지${currentPage}
-				
-				</td>
-			</tr>
-			<tr>
-				<td>
-					옵션<br/>
-					<select name="restopt_set">
-						<s:iterator value="list" status="stat">
-							<option value="<s:property value="restopt_subject"/>a<s:property value="restopt_priceplus" />">
-								<s:property value="restopt_subject" /> (가격 : <s:property value="restopt_priceplus" />) 
-							</option>
-						</s:iterator>
-					</select>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr>
-				<td>
-					<input name="submit" type="submit" value="구매하기"  />
-					<input name="list" type="button" value="장바구니담기" onClick="javascript:location.href='ListRest.action?currentPage=<s:property value="currentPage"/>'" />
-
-					<input type ="hidden" id="rest_writer_address" value="<s:property value="resultClass.rest_writer_address" />" />
-				</td>
-			</tr>
-		</table>
-
-
-		<table>
-			<tr>
-				<td align="right">
-					<input name="list" type="button" value="수정" class="inputb" onClick="javascript:location.href='modifyRest.action?rest_num=<s:property value="rest_num" />&currentPage=<s:property value="currentPage" />'">
-					<input name="list" type="button" value="삭제" class="inputb" onClick="javascript:location.href='deleteRest.action?rest_num=<s:property value="rest_num" />&currentPage=<s:property value="currentPage" />'">
-					<input name="list" type="button" value="목록"  onClick="javascript:location.href='listRest.action?currentPage=<s:property value="currentPage" />'">
-				</td>
-			</tr>
-		</table>
-	</form>
-
+	
+	
+	
+	
+	<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
+	
+	
+	
+	
+	
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
