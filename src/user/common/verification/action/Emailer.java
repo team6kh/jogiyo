@@ -48,6 +48,7 @@ public class Emailer extends ActionSupport
         System.out.println("Emailer execute()");
         
         String ret = SUCCESS;
+        
         try
         {
             Session session = Session.getDefaultInstance(properties,
@@ -60,30 +61,45 @@ public class Emailer extends ActionSupport
                     });
 
             Message message = new MimeMessage(session);
+            
             /* 파라미터 설정 */
             RNG rng = new RNG();            
             setEv_code(rng.sEv_code());
             setFrom("team6kh@gmail.com");
             setPassword("dkagh1234.");
-            if (getBuyer_email() != null)
-            {
+            
+            if (getUser_type().equals("buyer"))
+            { // BUYER에게 보내는 메일
                 setTo(getBuyer_email());
-            } else if (getSeller_email() != null)
-            {
+                setSubject("[JOGIYO] Please verify your email '" + getBuyer_email() + "'");
+                /* StringBuffer를 사용해 body를 작성한다. */
+                StringBuffer sbBody = new StringBuffer();
+                sbBody.append("Taz'dingo, we want to verify that you are indeed \"");
+                sbBody.append(getBuyer_name());
+                sbBody.append("\". if that's the case, please type the following verification code: ");
+                sbBody.append(getEv_code());
+                sbBody.append(". if you're not ");
+                sbBody.append(getBuyer_name());
+                sbBody.append(" or didn't request verification, you can ignore this email.");
+                /* END StringBuffer */
+                setBody(sbBody.toString());           
+            } else if (getUser_type().equals("seller"))
+            { // SELLER에게 보내는 메일 
                 setTo(getSeller_email());
+                setSubject("[JOGIYO] Please verify your email '" + getSeller_email() + "'");
+                /* StringBuffer를 사용해 body를 작성한다. */
+                StringBuffer sbBody = new StringBuffer();
+                sbBody.append("Taz'dingo, we want to verify that you are indeed \"");
+                sbBody.append(getSeller_name());
+                sbBody.append("\". if that's the case, please type the following verification code: ");
+                sbBody.append(getEv_code());
+                sbBody.append(". if you're not ");
+                sbBody.append(getSeller_name());
+                sbBody.append(" or didn't request verification, you can ignore this email.");
+                /* END StringBuffer */
+                setBody(sbBody.toString());
             }
-            setSubject("[JOGIYO] Please verify your email '" + getBuyer_email() + "'");
-            /* StringBuffer를 사용해 body를 작성한다. */
-            StringBuffer sbBody = new StringBuffer();
-            sbBody.append("Taz'dingo, we want to verify that you are indeed \"");
-            sbBody.append(getBuyer_name());
-            sbBody.append("\". if that's the case, please type the following verification code: ");
-            sbBody.append(getEv_code());
-            sbBody.append(". if you're not ");
-            sbBody.append(getBuyer_name());
-            sbBody.append(" or didn't request verification, you can ignore this email.");
-            /* END StringBuffer */
-            setBody(sbBody.toString());
+            
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);

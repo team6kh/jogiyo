@@ -9,7 +9,10 @@ public class RNG
     public String sEv_code()
     {        
         Random random = new Random();
-        int iRng = random.nextInt(10000);
+        int iRng = 0;
+        while (iRng < 1000) { // 4자리보다 작게 나오면 다시 실행합니다(?)
+            iRng = random.nextInt(10000);
+        }
         String sEv_code = Integer.toString(iRng);
         return sEv_code;        
     }    

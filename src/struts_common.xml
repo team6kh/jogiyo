@@ -188,7 +188,7 @@
 		
 		<!-- 이메일 인증 체크 -->
 		<action name="checkEv" class="user.common.verification.action.CheckEmailVerification">
-			<param name="aliases">#{'buyer_email' : 'ev_requested'}</param>
+			<param name="aliases">#{'buyer_email' : 'ev_requested','seller_email' : 'ev_requested'}</param>
 			<interceptor-ref name="alias"/>	
 			<interceptor-ref name="chain"/>					
 			<interceptor-ref name="params"/>
