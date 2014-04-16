@@ -116,7 +116,7 @@
 			</div>
 			<div class="form-group">
 			  <label>판매자 아이디</label>
-			  <input type="text" class="form-control" name="seller_id" onkeyup="validateRegId(this.form);" required>
+			  <input type="text" class="form-control" id="seller+id" name="seller_id" onkeyup="validateRegId(this.form);" required>
 			  <p class="help-block" id="feedbackRegId">아이디를 입력해주세요.</p>
 			  <iframe src="blink.html" id="checkDup" style="display:none;"></iframe>			  
 			</div>						
@@ -155,7 +155,7 @@
 	
 	<script type="text/javascript">
 	// disable spaces in input
-	$("input#buyer_id").on({
+	$("input#seller_id").on({
 		  keydown: function(e) {
 		    if (e.which === 32)
 		      return false;
