@@ -67,7 +67,7 @@ td { font-family:"돋움"; font-size:9pt; color:#333333; font-weight:normal; let
 .clsleft { padding-left:10px; text-align:left; }
 -->
 </style>
-<script language=javascript src="http://www.allthegate.com/plugin/AGSWallet.js"></script>
+<script language=javascript src="http://www.allthegate.com/plugin/AGSWallet_utf8.js"></script>
 <!-- ※ UTF8 언어 형식으로 페이지 제작시 아래 경로의 js 파일을 사용할 것!! -->
 <!-- script language=javascript src="http://www.allthegate.com/plugin/AGSWallet_utf8.js"></script -->
 <!-- Euc-kr 이 아닌 다른 charset 을 이용할 경우에는 AGS_pay_ing(결제처리페이지) 상단의 

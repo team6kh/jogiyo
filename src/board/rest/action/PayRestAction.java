@@ -22,9 +22,9 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 	
 	
 	//pay용 파라미터 변수
-	private int pay_num;
+	private int pay_num; //완료
 	private String pay_rest_subject; //완료
-	private String pay_restopt_subject; //완료
+	private String pay_restopt_subject =""; //완료
 	private int pay_pricetotal; //완료
 	
 	

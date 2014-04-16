@@ -1,6 +1,7 @@
 <%@ page import="aegis.pgclient.*,java.text.*,java.net.*,java.lang.*" contentType="text/html; charset=UTF-8" %>
 
 <%
+request.setCharacterEncoding("UTF-8");
 /**********************************************************************************************
 *
 * 파일명 : AGS_pay_ing.jsp

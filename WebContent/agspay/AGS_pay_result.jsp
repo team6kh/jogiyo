@@ -1,5 +1,10 @@
 <%@ page import="java.util.*,java.text.*,java.net.*" contentType="text/html; charset=utf-8" %>
 <%@ page import="java.security.MessageDigest" %>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Refresh" content="0; URL=http://localhost:8000/jogiyo/payRestResult.action?rest_num=${rOrdNo}&session_id=${sessionScope.sessionId}">
+
+
 <%
 /**********************************************************************************************
 *
