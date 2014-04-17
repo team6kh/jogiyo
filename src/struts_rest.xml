@@ -66,27 +66,20 @@
 			<result>/board/rest/payRestResult.jsp</result>
 		</action>
 		
-		
-		<!-- 장바구니 리스트 -->
-		<action name="listCart" class="board.rest.action.ListCartAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
-			<result>/board/rest/listCart.jsp</result>
-		</action>
-		
-		<!-- 장바구니 리스트 -->
-		<action name="listCart" class="board.rest.action.ListCartAction">
-			<interceptor-ref name="params"/>
-			<interceptor-ref name="conDAO"/>
-			<result>/board/rest/listCart.jsp</result>
-		</action>
-
-		<!-- 장바구니 액션 -->
+		<!-- 장바구니 insert -->
 		<action name="insertCart" class="board.rest.action.InsertCartAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/board/rest/listCart.jsp</result>
 		</action>
+		
+		<!-- 장바구니 list -->
+		<action name="listCart" class="board.rest.action.ListCartAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/board/rest/listCart.jsp</result>
+		</action>
+		
 
 		<!-- RestBoard 끝 -->
 
