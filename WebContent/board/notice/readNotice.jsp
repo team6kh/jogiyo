@@ -41,7 +41,7 @@
 		<table class="table table-striped table-forum">
 			<thead>
 	  			<tr>
-      				<th class="text-center" width="50"><strong><s:property value="notice_num" /></strong></th>
+      				<th class="text-center" width="50"><strong><s:property value="rnum" /></strong></th>
 					<th class="text-center"><strong>&nbsp;&nbsp;
 						<s:if test="resultClass.notice_headtag == '-----------------'" >
 							<s:property value="resultClass.notice_subject" />
@@ -74,17 +74,17 @@
 						</s:param>
 	        			</s:url>
 	        			<div style="float:left;">
-	        			<s:if test="prev_num == min_num">
+	        			<s:if test="rnum == 1">
 	        				<a href="javascript:alert('이전글이 없습니다.')" class="btn btn-default">이전글</a>
-	        				<a href="readNoticeAction.action?notice_num=${next_num}&currentPage=${currentPage}" class="btn btn-default">다음글</a>
+	        				<a href="rnumNoticeAction.action?currentPage=${currentPage}&rnum=${rnum+1}" class="btn btn-default">다음글</a>
 						</s:if>
-						<s:elseif test="next_num == max_num">
-	        				<a href="readNoticeAction.action?notice_num=${prev_num}&currentPage=${currentPage}" class="btn btn-default">이전글</a>
+						<s:elseif test="rnum == n_count">
+	        				<a href="rnumNoticeAction.action?currentPage=${currentPage}&rnum=${rnum-1}" class="btn btn-default">이전글</a>
 	        				<a href="javascript:alert('다음글이 없습니다.')" class="btn btn-default">다음글</a>
 						</s:elseif>
 						<s:else>
-							<a href="readNoticeAction.action?notice_num=${next_num}&currentPage=${currentPage}" class="btn btn-default">이전글</a>
-	        				<a href="readNoticeAction.action?notice_num=${prev_num}&currentPage=${currentPage}" class="btn btn-default">다음글</a>
+							<a href="rnumNoticeAction.action?currentPage=${currentPage}&rnum=${rnum-1}" class="btn btn-default">이전글</a>
+	        				<a href="rnumNoticeAction.action?currentPage=${currentPage}&rnum=${rnum+1}" class="btn btn-default">다음글</a>
 						</s:else>
 						</div>
 	        			<a href="updateNoticeForm.action?notice_num=${notice_num}&currentPage=${currentPage}" class="btn btn-default">수정</a>

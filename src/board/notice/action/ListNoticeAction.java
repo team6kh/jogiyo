@@ -15,7 +15,7 @@ import board.notice.dto.*;
 public class ListNoticeAction extends ActionSupport implements ConDAOAware,	Preparable, ModelDriven {
 	
 	public static SqlMapClient sqlMapper;	//SqlMapClient API를 사용하기 위한 sqlMapper 객체.
-	private List<NoticeDTO> list = new ArrayList<NoticeDTO>();	 
+	public static List<NoticeDTO> list = new ArrayList<NoticeDTO>();	 
 	
 	NoticeDTO noticeDTO;
 	
