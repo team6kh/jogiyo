@@ -620,13 +620,7 @@
 
 
 
-
-
-
-
-
-
-	<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
+	<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id }" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
 
 
 

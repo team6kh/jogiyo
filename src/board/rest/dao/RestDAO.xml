@@ -5,6 +5,8 @@
 	<typeAlias alias="RestDTO" type="board.rest.dto.RestDTO" />
 	<typeAlias alias="RestoptDTO" type="board.restopt.dto.RestoptDTO" />
 	<typeAlias alias="CartDTO" type="board.cart.dto.CartDTO" />
+	<typeAlias alias="CooponDTO" type="table.coopon.dto.CooponDTO" />
+	<typeAlias alias="PayDTO" type="board.pay.dto.payDTO" />
 
 	<!-- 리절트 맵 정의 -->
 	<resultMap id="RestBoard" class="RestDTO">
@@ -51,6 +53,30 @@
 	</resultMap>
 
 
+	<resultMap id="CooponTable" class="CooponDTO">
+		<result property="cpn_num" column="cpn_num" />
+	</resultMap>
+	
+	
+	<resultMap id="PaidBoard" class="PayDTO">
+		<result property="paid_num" column="paid_num" />
+		<result property="paid_rest_num" column="paid_rest_num" />
+		<result property="paid_rest_subject" column="paid_rest_subject" />
+		<result property="paid_restopt_num" column="paid_restopt_num" />
+		<result property="paid_restopt_subject" column="paid_restopt_subject" />
+		<result property="paid_restopt_priceplus" column="paid_restopt_priceplus" />
+		<result property="paid_restopt_destFile1" column="paid_restopt_destFile1" />
+		<result property="paid_cpn" column="paid_cpn" />
+		<result property="paid_cpn_used" column="paid_cpn_used" />
+		<result property="session_id" column="session_id" />
+		<result property="paid_reg_date" column="paid_reg_date" />
+	</resultMap>
+	
+	
+
+
+
+
 
 
 	<!-- 공통정의 -->
@@ -93,11 +119,24 @@
 		#cart_restopt_num#, #cart_restopt_destFile1#, #cart_restopt_subject#,
 		#cart_restopt_priceplus#, #session_id#)
 	</insert>
-
+	
+	<insert id="insertCpn" parameterClass="CooponDTO">
+		Insert into coopon_table (cpn_num) values (#cpn_num#)
+	</insert>
+	
+	
+	<insert id="insertPaidBoard" parameterClass="PayDTO">
+		Insert into paid_board (paid_num, paid_rest_num, paid_rest_subject, paid_restopt_num, paid_restopt_subject, paid_restopt_priceplus, paid_restopt_destFile1, paid_cpn, paid_cpn_used, session_id, paid_reg_date) values (paid_seq_num.NEXTVAL, #paid_rest_num#, #paid_rest_subject#, #paid_restopt_num#, #paid_restopt_subject#, #paid_restopt_priceplus#, #paid_restopt_destFile1#, #paid_cpn#, #paid_cpn_used#, #session_id#, #paid_reg_date#)
+	</insert>
+	
 
 
 
 	<!-- select -->
+	<select id="selectCheckcpn" resultClass="int" parameterClass="java.lang.String">
+		select count(*) from coopon_table where cpn_num = #cpn_num#
+	</select>
+	
 	<select id="selectLastNo" resultClass="RestDTO" parameterClass="int">
 		SELECT max(rest_num) as rest_num FROM Rest_board
 	</select>
@@ -111,9 +150,9 @@
 		ORDER BY rest_num DESC
 	</select>
 
-	<select id="selectCartAll" resultMap="CartBoard" parameterClass="int">
+	<select id="selectCartAll" resultMap="CartBoard" parameterClass="CartDTO">
 		select * from Cart_board
-		ORDER BY cart_num DESC
+		where cart_rest_num=#cart_rest_num# and session_id=#session_id#
 	</select>
 
 	<select id="selectRestOne" resultMap="RestBoard" parameterClass="int">
@@ -121,14 +160,12 @@
 		<include refid="where-num" />
 	</select>
 
-	<select id="selectRestoptOne" resultMap="RestoptBoard"
-		parameterClass="int">
+	<select id="selectRestoptOne" resultMap="RestoptBoard" parameterClass="int">
 		select * from RestOpt_Board
 		where restopt_rest_num = #restopt_rest_num#
 	</select>
 
-	<select id="selectForPayment" resultMap="CartBoard"
-		parameterClass="CartDTO">
+	<select id="selectForPayment" resultMap="CartBoard" parameterClass="CartDTO">
 		select * from Cart_board
 		where cart_rest_num = #cart_rest_num# and session_id = #session_id#
 	</select>
@@ -163,6 +200,10 @@
 		<include refid="where-num" />
 	</delete>
 
+	<delete id="deleteCartforpaid" parameterClass="CartDTO">
+		DELETE FROM Cart_board
+		where cart_rest_num=#cart_rest_num# and session_id=#session_id#	
+	</delete>
 
 
 
