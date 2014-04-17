@@ -26,11 +26,11 @@ public class ListCartAction implements Action, ConDAOAware {
 	public String execute() throws Exception {
 		paramClass.setCart_rest_num(getRest_num());
 		paramClass.setSession_id(getSession_id());
+		//레코드들 = cartboard // where 상품번호 and 세션아뒤 //
 		list = sqlMapper.queryForList("Rest.selectCartAll", paramClass);
 
 		return SUCCESS;
 	}
-	
 	
 	
 	public List<CartDTO> getList() {

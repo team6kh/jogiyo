@@ -48,7 +48,7 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 		
 		list = sqlMapper.queryForList("Rest.selectCartAll", paramClass);
 
-		return SUCCESS;
+		return SUCCESS; //listCart.jsp
 	}
 
 	public List<CartDTO> getList() {
