@@ -154,6 +154,11 @@
 		select * from Cart_board
 		where cart_rest_num=#cart_rest_num# and session_id=#session_id#
 	</select>
+	
+	<select id="selectPaidAll" resultMap="PaidBoard" parameterClass="CartDTO">
+		select * from paid_board
+		where paid_rest_num=#cart_rest_num# and session_id=#session_id#
+	</select>
 
 	<select id="selectRestOne" resultMap="RestBoard" parameterClass="int">
 		<include refid="select-all" />

@@ -45,8 +45,8 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 		paramClass.setSession_id(getSession_id());
 
 		sqlMapper.insert("Rest.insertCart_board", paramClass);
-
-		list = sqlMapper.queryForList("Rest.selectCartAll");
+		
+		list = sqlMapper.queryForList("Rest.selectCartAll", paramClass);
 
 		return SUCCESS;
 	}

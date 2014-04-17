@@ -24,7 +24,6 @@
 <!-- Bootstrap core CSS -->
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
-
 <!-- Custom styles for this template -->
 <link href="common/common-template.css" rel="stylesheet">
 
@@ -44,9 +43,9 @@
 	#cartFrame {
 		height: 450px
 	}
-
-
 </style>
+
+
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=true">
 </script>
@@ -359,17 +358,14 @@
 									    	</div>
 								      	</form>		      			      	
 									</c:forEach>
+								</div>
 
 
+								<c:if test="${list eq null}">
+									<div class="text-center">
+										<p>등록된 게시물이 없습니다.</p>
 									</div>
-
-
-									<c:if test="${list eq null}">
-										<div class="text-center">
-											<p>등록된 게시물이 없습니다.</p>
-										</div>
-									</c:if>
-
+								</c:if>
 
 							</div>
 						</div>
@@ -620,16 +616,7 @@
 
 
 
-	<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id }" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
-
-
-
-
-
-
-
-
-
+	<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=yes vspace=0></iframe>
 
 
 

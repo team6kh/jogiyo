@@ -21,8 +21,8 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 	private CartDTO paramClass1 = new CartDTO();
 	private payDTO paramClass2 = new payDTO();
 	
-	private List<CooponDTO> list = new ArrayList<CooponDTO>();
 	private List<CartDTO> list1 = new ArrayList<CartDTO>();
+	private List<payDTO> list2 = new ArrayList<payDTO>();
 	
 	
 	
@@ -81,6 +81,8 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		//최종 장바구니 레코드 삭제
 		sqlMapper.delete("Rest.deleteCartforpaid", paramClass1);
 		
+		//jsp로 보내줄 결과 리스트 생성
+		list2 = sqlMapper.queryForList("Rest.selectPaidAll", paramClass1);
 		
 		return SUCCESS; //payRestResult.jsp
 	}
@@ -100,9 +102,10 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		this.session_id = session_id;
 	}
 
-	//paramClass2 를 jsp로 보냄
-	public payDTO getParamClass2() {
-		return paramClass2;
+
+	public List<payDTO> getList2() {
+		return list2;
 	}
+
 	
 }
