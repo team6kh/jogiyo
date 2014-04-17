@@ -20,8 +20,19 @@
 <link href="user/common/registration/registration.css" rel="stylesheet">
 
 <script type="text/javascript">
+	function optionCheck(){
+	    var option = document.getElementById("reg_type").value;
+	    if(option == "buyer"){
+	    	url = "registrationForm.action?reg_type=" + option;
+	    	document.location.href = url;
+	    }
+	    if(option == "seller"){
+	    	url = "registrationForm.action?reg_type=" + option;
+			document.location.href = url;
+	    }
+	}
 
-	//실시간 ID validation
+	// 실시간 ID validation
 	function validateRegId(userinput) {
 		if (userinput.seller_id.value == "") {
 			feedbackRegId.innerHTML = "아이디를 입력해주세요.";
@@ -65,20 +76,7 @@
 			}
 		}
 		return true;
-	}
-	
-    function optionCheck(){
-        var option = document.getElementById("reg_type").value;
-        if(option == "buyer"){
-        	url = "registrationForm.action?reg_type=" + option;
-        	document.location.href = url;
-        }
-        if(option == "seller"){
-        	url = "registrationForm.action?reg_type=" + option;
-			document.location.href = url;
-        }
-    }
-	
+	}	
 </script>
 
 </head>
@@ -116,7 +114,7 @@
 			</div>
 			<div class="form-group">
 			  <label>판매자 아이디</label>
-			  <input type="text" class="form-control" id="seller+id" name="seller_id" onkeyup="validateRegId(this.form);" required>
+			  <input type="text" class="form-control" id="seller_id" name="seller_id" onkeyup="validateRegId(this.form);" required>
 			  <p class="help-block" id="feedbackRegId">아이디를 입력해주세요.</p>
 			  <iframe src="blink.html" id="checkDup" style="display:none;"></iframe>			  
 			</div>						

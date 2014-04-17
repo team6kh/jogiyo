@@ -20,8 +20,19 @@
 <link href="user/common/registration/registration.css" rel="stylesheet">
 
 <script type="text/javascript">
+	function optionCheck(){
+	    var option = document.getElementById("reg_type").value;
+	    if(option == "buyer"){
+	    	url = "registrationForm.action?reg_type=" + option;
+	    	document.location.href = url;
+	    }
+	    if(option == "seller"){
+	    	url = "registrationForm.action?reg_type=" + option;
+			document.location.href = url;
+	    }
+	}
 		
-	//실시간 ID validation
+	// 실시간 ID validation
 	function validateRegId(userinput) {
 		if (userinput.buyer_id.value == "") {
 			feedbackRegId.innerHTML = "아이디를 입력해주세요.";
@@ -67,18 +78,33 @@
 		return true;
 	}
 	
-    function optionCheck(){
-        var option = document.getElementById("reg_type").value;
-        if(option == "buyer"){
-        	url = "registrationForm.action?reg_type=" + option;
-        	document.location.href = url;
-        }
-        if(option == "seller"){
-        	url = "registrationForm.action?reg_type=" + option;
-			document.location.href = url;
-        }
-    }
+	function buyerPw() {
+		if (document.regForm.buyer_pw.value.length < 2) {
+			feedbackBuyerPw.innerHTML = "2자리 이상 입력하셔야 합니다.";
+			$('#divBuyerPw').addClass('has-error'); // bootstrap validation
+			$('#btnSubmit').prop('disabled', true);
+			
+		} else {
+			confirmPw();
+			feedbackBuyerPw.innerHTML = "사용하셔도 좋은 비밀번호 입니다.";
+			$('#divBuyerPw').removeClass('has-error'); // bootstrap validation
+			$('#divBuyerPw').addClass('has-success'); // bootstrap validation
+			$('#btnSubmit').prop('disabled', false);
+		}
+	}
 	
+	function confirmPw() {
+		if (document.regForm.confirm_pw.value != document.regForm.buyer_pw.value) {
+			feedbackConfirmPw.innerHTML = "비밀번호가 동일하지 않습니다.";
+			$('#divConfirmPw').addClass('has-error'); // bootstrap validation
+			$('#btnSubmit').prop('disabled', true);
+		} else if (document.regForm.confirm_pw.value == document.regForm.buyer_pw.value) {
+			feedbackConfirmPw.innerHTML = "비밀번호가 동일합니다.";
+			$('#divConfirmPw').removeClass('has-error'); // bootstrap validation
+			$('#divConfirmPw').addClass('has-success'); // bootstrap validation
+			$('#btnSubmit').prop('disabled', false);
+		}		
+	}
 </script>
 
 </head>
@@ -92,7 +118,7 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" method="post" action="registration.action" name="regForm">
+		<form class="form-signup" name="regForm" method="post" action="registration.action">
 			<input type="hidden" name="feedbackRegId" value="0" />
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">
@@ -102,7 +128,7 @@
 			      <option value="seller">판매자</option>
 			    </select>		  
 			</div>
-			<div id="divRegId" class="form-group">
+			<div class="form-group" id="divRegId">
 			  <label>구매자 아이디</label>
 			  <input type="text" class="form-control" id="buyer_id" name="buyer_id" onkeyup="validateRegId(this.form);" required autofocus>
 			  <p class="help-block" id="feedbackRegId">아이디를 입력해주세요.</p>
@@ -112,13 +138,15 @@
 			  <label>이름</label>
 			  <input type="text" class="form-control" name="buyer_name" required>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="divBuyerPw">
 			  <label>비밀번호</label>
-			  <input type="password" class="form-control" placeholder="4~20자로 입력해주세요." name="buyer_pw" required>
+			  <input type="password" class="form-control" name="buyer_pw" placeholder="4~20자로 입력해주세요." onkeyup="buyerPw();" required>
+			  <p class="help-block" id="feedbackBuyerPw">비밀번호를 입력해주세요.</p>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="divConfirmPw">
 			  <label>비밀번호 확인</label>
-			  <input type="password" class="form-control" placeholder="비밀번호를 재입력 해주세요." required>
+			  <input type="password" class="form-control" name="confirm_pw" placeholder="비밀번호를 재입력 해주세요." onkeyup="confirmPw();" required>
+			  <p class="help-block" id="feedbackConfirmPw">비밀번호를 동일하게 입력해주세요.</p>
 			</div>
 			<div class="form-group">
 			  <label>휴대폰</label>

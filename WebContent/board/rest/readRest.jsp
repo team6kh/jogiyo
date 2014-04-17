@@ -33,7 +33,7 @@
 <!-- 커스텀 CSS -->
 <style type="text/css">
 	#map_canvas {
-		height: 400px
+		height: 200px
 	}
 	#cartFrame {
 		height: 450px
@@ -157,9 +157,9 @@
 		});
 	}
 
-	function insertCart(form) {
+	function insertCart() {
 		alert("insertCart");
-		var rest_num = document.getElementById("rest_num").value;
+		var rest_num = document.getElementById('rest_num').value;
 		var rest_subject = document.getElementById("rest_subject").value;
 		var session_id = document.getElementById("session_id").value;
 
@@ -249,6 +249,25 @@
 	<!-- 줄띄우기 -->
 	<br />	
 	
+	<!-- Collapse : 너무 느림!
+	<div class="panel-group" id="accordion">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">지도 보기</a>
+				</h4>
+			</div>
+			<div id="collapseOne" class="panel-collapse collapse in">
+				<div class="panel-body">
+					<div id="map_canvas" class="map"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Collapse -->	
+	
+	<!-- /지도 -->
+	
 	<!-- 메뉴 리스트 col-md-9-->
 	<div class="col-md-9">
 	
@@ -275,7 +294,7 @@
 	      		
 	      		<!-- 장바구니 담기 버튼 -->
 	      		<div class="text-center">
-		      		<button type="button" class="btn btn-default" onclick="insertCart(this.form)">
+		      		<button type="button" class="btn btn-default" onclick="insertCart()">
 						<span class="glyphicon glyphicon-shopping-cart"></span> 장바구니 담기
 					</button>
 	      		</div>
@@ -286,12 +305,21 @@
 	</div>
 	<!-- /메뉴 리스트 col-md-9 -->
 	
+	<!-- 지도 col-md-3 -->
+	<div class="col-md-3">
+		<div class="page-header">
+		  <h1>지도</small></h1>
+		</div>
+		<div id="map_canvas" class="map"></div>
+	</div>
+	<!-- /지도 col-md-3 -->
+	
 	<!-- 장바구니 col-md-3 -->
 	<div class="col-md-3" id="cart">
 		<!-- iframe -->
   		<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:700px;width:100%" height="100%" width="100%"></iframe>
     </div>
-	<!-- /장바구니 col-md-3 -->
+	<!-- /장바구니 col-md-3 -->	
 	
 	<!-- 리뷰 쓰기 col-md-12 -->
 	<div class="col-md-12">
