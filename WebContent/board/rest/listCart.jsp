@@ -59,7 +59,7 @@
 	
 	<!-- 장바구니 결제 버튼 -->
 	<div align="center">
-		<button type="button" class="btn btn-success"
+		<button type="button" class="btn btn-primary"
 			onclick="goPayment(this.form)">구매하기</button>
 		<button type="button" class="btn btn-danger">모두제거</button>
 	</div>
