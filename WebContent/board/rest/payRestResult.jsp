@@ -55,28 +55,48 @@
 			<h3>구매완료 페이지</h3>
 		</div>
 		
-		<font color=blue size=7><b>구매해주셔서 감사합니다!</b></font>
+		<div class="col-md-12" align="center">
+			<font color=blue size=7 ><b>구매해주셔서 감사합니다!</b></font>
+		</div>
 		
-		<div class="col-md-12">
+		<div class="col-md-12 well">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-1">
+				상품코드
+			</div>
+			<div class="col-md-3">
+				상품
+			</div>
+			<div class="col-md-1">
+				가격
+			</div>
+			<div class="col-md-2">
+				쿠폰
+			</div>
+			<div class="col-md-3">
+				발행일
+			</div>
+		
 			<c:forEach var="list2" items="${list2}">
 				<div class="col-md-12 well">
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<img src="${list2.paid_restopt_destFile1}" alt="N/A" style="min-height:50px;height:50px;">
 					</div>
 					<div class="col-md-1">
-						상품코드 : ${list2.paid_rest_num}
+						${list2.paid_rest_num}
+					</div>
+					<div class="col-md-3">
+						${list2.paid_rest_subject}, ${list2.paid_restopt_subject}
+					</div>
+					<div class="col-md-1">
+						${list2.paid_restopt_priceplus}
 					</div>
 					<div class="col-md-2">
-						상품 : ${list2.paid_rest_subject}, ${list2.paid_restopt_subject}
+						 ${list2.paid_cpn}
 					</div>
-					<div class="col-md-2">
-						가격 : ${list2.paid_restopt_priceplus}
-					</div>
-					<div class="col-md-2">
-						쿠폰 : ${list2.paid_cpn}
-					</div>
-					<div class="col-md-2">
-						발행일 : ${list2.paid_reg_date}
+					<div class="col-md-3">
+						${list2.paid_reg_date}
 					</div>
 				</div>
 			</c:forEach>
