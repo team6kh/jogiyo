@@ -226,8 +226,8 @@
 									<s:property value="recipe_num" />
 								</s:param>
 							</s:url> 
-							<input name="list" type="button" value="수정" class="inputb" onClick="javascript:open_win_noresizable('checkForm.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
-							<input name="list" type="button" value="삭제" class="inputb" 	onClick="javascript:open_win_noresizable('checkForm.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
+							<input name="list" type="button" value="수정" class="inputb" onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
+							<input name="list" type="button" value="삭제" class="inputb" 	onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
 							<input name="list" type="button" value="목록" class="inputb" 	onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
 
 						</td>

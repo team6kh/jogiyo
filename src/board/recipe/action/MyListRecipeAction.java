@@ -16,8 +16,7 @@ import common.action.PagingAction;
 public class MyListRecipeAction extends ActionSupport implements ConDAOAware {
 	public static SqlMapClient sqlMapper;
 	private List<RecipeDTO> list = new ArrayList<RecipeDTO>();
-	private RecipeDTO paramClass = new RecipeDTO(); // 파라미터를 저장할 객체
-	private RecipeDTO resultClass = new RecipeDTO(); // 쿼리 결과 값을 저장할 객체
+	
 	private int currentPage = 1; // 현재 페이지
 	private int totalCount; // 총 게시물의 수
 	private int blockCount = 10; // 한 페이지의 게시물의 수
@@ -80,22 +79,7 @@ public class MyListRecipeAction extends ActionSupport implements ConDAOAware {
 		this.list = list;
 	}
 
-	public RecipeDTO getParamClass() {
-		return paramClass;
-	}
-
-	public void setParamClass(RecipeDTO paramClass) {
-		this.paramClass = paramClass;
-	}
-
-	public RecipeDTO getResultClass() {
-		return resultClass;
-	}
-
-	public void setResultClass(RecipeDTO resultClass) {
-		this.resultClass = resultClass;
-	}
-
+	
 	public int getCurrentPage() {
 		return currentPage;
 	}
