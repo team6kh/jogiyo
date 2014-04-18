@@ -81,7 +81,7 @@
 			</div>
 			<div class="form-group">
 			  <label>전화번호</label>
-			  <input type="text" class="form-control" name="seller_rest_telnum" value="${sellerDTO.seller_rest_telnum}" required>
+			  <input type="text" class="form-control" name="seller_telnum" value="${sellerDTO.seller_telnum}" required>
 			</div>		
 			<div class="form-group">
 			  <label>아이디</label>
@@ -104,7 +104,7 @@
 			</div>
 			<div class="form-group">
 			  <label>휴대폰</label>
-			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="seller_rest_mobilenum" value="${sellerDTO.seller_rest_mobilenum}" required>
+			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="seller_mobilenum" value="${sellerDTO.seller_mobilenum}" required>
 			</div>			
 			<div class="form-group">
 			  <label>이메일</label>

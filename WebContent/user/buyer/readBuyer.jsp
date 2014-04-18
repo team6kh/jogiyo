@@ -119,7 +119,7 @@
 			</div>  -->
 			<div class="form-group">
 			  <label>휴대폰</label>
-			  <input type="text" class="form-control" value="${buyerDTO.buyer_phonenumber}" disabled>
+			  <input type="text" class="form-control" value="${buyerDTO.buyer_mobilenum}" disabled>
 			</div>							
 			<div class="form-group">
 			  <label>이메일</label>

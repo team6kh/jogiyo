@@ -10,7 +10,7 @@ public class BuyerDTO
     private String buyer_name;
     private Date buyer_reg_date;
     private String buyer_email;
-    private String buyer_phonenumber;
+    private String buyer_mobilenum;
     private String buyer_verification;
 
     public int getUser_seq()
@@ -73,14 +73,14 @@ public class BuyerDTO
         this.buyer_email = buyer_email;
     }
 
-    public String getBuyer_phonenumber()
+    public String getBuyer_mobilenum()
     {
-        return buyer_phonenumber;
+        return buyer_mobilenum;
     }
 
-    public void setBuyer_phonenumber(String buyer_phonenumber)
+    public void setBuyer_mobilenum(String buyer_mobilenum)
     {
-        this.buyer_phonenumber = buyer_phonenumber;
+        this.buyer_mobilenum = buyer_mobilenum;
     }
 
     public String getBuyer_verification()
