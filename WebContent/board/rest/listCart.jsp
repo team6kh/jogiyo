@@ -29,6 +29,12 @@
 		form.submit();
 		return false;
 	}
+	
+	function goDelete(form) {
+		form.action = "cartDelete.action";
+		form.submit();
+		return false;
+	}
 </script>
 </head>
 
@@ -57,12 +63,11 @@
 		</div>
 	</c:forEach>
 	
+	
 	<!-- 장바구니 결제 버튼 -->
 	<div align="center">
-		<button type="button" class="btn btn-primary"
-			onclick="goPayment(this.form)">구매하기</button>
-		<button type="button" class="btn btn-danger">모두제거</button>
+		<button type="button" class="btn btn-primary" onclick="goPayment(this.form)" >구매하기</button>
+		<button type="button" class="btn btn-danger" onclick="goDelete(this.form)">비우기</button>
 	</div>
-	
 </form>
 </body>

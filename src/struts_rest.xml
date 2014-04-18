@@ -73,6 +73,12 @@
 			<result>/board/rest/listCart.jsp</result>
 		</action>
 		
+		<action name="cartDelete" class="board.rest.action.CartDeleteAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/board/rest/listCart.jsp</result>
+		</action>
+		
 		<!-- 장바구니 list -->
 		<action name="listCart" class="board.rest.action.ListCartAction">
 			<interceptor-ref name="params"/>

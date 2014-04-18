@@ -400,12 +400,7 @@ function Display(form){
 						<td class=clsleft colspan=3></td>
 					</tr>
 					
-					<tr><td>&nbsp;</td></tr>
-					<tr><td class=clsleft colspan=3><hr></td></tr>
 					
-					<tr>
-						<td class=clsleft colspan=3><font color=#006C6C size=3><br/><b>수취인</b></font></td>
-					</tr>
 					<tr>
 						<td colspan=2><input type="hidden" style=width:100px name=RcpNm maxlength=40></td>
 					</tr>

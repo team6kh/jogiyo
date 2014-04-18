@@ -140,7 +140,7 @@
 	<select id="selectLastNo" resultClass="RestDTO" parameterClass="int">
 		SELECT max(rest_num) as rest_num FROM Rest_board
 	</select>
-
+	
 	<select id="selectCount" resultClass="int">
 		SELECT count(*) FROM Rest_board
 	</select>
@@ -209,7 +209,6 @@
 		DELETE FROM Cart_board
 		where cart_rest_num=#cart_rest_num# and session_id=#session_id#	
 	</delete>
-
-
+	
 
 </sqlMap>

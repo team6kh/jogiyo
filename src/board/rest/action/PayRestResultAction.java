@@ -3,14 +3,11 @@ package board.rest.action;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import table.coopon.dto.CooponDTO;
 import board.cart.dto.CartDTO;
 import board.pay.dto.payDTO;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
-
 import common.ConDAOAware;
 
 public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
@@ -24,21 +21,15 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 	private List<CartDTO> list1 = new ArrayList<CartDTO>();
 	private List<payDTO> list2 = new ArrayList<payDTO>();
 	
-	
-	
 	Integer count;
-	
 	private int rest_num;
 	private String session_id;
-	
 	private String cooResult;
-	
-	
+
 	
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
 	}
-	
 	
 	public String execute() throws Exception {
 		
@@ -59,7 +50,6 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 			//쿠폰생성
 			cooResult = Integer.toString((int)(Math.random() * 999999))+ "-" + Integer.toString((int)(Math.random() * 99999999))+ "-" + Integer.toString((int)(Math.random() * 777777));
 			count = (Integer)sqlMapper.queryForObject("Rest.selectCheckcpn", cooResult);
-			
 			while(count != 0){ //값이 중복이 안될때까지 다시 생성
 				cooResult = Integer.toString((int)(Math.random() * 777777))+ "-" + Integer.toString((int)(Math.random() * 99999999))+ "-" + Integer.toString((int)(Math.random() * 999999));
 				count = (Integer)sqlMapper.queryForObject("Rest.selectCheckcpn", cooResult);
@@ -76,7 +66,6 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 			
 			sqlMapper.insert("Rest.insertPaidBoard", paramClass2);
 		}
-	    
 		
 		//최종 장바구니 레코드 삭제
 		sqlMapper.delete("Rest.deleteCartforpaid", paramClass1);
@@ -102,10 +91,8 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		this.session_id = session_id;
 	}
 
-
 	public List<payDTO> getList2() {
 		return list2;
 	}
-
 	
 }
