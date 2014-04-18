@@ -64,7 +64,7 @@ public class SearchRecipeAction extends ActionSupport implements ConDAOAware,Pre
         System.out.println("recipe_priceinput2:" +paramClass.getRecipe_priceinput2());
       
         list = sqlMapper.queryForList("Recipe.detailSearchRecipe", paramClass);
-        System.out.println("list:" +list);
+        System.out.println("list search:" +list);
         totalCount = list.size(); //전체 글 갯수를 구한다.
         page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
         pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.

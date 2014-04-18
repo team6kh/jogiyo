@@ -126,6 +126,14 @@
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
 
+		<!-- readcountRecipeDesc 액션 -->
+		<action name="readcountRecipeDesc" class="board.recipe.action.ListRecipeAction"
+			method="readcountDesc">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/board/recipe/listRecipe.jsp</result>
+		</action>
+
 		<!-- 레시피 끝 -->
 
 

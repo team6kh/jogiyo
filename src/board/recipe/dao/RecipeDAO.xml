@@ -148,31 +148,14 @@
 
 	<!-- searchRecipeBoard 쿼리문 정의 -->
 	<select id="detailSearchRecipe" resultMap="RecipeRes" parameterClass="board.recipe.dto.RecipeSearchDTO">
-		SELECT * FROM RECIPE_BOARD WHERE RECIPE_FOODKIND LIKE '%'||#recipe_foodkind#||'%' AND RECIPE_WRITER LIKE '%'||#recipe_writerinput#||'%' AND RECIPE_FOODSUBJECT LIKE '%'||#recipe_foodnameinput#||'%' AND (RECIPE_SUBJECT LIKE '%'||#recipe_subjectinput#||'%' OR RECIPE_CONTENT LIKE '%'||#recipe_subjectinput#||'%') <![CDATA[
-		AND RECIPE_TIME>#recipe_timeinput1# AND RECIPE_TIME<#recipe_timeinput2# AND RECIPE_PRICE>#recipe_priceinput1# AND RECIPE_PRICE<#recipe_priceinput2#]]>
+		SELECT * FROM RECIPE_BOARD WHERE RECIPE_FOODKIND LIKE '%'||#recipe_foodkind#||'%' AND RECIPE_WRITER LIKE '%'||#recipe_writerinput#||'%' AND RECIPE_FOODSUBJECT LIKE '%'||#recipe_foodnameinput#||'%' AND (RECIPE_SUBJECT LIKE '%'||#recipe_subjectinput#||'%' OR RECIPE_CONTENT LIKE '%'||#recipe_subjectinput#||'%')    
 	</select>
 	
-	<select id="writerSearchRecipe" resultMap="RecipeRes" parameterClass="java.lang.String">
-	 SELECT * FROM RECIPE_BOARD WHERE RECIPE_WRITER LIKE '%'||#recipe_writer#||'%'
-	 </select>
-	 
-	 <select id="foodnameSearchRecipe" resultMap="RecipeRes" parameterClass="java.lang.String">
-	 SELECT * FROM RECIPE_BOARD WHERE RECIPE_FOODSUBJECT LIKE '%'||#recipe_foodsubject#||'%'
-	 </select>
-	 
-	 <select id="subjectSearchRecipe" resultMap="RecipeRes" parameterClass="java.lang.String">
-	 SELECT * FROM RECIPE_BOARD WHERE RECIPE_SUBJECT LIKE '%'||#recipe_subject#||'%'
-	 </select>
-	 
-	 <select id="contentSearchRecipe" resultMap="RecipeRes" parameterClass="java.lang.String">
-	 SELECT * FROM RECIPE_BOARD WHERE RECIPE_CONTENT LIKE '%'||#recipe_content#||'%'
-	 </select>
-	 
-	 <select id="timeSearchRecipe" resultMap="RecipeRes" parameterClass="java.lang.String">
-	 SELECT * FROM RECIPE_BOARD WHERE RECIPE_TIME LIKE '%'||#recipe_time#||'%'
-	 </select>
-	 
-	 <select id="priceSearchRecipe" resultMap="RecipeRes" parameterClass="java.lang.String">
-	 SELECT * FROM RECIPE_BOARD WHERE RECIPE_PRICE LIKE '%'||#recipe_price#||'%'
-	 </select>
+	<!-- readcountDesc 쿼리문 정의 -->
+	<select id="readcountDesc" resultMap="RecipeRes">
+		SELECT * FROM RECIPE_BOARD
+		ORDER BY recipe_readcount DESC
+	</select>
+	
+	
 </sqlMap>

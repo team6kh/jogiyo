@@ -51,6 +51,18 @@
 
 						alert("해당 게시판은 Recipe 게시판으로 요리 Recipe만을 공유하는 곳입니다.~ 다른 사항으로 이용하지 말아주세요~!! 다른 내용 이용시 바로 삭제 조치 합니다.!!");
 					}
+					
+					function readcountarray() {
+						//var click = false;
+						//if(click==false){
+							alert("false");
+							//click = true;
+							document.location.href='readcountRecipeDesc.action';
+						//}if(click==true){
+						//	click = false;
+						//	window.location.href='readcountRecipeAsc.action';
+						//}
+					}
 
 					
 				</SCRIPT>
@@ -82,7 +94,7 @@
 					<td width="80"><strong>작성일</strong></td>
 					<td width="50"><strong>소비시간</strong></td>
 					<td width="50"><strong>비용</strong></td>
-					<td width="50"><strong>조회수</strong></td>
+					<td width="50"><strong><a href="javascript:return false;" onClick="readcountarray()">조회수</a></strong></td>
 					<td width="50"><strong>추천수</strong></td>
 				</tr>
 				<tr bgcolor="#777777">
