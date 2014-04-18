@@ -16,12 +16,18 @@
 
 <title>JOGIYO</title>
 
+<!-- 별점 관련 script & css -->
+<script type="text/javascript" src="board/review/rating/jquery.js"></script>
+<script type="text/javascript" src="board/review/rating/jquery.rating.pack.js"></script>
+<link rel="stylesheet" href="board/review/rating/jquery.rating.css">
+
+
 </head>
 
 <body onload="ratingck()">
 
 	<!-- 리뷰 수정 폼(review) -->
-	<form method="post" onsubmit="confirm()" enctype="multipart/form-data">
+	<form method="post" name="updateReview" id ="updateReview" onsubmit="confirm()" enctype="multipart/form-data">
 
 		<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
 		<input type="hidden" id="review_rest_currentPage"
@@ -31,39 +37,39 @@
 
 		<!-- 별점(review_rating) : radio 타입으로 -->
 		<table class="table table-striped table-forum">
-
 			<tr>
 				<th>별점 ${reviewDTO.review_rating }</th>
-				<td class="text-center"><input type="radio"
-					name="review_rating" value="1" /> 1점 <input type="radio"
-					name="review_rating" value="2" /> 2점 <input type="radio"
-					name="review_rating" value="3" /> 3점 <input type="radio"
-					name="review_rating" value="4" /> 4점 <input type="radio"
-					name="review_rating" value="5" /> 5점<input type="hidden"
-					name="rating_point" value="${reviewDTO.review_rating}" /></td>
+				<td class="text-center">
+                    <input type="radio" name="review_rating" class="star" value="1" />
+					<input type="radio" name="review_rating" class="star" value="2" />
+					<input type="radio" name="review_rating" class="star" value="3" />
+					<input type="radio" name="review_rating" class="star" value="4" />
+					<input type="radio" name="review_rating" class="star" value="5" />
+					<input type="hidden" name="rating_point" value="${reviewDTO.review_rating}" />
+					</td>
 			</tr>
 
 
 			<!-- 리뷰 content -->
 			<tr>
-				<td class="text-center" colspan="2"><textarea
-						id="review_content" name="review_content" rows="5" cols="50">${reviewDTO.review_content}</textarea></td>
+				<td class="text-center" colspan="2">
+                <textarea id="review_content" name="review_content" rows="5" cols="50">${reviewDTO.review_content}</textarea></td>
 			</tr>
 
 			<!-- 이미지 파일 첨부 -->
 			<tr>
-				<td class="text-center" colspan="2">이미지파일을 첨부하시면 기존에 첨부하신파일은
-					삭제됩니다. <br /> <input id="review_file" type="file"
-					name="review_files">
+				<td class="text-center" colspan="2">
+                    <Strong> 이미지파일을 새로 첨부하시면 기존에 첨부하신파일은 삭제됩니다. <br /> </Strong> 
+                    <input id="review_file" type="file" name="review_files" multiple="multiple">
 				</td>
 			</tr>
 
 
 			<!-- 리뷰 작성 완료 버튼 -->
 			<tr>
-				<td class="text-center" colspan="2"><input type="submit"
-					value="수정 완료" /> <input type="button" value="취 소"
-					onclick="javascript:history.go(-1)"></td>
+				<td class="text-center" colspan="2">
+                    <input type="submit" value="수정 완료" /> 
+                    <input type="button" value="취 소" onclick="javascript:self.close()"></td>
 			</tr>
 
 		</table>
@@ -74,7 +80,7 @@
 	<script type="text/javascript">
 		function ratingck() {
 			var rating_point = "${reviewDTO.review_rating}";
-			var review_rating = document.updateReviewForm.review_rating;
+			var review_rating = document.updateReview["review_rating"];
 			for (var i = 0; i < review_rating.length; i++) {
 				if (review_rating[i].value == rating_point) {
 					review_rating[i].checked = true;
@@ -90,10 +96,15 @@
 			var review_num = document.getElementById("review_num").value;
 			var review_content = document.getElementById("review_content").value;
 
+			var formdata =$("#updateReview").serialize();
+			
+			alert(formdata);
+			
 			opener.window.location.href = "updateReviewPro.action?rest_num="
 					+ rest_num + "&review_rest_currentPage="
 					+ review_rest_currentPage + "&ccp=" + ccp + "&review_num="
 					+ review_num + "&review_content=" + review_content;
+			
 			self.close();
 		}
 	</script>

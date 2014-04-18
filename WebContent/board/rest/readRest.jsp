@@ -173,6 +173,7 @@
 		return false;
 	}
 
+	
 	function reviewForm() {
 
 		var reviewform = document.insertReviewForm;
@@ -207,6 +208,11 @@
 		reviewForm.submit();
 	}
 </script>
+
+<!-- 별점 관련 script & css -->
+<script type="text/javascript" src="board/review/rating/jquery.js"></script>
+<script type="text/javascript" src="board/review/rating/jquery.rating.pack.js"></script>
+<link rel="stylesheet" href="board/review/rating/jquery.rating.css">
 
 </head>
 
@@ -347,11 +353,11 @@
 						<tr>
 							<th>별점</th>
 							<td class="text-center">
-								<input type="radio" name="review_rating" value="1" />1점
-								<input type="radio"	name="review_rating" value="2" />2점
-								<input type="radio"	name="review_rating" value="3" />3점
-								<input type="radio"	name="review_rating" value="4" />4점
-								<input type="radio"	name="review_rating" value="5" />5점
+								<input type="radio"    name="review_rating" class="star" value="1" />
+								<input type="radio"	name="review_rating" class="star" value="2" />
+								<input type="radio"	name="review_rating" class="star" value="3" />
+								<input type="radio"	name="review_rating" class="star" value="4"  checked="checked"/>
+								<input type="radio"	name="review_rating" class="star" value="5" />
 							</td>
 						</tr>
 						
@@ -420,9 +426,9 @@
 						<em>&nbsp;|&nbsp;</em>
 						
 						<!-- 별점 -->
-						<c:forEach begin="1"end="${reviewDTO.review_rating}">
-							<img src="assets/img/review/ratingimage/ico.png" width="25px" height="25px">
-						</c:forEach>
+                        <c:forEach begin="1"end="${reviewDTO.review_rating}">
+                            <img src="board/review/rating/ico.png" width="25px" height="25px">
+                        </c:forEach>
 						
 						<!-- 해당글 작성자일 경우 수정/삭제 버튼  -->
 						<!-- 임시값 "test_Customer" session_id 값으로 교체 -->
