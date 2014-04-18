@@ -75,6 +75,9 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
                 sessionMap.put("session_id", resultClass.getBuyer_id());
                 sessionMap.put("session_pw", resultClass.getBuyer_pw());
                 sessionMap.put("session_name", resultClass.getBuyer_name());
+                sessionMap.put("session_mobilenum", resultClass.getBuyer_mobilenum());
+                sessionMap.put("session_email", resultClass.getBuyer_email());
+                sessionMap.put("session_verification", resultClass.getBuyer_verification());              
 
                 return SUCCESS;
             }
@@ -98,10 +101,14 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
                 sessionMap.put("session_id", resultClass.getSeller_id());
                 sessionMap.put("session_pw", resultClass.getSeller_pw());
                 sessionMap.put("session_name", resultClass.getSeller_name());
+                sessionMap.put("session_mobilenum", resultClass.getSeller_mobilenum());
+                sessionMap.put("session_email", resultClass.getSeller_email());
+                sessionMap.put("session_verification", resultClass.getSeller_verification());
 
                 return SUCCESS;
             }
             return ERROR;
+        // 로그인 타입이 "관리자"
         } else if (getLogin_type().equals("admin"))
         {
             if (getLogin_id() != "admin" && getLogin_pw() != "1234")
@@ -110,6 +117,9 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
                 sessionMap.put("session_id", "admin");
                 sessionMap.put("session_pw", "1234");
                 sessionMap.put("session_name", "관리자");
+                sessionMap.put("session_mobilenum", "관리자 휴대폰");
+                sessionMap.put("session_email", "관리자 이메일");
+                sessionMap.put("session_verification", "yes");
                 
                 return SUCCESS;
             }
