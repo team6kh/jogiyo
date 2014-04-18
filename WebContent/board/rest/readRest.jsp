@@ -157,9 +157,9 @@
 		});
 	}
 
-	function insertCart() {
+	function insertCart(form) {
 		alert("insertCart");
-		var rest_num = document.getElementById('rest_num').value;
+		var rest_num = document.getElementById("rest_num").value;
 		var rest_subject = document.getElementById("rest_subject").value;
 		var session_id = document.getElementById("session_id").value;
 
@@ -182,7 +182,7 @@
 			reviewform.style.display = "none";
 		}
 	}
-	
+
 	function btnInsert() {
 		var reviewForm = document.insertReviewForm;
 		var btnInsert = document.getElementById("btnInsert");
@@ -190,9 +190,9 @@
 		reviewForm.style.display = "block";
 		btnInsert.style.display = "none";
 		btnSubmit.style.display = "block";
-		
+
 	}
-	
+
 	function btnCancel() {		
 		var reviewForm = document.insertReviewForm;
 		var btnInsert = document.getElementById("btnInsert");
@@ -201,7 +201,7 @@
 		btnInsert.style.display = "block";
 		btnSubmit.style.display = "none";
 	}
-	
+
 	function btnSubmit() {
 		var reviewForm = document.insertReviewForm;
 		reviewForm.submit();
@@ -245,10 +245,10 @@
 
 <!--=== Content Part ===-->
 <div class="container">	
-	
+
 	<!-- 줄띄우기 -->
 	<br />	
-	
+
 	<!-- Collapse : 너무 느림!
 	<div class="panel-group" id="accordion">
 		<div class="panel panel-default">
@@ -265,17 +265,20 @@
 		</div>
 	</div>
 	<!-- /Collapse -->	
-	
+
 	<!-- /지도 -->
-	
+
 	<!-- 메뉴 리스트 col-md-9-->
 	<div class="col-md-9">
-	
+
 		<!-- 메뉴 리스트 page-header -->
 	    <div class="page-header">
-		  <h1>메뉴 리스트 <small>장바구니에 담아 결제해주세요.</small></h1>
+			<h1>메뉴 리스트 <small>장바구니에 담아 결제해주세요.</small></h1>
+			<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
+			<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
+			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
 		</div>
-		
+
 		<c:forEach var="list" items="${list}">
 		<form class="col-sm-4 col-md-4" id="cartForm" name="test">					
 	    	<div class="thumbnail">
@@ -291,20 +294,20 @@
 	        		<input type="hidden" id="restopt_subject" name="restopt_subject" value="${list.restopt_subject}" />
 	        		<input type="hidden" id="restopt_priceplus" name="restopt_priceplus" value="${list.restopt_priceplus}" />
 	      		</div>
-	      		
+
 	      		<!-- 장바구니 담기 버튼 -->
 	      		<div class="text-center">
-		      		<button type="button" class="btn btn-default" onclick="insertCart()">
+		      		<button type="button" class="btn btn-default" onclick="insertCart(this.form)">
 						<span class="glyphicon glyphicon-shopping-cart"></span> 장바구니 담기
 					</button>
 	      		</div>
-	      		      		
+
 	    	</div>
 	     </form>		      			      	
 		</c:forEach>
 	</div>
 	<!-- /메뉴 리스트 col-md-9 -->
-	
+
 	<!-- 지도 col-md-3 -->
 	<div class="col-md-3">
 		<div class="page-header">
@@ -313,31 +316,31 @@
 		<div id="map_canvas" class="map"></div>
 	</div>
 	<!-- /지도 col-md-3 -->
-	
+
 	<!-- 장바구니 col-md-3 -->
 	<div class="col-md-3" id="cart">
 		<!-- iframe -->
   		<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:700px;width:100%" height="100%" width="100%"></iframe>
     </div>
 	<!-- /장바구니 col-md-3 -->	
-	
+
 	<!-- 리뷰 쓰기 col-md-12 -->
 	<div class="col-md-12">
-	
+
 		<!-- 리뷰 쓰기 page-header -->
 	    <div class="page-header">
 			<h1>리뷰 쓰기</h1>
 		</div>
-		
+
 		<!-- 리뷰 쓰기 권한에 관한 조건문 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
 		<!-- 일단은 로그인을 하지 않으면 리뷰 쓰기 폼이 보이지 않도록 조건문 설정  -->
-	
+
 		<c:if test="${empty sessionScope.session_id}">
 			글을 쓰시려면 로그인을 하세요
 		</c:if>
-		
+
 		<c:if test="${!empty sessionScope.session_id}">
-		
+
 			<div class="text-center">
 				<form name="insertReviewForm" method="post" action="insertReviewPro.action" enctype="multipart/form-data" style="display: none">
 					<table class="table table-striped table-forum">
@@ -351,19 +354,19 @@
 								<input type="radio"	name="review_rating" value="5" />5점
 							</td>
 						</tr>
-						
+
 						<!--  리뷰 content -->
 						<tr>
 							<td class="text-center" colspan="2">
 								<textarea class="form-control" name="review_content" rows="5" required></textarea></td>
 						</tr>					
-						
+
 						<!--  이미지 파일 첨부 : 첨부 개수 제한/ 용량 제한 필요  -->
 						<tr>
 							<td class="text-center" colspan="2">
 							<input type="file" id="review_file_element" name="review_files" multiple="multiple" />
 						</tr>
-						
+
 					</table>
 
 					<!-- 보내줘야 할 파라미터 : 식당코드(식당 테이블) / 구매자(= 회원 = 글 작성자) 정보 -->
@@ -374,33 +377,33 @@
 
 				</form>
 			</div>
-		
+
 			<!-- 리뷰 쓰기 버튼 -->
 			<div class="text-right" id="btnInsert" style="display:block;">				
 				<button class="btn btn-primary" name="btnWriteReview" onclick="return btnInsert()">리뷰 쓰기</button>
 			</div>
-			
+
 			<!-- 리뷰 등록 버튼 -->
 			<div class="text-right" id="btnSubmit" style="display:none">
 				<button class="btn btn-default" name="btnSubmitReview" onclick="return btnCancel()">취소</button>				
 				<button class="btn btn-primary" name="btnSubmitReview" onclick="return btnSubmit()">리뷰 등록</button>
 			</div>			
-			
+
 		</c:if>
 	</div>
 	<!-- /리뷰 쓰기 col-md-12 -->
-	
+
 	<!-- 리뷰 보기  col-md-12 -->
 	<div class="col-md-12">
-	
+
 		<!-- 리뷰 보기 page-header -->
 	    <div class="page-header">
 		  <h1>리뷰 보기</h1>
 		</div>
-		
+
 		<!-- 리뷰 보기 -->
 		<c:forEach var="reviewDTO" items="${reviewRes}">
-		
+
 			<!-- media -->
 			<div class="media">
 				<!-- 일반적으로 아바타 아이콘. 우리는 없다 그런거. -->
@@ -415,12 +418,12 @@
 						<em>&nbsp;|&nbsp;</em>
 						<fmt:formatDate value="${reviewDTO.review_reg_date}" pattern="yyyy-MM-dd" />
 						<em>&nbsp;|&nbsp;</em>
-						
+
 						<!-- 별점 -->
 						<c:forEach begin="1"end="${reviewDTO.review_rating}">
 							<img src="assets/img/review/ratingimage/ico.png" width="25px" height="25px">
 						</c:forEach>
-						
+
 						<!-- 해당글 작성자일 경우 수정/삭제 버튼  -->
 						<!-- 임시값 "test_Customer" session_id 값으로 교체 -->
 						<c:if test="${reviewDTO.review_writer == sessionScope.session_id}">
@@ -429,10 +432,10 @@
 							<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=200')">삭제</button>
 						</c:if>
 					</div>
-					
+
 					<!-- 리뷰 글 -->
 					<p>${reviewDTO.review_content}</p>
-					
+
 					<!-- 리뷰글 첨부사진 : 첨부사진이 있을 때만 보이도록 -->
 					<c:if test="${!empty reviewDTO.review_file}">
 						<c:forTokens var="reviewFileNames" items="${reviewDTO.review_file }" delims="' '">
@@ -444,25 +447,25 @@
 						</c:forTokens>
 					</c:if>
 					<!-- /리뷰글 첨부사진 : 첨부사진이 있을 때만 보이도록 -->					
-					
+
 				</div>
 				<!-- /리뷰 바디 -->
 			</div>
 			<!-- /media -->
-		
+
 		</c:forEach>
-		
+
 		<div class="text-center">
 			<ul class="pagination pagination-sm">
 				<s:property value="pagingHtml" escape="false" />
 			</ul>
 		</div>
-		
+
 		<!-- /리뷰 보기 -->		
-		
+
 	</div>
-	<!-- /리뷰 보기 col-md-12 -->*/
-										
+	<!-- /리뷰 보기 col-md-12 -->
+
 </div><!--/container-->		
 <!-- End Content Part -->
 

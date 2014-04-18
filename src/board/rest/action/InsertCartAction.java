@@ -24,7 +24,7 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 	// readRest.jsp 에서 a링크로 넘어오는 파라미터들
 	private int cart_rest_num; // 상품
 	private String cart_rest_subject;
-	private String cart_restopt_num; // 여기서부터 옵션
+	private int cart_restopt_num; // 여기서부터 옵션
 	private String cart_restopt_destFile1;
 	private String cart_restopt_subject;
 	private int cart_restopt_priceplus;
@@ -45,10 +45,10 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 		paramClass.setSession_id(getSession_id());
 
 		sqlMapper.insert("Rest.insertCart_board", paramClass);
+		
+		list = sqlMapper.queryForList("Rest.selectCartAll", paramClass);
 
-		list = sqlMapper.queryForList("Rest.selectCartAll");
-
-		return SUCCESS;
+		return SUCCESS; //listCart.jsp
 	}
 
 	public List<CartDTO> getList() {
@@ -123,11 +123,11 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 		this.session_id = session_id;
 	}
 
-	public String getCart_restopt_num() {
+	public int getCart_restopt_num() {
 		return cart_restopt_num;
 	}
 
-	public void setCart_restopt_num(String cart_restopt_num) {
+	public void setCart_restopt_num(int cart_restopt_num) {
 		this.cart_restopt_num = cart_restopt_num;
 	}
 

@@ -29,6 +29,12 @@
 		form.submit();
 		return false;
 	}
+
+	function goDelete(form) {
+		form.action = "cartDelete.action";
+		form.submit();
+		return false;
+	}
 </script>
 </head>
 
@@ -37,7 +43,7 @@
 	<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
 	<input type="hidden" id="rest_subject" name="rest_subject" value="${rest_subject}" />
 	<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
-	
+
 	<!-- 장바구니 page-header -->
     <div class="page-header">
 	  <h1>장바구니</h1>
@@ -56,13 +62,12 @@
 			</div>
 		</div>
 	</c:forEach>
-	
+
+
 	<!-- 장바구니 결제 버튼 -->
 	<div align="center">
-		<button type="button" class="btn btn-primary"
-			onclick="goPayment(this.form)">구매하기</button>
-		<button type="button" class="btn btn-danger">모두제거</button>
+		<button type="button" class="btn btn-primary" onclick="goPayment(this.form)" >구매하기</button>
+		<button type="button" class="btn btn-danger" onclick="goDelete(this.form)">비우기</button>
 	</div>
-	
 </form>
 </body>

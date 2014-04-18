@@ -376,7 +376,7 @@ function Display(form){
 					<tr>
 						<td class=clsleft>아이디</td>
 						<!-- [신용카드, 핸드폰] 결제와 [현금영수증자동발행]을 사용하시는 경우에 반드시 입력해 주시기 바랍니다. -->
-						<td><input type=text style=width:100px name=UserId maxlength=20 value="test"></td>
+						<td><input type=text style=width:100px name=UserId maxlength=20 value="${sessionScope.session_id}"></td>
 						<td width=170 class=clsleft></td>
 					</tr>
 					<tr>
@@ -387,7 +387,7 @@ function Display(form){
 					
 					<tr>
 						<td class=clsleft>이름</td>
-						<td colspan=2><input type=text style=width:100px name=OrdNm maxlength=40 value="히든 주문자아이디"></td>
+						<td colspan=2><input type=text style=width:100px name=OrdNm maxlength=40 value="${sessionScope.session_name }"></td>
 					</tr>
 					<tr>
 						<td class=clsleft>연락처</td>
@@ -400,27 +400,18 @@ function Display(form){
 						<td class=clsleft colspan=3></td>
 					</tr>
 					
-					<tr><td>&nbsp;</td></tr>
-					<tr><td class=clsleft colspan=3><hr></td></tr>
 					
 					<tr>
-						<td class=clsleft colspan=3><font color=#006C6C size=3><br/><b>수취인</b></font></td>
+						<td colspan=2><input type="hidden" style=width:100px name=RcpNm maxlength=40></td>
 					</tr>
 					<tr>
-						<td class=clsleft>수취인</td>
-						<td colspan=2><input type=text style=width:100px name=RcpNm maxlength=40></td>
+						<td colspan=2><input type=hidden style=width:130px name=RcpPhone maxlength=21 ></td>
 					</tr>
 					<tr>
-						<td class=clsleft>연락처</td>
-						<td colspan=2><input type=text style=width:130px name=RcpPhone maxlength=21 ></td>
+						<td colspan=2><input type=hidden style=width:300px name=DlvAddr maxlength=100 ></td>
 					</tr>
 					<tr>
-						<td class=clsleft>배송지</td>
-						<td colspan=2><input type=text style=width:300px name=DlvAddr maxlength=100 ></td>
-					</tr>
-					<tr>
-						<td class=clsleft>기타요구사항</td>
-						<td colspan=2><input type=text style=width:300px name=Remark maxlength=350 ></td>
+						<td colspan=2><input type=hidden style=width:300px name=Remark maxlength=350 ></td>
 					</tr>
 					
 					<tr><td>&nbsp;</td></tr>
