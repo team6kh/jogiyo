@@ -73,8 +73,8 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
             {
                 sessionMap.put("session_type", getLogin_type());
                 sessionMap.put("session_id", resultClass.getBuyer_id());
-                //sessionMap.put("session_pw", resultClass.getBuyer_pw());
-                //sessionMap.put("session_name", resultClass.getBuyer_name());
+                sessionMap.put("session_name", resultClass.getBuyer_name());
+                //sessionMap.put("session_pw", resultClass.getBuyer_pw());                
                 //sessionMap.put("session_mobilenum", resultClass.getBuyer_mobilenum());
                 //sessionMap.put("session_email", resultClass.getBuyer_email());
                 //sessionMap.put("session_verification", resultClass.getBuyer_verification());              
@@ -99,8 +99,8 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
             {
                 sessionMap.put("session_type", getLogin_type());
                 sessionMap.put("session_id", resultClass.getSeller_id());
+                sessionMap.put("session_name", resultClass.getSeller_name());
                 //sessionMap.put("session_pw", resultClass.getSeller_pw());
-                //sessionMap.put("session_name", resultClass.getSeller_name());
                 //sessionMap.put("session_mobilenum", resultClass.getSeller_mobilenum());                
                 //sessionMap.put("session_email", resultClass.getSeller_email());
                 //sessionMap.put("session_verification", resultClass.getSeller_verification());
@@ -115,6 +115,7 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
             {
                 sessionMap.put("session_type", getLogin_type());
                 sessionMap.put("session_id", "admin");
+                sessionMap.put("session_name", "관리자");
                 
                 return SUCCESS;
             }
