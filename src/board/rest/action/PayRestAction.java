@@ -20,7 +20,6 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 	private String rest_subject;
 	private String session_id;//cart_restopt_priceplus
 	
-	
 	//pay용 파라미터 변수
 	private int pay_num; //완료
 	private String pay_rest_subject; //완료
