@@ -20,6 +20,7 @@
 <link href="user/common/registration/registration.css" rel="stylesheet">
 
 <script type="text/javascript">
+	// 선택하는 가입유형에 따라 다른 폼을 로딩합니다.
 	function optionCheck(){
 	    var option = document.getElementById("reg_type").value;
 	    if(option == "buyer"){
@@ -40,7 +41,7 @@
 			//alert("아이디를 입력하세요");
 			$('#divRegId').removeClass('has-error'); // bootstrap validation
 			$('#divRegId').removeClass('has-success'); // bootstrap validation
-			$('#btnSubmit').prop('disabled', true);
+			//$('#btnSubmit').prop('disabled', true);
 			return;
 		} else {
 			var hanchk = hanCheck();
@@ -49,7 +50,7 @@
 				feedbackRegId.innerHTML = "아이디는 4자 이상이여야합니다.";
 				regForm.feedbackRegId.value = "0";
 				$('#divRegId').addClass('has-error'); // bootstrap validation
-				$('#btnSubmit').prop('disabled', true);
+				//$('#btnSubmit').prop('disabled', true);
 				return false;
 			} else if (hanchk) {
 				var reg_type = document.getElementById("reg_type").value;
@@ -63,6 +64,7 @@
 
 	}
 	
+	// 한글인지 체크
 	function hanCheck() {
 		for (i = 0; i < regForm.seller_id.value.length; i++) {
 			var a = regForm.seller_id.value.charCodeAt(i);
@@ -71,12 +73,42 @@
 				regForm.feedbackRegId.value = "0";
 				regForm.seller_id.focus();
 				$('#divRegId').addClass('has-error'); // bootstrap validation
-				$('#btnSubmit').prop('disabled', true);
+				//$('#btnSubmit').prop('disabled', true);
 				return false;
 			}
 		}
 		return true;
-	}	
+	}
+	
+	// 비밀번호
+	function sellerPw() {
+		if (document.regForm.seller_pw.value.length < 2) {
+			feedbackSellerPw.innerHTML = "2자리 이상 입력하셔야 합니다.";
+			$('#divSellerPw').addClass('has-error'); // bootstrap validation
+			//$('#btnSubmit').prop('disabled', true);
+			
+		} else {
+			confirmPw();
+			feedbackSellerPw.innerHTML = "사용하셔도 좋은 비밀번호 입니다.";
+			$('#divSellerPw').removeClass('has-error'); // bootstrap validation
+			$('#divSellerPw').addClass('has-success'); // bootstrap validation
+			//$('#btnSubmit').prop('disabled', false);
+		}
+	}
+	
+	// 비밀번호 확인
+	function confirmPw() {
+		if (document.regForm.confirm_pw.value != document.regForm.seller_pw.value) {
+			feedbackConfirmPw.innerHTML = "비밀번호가 동일하지 않습니다.";
+			$('#divConfirmPw').addClass('has-error'); // bootstrap validation
+			//$('#btnSubmit').prop('disabled', true);
+		} else if (document.regForm.confirm_pw.value == document.regForm.seller_pw.value) {
+			feedbackConfirmPw.innerHTML = "비밀번호가 동일합니다.";
+			$('#divConfirmPw').removeClass('has-error'); // bootstrap validation
+			$('#divConfirmPw').addClass('has-success'); // bootstrap validation
+			//$('#btnSubmit').prop('disabled', false);
+		}		
+	}
 </script>
 
 </head>
@@ -122,13 +154,15 @@
 			  <label>이름</label>
 			  <input type="text" class="form-control" name="seller_name" required>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="divSellerPw">
 			  <label>비밀번호</label>
-			  <input type="password" class="form-control" placeholder="4~20자로 입력해주세요." name="seller_pw" required>
+			  <input type="password" class="form-control" name="seller_pw" placeholder="4~20자로 입력해주세요." name="seller_pw" onkeyup="sellerPw();"required>
+			  <p class="help-block" id="feedbackSellerPw">비밀번호를 입력해주세요.</p>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="divConfirmPw">
 			  <label>비밀번호 확인</label>
-			  <input type="password" class="form-control" placeholder="비밀번호를 재입력 해주세요." required>
+			  <input type="password" class="form-control" name="confirm_pw" placeholder="비밀번호를 재입력 해주세요." onkeyup="confirmPw();" required>
+			  <p class="help-block" id="feedbackConfirmPw">비밀번호를 동일하게 입력해주세요.</p>
 			</div>			
 			<div class="form-group">
 			  <label>휴대폰</label>
@@ -150,17 +184,17 @@
 	<!-- Placed at the end of the document so the pages load faster -->	
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
-	
+
 	<script type="text/javascript">
-	// disable spaces in input
-	$("input#seller_id").on({
-		  keydown: function(e) {
-		    if (e.which === 32)
-		      return false;
-		  },
-		  change: function() {
-		    this.value = this.value.replace(/\s/g, "");
-		  }
+		// disable spaces in input
+		$("input").on({
+			keydown : function(e) {
+				if (e.which === 32)
+					return false;
+			},
+			change : function() {
+				this.value = this.value.replace(/\s/g, "");
+			}
 		});
 	</script>
 </body>

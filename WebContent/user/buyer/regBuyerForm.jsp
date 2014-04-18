@@ -20,6 +20,7 @@
 <link href="user/common/registration/registration.css" rel="stylesheet">
 
 <script type="text/javascript">
+	// 선택하는 가입유형에 따라 다른 폼을 로딩합니다.
 	function optionCheck(){
 	    var option = document.getElementById("reg_type").value;
 	    if(option == "buyer"){
@@ -37,10 +38,10 @@
 		if (userinput.buyer_id.value == "") {
 			feedbackRegId.innerHTML = "아이디를 입력해주세요.";
 			regForm.feedbackRegId.value = "0";
-			//alert("아이디를 입력하세요");
 			$('#divRegId').removeClass('has-error'); // bootstrap validation
 			$('#divRegId').removeClass('has-success'); // bootstrap validation
-			$('#btnSubmit').prop('disabled', true);
+			//$('#btnSubmit').prop('disabled', true);
+			//okSubmit();
 			return;
 		} else {
 			var hanchk = hanCheck();
@@ -49,7 +50,8 @@
 				feedbackRegId.innerHTML = "아이디는 4자 이상이여야합니다.";
 				regForm.feedbackRegId.value = "0";
 				$('#divRegId').addClass('has-error'); // bootstrap validation
-				$('#btnSubmit').prop('disabled', true);
+				//$('#btnSubmit').prop('disabled', true);
+				//okSubmit();
 				return false;
 			} else if (hanchk) {
 				var reg_type = document.getElementById("reg_type").value;
@@ -63,6 +65,7 @@
 
 	}
 	
+	// 한글인지 체크
 	function hanCheck() {
 		for (i = 0; i < regForm.buyer_id.value.length; i++) {
 			var a = regForm.buyer_id.value.charCodeAt(i);
@@ -71,39 +74,62 @@
 				regForm.feedbackRegId.value = "0";
 				regForm.buyer_id.focus();
 				$('#divRegId').addClass('has-error'); // bootstrap validation
-				$('#btnSubmit').prop('disabled', true);
+				//$('#btnSubmit').prop('disabled', true);
+				//okSubmit();
 				return false;
 			}
 		}
 		return true;
 	}
 	
+	// 비밀번호
 	function buyerPw() {
 		if (document.regForm.buyer_pw.value.length < 2) {
 			feedbackBuyerPw.innerHTML = "2자리 이상 입력하셔야 합니다.";
+			regForm.feedbackBuyerPw.value = "0";
 			$('#divBuyerPw').addClass('has-error'); // bootstrap validation
-			$('#btnSubmit').prop('disabled', true);
+			//$('#btnSubmit').prop('disabled', true);
+			//okSubmit();
 			
 		} else {
-			confirmPw();
+			//confirmPw();
 			feedbackBuyerPw.innerHTML = "사용하셔도 좋은 비밀번호 입니다.";
+			regForm.feedbackBuyerPw.value = "1";
 			$('#divBuyerPw').removeClass('has-error'); // bootstrap validation
 			$('#divBuyerPw').addClass('has-success'); // bootstrap validation
-			$('#btnSubmit').prop('disabled', false);
+			//$('#btnSubmit').prop('disabled', false);
+			//okSubmit();
 		}
 	}
 	
+	// 비밀번호 확인
 	function confirmPw() {
 		if (document.regForm.confirm_pw.value != document.regForm.buyer_pw.value) {
 			feedbackConfirmPw.innerHTML = "비밀번호가 동일하지 않습니다.";
+			regForm.feedbackConfirmPw.value = "0";
 			$('#divConfirmPw').addClass('has-error'); // bootstrap validation
-			$('#btnSubmit').prop('disabled', true);
+			//$('#btnSubmit').prop('disabled', true);
+			//okSubmit();
 		} else if (document.regForm.confirm_pw.value == document.regForm.buyer_pw.value) {
 			feedbackConfirmPw.innerHTML = "비밀번호가 동일합니다.";
+			regForm.feedbackConfirmPw.value = "0";
 			$('#divConfirmPw').removeClass('has-error'); // bootstrap validation
 			$('#divConfirmPw').addClass('has-success'); // bootstrap validation
-			$('#btnSubmit').prop('disabled', false);
+			//$('#btnSubmit').prop('disabled', false);
+			//okSubmit();
 		}		
+	}
+	
+	// 사용되지 않음.
+	function okSubmit() {
+		var regId = regForm.feedbackRegId.value;
+		var buyerPw = regForm.feedbackBuyerPw.value;
+		var confirmPw = regForm.feedbackConfirmPw.value;
+		
+		if ( regId == "1" && buyerPw == "1" && confirmPw == "1" ) {			
+			$('#btnSubmit').prop('disabled', false);
+		}
+		$('#btnSubmit').prop('disabled', true);
 	}
 </script>
 
@@ -119,7 +145,11 @@
 	<div class="container">
 
 		<form class="form-signup" name="regForm" method="post" action="registration.action">
+		    <!-- btnSubmit을 위한 체커. okSubmit 미완성으로 사용되지 않음. -->
 			<input type="hidden" name="feedbackRegId" value="0" />
+			<input type="hidden" name="feedbackBuyerPw" value="0" />
+			<input type="hidden" name="feedbackConfirmPw" value="0" />
+			<!-- /btnSubmit을 위한 체커 -->
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">
 			  <label>가입유형을 선택하세요.</label>
@@ -157,7 +187,8 @@
 			  <input type="email" class="form-control" placeholder="you@jogiyo.com" name="buyer_email" required>
 			</div>
 			
-        	<button id="btnSubmit" class="btn btn-lg btn-primary btn-block" type="submit" disabled="disabled">회원가입</button>
+			<!-- button property disabled="disabled" removed -->
+        	<button type="submit" class="btn btn-lg btn-primary btn-block" id="btnSubmit">회원가입</button>        	
       	</form>
 	</div>
 	<!-- /.container -->
@@ -168,17 +199,17 @@
 	<!-- Placed at the end of the document so the pages load faster -->	
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
-	
+
 	<script type="text/javascript">
-	// disable spaces in input
-	$("input#buyer_id").on({
-		  keydown: function(e) {
-		    if (e.which === 32)
-		      return false;
-		  },
-		  change: function() {
-		    this.value = this.value.replace(/\s/g, "");
-		  }
+		// disable spaces in input
+		$("input").on({
+			keydown : function(e) {
+				if (e.which === 32)
+					return false;
+			},
+			change : function() {
+				this.value = this.value.replace(/\s/g, "");
+			}
 		});
 	</script>
 </body>
