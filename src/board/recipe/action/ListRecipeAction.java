@@ -57,6 +57,75 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 
 				return SUCCESS;
 			}
+	//recommandDesc
+	public String recommandDesc() throws Exception {
+		list = sqlMapper.queryForList("Recipe.recommandDesc");
+        System.out.println("timeDesc()");
+	   
+        totalCount = list.size(); //전체 글 갯수를 구한다.
+        page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
+        pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.
+        
+        // 현재 페이지에서 보여줄 마지막 글의 번호 설정.
+                int lastCount = totalCount;
+
+                // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
+                if (page.getEndCount() < totalCount)
+                    lastCount = page.getEndCount() + 1;
+
+                // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
+                list = list.subList(page.getStartCount(), lastCount);
+
+                return SUCCESS;
+
+	}
+
+	
+	//priceDesc
+	public String priceDesc() throws Exception {
+		list = sqlMapper.queryForList("Recipe.priceDesc");
+        System.out.println("timeDesc()");
+	   
+        totalCount = list.size(); //전체 글 갯수를 구한다.
+        page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
+        pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.
+        
+        // 현재 페이지에서 보여줄 마지막 글의 번호 설정.
+                int lastCount = totalCount;
+
+                // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
+                if (page.getEndCount() < totalCount)
+                    lastCount = page.getEndCount() + 1;
+
+                // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
+                list = list.subList(page.getStartCount(), lastCount);
+
+                return SUCCESS;
+
+	}
+	//timeDesc
+	public String timeDesc() throws Exception {
+		list = sqlMapper.queryForList("Recipe.timeDesc");
+        System.out.println("timeDesc()");
+	   
+        totalCount = list.size(); //전체 글 갯수를 구한다.
+        page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
+        pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.
+        
+        // 현재 페이지에서 보여줄 마지막 글의 번호 설정.
+                int lastCount = totalCount;
+
+                // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
+                if (page.getEndCount() < totalCount)
+                    lastCount = page.getEndCount() + 1;
+
+                // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
+                list = list.subList(page.getStartCount(), lastCount);
+
+                return SUCCESS;
+
+		
+	}
 	//readcountDesc
 	public String readcountDesc() throws Exception {
 	    list = sqlMapper.queryForList("Recipe.readcountDesc");

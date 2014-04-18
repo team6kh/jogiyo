@@ -52,16 +52,28 @@
 						alert("해당 게시판은 Recipe 게시판으로 요리 Recipe만을 공유하는 곳입니다.~ 다른 사항으로 이용하지 말아주세요~!! 다른 내용 이용시 바로 삭제 조치 합니다.!!");
 					}
 					
-					function readcountarray() {
+					function recipe_readcountarray() {
 						//var click = false;
 						//if(click==false){
-							alert("false");
+							
 							//click = true;
 							document.location.href='readcountRecipeDesc.action';
 						//}if(click==true){
 						//	click = false;
 						//	window.location.href='readcountRecipeAsc.action';
 						//}
+					}
+					
+					function recipe_timearray() {
+						document.location.href='timeRecipeDesc.action';
+					}
+					
+					function recipe_pricearray() {
+						document.location.href='priceRecipeDesc.action';
+					}
+					
+					function recipe_recommandarray(){
+						document.location.href='recommandRecipeDesc.action';
 					}
 
 					
@@ -92,10 +104,10 @@
 					<td width="100"><strong>요리명</strong></td>
 					<td width="70"><strong>작성자</strong></td>
 					<td width="80"><strong>작성일</strong></td>
-					<td width="50"><strong>소비시간</strong></td>
-					<td width="50"><strong>비용</strong></td>
-					<td width="50"><strong><a href="javascript:return false;" onClick="readcountarray()">조회수</a></strong></td>
-					<td width="50"><strong>추천수</strong></td>
+					<td width="50"><strong><a href="javascript:return false;" onClick="recipe_timearray()">소비시간</strong></td>
+					<td width="50"><strong><a href="javascript:return false;" onClick="recipe_pricearray()">비용</strong></td>
+					<td width="50"><strong><a href="javascript:return false;" onClick="recipe_readcountarray()">조회수</a></strong></td>
+					<td width="50"><strong><a href="javascript:return false;" onClick="recipe_recommandarray()">추천수</strong></td>
 				</tr>
 				<tr bgcolor="#777777">
 					<td height="1" colspan="10"></td>
@@ -200,13 +212,17 @@
 									</tr>
 									<tr>
 										<td align="center">소요시간</td>
-										<td colspan="3"><input type="text" name="recipe_timeinput1" size="5">&nbsp;~<input
-											type="text" name="recipe_timeinput2" size="5"></td>
+										<td colspan="3">
+											<input type="text" name="recipe_timeinput1" size="5">&nbsp;~
+											<input type="text" name="recipe_timeinput2" size="5">
+										</td>
 									</tr>
 									<tr>
 										<td align="center">비용</td>
-										<td colspan="3"><input type="text" name="recipe_priceinput1" size="5">&nbsp;~<input
-											type="text" name="recipe_priceinput2" size="5"></td>
+										<td colspan="3">
+											<input type="text" name="recipe_priceinput1" size="5">&nbsp;~
+											<input type="text" name="recipe_priceinput2" size="5">
+										</td>
 									</tr>
 									<tr>
 										<td align="center" colspan="4"><input type="reset" value="초기화" />&nbsp;
