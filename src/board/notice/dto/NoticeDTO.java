@@ -10,8 +10,19 @@ public class NoticeDTO {
 	private String notice_content;
 	private Date notice_reg_date;
 	private int notice_readcount;
+	private int rnum;
 	
-	public int getNotice_num() {
+	
+
+    public int getRnum()
+    {
+        return rnum;
+    }
+    public void setRnum(int rnum)
+    {
+        this.rnum = rnum;
+    }
+    public int getNotice_num() {
 		return notice_num;
 	}
 	public void setNotice_num(int notice_num) {

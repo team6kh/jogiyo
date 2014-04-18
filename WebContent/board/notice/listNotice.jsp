@@ -57,10 +57,13 @@
 				<s:param name="currentPage">
 					<s:property value="currentPage" />
 				</s:param>
+				<s:param name="rnum">
+					<s:property value="rnum" />
+				</s:param>
 			</s:url>
 
 			<tr bgcolor="#FFFFFF" align="center">
-				<td><s:property value="notice_num" /></td>
+				<td><s:property value="rnum" /></td>
 				<td align="left">&nbsp;<s:a href="%{readNoticeURL}">
 				<s:if test="notice_headtag == '-----------------'" >
 					<font color="orange" size="3"><s:property value="notice_subject" /></font>

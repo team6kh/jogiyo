@@ -70,8 +70,8 @@
   		<div class="pull-right">
   			<button type="submit" class="btn btn-primary">완료</button>
   			<a href="listNotice.action?currentPage=${currentPage}" class="btn btn-default">목록</a>
-  		</div>  	
-  	
+  		</div>  
+  		
 	<!-- 꾸미기 끝 -->
 	</div>
 
@@ -95,7 +95,7 @@
 		function submitContents(elClickedObj){ 
 			oEditors.getById["notice_content"].exec("UPDATE_CONTENTS_FIELD", []);
 			try{ 
-				elClickedObj.f.submit(); 
+				elClickedObj.f.submit();
 			}catch(e){} 
 		} 
 		
@@ -104,7 +104,9 @@
 		    var sHTML = '<img src="<%=request.getContextPath()%>/board/se2/upload/'+filepath+'">';
 		    oEditors.getById["notice_content"].exec("PASTE_HTML", [sHTML]); 
 		}
-		  
+		
+	
+		
 	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
