@@ -53,7 +53,8 @@
 					}
 
 					function detailsearch() {
-						var sel = document.getElementById("recipe_search_target").value;
+						var sel = document
+								.getElementById("recipe_search_target").value;
 
 						if (sel == "recipe_detailsearch") {
 							document.getElementById('detailsearch').style.display = "block";
@@ -107,7 +108,9 @@
 					<tr bgcolor="#FFFFFF" align="center">
 						<td><s:property value="recipe_num" /></td>
 						<td align="center"><s:property value="recipe_foodkind" /></td>
-						<td align="center">&nbsp;<s:a href="%{viewURL}"><s:property value="recipe_subject" /></s:a></td>
+						<td align="center">&nbsp;<s:a href="%{viewURL}">
+								<s:property value="recipe_subject" />
+							</s:a></td>
 						<td align="center"><s:property value="recipe_foodsubject" /></td>
 						<td align="center"><s:property value="recipe_writer" /></td>
 						<td align="center"><s:property value="recipe_reg_date" /></td>
@@ -153,11 +156,13 @@
 				<tr>
 					<td colspan="10" align="center">
 						<!-- 검색 jsp -->
-						<form name="recipe_search" action="searchRecipe">
-							<select name="recipe_search_target" id="recipe_search_target" title="검색" onchange="detailsearch()">
+						<form name="recipe_search" action="recipe_search.action" enctype="multipart/form-data">
+							<select name="recipe_search_target" id="recipe_search_target"
+								title="검색" onchange="detailsearch()">
 								<option value="null">검색[선택]</option>
 								<option value="recipe_detailsearch">상세검색</option>
-							</select> <input name="mylist" type="button" value="전체글목록보기" onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage"  />';">
+							</select> <input name="mylist" type="button" value="전체글목록보기"
+								onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage"  />';">
 
 							<div id="detailsearch" style="display: none">
 								<table width="667" border="1" cellpadding="0" cellspacing="0">
@@ -168,49 +173,43 @@
 										<td><select name="recipe_foodkind" style="width: 120px"
 											id="statsType">
 												<option value="">선택하세요</option>
-												<option value="kfd">한식</option>
-												<option value="cfd">중식</option>
-												<option value="jfd">일식</option>
-												<option value="ufd">양식</option>
-												<option value="rfd">기타</option>
+												<option value="한식">한식</option>
+												<option value="중식">중식</option>
+												<option value="일식">일식</option>
+												<option value="양식">양식</option>
+												<option value="기타">기타</option>
 										</select></td>
 										<td align="center">작성자</td>
 										<td><input type="text" name="recipe_writerinput"></td>
 									</tr>
 									<tr>
 										<td align="center">요리명</td>
-										<td><input type="text" name="recipe_foodnameinput"></td>
+										<td colspan="3"><input type="text" name="recipe_foodnameinput"></td>
 
 									</tr>
 									<tr>
-										<td align="center">제목</td>
-										<td><input type="text" name="recipe_subjectinput"></td>
-
-									</tr>
-									<tr>
-										<td align="center">내용</td>
-										<td><input type="text" name="recipe_contentinput"></td>
+										<td align="center">제목+내용</td>
+										<td colspan="3"><input type="text" name="recipe_subjectinput"></td>
 
 									</tr>
 									<tr>
 										<td align="center">소요시간</td>
-										<td><input type="text" id="recipe_timeinput1" size="5">&nbsp;~<input
+										<td colspan="3"><input type="text" id="recipe_timeinput1" size="5">&nbsp;~<input
 											type="text" id="recipe_timeinput2" size="5"></td>
 									</tr>
 									<tr>
 										<td align="center">비용</td>
-										<td><input type="text" id="recipe_priceinput1" size="5">&nbsp;~<input
+										<td colspan="3"><input type="text" id="recipe_priceinput1" size="5">&nbsp;~<input
 											type="text" id="recipe_priceinput2" size="5"></td>
 									</tr>
+									<tr>
 
-
-								</table>
-								<table width="667" border="1" cellpadding="0" cellspacing="0">
-									<td align="center"><input type="button" value="초기화" />&nbsp;<input
-										type="submit" value="검색" /></td>
+										<td align="center" colspan="4"><input type="reset" value="초기화" />&nbsp;<input
+											type="submit" value="검색" /></td>
+									</tr>
 								</table>
 							</div>
-						</form> 
+						</form>
 					</td>
 				</tr>
 			</table>

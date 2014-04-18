@@ -42,7 +42,7 @@
 
 				<h2>비밀번호 확인</h2>
 
-				<form action="checkAction.action" method="post">
+				<form action="checkActionRecipe.action" method="post">
 					<s:hidden name="recipe_num" value="%{recipe_num}" />
 					<s:hidden name="currentPage" value="%{currentPage}" />
 

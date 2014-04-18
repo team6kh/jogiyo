@@ -9,7 +9,7 @@
 		<result property="recipe_subject" column="recipe_subject" />
 		<result property="recipe_foodsubject" column="recipe_foodsubject" />
 		<result property="recipe_foodkind" column="recipe_foodkind" />
-		<result property="recipe_memberwriter" column="recipe_memberwriter"/>
+		<result property="recipe_memberwriter" column="recipe_memberwriter" />
 		<result property="recipe_writer" column="recipe_writer" />
 		<result property="recipe_password" column="recipe_password" />
 		<result property="recipe_method" column="recipe_method" />
@@ -48,11 +48,13 @@
 	</select>
 
 	<select id="selectLastRecipe_num" resultClass="RecipeDTO">
-		SELECT max(recipe_num) as recipe_num
+		SELECT
+		max(recipe_num) as recipe_num
 		FROM RECIPE_BOARD
 	</select>
 
-	<select id="selectRecipe_password" resultMap="RecipeRes" parameterClass="RecipeDTO">
+	<select id="selectRecipe_password" resultMap="RecipeRes"
+		parameterClass="RecipeDTO">
 		<include refid="select-all" />
 		<include refid="where-recipe_num" />
 		AND recipe_password = #recipe_password#
@@ -99,13 +101,17 @@
 	<update id="updateRecipe" parameterClass="RecipeDTO">
 		UPDATE RECIPE_BOARD SET RECIPE_FOODKIND = #recipe_foodkind#,
 		RECIPE_SUBJECT = #recipe_subject#,
-		RECIPE_FOODSUBJECT = #recipe_foodsubject#,
-		RECIPE_METHOD =	#recipe_method#,
-		RECIPE_TIME = #recipe_time#,
+		RECIPE_FOODSUBJECT =
+		#recipe_foodsubject#,
+		RECIPE_METHOD = #recipe_method#,
+		RECIPE_TIME =
+		#recipe_time#,
 		RECIPE_PRICE = #recipe_price#,
-		RECIPE_MEMBERWRITER = #recipe_memberwriter#,
+		RECIPE_MEMBERWRITER =
+		#recipe_memberwriter#,
 		RECIPE_WRITER = #recipe_writer#,
-		RECIPE_PASSWORD = #recipe_password#,
+		RECIPE_PASSWORD
+		= #recipe_password#,
 		RECIPE_CONTENT = #recipe_content#
 
 		<include refid="where-recipe_num" />
@@ -113,7 +119,8 @@
 
 	<update id="updateFile" parameterClass="RecipeDTO">
 		UPDATE RECIPE_BOARD SET RECIPE_ORGFILE = #recipe_orgfile#
-		,RECIPE_FILE = #recipe_file#
+		,RECIPE_FILE
+		= #recipe_file#
 		<include refid="where-recipe_num" />
 	</update>
 
@@ -128,8 +135,8 @@
 	</update>
 
 	<!-- myListRecipe 쿼리문 정의 -->
-	<select id="myListRecipe" resultMap="RecipeRes"  parameterClass="java.lang.String">
-	    SELECT * FROM RECIPE_BOARD WHERE recipe_writer = #recipe_writer#
+	<select id="myListRecipe" resultMap="RecipeRes" parameterClass="java.lang.String">
+		SELECT * FROM RECIPE_BOARD WHERE RECIPE_MEMBERWRITER = #recipe_memberwriter#
 	</select>
 
 
@@ -139,4 +146,16 @@
 		<include refid="where-recipe_num" />
 	</delete>
 
+	<!-- searchRecipeBoard 쿼리문 정의 -->
+	<select id="detailSearchRecipe" resultMap="RecipeRes" parameterClass="board.recipe.dto.RecipeSearchDTO">
+		SELECT * FROM RECIPE_BOARD WHERE RECIPE_FOODKIND LIKE '%'||#recipe_foodkind#||'%' AND RECIPE_WRITER LIKE '%'||#recipe_writerinput#||'%' AND RECIPE_FOODSUBJECT LIKE '%'||#recipe_foodnameinput#||'%' AND (RECIPE_SUBJECT LIKE '%'||#recipe_subjectinput#||'%' OR RECIPE_CONTENT LIKE '%'||#recipe_subjectinput#||'%')    
+	</select>
+	
+	<!-- readcountDesc 쿼리문 정의 -->
+	<select id="readcountDesc" resultMap="RecipeRes">
+		SELECT * FROM RECIPE_BOARD
+		ORDER BY recipe_readcount DESC
+	</select>
+	
+	
 </sqlMap>
