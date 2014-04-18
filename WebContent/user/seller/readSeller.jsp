@@ -110,7 +110,7 @@
 			</div>
 			<div class="form-group">
 			  <label>전화번호</label>
-			  <input type="text" class="form-control" value="${sellerDTO.seller_rest_telnum}" disabled>
+			  <input type="text" class="form-control" value="${sellerDTO.seller_telnum}" disabled>
 			</div>		
 			<div class="form-group">
 			  <label>아이디</label>
@@ -131,7 +131,7 @@
 			</div>  -->
 			<div class="form-group">
 			  <label>휴대폰</label>
-			  <input type="text" class="form-control" value="${sellerDTO.seller_rest_mobilenum}" disabled>
+			  <input type="text" class="form-control" value="${sellerDTO.seller_mobilenum}" disabled>
 			</div>				
 			<div class="form-group">
 			  <label>이메일</label>

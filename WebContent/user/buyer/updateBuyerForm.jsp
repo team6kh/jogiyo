@@ -58,7 +58,7 @@
 			</div>
 			<div class="form-group">
 			  <label>휴대폰</label>
-			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="buyer_phonenumber" value="${buyerDTO.buyer_phonenumber}" required>
+			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="buyer_mobilenum" value="${buyerDTO.buyer_mobilenum}" onkeyup="confirmPw();" required>
 			</div>			
 			<div class="form-group">
 			  <label>이메일</label>

@@ -12,7 +12,7 @@
 		<result property="buyer_name" column="buyer_name" />
 		<result property="buyer_reg_date" column="buyer_reg_date" />
 		<result property="buyer_email" column="buyer_email" />
-		<result property="buyer_phonenumber" column="buyer_phonenumber" />
+		<result property="buyer_mobilenum" column="buyer_mobilenum" />
 		<result property="buyer_verification" column="buyer_verification" />
 	</resultMap>
 
@@ -52,7 +52,7 @@
 			buyer_name,
 			buyer_reg_date,
 			buyer_email,	
-			buyer_phonenumber,					
+			buyer_mobilenum,					
 			buyer_verification
 			)
 		VALUES 
@@ -62,7 +62,7 @@
 			#buyer_name#,
 			#buyer_reg_date#,
 			#buyer_email#,	
-			#buyer_phonenumber#,					
+			#buyer_mobilenum#,					
 			#buyer_verification#
 			)
 	</insert>
@@ -71,7 +71,7 @@
 	<update id="updateBuyer" parameterClass="BuyerDTO">
 		UPDATE buyer_table SET
 			buyer_pw = #buyer_pw#,			
-			buyer_phonenumber = #buyer_phonenumber#,
+			buyer_mobilenum = #buyer_mobilenum#,
 			buyer_email = #buyer_email#
 		<include refid="where-buyer_id" />
 	</update>

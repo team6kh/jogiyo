@@ -20,8 +20,8 @@ public class UpdateSellerAction implements Action, ConDAOAware
     private String seller_pw;
     private String seller_rest_name;
     private String seller_rest_address;
-    private String seller_rest_telnum;
-    private String seller_rest_mobilenum;
+    private String seller_telnum;
+    private String seller_mobilenum;
     private String seller_email;    
 
     public void setConDAO(SqlMapClient sqlMapper)
@@ -48,8 +48,8 @@ public class UpdateSellerAction implements Action, ConDAOAware
         sellerDTO.setSeller_pw(getSeller_pw());
         sellerDTO.setSeller_rest_name(getSeller_rest_name());
         sellerDTO.setSeller_rest_address(getSeller_rest_address());
-        sellerDTO.setSeller_rest_telnum(getSeller_rest_telnum());
-        sellerDTO.setSeller_rest_mobilenum(getSeller_rest_mobilenum());
+        sellerDTO.setSeller_telnum(getSeller_telnum());
+        sellerDTO.setSeller_mobilenum(getSeller_mobilenum());
         sellerDTO.setSeller_email(getSeller_email());
         
         sqlMapper.update("Seller.updateSeller", sellerDTO);
@@ -121,24 +121,24 @@ public class UpdateSellerAction implements Action, ConDAOAware
         this.seller_rest_address = seller_rest_address;
     }
 
-    public String getSeller_rest_telnum()
+    public String getSeller_telnum()
     {
-        return seller_rest_telnum;
+        return seller_telnum;
     }
 
-    public void setSeller_rest_telnum(String seller_rest_telnum)
+    public void setSeller_telnum(String seller_telnum)
     {
-        this.seller_rest_telnum = seller_rest_telnum;
+        this.seller_telnum = seller_telnum;
     }
 
-    public String getSeller_rest_mobilenum()
+    public String getSeller_mobilenum()
     {
-        return seller_rest_mobilenum;
+        return seller_mobilenum;
     }
 
-    public void setSeller_rest_mobilenum(String seller_rest_mobilenum)
+    public void setSeller_mobilenum(String seller_mobilenum)
     {
-        this.seller_rest_mobilenum = seller_rest_mobilenum;
+        this.seller_mobilenum = seller_mobilenum;
     }
 
     public String getSeller_email()

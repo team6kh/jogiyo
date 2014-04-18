@@ -19,7 +19,7 @@ public class UpdateBuyerAction implements Action, ConDAOAware
     // UPDATE에 쓰이는 파라미터들
     private String buyer_id;
     private String buyer_pw;
-    private String buyer_phonenumber;
+    private String buyer_mobilenum;
     private String buyer_email;
 
     public void setConDAO(SqlMapClient sqlMapper)
@@ -42,7 +42,7 @@ public class UpdateBuyerAction implements Action, ConDAOAware
         // 수정할 항목 설정.
         buyerDTO.setBuyer_id(getBuyer_id());
         buyerDTO.setBuyer_pw(getBuyer_pw());
-        buyerDTO.setBuyer_phonenumber(getBuyer_phonenumber());
+        buyerDTO.setBuyer_mobilenum(getBuyer_mobilenum());
         buyerDTO.setBuyer_email(getBuyer_email());
 
         sqlMapper.update("Buyer.updateBuyer", buyerDTO);
@@ -94,14 +94,14 @@ public class UpdateBuyerAction implements Action, ConDAOAware
         this.buyer_pw = buyer_pw;
     }
 
-    public String getBuyer_phonenumber()
+    public String getBuyer_mobilenum()
     {
-        return buyer_phonenumber;
+        return buyer_mobilenum;
     }
 
-    public void setBuyer_phonenumber(String buyer_phonenumber)
+    public void setBuyer_mobilenum(String buyer_mobilenum)
     {
-        this.buyer_phonenumber = buyer_phonenumber;
+        this.buyer_mobilenum = buyer_mobilenum;
     }
 
     public String getBuyer_email()
