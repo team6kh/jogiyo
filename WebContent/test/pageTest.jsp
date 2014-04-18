@@ -37,14 +37,17 @@
 			<p class="lead">지금은 release 04.15.01 입니다.</p>
 			<p class="lead">당신은 "${session_type}" 입니다.</p>
 			<p class="lead">"${session_name}" 님 환영합니다.</p>
-			<p class="lead">session_type : ${session_type}</p>
-			<p class="lead">session_id : ${session_id}</p>
-			<p class="lead">session_pw : ${session_pw}</p>
-			<p class="lead">session_name : ${session_name}</p>
+			<p class="lead"><strong>session_type : ${session_type}</strong></p>
+			<p class="lead"><strong>session_id : ${session_id}</strong></p>
+			<p class="lead"><strong>session_pw : ${session_pw}</strong></p>
+			<p class="lead"><strong>session_name : ${session_name}</strong></p>
+			<p class="lead"><strong>session_mobilenum : ${session_mobilenum}</strong></p>
+			<p class="lead"><strong>session_email : ${session_email}</strong></p>
+			<p class="lead"><strong>session_verification : ${session_verification}</strong></p>
 			<p class="lead">actionName : ${actionName}</p>
 			<p class="lead">sessionScope.session_id :
 				${sessionScope.session_id}</p>
-			<c:set var="sId" value="${sessionScope.sessionId}"></c:set>
+			<c:set var="sId" value="${sessionScope.session_id}"></c:set>
 			<p class="lead">sId : ${sId}</p>
 		</div>
 		<!-- end of test message -->
