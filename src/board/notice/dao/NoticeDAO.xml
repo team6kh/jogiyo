@@ -5,16 +5,6 @@
 	<typeAlias alias="notice" type="board.notice.dto.NoticeDTO" />
 
 	<!-- 리절트 맵 정의 -->
-	<resultMap id="noticeResAll" class="notice">
-		<result property="notice_num" column="notice_num" />
-		<result property="notice_headtag" column="notice_headtag" />
-		<result property="notice_subject" column="notice_subject" />
-		<result property="notice_content" column="notice_content" />
-		<result property="notice_reg_date" column="notice_reg_date" />
-		<result property="notice_readcount" column="notice_readcount" />
-		<result property="rnum" column="rnum" />
-	</resultMap>
-	
 	<resultMap id="noticeRes" class="notice">
 		<result property="notice_num" column="notice_num" />
 		<result property="notice_headtag" column="notice_headtag" />
@@ -36,21 +26,43 @@
 
 
 	<!-- select 쿼리문 정의 -->
-	<select id="Notice.selectAll" resultMap="noticeResAll" >
-		select * from (select notice_num,notice_headtag,notice_subject,notice_content,notice_reg_date,notice_readcount,rownum rnum from (select * from notice_board ORDER BY notice_num))order by rnum desc
+	<select id="Notice.selectAll" resultMap="noticeRes"
+		parameterClass="int">
+		<include refid="select-all" />
+		ORDER BY notice_num DESC
 	</select>
-	
+
 	<select id="Notice.selectOne" resultMap="noticeRes"
 		parameterClass="int">
 		<include refid="select-all" />
 		<include refid="where-notice_num" />
 	</select>
-	
-	<!-- notice_board의 게시글 총 갯수 -->
-	<select id="Notice.selectNCount" resultClass="notice" parameterClass="int">
-		SELECT count(notice_num) as NOTICE_NUM FROM NOTICE_BOARD
+	<!-- 게시글의 최대 번호 -->
+	<select id="Notice.selectLastNo" resultClass="notice"
+		parameterClass="int">
+		SELECT count(*) as NOTICE_NUM FROM NOTICE_BOARD
 	</select>
-	
+	<!-- 게시글의 최소 번호 -->
+	<select id="Notice.selectFirstNo" resultClass="notice"
+		parameterClass="int">
+		SELECT min(notice_num) as NOTICE_NUM FROM NOTICE_BOARD
+	</select>
+
+	<select id="Notice.selectNextNo" resultClass="notice"
+		parameterClass="int">
+		SELECT max(notice_num) as NOTICE_NUM FROM NOTICE_BOARD WHERE
+		NOTICE_NUM <![CDATA[<]]>
+		#notice_num#
+	</select>
+
+	<select id="Notice.selectPrevNo" resultClass="notice"
+		parameterClass="int">
+		SELECT min(notice_num) as NOTICE_NUM FROM NOTICE_BOARD WHERE
+		NOTICE_NUM <![CDATA[>]]>
+		#notice_num#
+	</select>
+
+
 	<!-- insert 쿼리문 정의 -->
 	<insert id="Notice.insertNotice" parameterClass="notice">
 
