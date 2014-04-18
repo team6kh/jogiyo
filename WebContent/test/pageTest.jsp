@@ -39,11 +39,6 @@
 			<p class="lead">"${session_name}" 님 환영합니다.</p>
 			<p class="lead"><strong>session_type : ${session_type}</strong></p>
 			<p class="lead"><strong>session_id : ${session_id}</strong></p>
-			<p class="lead"><strong>session_pw : ${session_pw}</strong></p>
-			<p class="lead"><strong>session_name : ${session_name}</strong></p>
-			<p class="lead"><strong>session_mobilenum : ${session_mobilenum}</strong></p>
-			<p class="lead"><strong>session_email : ${session_email}</strong></p>
-			<p class="lead"><strong>session_verification : ${session_verification}</strong></p>
 			<p class="lead">actionName : ${actionName}</p>
 			<p class="lead">sessionScope.session_id :
 				${sessionScope.session_id}</p>
