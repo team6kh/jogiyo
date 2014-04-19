@@ -211,5 +211,16 @@
 		where cart_rest_num=#cart_rest_num# and session_id=#session_id#	
 	</delete>
 	
+	<delete id="deleteRestBoard" parameterClass="RestDTO">
+		DELETE FROM Rest_board
+		where rest_num=#rest_num# and rest_writer_id=#rest_writer_id#	
+	</delete>
+	
+	<delete id="deleteRestoptBoard" parameterClass="int">
+		DELETE FROM RestOpt_Board
+		where restopt_rest_num=#rest_num#	
+	</delete>
+	
+	
 
 </sqlMap>
