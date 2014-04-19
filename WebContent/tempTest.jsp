@@ -1,44 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 
 
-<script type="text/javascript">
-	fields = 1;
 
-	function addInput() {
-		if (fields != 16) {
-			
-			document.getElementById('text').innerHTML += "<div>옵션명"+fields+".&nbsp&nbsp <input type='text' name='restopt_subject"+fields+"' value=''/> <br/>"
-														+"옵션가"+fields+".&nbsp&nbsp <input type='text' name='restopt_priceplus"+fields+"' value=''/> 원<br/>"
-														+"옵션사진"+fields+".&nbsp&nbsp <input type='file' name='optupload"+fields+"' />"
-														+ " <a href='#' onclick='removeInput(this.parentNode)' />옵션제거</div>";
-			fields += 1;
-			//optMap.put("restopt_subject"+fields,"restopt_priceplus"+fields);
-		} else {
-			document.getElementById('stop').innerHTML += "<font color='#FF0000'>옵션은 최대 15개만 등록할 수 있습니다.</font><br/>";
-			document.form.add.disabled=true;
+
+<HTML>
+<HEAD>
+<TITLE>Script</TITLE>
+
+<script> 
+
+	var checkobj
+
+	function agreesubmit(el) {
+		checkobj = el
+		if (document.all || document.getElementById) {
+			for (i = 0; i < checkobj.form.length; i++) {
+				var tempobj = checkobj.form.elements[i]
+				if (tempobj.type.toLowerCase() == "submit")
+					tempobj.disabled = !checkobj.checked
+			}
 		}
 	}
-	
-	function removeInput(el) {
-		if (fields > 0) {
-			document.getElementById('stop').innerHTML = "";
-			var parent = document.getElementById('text');
-			parent.removeChild(el);
-			fields -= 1;
+
+	function defaultagree(el) {
+		if (!document.all && !document.getElementById) {
+			if (window.checkobj && checkobj.checked)
+				return true
+			else {
+				alert("약관에 동의 하지 않으면 상품을 등록할 수 없습니다.")
+				return false
+			}
 		}
 	}
 </script>
 
+</HEAD>
 
-<input type="button"  name="add" value="옵션추가" onclick="addInput()"/>
+<BODY>
 
+	<p>
+	<form name="insertRestForm" onSubmit="return defaultagree(this)">
+		<textarea cols=30 rows=5> 
+			위 프로그램의 저작권은 OOO에 있습니다.
+			위의 사실을 동의할 경우 다음으로 이동할 수 있습니다.
+		</textarea>
 
-<div id="text">
-	text
-	<!-- 옵션추가 클릭시 여기에 태그 추가 -->
-</div>
-<div id="stop">
-	warning
-	<!-- 옵션추가 클릭시 여기에 태그 추가 -->
-</div>
+		<input name="agreecheck" type="checkbox" onClick="agreesubmit(this)"> <b>예, 동의 합니다</b>
+			<input type="Submit" value=" 확 인 " disabled>
+	</form>
+
+	<script>
+		document.forms.insertRestForm.agreecheck.checked = false
+	</script>
+
+</BODY>
+</HTML>
