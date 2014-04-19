@@ -34,6 +34,9 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 		//카트레코드 제거
 		sqlMapper.delete("Rest.deleteCartBoard", paramClass);
 		
+		//리뷰레코드 제거
+		sqlMapper.delete("Rest.deleteReviewtBoard", getRest_num());
+		
 		return SUCCESS; // 액션-> listRest.jsp
 	}
 

@@ -7,6 +7,7 @@
 	<typeAlias alias="CartDTO" type="board.cart.dto.CartDTO" />
 	<typeAlias alias="CooponDTO" type="table.coopon.dto.CooponDTO" />
 	<typeAlias alias="PayDTO" type="board.pay.dto.payDTO" />
+	<typeAlias alias="reviewDTO" type="board.review.dto.ReviewDTO" />
 
 	<!-- 리절트 맵 정의 -->
 	<resultMap id="RestBoard" class="RestDTO">
@@ -73,10 +74,20 @@
 		<result property="paid_reg_date" column="paid_reg_date" />
 	</resultMap>
 	
+
+	<!-- 리절트맵 정의 -->
+	<resultMap id="reviewRes" class="reviewDTO">
+		<result property="review_num" column="review_num" />
+		<result property="review_rest" column="review_rest" />
+		<result property="review_writer" column="review_writer" />
+		<result property="review_content" column="review_content" />
+		<result property="review_file" column="review_file" />
+		<result property="review_reg_date" column="review_reg_date" />
+		<result property="review_rating" column="review_rating" />
+	</resultMap>
 	
-
-
-
+	
+	
 
 
 
@@ -224,6 +235,11 @@
 	<delete id="deleteCartBoard" parameterClass="RestDTO">
 		DELETE FROM Cart_board
 		where cart_rest_num=#rest_num# and session_id=#rest_writer_id#	
+	</delete>
+	
+	<delete id="deleteReviewtBoard" parameterClass="int">
+		DELETE FROM review_board
+		where review_rest=#rest_num#	
 	</delete>
 	
 	
