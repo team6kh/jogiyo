@@ -21,7 +21,7 @@
 <body onload="ratingck()">
 
 	<!-- 리뷰 수정 폼(review) -->
-	<form method="post" onsubmit="confirm()" enctype="multipart/form-data">
+	<form method="post" onsubmit="confirm()"  enctype="multipart/form-data" >
 
 		<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
 		<input type="hidden" id="review_rest_currentPage"
@@ -30,11 +30,16 @@
 			type="hidden" id="review_num" name="review_num" value="${review_num}" />
 
 		<!-- 별점(review_rating) : radio 타입으로 -->
-		<table class="table table-striped table-forum">
-
+		<table class="table table-striped table-forum" align="center" >
+			<tr>
+				<td align="center">
+					<br/>
+					<font size=4 color="green"><b>후기 수정 하기</b></font>
+				</td>
+			</tr>
 			<tr>
 				<th>별점 ${reviewDTO.review_rating }</th>
-				<td class="text-center"><input type="radio"
+				<td class="text-center" ><input type="radio"
 					name="review_rating" value="1" /> 1점 <input type="radio"
 					name="review_rating" value="2" /> 2점 <input type="radio"
 					name="review_rating" value="3" /> 3점 <input type="radio"
@@ -46,24 +51,26 @@
 
 			<!-- 리뷰 content -->
 			<tr>
-				<td class="text-center" colspan="2"><textarea
-						id="review_content" name="review_content" rows="5" cols="50">${reviewDTO.review_content}</textarea></td>
+				<td class="text-center" colspan="2">
+					<textarea id="review_content" name="review_content" rows="5" cols="50">${reviewDTO.review_content}</textarea>
+				</td>
 			</tr>
 
 			<!-- 이미지 파일 첨부 -->
 			<tr>
-				<td class="text-center" colspan="2">이미지파일을 첨부하시면 기존에 첨부하신파일은
-					삭제됩니다. <br /> <input id="review_file" type="file"
-					name="review_files">
+				<td class="text-center" colspan="2" align="right">
+					이미지파일을 첨부하시면 기존에 첨부하신파일은 삭제됩니다. <br /> 
+					<input id="review_file" type="file" name="review_files">
 				</td>
 			</tr>
 
 
 			<!-- 리뷰 작성 완료 버튼 -->
 			<tr>
-				<td class="text-center" colspan="2"><input type="submit"
-					value="수정 완료" /> <input type="button" value="취 소"
-					onclick="javascript:history.go(-1)"></td>
+				<td class="text-center" colspan="2" align="center">
+					<br/>
+					<input type="submit" value="수정 완료" /> 
+					<input type="button" value="취 소" onclick="javascript:history.go(-1)"></td>
 			</tr>
 
 		</table>

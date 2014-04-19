@@ -76,7 +76,7 @@
 		<action name="cartDelete" class="board.rest.action.CartDeleteAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result>/board/rest/listCart.jsp</result>
+			<result>/board/rest/deleteCartAlert.jsp</result>
 		</action>
 		
 		<!-- 장바구니 list -->

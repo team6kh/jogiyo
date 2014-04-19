@@ -67,7 +67,10 @@
 	<!-- 장바구니 결제 버튼 -->
 	<div align="center">
 		<button type="button" class="btn btn-primary" onclick="goPayment(this.form)" >구매하기</button>
-		<button type="button" class="btn btn-danger" onclick="goDelete(this.form)">비우기</button>
+		
+		<button type="button" class="btn btn-danger" onclick="javascript:open('cartDelete.action?rest_num=${rest_num}&currentPage=${currentPage}&rest_subject=${rest_subject}&session_id=${sessionScope.session_id}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=150, height=100')">
+			비우기
+		</button>
 	</div>
 </form>
 

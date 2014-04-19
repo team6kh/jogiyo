@@ -17,7 +17,17 @@ public class DeleteReviewAction implements Action, ConDAOAware {
     private int review_rest_currentPage; 
     private int ccp;
     private int review_num;
+    private int currentPage;
     
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
 
 	// DTO 관련 변수
 	private ReviewDTO reviewDTO;
@@ -54,7 +64,7 @@ public class DeleteReviewAction implements Action, ConDAOAware {
 		// DB에서 레코드 삭제
 		sqlMapper.delete("Review.deleteReview", reviewDTO);
 
-		return SUCCESS;
+		return SUCCESS; //deleteCartAleart.jsp
 	}
 
 	// parameter getter & setter
