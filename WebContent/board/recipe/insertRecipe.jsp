@@ -41,7 +41,7 @@
 					function validation() {
 						
 
-						var frm = document.test;
+						var frm = document.inputWarning;
 
 						if (frm.recipe_foodkind.value == "") {
 							alert("종류를 입력해주세요.");
@@ -86,9 +86,51 @@
 
 						return true;
 					}
+					
+					function membervalidation(){
+						var frm = document.inputWarning;
+
+						if (frm.recipe_foodkind.value == "") {
+							alert("종류를 입력해주세요.");
+							return false;
+						}
+
+						else if (frm.recipe_subject.value == "") {
+							alert("제목을 입력해주세요.");
+							return false;
+						}
+
+						else if (frm.recipe_foodsubject.value == "") {
+							alert("요리명을 입력해주세요.");
+							return false;
+						}
+
+						else if (frm.recipe_password.value == "") {
+							alert("비밀번호를 입력해주세요.");
+							return false;
+						}
+
+						else if (frm.recipe_method.value == "") {
+							alert("재료를 입력해주세요.");
+							return false;
+						}
+
+						else if (frm.recipe_time.value == "") {
+							alert("소요시간을 입력해주세요.");
+							return false;
+						} else if (frm.recipe_price.value == "") {
+							alert("비용을 입력해주세요.");
+							return false;
+						} else if (frm.recipe_content.value == "") {
+							alert("방법 및 상세 내용을 입력해주세요.");
+							return false;
+						}
+
+						return true;
+					}
 				</SCRIPT>
 			</header>
-
+			
 			<body>
 				<table width="400" border="0" cellspacing="0" cellpadding="2"
 					align="center">
@@ -96,26 +138,31 @@
 						<td align="center"><h2>RECIPE 게시판</h2></td>
 					</tr>
 				</table>
-				<s:if test="resultClass == NULL">
-					<form name="test" action="insertRecipe.action" method="post"
-						enctype="multipart/form-data" onsubmit="return validation();">
+				<s:if test="resultClass == NULL && #session.session_id == null">
+					<form name="inputWarning" action="insertRecipe.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
 				</s:if>
-
-				<s:else>
-					<form name="test" action="updateRecipe.action" method="post"
-						enctype="multipart/form-data" onsubmit="return validation();">
+				<s:elseif test="resultClass == NULL && #session.session_id != null">
+				    <form name="inputWarning" action="insertRecipe.action" method="post" enctype="multipart/form-data" onsubmit="return membervalidation();" >
+				</s:elseif>
+				<s:elseif test="resultClass != NULL && #session.session_id == null">
+					<form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
 						<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
 						<s:hidden name="currentPage" value="%{currentPage}" />
 						<s:hidden name="old_file" value="%{resultClass.recipe_file}" />
-				</s:else>
+				</s:elseif>
+				<s:elseif test="resultClass != NULL && session.session_id != null">
+				    <form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data" onsubmit="return membervalidation();">
+						<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
+						<s:hidden name="currentPage" value="%{currentPage}" />
+						<s:hidden name="old_file" value="%{resultClass.recipe_file}" />
+				</s:elseif>
 
 				<table width="400" border="1" cellspacing="0" cellpadding="0"
 					bgcolor="" align="center">
 					<tr>
 						<td align="right">종류</td>
-						<td align="left" colspan="3">&nbsp; <select
-							name="recipe_foodkind" id="recipe_foodkind"
-							value="${resultClass.recipe_foodkind}">
+						<td align="left" colspan="3">&nbsp; 
+						<select name="recipe_foodkind" id="recipe_foodkind" value="${resultClass.recipe_foodkind}">
 								<option value="${resultClass.recipe_foodkind}">${resultClass.recipe_foodkind}</option>
 								<option value="한식">한식</option>
 								<option value="양식">양식</option>
@@ -126,56 +173,64 @@
 					</tr>
 					<tr>
 						<td width="100" bgcolor="" align="center">제목</td>
-						<td width="300" colspan="3" align="left"><input type="text"
-							name="recipe_subject" value="${resultClass.recipe_subject}" /></td>
+						<td width="300" colspan="3" align="left">
+						  <input type="text" name="recipe_subject" value="${resultClass.recipe_subject}" /></td>
 					</tr>
 					<tr>
 						<td width="100" bgcolor="" align="center">요리명</td>
-						<td width="300" colspan="3" align="left"><input type="text"
-							name="recipe_foodsubject"
-							value="${resultClass.recipe_foodsubject}" /></td>
+						<td width="300" colspan="3" align="left">
+						  <input type="text" name="recipe_foodsubject" value="${resultClass.recipe_foodsubject}" /></td>
 					</tr>
+					<s:if test="#session.session_id != null">
 					<tr>
 						<td width="100" bgcolor="" align="center">작성자</td>
-						<td width="100" align="left"><input type="text"
-							name="recipe_writer" value="${resultClass.recipe_writer}" /></td>
+						<td width="100" align="left"><p>${sessionScope.session_id}</p>
+						  <input type="hidden" name="recipe_memberwriter" value="${sessionScope.session_id}" />
+						  <input type="hidden" name="recipe_writer" value="${sessionScope.session_id}"/></td>
+					</s:if>
+					<s:else>
+					<tr>
+						<td width="100" bgcolor="" align="center">작성자</td>
+						<td width="100" align="left">
+						  <input type="text" name="recipe_writer" value="${resultClass.recipe_writer}" /></td>
+					</s:else>
+					
 						<td width="100" bgcolor="" align="center">비밀번호</td>
-						<td width="100" align="left"><input type="password"
-							name="recipe_password" value="${resultClass.recipe_password}" /></td>
+						<td width="100" align="left">
+						  <input type="password" name="recipe_password" value="${resultClass.recipe_password}" /></td>
 					</tr>
 					<tr>
 						<td width="100" bgcolor="" align="center">재료</td>
-						<td width="300" colspan="3" align="left"><input type="text"
-							size="40" maxlength="30" name="recipe_method"
-							value="${resultClass.recipe_method}"></td>
+						<td width="300" colspan="3" align="left">
+						  <input type="text" size="40" maxlength="30" name="recipe_method" value="${resultClass.recipe_method}"></td>
 					</tr>
 					<tr>
 						<td width="100" bgcolor="" align="center">소요 시간</td>
-						<td width="100" align="left"><input type="text"
-							name="recipe_time" value="${resultClass.recipe_time}" /></td>
+						<td width="100" align="left">
+						  <input type="text" name="recipe_time" value="${resultClass.recipe_time}" /></td>
 						<td width="100" bgcolor="" align="center">비용</td>
-						<td width="100" align="left"><input type="text"
-							name="recipe_price" value="${resultClass.recipe_price}" /></td>
+						<td width="100" align="left">
+						  <input type="text" name="recipe_price" value="${resultClass.recipe_price}" /></td>
 					</tr>
 					<tr>
 						<td width="100" bgcolor="" align="center">방법 및 상세내용</td>
-						<td width="300" colspan="3" align="left"><s:textarea
-								name="recipe_content" theme="simple"
-								value="%{resultClass.recipe_content}" rows="13" cols="40" /></td>
+						<td width="300" colspan="3" align="left">
+						  <s:textarea name="recipe_content" theme="simple" value="%{resultClass.recipe_content}" rows="13" cols="40" /></td>
 					</tr>
 					<tr>
 						<td width="100" bgcolor="" align="center">첨부파일</td>
-						<td width="300" colspan="3" align="left"><s:file
-								name="recipe_file" theme="simple" /> <s:if
-								test="resultClass.recipe_orgfile != NULL">
-		                     &nbsp;  <s:property
-									value="resultClass.recipe_orgfile" /> 파일이 등록되어 있습니다. 다시 업로드하면 기존의 파일은 삭제됩니다.
-	                            </s:if></td>
+						<td width="300" colspan="3" align="left"> 
+						  <s:file name="recipe_file" theme="simple" /> 
+						  <s:if test="resultClass.recipe_orgfile != NULL"> &nbsp;  
+						  <s:property value="resultClass.recipe_orgfile" /> 
+						       파일이 등록되어 있습니다. 다시 업로드하면 기존의 파일은 삭제됩니다.
+	                      </s:if>
+	                    </td>
 					</tr>
-					<td colspan="4" bgcolor="" align="center"><input name="submit"
-						type="submit" value="등록"> <input type="reset" value="다시작성">
-						<input name="list" type="button" value="목록보기"
-						OnClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
+					<td colspan="4" bgcolor="" align="center">
+					    <input name="submit" type="submit" value="등록"> 
+					    <input type="reset" value="다시작성">
+						<input name="list" type="button" value="목록보기" 	OnClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
 					</td>
 					</tr>
 				</table>

@@ -52,9 +52,10 @@
 					<tr>
 						<td align="center"><h2>${resultClass.recipe_subject}</h2></td>
 					</tr>
-
 					<tr>
+					<s:if test="#session.session_id != null">
 						<td height="20" align="right"><input name="list" type="button" value="추천" onClick="javascript:location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />'"></td>
+					</s:if>
 					</tr>
 				</table>
 
