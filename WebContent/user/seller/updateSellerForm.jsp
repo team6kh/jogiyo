@@ -73,11 +73,11 @@
 			</div>
 			<div class="form-group">
 			  <label>상호명</label>
-			  <input type="text" class="form-control" name="seller_rest_name" value="${sellerDTO.seller_rest_name}" required>
+			  <input type="text" class="form-control" id="seller_rest_name" name="seller_rest_name" value="${sellerDTO.seller_rest_name}" required>
 			</div>
 			<div class="form-group">
 			  <label>주소</label>
-			  <input type="text" class="form-control" name="seller_rest_address" value="${sellerDTO.seller_rest_address}" required>
+			  <input type="text" class="form-control" id="seller_rest_address" name="seller_rest_address" value="${sellerDTO.seller_rest_address}" required>
 			</div>
 			<div class="form-group">
 			  <label>전화번호</label>
@@ -126,8 +126,8 @@
 	<script>
 		$("#user_type").val("seller");
 
-		// disable spaces in input
-		$("input").on({
+		// disable spaces in input except rest_name and rest_address
+		$("input").not("#seller_rest_name, #seller_rest_address").on({
 			keydown : function(e) {
 				if (e.which === 32)
 					return false;

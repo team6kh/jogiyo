@@ -277,6 +277,7 @@
 			<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
 			<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
 			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
+			<button class="btn btn-default">수정</button>
 		</div>
 
 		<c:forEach var="list" items="${list}">

@@ -18,6 +18,7 @@
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
+<link href="jogiyo.css" rel="stylesheet">
 <link href="user/common/login/login.css" rel="stylesheet">
 
 </head>

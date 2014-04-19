@@ -19,6 +19,8 @@
 <!-- Custom styles for this template -->
 <link href="user/common/registration/registration.css" rel="stylesheet">
 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key="></script>
+
 <script type="text/javascript">
 	// 선택하는 가입유형에 따라 다른 폼을 로딩합니다.
 	function optionCheck(){
@@ -109,6 +111,51 @@
 			//$('#btnSubmit').prop('disabled', false);
 		}		
 	}
+	
+	//
+	// Geolocation with Google Maps
+	function get_current_postion() {
+	    if(navigator.geolocation)
+	        navigator.geolocation.getCurrentPosition(handleGetCurrentPosition, handleGetCurrentPositionError);		
+	}
+	
+	function handleGetCurrentPosition(location){
+	    
+	    var position = new google.maps.LatLng(location.coords.latitude, location.coords.longitude)
+	    
+	    new google.maps.Geocoder().geocode({location: position}, handleGeocoderGetLocations);
+	}
+	
+	function handleGeocoderGetLocations( addresses, status ){
+	        if (status != google.maps.GeocoderStatus.OK)
+	            return maybe_log( 'failed to talk to google' );
+	            
+	        var city = getCityFromPlacemarks(addresses);
+	        //var country = getCountryFromPlacemarks(addresses);
+	        
+	        //mapOverlay.style.visibility = 'visible';
+	        document.getElementById('seller_rest_address').value = addresses[0].formatted_address;
+	    }
+	    	    
+	function getCityFromPlacemarks( placemarks ){
+	    return extractNameFromGoogleGeocoderResults('locality', placemarks)
+	}
+
+	function getCountryFromPlacemarks(placemarks){
+	    return extractNameFromGoogleGeocoderResults('country', placemarks)
+	}
+
+	function extractNameFromGoogleGeocoderResults(type, results){
+	    for( var i = 0, l = results.length; i < l; i ++)
+	        for(var j = 0, l2 = results[i].types.length; j < l2; j++ )
+	            if( results[i].types[j] == type )
+	                 return results[i].address_components[0].long_name;
+	    return ''
+	}
+	    
+	function handleGetCurrentPositionError(){
+	    mapDiv.innerHTML = 'Something went horribly wrong!';
+	}
 </script>
 
 </head>
@@ -134,12 +181,15 @@
 			</div>
 			<div class="form-group">
 			  <label>상호명</label>
-			  <input type="text" class="form-control" name="seller_rest_name" required autofocus>
+			  <input type="text" class="form-control" id="seller_rest_name" name="seller_rest_name" required autofocus>
 			</div>
 			<div class="form-group">
 			  <label>주소</label>
-			  <input type="text" class="form-control" name="seller_rest_address" required>
-			</div>				
+			  <input type="text" class="form-control" id="seller_rest_address" name="seller_rest_address" required>
+			  <button type="button" class="btn btn-default btn-block" onclick="get_current_postion(); return false;">
+			    <span class="glyphicon glyphicon-map-marker"></span> 현재위치 자동검색
+			  </button>
+			</div>							
 			<div class="form-group">
 			  <label>전화번호</label>
 			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="seller_telnum" required>
@@ -186,8 +236,8 @@
 	<script src="dist/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
-		// disable spaces in input
-		$("input").on({
+		// disable spaces in input except rest_name and rest_address
+		$("input").not("#seller_rest_name, #seller_rest_address").on({
 			keydown : function(e) {
 				if (e.which === 32)
 					return false;
