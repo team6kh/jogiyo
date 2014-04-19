@@ -1,10 +1,8 @@
 package board.review.action;
 
 import board.review.dto.ReviewDTO;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
-
 import common.ConDAOAware;
 import common.Constants;
 
@@ -20,13 +18,6 @@ public class DeleteReviewAction implements Action, ConDAOAware {
     private int currentPage;
     
 
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
 
 
 	// DTO 관련 변수
@@ -104,7 +95,13 @@ public class DeleteReviewAction implements Action, ConDAOAware {
     {
         this.review_rest_currentPage = review_rest_currentPage;
     }
-	
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
 	
 	// ConDAOAware 인터페이스
 	public void setConDAO(SqlMapClient sqlMapper) {

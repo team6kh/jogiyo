@@ -2,7 +2,6 @@ package board.rest.action;
 
 import board.rest.dto.RestDTO;
 import board.restopt.dto.RestoptDTO;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -13,7 +12,7 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 	public static SqlMapClient sqlMapper;
 	private RestDTO paramClass = new RestDTO();
 	private RestoptDTO paramClass1 = new RestoptDTO();
-	
+
 	private int rest_num;
 	private String session_id;
 	
@@ -31,6 +30,9 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 		
 		//옵션레코드 제거
 		sqlMapper.delete("Rest.deleteRestoptBoard", getRest_num());
+		
+		//카트레코드 제거
+		sqlMapper.delete("Rest.deleteCartBoard", paramClass);
 		
 		return SUCCESS; // 액션-> listRest.jsp
 	}
