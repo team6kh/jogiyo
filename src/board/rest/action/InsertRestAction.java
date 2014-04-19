@@ -15,6 +15,8 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 
+import user.seller.dto.SellerDTO;
+
 public class InsertRestAction extends ActionSupport implements ConDAOAware{
 
 	public static Reader reader; 
@@ -25,6 +27,8 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	//RestoptBoard
 	private RestoptDTO paramClass1 = new RestoptDTO();
 	private RestoptDTO resultClass1 = new RestoptDTO();
+	//Seller
+	private SellerDTO sellerDTO = new SellerDTO();
 
 	//폼으로 넘길 넘버
 	int temp;
@@ -39,10 +43,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private int rest_amount;
 	private String rest_localcategory;
 	private String rest_typecategory;
-	private String rest_writer_name;//임시히든
-	private String rest_writer_telnum;//임시히든
-	private String rest_writer_mobilenum;//임시히든
-	private String rest_writer_address;//임시히든
+	private String session_id;//임시히든
 	Calendar today = Calendar.getInstance();
 
 	//insertRest.jsp에서 사용자가 입력한 옵션명 파라미터
@@ -207,19 +208,21 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 
 	//사용자가 글 등록(submit)했을시
 	public String execute() throws Exception {
-
+		
+		sellerDTO.setSeller_id(getSession_id());
+		sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectWhereSellerId", sellerDTO);
+		
 		//아래의 파라미터 insert
 		paramClass.setRest_subject(getRest_subject());
 		paramClass.setRest_localcategory(getRest_localcategory());
 		paramClass.setRest_typecategory(getRest_typecategory());
-		paramClass.setRest_writer_name(getRest_writer_name());
-		paramClass.setRest_writer_telnum(getRest_writer_telnum());
-		paramClass.setRest_writer_mobilenum(getRest_writer_mobilenum());
-		paramClass.setRest_writer_address(getRest_writer_address());
+		paramClass.setRest_writer_name(sellerDTO.getSeller_name()); //세션의 정보를 넣음
+		paramClass.setRest_writer_telnum(sellerDTO.getSeller_telnum());//
+		paramClass.setRest_writer_mobilenum(sellerDTO.getSeller_mobilenum());//
+		paramClass.setRest_writer_address(sellerDTO.getSeller_rest_address());//
 		paramClass.setRest_reg_date(today.getTime());
 
 		sqlMapper.insert("Rest.insertRest_board", paramClass);
-
 
 
 		// num, resnum, 옵션명, 옵션가 insert
@@ -665,30 +668,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	}
 	public void setRest_typecategory(String rest_typecategory) {
 		this.rest_typecategory = rest_typecategory;
-	}
-	public String getRest_writer_name() {
-		return rest_writer_name;
-	}
-	public void setRest_writer_name(String rest_writer_name) {
-		this.rest_writer_name = rest_writer_name;
-	}
-	public String getRest_writer_telnum() {
-		return rest_writer_telnum;
-	}
-	public void setRest_writer_telnum(String rest_writer_telnum) {
-		this.rest_writer_telnum = rest_writer_telnum;
-	}
-	public String getRest_writer_mobilenum() {
-		return rest_writer_mobilenum;
-	}
-	public void setRest_writer_mobilenum(String rest_writer_mobilenum) {
-		this.rest_writer_mobilenum = rest_writer_mobilenum;
-	}
-	public String getRest_writer_address() {
-		return rest_writer_address;
-	}
-	public void setRest_writer_address(String rest_writer_address) {
-		this.rest_writer_address = rest_writer_address;
 	}
 	public Calendar getToday() {
 		return today;
@@ -1364,5 +1343,12 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	}
 	public void setOptfileUploadPath15(String optfileUploadPath15) {
 		this.optfileUploadPath15 = optfileUploadPath15;
+	}
+
+	public String getSession_id() {
+		return session_id;
+	}
+	public void setSession_id(String session_id) {
+		this.session_id = session_id;
 	}
 }

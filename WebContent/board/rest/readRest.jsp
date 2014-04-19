@@ -277,6 +277,8 @@
 			<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
 			<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
 			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
+			
+			<input type="hidden" id="rest_writer_address" name="rest_writer_address" value=<s:property value="resultClass.rest_writer_address" /> />
 		</div>
 
 		<c:forEach var="list" items="${list}">

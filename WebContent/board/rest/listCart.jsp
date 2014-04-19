@@ -70,4 +70,8 @@
 		<button type="button" class="btn btn-danger" onclick="goDelete(this.form)">비우기</button>
 	</div>
 </form>
+
+
+
+
 </body>
