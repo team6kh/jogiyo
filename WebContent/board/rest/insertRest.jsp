@@ -192,7 +192,7 @@
 						<tr>
 							<td colspan="2"  align="right">
 								<br/>
-								<input name="agreecheck" type="checkbox" onClick="agreesubmit(this)"> <b>예, 동의 합니다</b>
+								<input name="agreecheck" type="checkbox" onClick="agreesubmit(this)"> <b>예, 위 약관에 동의 합니다</b>
 							</td>
 						</tr>
 						
@@ -202,7 +202,7 @@
 						
 						
 						<tr align="center">
-							<td align="right" ><font color="#FF0000">*</font>상품명&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="right" ><font size=3><b>상품명</b></font>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td align="left">
 								<s:textfield name="rest_subject" theme="simple" value="%{resultClass.rest_subject}" maxlength="50"/>
 							</td>
@@ -220,7 +220,7 @@
 							</td>
 							<td align="left">
 								<div id="stop"></div>
-								<font color='#BDBDBD'>옵션명과 옵션가를 정의하세요.</font>
+								<font color='#BDBDBD'>옵션명, 옵션가 정의 및 옵션사진을 업로드해주세요.</font>
 							</td>
 						</tr>
 						
@@ -242,7 +242,7 @@
 						
 						
 						<tr align="center">
-							<td align="right"><font color="#FF0000">*</font>지역 카테고리&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="right"><font size=3><b>지역 카테고리</b></font>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td align="left">
 								<select name = "rest_localcategory">
 									<option value = "11">서울 지역</option>
@@ -259,7 +259,7 @@
 						<tr><td colspan="2" ><br/></td></tr>
 						    
 						<tr align="center">
-							<td align="right"><font color="#FF0000">*</font>종류 카테고리&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="right"><font size=3><b>종류 카테고리</b></font>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td align="left">
 								<select name = "rest_typecategory">
 									<option value = "21">한식</option>
@@ -276,7 +276,7 @@
 						
 						<tr align="center">
 							<td align="right">
-								매인 사진 업로드&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/><br/>
+								<font size=3><b>매인 사진 업로드</b></font>&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/><br/>
 							</td>
 							<td align="left">
 								<s:file name="upload1" theme="simple"/>
@@ -291,7 +291,7 @@
 						
 						<tr align="center">
 							<td align="right">
-								상세 사진 업로드&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/><br/>
+								<font size=3><b>상세 사진 업로드</b></font>&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/><br/>
 							</td>
 							<td align="left">
 								<s:file name="upload2" theme="simple"/>
