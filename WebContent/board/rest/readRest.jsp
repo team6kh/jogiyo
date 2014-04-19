@@ -158,7 +158,7 @@
 	}
 
 	function insertCart(form) {
-		alert("insertCart");
+		alert("장바구니에 담겼습니다.");
 		var rest_num = document.getElementById("rest_num").value;
 		var rest_subject = document.getElementById("rest_subject").value;
 		var session_id = document.getElementById("session_id").value;
@@ -277,8 +277,17 @@
 			<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
 			<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
 			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
-			<button class="btn btn-default">수정</button>
+			<input type="hidden" id="rest_writer_address" name="rest_writer_address" value=<s:property value="resultClass.rest_writer_address" /> />
+
+			<c:if test="${sessionScope.session_id==resultClass.rest_writer_id}">
+				<div class="forSeller" align="right">
+					<a href="updateRest.action" class="btn btn-success">수정</a>
+					<a href="deleteRest.action?rest_num=${resultClass.rest_num}&session_id=${sessionScope.session_id}" class="btn btn-danger">삭제</a>
+				</div>
+			</c:if>	
 		</div>
+
+
 
 		<c:forEach var="list" items="${list}">
 		<form class="col-sm-4 col-md-4" id="cartForm" name="test">					
@@ -429,8 +438,8 @@
 						<!-- 임시값 "test_Customer" session_id 값으로 교체 -->
 						<c:if test="${reviewDTO.review_writer == sessionScope.session_id}">
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-default" onclick="javascript:open('updateReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=500, height=500')">수정</button>
-							<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=200')">삭제</button>
+							<button class="btn btn-default" onclick="javascript:open('updateReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=500, height=270')">수정</button>
+							<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
 						</c:if>
 					</div>
 

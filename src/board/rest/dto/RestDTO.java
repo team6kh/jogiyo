@@ -17,14 +17,17 @@ public class RestDTO {
 	private String rest_content_savname;//
 
 	private String rest_destFile2;
+	
+	private String rest_writer_id;
 	private String rest_writer_name;
 	private String rest_writer_telnum;
 	private String rest_writer_mobilenum;
 	private String rest_writer_address;
+	
 	private Date rest_reg_date;
 	private int rest_readcount;//
-
-
+	
+	
 	public int getRest_num() {
 		return rest_num;
 	}
@@ -85,6 +88,12 @@ public class RestDTO {
 	public void setRest_destFile2(String rest_destFile2) {
 		this.rest_destFile2 = rest_destFile2;
 	}
+	public String getRest_writer_id() {
+		return rest_writer_id;
+	}
+	public void setRest_writer_id(String rest_writer_id) {
+		this.rest_writer_id = rest_writer_id;
+	}
 	public String getRest_writer_name() {
 		return rest_writer_name;
 	}
@@ -121,5 +130,4 @@ public class RestDTO {
 	public void setRest_readcount(int rest_readcount) {
 		this.rest_readcount = rest_readcount;
 	}
-
 }

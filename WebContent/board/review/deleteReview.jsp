@@ -28,13 +28,17 @@
 		<input type="hidden" id="ccp" name="ccp" value="${ccp}" /> 
 		<input type="hidden" id="review_num" name="review_num" value="${review_num}" />
 					
-		<table class="table table-striped table-forum">
+		<table class="table table-striped table-forum" align="center">
 			<tr>
-				<th>정말 삭제하시겠습니까?</th>
+				<td align="center">
+					<br/>
+					<font size=4 color="red"><b>정말 삭제하시겠습니까?</b></font>
+				</td>
 			</tr>
 			<tr>
-				<td>
-					<input type="submit" value="확 인" />
+				<td align="center">
+					<br/>
+					<input type="submit" value="확 인" /> 
 					<input type="button" value="취 소" onclick="javascript:self.close()"> <!-- 파라메터 -->
 				</td>
 			</tr>

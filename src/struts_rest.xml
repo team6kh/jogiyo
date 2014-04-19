@@ -37,6 +37,16 @@
 				<param name="actionName">listRest</param>
 			</result>
 		</action>
+		
+		<!-- 상품 삭제 액션 -->
+		<action name="deleteRest" class="board.rest.action.DeleteRestAction" >
+			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params"/>
+			<result type="redirect-action">
+				<param name="actionName">listRest</param>
+			</result>
+		</action>
+		
 
 		<!-- 리스트 액션 -->
 		<action name="listRest" class="board.rest.action.ListRestAction">
@@ -76,7 +86,7 @@
 		<action name="cartDelete" class="board.rest.action.CartDeleteAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
-			<result>/board/rest/listCart.jsp</result>
+			<result>/board/rest/deleteCartAlert.jsp</result>
 		</action>
 		
 		<!-- 장바구니 list -->
