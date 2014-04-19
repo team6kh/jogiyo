@@ -43,7 +43,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private int rest_amount;
 	private String rest_localcategory;
 	private String rest_typecategory;
-	private String session_id;//임시히든
+	private String session_id;
 	Calendar today = Calendar.getInstance();
 
 	//insertRest.jsp에서 사용자가 입력한 옵션명 파라미터
@@ -216,6 +216,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		paramClass.setRest_subject(getRest_subject());
 		paramClass.setRest_localcategory(getRest_localcategory());
 		paramClass.setRest_typecategory(getRest_typecategory());
+		paramClass.setRest_writer_id(getSession_id());
 		paramClass.setRest_writer_name(sellerDTO.getSeller_name()); //세션의 정보를 넣음
 		paramClass.setRest_writer_telnum(sellerDTO.getSeller_telnum());//
 		paramClass.setRest_writer_mobilenum(sellerDTO.getSeller_mobilenum());//

@@ -270,16 +270,24 @@
 
 	<!-- 메뉴 리스트 col-md-9-->
 	<div class="col-md-9">
-
+		
 		<!-- 메뉴 리스트 page-header -->
 	    <div class="page-header">
 			<h1>메뉴 리스트 <small>장바구니에 담아 결제해주세요.</small></h1>
 			<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
 			<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
 			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
-			
 			<input type="hidden" id="rest_writer_address" name="rest_writer_address" value=<s:property value="resultClass.rest_writer_address" /> />
+			
+			<c:if test="${sessionScope.session_id==resultClass.rest_writer_id}">
+				<div class="forSeller" align="right">
+					<button type="button" class="btn btn-success">수정</button>
+					<button type="button" class="btn btn-danger">삭제</button>
+				</div>
+			</c:if>	
 		</div>
+		
+		
 
 		<c:forEach var="list" items="${list}">
 		<form class="col-sm-4 col-md-4" id="cartForm" name="test">					
