@@ -36,14 +36,12 @@
 							+ "옵션가"
 							+ fields
 							+ ".&nbsp&nbsp <input type='text' name='restopt_priceplus"+fields+"' value=''/> 원<br/>"
-							+ "옵션사진"
-							+ fields
 							+ ".&nbsp&nbsp <input type='file' name='optupload"+fields+"' />"
-							+ " <a href='#' onclick='removeInput(this.parentNode)' />옵션제거</div>";
+							+ " <a href='#' onclick='removeInput(this.parentNode)' />옵션"+fields+"제거 <br/><hr></div>";
 					fields += 1;
 					//optMap.put("restopt_subject"+fields,"restopt_priceplus"+fields);
 				} else {
-					document.getElementById('stop').innerHTML += "<font color='#FF0000'>옵션은 최대 15개만 등록할 수 있습니다.</font><br/>";
+					document.getElementById('stop').innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;<font color='#FF0000'>옵션은 최대 15개만 등록할 수 있습니다.</font><br/>";
 					document.form.add.disabled = true;
 				}
 			}
@@ -124,21 +122,31 @@
 		<!-- container -->
 		<div class="container">
 		
-			<table width="600" border="0" cellspacing="0" cellpadding="2">
+			<table width="600" border="0" cellspacing="0" cellpadding="2" align="center">
+				<tr><td colspan="2" ><br/></td></tr>
 				<tr>
 					<td align="center">
-						<h2>상품 등록 페이지</h2>
+						<h2>상품 등록 페이지</h2><br/><br/><br/>
 					</td>
 				</tr>
+				
 			</table>
 			
+			
+			
+			
+			
+			
+			
+			
+			<!-- 최초 입력시에 -->
 			<s:if test="rest_num == 0">
 				<form name="insertRestForm" action="insertRest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
 					<!-- 임시 히든값 -->
 					<input type="hidden" name="session_id" value="${sessionScope.session_id}" />
 				
 			</s:if>
-			<s:else>
+			<s:else>	<!-- 수정 입력시에 -->
 				<form name="updateRestForm" action="updateRest.action" method="post" enctype="multipart/form-data">
 					<s:hidden name="rest_num" value="%{resultClass.rest_num}" />
 					<s:hidden name="currentPage" value="%{currentPage}" />
@@ -147,10 +155,20 @@
 					<s:hidden name="old_file2" value="%{resultClass.file_savname2}" />
 			</s:else>
 			
-					<table width="600" border="0" cellspacing="0" cellpadding="0">
+			
+			
+			
+			
+			
+					<table width=75% border="0" cellspacing="0" cellpadding="0" align="center">
 						<tr bgcolor="#777777">
 							<td height="1" colspan="2"></td>
 						</tr>
+						
+						
+						
+						
+						
 						
 						<tr>
 							<td colspan="2">
@@ -169,15 +187,23 @@
 ▶ 조기요는 관련 법률에 의거하여 위 내용에 해당하는 사실이 접수되어 적발될 시 해당고객에게 사전 공지없이관련 자료 삭제 및 이용정지 가 될 수 있습니다.
 ▶ 특히 관련성이 없는 상품등록이나 광고글에 대해서는 회원 탈퇴를 원칙 으로 처리되니 이점 유의하시기 바랍니다
 								</textarea>
-						
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"  align="right">
+								<br/>
 								<input name="agreecheck" type="checkbox" onClick="agreesubmit(this)"> <b>예, 동의 합니다</b>
 							</td>
 						</tr>
 						
 						
-						<tr>
-							<td width="150"><font color="#FF0000">*</font>상품명</td>
-							<td width="450">
+						<tr><td colspan="2" ><hr></td></tr>
+						
+						
+						
+						<tr align="center">
+							<td align="right" ><font color="#FF0000">*</font>상품명&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="left">
 								<s:textfield name="rest_subject" theme="simple" value="%{resultClass.rest_subject}" maxlength="50"/>
 							</td>
 						</tr>
@@ -185,35 +211,39 @@
 							<td height="1" colspan="2"></td>
 						</tr>
 						
-						<tr>
-							<td>
+						<tr><td colspan="2" ><br/></td></tr>
+						
+						<tr align="center">
+							<td align="right">
 								<input type="button"  name="add" value="옵션추가" onclick="addInput()"/>
+								&nbsp;&nbsp;&nbsp;&nbsp;
 							</td>
-							<td>
+							<td align="left">
 								<div id="stop"></div>
 								<font color='#BDBDBD'>옵션명과 옵션가를 정의하세요.</font>
 							</td>
 						</tr>
 						
-						<tr>
-							<td>
+						<tr><td colspan="2" ><br/></td></tr>
+						
+						<tr align="center">
+							<td align="right">
 								<input type="hidden" name="virRest_num" value="${virRest_num}" />
+								&nbsp;&nbsp;&nbsp;&nbsp;
 							</td>
-							<td>
+							<td align="left">
 								<div id="text">
 									<!-- 옵션추가 클릭시 여기에 태그 추가 -->
 								</div>
 							</td>
 						</tr>
 						
+						<tr><td colspan="2" ><br/></td></tr>
 						
-						<tr>
-							<td height="1" colspan="2"></td>	
-						</tr>
 						
-						<tr>
-							<td><font color="#FF0000">*</font>지역 카테고리</td>
-							<td>
+						<tr align="center">
+							<td align="right"><font color="#FF0000">*</font>지역 카테고리&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="left">
 								<select name = "rest_localcategory">
 									<option value = "11">서울 지역</option>
 									<option value = "12">경기/인천</option>
@@ -225,13 +255,12 @@
 								</select>
 							</td>
 						</tr>
-						<tr>
-							<td height="1" colspan="2"></td>	
-						</tr>
+						
+						<tr><td colspan="2" ><br/></td></tr>
 						    
-						<tr>
-							<td><font color="#FF0000">*</font>종류 카테고리</td>
-							<td>
+						<tr align="center">
+							<td align="right"><font color="#FF0000">*</font>종류 카테고리&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="left">
 								<select name = "rest_typecategory">
 									<option value = "21">한식</option>
 									<option value = "22">양식</option>
@@ -241,37 +270,41 @@
 								</select>
 							</td>
 						</tr>
-						<tr>
-							<td height="1" colspan="2"></td>	
-						</tr>
+						
+						<tr><td colspan="2" ><br/></td></tr>
 						
 						
-						<tr>
-							<td>매인 사진 업로드</td>
-							<td>
+						<tr align="center">
+							<td align="right">
+								매인 사진 업로드&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/><br/>
+							</td>
+							<td align="left">
 								<s:file name="upload1" theme="simple"/>
 								<s:if test="resultClass.file_orgname1 != NULL">
 									&nbsp; * <s:property value="resultClass.file_orgname1" /> 재업로드시 기존파일은 삭제됩니다.
 								</s:if>
+								<font color="grey">상품이 매인리스트에 노출될 이미지를 업로드 해주세요. <br/> 최적 이미지 크기 125x125 </font>
 							</td>
 						</tr>
-						<tr>
-							<td height="1" colspan="2"></td>	
-						</tr>
 						
-						<tr>
-							<td>상세 사진 업로드</td>
-							<td>
+						<tr><td colspan="2" ><br/></td></tr>
+						
+						<tr align="center">
+							<td align="right">
+								상세 사진 업로드&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/><br/>
+							</td>
+							<td align="left">
 								<s:file name="upload2" theme="simple"/>
 								<s:if test="resultClass.file_orgname2 != NULL">
 									&nbsp; * <s:property value="resultClass.file_orgname2" /> 재업로드시 기존파일은 삭제됩니다.
 								</s:if>
+								<font color="grey">상품의 배경에 노출될 이미지를 업로드 해주세요. <br/> 최적 이미지 크기 1280x200 </font>
 							</td>
 						</tr>
-						<tr>
-							<td height="1" colspan="2"></td>	
-						</tr>
 						
+						<tr><td colspan="2" ><br/></td></tr>
+						<tr><td colspan="2" ><hr></td></tr>
+						<tr><td colspan="2" ><br/></td></tr>
 						
 						<tr>
 							<td align="right" colspan="2">
@@ -279,6 +312,9 @@
 								<input name="cancel" type="button" value="상품 등록 취소" onClick="javascript:location.href='insertCancelRestForm.action'" />
 							</td>
 						</tr>
+						
+						<tr><td colspan="2" ><br/></td></tr>
+						<tr><td colspan="2" ><br/></td></tr>
 					</table>
 					
 					
