@@ -1,0 +1,27 @@
+.btn-primary {
+	color: #fff;
+	background-color: #5cb85c;
+	border-color: #4cae4c;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+	color: #fff;
+	background-color: #47a447;
+	border-color: #398439;
+}
+
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+	color: #fff;
+	background-color: #5cb85c;
+	border-color: #5cb85c;
+}
+
+.pagination>li>a, .pagination>li>span {
+	color: #47a447;
+}
+
+.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus {
+	color: #5cb85c;
+	background-color: #eee;
+	border-color: #ddd;
+}

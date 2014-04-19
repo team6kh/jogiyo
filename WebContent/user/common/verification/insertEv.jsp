@@ -4,5 +4,3 @@
 <script type="text/javascript">
 	parent.readBuyerAlert.innerHTML = "전송하였습니다.";
 </script>
-
-</body>

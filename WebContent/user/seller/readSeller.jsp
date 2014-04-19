@@ -17,6 +17,7 @@
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
+<link href="jogiyo.css" rel="stylesheet">
 <link href="user/common/registration/registration.css" rel="stylesheet">
 
 <script type="text/javascript">
