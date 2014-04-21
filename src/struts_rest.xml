@@ -38,7 +38,19 @@
 			</result>
 		</action>
 		
-		<!-- 상품 삭제 액션 -->
+		
+		<!--글 읽기에서 상품 수정 클릭시 -->
+		<action name="updateRestForm" class="board.rest.action.UpdateRestAction"  method="form">
+			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params"/>
+			<result>/board/rest/updateRest.jsp</result>
+		</action>
+		
+		<!-- updateRest.jsp에서 submit(수정하기) 클릭시 -->
+		
+		
+		
+		<!-- 글 읽기에서 상품 삭제 클릭시 -->
 		<action name="deleteRest" class="board.rest.action.DeleteRestAction" >
 			<interceptor-ref name="conDAO"/>
 			<interceptor-ref name="params"/>
@@ -46,7 +58,6 @@
 				<param name="actionName">listRest</param>
 			</result>
 		</action>
-		
 
 		<!-- 리스트 액션 -->
 		<action name="listRest" class="board.rest.action.ListRestAction">
@@ -83,6 +94,7 @@
 			<result>/board/rest/listCart.jsp</result>
 		</action>
 		
+		<!-- 장바구니 delete -->
 		<action name="cartDelete" class="board.rest.action.CartDeleteAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>

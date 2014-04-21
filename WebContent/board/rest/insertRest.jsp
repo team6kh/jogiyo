@@ -40,7 +40,6 @@
 							+ ".&nbsp&nbsp <input type='file' name='optupload"+fields+"' />"
 							+ " <a href='#' onclick='removeInput(this.parentNode)' />옵션"+fields+"제거 <br/><hr></div>";
 					fields += 1;
-					//optMap.put("restopt_subject"+fields,"restopt_priceplus"+fields);
 				} else {
 					document.getElementById('stop').innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;<font color='#FF0000'>옵션은 최대 15개만 등록할 수 있습니다.</font><br/>";
 					document.form.add.disabled = true;
