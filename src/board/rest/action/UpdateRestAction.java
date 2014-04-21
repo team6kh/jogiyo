@@ -428,8 +428,9 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 			//필요한 레코드는 그대로임
 			//아래에서 사용자가 수정한 정보들을 update 함
 			
+			//그리고 새로 사용자가 추가한 옵션들은 insert함
 			
-			///
+			
 			if(getRestopt_subject1() != null && getRestopt_priceplus1() != 0){
 				paramClass1.setRestopt_rest_num(getRest_num());
 				paramClass1.setRestopt_subject(restopt_subject1);
@@ -462,12 +463,16 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						paramClass1.setRestopt_savname(list.get(0).getRestopt_savname());
 					}
 				}
-
-				sqlMapper.update("Rest.updateRestopt", paramClass1);
+				
+				if(0<listsize){ 
+					if(list.get(0).getRestopt_num() != 0){// 기존 옵션레코드가 있었을 경우 update
+						sqlMapper.update("Rest.updateRestopt", paramClass1);
+					}else{ //옵션을 새로 추가하가한 경우 insert
+						sqlMapper.insert("Rest.insertRestopt", paramClass1);
+					}
+				}
+				
 			}
-			///
-			
-			
 			
 			
 			if(getRestopt_subject2() != null && getRestopt_priceplus2() != 0){
@@ -501,7 +506,15 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 					}
 				}
 
-				sqlMapper.update("Rest.updateRestopt", paramClass1);
+				if(1<listsize){ 
+					if(list.get(1).getRestopt_num() != 0){// 기존 옵션레코드가 있었을 경우 update
+						sqlMapper.update("Rest.updateRestopt", paramClass1);
+					}else{ //옵션을 새로 추가하가한 경우 insert
+						sqlMapper.insert("Rest.insertRestopt", paramClass1);
+					}
+				}
+				
+				
 			}
 			if(getRestopt_subject3() != null && getRestopt_priceplus3() != 0){
 				paramClass1.setRestopt_rest_num(getRest_num());
@@ -533,8 +546,8 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						paramClass1.setRestopt_savname(list.get(2).getRestopt_savname());
 					}
 				}
-				
 				sqlMapper.update("Rest.updateRestopt", paramClass1);
+				
 			}
 			if(getRestopt_subject4() != null && getRestopt_priceplus4() != 0){
 				paramClass1.setRestopt_rest_num(getRest_num());
