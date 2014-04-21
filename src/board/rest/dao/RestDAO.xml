@@ -192,6 +192,14 @@
 
 
 	<!-- update -->
+	<update id="updateRestone" parameterClass="RestDTO">
+		UPDATE Rest_board SET rest_subject = #rest_subject#,
+		rest_localcategory = #rest_localcategory#,
+		rest_typecategory = #rest_typecategory#
+		<include refid="where-num" />
+	</update>
+	
+	
 	<update id="updateFile" parameterClass="RestDTO">
 		UPDATE Rest_board SET rest_destFile1 = #rest_destFile1#,
 		rest_main_orgname = #rest_main_orgname#,
@@ -241,7 +249,6 @@
 		DELETE FROM review_board
 		where review_rest=#rest_num#	
 	</delete>
-	
 	
 	
 	

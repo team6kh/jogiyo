@@ -47,6 +47,13 @@
 		</action>
 		
 		<!-- updateRest.jsp에서 submit(수정하기) 클릭시 -->
+		<action name="updateRest" class="board.rest.action.UpdateRestAction" >
+			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="fileUpload"/>
+			<interceptor-ref name="params"/>
+			<result>/board/rest/preRead.jsp</result>
+		</action>
+		
 		
 		
 		

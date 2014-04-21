@@ -76,10 +76,12 @@
 					<s:property value="pagingHtml" escape="false" />
 				</ul>
 			</div>
-
-			<div class="pull-right">
-				<a href="insertRestForm.action" class="btn btn-primary">글쓰기</a>
-			</div>
+			
+			<c:if test="${sessionScope.session_type=='seller'}">
+				<div class="pull-right">
+					<a href="insertRestForm.action" class="btn btn-primary">글쓰기</a>
+				</div>
+			</c:if>
 
 		</div>
 		<!-- end of test board pretty -->

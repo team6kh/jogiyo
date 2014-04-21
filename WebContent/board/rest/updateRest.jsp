@@ -104,21 +104,14 @@
 						<h2>상품 등록 페이지</h2><br/><br/><br/>
 					</td>
 				</tr>
-				
 			</table>
 			
 			
-			
-			
 			<form name="updateRestForm" action="updateRest.action" method="post" enctype="multipart/form-data">
-				<s:hidden name="rest_num" value="%{rest_num}" />
-				<s:hidden name="currentPage" value="%{currentPage}" />
+				<input type="hidden" name="rest_num" value="${rest_num}" />
+				<input type="hidden" name="currentPage" value="${currentPage}" />
 				
 				
-				<s:hidden name="old_file1" value="%{resultClass.file_savname1}" />
-				<s:hidden name="old_file2" value="%{resultClass.file_savname2}" />
-		
-		
 				<table width=75% border="0" cellspacing="0" cellpadding="0" align="center">
 					<tr bgcolor="#777777">
 						<td height="1" colspan="2"></td>
@@ -239,8 +232,8 @@
 					
 					<tr>
 						<td align="right" colspan="2">
-							<input name="submit" type="submit" value="상품 수정" disabled/>
-							<input name="cancel" type="button" value="상품 수정 취소" onClick="javascript:location.href='listRest.action'" />
+							<input name="submit" type="submit" value="상품 수정" />
+							<input name="cancel" type="button" value="상품 수정 취소" onClick="javascript:location.href='readRest.action?rest_num=${rest_num}&currentPage=${currentPage}'" />
 						</td>
 					</tr>
 					
