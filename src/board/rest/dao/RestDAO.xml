@@ -209,7 +209,17 @@
 		rest_content_savname = #rest_content_savname#
 		<include refid="where-num" />
 	</update>
-
+	
+	<update id="updateRestopt" parameterClass="RestoptDTO">
+		UPDATE RestOpt_Board SET restopt_subject=#restopt_subject#,
+														restopt_priceplus=#restopt_priceplus#,
+														restopt_destFile1=#restopt_destFile1#,
+														restopt_orgname=#restopt_orgname#,
+														restopt_savname=#restopt_savname#
+		where restopt_rest_num=#restopt_rest_num# and restopt_subject=#restopt_subject#
+	</update>
+	
+	
 	<update id="updateRest_readcount" parameterClass="RestDTO">
 		UPDATE Rest_board SET rest_readcount = rest_readcount + 1
 		<include refid="where-num" />
@@ -239,6 +249,12 @@
 		DELETE FROM RestOpt_Board
 		where restopt_rest_num=#rest_num#	
 	</delete>
+	
+	<delete id="deleteRestoptOne" parameterClass="RestoptDTO">
+		DELETE FROM RestOpt_Board
+		where restopt_rest_num=#restopt_rest_num# and restopt_subject=#restopt_subject#
+	</delete>
+	
 	
 	<delete id="deleteCartBoard" parameterClass="RestDTO">
 		DELETE FROM Cart_board

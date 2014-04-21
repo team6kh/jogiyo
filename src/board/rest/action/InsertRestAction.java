@@ -2,17 +2,13 @@ package board.rest.action;
 
 import board.rest.dto.RestDTO;
 import board.restopt.dto.RestoptDTO;
-
 import com.opensymphony.xwork2.ActionSupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
-
 import common.ConDAOAware;
 import common.Constants;
-
 import java.util.*;
 import java.io.Reader;
 import java.io.File;
-
 import org.apache.commons.io.FileUtils;
 
 import user.seller.dto.SellerDTO;

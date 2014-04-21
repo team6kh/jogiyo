@@ -25,7 +25,7 @@
 				
 			fields = 1;
 
-			function addInput(a, b) {
+			function addInput(a, b, c) {
 				if (fields != 16) {
 
 					document.getElementById('text').innerHTML += "<div>옵션명"+ fields
@@ -33,7 +33,7 @@
 												+ "옵션가"
 												+ fields
 												+ ".&nbsp&nbsp <input type='text' name='restopt_priceplus"+fields+"' value='"+b+"'/> 원<br/>"
-												+ ".&nbsp&nbsp <input type='file' name='optupload"+fields+"' />"
+												+ ".&nbsp&nbsp 현재 업로드된 파일명 : "+c+"<br/> 재 업로드시 기존 파일은 삭제 됩니다. <input type='file' name='optupload"+fields+"' />"
 												+ " <a href='#' onclick='removeInput(this.parentNode)' />옵션"+fields+"제거 <br/><hr></div>";
 					fields += 1;
 				} else {
@@ -155,7 +155,7 @@
 								<!-- 아래는 기존 옵션 불러온 것 -->
 								<c:forEach var="list" items="${list}">
 									<script>
-										addInput ('${list.restopt_subject}' , '${list.restopt_priceplus}');
+										addInput ('${list.restopt_subject}' , '${list.restopt_priceplus}', '${list.restopt_savname}');
 									</script>
 								</c:forEach>
 							</div>
