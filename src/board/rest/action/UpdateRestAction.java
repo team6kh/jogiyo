@@ -428,7 +428,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 			//필요한 레코드는 그대로임
 			//아래에서 사용자가 수정한 정보들을 update 함
 			
-			//그리고 새로 사용자가 추가한 옵션들은 insert함
+			//다른case// 새로 사용자가 추가한 옵션들은 insert함
 			
 			
 			if(getRestopt_subject1() != null && getRestopt_priceplus1() != 0){
@@ -441,21 +441,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(0).getRestopt_savname() != null) {
 							String filesName = list.get(0).getRestopt_savname(); //기존 파일명을 가져옴
 							fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
-							
-							//새롭게 업로드된 것 저장
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu1_" + getRest_num();
-							String file_ext1 = getOptupload1FileName().substring(getOptupload1FileName().lastIndexOf('.') + 1, getOptupload1FileName().length());
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath1 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload1(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload1FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//새롭게 업로드된 것 저장
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu1_" + getRest_num();
+					String file_ext1 = getOptupload1FileName().substring(getOptupload1FileName().lastIndexOf('.') + 1, getOptupload1FileName().length());
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath1 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload1(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload1FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(0<listsize){
 						paramClass1.setRestopt_destFile1(list.get(0).getRestopt_destFile1());
@@ -485,19 +484,18 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(1).getRestopt_savname() != null) {
 							String filesName = list.get(1).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath2);
-							
-							String file_name1 = "menu2_" + getRest_num();
-							String file_ext1 = getOptupload2FileName().substring(getOptupload2FileName().lastIndexOf('.') + 1, getOptupload2FileName().length());
-
-							File restopt_destFile1 = new File(optfileUploadPath2 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload2(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload2FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					String file_name1 = "menu2_" + getRest_num();
+					String file_ext1 = getOptupload2FileName().substring(getOptupload2FileName().lastIndexOf('.') + 1, getOptupload2FileName().length());
+
+					File restopt_destFile1 = new File(optfileUploadPath2 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload2(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload2FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(1<listsize){
 						paramClass1.setRestopt_destFile1(list.get(1).getRestopt_destFile1());
@@ -525,19 +523,18 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(2).getRestopt_savname() != null) {
 							String filesName = list.get(2).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath3);
-							
-							String file_name1 = "menu3_" + getRest_num();
-							String file_ext1 = getOptupload3FileName().substring(getOptupload3FileName().lastIndexOf('.') + 1, getOptupload3FileName().length());
-
-							File restopt_destFile1 = new File(optfileUploadPath3 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload3(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload3FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					String file_name1 = "menu3_" + getRest_num();
+					String file_ext1 = getOptupload3FileName().substring(getOptupload3FileName().lastIndexOf('.') + 1, getOptupload3FileName().length());
+
+					File restopt_destFile1 = new File(optfileUploadPath3 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload3(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload3FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(2<listsize){
 						paramClass1.setRestopt_destFile1(list.get(2).getRestopt_destFile1());
@@ -565,21 +562,19 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(3).getRestopt_savname() != null) {
 							String filesName = list.get(3).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath4);
-							
-							String file_name1 = "menu4_" + getRest_num();
-							String file_ext1 = getOptupload4FileName().substring(getOptupload4FileName().lastIndexOf('.') + 1, getOptupload4FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath4 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload4(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload4FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
-					
+					String file_name1 = "menu4_" + getRest_num();
+					String file_ext1 = getOptupload4FileName().substring(getOptupload4FileName().lastIndexOf('.') + 1, getOptupload4FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath4 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload4(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload4FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(3<listsize){
 						paramClass1.setRestopt_destFile1(list.get(3).getRestopt_destFile1());
@@ -607,21 +602,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(4).getRestopt_savname() != null) {
 							String filesName = list.get(4).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath5);
-							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu5_" + getRest_num();
-							String file_ext1 = getOptupload5FileName().substring(getOptupload5FileName().lastIndexOf('.') + 1, getOptupload5FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath5 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload5(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload5FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu5_" + getRest_num();
+					String file_ext1 = getOptupload5FileName().substring(getOptupload5FileName().lastIndexOf('.') + 1, getOptupload5FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath5 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload5(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload5FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(4<listsize){
@@ -650,21 +644,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(5).getRestopt_savname() != null) {
 							String filesName = list.get(5).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath6);
-							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu6_" + getRest_num();
-							String file_ext1 = getOptupload6FileName().substring(getOptupload6FileName().lastIndexOf('.') + 1, getOptupload6FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath6 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload6(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload6FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu6_" + getRest_num();
+					String file_ext1 = getOptupload6FileName().substring(getOptupload6FileName().lastIndexOf('.') + 1, getOptupload6FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath6 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload6(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload6FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(5<listsize){
@@ -689,21 +682,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(6).getRestopt_savname() != null) {
 							String filesName = list.get(6).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath7);
-							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu7_" + getRest_num();
-							String file_ext1 = getOptupload7FileName().substring(getOptupload7FileName().lastIndexOf('.') + 1, getOptupload7FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath7 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload7(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload7FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu7_" + getRest_num();
+					String file_ext1 = getOptupload7FileName().substring(getOptupload7FileName().lastIndexOf('.') + 1, getOptupload7FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath7 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload7(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload7FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(6<listsize){
@@ -731,21 +723,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(7).getRestopt_savname() != null) {
 							String filesName = list.get(7).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath8);
-							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu8_" + getRest_num();
-							String file_ext1 = getOptupload8FileName().substring(getOptupload8FileName().lastIndexOf('.') + 1, getOptupload8FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath8 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload8(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload8FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu8_" + getRest_num();
+					String file_ext1 = getOptupload8FileName().substring(getOptupload8FileName().lastIndexOf('.') + 1, getOptupload8FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath8 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload8(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload8FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(7<listsize){
@@ -773,21 +764,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(8).getRestopt_savname() != null) {
 							String filesName = list.get(8).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath9);
-							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu9_" + getRest_num();
-							String file_ext1 = getOptupload9FileName().substring(getOptupload9FileName().lastIndexOf('.') + 1, getOptupload9FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath9 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload9(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload9FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu9_" + getRest_num();
+					String file_ext1 = getOptupload9FileName().substring(getOptupload9FileName().lastIndexOf('.') + 1, getOptupload9FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath9 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload9(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload9FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(8<listsize){
@@ -796,8 +786,6 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						paramClass1.setRestopt_savname(list.get(8).getRestopt_savname());
 					}
 				}
-
-
 				paramClass1.setRestopt_rest_num(getRest_num());
 				paramClass1.setRestopt_subject(restopt_subject9);
 				paramClass1.setRestopt_priceplus(restopt_priceplus9);
@@ -816,22 +804,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(9).getRestopt_savname() != null) {
 							String filesName = list.get(9).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath10);
-							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu10_" + getRest_num();
-							String file_ext1 = getOptupload10FileName().substring(getOptupload10FileName().lastIndexOf('.') + 1, getOptupload10FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath10 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload10(), restopt_destFile1);
-
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload10FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu10_" + getRest_num();
+					String file_ext1 = getOptupload10FileName().substring(getOptupload10FileName().lastIndexOf('.') + 1, getOptupload10FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath10 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload10(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload10FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(9<listsize){
@@ -860,20 +846,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 							String filesName = list.get(10).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath11);
 							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu11_" + getRest_num();
-							String file_ext1 = getOptupload11FileName().substring(getOptupload11FileName().lastIndexOf('.') + 1, getOptupload11FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath11 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload11(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload11FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu11_" + getRest_num();
+					String file_ext1 = getOptupload11FileName().substring(getOptupload11FileName().lastIndexOf('.') + 1, getOptupload11FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath11 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload11(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload11FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(10<listsize){
@@ -901,21 +887,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(11).getRestopt_savname() != null) {
 							String filesName = list.get(11).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath12);
-							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu12_" + getRest_num();
-							String file_ext1 = getOptupload12FileName().substring(getOptupload12FileName().lastIndexOf('.') + 1, getOptupload12FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath12 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload12(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload12FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu12_" + getRest_num();
+					String file_ext1 = getOptupload12FileName().substring(getOptupload12FileName().lastIndexOf('.') + 1, getOptupload12FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath12 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload12(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload12FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(11<listsize){
@@ -943,21 +928,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(12).getRestopt_savname() != null) {
 							String filesName = list.get(12).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath13);
-							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu13_" + getRest_num();
-							String file_ext1 = getOptupload13FileName().substring(getOptupload13FileName().lastIndexOf('.') + 1, getOptupload13FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath13 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload13(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload13FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu13_" + getRest_num();
+					String file_ext1 = getOptupload13FileName().substring(getOptupload13FileName().lastIndexOf('.') + 1, getOptupload13FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath13 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload13(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload13FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(12<listsize){
@@ -985,21 +969,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(13).getRestopt_savname() != null) {
 							String filesName = list.get(13).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath14);
-							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu14_" + getRest_num();
-							String file_ext1 = getOptupload14FileName().substring(getOptupload14FileName().lastIndexOf('.') + 1, getOptupload14FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath14 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload14(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload14FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu14_" + getRest_num();
+					String file_ext1 = getOptupload14FileName().substring(getOptupload14FileName().lastIndexOf('.') + 1, getOptupload14FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath14 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload14(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload14FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(13<listsize){
@@ -1008,7 +991,6 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						paramClass1.setRestopt_savname(list.get(13).getRestopt_savname());
 					}
 				}
-
 
 				paramClass1.setRestopt_rest_num(getRest_num());
 				paramClass1.setRestopt_subject(restopt_subject14);
@@ -1028,21 +1010,20 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						if (list.get(14).getRestopt_savname() != null) {
 							String filesName = list.get(14).getRestopt_savname();
 							fileUpload.deleteFiles(filesName, optfileUploadPath15);
-							
-							//옵션 사진 파일 이름과 확장자 설정.
-							String file_name1 = "menu15_" + getRest_num();
-							String file_ext1 = getOptupload15FileName().substring(getOptupload15FileName().lastIndexOf('.') + 1, getOptupload15FileName().length());
-
-							//옵션 사진 파일 저장.
-							File restopt_destFile1 = new File(optfileUploadPath15 + file_name1 + "."+ file_ext1); 
-							FileUtils.copyFile(getOptupload15(), restopt_destFile1);
-
-							//매인사진파일 DTO에 set
-							paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-							paramClass1.setRestopt_orgname(getOptupload15FileName());
-							paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 						}
 					}
+					//옵션 사진 파일 이름과 확장자 설정.
+					String file_name1 = "menu15_" + getRest_num();
+					String file_ext1 = getOptupload15FileName().substring(getOptupload15FileName().lastIndexOf('.') + 1, getOptupload15FileName().length());
+
+					//옵션 사진 파일 저장.
+					File restopt_destFile1 = new File(optfileUploadPath15 + file_name1 + "."+ file_ext1); 
+					FileUtils.copyFile(getOptupload15(), restopt_destFile1);
+
+					//매인사진파일 DTO에 set
+					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
+					paramClass1.setRestopt_orgname(getOptupload15FileName());
+					paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 
 				}else{//수정시에 파일 업로드 하지 않았을 경우
 					if(14<listsize){
