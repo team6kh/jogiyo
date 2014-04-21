@@ -1,5 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
-    
-    메타태그로 readRest.action  ... rest_num& currentPage  
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled Document</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Refresh" content="0; URL=http://localhost:8000/jogiyo/readRest.action?rest_num=${rest_num}&currentPage=${review_rest_currentPage}">
+</head>
+
+
+<body>
+	
+</body>
+</html>
+
+
