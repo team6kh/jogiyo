@@ -72,7 +72,7 @@ public class UpdateReviewAction implements Action, Preparable,
 			// 첨부파일 업로드 메서드 호출
 			String saveFileName = fileUpload.uploadFiles(review_files,
 					review_filesFileName, fileUploadPath, fileRename);
-			System.out.println("saveFileName :" + saveFileName);
+			
 
 			// setReview_file 메서드로 값 설정
 			reviewDTO.setReview_file(saveFileName);

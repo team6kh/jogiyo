@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+<sqlMap namespace="Pay">
+
+    <typeAlias alias="payDTO" type="board.pay.dto.payDTO" />
+    <typeAlias alias="salesDTO" type="table.sales.dto.SalesDTO"/>
+    
+    <resultMap id="payRes" class="payDTO">
+        <result property="paid_num" column="paid_num" />
+        <result property="paid_rest_num" column="paid_rest_num" />
+        <result property="paid_rest_subject" column="paid_rest_subject" />
+        <result property="paid_restopt_num" column="paid_restopt_num" />
+        <result property="paid_restopt_subject" column="paid_restopt_subject" />
+        <result property="paid_restopt_priceplus" column="paid_restopt_priceplus" />
+        <result property="paid_restopt_destFile1" column="paid_restopt_destFile1" />
+        <result property="paid_cpn" column="paid_cpn" />
+        <result property="paid_cpn_used" column="paid_cpn_used" />
+        <result property="session_id" column="session_id" />
+        <result property="paid_reg_date" column="paid_reg_date" />
+    </resultMap>
+    
+    <resultMap id="salesRes" class="salesDTO">
+    <result property="rest_num" column="paid_rest_num"/>
+    <result property="paid_restopt_subject" column="paid_restopt_subject"/>    
+    <result property="paid_sales_volume" column="paid_sales_volume"/>
+    <result property="paid_sales_price" column="paid_sales_price"/>
+    <result property="groupColumn" column="groupColumn"/>
+    <result property="sortColumn" column="sortColumn"/>
+    </resultMap>
+    
+    <!-- 공통 정의  -->
+    <sql id="selectAll">
+        SELECT * FROM paid_board    
+    </sql>
+    <sql id="whereSessionId">
+        WHERE session_id = #session_id#
+    </sql>
+    
+    <sql id="whereDetail">
+      <dynamic>
+            <include refid="whereSessionId"/>               
+            <isNotNull property="paid_restopt_subject" prepend="AND">
+                paid_restopt_subject like '%' || #paid_restopt_subject || '%'
+            </isNotNull>
+            <isNotNull property="paid_reg_date1" prepend="AND" open="(" close=")">
+                paid_reg_date <![CDATA[>=]]> #paid_reg_date1#
+                <isNotNull property="paid_reg_date1" prepend="AND">
+                    paid_reg_date <![CDATA[<=]]>  #paid_reg_date2#
+                </isNotNull>
+            </isNotNull>     
+         </dynamic>
+    </sql>
+    
+    <!-- SELECT -->
+    <!-- 주문결제 내역 검색 -->
+    <select id="selectPayList" resultMap="payRes" parameterClass="java.lang.String">
+        <include refid="selectAll"/>
+        <include refid="whereSessionId"/>
+    </select>
+    
+    <!-- 주문결제 내역 상세검색 -->
+    <select id="selectPayListDetail" resultMap="payRes">
+        <include refid="selectAll"/>
+        <include refid="whereDetail"/>
+    </select>
+
+          <!-- 메뉴별 매출 건수/금액 검색 -->
+    <select id="selectMenuSales"  resultMap="salesRes" parameterClass="salesDTO">
+        SELECT paid_restopt_subject, COUNT(*) as paid_sales_volume, SUM(paid_restopt_priceplus) as paid_sales_price FROM paid_board 
+        
+        <dynamic>
+        	<isEqual property="groupColumn" compareValue="paid_restopt_subject">
+        		GROUP BY paid_restopt_subject
+        	</isEqual>       
+            <isEqual property="sortColumn" compareValue="sales_vloume">
+           		ORDER BY paid_sales_volume
+            </isEqual>
+            <isEqual property="sortColumn" compareValue="sales_price">
+            	ORDER BY paid_restopt_subject
+            </isEqual>
+        </dynamic>     
+        <include refid="whereSessionId"/>
+            
+    </select>
+</sqlMap>

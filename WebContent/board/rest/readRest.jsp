@@ -174,15 +174,7 @@
 		return false;
 	}
 
-	function reviewForm() {
-
-		var reviewform = document.insertReviewForm;
-		if (reviewform.style.display == "none") {
-			reviewform.style.display = "block";
-		} else {
-			reviewform.style.display = "none";
-		}
-	}
+	
 
 	function btnInsert() {
 		var reviewForm = document.insertReviewForm;
@@ -208,6 +200,10 @@
 		reviewForm.submit();
 	}
 </script>
+
+<!-- 별점 관련 css -->
+<link rel="stylesheet" href="assets/img/review/css/jquery.rating.css" />
+
 
 </head>
 
@@ -358,11 +354,11 @@
 						<tr>
 							<th>별점</th>
 							<td class="text-center">
-								<input type="radio" name="review_rating" value="1" />1점
-								<input type="radio"	name="review_rating" value="2" />2점
-								<input type="radio"	name="review_rating" value="3" />3점
-								<input type="radio"	name="review_rating" value="4" />4점
-								<input type="radio"	name="review_rating" value="5" />5점
+								<input type="radio" name="review_rating" class="star" value="1" />
+								<input type="radio" name="review_rating" class="star" value="2" />
+								<input type="radio" name="review_rating" class="star" value="3" />
+								<input type="radio" name="review_rating" class="star" value="4"  checked="checked"/>
+								<input type="radio" name="review_rating" class="star" value="5" />
 							</td>
 						</tr>
 
@@ -375,7 +371,7 @@
 						<!--  이미지 파일 첨부 : 첨부 개수 제한/ 용량 제한 필요  -->
 						<tr>
 							<td class="text-center" colspan="2">
-							<input type="file" id="review_file_element" name="review_files" multiple="multiple" />
+							<input type="file" id="review_file_element" name="review_files" class="multi" maxlength="2" accept="gif|jpg|png|jpeg" multiple="multiple" />
 						</tr>
 
 					</table>
@@ -425,23 +421,38 @@
 				<!-- 리뷰 바디 -->
 				<div class="media-body">
 					<div class="media-heading">
-						<strong>${reviewDTO.review_writer}</strong>
-						<em>&nbsp;|&nbsp;</em>
-						<fmt:formatDate value="${reviewDTO.review_reg_date}" pattern="yyyy-MM-dd" />
-						<em>&nbsp;|&nbsp;</em>
-
-						<!-- 별점 -->
-						<c:forEach begin="1"end="${reviewDTO.review_rating}">
-							<img src="assets/img/review/ratingimage/ico.png" width="25px" height="25px">
-						</c:forEach>
-
-						<!-- 해당글 작성자일 경우 수정/삭제 버튼  -->
-						<!-- 임시값 "test_Customer" session_id 값으로 교체 -->
-						<c:if test="${reviewDTO.review_writer == sessionScope.session_id}">
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-default" onclick="javascript:open('updateReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=500, height=270')">수정</button>
-							<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
-						</c:if>
+						<table>
+							<tr>
+								<td><strong>${reviewDTO.review_writer}</strong><em>&nbsp;|&nbsp;</em></td>
+								<td><fmt:formatDate value="${reviewDTO.review_reg_date}" pattern="yyyy-MM-dd" /><em>&nbsp;|&nbsp;</em></td>
+																	
+									<!-- 별점 -->
+								<td>
+									<c:forEach var="ratingCnt" begin="1"end="5">
+			        						<c:if test="${ratingCnt le reviewDTO.review_rating }">                                
+			                                    <span class="star-rating rater-0 star star-rating-applied star-rating-readonly star-rating-on" >
+			                                        <a title="${ratingCnt }">${ratingCnt }</a>
+			                                     </span>
+			                                 </c:if> 
+			                                 <c:if test="${ratingCnt gt reviewDTO.review_rating }">
+			                                     <span class="star-rating rater-0 star star-rating-applied star-rating-readonly">
+			                                        <a title="${ratingCnt }">${ratingCnt }</a>
+			                                     </span>                    
+			                                 </c:if>
+			    						</c:forEach>
+			    					</td>
+			
+									<!-- 해당글 작성자일 경우 수정/삭제 버튼  -->
+									<!-- 임시값 "test_Customer" session_id 값으로 교체 -->
+									<td>
+										<c:if test="${reviewDTO.review_writer == sessionScope.session_id}">
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<button class="btn btn-default" onclick="javascript:open('updateReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=500, height=270')">수정</button>
+											<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
+										</c:if>
+									</td>
+							</tr>
+						</table>
 					</div>
 
 					<!-- 리뷰 글 -->
@@ -452,7 +463,7 @@
 						<c:forTokens var="reviewFileNames" items="${reviewDTO.review_file }" delims="' '">
 							<c:forEach var="reviewFileName" items="${reviewFileNames}">
 								<div class="img-review-group">
-									<img src="${reviewFile_Path}${reviewFileName}" style="display:block;">
+									<img src="${reviewFile_Path}${reviewFileName}" style="display:block" width="300px">
 								</div>
 							</c:forEach>
 						</c:forTokens>
@@ -521,6 +532,9 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-
+<!-- 별점 제이쿼리 -->
+<script type="text/javascript" src="assets/img/review/js/jquery.rating.js"></script>
+<!-- 파일업로드 제이쿼리 -->
+<script type="text/javascript" src="assets/img/review/js/jquery.MultiFile.js"></script>
 </body>
 </html>	
