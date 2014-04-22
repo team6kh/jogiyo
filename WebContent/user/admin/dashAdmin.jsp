@@ -36,25 +36,58 @@
 
 		<!-- Administrator's Dashboard -->
 		<div class="dash-admin"><!-- CSS 미지정 -->
+		
           <h1 class="page-header">관리자 대시보드</h1>      
           
+          <!-- placeholders -->
           <div class="row placeholders">
-            <!-- 구매자 수 -->
-            <div class="col-xs-6 col-sm-4 placeholder">
-              <h1>${fn:length(listBuyer)}</h1>
-              <span class="text-muted">구매자 수</span>
-            </div>
-            <!-- 판매자 수 -->
-            <div class="col-xs-6 col-sm-4 placeholder">
-              <h1>${fn:length(listSeller)}</h1>
-              <span class="text-muted">판매자 수</span>
-            </div>            
-          	<!-- TEST 글 갯수 -->
-            <div class="col-xs-6 col-sm-4 placeholder">
-              <h1>${countTest}</h1>
-              <span class="text-muted">TEST 글 갯수</span>
-            </div>
-          </div>          
+            	<!-- 상품 개수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countRest}</h1>
+					<span class="text-muted">상품 개수</span>
+				</div>
+				<!-- 메뉴 개수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countRestopt}</h1>
+					<span class="text-muted">메뉴 개수</span>
+				</div>
+				<!-- 결재 건수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countPaid}</h1>
+					<span class="text-muted">결재 건수</span>
+				</div>
+				<!-- 리뷰 개수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countReview}</h1>
+					<span class="text-muted">리뷰 개수</span>
+				</div>
+				<!-- 레시피 개수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countRecipe}</h1>
+					<span class="text-muted">레시피 개수</span>
+				</div>
+				<!-- 공지사항 글 개수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countNotice}</h1>
+					<span class="text-muted">공지사항 글 개수</span>
+				</div>
+				<!-- 문의하기 글 개수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countQna}</h1>
+					<span class="text-muted">문의하기 글 개수</span>
+				</div>
+				<!-- 구매자 수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countBuyer}</h1>
+					<span class="text-muted">구매자 수</span>
+				</div>
+				<!-- 판매자 수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countSeller}</h1>
+					<span class="text-muted">판매자 수</span>
+				</div>
+          </div>
+          <!-- /placeholders -->          
 
 		  <!-- 구매자 현황 -->
           <h2 class="sub-header">구매자 현황</h2>
