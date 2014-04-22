@@ -3,7 +3,6 @@ package board.rest.action;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.io.FileUtils;
 
 import board.rest.dto.RestDTO;
@@ -176,9 +175,6 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	private String optupload15FileName;
 	private String optfileUploadPath15 = Constants.COMMON_FILE_PATH + Constants.REST_MENU_FILE_PATH;
 	//옵션레코드 update 끝
-	
-	
-	
 	
 	
 	
@@ -445,7 +441,8 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 					}
 					//새롭게 업로드된 것 저장
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu1_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
+					
 					String file_ext1 = getOptupload1FileName().substring(getOptupload1FileName().lastIndexOf('.') + 1, getOptupload1FileName().length());
 					//옵션 사진 파일 저장.
 					File restopt_destFile1 = new File(optfileUploadPath1 + file_name1 + "."+ file_ext1); 
@@ -486,7 +483,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 							fileUpload.deleteFiles(filesName, optfileUploadPath2);
 						}
 					}
-					String file_name1 = "menu2_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload2FileName().substring(getOptupload2FileName().lastIndexOf('.') + 1, getOptupload2FileName().length());
 
 					File restopt_destFile1 = new File(optfileUploadPath2 + file_name1 + "."+ file_ext1); 
@@ -525,7 +522,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 							fileUpload.deleteFiles(filesName, optfileUploadPath3);
 						}
 					}
-					String file_name1 = "menu3_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload3FileName().substring(getOptupload3FileName().lastIndexOf('.') + 1, getOptupload3FileName().length());
 
 					File restopt_destFile1 = new File(optfileUploadPath3 + file_name1 + "."+ file_ext1); 
@@ -564,7 +561,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 							fileUpload.deleteFiles(filesName, optfileUploadPath4);
 						}
 					}
-					String file_name1 = "menu4_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload4FileName().substring(getOptupload4FileName().lastIndexOf('.') + 1, getOptupload4FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -605,7 +602,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu5_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload5FileName().substring(getOptupload5FileName().lastIndexOf('.') + 1, getOptupload5FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -647,7 +644,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu6_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload6FileName().substring(getOptupload6FileName().lastIndexOf('.') + 1, getOptupload6FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -685,7 +682,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu7_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload7FileName().substring(getOptupload7FileName().lastIndexOf('.') + 1, getOptupload7FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -726,7 +723,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu8_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload8FileName().substring(getOptupload8FileName().lastIndexOf('.') + 1, getOptupload8FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -767,7 +764,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu9_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload9FileName().substring(getOptupload9FileName().lastIndexOf('.') + 1, getOptupload9FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -807,7 +804,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu10_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload10FileName().substring(getOptupload10FileName().lastIndexOf('.') + 1, getOptupload10FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -849,7 +846,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu11_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload11FileName().substring(getOptupload11FileName().lastIndexOf('.') + 1, getOptupload11FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -890,7 +887,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu12_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload12FileName().substring(getOptupload12FileName().lastIndexOf('.') + 1, getOptupload12FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -931,7 +928,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu13_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload13FileName().substring(getOptupload13FileName().lastIndexOf('.') + 1, getOptupload13FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -972,7 +969,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu14_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload14FileName().substring(getOptupload14FileName().lastIndexOf('.') + 1, getOptupload14FileName().length());
 
 					//옵션 사진 파일 저장.
@@ -1013,7 +1010,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						}
 					}
 					//옵션 사진 파일 이름과 확장자 설정.
-					String file_name1 = "menu15_" + getRest_num();
+					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload15FileName().substring(getOptupload15FileName().lastIndexOf('.') + 1, getOptupload15FileName().length());
 
 					//옵션 사진 파일 저장.
