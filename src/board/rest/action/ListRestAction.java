@@ -12,7 +12,7 @@ import board.rest.dto.RestDTO;
 
 public class ListRestAction extends ActionSupport implements ConDAOAware {
 
-	public static SqlMapClient sqlMapper; // SqlMapClient API를 사용하기 위한 sqlMapper 객체.
+	public static SqlMapClient sqlMapper; 
 
 	private List<RestDTO> list = new ArrayList<RestDTO>();
 	

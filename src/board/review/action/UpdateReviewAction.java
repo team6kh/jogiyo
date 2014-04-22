@@ -58,14 +58,14 @@ public class UpdateReviewAction implements Action, Preparable,
 			// 기존 업로드된 첨부파일 삭제 시작
 
 			// 첨부파일 삭제를 위해 DB에서 해당 글을 가져옴
-			reviewDTO = (ReviewDTO) sqlMapper.queryForObject(
-					"Review.selectReviewOne", reviewDTO);
+			reviewDTO = (ReviewDTO) sqlMapper.queryForObject("Review.selectReviewOne", reviewDTO);
 			// 첨부파일명 값을 꺼냄
 			String filesName = reviewDTO.getReview_file();
 			// 첨부파일 삭제 메서드 호출
 			fileUpload.deleteFiles(filesName, fileUploadPath);
 			// 기존 업로드된 첨부파일 삭제 종료
 
+			
 			// 새로 첨부된 파일 업로드 시작
 			// 파일명 변경시 공통으로 붙여줄 이름
 			String fileRename = "review_" + reviewDTO.getReview_num();

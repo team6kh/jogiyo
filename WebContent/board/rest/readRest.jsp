@@ -282,7 +282,7 @@
 
 			<c:if test="${sessionScope.session_id==resultClass.rest_writer_id}">
 				<div class="forSeller" align="right">
-					<a href="updateRest.action" class="btn btn-success">수정</a>
+					<a href="updateRestForm.action?rest_num=${resultClass.rest_num}&currentPage=${currentPage}&session_id=${sessionScope.session_id}" class="btn btn-success">수정</a>
 					<a href="deleteRest.action?rest_num=${resultClass.rest_num}&session_id=${sessionScope.session_id}" class="btn btn-danger">삭제</a>
 				</div>
 			</c:if>	
