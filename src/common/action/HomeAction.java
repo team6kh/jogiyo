@@ -23,12 +23,8 @@ public class HomeAction implements Action, ConDAOAware
     private int countPaid;
     private int countReview;
     // .상품 관련
-    
-    private int countRecipe;
-    private int countNotice;
-    private int countQna;
 
-	// 회원 관련
+    // 회원 관련
     private int countBuyer;
     private int countSeller;
     // .회원 관련
@@ -57,15 +53,6 @@ public class HomeAction implements Action, ConDAOAware
     	
     	// 리뷰 개수를 구한다.
     	setCountReview((Integer) sqlMapper.queryForObject("Common.selectReviewCount"));
-    	
-    	// 레시피 개수를 구한다.
-    	setCountRecipe((Integer) sqlMapper.queryForObject("Common.selectRecipeCount"));
-    	
-    	// 공지사항 개수를 구한다.
-    	setCountNotice((Integer) sqlMapper.queryForObject("Common.selectNoticeCount"));
-    	
-    	// 문의하기 개수를 구한다.
-    	setCountQna((Integer) sqlMapper.queryForObject("Common.selectQnaCount"));
     	
     	// 구매자 수를 구한다.
     	setCountBuyer((Integer) sqlMapper.queryForObject("Buyer.selectBuyerCount"));
@@ -112,30 +99,6 @@ public class HomeAction implements Action, ConDAOAware
 
 	public void setCountReview(int countReview) {
 		this.countReview = countReview;
-	}
-	
-    public int getCountRecipe() {
-		return countRecipe;
-	}
-
-	public void setCountRecipe(int countRecipe) {
-		this.countRecipe = countRecipe;
-	}
-
-	public int getCountNotice() {
-		return countNotice;
-	}
-
-	public void setCountNotice(int countNotice) {
-		this.countNotice = countNotice;
-	}
-
-	public int getCountQna() {
-		return countQna;
-	}
-
-	public void setCountQna(int countQna) {
-		this.countQna = countQna;
 	}
 	
     public int getCountBuyer() {

@@ -2,6 +2,94 @@
 <!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
 <sqlMap namespace="Common">
 
+	<typeAlias alias="RestDTO" type="board.rest.dto.RestDTO" />
+	<typeAlias alias="RestoptDTO" type="board.restopt.dto.RestoptDTO" />
+	<typeAlias alias="CartDTO" type="board.cart.dto.CartDTO" />
+	<typeAlias alias="PayDTO" type="board.pay.dto.payDTO" />
+	<typeAlias alias="ReviewDTO" type="board.review.dto.ReviewDTO" />
+
+	<!-- 리절트 맵 정의 -->
+	
+	<!-- RestDTO -->
+	<resultMap id="RestBoard" class="RestDTO">
+		<result property="rest_num" column="rest_num" />
+		<result property="rest_subject" column="rest_subject" />
+		<result property="rest_localcategory" column="rest_localcategory" />
+		<result property="rest_typecategory" column="rest_typecategory" />
+		<result property="rest_destFile1" column="rest_destFile1" />
+		<result property="rest_main_orgname" column="rest_main_orgname" />
+		<result property="rest_main_savname" column="rest_main_savname" />
+		<result property="rest_destFile2" column="rest_destFile2" />
+		<result property="rest_content_orgname" column="rest_content_orgname" />
+		<result property="rest_content_savname" column="rest_content_savname" />
+		<result property="rest_writer_id" column="rest_writer_id" />
+		<result property="rest_writer_name" column="rest_writer_name" />
+		<result property="rest_writer_telnum" column="rest_writer_telnum" />
+		<result property="rest_writer_mobilenum" column="rest_writer_mobilenum" />
+		<result property="rest_writer_address" column="rest_writer_address" />
+		<result property="rest_readcount" column="rest_readcount" />
+		<result property="rest_reg_date" column="rest_reg_date" />
+	</resultMap>
+	
+	<!-- RestoptDTO -->
+	<resultMap id="RestoptBoard" class="RestoptDTO">
+		<result property="restopt_num" column="restopt_num" />
+		<result property="restopt_rest_num" column="restopt_rest_num" />
+		<result property="restopt_subject" column="restopt_subject" />
+		<result property="restopt_priceplus" column="restopt_priceplus" />
+		<result property="restopt_amount" column="restopt_amount" />
+		<result property="restopt_destFile1" column="restopt_destFile1" />
+		<result property="restopt_orgname" column="restopt_orgname" />
+		<result property="restopt_savname" column="restopt_savname" />
+	</resultMap>
+	
+	<!-- CartDTO -->
+	<resultMap id="CartBoard" class="CartDTO">
+		<result property="cart_num" column="cart_num" />
+		<result property="cart_rest_num" column="cart_rest_num" />
+		<result property="cart_rest_subject" column="cart_rest_subject" />
+		<result property="cart_restopt_num" column="cart_restopt_num" />
+		<result property="cart_restopt_destFile1" column="cart_restopt_destFile1" />
+		<result property="cart_restopt_subject" column="cart_restopt_subject" />
+		<result property="cart_restopt_priceplus" column="cart_restopt_priceplus" />
+		<result property="session_id" column="session_id" />
+	</resultMap>
+	
+	<!-- PayDTO -->
+	<resultMap id="PaidBoard" class="PayDTO">
+		<result property="paid_num" column="paid_num" />
+		<result property="paid_rest_num" column="paid_rest_num" />
+		<result property="paid_rest_subject" column="paid_rest_subject" />
+		<result property="paid_restopt_num" column="paid_restopt_num" />
+		<result property="paid_restopt_subject" column="paid_restopt_subject" />
+		<result property="paid_restopt_priceplus" column="paid_restopt_priceplus" />
+		<result property="paid_restopt_destFile1" column="paid_restopt_destFile1" />
+		<result property="paid_cpn" column="paid_cpn" />
+		<result property="paid_cpn_used" column="paid_cpn_used" />
+		<result property="session_id" column="session_id" />
+		<result property="paid_reg_date" column="paid_reg_date" />
+	</resultMap>	
+
+	<!-- ReviewDTO-->
+	<resultMap id="ReviewBoard" class="ReviewDTO">
+		<result property="review_num" column="review_num" />
+		<result property="review_rest" column="review_rest" />
+		<result property="review_writer" column="review_writer" />
+		<result property="review_content" column="review_content" />
+		<result property="review_file" column="review_file" />
+		<result property="review_reg_date" column="review_reg_date" />
+		<result property="review_rating" column="review_rating" />
+	</resultMap>
+	
+	<!-- 공통정의(?) -->
+	<sql id="select-all">
+		select * from Rest_board
+	</sql>
+
+	<sql id="where-rest_num">
+		where rest_num = #rest_num#
+	</sql>
+
 	<!-- select -->
 	<select id="selectRestCount" resultClass="int">
 		SELECT count(*) FROM rest_board
@@ -18,17 +106,4 @@
 	<select id="selectReviewCount" resultClass="int">
 		SELECT count(*) FROM review_board
 	</select>
-	
-	<select id="selectRecipeCount" resultClass="int">
-		SELECT count(*) FROM recipe_board
-	</select>
-	
-	<select id="selectNoticeCount" resultClass="int">
-		SELECT count(*) FROM notice_board
-	</select>
-	
-	<select id="selectQnaCount" resultClass="int">
-		SELECT count(*) FROM qna_board
-	</select>	
-	
 </sqlMap>

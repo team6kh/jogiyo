@@ -38,9 +38,43 @@
 
 			<div class="jumbotron">
 				<h1>안녕하세요?</h1>
-				<p>조기요에는 ${countRestopt}개의 메뉴와 ${countBuyer+countSeller}명의 회원, ${countPaid}번의 결재, ${countReview+countRecipe+countNotice+countQna}개의 글이 있습니다.</p>
+				<p>조기요에는 ${countRestopt}개의 메뉴와 ${countBuyer+countSeller}명의 회원, ${countPaid}번의 결재, ${countReview}개의 리뷰가 있습니다.</p>
 				<p><a class="btn btn-default btn-lg" role="button">지금 가입하세요!</a></p>
 			</div>
+
+			<div class="row placeholders">			
+				<!-- 상품 개수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countRest}</h1>
+					<span class="text-muted">상품 개수</span>
+				</div>
+				<!-- 메뉴 개수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countRestopt}</h1>
+					<span class="text-muted">메뉴 개수</span>
+				</div>
+				<!-- 결재 건수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countPaid}</h1>
+					<span class="text-muted">결재 건수</span>
+				</div>
+				<!-- 리뷰 개수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countReview}</h1>
+					<span class="text-muted">리뷰 개수</span>
+				</div>
+				<!-- 구매자 수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countBuyer}</h1>
+					<span class="text-muted">구매자 수</span>
+				</div>
+				<!-- 판매자 수 -->
+				<div class="col-xs-6 col-sm-3 placeholder">
+					<h1>${countSeller}</h1>
+					<span class="text-muted">판매자 수</span>
+				</div>
+			</div>
+			<!-- /row placeholders -->
 
 		</div>
 		<!-- /Home Dashboard -->
