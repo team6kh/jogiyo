@@ -20,8 +20,8 @@
 
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
-<link href="common-template.css" rel="stylesheet">
-<link href="home.css" rel="stylesheet">
+<link href="common/common-template.css" rel="stylesheet">
+<link href="common/home.css" rel="stylesheet">
 
 </head>
 
@@ -33,8 +33,6 @@
 
 		<!-- Home Dashboard -->
 		<div class="dash-home"><!-- CSS 미지정 -->
-
-			<br />
 
 			<div class="jumbotron">
 				<h1>안녕하세요?</h1>
