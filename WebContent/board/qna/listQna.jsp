@@ -53,7 +53,7 @@
 
 
 
-		<!-- test board prettyaaaaaaaa -->
+		<!-- test board pretty -->
 		<div class="col-md-12">
 			<h3>자주묻는질문</h3>
 		</div>
