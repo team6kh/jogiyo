@@ -42,7 +42,7 @@
 		<result property="qna_content" column="qna_content" />
 	</resultMap>
 
-	<select id="qnaList" resultClass="qnaBoard" parameterClass="string">
+	<select id="qnaList" resultClass="qnaBoard" parameterClass="java.util.HashMap">
 		select 
 			qna_num,
 			qna_category,
@@ -51,10 +51,14 @@
 			to_char(qna_reg_date, 'YYYY-MM-DD HH24:MI')	AS qna_reg_date
 		from qna_board
 		where 1=1 
-		<isNotEmpty>
+		<isNotEmpty property="qna_category">
 			and qna_category = #qna_category#
 		</isNotEmpty>
-		order by qna_reg_date desc
+		<isNotEmpty property="searchText">
+			and (qna_subject like '%' || #searchText# || '%'
+			or qna_content like '%' || #searchText# || '%')
+		</isNotEmpty>
+		order by qna_num desc
 	</select>
 
 	<select id="qnaTopList" resultClass="qnaBoard">

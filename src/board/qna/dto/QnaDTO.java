@@ -82,7 +82,16 @@ public class QnaDTO {
     public void setQna_id(int qna_id) {
         this.qna_id = qna_id;
     }
-
-
+    @Override
+    public String toString()
+    {
+        return "QnaDTO [qna_num=" + qna_num + ", qna_id=" + qna_id
+                + ", qna_subject=" + qna_subject + ", qna_isprivate="
+                + qna_isprivate + ", qna_category=" + qna_category
+                + ", qna_content=" + qna_content + ", qna_readcount="
+                + qna_readcount + ", qna_reg_date=" + qna_reg_date
+                + ", qna_ref=" + qna_ref + ", qna_ref_step=" + qna_ref_step
+                + ", qna_ref_level=" + qna_ref_level + "]";
+    }
 
 }
