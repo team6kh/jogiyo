@@ -1,18 +1,21 @@
 package board.qna.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import board.qna.dto.QnaDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 import common.ConDAOAware;
 import common.action.PagingAction;
 
 
-public class ListQnaAction implements Action, ConDAOAware{
+public class ListQnaAction implements Action, ConDAOAware, Preparable, ModelDriven{
 
 	public static SqlMapClient sqlMapper;
 
@@ -23,6 +26,7 @@ public class ListQnaAction implements Action, ConDAOAware{
 	private int qna_num;
 
 	private String qna_category;
+	private String searchText;
 
 	private List<QnaDTO> list = new ArrayList<QnaDTO>();
 	private List<QnaDTO> topList = new ArrayList<QnaDTO>();
@@ -31,6 +35,7 @@ public class ListQnaAction implements Action, ConDAOAware{
 	private int totalCount;					// 총 게시물의 수
 	private int blockCount = 10;			// 한 페이지의 게시물의 수
 	private int blockPage = 5;				// 한 화면에 보여줄 페이지 수
+	private int topCount = 0;
 	private String pagingHtml;				// 페이징을 구현한 HTML
 	private PagingAction page;				// 페이징 클래스
 
@@ -39,13 +44,29 @@ public class ListQnaAction implements Action, ConDAOAware{
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
 	}
+	
+	public void prepare() throws Exception {
+        paramClass = new QnaDTO();
+    }
+
+    public Object getModel() {
+        return paramClass;
+    }
 
 	public String execute() throws Exception {
+	    
 		QnaDTO qnaDTO = new QnaDTO();
 
 		topList = sqlMapper.queryForList("Qna.qnaTopList");
+		
+		setTopCount(topList.size());
+		
+		HashMap<String, String> param = new HashMap<String, String>();
+		
+		param.put("qna_category", getQna_category());
+		param.put("searchText", getSearchText());
 
-		list = sqlMapper.queryForList("Qna.qnaList", getQna_category());
+		list = sqlMapper.queryForList("Qna.qnaList", param);
 		totalCount = list.size(); // 전체 글 갯수를 구한다.
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // pagingAction 객체 생성.
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
@@ -59,6 +80,11 @@ public class ListQnaAction implements Action, ConDAOAware{
 
 		// 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
 		list = list.subList(page.getStartCount(), lastCount);
+		
+		/*for(int i=0;i<list.size();i++){
+		    QnaDTO a = list.get(i);
+		    System.out.println("index = " + a.toString());
+		}*/
 
 		return SUCCESS;
 
@@ -72,6 +98,7 @@ public class ListQnaAction implements Action, ConDAOAware{
 
 		//상세보기 조회
 		resultClass = (QnaDTO)sqlMapper.queryForObject("Qna.qnaDetail", getQna_num());
+		resultClass.setQna_content(resultClass.getQna_content().replaceAll("\n", "<br/>"));
 
 		return SUCCESS;
 	}
@@ -179,5 +206,25 @@ public class ListQnaAction implements Action, ConDAOAware{
 	public void setQna_category(String qna_category) {
 		this.qna_category = qna_category;
 	}
+
+    public int getTopCount()
+    {
+        return topCount;
+    }
+
+    public void setTopCount(int topCount)
+    {
+        this.topCount = topCount;
+    }
+
+    public String getSearchText()
+    {
+        return searchText;
+    }
+
+    public void setSearchText(String searchText)
+    {
+        this.searchText = searchText;
+    }
 
 }
