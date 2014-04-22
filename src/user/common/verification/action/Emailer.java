@@ -45,7 +45,7 @@ public class Emailer extends ActionSupport
 
     public String execute()
     {
-        System.out.println("Emailer execute()");
+        //System.out.println("Emailer execute()");
         
         String ret = SUCCESS;
         

@@ -152,12 +152,14 @@
 		<!-- HOME -->
 		
 		<!-- 홈 액션 -->
-		<action name="home" class="board.home.action.HomeAction">
-			<result>/index.jsp</result>
+		<action name="home" class="common.action.HomeAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/common/home.jsp</result>
 		</action>
 		
 		<!-- welocme 액션 -->
-		<action name="welcome" class="board.home.action.HomeAction" method="welcome">
+		<action name="welcome" class="common.action.HomeAction" method="welcome">
 			<result>/common/welcome.jsp</result>
 		</action>
 		
