@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+<%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
-    <title>JOGIYO</title>
+<title>JOGIYO</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,13 +23,14 @@
     
     <script type="text/javascript">
     	var num = 0;
+    	var totcnt = "<c:out value="${topCount }"/>";
     	function fn_show(row_id, row_seq){
     		var rId = document.getElementById(row_id);
     		if(num == row_seq){
     			rId.style.display = "none";
     			num = 0;
     		}else{
-    			for(var i=1;i<=10;i++){
+    			for(var i=1;i<=totcnt;i++){
     				var cId = document.getElementById("row"+i);
     				cId.style.display = "none";
     			}
@@ -53,7 +55,7 @@
 
 		<!-- test board pretty -->
 		<div class="col-md-12">
-			<h3>ÀÚÁÖ¹¯´ÂÁú¹®</h3>
+			<h3>ìžì£¼ë¬»ëŠ”ì§ˆë¬¸</h3>
 		</div>
 
 		<div class="col-md-12 well">
@@ -64,28 +66,15 @@
 							<td class="text-center">
 								<c:out value="${list.qna_num }" />
 							</td>
-							<!-- 
-							<td class="text-center">
+									<td class="text-left">
 								<c:choose>
-									<c:when test="${list.qna_category eq '01' }">È¸¿ø°¡ÀÔ</c:when>
-									<c:when test="${list.qna_category eq '02' }">¹Ù·Î°áÁ¦</c:when>
-									<c:when test="${list.qna_category eq '03' }">¸®ºä</c:when>
-									<c:when test="${list.qna_category eq '04' }">ÀÌ¿ë¹®ÀÇ</c:when>
-									<c:when test="${list.qna_category eq '05' }">±¤°í¹®ÀÇ</c:when>
-									<c:when test="${list.qna_category eq '06' }">±âÅ¸</c:when>
-									<c:otherwise>ÀüÃ¼</c:otherwise>
-								</c:choose>
-							</td>
-							 -->
-							<td class="text-left">
-								<c:choose>
-									<c:when test="${list.qna_category eq '01' }">[È¸¿ø°¡ÀÔ]</c:when>
-									<c:when test="${list.qna_category eq '02' }">[¹Ù·Î°áÁ¦]</c:when>
-									<c:when test="${list.qna_category eq '03' }">[¸®ºä]</c:when>
-									<c:when test="${list.qna_category eq '04' }">[ÀÌ¿ë¹®ÀÇ]</c:when>
-									<c:when test="${list.qna_category eq '05' }">[±¤°í¹®ÀÇ]</c:when>
-									<c:when test="${list.qna_category eq '06' }">[±âÅ¸]</c:when>
-									<c:otherwise>[ÀüÃ¼]</c:otherwise>
+									<c:when test="${list.qna_category eq '01' }">[íšŒì›ê°€ìž…]</c:when>
+									<c:when test="${list.qna_category eq '02' }">[ë°”ë¡œê²°ì œ]</c:when>
+									<c:when test="${list.qna_category eq '03' }">[ë¦¬ë·°]</c:when>
+									<c:when test="${list.qna_category eq '04' }">[ì´ìš©ë¬¸ì˜]</c:when>
+									<c:when test="${list.qna_category eq '05' }">[ê´‘ê³ ë¬¸ì˜]</c:when>
+									<c:when test="${list.qna_category eq '06' }">[ê¸°íƒ€]</c:when>
+									<c:otherwise>[ì „ì²´]</c:otherwise>
 								</c:choose>
 								<c:out value="${list.qna_subject }" />
 							</td>
@@ -97,7 +86,7 @@
 					</c:forEach>
 					<c:if test="${empty topList}">
 						<tr>
-							<td colspan="5">µî·ÏµÈ °Ô½Ã¹°ÀÌ ¾ø½À´Ï´Ù.</td>
+							<td colspan="5">ë“±ë¡ëœ ê²Œì‹œë¬¼ì´ ì—†ìŠµë‹ˆë‹¤.</td>
 						</tr>
 					</c:if>
 				</tbody>
@@ -106,28 +95,30 @@
 
 		<!-- test board pretty -->
 		<div class="col-md-12">
-			<h3>±Û¸ñ·Ï</h3>
+			<h3>ê¸€ëª©ë¡</h3>
 		</div>
-		<form name="searchForm" id="searchForm">
+		<form name="searchForm" id="searchForm" method="post">
 		<select name="qna_category" id="qna_category" onchange="fn_search();">
-			<option value="">ÀüÃ¼</option>
-			<option value="01" <c:if test="${qna_category eq '01'}">selected</c:if>>È¸¿ø°¡ÀÔ</option>
-			<option value="02" <c:if test="${qna_category eq '02'}">selected</c:if>>¹Ù·Î°áÁ¦</option>
-			<option value="03" <c:if test="${qna_category eq '03'}">selected</c:if>>¸®ºä</option>
-			<option value="04" <c:if test="${qna_category eq '04'}">selected</c:if>>ÀÌ¿ë¹®ÀÇ</option>
-			<option value="05" <c:if test="${qna_category eq '05'}">selected</c:if>>±¤°í¹®ÀÇ</option>
-			<option value="06" <c:if test="${qna_category eq '06'}">selected</c:if>>±âÅ¸</option>
+			<option value="">ì „ì²´</option>
+			<option value="01" <c:if test="${qna_category eq '01'}">selected</c:if>>íšŒì›ê°€ìž…</option>
+			<option value="02" <c:if test="${qna_category eq '02'}">selected</c:if>>ë°”ë¡œê²°ì œ</option>
+			<option value="03" <c:if test="${qna_category eq '03'}">selected</c:if>>ë¦¬ë·°</option>
+			<option value="04" <c:if test="${qna_category eq '04'}">selected</c:if>>ì´ìš©ë¬¸ì˜</option>
+			<option value="05" <c:if test="${qna_category eq '05'}">selected</c:if>>ê´‘ê³ ë¬¸ì˜</option>
+			<option value="06" <c:if test="${qna_category eq '06'}">selected</c:if>>ê¸°íƒ€</option>
 		</select>
+		<input type="text" name="searchText" value="${searchText }">
+		<a href="javascript:fn_search()">ê²€ìƒ‰</a>
 		</form>
 		<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
 				<thead>
 					<tr>
-						<th class="text-center" style="width: 100px;">¹øÈ£</th>
-						<th class="text-center" style="width: 100px;">Ä«Å×°í¸®</th>
-						<th class="text-center" style="width: 100px;" >Á¦¸ñ</th>
-						<th class="text-center" style="width: 100px;">ÀÛ¼ºÀÏ</th>
-						<th class="text-center" style="width: 100px;">Á¶È¸¼ö</th>
+						<th class="text-center" style="width: 100px;">ë²ˆí˜¸</th>
+						<th class="text-center" style="width: 100px;">ì¹´í…Œê³ ë¦¬</th>
+						<th class="text-center" style="width: 100px;" >ì œëª©</th>
+						<th class="text-center" style="width: 100px;">ìž‘ì„±ì¼</th>
+						<th class="text-center" style="width: 100px;">ì¡°íšŒìˆ˜</th>
 
 					</tr>
 				</thead>
@@ -139,13 +130,13 @@
 							</td>
 						<td class="text-center">
 							<c:choose>
-								<c:when test="${list.qna_category eq '01' }">È¸¿ø°¡ÀÔ</c:when>
-								<c:when test="${list.qna_category eq '02' }">¹Ù·Î°áÁ¦</c:when>
-								<c:when test="${list.qna_category eq '03' }">¸®ºä</c:when>
-								<c:when test="${list.qna_category eq '04' }">ÀÌ¿ë¹®ÀÇ</c:when>
-								<c:when test="${list.qna_category eq '05' }">±¤°í¹®ÀÇ</c:when>
-								<c:when test="${list.qna_category eq '06' }">±âÅ¸</c:when>
-								<c:otherwise>ÀüÃ¼</c:otherwise>
+								<c:when test="${list.qna_category eq '01' }">íšŒì›ê°€ìž…</c:when>
+								<c:when test="${list.qna_category eq '02' }">ë°”ë¡œê²°ì œ</c:when>
+								<c:when test="${list.qna_category eq '03' }">ë¦¬ë·°</c:when>
+								<c:when test="${list.qna_category eq '04' }">ì´ìš©ë¬¸ì˜</c:when>
+								<c:when test="${list.qna_category eq '05' }">ê´‘ê³ ë¬¸ì˜</c:when>
+								<c:when test="${list.qna_category eq '06' }">ê¸°íƒ€</c:when>
+								<c:otherwise>ì „ì²´</c:otherwise>
 							</c:choose>
 						</td>
 							<td class="text-left">
@@ -161,7 +152,7 @@
 					</c:forEach>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="5">µî·ÏµÈ °Ô½Ã¹°ÀÌ ¾ø½À´Ï´Ù.</td>
+							<td colspan="5">ë“±ë¡ëœ ê²Œì‹œë¬¼ì´ ì—†ìŠµë‹ˆë‹¤.</td>
 						</tr>
 					</c:if>
 				</tbody>
@@ -174,7 +165,7 @@
 			</div>
 
 			<div class="pull-right">
-				<a href="insertQnaForm.action" class="btn btn-primary">±Û¾²±â</a>
+				<a href="insertQnaForm.action" class="btn btn-primary">ê¸€ì“°ê¸°</a>
 			</div>
 
 		</div>
