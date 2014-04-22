@@ -50,7 +50,7 @@
 		<form action="updateQnaForm.action" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="qna_num" value="${resultClass.qna_num }"/>
 		<div class="form-group">
-				<label for="qna_category">카테고리:</label>
+				<label for="qna_category"><font color="blue">카테고리:</label></font>
 					<c:choose>
 						<c:when test="${resultClass.qna_category eq '01' }">회원가입</c:when>
 						<c:when test="${resultClass.qna_category eq '02' }">바로결제</c:when>
@@ -62,11 +62,11 @@
 					</c:choose>
 			</div>
 			<div class="form-group">
-				<label for="qna_subject">제목:</label>
+				<label for="qna_subject"><font color="green">제목:</label></font>
 				${resultClass.qna_subject }
 			</div>
 			<div class="form-group">
-				<label for="qna_content">내용:</label>
+				<label for="qna_content"><font color="orange">내용:</label></font>
 				${resultClass.qna_content }
 			</div>
 

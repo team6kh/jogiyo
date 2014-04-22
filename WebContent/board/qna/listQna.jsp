@@ -66,30 +66,18 @@
 							<td class="text-center">
 								<c:out value="${list.qna_num }" />
 							</td>
-							<!-- 
-							<td class="text-center">
-								<c:choose>
-									<c:when test="${list.qna_category eq '01' }">회원가입</c:when>
-									<c:when test="${list.qna_category eq '02' }">바로결제</c:when>
-									<c:when test="${list.qna_category eq '03' }">리뷰</c:when>
-									<c:when test="${list.qna_category eq '04' }">이용문의</c:when>
-									<c:when test="${list.qna_category eq '05' }">광고문의</c:when>
-									<c:when test="${list.qna_category eq '06' }">기타</c:when>
-									<c:otherwise>전체</c:otherwise>
-								</c:choose>
-							</td>
-							 -->
+					
 							<td class="text-left">
 								<c:choose>
-									<c:when test="${list.qna_category eq '01' }">[회원가입]</c:when>
-									<c:when test="${list.qna_category eq '02' }">[바로결제]</c:when>
-									<c:when test="${list.qna_category eq '03' }">[리뷰]</c:when>
-									<c:when test="${list.qna_category eq '04' }">[이용문의]</c:when>
-									<c:when test="${list.qna_category eq '05' }">[광고문의]</c:when>
-									<c:when test="${list.qna_category eq '06' }">[기타]</c:when>
-									<c:otherwise>[전체]</c:otherwise>
+									<c:when test="${list.qna_category eq '01' }"><font color="blue">[회원가입]</c:when>
+									<c:when test="${list.qna_category eq '02' }"><font color="orange">[바로결제]</c:when>
+									<c:when test="${list.qna_category eq '03' }"><font color="#747474">[리뷰]</c:when>
+									<c:when test="${list.qna_category eq '04' }"><font color="#8041D9">[이용문의]</c:when>
+									<c:when test="${list.qna_category eq '05' }"><font color="green">[광고문의]</c:when>
+									<c:when test="${list.qna_category eq '06' }"><font color="#00D8FF">[기타]</c:when>
+									<c:otherwise><font color="red">[전체]</c:otherwise>
 								</c:choose>
-								<c:out value="${list.qna_subject }" />
+								<c:out value="${list.qna_subject }" /></font>
 							</td>
 						</tr>
 						<tr id="row${list.qna_num }" style="display: none;">
@@ -105,6 +93,9 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="pull-right">
+				<a href="insertQnaForm.action" class="btn btn-primary">글쓰기</a>
+			</div>
 
 		<!-- test board pretty -->
 		<div class="col-md-12">
@@ -121,7 +112,7 @@
 			<option value="06" <c:if test="${qna_category eq '06'}">selected</c:if>>기타</option>
 		</select>
 		<input type="text" name="searchText" value="${searchText }">
-		<a href="javascript:fn_search()">검색</a>
+		<a href="javascript:fn_search()"><font color="red"size="4">[검색]</a></font>
 		</form>
 		<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
@@ -143,13 +134,13 @@
 							</td>
 						<td class="text-center">
 							<c:choose>
-								<c:when test="${list.qna_category eq '01' }">회원가입</c:when>
-								<c:when test="${list.qna_category eq '02' }">바로결제</c:when>
-								<c:when test="${list.qna_category eq '03' }">리뷰</c:when>
-								<c:when test="${list.qna_category eq '04' }">이용문의</c:when>
-								<c:when test="${list.qna_category eq '05' }">광고문의</c:when>
-								<c:when test="${list.qna_category eq '06' }">기타</c:when>
-								<c:otherwise>전체</c:otherwise>
+								<c:when test="${list.qna_category eq '01' }"><font color="blue">[회원가입]</c:when>
+								<c:when test="${list.qna_category eq '02' }"><font color="orange">[바로결제]</c:when>
+								<c:when test="${list.qna_category eq '03' }"><font color="#747474">[리뷰]</c:when>
+								<c:when test="${list.qna_category eq '04' }"><font color="#8041D9">[이용문의]</c:when>
+								<c:when test="${list.qna_category eq '05' }"><font color="green">[광고문의]</c:when>
+								<c:when test="${list.qna_category eq '06' }"><font color="#00D8FF">[기타]</c:when>
+								<c:otherwise><font color="red">[전체]</c:otherwise>
 							</c:choose>
 						</td>
 							<td class="text-left">
