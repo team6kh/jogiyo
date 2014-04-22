@@ -30,8 +30,8 @@
     <div class="container">
 
       <div class="common-template">
-        <h1>home template</h1>
-        <p class="lead">Hello Home</p>
+        <h1>index.jsp</h1>
+        <p class="lead">Hello World</p>
       </div>
 
     </div><!-- /.container -->

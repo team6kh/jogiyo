@@ -35,6 +35,10 @@
 		ORDER BY seller_reg_date DESC
 	</select>
 	
+	<select id="selectSellerCount" resultClass="int">
+		SELECT count(*) FROM seller_table
+	</select>
+	
 	<select id="selectWhereSellerId" resultMap="SellerResult" parameterClass="SellerDTO">
 		<include refid="select-all" />
 		<include refid="where-seller_id" />
@@ -85,6 +89,13 @@
 			seller_mobilenum = #seller_mobilenum#,
 			seller_telnum = #seller_telnum#
 		<include refid="where-seller_id" />
+	</update>
+	
+	<!-- seller_verification 업데이트 -->
+	<update id="updateVerification" parameterClass="SellerDTO">
+		UPDATE seller_table SET
+			seller_verification = #seller_verification#
+		<include refid="where-seller_id"	/>
 	</update>
 
 	<!-- delete 쿼리문 정의 -->

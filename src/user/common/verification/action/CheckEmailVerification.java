@@ -1,6 +1,8 @@
 package user.common.verification.action;
 
+import user.buyer.dto.BuyerDTO;
 import user.common.verification.dto.EvDTO;
+import user.seller.dto.SellerDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
@@ -17,10 +19,11 @@ public class CheckEmailVerification implements Action, ConDAOAware
     private String ev_requested;
     private String ev_code_input; // 사용자가 입력한 ev_code
     
-    // 액션 실행 후 redirect-action을 위한 파라미터
+    // 해당 쿼리 실행 후 redirect-action을 위한 파라미터
     private String user_type;
-    private String user_id;
+    private String user_id;    
     private int isSuccess;
+    //private String actionStatus;
     
     public void setConDAO(SqlMapClient sqlMapper)
     {
@@ -30,8 +33,8 @@ public class CheckEmailVerification implements Action, ConDAOAware
     public String execute() throws Exception
     {       
         //System.out.println("getBuyer_email():"+getBuyer_email());
-        System.out.println("getEv_requested():"+getEv_requested());
-        System.out.println("getEv_code():"+getEv_code_input());
+        //System.out.println("getEv_requested():"+getEv_requested());
+        //System.out.println("getEv_code():"+getEv_code_input());
         
         EvDTO evDTO = new EvDTO();
         
@@ -42,13 +45,35 @@ public class CheckEmailVerification implements Action, ConDAOAware
         
         if (evDTO != null)
         {
-            //return SUCCESS;
-            isSuccess = 1;
-        } else {
-            isSuccess = 0;
-        }
-        
-        //return ERROR;
+        	if (getUser_type().equals("buyer"))
+        	{
+        		// 객체 생성 후 파라미터 세팅
+        		BuyerDTO buyerDTO = new BuyerDTO();
+        		buyerDTO.setBuyer_id(getUser_id());
+        		buyerDTO.setBuyer_verification("yes");
+        		// 업데이트 쿼리 실행
+        		sqlMapper.update("Buyer.updateVerification", buyerDTO);
+        		
+        		//System.out.println("buyer_verification is now 'yes'");
+        		
+        		isSuccess = 1;
+        		//actionStatus = "evSuccess";
+        		
+        	} else if (getUser_type().equals("seller"))
+        	{
+        		// 객체 생성 후 파라미터 세팅
+        		SellerDTO sellerDTO = new SellerDTO();
+        		sellerDTO.setSeller_id(getUser_id());
+        		sellerDTO.setSeller_verification("yes");
+        		// 업데이트 쿼리 실행
+        		sqlMapper.update("Seller.updateVerification", sellerDTO);
+        		
+        		isSuccess = 1;    
+        		
+        	}      
+        	
+        }         
+      
         return SUCCESS;
     }
     
@@ -121,5 +146,13 @@ public class CheckEmailVerification implements Action, ConDAOAware
     {
         this.isSuccess = isSuccess;
     }
+
+//	public String getActionStatus() {
+//		return actionStatus;
+//	}
+//
+//	public void setActionStatus(String actionStatus) {
+//		this.actionStatus = actionStatus;
+//	}
    
 }

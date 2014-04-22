@@ -23,7 +23,7 @@
 <script type="text/javascript">
 	function requestEv()
 	{	
-		alert("requstEv");
+		//alert("requstEv");
 		$('#alert_div').removeClass('alert-info');
 		$('#alert_div').addClass('alert-warning');
 		document.getElementById('alert_placeholder').innerHTML = "Loading...";
@@ -42,7 +42,12 @@
 		//form.submit();
 		var ev_requested = document.getElementById("seller_email").value;
 		var ev_code_input = document.getElementById("ev_code_input").value;
-		url = "checkEv.action?ev_requested="+ev_requested+"&ev_code_input="+ev_code_input;
+		
+		// verification update를 위해 필요하다.
+		var user_type = document.getElementById("user_type").value;
+		var user_id = document.getElementById("user_id").value;
+		
+		url = "checkEv.action?ev_requested="+ev_requested+"&ev_code_input="+ev_code_input+"&user_type="+user_type+"&user_id="+user_id;
 		document.getElementById('checkEv').contentWindow.location.href = url;
 		
 		return true;
@@ -87,6 +92,14 @@
 			</div>
 			</c:if>
 			<!-- END 인증이 되지 않았을 시 뜬다. -->
+			<!-- 인증 성공 시 -->
+			<c:if test="${sellerDTO.seller_verification eq 'yes' && actionStatus eq 'evSuccess'}">
+			<div class="alert alert-success alert-dismissable">
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  <a href="#" class="alert-link">인증 성공</a>
+			</div>
+			</c:if>
+			<!-- END 인증 성공 시 -->
 			<!-- 숨겨진 iframe -->
 			<iframe src="blink.html" id="checkEv" style="display:none;"></iframe>
 			<!-- END 숨겨진 iframe -->
@@ -99,7 +112,7 @@
 			      <option value="seller">판매자</option>
 			    </select>
 			    <!-- 이메일작성을 위해 필요한 히든 파라미터 user_type -->
-			    <input type="hidden" name="user_type" value="${session_type}">			  
+			    <input type="hidden" id="user_type" name="user_type" value="${session_type}">			  
 			</div>			
 			<div class="form-group">
 			  <label>상호명</label>
@@ -117,7 +130,7 @@
 			  <label>아이디</label>
 			  <input type="text" class="form-control" value="${sellerDTO.seller_id}" disabled>
 			  <!-- 이메일작성을 위해 필요한 히든 파라미터 user_id -->
-			  <input type="hidden" name="user_id" value="${sellerDTO.seller_id}">		  
+			  <input type="hidden" id="user_id" name="user_id" value="${sellerDTO.seller_id}">		  
 			</div>						
 			<div class="form-group">
 			  <label>이름</label>
