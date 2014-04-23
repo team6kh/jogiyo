@@ -28,7 +28,7 @@
 		<input type="hidden" id="ccp" name="ccp" value="${ccp}" /> 
 		<input type="hidden" id="review_num" name="review_num" value="${review_num}" />
 					
-		<table class="table table-striped table-forum" align="center">
+		<table class="table table-striped table-forum" style="text-align: center">
 			<tr>
 				<td align="center">
 					<br/>

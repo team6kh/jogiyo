@@ -1,9 +1,12 @@
-package user.seller.action;
+ package user.seller.action;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import table.sales.dto.SalesDTO;
+
+
+
+import board.pay.dto.PaidDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
@@ -17,51 +20,52 @@ public class DashSellerAction implements Action, Preparable, ModelDriven, ConDAO
     private String actionName = "dashSeller"; // 페이징액션과 로그인액션에서 쓰인다.
     
     private SqlMapClient sqlMapper;
-    private SalesDTO salesDTO;
-    private List salesRes = new ArrayList();
- 
+    
+    private PaidDTO paidDTO;
+    private List<PaidDTO> paidRes = new ArrayList<PaidDTO>();
+    private String session_id;
     
     
     public String execute() throws Exception
     {
-        System.out.println(sqlMapper);
+         
         
-            
-        salesDTO.setGroupColumn("paid_restopt_subject");
-        salesDTO.setSortColumn("paid_sales_volume");
-        
-        salesRes = sqlMapper.queryForList("Pay.selectMenuSales", salesDTO);
-       
+        paidRes = sqlMapper.queryForList("Pay.payList", session_id);
         return SUCCESS;
     }
+        
     
     
     
     
-    
-    
-    
-    
+    public String getSession_id()
+    {
+        return session_id;
+    }
+    public void setSession_id(String session_id)
+    {
+        this.session_id = session_id;
+    }
+
+    public void setActionName(String actionName)
+    {
+        this.actionName = actionName;
+    }
     public String getActionName()
     {
         return actionName;
     }
 
-    public List getSalesRes()
+    public List<PaidDTO> getPaidRes()
     {
-        return salesRes;
-    }
-
-    public void setSalesRes(List salesRes)
-    {
-        this.salesRes = salesRes;
+        return paidRes;
     }
 
 
-
-
-
-
+    public void setPaidRes(List<PaidDTO> paidRes)
+    {
+        this.paidRes = paidRes;
+    }
 
 
     // ConDAOAware 인터페이스 : DB 쿼리
@@ -73,13 +77,13 @@ public class DashSellerAction implements Action, Preparable, ModelDriven, ConDAO
     // ModelDriven 인터페이스
     public Object getModel()
     {
-        return salesDTO;
+        return paidDTO;
     }
 
     // Preparable 인터페이스
     public void prepare() throws Exception
     {
-        salesDTO = new SalesDTO();        
+        paidDTO = new PaidDTO();        
     }
 
     
