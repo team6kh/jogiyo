@@ -2,29 +2,12 @@ package board.pay.dto;
 
 public class MenuDTO
 {
-    private int rest_num; // 식당 코드 
-    private String rest_writer_id; // 판매자id
-     private String paid_restopt_subject; // 메뉴명
+  
+    private String paid_restopt_subject; // 메뉴명
     private String paid_sales_volume;  // 메뉴 매출 건수
     private int paid_sales_price; //메뉴 총 매출금액
    
     
-    public int getRest_num()
-    {
-        return rest_num;
-    }
-    public void setRest_num(int rest_num)
-    {
-        this.rest_num = rest_num;
-    }
-    public String getRest_writer_id()
-    {
-        return rest_writer_id;
-    }
-    public void setRest_writer_id(String rest_writer_id)
-    {
-        this.rest_writer_id = rest_writer_id;
-    }
     public String getPaid_restopt_subject()
     {
         return paid_restopt_subject;

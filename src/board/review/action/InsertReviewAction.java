@@ -36,7 +36,7 @@ public class InsertReviewAction implements Action, Preparable,
 		// 두 param을 이용해 해당회원이 해당 식당에서 구매한 내역이 있는지 없는지 논리값을 구할 것
 		// 작성일에 현재 시간 설정
 		reviewDTO.setReview_reg_date(today.getTime());
-
+	
 		// DB 입력처리
 		sqlMapper.insert("Review.insertReview", reviewDTO);
 

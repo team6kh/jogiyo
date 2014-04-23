@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,12 +46,39 @@
 			<div class="col-md-12 tab-content">
 				<!--  홈 탭 컨텐츠 -->
 			 	<div class="tab-pane active" id="home"> 
+			 		<!-- 홈탭 상단 : 차트? -->
 			 		<div class="col-md-12">
 			 				차트?
+			 				
+			 				
+			 				
+			 				
 			 		</div>
 			 		<div class="col-md-12">
 			 		
-			 			<div class="col-md-6"> 전체</div>
+			 			<div class="col-md-6">
+			 			<table class="table table-bordered table-hover">
+			 				<tr>
+			 					<th>결제코드	</th>
+			 					<th>메      뉴 </th>
+			 					<th>메뉴가격 </th>
+			 					<th> 구 매 자 </th>
+			 					<th> 주 문 일 </th>
+			 				</tr>
+			 				<c:forEach var="paidDTO" items="${paidRes}">
+			 				<tr>
+			 					<td>${paidDTO.paid_num} </td>
+			 					<td>${paidDTO.paid_restopt_subject }</td>
+			 					<td>${paidDTO.paid_restopt_subject}</td>
+			 					<td>${paidDTO.session_id}</td>
+			 					<td><fmt:formatDate value="${paidDTO.paid_reg_date}" pattern="yyyy.MM.dd  HH:mm:ss"/>
+			 					</td>
+			 				</tr>
+			 				</c:forEach>
+			 					
+			 			</table>
+			 			
+			 			</div>
 			 			<div class="col-md-6"> 
 			 				<table class="table table-bordered table-hover">
 			 					<tr>
@@ -58,11 +86,11 @@
 			 						<th> 매출 건수 </th>
 			 						<th> 매출 금액 </th>
 			 					</tr>
-			 					<c:forEach var="salesDTO" items="${salesRes }">
+			 					<c:forEach var="menuDTO" items="${menuRes }">
 			 					<tr>
-			 						<td>${salesDTO.paid_restopt_subject}</td>
-			 						<td>${salesDTO.paid_sales_volume }</td>
-			 						<td>${salesDTO.paid_sales_price }</td>
+			 						<td>${menuDTO.paid_restopt_subject}</td>
+			 						<td>${menuDTO.paid_sales_volume }</td>
+			 						<td>${menuDTO.paid_sales_price }</td>
 			 					</tr>	
 			 					</c:forEach>	
 			 				</table>

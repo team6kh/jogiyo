@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class PaidDTO
 {
- 
     private int rest_num; // 식당 코드
     private String rest_writer_id; // 판매자id
     private int paid_num; // 결제 코드

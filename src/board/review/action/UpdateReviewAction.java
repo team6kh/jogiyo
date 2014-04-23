@@ -39,6 +39,7 @@ public class UpdateReviewAction implements Action, Preparable,
 	public String form() throws Exception {
 		reviewDTO = (ReviewDTO) sqlMapper.queryForObject(
 				"Review.selectReviewOne", review_num);
+		
 		return SUCCESS;
 	}
 

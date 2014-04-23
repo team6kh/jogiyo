@@ -12,11 +12,15 @@
 		
 		<!-- Pay 주문결제내역 -->
 		<action name="dashSeller" class="user.seller.action.DashSellerAction">
+			<interceptor-ref name="servletConfig"/>
 			<interceptor-ref name="conDAO"/>
-			<interceptor-ref name="prepare" />
-			<interceptor-ref name="modelDriven" />
-			<interceptor-ref name="params"/>
-			<result>user/seller/dashSeller.jsp</result>	
+			<interceptor-ref name="prepare"/>
+			<interceptor-ref name="modelDriven"/>
+			<interceptor-ref name="params"/>			
+			<result name="success">user/seller/dashSeller.jsp</result>	
+			<result name="error" type="redirect-action">
+				<param name="actionName">loginForm</param></result>
+		
 		</action>
 		
 	</package>

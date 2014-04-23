@@ -41,21 +41,20 @@
 
 		<!-- 별점(review_rating) : radio 타입으로 -->
 	
-				<div class="form-group">
+				<div class="form-group" style="margin: 10px">
 					<br/>
-					<font size=4 color="green"><b>후기 수정 하기</b></font>
+					<font size=3 color="green"><b>후기 수정 하기</b></font>
 				</div>
-			
-				<div class="form-group">
+				<div class="form-group text-center">
 					<table>
 					<tr>
 						<td><label>별점 &nbsp;&nbsp;&nbsp;</label></td>
 						<td>
 							<c:forEach var="cnt" begin="1" end="5">
-								<c:if test="${cnt == reviewDTO.review_rating}">
+								<c:if test="${cnt eq reviewDTO.review_rating}">
 									<input type="radio" class="star" name="review_rating" value="${cnt}" checked="checked" />
 								</c:if>
-								<c:if test="${cnt != reviewDTO.review_rating}">
+								<c:if test="${cnt ne reviewDTO.review_rating}">
 									<input type="radio" class="star" name="review_rating" value="${cnt}" />
 								</c:if>					
 		                    </c:forEach>
@@ -64,30 +63,23 @@
                  </div>        
       
 			<!-- 리뷰 content -->
-				<div class="form-group">
-					<textarea id="review_content" name="review_content" rows="3">${reviewDTO.review_content}</textarea>
+				<div class="form-group text-center">
+					<textarea id="review_content" name="review_content" rows="3" cols="50">${reviewDTO.review_content}</textarea>
 				</div>
 
 			<!-- 이미지 파일 첨부 -->
-				<div class="form-group">
+				<div class="form-group text-center">
 				 	<label> 새로 파일을 첨부하시면 기존에 첨부하신 파일은 삭제됩니다. </label>
                     <input type="file" name="review_files" class="multi" maxlength="2" accept="gif|jpg|png|jpeg" multiple="multiple"/>        
 				</div>
 
 
 			<!-- 리뷰 작성 완료 버튼 -->
-				<div class="form-group">
+				<div class="form-group text-right">
 					<button type="submit" class="btn btn-primary" >수정 완료</button>
-					<button type="button" class="btn btn-default" onclick="javascript:self.close">취소</button> 					
+					<button type="button" class="btn btn-default" onclick="javascript:self.close()">취소</button> 					
 				</div>
-	
 	</form>
-
-			
-			
-
-	
-	
 		
 
 	<!-- /.container -->
