@@ -3,11 +3,14 @@ package board.rest.action;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 import table.coopon.dto.CooponDTO;
 import board.cart.dto.CartDTO;
 import board.pay.dto.payDTO;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
+
 import common.ConDAOAware;
 
 public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
@@ -17,6 +20,7 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 	private CooponDTO paramClass = new CooponDTO();
 	private CartDTO paramClass1 = new CartDTO();
 	private payDTO paramClass2 = new payDTO();
+	private payDTO resultClass = new payDTO();
 	
 	private List<CartDTO> list1 = new ArrayList<CartDTO>();
 	private List<payDTO> list2 = new ArrayList<payDTO>();
@@ -37,6 +41,9 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		paramClass1.setCart_rest_num(getRest_num());
 		paramClass1.setSession_id(getSession_id());
 		list1 = sqlMapper.queryForList("Rest.selectCartAll", paramClass1);
+		
+		//결제 테이블 insert전 LastNo를 get함
+		resultClass = (payDTO) sqlMapper.queryForObject("Rest.selectPaidLastNo");
 		
 		//장바구니 테이블 -> 결과테이블로 insert
 		for(int i=0; i<list1.size(); i++){
@@ -70,8 +77,15 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		//최종 장바구니 레코드 삭제
 		sqlMapper.delete("Rest.deleteCartforpaid", paramClass1);
 		
-		//jsp로 보내줄 결과 리스트 생성
-		list2 = sqlMapper.queryForList("Rest.selectPaidAll", paramClass1);
+		//레코드가 있는지 판단.
+		Integer count = (Integer)sqlMapper.queryForObject("Rest.selectPaidCount");
+		if( count != 0){ //레코드가 있을 경우
+			//jsp로 보내줄 결과 리스트 생성
+			list2 = sqlMapper.queryForList("Rest.selectPaidnow", resultClass);
+		}else{//레코드가 없는 경우
+			//모든글 select함
+			list2 = sqlMapper.queryForList("Rest.selectPaidAll", paramClass1);
+		}
 		
 		return SUCCESS; //payRestResult.jsp
 	}

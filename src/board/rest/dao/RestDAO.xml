@@ -153,8 +153,16 @@
 		SELECT max(rest_num) as rest_num FROM Rest_board
 	</select>
 	
+	<select id="selectPaidLastNo" resultClass="PayDTO" parameterClass="int">
+		SELECT max(paid_num) as paid_num FROM paid_board
+	</select>
+	
 	<select id="selectCount" resultClass="int">
 		SELECT count(*) FROM Rest_board
+	</select>
+	
+	<select id="selectPaidCount" resultClass="int">
+		SELECT count(*) FROM paid_board
 	</select>
 
 	<select id="selectAll" resultMap="RestBoard" parameterClass="int">
@@ -165,6 +173,10 @@
 	<select id="selectCartAll" resultMap="CartBoard" parameterClass="CartDTO">
 		select * from Cart_board
 		where cart_rest_num=#cart_rest_num# and session_id=#session_id#
+	</select>
+	
+	<select id="selectPaidnow" resultMap="PaidBoard" parameterClass="PayDTO">
+		select * from paid_board where paid_num > #paid_num#
 	</select>
 	
 	<select id="selectPaidAll" resultMap="PaidBoard" parameterClass="CartDTO">
