@@ -48,6 +48,8 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		
 		if( count != 0){ //레코드가 있을 경우 last넘을 get함
 			resultClass = (payDTO) sqlMapper.queryForObject("Rest.selectPaidLastNo"); //라스트넘 이상 select 하도록
+		}else{
+			resultClass.setPaid_num(0);
 		}
 		
 		//장바구니 테이블 -> 결과테이블로 insert
@@ -82,14 +84,18 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		//최종 장바구니 레코드 삭제
 		sqlMapper.delete("Rest.deleteCartforpaid", paramClass1);
 		
-		//레코드가 있는지 판단.
+		//뿌려줄 리스트임.
+		list2 = sqlMapper.queryForList("Rest.selectPaidnow", resultClass); //마지막넘 이상인 글들을 받음
+		
+		
+		/*//레코드가 있는지 판단.
 		if( count != 0){ //레코드가 있을 경우
 			//jsp로 보내줄 결과 리스트 생성
 			list2 = sqlMapper.queryForList("Rest.selectPaidnow", resultClass); //마지막넘 이상인 글들을 받음
 		}else{//레코드가 없는 경우
 			//모든글 select함
 			list2 = sqlMapper.queryForList("Rest.selectPaidAll", paramClass1); //모든글들을 받음
-		}
+		}*/
 		
 		return SUCCESS; //payRestResult.jsp
 	}
