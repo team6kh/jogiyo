@@ -331,7 +331,7 @@
 			전화번호 : ${resultClass.rest_writer_telnum}<br/>
 			핸드폰번호 :  ${resultClass.rest_writer_mobilenum}<br/>
 			주소 : ${resultClass.rest_writer_address} <br/>
-			이메일 : ${resultClass.rest_writer_email} <br/><br/>
+			이메일 : <a href="sendMail.action?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/><br/>
 		</div>
 		
 		<div id="map_canvas" class="map"></div>

@@ -11,7 +11,22 @@
 		</interceptors>
 
 		<!-- RestBoard 액션 -->	
-			
+		
+		<!-- readRest.jsp 에서 판매자정보에 있는 메일주소를 클릭했을때 -->
+		<action name="sendMail" class="board.rest.action.SendMailAction" method="form">
+			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params"/>
+			<result>/board/rest/mailer.jsp</result>
+		</action>	
+		
+		<!-- mailer.jsp에서 submit을 눌렀을때 -->
+		<action name="sendMailPro" class="board.rest.action.SendMailAction">
+			<interceptor-ref name="conDAO"/>
+			<interceptor-ref name="params"/>
+			<result>/board/rest/mailerPro.jsp</result>
+		</action>	
+		
+		
 		<!-- 리스트에서 글쓰기 클릭시 -->
 		<action name="insertRestForm" class="board.rest.action.InsertRestAction" method="form">
 			<interceptor-ref name="conDAO"/>

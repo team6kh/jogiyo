@@ -3,14 +3,11 @@ package board.rest.action;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import table.coopon.dto.CooponDTO;
 import board.cart.dto.CartDTO;
 import board.pay.dto.payDTO;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
-
 import common.ConDAOAware;
 
 public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
