@@ -274,12 +274,13 @@
 
 		<!-- 메뉴 리스트 page-header -->
 	    <div class="page-header">
-			<h1>메뉴 리스트 <small>장바구니에 담아 결제해주세요.</small></h1>
+			<h2><strong>메뉴 리스트</strong> <small>장바구니에 담아 결제해주세요.</small></h2>
 			<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
 			<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
 			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
 			<input type="hidden" id="rest_writer_address" name="rest_writer_address" value=<s:property value="resultClass.rest_writer_address" /> />
 
+			<!-- 글 작성자와 현재 로그인한 세션이 일치할 경우, 수정 및 삭제 버튼을 출력 시킴 -->
 			<c:if test="${sessionScope.session_id==resultClass.rest_writer_id}">
 				<div class="forSeller" align="right">
 					<a href="updateRestForm.action?rest_num=${resultClass.rest_num}&currentPage=${currentPage}&session_id=${sessionScope.session_id}" class="btn btn-success">수정</a>
@@ -319,21 +320,32 @@
 	</div>
 	<!-- /메뉴 리스트 col-md-9 -->
 
-	<!-- 지도 col-md-3 -->
+	<!-- 업소상세정보 col-md-3 -->
 	<div class="col-md-3">
 		<div class="page-header">
-		  <h1>지도</small></h1>
+		  <h2><strong>업소상세정보</strong></small></h2>
 		</div>
+		
+		<div class="sellerInfo">
+			이름 : ${resultClass.rest_writer_name} <br/>
+			전화번호 : ${resultClass.rest_writer_telnum}<br/>
+			핸드폰번호 :  ${resultClass.rest_writer_mobilenum}<br/>
+			주소 : ${resultClass.rest_writer_address} <br/>
+			이메일 : ${resultClass.rest_writer_email} <br/><br/>
+		</div>
+		
 		<div id="map_canvas" class="map"></div>
-	</div>
-	<!-- /지도 col-md-3 -->
-
-	<!-- 장바구니 col-md-3 -->
-	<div class="col-md-3" id="cart">
+		
+		<!-- 장바구니 col-md-3 -->
+		<div class="page-header">
+			<h2><strong>장바구니</strong></small></h2>
+		</div>
 		<!-- iframe -->
-  		<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:700px;width:100%" height="100%" width="100%"></iframe>
-    </div>
-	<!-- /장바구니 col-md-3 -->	
+		<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:500px;width:100%" height="100%" width="100%"></iframe>
+		<!-- /장바구니 col-md-3 -->
+	</div>
+	<!-- /업소상세정보 col-md-3 -->
+
 
 	<!-- 리뷰 쓰기 col-md-12 -->
 	<div class="col-md-12">

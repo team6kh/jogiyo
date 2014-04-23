@@ -217,9 +217,12 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		paramClass.setRest_writer_telnum(sellerDTO.getSeller_telnum());//
 		paramClass.setRest_writer_mobilenum(sellerDTO.getSeller_mobilenum());//
 		paramClass.setRest_writer_address(sellerDTO.getSeller_rest_address());//
+		paramClass.setRest_writer_email(sellerDTO.getSeller_email());
 		paramClass.setRest_reg_date(today.getTime());
 
 		sqlMapper.insert("Rest.insertRest_board", paramClass);
+		
+		
 
 
 		// num, resnum, 옵션명, 옵션가 insert

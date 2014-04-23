@@ -8,6 +8,7 @@
 	<typeAlias alias="CooponDTO" type="table.coopon.dto.CooponDTO" />
 	<typeAlias alias="PayDTO" type="board.pay.dto.payDTO" />
 	<typeAlias alias="reviewDTO" type="board.review.dto.ReviewDTO" />
+	
 
 	<!-- 리절트 맵 정의 -->
 	<resultMap id="RestBoard" class="RestDTO">
@@ -26,6 +27,7 @@
 		<result property="rest_writer_telnum" column="rest_writer_telnum" />
 		<result property="rest_writer_mobilenum" column="rest_writer_mobilenum" />
 		<result property="rest_writer_address" column="rest_writer_address" />
+		<result property="rest_writer_email" column="rest_writer_email" />
 		<result property="rest_readcount" column="rest_readcount" />
 		<result property="rest_reg_date" column="rest_reg_date" />
 	</resultMap>
@@ -108,10 +110,10 @@
 	<insert id="insertRest_board" parameterClass="RestDTO">
 		INSERT INTO Rest_board (rest_num, rest_subject, rest_localcategory,
 		rest_typecategory, rest_writer_id, rest_writer_name, rest_writer_telnum,
-		rest_writer_mobilenum, rest_writer_address, rest_reg_date)
+		rest_writer_mobilenum, rest_writer_address, rest_writer_email, rest_reg_date)
 		VALUES (rest_seq_num.NEXTVAL, #rest_subject#, #rest_localcategory#,
 		#rest_typecategory#, #rest_writer_id#, #rest_writer_name#, #rest_writer_telnum#,
-		#rest_writer_mobilenum#, #rest_writer_address#, #rest_reg_date#)
+		#rest_writer_mobilenum#, #rest_writer_address#, #rest_writer_email#, #rest_reg_date#)
 	</insert>
 
 	<insert id="insertRestopt" parameterClass="RestoptDTO">
@@ -169,7 +171,7 @@
 		<include refid="select-all" />
 		ORDER BY rest_num DESC
 	</select>
-
+	
 	<select id="selectCartAll" resultMap="CartBoard" parameterClass="CartDTO">
 		select * from Cart_board
 		where cart_rest_num=#cart_rest_num# and session_id=#session_id#

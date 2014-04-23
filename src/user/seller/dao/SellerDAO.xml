@@ -49,6 +49,7 @@
 		<include refid="where-seller_id" />
 		AND seller_pw = #seller_pw#
 	</select>
+	
 
 	<!-- insert 쿼리문 정의 -->
 	<insert id="insertSeller" parameterClass="SellerDTO">
