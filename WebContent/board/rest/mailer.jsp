@@ -179,9 +179,7 @@
 																onKeyUp="textCounter(this,'progressbar1',200)" 
 																onFocus="textCounter(this,'progressbar1',200)" >
 							</textarea><br />
-								
 							<div id="progressbar1" class="progress"></div>
-								
 							<script>textCounter(document.getElementById("maxcharfield"),"progressbar1",200)</script>
 	                    </td>
 					</tr>
