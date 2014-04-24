@@ -332,7 +332,7 @@
 		<div class="page-header">
 		  <h2><strong>업소상세정보</strong></small></h2>
 		</div>
-		
+
 		<div class="sellerInfo">
 			<span class="glyphicon glyphicon-user"></span>			
 			이름 : ${resultClass.rest_writer_name} <br/>
@@ -347,9 +347,9 @@
 			<span class="glyphicon glyphicon-print"></span>
 			<a href="javascript:printWindow()">프린트하기</a> <br/><br/>
 		</div>
-		
+
 		<div id="map_canvas" class="map"></div>
-		
+
 		<!-- 장바구니 col-md-3 -->
 		<div class="page-header">
 			<h2><strong>장바구니</strong></small></h2>
@@ -549,4 +549,4 @@
 </script>
 
 </body>
-</html>	
+</html>

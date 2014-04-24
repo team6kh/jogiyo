@@ -14,102 +14,81 @@
 <meta name="author" content="">
 <link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
+<!-- Bootstrap core CSS -->
+<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- 별점 관련 js & css -->
+<script type="text/javascript" src="assets/img/review/js/jquery.js"></script>
+<script type="text/javascript" src="assets/img/review/js/jquery.rating.js"></script>
+<link rel="stylesheet" href="assets/img/review/css/jquery.rating.css" />
+<!--  파일업로드 관련 js -->
+<script type="text/javascript" src="assets/img/review/js/jquery.form.js"></script>
+<script type="text/javascript" src="assets/img/review/js/jquery.MultiFile.js"></script>
 <title>JOGIYO</title>
 
 </head>
 
-<body onload="ratingck()">
+<body>
 
 	<!-- 리뷰 수정 폼(review) -->
-	<form method="post" onsubmit="confirm()"  enctype="multipart/form-data" >
+	<form method="post" name="updateReviewForm" id="updateReviewForm" action="updateReviewPro.action" enctype="multipart/form-data" >
 
 		<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
-		<input type="hidden" id="review_rest_currentPage" name="review_rest_currentPage" value="${review_rest_currentPage}" />
+		<input type="hidden" id="review_rest_currentPage"
+			name="review_rest_currentPage" value="${review_rest_currentPage}" />
 		<input type="hidden" id="ccp" name="ccp" value="${ccp}" /> <input
 			type="hidden" id="review_num" name="review_num" value="${review_num}" />
 
 		<!-- 별점(review_rating) : radio 타입으로 -->
-		<table class="table table-striped table-forum" align="center" >
-			<tr>
-				<td align="center">
+
+				<div class="form-group" style="margin: 10px">
 					<br/>
-					<font size=4 color="green"><b>후기 수정 하기</b></font>
-				</td>
-			</tr>
-			<tr>
-				<th>별점 ${reviewDTO.review_rating }</th>
-				<td class="text-center" ><input type="radio"
-					name="review_rating" value="1" /> 1점 <input type="radio"
-					name="review_rating" value="2" /> 2점 <input type="radio"
-					name="review_rating" value="3" /> 3점 <input type="radio"
-					name="review_rating" value="4" /> 4점 <input type="radio"
-					name="review_rating" value="5" /> 5점<input type="hidden"
-					name="rating_point" value="${reviewDTO.review_rating}" /></td>
-			</tr>
-
-
+					<font size=3 color="green"><b>후기 수정 하기</b></font>
+				</div>
+				<div class="form-group text-center">
+					<table>
+					<tr>
+						<td><label>별점 &nbsp;&nbsp;&nbsp;</label></td>
+						<td>
+							<c:forEach var="cnt" begin="1" end="5">
+								<c:if test="${cnt eq reviewDTO.review_rating}">
+									<input type="radio" class="star" name="review_rating" value="${cnt}" checked="checked" />
+								</c:if>
+								<c:if test="${cnt ne reviewDTO.review_rating}">
+									<input type="radio" class="star" name="review_rating" value="${cnt}" />
+								</c:if>					
+		                    </c:forEach>
+		                 </td>
+                    </table>
+                 </div>        
+      
 			<!-- 리뷰 content -->
-			<tr>
-				<td class="text-center" colspan="2">
-					<textarea id="review_content" name="review_content" rows="5" cols="50">${reviewDTO.review_content}</textarea>
-				</td>
-			</tr>
+				<div class="form-group text-center">
+					<textarea id="review_content" name="review_content" rows="3" cols="50">${reviewDTO.review_content}</textarea>
+				</div>
 
 			<!-- 이미지 파일 첨부 -->
-			<tr>
-				<td class="text-center" colspan="2" align="right">
-					이미지파일을 첨부하시면 기존에 첨부하신파일은 삭제됩니다. <br /> 
-					<input id="review_file" type="file" name="review_files">
-				</td>
-			</tr>
+				<div class="form-group text-center">
+				 	<label> 새로 파일을 첨부하시면 기존에 첨부하신 파일은 삭제됩니다. </label>
+                    <input type="file" name="review_files" class="multi" maxlength="2" accept="gif|jpg|png|jpeg" multiple="multiple"/>        
+				</div>
 
 
 			<!-- 리뷰 작성 완료 버튼 -->
-			<tr>
-				<td class="text-center" colspan="2" align="center">
-					<br/>
-					<input type="submit" value="수정 완료" /> 
-					<input type="button" value="취 소" onclick="javascript:history.go(-1)"></td>
-			</tr>
-
-		</table>
-
+				<div class="form-group text-right">
+					<button type="submit" class="btn btn-primary" >수정 완료</button>
+					<button type="button" class="btn btn-default" onclick="javascript:self.close()">취소</button> 					
+				</div>
 	</form>
 
-	<!-- 해당글의 별점과 일치하는 라디오박스에 체크 -->
-	<script type="text/javascript">
-		function ratingck() {
-			var rating_point = "${reviewDTO.review_rating}";
-			var review_rating = document.updateReviewForm.review_rating;
-			for (var i = 0; i < review_rating.length; i++) {
-				if (review_rating[i].value == rating_point) {
-					review_rating[i].checked = true;
-				}
-			}
-		}
-
-		function confirm() {
-			var rest_num = document.getElementById("rest_num").value;
-			var review_rest_currentPage = document.getElementById("review_rest_currentPage").value;
-			var ccp = document.getElementById("ccp").value;
-			var review_num = document.getElementById("review_num").value;
-			var review_content = document.getElementById("review_content").value;
-
-			opener.window.location.href = "updateReviewPro.action?rest_num="
-					+ rest_num + "&review_rest_currentPage="
-					+ review_rest_currentPage + "&ccp=" + ccp + "&review_num="
-					+ review_num + "&review_content=" + review_content;
-			self.close();
-		}
-	</script>
 
 	<!-- /.container -->
 
 	<!-- Bootstrap core JavaScript
 ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>

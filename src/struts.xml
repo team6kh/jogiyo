@@ -11,4 +11,5 @@
 	<include file="struts_notice.xml"/>
 	<include file="struts_qna.xml"/>
 	<include file="struts_test.xml"/>
+	<include file="struts_pay.xml"/>
 </struts>
