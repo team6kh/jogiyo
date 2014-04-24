@@ -47,19 +47,19 @@
     	
     	// 글쓰기 버튼 체크    
 		function checkId() {
-			
+
 			if("${session_id}" != '') {
 				window.location.href= "insertQnaForm.action";
 			}else {
 			alert("!로그인 하셔야 글을 쓰실 수 있습니다.");
-				
+
 			}	
 		}
-	
-	
+
+
     </script>
 
-	
+
 </head>
 <body>
 	<%@ include file="/common/header.jsp"%>
@@ -69,7 +69,7 @@
 
 
 		<!-- test board pretty -->
-		
+
 		<h3>자주묻는질문</h3>
 		 	<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
@@ -79,7 +79,7 @@
 							<td class="text-center">
 								<c:out value="${list.qna_num }" />
 							</td>
-					
+
 							<td class="text-left">
 								<c:choose>
 									<c:when test="${list.qna_category eq '01' }"><font color="blue">[회원가입]</c:when>
@@ -107,7 +107,7 @@
 			</table>
 		</div>
 		<div class="pull-right">
-				
+
 				<input type="hidden" name="session_id" value="${sessionScope.session_id}"/>
 				<button type="button" class="btn btn-primary" onclick="return checkId()">글쓰기</button>
 			</div>  

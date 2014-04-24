@@ -73,22 +73,66 @@
 						<s:property value="notice_num" />
 						</s:param>
 	        			</s:url>
-	        			<div style="float:left;">
+	        			<div style="float:left;" align="left">
+	        			<s:url id="readNoticeURL" action="readNoticeAction">
+							<s:param name="notice_num">
+								<s:property value="notice_num" />
+							</s:param>
+							<s:param name="currentPage">
+								<s:property value="currentPage" />
+							</s:param>
+							<s:param name="rnum">
+								<s:property value="rnum" />
+							</s:param>
+						</s:url>
 	        			<s:if test="rnum == 1">
-	        				<a href="javascript:alert('이전글이 없습니다.')" class="btn btn-default">이전글</a>
-	        				<a href="rnumNoticeAction.action?currentPage=${currentPage}&rnum=${rnum+1}" class="btn btn-default">다음글</a>
+	        				<img  src="board/notice/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        				<a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}">
+	        				<s:if test="resultClass.notice_headtag == '-----------------'">
+	        					${aClass.notice_subject }
+	        				</s:if>
+	        				<s:else>
+	        					${aClass.notice_headtag } ${aClass.notice_subject }
+	        				</s:else></a><br/>
+	        				<img  src="board/notice/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        				<a href="javascript:alert('이전글이 없습니다.')">이전글이 없습니다.</a> 
 						</s:if>
 						<s:elseif test="rnum == n_count">
-	        				<a href="rnumNoticeAction.action?currentPage=${currentPage}&rnum=${rnum-1}" class="btn btn-default">이전글</a>
-	        				<a href="javascript:alert('다음글이 없습니다.')" class="btn btn-default">다음글</a>
+							<img  src="board/notice/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="javascript:alert('다음글이 없습니다.')">다음글이 없습니다.</a><br/>
+							<img  src="board/notice/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        				<a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum-1}">
+	        				<s:if test="resultClass.notice_headtag == '-----------------'">
+	        					${bClass.notice_subject }
+	        				</s:if>
+	        				<s:else>
+	        					${bClass.notice_headtag } ${bClass.notice_subject }
+	        				</s:else></a>
+	        				<!-- <a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum-1}" class="btn btn-default">이전글</a> -->
 						</s:elseif>
 						<s:else>
-							<a href="rnumNoticeAction.action?currentPage=${currentPage}&rnum=${rnum-1}" class="btn btn-default">이전글</a>
-	        				<a href="rnumNoticeAction.action?currentPage=${currentPage}&rnum=${rnum+1}" class="btn btn-default">다음글</a>
+							<img  src="board/notice/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        				<a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}">
+	        				<s:if test="aClass.notice_headtag == '-----------------'">
+	        					${aClass.notice_subject }
+	        				</s:if>
+	        				<s:else>
+	        					${aClass.notice_headtag } ${aClass.notice_subject }
+	        				</s:else></a><br/>
+	        				<img  src="board/notice/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        				<a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum-1}">
+	        				<s:if test="bClass.notice_headtag == '-----------------'">
+	        					${bClass.notice_subject }
+	        				</s:if>
+	        				<s:else>
+	        					${bClass.notice_headtag } ${bClass.notice_subject }
+	        				</s:else></a>
+							<!-- <a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum-1}" class="btn btn-default">이전글</a>
+	        				<a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}" class="btn btn-default">다음글</a> -->
 						</s:else>
 						</div>
-	        			<a href="updateNoticeForm.action?notice_num=${notice_num}&currentPage=${currentPage}" class="btn btn-default">수정</a>
-	        			<a href="deleteNoticeAction.action?notice_num=${notice_num}&currentPage=${currentPage}" class="btn btn-default">삭제</a>
+	        			<a href="updateNoticeForm.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}" class="btn btn-default">수정</a>
+	        			<a href="deleteNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}" class="btn btn-default">삭제</a>
 	        			<a href="listNotice.action?currentPage=${currentPage}" class="btn btn-default">목록</a>
 					</td>
       			</tr>

@@ -24,6 +24,7 @@
 </head>
 
 <body>
+	<form>
 
 	<!-- header -->
 	<%@ include file="/common/header.jsp"%>
@@ -31,87 +32,91 @@
 
 	<!-- container -->
 	<div class="container">
- 
+
 		<!-- 밑으로 view 꾸미기 -->
 		<div class="col-md-12">
 			<h3>공지사항/이벤트</h3>
 		</div>
-			
+
 		<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
-			<thead>
-		<tr bgcolor="#F3F3F3" align="center"> 
-			<th class="text-center" style="width: 100px;">번호</th>
-			<th class="text-center" style="width: 450px;">제목</th>
-			<th class="text-center" style="width: 150px;">날짜</th>
-			<th class="text-center" style="width: 100px;">조회</th>
-			</tr>
-		</thead>
-		
-		<tbody>
-		<s:iterator value="list" status="stat">
-			<s:url id="readNoticeURL" action="readNoticeAction">
-				<s:param name="notice_num">
-					<s:property value="notice_num" />
-				</s:param>
-				<s:param name="currentPage">
-					<s:property value="currentPage" />
-				</s:param>
-				<s:param name="rnum">
-					<s:property value="rnum" />
-				</s:param>
-			</s:url>
+				<thead>
+					<tr bgcolor="#F3F3F3" align="center">
+						<th class="text-center" style="width: 100px;">번호</th>
+						<th class="text-center" style="width: 450px;">제목</th>
+						<th class="text-center" style="width: 150px;">날짜</th>
+						<th class="text-center" style="width: 100px;">조회</th>
+					</tr>
+				</thead>
 
-			<tr bgcolor="#FFFFFF" align="center">
-				<td><s:property value="rnum" /></td>
-				<td align="left">&nbsp;<s:a href="%{readNoticeURL}">
-				<s:if test="notice_headtag == '-----------------'" >
-					<font color="orange" size="3"><s:property value="notice_subject" /></font>
-				</s:if>
-				<s:elseif test="notice_headtag == '[공지]'">
-					<font color="blue" size="3">
-					<s:property value="notice_headtag" />&nbsp;
-					<s:property value="notice_subject" /></font>
-				</s:elseif>
-				<s:elseif test="notice_headtag == '[이벤트]'">
-					<font color="green" size="3">
-					<s:property value="notice_headtag" />&nbsp;
-					<s:property value="notice_subject" /></font>
-				</s:elseif>
-				<s:elseif test="notice_headtag == '[스마트팁]'">
-					<font color="red" size="3">
-					<s:property value="notice_headtag" />&nbsp;
-					<s:property value="notice_subject" /></font>
-				</s:elseif>
-					</s:a></td>
-				<td align="center"><s:property value="notice_reg_date" /></td>
-				<td><s:property value="notice_readcount" /></td>
-			</tr>
-		</s:iterator>
+				<tbody>
+					<s:iterator value="list" status="stat">
+						<s:url id="readNoticeURL" action="readNoticeAction">
+							<s:param name="notice_num">
+								<s:property value="notice_num" />
+							</s:param>
+							<s:param name="currentPage">
+								<s:property value="currentPage" />
+							</s:param>
+							<s:param name="rnum">
+								<s:property value="rnum" />
+							</s:param>
+						</s:url>
 
-		<s:if test="list.size() <= 0">
-			<tr bgcolor="#FFFFFF" align="center">
-				<td colspan="4">등록된 게시물이 없습니다.</td>
-			</tr>
-		</s:if>
-		</tbody>
-		</table>
-		
-		<div class="text-center">
+						<tr bgcolor="#FFFFFF" align="center">
+							<td><s:property value="rnum" /></td>
+							<td align="left">&nbsp;<s:a href="%{readNoticeURL}">
+									<s:if test="notice_headtag == '-----------------'">
+										<font color="orange" size="3"><s:property
+												value="notice_subject" /></font>
+									</s:if>
+									<s:elseif test="notice_headtag == '[공지]'">
+										<font color="blue" size="3"> <s:property
+												value="notice_headtag" />&nbsp; <s:property
+												value="notice_subject" /></font>
+									</s:elseif>
+									<s:elseif test="notice_headtag == '[이벤트]'">
+										<font color="green" size="3"> <s:property
+												value="notice_headtag" />&nbsp; <s:property
+												value="notice_subject" /></font>
+									</s:elseif>
+									<s:elseif test="notice_headtag == '[스마트팁]'">
+										<font color="red" size="3"> <s:property
+												value="notice_headtag" />&nbsp; <s:property
+												value="notice_subject" /></font>
+									</s:elseif>
+								</s:a></td>
+							<td align="center"><s:property value="notice_reg_date" /></td>
+							<td><s:property value="notice_readcount" /></td>
+						</tr>
+					</s:iterator>
+
+					<s:if test="list.size() <= 0">
+						<tr bgcolor="#FFFFFF" align="center">
+							<td colspan="4">등록된 게시물이 없습니다.</td>
+						</tr>
+					</s:if>
+				</tbody>
+			</table>
+
+			<div class="text-center">
 				<ul class="pagination pagination-sm">
 					<s:property value="pagingHtml" escape="false" />
 				</ul>
 			</div>
-			
+
+			<div id="gotop">
+		
 			<div class="pull-right">
-				<a href="insertNoticeForm.action?currentPage=<s:property value="currentPage"/>"
-				 class="btn btn-primary">글쓰기</a>
+				<a
+					href="insertNoticeForm.action?currentPage=<s:property value="currentPage"/>"
+					class="btn btn-primary">글쓰기</a>
 			</div>
 		</div>
 
 	</div>
 	<!-- /.container -->
-
+	</form>
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
