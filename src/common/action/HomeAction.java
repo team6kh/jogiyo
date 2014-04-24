@@ -1,5 +1,10 @@
 package common.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import board.restopt.dto.RestoptDTO;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
 
@@ -26,6 +31,10 @@ public class HomeAction implements Action, ConDAOAware
     private int countBuyer;
     private int countSeller;
     // .회원 관련
+    
+    // masonry
+    private List<RestoptDTO> listRestopt = new ArrayList<RestoptDTO>();
+    // .masonry
     
     public void setConDAO(SqlMapClient sqlMapper)
     {
@@ -66,6 +75,9 @@ public class HomeAction implements Action, ConDAOAware
     	
     	// 판매자 수를 구한다.
     	setCountSeller((Integer) sqlMapper.queryForObject("Seller.selectSellerCount"));
+    	
+    	// Masonry 리스트
+    	setListRestopt((List<RestoptDTO>) sqlMapper.queryForList("Common.selectRestoptAll"));
 
         return SUCCESS;
     }
@@ -146,6 +158,14 @@ public class HomeAction implements Action, ConDAOAware
 
 	public void setCountSeller(int countSeller) {
 		this.countSeller = countSeller;
+	}
+	
+	public List<RestoptDTO> getListRestopt() {
+		return listRestopt;
+	}
+	
+	public void setListRestopt(List<RestoptDTO> listRestopt) {
+		this.listRestopt = listRestopt;
 	}
     
 }
