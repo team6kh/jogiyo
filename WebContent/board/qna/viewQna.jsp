@@ -34,11 +34,12 @@
 
 		<!-- test form pretty -->
 		<div class="col-md-12">
-			<h3>Q&A 게시판 > 상세 </h3>
+			<h3>게시판  글보기</h3>
 		</div>
 		<c:set var="actionName"/>
 		<c:set var="textName"/>
 		<c:if test="${resultClass.qna_num ne 0}">
+			
 			<c:set var="actionName" value="updateQna.action"/>
 			<c:set var="textName" value="수정"/>
 		</c:if>
@@ -71,9 +72,11 @@
 			</div>
 
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary">수정하기</button>
-				<a href="deleteQna.action?qna_num=${resultClass.qna_num }" class="btn btn-primary">삭제</a>
-				<a href="listQna.action" class="btn btn-default">목록</a>
+				<c:if test="${session_id == resultClass.qna_id}">
+					<button type="submit" class="btn btn-primary">수정하기</button>
+					<a href="deleteQna.action?qna_num=${resultClass.qna_num }" class="btn btn-primary">삭제</a>
+				</c:if>
+				<a href="listQna.action" class="btn btn-primary">목록</a>
 			</div>
 		</form>
 		</div>

@@ -31,9 +31,6 @@
 	<!-- end of header -->
 
 	<!-- container -->
-	<div class="container">
- 
-	<!-- 밑으로 view 꾸미기 -->
 	<div class="col-md-12">
 		<h3>공지사항/이벤트</h3>
 	</div>
@@ -41,23 +38,24 @@
   	<div class="col-md-12 well">
   		<s:if test="resultClass == NULL">
 			<form name="f" action="insertNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
-		</s:if>
+		</form></s:if>
 		<s:else>
 		  	<form name="u" action="updateNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
 		  	<s:hidden name="notice_num" value="%{notice_num}" />
 		  	<s:hidden name="currentPage" value="%{currentPage}" />
 		  	<s:hidden name="notice_file" value="%{notice_file}" />
-		</s:else>
+		</form></s:else>
 		
   		<div class="form-group">
-			<label>제목</label><br/>
-			<div style="float:left;">
-  			<select name="notice_headtag" style="width: 200px;" class="form-control">
+			<label>제목</label>
+			<br>
+			<div style="float:left;"><select name="notice_headtag" style="width: 200px;" class="form-control">
   				<option>-----------------</option>
   				<option>[공지]</option>
   				<option>[이벤트]</option>
   				<option>[스마트팁]</option>
   			</select>
+  			
   			</div>
   			<input type="text" class="form-control" style="width: 898px;" name="notice_subject" value="${resultClass.notice_subject}" placeholder="제목" required>
   		</div>
@@ -75,7 +73,7 @@
 	<!-- 꾸미기 끝 -->
 	</div>
 
-	</div>
+	
 	<!-- /.container -->
 
 
