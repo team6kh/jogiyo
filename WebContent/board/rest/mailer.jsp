@@ -175,10 +175,9 @@
 					</tr>
 					<tr align="center">
 						<td align="left">
-							<textarea cols="70" rows="7" name="content" style="overflow:hidden;" id="maxcharfield" 
-										onKeyDown="textCounter(this,'progressbar1',200)" 
-										onKeyUp="textCounter(this,'progressbar1',200)" 
-										onFocus="textCounter(this,'progressbar1',200)" >
+							<textarea cols="70" rows="7" name="content" style="overflow:hidden;" id="maxcharfield" onKeyDown="textCounter(this,'progressbar1',200)" 
+																onKeyUp="textCounter(this,'progressbar1',200)" 
+																onFocus="textCounter(this,'progressbar1',200)" >
 							</textarea><br />
 								
 							<div id="progressbar1" class="progress"></div>
