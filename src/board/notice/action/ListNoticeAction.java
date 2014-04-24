@@ -15,7 +15,8 @@ import board.notice.dto.*;
 public class ListNoticeAction extends ActionSupport implements ConDAOAware,	Preparable, ModelDriven {
 	
 	public static SqlMapClient sqlMapper;	//SqlMapClient API를 사용하기 위한 sqlMapper 객체.
-	public static List<NoticeDTO> list = new ArrayList<NoticeDTO>();	 
+	public static List<NoticeDTO> list = new ArrayList<NoticeDTO>();
+	public static List<NoticeDTO> all_list = new ArrayList<NoticeDTO>();
 	
 	NoticeDTO noticeDTO;
 	
@@ -33,7 +34,7 @@ public class ListNoticeAction extends ActionSupport implements ConDAOAware,	Prep
 
 		// 모든 글을 가져와 list에 넣는다.
 		list = sqlMapper.queryForList("Notice.selectAll");
-
+		all_list = list;
 		totalCount = list.size(); // 전체 글 갯수를 구한다.
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // pagingAction 객체 생성.
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.

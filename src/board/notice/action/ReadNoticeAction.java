@@ -19,37 +19,18 @@ import board.notice.dto.*;
 
 import java.net.URLEncoder;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ReadNoticeAction extends ActionSupport implements ConDAOAware,
-		Preparable, ModelDriven {
+public class ReadNoticeAction extends ActionSupport implements ConDAOAware,Preparable, ModelDriven {
 
 	public static SqlMapClient sqlMapper;
 	private NoticeDTO resultClass = new NoticeDTO(); // 쿼리 결과 값을 저장할 객체
+	private NoticeDTO aClass = new NoticeDTO(); // 쿼리 결과 값을 저장할 객체
+	private NoticeDTO bClass = new NoticeDTO(); // 쿼리 결과 값을 저장할 객체
 	NoticeDTO noticeDTO;
-
+	private int n_count;
 	private int currentPage;
-	private int max_num;
-	private int min_num;
-	private int next_num;
-	private int prev_num;
-	private int nrow_num;
-	private int prow_num;
-
-	public int getNrow_num() {
-		return nrow_num;
-	}
-
-	public void setNrow_num(int nrow_num) {
-		this.nrow_num = nrow_num;
-	}
-
-	public int getProw_num() {
-		return prow_num;
-	}
-
-	public void setProw_num(int prow_num) {
-		this.prow_num = prow_num;
-	}
 
 	private InputStream inputStream;
 	private String contentDisposition;
@@ -58,79 +39,92 @@ public class ReadNoticeAction extends ActionSupport implements ConDAOAware,
 	// 추가한것.
 	private StringBuffer pagingHtml = new StringBuffer();
 
-	//
-
-	// 상세보기
-	public String execute() throws Exception {
-		// 해당 글의 조회수 +1
-		sqlMapper.update("Notice.updateReadCount", noticeDTO);
-
-		// 게시글의 마지막번호를 받아온다
-		resultClass = (NoticeDTO) sqlMapper
-				.queryForObject("Notice.selectLastNo");
-		max_num = resultClass.getNotice_num();
-
-		// 게시글의 처음번호를 받아온다
-		resultClass = (NoticeDTO) sqlMapper
-				.queryForObject("Notice.selectFirstNo");
-		min_num = resultClass.getNotice_num();
+	// 게시글 수정
+	public String update() throws Exception {
 		
-		//
-		resultClass = (NoticeDTO) sqlMapper.queryForObject(
-				"Notice.selectNextNo", noticeDTO.getNotice_num());
-		next_num = resultClass.getNotice_num();
-
-		resultClass = (NoticeDTO) sqlMapper.queryForObject(
-				"Notice.selectPrevNo", noticeDTO.getNotice_num());
-		prev_num = resultClass.getNotice_num();
-
-
+		// 게시글의 총 갯수를 가져온다
+		System.out.println("글번호 :"+noticeDTO.getNotice_num());
+		resultClass = (NoticeDTO) sqlMapper.queryForObject("Notice.selectNCount");
+        n_count = resultClass.getNotice_num();
+		
 		// 해당 번호의 글을 가져온다
-		resultClass = (NoticeDTO) sqlMapper.queryForObject("Notice.selectOne",
-				noticeDTO.getNotice_num());
-
+		resultClass = (NoticeDTO) sqlMapper.queryForObject("Notice.selectOne",noticeDTO.getNotice_num());
 		pagingHtml.append(resultClass.getNotice_content());
 
 		return SUCCESS;
 	}
+	
 
-	public int getNext_num() {
-		return next_num;
-	}
-
-	public void setNext_num(int next_num) {
-		this.next_num = next_num;
-	}
-
-	public int getPrev_num() {
-		return prev_num;
-	}
-
-	public void setPrev_num(int prev_num) {
-		this.prev_num = prev_num;
-	}
-
-	public int getMax_num() {
-		return max_num;
-	}
-
-	public void setMax_num(int max_num) {
-		this.max_num = max_num;
-	}
-
-	public int getMin_num() {
-		return min_num;
-	}
-
-	public void setMin_num(int min_num) {
-		this.min_num = min_num;
-	}
-
-	public String checkAction() throws Exception {
+	// 게시글 상세보기
+	public String execute() throws Exception {
+		// 해당 글의 조회수 +1
+		sqlMapper.update("Notice.updateReadCount", noticeDTO);
+		
+		// 게시글의 총 갯수를 가져온다
+		resultClass = (NoticeDTO) sqlMapper.queryForObject("Notice.selectNCount");
+        n_count = resultClass.getNotice_num();
+		
+		// 해당 번호의 글을 가져온다
+		resultClass = (NoticeDTO) sqlMapper.queryForObject("Notice.selectOne",noticeDTO.getNotice_num());
+		pagingHtml.append(resultClass.getNotice_content());
+		
+		List<NoticeDTO> list = ListNoticeAction.all_list;
+		for(NoticeDTO dto : list){
+	            if(dto.getRnum() == noticeDTO.getRnum()+1){
+	                aClass = dto;
+	            }
+	            if(dto.getRnum() == noticeDTO.getRnum()-1){
+	                bClass = dto;
+	            }
+	    }
 		return SUCCESS;
 	}
 
-	public InputStream getInputStream() {
+	public String rnum() throws Exception {
+	    // 게시글의 총 갯수를 가져온다
+	    resultClass = (NoticeDTO) sqlMapper.queryForObject("Notice.selectNCount");
+        n_count = resultClass.getNotice_num();
+	    
+	    List<NoticeDTO> list = ListNoticeAction.all_list;
+	        for(NoticeDTO dto : list){
+	            if(dto.getRnum() == noticeDTO.getRnum()){
+	                resultClass = dto;
+	            }
+	            if(dto.getRnum() == noticeDTO.getRnum()+1){
+	                aClass = dto;
+	            }
+	            if(dto.getRnum() == noticeDTO.getRnum()-1){
+	                bClass = dto;
+	            }
+	        }
+	    	   
+        // 해당 글의 조회수 +1
+        sqlMapper.update("Notice.updateReadCount", resultClass);
+        pagingHtml.append(resultClass.getNotice_content());
+
+        return SUCCESS;
+    }
+
+	
+	
+	public NoticeDTO getaClass() {
+		return aClass;
+	}
+
+
+	public NoticeDTO getbClass() {
+		return bClass;
+	}
+
+	public int getN_count() {
+        return n_count;
+    }
+
+    public void setN_count(int n_count) {
+        this.n_count = n_count;
+    }
+
+    public InputStream getInputStream() {
 		return inputStream;
 	}
 

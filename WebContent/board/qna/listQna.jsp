@@ -42,7 +42,7 @@
     		document.searchForm.submit();
     	}
     </script>
-    
+
 </head>
 <body>
 	<%@ include file="/common/header.jsp"%>
@@ -55,6 +55,7 @@
 		<div class="col-md-12">
 			<h3>자주묻는질문</h3>
 		</div>
+
 
 		<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
@@ -103,6 +104,7 @@
 				</tbody>
 			</table>
 		</div>
+
 
 		<!-- test board pretty -->
 		<div class="col-md-12">

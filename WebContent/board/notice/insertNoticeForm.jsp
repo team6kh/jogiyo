@@ -64,7 +64,7 @@
   			
   		<div class="form-group">
 			<label for="test_content">내용</label>
-  			<s:textarea name="notice_content" id="notice_content" theme="simple" value="%{resultClass.notice_content}" cssStyle="width:1098px" rows="20" />
+  			<s:textarea name="notice_content" id="notice_content" theme="simple" value="%{resultClass.notice_content}" cssStyle="width:1098px" />
   		</div>
       	    
   		<div class="pull-right">
@@ -104,9 +104,6 @@
 		    var sHTML = '<img src="<%=request.getContextPath()%>/board/se2/upload/'+filepath+'">';
 		    oEditors.getById["notice_content"].exec("PASTE_HTML", [sHTML]); 
 		}
-		
-	
-		
 	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

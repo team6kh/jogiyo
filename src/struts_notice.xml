@@ -63,7 +63,7 @@
 		</action>
 
 		<!-- 게시판 수정 액션. -->
-		<action name="updateNoticeForm" class="board.notice.action.ReadNoticeAction">
+		<action name="updateNoticeForm" class="board.notice.action.ReadNoticeAction" method="update">
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="prepare" />
 			<interceptor-ref name="modelDriven" />
