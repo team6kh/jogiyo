@@ -48,9 +48,7 @@ public class DashSellerAction implements Action, Preparable,
             searchDTO.setSession_id(session_id);
             
             // 날짜 검색 조건 값이 없는 경우에는 오늘로부터 하루 전 날짜로 설정
-            if ((searchDTO.getStartDay() == null)
-                    && (searchDTO.getEndDay() == null))
-            
+            if ((searchDTO.getStartDay() == null) && (searchDTO.getEndDay() == null))          
             {
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -66,14 +64,14 @@ public class DashSellerAction implements Action, Preparable,
             
             // 판매자가 등록한 상품의 결제 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
             paidRes = sqlMapper.queryForList("Pay.payList", searchDTO);
-            System.out.println("paidRes : " + paidRes);
+
             
             // 가져온 결제내역에서 식당코드를 꺼내어 searchDTO에 넣는다
             searchDTO.setRest_num(paidRes.get(0).getRest_num());
             
             // 판매자가 등록한 상품의 인기 메뉴 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
             menuRes = sqlMapper.queryForList("Pay.hotmenu", searchDTO);
-            System.out.println("menuRes : " + menuRes);
+            
             return SUCCESS;
         }
         // session_id 값이 없는 경우에는 ERROR 리턴
