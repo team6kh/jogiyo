@@ -64,6 +64,7 @@ public class InsertQnaAction implements Action, Preparable, ModelDriven, ConDAOA
 	 * Insert 실행
 	 */
 	public String execute() throws Exception {
+	
 
 		sqlMapper.insert("Qna.insertQnaBoard", paramClass);
 

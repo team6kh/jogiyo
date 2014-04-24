@@ -42,9 +42,24 @@
     	function fn_search(){
     		document.searchForm.action = "listQna.action";
     		document.searchForm.submit();
+    	
     	}
+    	
+    	// 글쓰기 버튼 체크    
+		function checkId() {
+			
+			if("${session_id}" != '') {
+				window.location.href= "insertQnaForm.action";
+			}else {
+			alert("!로그인 하셔야 글을 쓰실 수 있습니다.");
+				
+			}	
+		}
+	
+	
     </script>
-    
+
+	
 </head>
 <body>
 	<%@ include file="/common/header.jsp"%>
@@ -54,11 +69,9 @@
 
 
 		<!-- test board pretty -->
-		<div class="col-md-12">
-			<h3>자주묻는질문</h3>
-		</div>
-
-		<div class="col-md-12 well">
+		
+		<h3>자주묻는질문</h3>
+		 	<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
 				<tbody>
 					<c:forEach var="list" items="${topList }">
@@ -66,35 +79,23 @@
 							<td class="text-center">
 								<c:out value="${list.qna_num }" />
 							</td>
-							<!-- 
-							<td class="text-center">
-								<c:choose>
-									<c:when test="${list.qna_category eq '01' }">회원가입</c:when>
-									<c:when test="${list.qna_category eq '02' }">바로결제</c:when>
-									<c:when test="${list.qna_category eq '03' }">리뷰</c:when>
-									<c:when test="${list.qna_category eq '04' }">이용문의</c:when>
-									<c:when test="${list.qna_category eq '05' }">광고문의</c:when>
-									<c:when test="${list.qna_category eq '06' }">기타</c:when>
-									<c:otherwise>전체</c:otherwise>
-								</c:choose>
-							</td>
-							 -->
+					
 							<td class="text-left">
 								<c:choose>
-									<c:when test="${list.qna_category eq '01' }">[회원가입]</c:when>
-									<c:when test="${list.qna_category eq '02' }">[바로결제]</c:when>
-									<c:when test="${list.qna_category eq '03' }">[리뷰]</c:when>
-									<c:when test="${list.qna_category eq '04' }">[이용문의]</c:when>
-									<c:when test="${list.qna_category eq '05' }">[광고문의]</c:when>
-									<c:when test="${list.qna_category eq '06' }">[기타]</c:when>
-									<c:otherwise>[전체]</c:otherwise>
+									<c:when test="${list.qna_category eq '01' }"><font color="blue">[회원가입]</c:when>
+									<c:when test="${list.qna_category eq '02' }"><font color="orange">[바로결제]</c:when>
+									<c:when test="${list.qna_category eq '03' }"><font color="#747474">[리뷰]</c:when>
+									<c:when test="${list.qna_category eq '04' }"><font color="#8041D9">[이용문의]</c:when>
+									<c:when test="${list.qna_category eq '05' }"><font color="green">[광고문의]</c:when>
+									<c:when test="${list.qna_category eq '06' }"><font color="#00D8FF">[기타]</c:when>
+									<c:otherwise><font color="red">[전체]</c:otherwise>
 								</c:choose>
-								<c:out value="${list.qna_subject }" />
+								<c:out value="${list.qna_subject }" /></font>
 							</td>
 						</tr>
 						<tr id="row${list.qna_num }" style="display: none;">
 							<td class="text-center">&nbsp;</td>
-							<td class="text-left"><c:out value="${list.qna_content }"/></td>
+							<td class="text-left"><pre style="border: 0px" >${list.qna_content}</pre></td>
 						</tr>
 					</c:forEach>
 					<c:if test="${empty topList}">
@@ -105,6 +106,11 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="pull-right">
+				
+				<input type="hidden" name="session_id" value="${sessionScope.session_id}"/>
+				<button type="button" class="btn btn-primary" onclick="return checkId()">글쓰기</button>
+			</div>  
 
 		<!-- test board pretty -->
 		<div class="col-md-12">
@@ -113,6 +119,7 @@
 		<form name="searchForm" id="searchForm" method="post">
 		<select name="qna_category" id="qna_category" onchange="fn_search();">
 			<option value="">전체</option>
+			<option value="" <c:if test="${qna_category eq ''}">selected</c:if>>작성자</option>
 			<option value="01" <c:if test="${qna_category eq '01'}">selected</c:if>>회원가입</option>
 			<option value="02" <c:if test="${qna_category eq '02'}">selected</c:if>>바로결제</option>
 			<option value="03" <c:if test="${qna_category eq '03'}">selected</c:if>>리뷰</option>
@@ -120,14 +127,15 @@
 			<option value="05" <c:if test="${qna_category eq '05'}">selected</c:if>>광고문의</option>
 			<option value="06" <c:if test="${qna_category eq '06'}">selected</c:if>>기타</option>
 		</select>
-		<input type="text" name="searchText" value="${searchText }">
-		<a href="javascript:fn_search()">검색</a>
+		<input type="text" name="searchText" maxlength="17"  value="${searchText }">
+		<a href="javascript:fn_search()" class="btn btn-primary">검색</a>
 		</form>
 		<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
 				<thead>
 					<tr>
 						<th class="text-center" style="width: 100px;">번호</th>
+						<th class="text-center" style="width: 100px;">작성자</th>
 						<th class="text-center" style="width: 100px;">카테고리</th>
 						<th class="text-center" style="width: 100px;" >제목</th>
 						<th class="text-center" style="width: 100px;">작성일</th>
@@ -141,15 +149,17 @@
 							<td class="text-center">
 								<c:out value="${list.qna_num }" />
 							</td>
+							<td class="text-center"><c:out value="${list.qna_id }"/></td>
 						<td class="text-center">
 							<c:choose>
-								<c:when test="${list.qna_category eq '01' }">회원가입</c:when>
-								<c:when test="${list.qna_category eq '02' }">바로결제</c:when>
-								<c:when test="${list.qna_category eq '03' }">리뷰</c:when>
-								<c:when test="${list.qna_category eq '04' }">이용문의</c:when>
-								<c:when test="${list.qna_category eq '05' }">광고문의</c:when>
-								<c:when test="${list.qna_category eq '06' }">기타</c:when>
-								<c:otherwise>전체</c:otherwise>
+								<c:when test="${list.qna_category eq '07' }"><font color="#CFFF24">[작성자]</c:when>
+								<c:when test="${list.qna_category eq '01' }"><font color="blue">[회원가입]</c:when>
+								<c:when test="${list.qna_category eq '02' }"><font color="orange">[바로결제]</c:when>
+								<c:when test="${list.qna_category eq '03' }"><font color="#747474">[리뷰]</c:when>
+								<c:when test="${list.qna_category eq '04' }"><font color="#8041D9">[이용문의]</c:when>
+								<c:when test="${list.qna_category eq '05' }"><font color="green">[광고문의]</c:when>
+								<c:when test="${list.qna_category eq '06' }"><font color="#00D8FF">[기타]</c:when>
+								<c:otherwise><font color="red">[전체]</c:otherwise>
 							</c:choose>
 						</td>
 							<td class="text-left">
@@ -178,7 +188,7 @@
 			</div>
 
 			<div class="pull-right">
-				<a href="insertQnaForm.action" class="btn btn-primary">글쓰기</a>
+				<button type="button" class="btn btn-primary" onclick="return checkId()">글쓰기</button>
 			</div>
 
 		</div>
@@ -194,6 +204,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
+
 
 
 </body>

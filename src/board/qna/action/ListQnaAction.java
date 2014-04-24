@@ -85,7 +85,7 @@ public class ListQnaAction implements Action, ConDAOAware, Preparable, ModelDriv
 		    QnaDTO a = list.get(i);
 		    System.out.println("index = " + a.toString());
 		}*/
-
+		searchText = "";
 		return SUCCESS;
 
 

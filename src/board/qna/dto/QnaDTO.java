@@ -2,7 +2,7 @@ package board.qna.dto;
 
 public class QnaDTO {
     private int qna_num;
-    private int qna_id;
+    private String qna_id;
     private String qna_subject;
     private String qna_isprivate;
     private String qna_category;
@@ -76,13 +76,14 @@ public class QnaDTO {
     public void setQna_ref_level(int qna_ref_level) {
         this.qna_ref_level = qna_ref_level;
     }
-    public int getQna_id() {
-        return qna_id;
-    }
-    public void setQna_id(int qna_id) {
-        this.qna_id = qna_id;
-    }
-    @Override
+  
+    public String getQna_id() {
+		return qna_id;
+	}
+	public void setQna_id(String qna_id) {
+		this.qna_id = qna_id;
+	}
+	@Override
     public String toString()
     {
         return "QnaDTO [qna_num=" + qna_num + ", qna_id=" + qna_id
