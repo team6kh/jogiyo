@@ -9,44 +9,129 @@
 
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
-
-
-<title>JOGIYO</title>
-
-
-<!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="jogiyo.css" rel="stylesheet">
-<link href="common/common-template.css" rel="stylesheet">
-
-
-<style type="text/css">
-	html {
-		height: 100%
-	}
-	body {
-		height: 100%;
-		margin: 3% 0% 0% 1.5%;
-		padding: 0
-	}
-</style>
-
-
-<script type="text/javascript">
-	function btnSubmit() {
-		var sendMail = document.sendMail;
-		sendMail.submit();
-	}
-</script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+	
+	
+	<title>JOGIYO</title>
+	
+	
+	<!-- Bootstrap core CSS -->
+	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Custom styles for this template -->
+	<link href="jogiyo.css" rel="stylesheet">
+	<link href="common/common-template.css" rel="stylesheet">
+	
+	<style type="text/css">
+		.progress{
+		 width: 1px;
+		 height: 14px;
+		 color: white;
+		 font-size: 12px;
+		  overflow: hidden;
+		 background-color: navy; /*바의 배경색상*/
+		 padding-left: 5px;
+		}
+		</style>
+		
+		<script type="text/JavaScript">
+		
+		function textCounter(field,counter,maxlimit,linecounter) {
+		 var fieldWidth =  parseInt(field.offsetWidth);
+		 var charcnt = field.value.length;        
+		
+		 if (charcnt > maxlimit) { 
+		  field.value = field.value.substring(0, maxlimit);
+		 }
+		
+		 else { 
+		 var percentage = parseInt(100 - (( maxlimit - charcnt) * 100)/maxlimit) ;
+		 document.getElementById(counter).style.width =  parseInt((fieldWidth*percentage)/100)+"px";
+		 document.getElementById(counter).innerHTML="Limit: "+percentage+"%"
+		 setcolor(document.getElementById(counter),percentage,"background-color");
+		 }
+		}
+		
+		function setcolor(obj,percentage,prop){
+		 obj.style[prop] = "rgb(80%,"+(100-percentage)+"%,"+(100-percentage)+"%)";
+		}
+		
+		</script>
+			
+	
+	<style type="text/css">
+		html {
+			height: 100%
+		}
+		body {
+			height: 100%;
+			margin: 3% 0% 0% 1.5%;
+			padding: 0
+		}
+	</style>
+	
+	
+	<script type="text/javascript">
+		function btnSubmit() {
+			var sendMail = document.sendMail;
+			sendMail.submit();
+		}
+	
+		//Created by: Paul Tuckey | http://tuckey.org/ */
+		function countLines(strtocount, cols) {
+			var hard_lines = 1;
+			var last = 0;
+			while (true) {
+				last = strtocount.indexOf("\n", last + 1);
+				hard_lines++;
+				if (last == -1)
+					break;
+			}
+			var soft_lines = Math.round(strtocount.length / (cols - 1));
+			var hard = eval("hard_lines  " + unescape("%3e") + "soft_lines;");
+			if (hard)
+				soft_lines = hard_lines;
+			return soft_lines;
+		}
+		function cleanForm() {
+			var the_form = document.forms[0];
+			for ( var x in the_form) {
+				if (!the_form[x])
+					continue;
+				if (typeof the_form[x].rows != "number")
+					continue;
+				the_form[x].rows = countLines(the_form[x].value, the_form[x].cols) + 1;
+			}
+			setTimeout("cleanForm();", 0);
+		}
+	
+		// Multiple onload function created by: Simon Willison
+		// http://simon.incutio.com/archive/2004/05/26/addLoadEvent
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function() {
+					if (oldonload) {
+						oldonload();
+					}
+					func();
+				}
+			}
+		}
+	
+		addLoadEvent(function() {
+			cleanForm();
+		});
+	</script>
+</head>
 
 <body>
 	<!-- header -->
@@ -84,13 +169,21 @@
 					</tr>
 					<tr>
 						<td>
-							<font size=3><b>문의사항</b></font>
+							<font size=3><b>문의사항</b></font> <br/>
+							<font size=2 color=gray>글자 수는 최대 200자까지 입력 가능합니다.</font>
 						</td>
 					</tr>
 					<tr align="center">
 						<td align="left">
-							<textarea cols="50" rows="7" name="content"> 
-	                    	</textarea> 
+							<textarea cols="70" rows="7" name="content" style="overflow:hidden;" id="maxcharfield" 
+										onKeyDown="textCounter(this,'progressbar1',200)" 
+										onKeyUp="textCounter(this,'progressbar1',200)" 
+										onFocus="textCounter(this,'progressbar1',200)" >
+							</textarea><br />
+								
+							<div id="progressbar1" class="progress"></div>
+								
+							<script>textCounter(document.getElementById("maxcharfield"),"progressbar1",200)</script>
 	                    </td>
 					</tr>
 					<tr><td><br/><td></tr>

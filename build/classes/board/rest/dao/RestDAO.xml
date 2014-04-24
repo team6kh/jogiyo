@@ -167,9 +167,34 @@
 		SELECT count(*) FROM paid_board
 	</select>
 
+	<!-- 카테고리별 글 select -->
 	<select id="selectAll" resultMap="RestBoard" parameterClass="int">
 		<include refid="select-all" />
 		ORDER BY rest_num DESC
+	</select>
+	
+	<!-- 지역카테고리 전체 select -->
+	<select id="selectLocalAll" resultMap="RestBoard" parameterClass="int">
+		select * from rest_board where rest_localcategory like '1%'
+		ORDER BY rest_num DESC
+	</select>
+	
+	<!-- 종류카테고리 글 select -->
+	<select id="selectTypeAll" resultMap="RestBoard" parameterClass="int">
+		select * from rest_board where rest_typecategory like '2%'
+		ORDER BY rest_num DESC
+	</select>
+	
+	<!-- 지역 카테고리 글 select -->
+	<select id="selectLocal" resultMap="RestBoard" parameterClass="RestDTO">
+		select * from rest_board
+		where rest_localcategory=#rest_localcategory#
+	</select>
+	
+	<!-- 종류 카테고리 글 select -->
+	<select id="selectType" resultMap="RestBoard" parameterClass="RestDTO">
+		select * from rest_board
+		where rest_typecategory=#rest_typecategory#
 	</select>
 	
 	<select id="selectCartAll" resultMap="CartBoard" parameterClass="CartDTO">

@@ -30,25 +30,25 @@ text-decoration: none;
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
-	              <a href="listRest.action" class="dropdown-toggle disabled" data-toggle="dropdown">지역별<b class="caret"></b></a>
+	              <a href="listRest.action?rest_localcategory=1&rest_typecategory=1" class="dropdown-toggle disabled" data-toggle="dropdown">지역별<b class="caret"></b></a>
 	              <ul class="dropdown-menu">
-	                <li><a href="#">서울특별시</a></li>
-	                <li><a href="#">경기/인천</a></li>
-	                <li><a href="#">부산/경남</a></li>
-	                <li><a href="#">대구/경북</a></li>
-	                <li><a href="#">대전/전북</a></li>
-	                <li><a href="#">광주/전남</a></li>
-	                <li><a href="#">그 외 지역</a></li>
+	                <li><a href="listRest.action?rest_localcategory=11&rest_typecategory=0">서울특별시</a></li>
+	                <li><a href="listRest.action?rest_localcategory=12&rest_typecategory=0">경기/인천</a></li>
+	                <li><a href="listRest.action?rest_localcategory=13&rest_typecategory=0">부산/경남</a></li>
+	                <li><a href="listRest.action?rest_localcategory=14&rest_typecategory=0">대구/경북</a></li>
+	                <li><a href="listRest.action?rest_localcategory=15&rest_typecategory=0">대전/전북</a></li>
+	                <li><a href="listRest.action?rest_localcategory=16&rest_typecategory=0">광주/전남</a></li>
+	                <li><a href="listRest.action?rest_localcategory=17&rest_typecategory=0">그 외 지역</a></li>
 	              </ul>
 	            </li>
 	            <li class="dropdown">
-	              <a href="listRest.action" class="dropdown-toggle disabled" data-toggle="dropdown">종류별<b class="caret"></b></a>
+	              <a href="listRest.action?rest_localcategory=2&rest_typecategory=2" class="dropdown-toggle disabled" data-toggle="dropdown">종류별<b class="caret"></b></a>
 	              <ul class="dropdown-menu">
-	                <li><a href="#">한식</a></li>
-	                <li><a href="#">양식</a></li>
-	                <li><a href="#">중식</a></li>
-	                <li><a href="#">일식</a></li>
-	                <li><a href="#">기타</a></li>
+	                <li><a href="listRest.action?rest_localcategory=0&rest_typecategory=21">한식</a></li>
+	                <li><a href="listRest.action?rest_localcategory=0&rest_typecategory=22">양식</a></li>
+	                <li><a href="listRest.action?rest_localcategory=0&rest_typecategory=23">중식</a></li>
+	                <li><a href="listRest.action?rest_localcategory=0&rest_typecategory=24">일식</a></li>
+	                <li><a href="listRest.action?rest_localcategory=0&rest_typecategory=25">기타</a></li>
 	              </ul>
 	            </li>
 				<!-- <li><a href="listReview.action">후기</a></li>  -->

@@ -15,6 +15,7 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	public static SqlMapClient sqlMapper; 
 
 	private List<RestDTO> list = new ArrayList<RestDTO>();
+	private RestDTO paramClass = new RestDTO();
 	
 	private int currentPage = 1;			// 현재 페이지
 	private int totalCount;					// 총 게시물의 수
@@ -23,7 +24,12 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	private String pagingHtml;				// 페이징을 구현한 HTML
 	private PagingAction page;				// 페이징 클래스
 	
-	private String actionName = "listRest";	// 페이징액션과 로그인액션에서 쓰인다...
+	private String actionName = "listRest";	// 페이징액션과 로그인액션에서 쓰인다
+	
+	//카테고리 판단
+	private String rest_localcategory;
+	private String rest_typecategory;
+	
 
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
@@ -31,9 +37,21 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 
 	// 게시판 LIST 액션.
 	public String execute() throws Exception {
-
-		// 모든 글을 가져와 list에 넣는다.
-		list = sqlMapper.queryForList("Rest.selectAll");
+		
+		if(rest_localcategory==null&&rest_typecategory==null){
+			list = sqlMapper.queryForList("Rest.selectAll");
+		}else if(rest_localcategory.equals("1")&&rest_typecategory.equals("1")){//지역카테고리 전체글
+			list = sqlMapper.queryForList("Rest.selectLocalAll");
+		}else if(rest_localcategory.equals("2")&&rest_typecategory.equals("2")){//종류카테고리 전체글
+			list = sqlMapper.queryForList("Rest.selectTypeAll");
+		}else if(rest_typecategory.equals("0")){//지역카테고리에 속하면
+			paramClass.setRest_localcategory(getRest_localcategory());
+			list = sqlMapper.queryForList("Rest.selectLocal", paramClass);
+		}else  if(rest_localcategory.equals("0")){//종류카테고리에 속하면
+			paramClass.setRest_typecategory(getRest_typecategory());
+			list = sqlMapper.queryForList("Rest.selectType", paramClass);
+		}
+		
 		totalCount = list.size(); // 전체 글 갯수
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // pagingAction 객체 생성.
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
@@ -93,4 +111,19 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	public String getActionName() { // 일단 get만...
 		return actionName;
 	}
+
+	public String getRest_localcategory() {
+		return rest_localcategory;
+	}
+	public void setRest_localcategory(String rest_localcategory) {
+		this.rest_localcategory = rest_localcategory;
+	}
+	public String getRest_typecategory() {
+		return rest_typecategory;
+	}
+	public void setRest_typecategory(String rest_typecategory) {
+		this.rest_typecategory = rest_typecategory;
+	}
+	
+	
 }

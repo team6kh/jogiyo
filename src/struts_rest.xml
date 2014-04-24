@@ -87,6 +87,7 @@
 			<interceptor-ref name="conDAO"/>
 			<result>/board/rest/listRest.jsp</result>
 		</action>
+		
 
 		<!-- 리드 액션 -->
 		<action name="readRest" class="board.rest.action.ReadRestAction">
@@ -94,6 +95,7 @@
 			<interceptor-ref name="conDAO"/>
 			<result>/board/rest/readRest.jsp</result>
 		</action>
+		
 
 		<!-- 결제 액션 -->
 		<action name="payRest" class="board.rest.action.PayRestAction">

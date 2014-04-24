@@ -11,24 +11,20 @@ import javax.mail.internet.*;
 import java.util.*;
 import javax.mail.*;
 
+
 public class SendMailAction  implements Action, ConDAOAware {
 	private SqlMapClient sqlMapper;
 	private String rest_writer_email;
-	
 	private String email;
 	private String content;
-	
 	private int currentPage;
 	private int  rest_num;
-	
 	private String session_id;
-	
 	
 	
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
 	}
-	
 	
 	public String form() throws Exception {
 		return SUCCESS; //mailer.jsp
@@ -36,18 +32,23 @@ public class SendMailAction  implements Action, ConDAOAware {
 	
 	public String execute() throws Exception {
 		
-	    String host = "smtp.gmail.com";//smtp 서버
+		String host = "smtp.gmail.com";//smtp 서버
 	    String subject = getSession_id()+"이 문의하신 글입니다.";
 	    String from =  "team6kh@gmail.com";//문의하는 회원
 	    String to1 =getRest_writer_email(); //받는 사람
-
+	    String img_main = "http://blogfiles.naver.net/20140424_115/ljw7426_1398302669531NWpRY_PNG/%C1%A6%B8%F1.png";
+	    String putter = "http://postfiles6.naver.net/20140424_245/ljw7426_1398302289804V1tEl_PNG/%C7%AA%C5%CD.png?type=w2";
 	    
-		String body = "<font size=4> <b>"+getSession_id()+"</b>님이 문의하신 글입니다. </font><br/><br/><br/>"
-													+"<b>이하 본문</b>  : "+getContent()+"<br/>"
-													+"<b>답장메일</b> : "+getEmail()+"<br/>";
-		
-		
-		try{
+	    String body = "<img src='"+img_main+"' /> <br/>"
+								+"<br/><br/>"
+								+ "<b>문의 내용</b><br/>"+getContent()+"<br/>"
+								+ "<b>답변 메일</b> : "+getEmail()+"<br/>"
+								+"<br/><hr><br/>"
+								+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+								+"자주 묻는 질문 확인은 <a href = 'http://localhost:8000/jogiyo/listQna.action'>여기</a>를 클릭하세요. "
+								+"빠른 시간내에 답변드리겠습니다. 감사합니다. <br/><hr><br/>"
+								+"<img src='"+putter+"' /> <br/>";
+	    try{
 	           // 프로퍼티 값 인스턴스 생성과 기본세션(SMTP 서버 호스트 지정)
 			   Properties props = new Properties();
 			   
@@ -63,12 +64,12 @@ public class SendMailAction  implements Action, ConDAOAware {
 			   Session mailSession = Session.getInstance(props,
 			 		  new javax.mail.Authenticator() {
 			 			protected PasswordAuthentication getPasswordAuthentication() {
-			 				return new PasswordAuthentication("team6kh@gmail.com", "dkagh1234.");
+			 				return new PasswordAuthentication("nathan2yo@gmail.com", "wodnr6435");
 			 			}
 			 		  });
 			   
 			   Message msg = new MimeMessage(mailSession);
-			   msg.setFrom(new InternetAddress(from, MimeUtility.encodeText("회원님","euc-kr","B")));//보내는 사람 설정
+			   msg.setFrom(new InternetAddress(from, MimeUtility.encodeText("팀6관리자","euc-kr","B")));//보내는 사람 설정
 			   
 			   InternetAddress[] address1 = {new InternetAddress(to1)};
 			   

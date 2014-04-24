@@ -209,6 +209,13 @@
 	}
 </script>
 
+<script language="Javascript1.2">
+	function printWindow(){
+	    browserVersion = parseInt(navigator.appVersion)
+	        if (browserVersion >= 4) window.print()
+	}
+</script>
+
 </head>
 
 <body onload="initialize()">
@@ -296,7 +303,7 @@
 	    	<div class="thumbnail">
 	    		<!-- 옵션 -->
 	      		<a href="${list.restopt_destFile1}">
-	      			<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
+	      			<img src="${list.restopt_destFile1}"  alt="N/A" style="min-height:125px;height:125px;">
 	      		</a>
 	      		<input type="hidden" id="restopt_destFile1" name="restopt_destFile1" value="${list.restopt_destFile1}" />
 	      		<div class="caption" align="center">
@@ -309,9 +316,9 @@
 
 	      		<!-- 장바구니 담기 버튼 -->
 	      		<div class="text-center">
-		      		<button type="button" class="btn btn-default" onclick="insertCart(this.form)">
-						<span class="glyphicon glyphicon-shopping-cart"></span> 장바구니 담기
-					</button>
+	      				<button type="button" class="btn btn-default" onclick="insertCart(this.form)">
+							<span class="glyphicon glyphicon-shopping-cart"></span> 장바구니 담기
+						</button>
 	      		</div>
 
 	    	</div>
@@ -327,11 +334,18 @@
 		</div>
 		
 		<div class="sellerInfo">
+			<span class="glyphicon glyphicon-user"></span>			
 			이름 : ${resultClass.rest_writer_name} <br/>
+			<span class="glyphicon glyphicon-phone-alt"></span>
 			전화번호 : ${resultClass.rest_writer_telnum}<br/>
+			<span class="glyphicon glyphicon-earphone"></span>
 			핸드폰번호 :  ${resultClass.rest_writer_mobilenum}<br/>
+			<span class="glyphicon glyphicon-map-marker"></span>
 			주소 : ${resultClass.rest_writer_address} <br/>
-			이메일 : <a href="sendMail.action?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/><br/>
+			<span class="glyphicon glyphicon-envelope"></span>
+			이메일 : <a href="sendMail.action?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
+			<span class="glyphicon glyphicon-print"></span>
+			<a href="javascript:printWindow()">프린트하기</a> <br/><br/>
 		</div>
 		
 		<div id="map_canvas" class="map"></div>
