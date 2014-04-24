@@ -4,9 +4,12 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 100px;
+  padding-top: 50px;
 }
-
+.home-template {
+  padding: 40px 140px;
+  text-align: center;
+}
 
 /*
  * Global add-ons

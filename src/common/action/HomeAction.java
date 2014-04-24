@@ -1,6 +1,7 @@
 package common.action;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import board.restopt.dto.RestoptDTO;
@@ -76,8 +77,11 @@ public class HomeAction implements Action, ConDAOAware
     	// 판매자 수를 구한다.
     	setCountSeller((Integer) sqlMapper.queryForObject("Seller.selectSellerCount"));
     	
-    	// Masonry 리스트
-    	setListRestopt((List<RestoptDTO>) sqlMapper.queryForList("Common.selectRestoptAll"));
+    	/* Masonry 리스트 */
+    	listRestopt = (List<RestoptDTO>) sqlMapper.queryForList("Common.selectRestoptAll");
+    	// 리스트를 받아와 섞는다(shuffle)
+    	Collections.shuffle(listRestopt);    	
+    	setListRestopt(listRestopt);
 
         return SUCCESS;
     }

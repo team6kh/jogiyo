@@ -29,6 +29,27 @@
 <script src="assets/plugins/masonry/js/modernizr.custom.js"></script>
 <!-- /masonry -->
 
+<style type="text/css">
+.masonry {
+	overflow: hidden;
+	position: relative;
+}
+
+.masonry:hover .hoverdetail {
+	bottom: 0;
+}
+
+.hoverdetail {
+	padding: 10px;
+	width: 100%;
+	background-color: #000000;
+	color: #ffffff;
+	opacity: .7;
+	position: absolute;
+	bottom: -100px;
+}
+</style>
+
 </head>
 
 <body>
@@ -38,12 +59,18 @@
 	<div class="container">
 
 		<!-- Home Dashboard -->
-		<div class="common-template"><!-- CSS 미지정 -->
+		<div class="home-template">
 		
 			<!-- masonry -->
 			<ul class="grid effect-2" id="grid">
 			<c:forEach var="listRestopt" items="${listRestopt}">
-				<li><a href="#"><img src="${listRestopt.restopt_destFile1}" alt="N/A"></a></li>
+				<li>
+					<div class="masonry">
+						<a href="readRest.action?rest_num=${listRestopt.restopt_rest_num}">
+						<img src="${listRestopt.restopt_destFile1}" alt="N/A"></a>
+						<div class='hoverdetail'>${listRestopt.restopt_subject}</div>
+					</div>
+				</li>
 			</c:forEach>	
 			</ul>			
 			<!-- /masonry -->
@@ -77,7 +104,7 @@
 		new AnimOnScroll( document.getElementById( 'grid' ), {
 			minDuration : 0.4,
 			maxDuration : 0.7,
-			viewportFactor : 0.2
+			viewportFactor : 0.5
 		} );
 	</script>
 	<!-- /masonry -->

@@ -9,7 +9,7 @@
 	display: block;
 	float: left;
 	padding: 7px;
-	width: 33%;
+	width: 25%;
 	opacity: 0;
 }
 
@@ -25,6 +25,9 @@
 	border: none;
 	display: block;
 	max-width: 100%;
+}
+
+.grid li img:hover {	
 }
 
 /* Effect 1: opacity */
