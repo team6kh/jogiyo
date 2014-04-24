@@ -47,7 +47,7 @@
    <select id="hotmenu" resultMap="menuRes" parameterClass="searchDTO">          
         SELECT paid_restopt_subject, count(*) as paid_sales_volume, sum(paid_restopt_priceplus) as paid_sales_price
         from paid_board  WHERE paid_rest_num = #rest_num# and (paid_reg_date <![CDATA[>=]]> #startDay# and paid_reg_date <![CDATA[<=]]> #endDay#) 
-        GROUP BY paid_restopt_subject ORDER BY paid_sales_volume
+        GROUP BY paid_restopt_subject ORDER BY paid_sales_volume DESC
    </select>
     
     

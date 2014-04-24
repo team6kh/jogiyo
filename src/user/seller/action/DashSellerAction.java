@@ -56,22 +56,20 @@ public class DashSellerAction implements Action, Preparable,
                 // EndDay에 오늘 날짜 값 설정
                 searchDTO.setEndDay(sdf.parse(date));
             
-                // StartDay에 어제 날짜로 설정 // 임시로 일주일 전으로 설정
-                cal.add(cal.DATE, -7);
-                searchDTO.setStartDay(sdf.parse(sdf.format(cal.getTime())));
-                
+                // StartDay에 어제 날짜 값 설정 
+                cal.add(cal.DATE, -1);
+                searchDTO.setStartDay(sdf.parse(sdf.format(cal.getTime())));                
             }
             
             // 판매자가 등록한 상품의 결제 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
             paidRes = sqlMapper.queryForList("Pay.payList", searchDTO);
-
-            
+            if(!paidRes.isEmpty()) {
             // 가져온 결제내역에서 식당코드를 꺼내어 searchDTO에 넣는다
             searchDTO.setRest_num(paidRes.get(0).getRest_num());
             
             // 판매자가 등록한 상품의 인기 메뉴 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
             menuRes = sqlMapper.queryForList("Pay.hotmenu", searchDTO);
-            
+            }
             return SUCCESS;
         }
         // session_id 값이 없는 경우에는 ERROR 리턴
