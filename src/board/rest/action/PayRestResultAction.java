@@ -17,6 +17,7 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 	private CooponDTO paramClass = new CooponDTO();
 	private CartDTO paramClass1 = new CartDTO();
 	private payDTO paramClass2 = new payDTO();
+	private payDTO resultClass = new payDTO();
 	
 	private List<CartDTO> list1 = new ArrayList<CartDTO>();
 	private List<payDTO> list2 = new ArrayList<payDTO>();
@@ -37,6 +38,16 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		paramClass1.setCart_rest_num(getRest_num());
 		paramClass1.setSession_id(getSession_id());
 		list1 = sqlMapper.queryForList("Rest.selectCartAll", paramClass1);
+		
+		//결제 테이블 insert전 레코드가 없는지 있는지 판단.
+		//레코드가 없으면 0, 레코드가 있으면 1 이상
+		Integer count = (Integer)sqlMapper.queryForObject("Rest.selectPaidCount");
+		
+		if( count != 0){ //레코드가 있을 경우 last넘을 get함
+			resultClass = (payDTO) sqlMapper.queryForObject("Rest.selectPaidLastNo"); //라스트넘 이상 select 하도록
+		}else{
+			resultClass.setPaid_num(0);
+		}
 		
 		//장바구니 테이블 -> 결과테이블로 insert
 		for(int i=0; i<list1.size(); i++){
@@ -70,8 +81,18 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		//최종 장바구니 레코드 삭제
 		sqlMapper.delete("Rest.deleteCartforpaid", paramClass1);
 		
-		//jsp로 보내줄 결과 리스트 생성
-		list2 = sqlMapper.queryForList("Rest.selectPaidAll", paramClass1);
+		//뿌려줄 리스트임.
+		list2 = sqlMapper.queryForList("Rest.selectPaidnow", resultClass); //마지막넘 이상인 글들을 받음
+		
+		
+		/*//레코드가 있는지 판단.
+		if( count != 0){ //레코드가 있을 경우
+			//jsp로 보내줄 결과 리스트 생성
+			list2 = sqlMapper.queryForList("Rest.selectPaidnow", resultClass); //마지막넘 이상인 글들을 받음
+		}else{//레코드가 없는 경우
+			//모든글 select함
+			list2 = sqlMapper.queryForList("Rest.selectPaidAll", paramClass1); //모든글들을 받음
+		}*/
 		
 		return SUCCESS; //payRestResult.jsp
 	}

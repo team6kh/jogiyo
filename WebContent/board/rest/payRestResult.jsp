@@ -57,7 +57,7 @@
 		</div>
 		
 		<div class="col-md-12" align="center">
-			<font color=blue size=7 ><b>구매해주셔서 감사합니다!</b></font>
+			<img src="assets/img/common/Jogiyo_paidResult.png" width="800px" height="200px">
 		</div>
 		
 		<div class="col-md-12 well">

@@ -45,11 +45,6 @@
 	<input type="hidden" id="rest_subject" name="rest_subject" value="${rest_subject}" />
 	<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
 
-	<!-- 장바구니 page-header -->
-    <div class="page-header">
-	  <h1>장바구니</h1>
-	</div>
-
 	<!-- 장바구니 list -->
 	<c:forEach var="list" items="${list}">
 		<div class="col-sm-3 col-md-2">

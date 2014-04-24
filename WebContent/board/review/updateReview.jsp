@@ -24,8 +24,7 @@
 	<form method="post" onsubmit="confirm()"  enctype="multipart/form-data" >
 
 		<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
-		<input type="hidden" id="review_rest_currentPage"
-			name="review_rest_currentPage" value="${review_rest_currentPage}" />
+		<input type="hidden" id="review_rest_currentPage" name="review_rest_currentPage" value="${review_rest_currentPage}" />
 		<input type="hidden" id="ccp" name="ccp" value="${ccp}" /> <input
 			type="hidden" id="review_num" name="review_num" value="${review_num}" />
 
@@ -91,8 +90,7 @@
 
 		function confirm() {
 			var rest_num = document.getElementById("rest_num").value;
-			var review_rest_currentPage = document
-					.getElementById("review_rest_currentPage").value;
+			var review_rest_currentPage = document.getElementById("review_rest_currentPage").value;
 			var ccp = document.getElementById("ccp").value;
 			var review_num = document.getElementById("review_num").value;
 			var review_content = document.getElementById("review_content").value;

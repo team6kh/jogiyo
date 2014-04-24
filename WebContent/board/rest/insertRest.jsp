@@ -137,8 +137,6 @@
 			
 			
 			
-			
-			
 			<!-- 최초 입력시에 -->
 			<s:if test="rest_num == 0">
 				<form name="insertRestForm" action="insertRest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
