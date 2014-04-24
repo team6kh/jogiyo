@@ -173,7 +173,7 @@
 				
 
 				<br />
-
+              
 				<table width="900" border="0" cellspacing="0" cellpadding="2">
 					<tr>
 						<td colspan="10" align="center">
@@ -185,13 +185,16 @@
 									<option value="null">검색[선택]</option>
 									<option value="recipe_detailsearch">상세검색</option>
 								</select>
+								
 								<s:if test="#session.session_id != null">
 									<input name="mylist" type="button" value="내가쓴글"
 										onClick="javascript:location.href='recipe_mylsit.action?session_id=<s:property value="#session.session_id" />';">
 								</s:if>
 
 								<div id="detailsearch" style="display: none">
-									<table width="667" border="1" cellpadding="0" cellspacing="0">
+								  <div class="col-md-12">
+				
+									<table width="667" border="1" cellpadding="0" cellspacing="0" class="table table-stiped">
 
 
 										<tr>
@@ -238,6 +241,7 @@
 
 										</tr>
 									</table>
+									</div>
 								</div>
 							</form>
 						</td>

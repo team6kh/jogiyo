@@ -101,7 +101,7 @@
 			method="recommandAction">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
-			<result>/board/recipe/readRecipe.jsp</result>
+			<result>/board/recipe/isRecommand.jsp</result>
 		</action>
 
 		<!-- recipe_mylsit 액션 -->

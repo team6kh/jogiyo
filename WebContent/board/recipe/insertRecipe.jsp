@@ -12,7 +12,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="assets/ico/jogiyo.png">
-
+<script type="text/javascript" src="<%=request.getContextPath()%>/board/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/board/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
@@ -85,6 +86,7 @@
 						}
 
 						return true;
+						
 					}
 					
 					function membervalidation(){
@@ -121,46 +123,48 @@
 						} else if (frm.recipe_price.value == "") {
 							alert("비용을 입력해주세요.");
 							return false;
-						} else if (frm.recipe_content.value == "") {
+						} else if (document.getElementById("recipe_content") == "") {
 							alert("방법 및 상세 내용을 입력해주세요.");
 							return false;
 						}
 
 						return true;
 					}
+					
 				</SCRIPT>
 			</header>
 			
 			<body>
-				<table width="400" border="0" cellspacing="0" cellpadding="2"
-					align="center">
-					<tr>
-						<td align="center"><h2>RECIPE 게시판</h2></td>
-					</tr>
-				</table>
+			<!-- insert 게시판 윗부분 -->
+				<div class="col-md-12">
+					<h2>RECIPE 게시판</h2>
+					</div>
+					
+					<!-- insert 게시판 body -->
+					<!-- 게시판 바디 -->
+		<div class="col-md-12">
 				<s:if test="resultClass == NULL && #session.session_id == null">
-					<form name="inputWarning" action="insertRecipe.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
+					<form name="inputWarning" action="insertRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="submitContents(this);">
 				</s:if>
 				<s:elseif test="resultClass == NULL && #session.session_id != null">
-				    <form name="inputWarning" action="insertRecipe.action" method="post" enctype="multipart/form-data" onsubmit="return membervalidation();" >
+				    <form name="inputWarning" action="insertRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="submitContents(this);">
 				</s:elseif>
 				<s:elseif test="resultClass != NULL && #session.session_id == null">
-					<form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
+					<form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="submitContents(this);">
 						<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
 						<s:hidden name="currentPage" value="%{currentPage}" />
 						<s:hidden name="old_file" value="%{resultClass.recipe_file}" />
 				</s:elseif>
 				<s:elseif test="resultClass != NULL && session.session_id != null">
-				    <form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data" onsubmit="return membervalidation();">
+				    <form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="submitContents(this);">
 						<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
 						<s:hidden name="currentPage" value="%{currentPage}" />
 						<s:hidden name="old_file" value="%{resultClass.recipe_file}" />
 				</s:elseif>
 
-				<table width="400" border="1" cellspacing="0" cellpadding="0"
-					bgcolor="" align="center">
+				<table class="table table-stiped">
 					<tr>
-						<td align="right">종류</td>
+						<td align="center">종류</td>
 						<td align="left" colspan="3">&nbsp; 
 						<select name="recipe_foodkind" id="recipe_foodkind" value="${resultClass.recipe_foodkind}">
 								<option value="${resultClass.recipe_foodkind}">${resultClass.recipe_foodkind}</option>
@@ -173,7 +177,7 @@
 					</tr>
 					<tr>
 						<td width="100" bgcolor="" align="center">제목</td>
-						<td width="300" colspan="3" align="left">
+						<td colspan="3" align="left">
 						  <input type="text" name="recipe_subject" value="${resultClass.recipe_subject}" /></td>
 					</tr>
 					<tr>
@@ -215,18 +219,9 @@
 					<tr>
 						<td width="100" bgcolor="" align="center">방법 및 상세내용</td>
 						<td width="300" colspan="3" align="left">
-						  <s:textarea name="recipe_content" theme="simple" value="%{resultClass.recipe_content}" rows="13" cols="40" /></td>
+						  <s:textarea name="recipe_content" id="recipe_content" theme="simple" value="%{resultClass.recipe_content}" cssStyle="width:800px" /></td>
 					</tr>
-					<tr>
-						<td width="100" bgcolor="" align="center">첨부파일</td>
-						<td width="300" colspan="3" align="left"> 
-						  <s:file name="recipe_file" theme="simple" /> 
-						  <s:if test="resultClass.recipe_orgfile != NULL"> &nbsp;  
-						  <s:property value="resultClass.recipe_orgfile" /> 
-						       파일이 등록되어 있습니다. 다시 업로드하면 기존의 파일은 삭제됩니다.
-	                      </s:if>
-	                    </td>
-					</tr>
+				
 					<td colspan="4" bgcolor="" align="center">
 					    <input name="submit" type="submit" value="등록"> 
 					    <input type="reset" value="다시작성">
@@ -235,6 +230,7 @@
 					</tr>
 				</table>
 				</form>
+				</div>
 			</body>
 		</div>
 		<!-- end of test message -->
@@ -246,6 +242,32 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript">
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "recipe_content",
+	sSkinURI: "<%=request.getContextPath()%>/board/se2/SmartEditor2Skin.html",
+	fCreator: "createSEditor2"
+});
+	
+function submitContents(elClickedObj){ 
+	
+	
+	oEditors.getById["recipe_content"].exec("UPDATE_CONTENTS_FIELD", []);
+	try{ 
+		elClickedObj.inputWarning.submit();
+	}catch(e){} 
+} 
+
+// textArea에 이미지 첨부
+function pasteHTML(filepath){
+    var sHTML = '<img src="<%=request.getContextPath()%>/board/se2/recipe_upload/'+filepath+'">';
+    oEditors.getById["recipe_content"].exec("PASTE_HTML", [sHTML]); 
+}
+	
+		
+	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>

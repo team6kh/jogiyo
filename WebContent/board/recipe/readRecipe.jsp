@@ -45,7 +45,8 @@
 	}
 </script>
 			</head>
-
+			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
+            
 			<body>
 
 				<table width="600" border="0" cellspacing="0" cellpadding="2">
@@ -54,7 +55,9 @@
 					</tr>
 					<tr>
 					<s:if test="#session.session_id != null">
-						<td height="20" align="right"><input name="list" type="button" value="추천" onClick="javascript:location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />'"></td>
+						
+						<td height="20" align="right"><input name="list" type="button" value="추천" onClick="javascript:document.getElementById('isrecommand').contentWindow.location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'"></td>
+                         <iframe src="blink.html" id ="isrecommand" style="display:none;"></iframe>					
 					</s:if>
 					</tr>
 				</table>
@@ -167,8 +170,8 @@
 
 					<tr>
 						<td bgcolor="#F4F4F4">내용</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_content" />
+						<td bgcolor="#FFFFFF" height="600" colspan="3" align="left">
+          			&nbsp;&nbsp;<s:property value="pagingHtml" escape="false" />
 						</td>
 					</tr>
 					<tr bgcolor="#777777">

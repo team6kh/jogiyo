@@ -7,7 +7,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 
-String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "/board/se2/upload"; // 이미지가 저장될 주소
+String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "/board/se2/recipe_upload"; // 이미지가 저장될 주소
 //String path = "C:/team6/jogiyo/WebContent/resource/notice/content";
 System.out.println(path);
 String filename = "";
