@@ -60,7 +60,7 @@
 			<c:choose>
 				<c:when test="${not empty session_id}">
 					<form class="navbar-form navbar-right" action="/jogiyo/logout.action">
-						<a href="readUser.action?user_type=${session_type}&user_id=${session_id}" class="btn btn-link">${session_name} (${session_id}) 님 환영합니다.</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="dashboard.action?user_type=${session_type}&user_id=${session_id}" class="btn btn-link">${session_name} (${session_id}) 님 환영합니다.</a>&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="submit" class="btn btn-warning">로그아웃</button>
 					</form>
 				</c:when>

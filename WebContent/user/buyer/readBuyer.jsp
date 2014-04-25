@@ -18,6 +18,7 @@
 
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
+<link href="user/common/dashboard.css" rel="stylesheet">
 <link href="user/common/registration/registration.css" rel="stylesheet">
 
 <script type="text/javascript">
@@ -71,128 +72,143 @@
 
 	<!-- header -->
 	<%@ include file="/common/header.jsp"%>
-	<!-- end of header -->
+	<!-- /.header -->
 	
-	<!-- container -->
-	<div class="container">	
-		<form class="form-signup" id="form-signup" method="post">
-			<br />
-		  	<!-- 인증이 되지 않았을 시 뜬다. -->		  	
-			<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq null}">						
-			<div class="alert alert-info alert-dismissable" id="alert_div">			  
-			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			  <a href="#" class="alert-link" id="alert_placeholder" onclick="requestEv()">이메일을 인증해주세요.</a>			  
-			</div>
-			</c:if>
-			<!-- 이메일 인증 요청을 받으면 인증번호가 담긴 메일이 발송되었다는 메시지를 출력한다. -->
-			<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq 'evRequested'}">
-			<div class="alert alert-success alert-dismissable">
-			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			  <a href="#" class="alert-link">이메일을 확인해주세요.</a>
-			</div>
-			</c:if>
-			<!-- END 인증이 되지 않았을 시 뜬다. -->
-			<!-- 인증 성공 시 -->
-			<c:if test="${buyerDTO.buyer_verification eq 'yes' && actionStatus eq 'evSuccess'}">
-			<div class="alert alert-success alert-dismissable">
-			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			  <a href="#" class="alert-link">인증 성공</a>
-			</div>
-			</c:if>
-			<!-- END 인증 성공 시 -->
-			<!-- 숨겨진 iframe -->
-			<iframe src="blink.html" id="checkEv" style="display:none;"></iframe>
-			<!-- END 숨겨진 iframe -->
-	       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>			
-			<!-- disabled는 정보출력스타일을 폼으로 유지하기 위해 사용. 값은 액션으로 안 넘어간다. -->
-			<div class="form-group">
-			  <label>가입유형</label>
-			    <select class="form-control" id="user_type" disabled>
-			      <option value="buyer">구매자</option>
-			      <option value="seller">판매자</option>
-			    </select>
-			    <!-- 이메일작성을 위해 필요한 히든 파라미터 user_type -->
-			    <input type="hidden" id="user_type" name="user_type" value="${session_type}">			  
-			</div>
-			<div class="form-group">
-			  <label>아이디</label>
-			  <input type="text" class="form-control" value="${buyerDTO.buyer_id}" disabled>
-			  <!-- 이메일작성을 위해 필요한 히든 파라미터 user_id -->
-			  <input type="hidden" id="user_id" name="user_id" value="${buyerDTO.buyer_id}">		  
-			</div>						
-			<div class="form-group">
-			  <label>이름</label>
-			  <input type="text" class="form-control" value="${buyerDTO.buyer_name}" disabled>
-			  <!-- 이메일작성을 위해 필요한 히든 파라미터 buyer_name -->
-			  <input type="hidden" name="buyer_name" value="${buyerDTO.buyer_name}">
-			</div>
-			<!-- 
-			<div class="form-group">
-			  <label>비밀번호</label>
-			  <input type="password" class="form-control" value="${buyerDTO.buyer_pw}" disabled>
-			</div>  -->
-			<div class="form-group">
-			  <label>휴대폰</label>
-			  <input type="text" class="form-control" value="${buyerDTO.buyer_mobilenum}" disabled>
-			</div>							
-			<div class="form-group">
-			  <label>이메일</label>
-			  <input type="text" class="form-control" value="${buyerDTO.buyer_email}" disabled>
-			  <!-- 이메일작성을 위해 필요한 히든 파라미터 buyer_email -->
-			  <input type="hidden" id="buyer_email" name="buyer_email" value="${buyerDTO.buyer_email}">
-			</div>
-			<!-- 인증이 되지 않았을 입력폼이 뜬다. -->
-			<c:if test="${buyerDTO.buyer_verification eq 'no'}">
-			<div class="form-group">
-			  <label>인증번호</label>
-			  <div class="input-group">
-			    <input type="text" class="form-control" id="ev_code_input" name="ev_code_input">
-			    <span id="btnCheckEv" class="input-group-addon btn btn-default" onclick="checkEv()">인증</span>
-			  </div>
-			</div>
-			</c:if>					
-		</form><!-- END of form-signup -->
-		
-		<!-- form-signup looklike div -->
-		<div class="form-signup">			
-			<div class="pull-right">
-				<!-- Button trigger modal : 수정 -->
-				<button class="btn btn-default insertModalParam" data-toggle="modal"
-					data-target="#checkModal" data-id="updateBuyerForm">수정</button>
-					
-				<!-- Button trigger modal : 탈퇴 -->
-				<button class="btn btn-default insertModalParam" data-toggle="modal"
-					data-target="#checkModal" data-id="deleteBuyer">탈퇴</button>					
-				
-				<!-- Modal -->
-				<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<form id="checkPass" method="post">
-							<div class="modal-content">							
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="checkModalLabel">비밀번호를 입력하세요.</h4>
-								</div>
-								<div class="modal-body">
-									<div class="form-group">
-										<label>비밀번호</label>
-										<input type="password" class="form-control" id="modalParam_pw" name="modalParam_pw">										
-									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
-									<input type="hidden" id="modalParam" name="modalParam">						
-									<input type="hidden" id="modalParam_key" name="modalParam_key" value="${buyerDTO.buyer_id}">								
-									<button class="btn btn-primary" onclick="checkPass(this.form)">입력</button>
-								</div>							
-							</div>
-						</form>
-					</div>
-				</div><!-- END of Modal -->					
-										
-			</div><!-- END of pull-right -->
+	<!-- container -->	
+	<div class="container-fluid">
+	  <!-- row -->
+      <div class="row">
+        <!-- sidebar -->
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">회원정보</a></li>
+            <li><a href="#">구매목록</a></li>
+            <li><a href="#">내가 작성한 글</a></li>
+          </ul>
+        </div>
+        <!-- /sidebar -->
+        <!-- main -->
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
+			<form class="form-signup" id="form-signup" method="post">
+				<br />
+			  	<!-- 인증이 되지 않았을 시 뜬다. -->		  	
+				<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq null}">						
+				<div class="alert alert-info alert-dismissable" id="alert_div">			  
+				  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				  <a href="#" class="alert-link" id="alert_placeholder" onclick="requestEv()">이메일을 인증해주세요.</a>			  
+				</div>
+				</c:if>
+				<!-- 이메일 인증 요청을 받으면 인증번호가 담긴 메일이 발송되었다는 메시지를 출력한다. -->
+				<c:if test="${buyerDTO.buyer_verification eq 'no' && actionStatus eq 'evRequested'}">
+				<div class="alert alert-success alert-dismissable">
+				  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				  <a href="#" class="alert-link">이메일을 확인해주세요.</a>
+				</div>
+				</c:if>
+				<!-- END 인증이 되지 않았을 시 뜬다. -->
+				<!-- 인증 성공 시 -->
+				<c:if test="${buyerDTO.buyer_verification eq 'yes' && actionStatus eq 'evSuccess'}">
+				<div class="alert alert-success alert-dismissable">
+				  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				  <a href="#" class="alert-link">인증 성공</a>
+				</div>
+				</c:if>
+				<!-- END 인증 성공 시 -->
+				<!-- 숨겨진 iframe -->
+				<iframe src="blink.html" id="checkEv" style="display:none;"></iframe>
+				<!-- END 숨겨진 iframe -->
+		       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>			
+				<!-- disabled는 정보출력스타일을 폼으로 유지하기 위해 사용. 값은 액션으로 안 넘어간다. -->
+				<div class="form-group">
+				  <label>가입유형</label>
+				    <select class="form-control" id="user_type" disabled>
+				      <option value="buyer">구매자</option>
+				      <option value="seller">판매자</option>
+				    </select>
+				    <!-- 이메일작성을 위해 필요한 히든 파라미터 user_type -->
+				    <input type="hidden" id="user_type" name="user_type" value="${session_type}">			  
+				</div>
+				<div class="form-group">
+				  <label>아이디</label>
+				  <input type="text" class="form-control" value="${buyerDTO.buyer_id}" disabled>
+				  <!-- 이메일작성을 위해 필요한 히든 파라미터 user_id -->
+				  <input type="hidden" id="user_id" name="user_id" value="${buyerDTO.buyer_id}">		  
+				</div>						
+				<div class="form-group">
+				  <label>이름</label>
+				  <input type="text" class="form-control" value="${buyerDTO.buyer_name}" disabled>
+				  <!-- 이메일작성을 위해 필요한 히든 파라미터 buyer_name -->
+				  <input type="hidden" name="buyer_name" value="${buyerDTO.buyer_name}">
+				</div>
+				<div class="form-group">
+				  <label>휴대폰</label>
+				  <input type="text" class="form-control" value="${buyerDTO.buyer_mobilenum}" disabled>
+				</div>							
+				<div class="form-group">
+				  <label>이메일</label>
+				  <input type="text" class="form-control" value="${buyerDTO.buyer_email}" disabled>
+				  <!-- 이메일작성을 위해 필요한 히든 파라미터 buyer_email -->
+				  <input type="hidden" id="buyer_email" name="buyer_email" value="${buyerDTO.buyer_email}">
+				</div>
+				<!-- 인증이 되지 않았을 입력폼이 뜬다. -->
+				<c:if test="${buyerDTO.buyer_verification eq 'no'}">
+				<div class="form-group">
+				  <label>인증번호</label>
+				  <div class="input-group">
+				    <input type="text" class="form-control" id="ev_code_input" name="ev_code_input">
+				    <span id="btnCheckEv" class="input-group-addon btn btn-default" onclick="checkEv()">인증</span>
+				  </div>
+				</div>
+				</c:if>					
+			</form>
+			<!-- /.form-signup -->
 			
-       	</div><!-- END of form-signup looklike div -->
+			<!-- form-signup looklike div -->
+			<div class="form-signup">
+			    <!-- pull-right -->			
+				<div class="pull-right">
+					<!-- Button trigger modal : 수정 -->
+					<button class="btn btn-default insertModalParam" data-toggle="modal"
+						data-target="#checkModal" data-id="updateBuyerForm">수정</button>
+						
+					<!-- Button trigger modal : 탈퇴 -->
+					<button class="btn btn-default insertModalParam" data-toggle="modal"
+						data-target="#checkModal" data-id="deleteBuyer">탈퇴</button>					
+					
+					<!-- Modal -->
+					<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<form id="checkPass" method="post">
+								<div class="modal-content">							
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="checkModalLabel">비밀번호를 입력하세요.</h4>
+									</div>
+									<div class="modal-body">
+										<div class="form-group">
+											<label>비밀번호</label>
+											<input type="password" class="form-control" id="modalParam_pw" name="modalParam_pw">										
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
+										<input type="hidden" id="modalParam" name="modalParam">						
+										<input type="hidden" id="modalParam_key" name="modalParam_key" value="${buyerDTO.buyer_id}">								
+										<button class="btn btn-primary" onclick="checkPass(this.form)">입력</button>
+									</div>							
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- /.Modal -->											
+				</div>
+				<!-- /.pull-right -->				
+	       	</div>
+	       	<!-- /.form-signup looklike div -->
+	    </div>
+	    <!-- /.main -->
+	  </div>
+	  <!-- /.row	-->
 	</div>
 	<!-- /.container -->
 
