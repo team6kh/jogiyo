@@ -1,6 +1,5 @@
 package board.recipe.action;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 
@@ -22,8 +21,7 @@ public class DeleteRecipeAction extends ActionSupport implements ConDAOAware {
 	private int currentPage; // 현재 페이지
 	private int recipe_num;
 
-	private String fileUploadPath = "D:\\김경남\\Java\\upload\\"; // 업로드 경로.
-
+	
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
 
@@ -41,22 +39,11 @@ public class DeleteRecipeAction extends ActionSupport implements ConDAOAware {
 		// 삭제 쿼리 수행.
 		sqlMapper.update("Recipe.deleteRecipe", paramClass);
 
-		// 서버 파일 삭제
-		File deleteFile = new File(fileUploadPath
-				+ resultClass.getRecipe_file());
-		deleteFile.delete();
-
+	
 		return SUCCESS;
 	}
 
-	public String getFileUploadPath() {
-		return fileUploadPath;
-	}
-
-	public void setFileUploadPath(String fileUploadPath) {
-		this.fileUploadPath = fileUploadPath;
-	}
-
+	
 	public RecipeDTO getParamClass() {
 		return paramClass;
 	}

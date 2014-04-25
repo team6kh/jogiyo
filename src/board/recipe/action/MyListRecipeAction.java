@@ -37,8 +37,7 @@ public class MyListRecipeAction extends ActionSupport implements ConDAOAware {
 		list = sqlMapper.queryForList("Recipe.myListRecipe", session_id);
 
 		totalCount = list.size(); // 전체 글 갯수를 구한다.
-		page = new PagingAction(actionName, currentPage, totalCount,
-				blockCount, blockPage); // PagingAction 객체 생성
+		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // PagingAction 객체 생성
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
 
 		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
@@ -54,15 +53,6 @@ public class MyListRecipeAction extends ActionSupport implements ConDAOAware {
 		return SUCCESS;
 
 	}
-	
-	
-	
-	
-	
-	
-
-	
-
 	
 
 	public String getSession_id() {
