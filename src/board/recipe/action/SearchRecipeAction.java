@@ -53,18 +53,16 @@ public class SearchRecipeAction extends ActionSupport implements ConDAOAware,Pre
 
     public String execute() throws Exception
     {
+        if(paramClass.getRecipe_priceinput1()==0 && paramClass.getRecipe_priceinput2()==0 && paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){
+        	list = sqlMapper.queryForList("Recipe.detailSearchRecipeEmpty", paramClass);
+        }else if(paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){
+        	list = sqlMapper.queryForList("Recipe.detailSearchRecipePrice", paramClass);
+        }else if(paramClass.getRecipe_priceinput1()==0 && paramClass.getRecipe_priceinput2()==0){
+        	list = sqlMapper.queryForList("Recipe.detailSearchRecipeTime", paramClass);
+        }else{//모두 기입했을때
+        	list = sqlMapper.queryForList("Recipe.detailSearchRecipeAll", paramClass);
+        }
         
-        System.out.println("recipe_foodkind:" +paramClass.getRecipe_foodkind());
-        System.out.println("recipe_writerinput:" +paramClass.getRecipe_writerinput());
-        System.out.println("recipe_foodnameinput:" +paramClass.getRecipe_foodnameinput());
-        System.out.println("recipe_subjectinput:" +paramClass.getRecipe_subjectinput());
-        System.out.println("recipe_timeinput1:" +paramClass.getRecipe_timeinput1());
-        System.out.println("recipe_timeinput2:" +paramClass.getRecipe_timeinput2());
-        System.out.println("recipe_priceinput1:" +paramClass.getRecipe_priceinput1());
-        System.out.println("recipe_priceinput2:" +paramClass.getRecipe_priceinput2());
-      
-        list = sqlMapper.queryForList("Recipe.detailSearchRecipe", paramClass);
-        System.out.println("list search:" +list);
         totalCount = list.size(); //전체 글 갯수를 구한다.
         page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
         pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.
@@ -83,79 +81,64 @@ public class SearchRecipeAction extends ActionSupport implements ConDAOAware,Pre
     }
 
   
-    public String getActionName()
-    {
-        return actionName;
-    }
+	public String getActionName() {
+		return actionName;
+	}
 
-    public int getCurrentPage()
-    {
-        return currentPage;
-    }
+	public int getCurrentPage() {
+		return currentPage;
+	}
 
-    public void setCurrentPage(int currentPage)
-    {
-        this.currentPage = currentPage;
-    }
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
 
-    public int getTotalCount()
-    {
-        return totalCount;
-    }
+	public int getTotalCount() {
+		return totalCount;
+	}
 
-    public void setTotalCount(int totalCount)
-    {
-        this.totalCount = totalCount;
-    }
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
 
-    public int getBlockCount()
-    {
-        return blockCount;
-    }
+	public int getBlockCount() {
+		return blockCount;
+	}
 
-    public void setBlockCount(int blockCount)
-    {
-        this.blockCount = blockCount;
-    }
+	public void setBlockCount(int blockCount) {
+		this.blockCount = blockCount;
+	}
 
-    public int getBlockPage()
-    {
-        return blockPage;
-    }
+	public int getBlockPage() {
+		return blockPage;
+	}
 
-    public void setBlockPage(int blockPage)
-    {
-        this.blockPage = blockPage;
-    }
+	public void setBlockPage(int blockPage) {
+		this.blockPage = blockPage;
+	}
 
-    public String getPagingHtml()
-    {
-        return pagingHtml;
-    }
+	public String getPagingHtml() {
+		return pagingHtml;
+	}
 
-    public void setPagingHtml(String pagingHtml)
-    {
-        this.pagingHtml = pagingHtml;
-    }
+	public void setPagingHtml(String pagingHtml) {
+		this.pagingHtml = pagingHtml;
+	}
 
-    public PagingAction getPage()
-    {
-        return page;
-    }
+	public PagingAction getPage() {
+		return page;
+	}
 
-    public void setPage(PagingAction page)
-    {
-        this.page = page;
-    }
+	public void setPage(PagingAction page) {
+		this.page = page;
+	}
 
-    public List<RecipeDTO> getList()
-    {
-        return list;
-    }
+	public List<RecipeDTO> getList() {
+		return list;
+	}
 
-    public void setList(List<RecipeDTO> list)
-    {
-        this.list = list;
-    }
+	public void setList(List<RecipeDTO> list) {
+		this.list = list;
+	}
    
 }
