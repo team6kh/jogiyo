@@ -143,10 +143,8 @@
 				</tr>
 
 				<tr align="right">
-					<td colspan="10"><input type="button" value="글쓰기"
-						onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
-						<input type="button" value="새로고침"
-						onClick="javascript:location.href='myListRecipe.action?currentPage=<s:property value="currentPage" />';">
+					<td colspan="10"><input type="button" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
+						<input type="button" value="새로고침" 	onClick="javascript:location.href='myListRecipe.action?session_id=<s:property value="#session.session_id" />';">
 					</td>
 				</tr>
 			</table>

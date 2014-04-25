@@ -162,8 +162,7 @@
 		<div class="pull-right">
 			<input type="button" value="글쓰기"
 				onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
-			<input type="button" value="새로고침"
-				onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />';">
+			<input type="button" value="새로고침" 	onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />';">
 		</div>
 		<!-- /버튼 -->
 
@@ -187,8 +186,7 @@
 								</select>
 								
 								<s:if test="#session.session_id != null">
-									<input name="mylist" type="button" value="내가쓴글"
-										onClick="javascript:location.href='recipe_mylsit.action?session_id=<s:property value="#session.session_id" />';">
+									<input name="mylist" type="button" value="내가쓴글" onClick="javascript:location.href='myListRecipe.action?session_id=<s:property value="#session.session_id" />';">
 								</s:if>
 
 								<div id="detailsearch" style="display: none">

@@ -105,7 +105,7 @@
 		</action>
 
 		<!-- recipe_mylsit 액션 -->
-		<action name="recipe_mylsit" class="board.recipe.action.MyListRecipeAction">
+		<action name="myListRecipe" class="board.recipe.action.MyListRecipeAction">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/myListRecipe.jsp</result>
