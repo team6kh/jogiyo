@@ -17,6 +17,14 @@
 <link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
+
+<script type="text/javascript">
+	function closeAlert() {
+		self.close();
+		//window.location.reload(true);
+	}
+</script>
+
 </head>
 
 <body>
@@ -27,7 +35,7 @@
 			<tr>
 				<td align="center">
 					장바구니를 비웠습니다<br/>
-					<input type="button" value="확인" onclick="javascript:self.close()">
+					<input type="button" value="확인" onclick="closeAlert()">
 				</td>
 			</tr>
 		</table>
