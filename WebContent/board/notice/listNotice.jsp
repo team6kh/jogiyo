@@ -23,14 +23,14 @@
 
 </head>
 
-<body>
-	<form>
+<body>	
 
 	<!-- header -->
 	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
 
 	<!-- container -->
+	<form>
 	<div class="container">
 
 		<!-- 밑으로 view 꾸미기 -->
@@ -105,7 +105,7 @@
 				</ul>
 			</div>
 
-			<div id="gotop">
+			<div id="gotop"></div>
 		
 			<div class="pull-right">
 				<a
