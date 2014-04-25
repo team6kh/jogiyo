@@ -1,3 +1,28 @@
+@import url("//fonts.googleapis.com/css?family=Lobster|Cabin:400,700");
+
+body {
+	font-family: "Cabin", "맑은 고딕"
+}
+
+.navbar-inverse {
+	background-color: #ad1d28;
+	border-color: #911821;
+}
+
+.navbar-inverse .navbar-brand {
+	font-size: 28px;
+	color: #fff;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: #fff;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus {
+	color: #fff;
+	background-color: #cd3742;
+}
+
 .btn-primary {
 	color: #fff;
 	background-color: #5cb85c;
@@ -24,4 +49,9 @@
 	color: #5cb85c;
 	background-color: #eee;
 	border-color: #ddd;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
 }

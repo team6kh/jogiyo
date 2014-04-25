@@ -24,7 +24,6 @@
 <link href="common/home.css" rel="stylesheet">
 
 <!-- masonry -->
-<link rel="stylesheet" type="text/css" href="assets/plugins/masonry/css/default.css" />
 <link rel="stylesheet" type="text/css" href="assets/plugins/masonry/css/component.css" />
 <script src="assets/plugins/masonry/js/modernizr.custom.js"></script>
 <!-- /masonry -->

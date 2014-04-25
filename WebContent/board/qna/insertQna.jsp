@@ -16,6 +16,7 @@
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
+<link href="jogiyo.css" rel="stylesheet">
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->

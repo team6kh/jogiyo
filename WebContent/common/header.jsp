@@ -7,11 +7,11 @@
 	display: block;
 }
 .btn-link {
-color: #fff;
+	color: #fff;
 }
 .btn-link:hover, .btn-link:focus {
-color: #47a447;
-text-decoration: none;
+	color: #fff;
+	text-decoration: line;
 }
 
 </style>
@@ -55,22 +55,13 @@ text-decoration: none;
 				<li><a href="listRecipe.action">레시피</a></li>
 				<li><a href="listNotice.action">공지사항</a></li>
 				<li><a href="listQna.action">문의하기</a></li>
-				<!-- 테스트 -->
-				<li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">테스트<b class="caret"></b></a>
-	              <ul class="dropdown-menu">
-	                <li><a href="pageTest.action">테스트 페이지</a></li>
-	                <li><a href="listTest.action">테스트 게시판</a></li>
-	                <li><a href="dashAdmin.action">관리자 대시보드</a></li>
-	              </ul>
-	            </li>
-				<!-- end 테스트 -->
+				<!-- 테스트 메뉴 삭제하였습니다. -->
 			</ul>
 			<c:choose>
 				<c:when test="${not empty session_id}">
 					<form class="navbar-form navbar-right" action="/jogiyo/logout.action">
 						<a href="readUser.action?user_type=${session_type}&user_id=${session_id}" class="btn btn-link">${session_name} 님 환영합니다.</a>&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="submit" class="btn btn-danger">로그아웃</button>
+						<button type="submit" class="btn btn-warning">로그아웃</button>
 					</form>
 				</c:when>
 				<c:when test="${empty session_id}">
