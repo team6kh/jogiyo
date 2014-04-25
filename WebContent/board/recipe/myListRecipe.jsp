@@ -21,22 +21,8 @@
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-	<!-- header -->
-	<%@ include file="/common/header.jsp"%>
-	<!-- end of header -->
-
-	<!-- container -->
-	<div class="container">
-
-		<!-- test message -->
-		<div class="common-template">
-			<header>
-				<SCRIPT type="text/javascript">
+<!-- 스크립트 -->
+<SCRIPT type="text/javascript">
 					function searchtype() {
 						var sel = document
 								.getElementById("recipe_search_target").value;
@@ -63,38 +49,71 @@
 							document.getElementById('detailsearch').style.display = "none";
 						}
 					}
+					
+					function recipe_readcountarray() {
+						//var click = false;
+						//if(click==false){
+
+						//click = true;
+						document.location.href = 'readcountRecipeDesc.action';
+						//}if(click==true){
+						//	click = false;
+						//	window.location.href='readcountRecipeAsc.action';
+						//}
+					}
+
+					function recipe_timearray() {
+						document.location.href = 'timeRecipeDesc.action';
+					}
+
+					function recipe_pricearray() {
+						document.location.href = 'priceRecipeDesc.action';
+					}
+
 				</SCRIPT>
-			</header>
-			<table width="900" border="0" cellspacing="0" cellpadding="2">
-				<tr>
-					<td align="center"><h2>MyRecipe 목록</h2></td>
-				</tr>
-				<tr>
-					<td height="1" bgcolor="#BDBDBD" align="center">내가 올린 레시피~~!!</td>
-				</tr>
-				<tr>
-					<td height="20"></td>
-				</tr>
-			</table>
+<!-- 스크립트 끝 -->
 
+</head>
 
-			<table width="900" border="0" cellspacing="0" cellpadding="2">
+<body>
+
+	<!-- header -->
+	<%@ include file="/common/header.jsp"%>
+	<!-- end of header -->
+
+	<!-- container -->
+	<div class="container">
+
+		<!-- 게시판 윗부분 -->
+		<div class="col-md-12">
+			<h3>MyRecipe 목록</h3>
+				<p>내가 올린 레시피~~!!</p>
+				<input type="button" class="btn btn-warning" value="게시판 사용 지침" onClick="recipeboardrules()">
+			<div class="pull-right">
+				
+				<s:if test="#session.session_id != null">
+					<input type="button" class="btn btn-default" value="마이페이지" onClick="javascript:location.href='mypageFormRecipe.action'" /></td>
+				</s:if>
+			</div>
+		</div>
+		<!-- /게시판 윗부분 -->
+		
+		<!-- 게시판 바디 -->
+		<div class="col-md-12">
+			<table class="table table-stiped">
 				<tr align="center" bgcolor="">
-					<td width="50"><strong>번호</strong></td>
-					<td width="50"><strong>종류</strong></td>
-					<td width="350"><strong>제목</strong></td>
-					<td width="100"><strong>요리명</strong></td>
-					<td width="70"><strong>작성자</strong></td>
-					<td width="80"><strong>작성일</strong></td>
-					<td width="50"><strong>소비시간</strong></td>
-					<td width="50"><strong>비용</strong></td>
-					<td width="50"><strong>조회수</strong></td>
-					<td width="50"><strong>추천수</strong></td>
+					<td><strong>번호</strong></td>
+					<td><strong>종류</strong></td>
+					<td><strong>제목</strong></td>
+					<td><strong>요리명</strong></td>
+					<td><strong>작성자</strong></td>
+					<td><strong>작성일</strong></td>
+					<td><strong><a href="javascript:return false;" onClick="recipe_timearray()">소비시간</strong></td>
+					<td><strong><a href="javascript:return false;" onClick="recipe_pricearray()">비용</strong></td>
+					<td><strong><a href="javascript:return false;" onClick="recipe_readcountarray()">조회수</a></strong></td>
+					<td><strong><a href="javascript:return false;" onClick="recipe_recommandarray()">추천수</strong></td>
 				</tr>
-				<tr bgcolor="#777777">
-					<td height="1" colspan="10"></td>
-				</tr>
-
+				
 				<s:iterator value="list" status="stat">
 
 					<s:url id="viewURL" action="readRecipe">
@@ -122,10 +141,7 @@
 
 
 					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="10"></td>
-					</tr>
-
+					
 				</s:iterator>
 
 				<s:if test="list.size() <= 0">
@@ -138,17 +154,25 @@
 					</tr>
 
 				</s:if>
-
-				<tr align="center">
-					<td colspan="10"><s:property value="pagingHtml" escape="false" /></td>
-				</tr>
-
-				<tr align="right">
-					<td colspan="10"><input type="button" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
+				</table>
+				</div>
+				<!-- /게시판 바디 -->
+				
+				<!-- 페이징 -->
+				<div class="text-center">
+			<ul class="pagination pagination-sm">
+				<s:property value="pagingHtml" escape="false" />
+			</ul>
+		</div>
+		<!-- /페이징 -->
+		
+		<!-- 버튼 -->
+		<div class="pull-right">
+				<input type="button" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
 						<input type="button" value="새로고침" 	onClick="javascript:location.href='myListRecipe.action?session_id=<s:property value="#session.session_id" />';">
-					</td>
-				</tr>
-			</table>
+					</div>
+					<!-- /버튼 -->
+			
 			<br />
 
 			<table width="900" border="0" cellspacing="0" cellpadding="2">

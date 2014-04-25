@@ -125,7 +125,7 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 	//readcountDesc
 	public String readcountDesc() throws Exception {
 	    list = sqlMapper.queryForList("Recipe.readcountDesc");
-        System.out.println("readcountDesc()");
+        //System.out.println("readcountDesc()");
 	    //System.out.println("list:"+list);
         totalCount = list.size(); //전체 글 갯수를 구한다.
         page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성

@@ -154,13 +154,13 @@
 					<form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="submitContents(this);">
 						<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
 						<s:hidden name="currentPage" value="%{currentPage}" />
-						<s:hidden name="old_file" value="%{resultClass.recipe_file}" />
+						
 				</s:elseif>
 				<s:elseif test="resultClass != NULL && session.session_id != null">
 				    <form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="submitContents(this);">
 						<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
 						<s:hidden name="currentPage" value="%{currentPage}" />
-						<s:hidden name="old_file" value="%{resultClass.recipe_file}" />
+						
 				</s:elseif>
 
 				<table class="table table-stiped">
