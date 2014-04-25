@@ -31,9 +31,13 @@
 		return false;
 	}
 
-	function goDelete(form) {
-		form.action = "cartDelete.action";
-		form.submit();
+	function goDelete() {
+		alert("장바구니가 비워졌습니다.");
+		var rest_num = document.getElementById("rest_num").value;
+		var rest_subject = document.getElementById("rest_subject").value;
+		var session_id = document.getElementById("session_id").value;
+		var url = "cartDelete.action?rest_num="+rest_num+"&rest_subject="+rest_subject+"&session_id="+session_id;
+		document.location.href=url;
 		return false;
 	}
 </script>
@@ -59,18 +63,11 @@
 		</div>
 	</c:forEach>
 
-
 	<!-- 장바구니 결제 버튼 -->
 	<div align="center">
-		<button type="button" class="btn btn-primary" onclick="goPayment(this.form)" >구매하기</button>
-		
-		<button type="button" class="btn btn-danger" onclick="javascript:open('cartDelete.action?rest_num=${rest_num}&currentPage=${currentPage}&rest_subject=${rest_subject}&session_id=${sessionScope.session_id}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=150, height=100')">
-			비우기
-		</button>
+		<button type="button" class="btn btn-primary" onclick="goPayment(this.form)">구매하기</button>		
+		<button type="button" class="btn btn-danger" onclick="goDelete()">비우기</button>
 	</div>
+	
 </form>
-
-
-
-
 </body>
