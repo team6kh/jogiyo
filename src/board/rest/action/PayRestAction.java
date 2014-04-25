@@ -3,6 +3,8 @@ package board.rest.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import user.buyer.dto.BuyerDTO;
+import user.seller.dto.SellerDTO;
 import board.cart.dto.CartDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -15,6 +17,7 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 	public static SqlMapClient sqlMapper;
 	private List<CartDTO> list = new ArrayList<CartDTO>();
 	private CartDTO paramClass = new CartDTO();
+	private BuyerDTO buyerDTO = new BuyerDTO();
 	
 	private int rest_num;
 	private String rest_subject;
@@ -49,6 +52,13 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 			pay_restopt_subject += list.get(i).getCart_restopt_subject()+", ";
 			pay_pricetotal += list.get(i).getCart_restopt_priceplus();
 		}
+		
+		
+		//회원정보
+		String session_id = getSession_id();
+		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerOne", session_id);
+		
+		
 		
 		return SUCCESS; // AGS_pay.jsp
 	}
@@ -100,6 +110,14 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 	}
 	public void setRest_subject(String rest_subject) {
 		this.rest_subject = rest_subject;
+	}
+
+
+	public BuyerDTO getBuyerDTO() {
+		return buyerDTO;
+	}
+	public void setBuyerDTO(BuyerDTO buyerDTO) {
+		this.buyerDTO = buyerDTO;
 	}
 	
 

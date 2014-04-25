@@ -21,6 +21,7 @@
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css" type="text/css" charset="UTF-8" />
 
 </head>
 
@@ -33,11 +34,27 @@
 	<!-- container -->
 	<form>
 	<div class="container">
-
-		<!-- 밑으로 view 꾸미기 -->
-		<div class="col-md-12">
-			<h3>공지사항/이벤트</h3>
-		</div>
+		
+		<div id=topOfNoticeNew class="col-md-12">
+			<!-- topOfNotice 의 이미지-->
+			<div class="col-md-3"></div>
+			<div class="col-md-9"><br/><br/><br/><br/>
+				<div class="col-md-12">
+					<div class="col-md-4" align="left">
+						<b>공지사항</b><br/>
+						<font color=red>4</font>개의 글
+					</div>
+					<div class="col-md-4" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<b>이벤트</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<font color=red>3</font>개의 글
+					</div>
+					<div class="col-md-4" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<b>스마트팁</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<font color=red>3</font>개의 글
+					</div>
+				</div>
+			</div>
+		</div>	
 
 		<div class="col-md-12 well">
 			<table class="table table-striped table-forum">

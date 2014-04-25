@@ -21,6 +21,7 @@
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css" type="text/css" charset="UTF-8" />
 
 <!-- 스크립트 -->
 <SCRIPT type="text/javascript">
@@ -75,13 +76,19 @@
 	<!-- container -->
 	<div class="container">
 	
-		<!-- 게시판 윗부분 -->
+		<div id=topOfRecipe class="col-md-12">
+			<!-- topOfRecipe 의 이미지 -->
+			<div class="col-md-3"></div>
+			<div class="col-md-9"><br/><br/><br/>
+				<!-- 알고 있는 요리 레시피를 올려주세요~~! 혼자만 알고 있음, 안~돼!!<br/> -->
+				<input type="button" class="btn btn-warning" value="게시판 사용 지침" onClick="recipeboardrules()"><br/>
+			</div>
+		</div>	
+		
+		
+		
 		<div class="col-md-12">
-			<h3>Recipe 게시판</h3>
-			<p>알고 있는 요리 레시피를 올려주세요~~! 혼자만 알고 있음, 안~돼!!</p>
-			<input type="button" class="btn btn-warning" value="게시판 사용 지침" onClick="recipeboardrules()">
 			<div class="pull-right">
-				
 				<s:if test="#session.session_id != null">
 					<input type="button" class="btn btn-default" value="마이페이지" onClick="javascript:location.href='mypageFormRecipe.action'" /></td>
 				</s:if>

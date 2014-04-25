@@ -330,22 +330,51 @@
 	<!-- 업소상세정보 col-md-3 -->
 	<div class="col-md-3">
 		<div class="page-header">
-		  <h2><strong>업소상세정보</strong></small></h2>
+		  <h2><strong>업소상세정보</strong></h2>
 		</div>
 
-		<div class="sellerInfo">
-			<span class="glyphicon glyphicon-user"></span>			
-			이름 : ${resultClass.rest_writer_name} <br/>
-			<span class="glyphicon glyphicon-phone-alt"></span>
-			전화번호 : ${resultClass.rest_writer_telnum}<br/>
-			<span class="glyphicon glyphicon-earphone"></span>
-			핸드폰번호 :  ${resultClass.rest_writer_mobilenum}<br/>
-			<span class="glyphicon glyphicon-map-marker"></span>
-			주소 : ${resultClass.rest_writer_address} <br/>
-			<span class="glyphicon glyphicon-envelope"></span>
-			이메일 : <a href="sendMail.action?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
-			<span class="glyphicon glyphicon-print"></span>
-			<a href="javascript:printWindow()">프린트하기</a> <br/><br/>
+		<div class="col-md-12">
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-user"></span>	
+			</div>
+			<div class="col-md-10">
+				${resultClass.rest_writer_name}
+			</div>
+			
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-phone-alt"></span>
+			</div>
+			<div class="col-md-10">
+				 ${resultClass.rest_writer_telnum}
+			</div>
+			
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-earphone"></span>	
+			</div>
+			<div class="col-md-10">
+				${resultClass.rest_writer_mobilenum}
+			</div>
+
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-map-marker"></span>
+			</div>
+			<div class="col-md-10">
+				${resultClass.rest_writer_address} 
+			</div>
+			
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-envelope"></span>
+			</div>
+			<div class="col-md-10">
+				<a href="sendMail.action?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
+			</div>
+			
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-print"></span>
+			</div>
+			<div class="col-md-10">
+				<a href="javascript:printWindow()">프린트하기</a> <br/><br/>
+			</div>
 		</div>
 
 		<div id="map_canvas" class="map"></div>

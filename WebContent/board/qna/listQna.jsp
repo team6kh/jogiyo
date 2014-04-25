@@ -21,6 +21,7 @@
     <!-- Custom styles for this template -->
     <link href="jogiyo.css" rel="stylesheet">
     <link href="common/common-template.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" type="text/css" charset="UTF-8" />
     
     <script type="text/javascript">
     	var num = 0;
@@ -67,12 +68,19 @@
 	<!-- container -->
 	<div class="container">
 
-
-
-		<!-- test board pretty -->
-
-		<h3>자주묻는질문</h3>
-		 	<div class="col-md-12 well">
+		<div id=topOfQna class="col-md-12">
+			<!-- topOfQna 의 이미지-->
+			<div class="col-md-3"></div>
+			<div class="col-md-9"><br/><br/><br/>
+				여기에 추가
+			</div>
+		</div>	
+		
+		<div class="col-md-12">
+			<h3>자주묻는질문</h3>
+		</div>
+		
+	 	<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
 				<tbody>
 					<c:forEach var="list" items="${topList }">
@@ -108,10 +116,9 @@
 			</table>
 		</div>
 		<div class="pull-right">
-
-				<input type="hidden" name="session_id" value="${sessionScope.session_id}"/>
-				<button type="button" class="btn btn-primary" onclick="return checkId()">글쓰기</button>
-			</div>  
+			<input type="hidden" name="session_id" value="${sessionScope.session_id}"/>
+			<button type="button" class="btn btn-primary" onclick="return checkId()">글쓰기</button>
+		</div>  
 
 		<!-- test board pretty -->
 		<div class="col-md-12">

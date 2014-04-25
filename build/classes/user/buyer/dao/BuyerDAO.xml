@@ -31,6 +31,11 @@
 		<include refid="select-all" />
 		ORDER BY buyer_reg_date DESC
 	</select>	
+	
+	<select id="selectBuyerOne" resultMap="BuyerResult" parameterClass="java.lang.String">
+		select * from buyer_table
+		where buyer_id = #session_id#
+	</select>
 
 	<select id="selectBuyerCount" resultClass="int">
 		SELECT count(*) FROM buyer_table
