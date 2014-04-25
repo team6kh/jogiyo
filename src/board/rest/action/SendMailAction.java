@@ -36,8 +36,8 @@ public class SendMailAction  implements Action, ConDAOAware {
 	    String subject = getSession_id()+"이 문의하신 글입니다.";
 	    String from =  "team6kh@gmail.com";//문의하는 회원
 	    String to1 =getRest_writer_email(); //받는 사람
-	    String img_main = "http://blogfiles.naver.net/20140424_115/ljw7426_1398302669531NWpRY_PNG/%C1%A6%B8%F1.png";
-	    String putter = "http://postfiles6.naver.net/20140424_245/ljw7426_1398302289804V1tEl_PNG/%C7%AA%C5%CD.png?type=w2";
+	    String img_main = "http://blogfiles.naver.net/20140425_61/ljw7426_1398389790756PQfsf_PNG/%C1%A6%B8%F1.png";
+	    String putter = "http://blogfiles.naver.net/20140425_268/ljw7426_1398389791006NHcfO_PNG/%C7%AA%C5%CD.png";
 	    
 	    String body = "<img src='"+img_main+"' /> <br/>"
 								+"<br/><br/>"

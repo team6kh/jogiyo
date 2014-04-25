@@ -36,11 +36,7 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 	
 	// 레시피 리스트 액션
 	public String execute() throws Exception {
-		
-			
 		list = sqlMapper.queryForList("Recipe.selectAll");
-		System.out.println("ListRecipeAction execute()");
-		//System.out.println("list:"+list);
 		totalCount = list.size(); //전체 글 갯수를 구한다.
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
 		pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.
