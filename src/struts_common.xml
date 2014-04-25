@@ -81,6 +81,26 @@
         	</result>	
 		</action>
 		
+		<!-- 대시보드 -->
+		<action name="dashboard" class="user.common.action.DashboardAction">
+			<result name="buyer" type="chain">dashBuyer</result>
+			<result name="seller" type="chain">dashSeller</result>
+			<result name="admin" type="redirect-action">dashAdmin</result>
+			<result name="error">/common/error.jsp</result>
+		</action>
+		
+		<!-- 구매자 대시보드 -->
+		<action name="dashBuyer" class="user.buyer.action.DashBuyerAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result type="chain">readBuyer</result>
+		</action>
+		
+		<!-- 관리자 대시보드 -->
+		<action name="dashAdmin" class="user.admin.action.DashAdminAction">
+			<result>/user/admin/dashAdmin.jsp</result>
+		</action>		
+		
 		<!-- 유저정보 액션 : 구매자, 판매자로 chain -->
 		<action name="readUser" class="user.common.action.ReadUserAction">
 			<result name="buyer" type="chain">readBuyer</result>
