@@ -306,49 +306,23 @@
 		  <h2><strong>업소상세정보</strong></h2>
 		</div>
 
-		<div class="col-md-12">
-			<div class="col-md-2">
 				<span class="glyphicon glyphicon-user"></span>	
-			</div>
-			<div class="col-md-10">
-				${resultClass.rest_writer_name}
-			</div>
+				${resultClass.rest_writer_name} <br/>
 			
-			<div class="col-md-2">
 				<span class="glyphicon glyphicon-phone-alt"></span>
-			</div>
-			<div class="col-md-10">
-				 ${resultClass.rest_writer_telnum}
-			</div>
+				 ${resultClass.rest_writer_telnum}<br/>
 			
-			<div class="col-md-2">
 				<span class="glyphicon glyphicon-earphone"></span>	
-			</div>
-			<div class="col-md-10">
-				${resultClass.rest_writer_mobilenum}
-			</div>
+				${resultClass.rest_writer_mobilenum}<br/>
 
-			<div class="col-md-2">
 				<span class="glyphicon glyphicon-map-marker"></span>
-			</div>
-			<div class="col-md-10">
-				${resultClass.rest_writer_address} 
-			</div>
+				${resultClass.rest_writer_address} <br/>
 			
-			<div class="col-md-2">
 				<span class="glyphicon glyphicon-envelope"></span>
-			</div>
-			<div class="col-md-10">
 				<a href="sendMail.action?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
-			</div>
-			
-			<div class="col-md-2">
+				
 				<span class="glyphicon glyphicon-print"></span>
-			</div>
-			<div class="col-md-10">
 				<a href="javascript:printWindow()">프린트하기</a> <br/><br/>
-			</div>
-		</div>
 
 		<div id="map_canvas" class="map"></div>
 
