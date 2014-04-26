@@ -18,6 +18,12 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	private List<RestDTO> list = new ArrayList<RestDTO>();
 	private RestDTO paramClass = new RestDTO();
 	
+	private List<RestDTO> listKO = new ArrayList<RestDTO>();
+	private List<RestDTO> listWE = new ArrayList<RestDTO>();
+	private List<RestDTO> listJA = new ArrayList<RestDTO>();
+	private List<RestDTO> listCH = new ArrayList<RestDTO>();
+	private List<RestDTO> listETC = new ArrayList<RestDTO>();
+	
 	private int currentPage = 1;			// 현재 페이지
 	private int totalCount;					// 총 게시물의 수
 	private int blockCount = 12;			// 한 페이지의 게시물의 수
@@ -29,6 +35,28 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	//카테고리 판단
 	private String rest_localcategory;
 	private String rest_typecategory;
+	
+	//슬라이더
+	private String ko1;
+	private String ko2;
+	private String ko3;
+	private String ko4;
+	private String we1;
+	private String we2;
+	private String we3;
+	private String we4;
+	private String ch1;
+	private String ch2;
+	private String ch3;
+	private String ch4;
+	private String ja1;
+	private String ja2;
+	private String ja3;
+	private String ja4;
+	private String etc1;
+	private String etc2;
+	private String etc3;
+	private String etc4;
 
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
@@ -121,4 +149,85 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	public void setRest_typecategory(String rest_typecategory) {
 		this.rest_typecategory = rest_typecategory;
 	}
+
+	public String getKo1() {
+		return ko1;
+	}
+
+	public String getKo2() {
+		return ko2;
+	}
+
+	public String getKo3() {
+		return ko3;
+	}
+
+	public String getKo4() {
+		return ko4;
+	}
+
+	public String getWe1() {
+		return we1;
+	}
+
+	public String getWe2() {
+		return we2;
+	}
+
+	public String getWe3() {
+		return we3;
+	}
+
+	public String getWe4() {
+		return we4;
+	}
+
+	public String getCh1() {
+		return ch1;
+	}
+
+	public String getCh2() {
+		return ch2;
+	}
+
+	public String getCh3() {
+		return ch3;
+	}
+
+	public String getCh4() {
+		return ch4;
+	}
+
+	public String getJa1() {
+		return ja1;
+	}
+
+	public String getJa2() {
+		return ja2;
+	}
+
+	public String getJa3() {
+		return ja3;
+	}
+
+	public String getJa4() {
+		return ja4;
+	}
+
+	public String getEtc1() {
+		return etc1;
+	}
+
+	public String getEtc2() {
+		return etc2;
+	}
+
+	public String getEtc3() {
+		return etc3;
+	}
+
+	public String getEtc4() {
+		return etc4;
+	}
+	
 }
