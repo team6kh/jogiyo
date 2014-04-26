@@ -33,8 +33,9 @@
 							+ "옵션가"
 							+ fields
 							+ ".&nbsp&nbsp <input type='text' name='restopt_priceplus"+fields+"' value=''/> 원<br/>"
-							+ ".&nbsp&nbsp <input type='file' name='optupload"+fields+"' />"
-							+ " <a href='#' onclick='removeInput(this.parentNode)' />옵션"+fields+"제거 <br/><hr></div>";
+							+ "&nbsp&nbsp <input type='file' name='optupload"+fields+"' />"
+							+ "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
+							+"<a href='#' onclick='removeInput(this.parentNode)' />옵션"+fields+"제거 <br/><hr></div>";
 					fields += 1;
 				} else {
 					document.getElementById('stop').innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;<font color='#FF0000'>옵션은 최대 15개만 등록할 수 있습니다.</font><br/>";
@@ -200,7 +201,6 @@
 
 						<tr align="center">
 							<td align="right">
-								<input type="hidden" name="virRest_num" value="${virRest_num}" />
 								&nbsp;&nbsp;&nbsp;&nbsp;
 							</td>
 							<td align="left">
