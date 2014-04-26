@@ -87,7 +87,7 @@
           		<ul class="nav nav-sidebar">
             		<li class="active"><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
             		<li><a href="#">구매목록</a></li>
-            		<li><a href="#">내가 작성한 글</a></li>
+            		<li><a href="myAllListPage.action?session_id=${session_id}">내가 작성한 글</a></li>
           		</ul>
         	</div>
         	<!-- /.sidebar -->
