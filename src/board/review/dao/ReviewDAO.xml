@@ -81,7 +81,7 @@
 											REVIEW_CONTENT = #review_content#
 		<include refid="where_review_num" />
 	</update>
-
+    
 	<!-- 첨부파일을 위한 쿼리문 -->
 	<update id="updateReviewFile" parameterClass="reviewDTO">
 		UPDATE review_board SET REVIEW_FILE=#review_file#

@@ -20,27 +20,25 @@ import com.opensymphony.xwork2.Preparable;
 import common.ConDAOAware;
 
 public class DashSellerAction implements Action, Preparable,
-        ModelDriven<SearchConditionDTO>, ConDAOAware, SessionAware
+ModelDriven<SearchConditionDTO>, ConDAOAware, SessionAware
 {
     private String actionName = "dashSeller"; // 페이징액션과 로그인액션에서 쓰인다.
     
-    private SqlMapClient sqlMapper;
+    private SqlMapClient sqlMapper; // db 쿼리
     
-    private Map sessionMap;
-    
+    private Map sessionMap; //
     private String session_id;
     
-    private SearchConditionDTO searchDTO;
-    
-    private List<PaidDTO> paidRes = new ArrayList<PaidDTO>();
-    
-    private List<MenuDTO> menuRes = new ArrayList<MenuDTO>();
+    private SearchConditionDTO searchDTO; // db 검색 조건 값을 담은 DTO
+
+    private List<PaidDTO> paidRes = new ArrayList<PaidDTO>(); // 쿼리문 실행 후 결제 내역 결과를 담는 List
+    private List<MenuDTO> menuRes = new ArrayList<MenuDTO>(); // 쿼리문 실행 후 인기 메뉴 결과를 담는 List
     
     public String execute() throws Exception
     {
         // 판매자의 session_id 정보를 받아온다
         session_id = (String) sessionMap.get("session_id");
-        
+     
         // session_id 값이 있는지 확인한다.
         if (session_id != null)
         {
@@ -48,17 +46,17 @@ public class DashSellerAction implements Action, Preparable,
             searchDTO.setSession_id(session_id);
             
             // 날짜 검색 조건 값이 없는 경우에는 오늘로부터 하루 전 날짜로 설정
-            if ((searchDTO.getStartDay() == null) && (searchDTO.getEndDay() == null))          
+            if ((searchDTO.getStartDate() == null) && (searchDTO.getEndDate() == null))          
             {
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String date = sdf.format(cal.getTime());
                 // EndDay에 오늘 날짜 값 설정
-                searchDTO.setEndDay(sdf.parse(date));
+                searchDTO.setEndDate(sdf.parse(date));
             
                 // StartDay에 어제 날짜 값 설정 
                 cal.add(cal.DATE, -1);
-                searchDTO.setStartDay(sdf.parse(sdf.format(cal.getTime())));                
+                searchDTO.setStartDate(sdf.parse(sdf.format(cal.getTime())));                
             }
             
             // 판매자가 등록한 상품의 결제 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
@@ -124,18 +122,20 @@ public class DashSellerAction implements Action, Preparable,
         this.sessionMap = sessionMap;
         
     }
-    
-    // ModelDriven 인터페이스
+
+
     public SearchConditionDTO getModel()
     {
+       
         return searchDTO;
     }
-    
-    // preparable 인터페이스
+
     public void prepare() throws Exception
     {
-        searchDTO = new SearchConditionDTO();
-        
+      this.searchDTO =  new SearchConditionDTO();
     }
+
+   
+    
     
 }

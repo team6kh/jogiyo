@@ -19,8 +19,8 @@
 			<interceptor-ref name="params"/>			
 			<result name="success">user/seller/dashSeller.jsp</result>	
 			<result name="error" type="redirect-action">
-				<param name="actionName">loginForm</param></result>
-		
+				<param name="actionName">loginForm</param>
+            </result>
 		</action>
 		
 	</package>
