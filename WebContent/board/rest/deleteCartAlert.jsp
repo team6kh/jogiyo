@@ -30,7 +30,6 @@
 <body>
 
 	<form method="post"  onsubmit="confirm()" >
-					
 		<table class="table table-striped table-forum" align="center">
 			<tr>
 				<td align="center">
@@ -40,7 +39,5 @@
 			</tr>
 		</table>
 	</form>
-
-
 </body>
 </html>

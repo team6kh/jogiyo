@@ -5,8 +5,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 
-
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,10 +13,8 @@
 		<meta name="author" content="huks">
 		<link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
-
 		<!-- Bootstrap core CSS -->
 		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
-
 		<!-- Custom styles for this template -->
 		<link href="jogiyo.css" rel="stylesheet">
 		<link href="common/common-template.css" rel="stylesheet">
@@ -84,9 +80,6 @@
 				return true;
 			}
 
-
-
-
 			var checkobj
 
 			function agreesubmit(el) {
@@ -132,11 +125,6 @@
 
 			</table>
 
-
-
-
-
-
 			<!-- 최초 입력시에 -->
 			<s:if test="rest_num == 0">
 				<form name="insertRestForm" action="insertRest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
@@ -153,21 +141,10 @@
 					<s:hidden name="old_file2" value="%{resultClass.file_savname2}" />
 			</s:else>
 
-
-
-
-
-
 					<table width=75% border="0" cellspacing="0" cellpadding="0" align="center">
 						<tr bgcolor="#777777">
 							<td height="1" colspan="2"></td>
 						</tr>
-
-
-
-
-
-
 						<tr>
 							<td colspan="2">
 								<textarea cols=150 rows=16>
@@ -193,12 +170,9 @@
 								<input name="agreecheck" type="checkbox" onClick="agreesubmit(this)"> <b>예, 위 약관에 동의 합니다</b>
 							</td>
 						</tr>
-
-
+						
 						<tr><td colspan="2" ><hr></td></tr>
-
-
-
+						
 						<tr align="center">
 							<td align="right" ><font size=3><b>상품명</b></font>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td align="left">
@@ -314,13 +288,7 @@
 						<tr><td colspan="2" ><br/></td></tr>
 						<tr><td colspan="2" ><br/></td></tr>
 					</table>
-
-
 				</form>
-
-
-
-
 		</div>
 	</body>
 </html>

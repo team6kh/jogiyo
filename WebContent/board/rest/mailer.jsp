@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,42 +26,43 @@
 	<!-- Custom styles for this template -->
 	<link href="jogiyo.css" rel="stylesheet">
 	<link href="common/common-template.css" rel="stylesheet">
-	
+
 	<style type="text/css">
-		.progress{
-		 width: 1px;
-		 height: 14px;
-		 color: white;
-		 font-size: 12px;
-		  overflow: hidden;
-		 background-color: navy; /*바의 배경색상*/
-		 padding-left: 5px;
+	.progress {
+		width: 1px;
+		height: 14px;
+		color: white;
+		font-size: 12px;
+		overflow: hidden;
+		background-color: navy; /*바의 배경색상*/
+		padding-left: 5px;
+	}
+	</style>
+
+	<script type="text/JavaScript">
+		function textCounter(field, counter, maxlimit, linecounter) {
+			var fieldWidth = parseInt(field.offsetWidth);
+			var charcnt = field.value.length;
+
+			if (charcnt > maxlimit) {
+				field.value = field.value.substring(0, maxlimit);
+			}else {
+				var percentage = parseInt(100 - ((maxlimit - charcnt) * 100)
+						/ maxlimit);
+				document.getElementById(counter).style.width = parseInt((fieldWidth * percentage) / 100)
+						+ "px";
+				document.getElementById(counter).innerHTML = "Limit: "
+						+ percentage + "%"
+				setcolor(document.getElementById(counter), percentage,
+						"background-color");
+			}
 		}
-		</style>
-		
-		<script type="text/JavaScript">
-		
-		function textCounter(field,counter,maxlimit,linecounter) {
-		 var fieldWidth =  parseInt(field.offsetWidth);
-		 var charcnt = field.value.length;        
-		
-		 if (charcnt > maxlimit) { 
-		  field.value = field.value.substring(0, maxlimit);
-		 }
-		
-		 else { 
-		 var percentage = parseInt(100 - (( maxlimit - charcnt) * 100)/maxlimit) ;
-		 document.getElementById(counter).style.width =  parseInt((fieldWidth*percentage)/100)+"px";
-		 document.getElementById(counter).innerHTML="Limit: "+percentage+"%"
-		 setcolor(document.getElementById(counter),percentage,"background-color");
-		 }
+
+		function setcolor(obj, percentage, prop) {
+			obj.style[prop] = "rgb(80%," + (100 - percentage) + "%,"
+					+ (100 - percentage) + "%)";
 		}
-		
-		function setcolor(obj,percentage,prop){
-		 obj.style[prop] = "rgb(80%,"+(100-percentage)+"%,"+(100-percentage)+"%)";
-		}
-		
-		</script>
+	</script>
 			
 	
 	<style type="text/css">
@@ -75,7 +75,6 @@
 			padding: 0
 		}
 	</style>
-	
 	
 	<script type="text/javascript">
 		function btnSubmit() {
@@ -138,7 +137,6 @@
 	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
 	
-	
 	<!-- container -->
 	<div class="container">
 		
@@ -200,7 +198,6 @@
 	</div>
 	<!-- end of container -->
 				
-	
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

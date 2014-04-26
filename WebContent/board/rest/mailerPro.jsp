@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,14 +20,11 @@
 
 <title>JOGIYO</title>
 
-
 <!-- Bootstrap core CSS -->
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
-
 
 <style type="text/css">
 	html {
@@ -41,14 +37,10 @@
 	}
 </style>
 
-
-
-
 <body>
 	<!-- header -->
 	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
-	
 	
 	<!-- container -->
 	<div class="container">
@@ -63,7 +55,6 @@
 			
 			<font color=gray size=2>3초 뒤 매인화면으로 돌아갑니다.</font>
 		</div>
-		
 		
 	</div>
 	<!-- end of container -->

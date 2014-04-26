@@ -45,7 +45,6 @@
 		</div>		
 
 		<div class="col-md-12 well">
-
 			<div class="col-md-12">
 
 			<c:forEach var="list" items="${list}">
@@ -92,7 +91,6 @@
 
 	</div>
 	<!-- /.container -->
-
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

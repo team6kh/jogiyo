@@ -163,19 +163,17 @@
 		var rest_num = document.getElementById("rest_num").value;
 		var rest_subject = document.getElementById("rest_subject").value;
 		var session_id = document.getElementById("session_id").value;
-
 		var restopt_num = form.restopt_num.value;
 		var restopt_destFile1 = form.restopt_destFile1.value;
 		var restopt_subject = form.restopt_subject.value;
 		var restopt_priceplus = form.restopt_priceplus.value;
-
+		
 		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_num="+restopt_num+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
 		document.getElementById("cartFrame").contentWindow.location.href=url;
 		return false;
 	}
 
 	function reviewForm() {
-
 		var reviewform = document.insertReviewForm;
 		if (reviewform.style.display == "none") {
 			reviewform.style.display = "block";
@@ -253,32 +251,9 @@
 
 <!--=== Content Part ===-->
 <div class="container">	
-
-	<!-- 줄띄우기 -->
 	<br />	
-
-	<!-- Collapse : 너무 느림!
-	<div class="panel-group" id="accordion">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">지도 보기</a>
-				</h4>
-			</div>
-			<div id="collapseOne" class="panel-collapse collapse in">
-				<div class="panel-body">
-					<div id="map_canvas" class="map"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /Collapse -->	
-
-	<!-- /지도 -->
-
 	<!-- 메뉴 리스트 col-md-9-->
 	<div class="col-md-9">
-
 		<!-- 메뉴 리스트 page-header -->
 	    <div class="page-header">
 			<h2><strong>메뉴 리스트</strong> <small>장바구니에 담아 결제해주세요.</small></h2>
@@ -295,8 +270,6 @@
 				</div>
 			</c:if>	
 		</div>
-
-
 
 		<c:forEach var="list" items="${list}">
 		<form class="col-sm-4 col-md-4" id="cartForm" name="test">					
@@ -388,7 +361,6 @@
 		<!-- /장바구니 col-md-3 -->
 	</div>
 	<!-- /업소상세정보 col-md-3 -->
-
 
 	<!-- 리뷰 쓰기 col-md-12 -->
 	<div class="col-md-12">
@@ -565,16 +537,21 @@
     <script src="assets/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-29166220-1']);
-  _gaq.push(['_setDomainName', 'htmlstream.com']);
-  _gaq.push(['_trackPageview']);
+	var _gaq = _gaq || [];
+	_gaq.push([ '_setAccount', 'UA-29166220-1' ]);
+	_gaq.push([ '_setDomainName', 'htmlstream.com' ]);
+	_gaq.push([ '_trackPageview' ]);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+				: 'http://www')
+				+ '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
 </script>
 
 </body>
