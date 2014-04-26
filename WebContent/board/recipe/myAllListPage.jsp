@@ -168,7 +168,7 @@
 		<!-- 버튼 -->
 		<div class="pull-right">
 				<input type="button" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
-						<input type="button" value="새로고침" 	onClick="javascript:location.href='myListRecipe.action?session_id=<s:property value="#session.session_id" />';">
+						<input type="button" value="새로고침" 	onClick="javascript:location.href='myAllListPage.action?session_id=<s:property value="#session.session_id" />';">
 					</div>
 					<!-- /버튼 -->
 			

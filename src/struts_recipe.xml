@@ -159,7 +159,7 @@
 		<action name="myAllListPage" class="board.recipe.action.MyAllListPageAction">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
-			<result>/board/recipe/myAllListPage.jsp</result>
+			<result>/user/common/myAllListPage.jsp</result>
 		</action>
 		<!-- 레시피 끝 -->
 
