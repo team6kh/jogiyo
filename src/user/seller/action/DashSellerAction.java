@@ -1,10 +1,8 @@
 package user.seller.action;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -14,22 +12,23 @@ import board.pay.dto.SearchConditionDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.Preparable;
+
 
 import common.ConDAOAware;
 
-public class DashSellerAction implements Action, Preparable,
-ModelDriven<SearchConditionDTO>, ConDAOAware, SessionAware
+public class DashSellerAction implements Action, ConDAOAware, SessionAware
 {
     private String actionName = "dashSeller"; // 페이징액션과 로그인액션에서 쓰인다.
     
     private SqlMapClient sqlMapper; // db 쿼리
     
-    private Map sessionMap; //
+    private Map sessionMap; 
     private String session_id;
     
-    private SearchConditionDTO searchDTO; // db 검색 조건 값을 담은 DTO
+    private String startDate;
+    private String endDate;
+    
+    private SearchConditionDTO searchDTO = new SearchConditionDTO(); // db 검색 조건 값을 담을 DTO
 
     private List<PaidDTO> paidRes = new ArrayList<PaidDTO>(); // 쿼리문 실행 후 결제 내역 결과를 담는 List
     private List<MenuDTO> menuRes = new ArrayList<MenuDTO>(); // 쿼리문 실행 후 인기 메뉴 결과를 담는 List
@@ -39,24 +38,29 @@ ModelDriven<SearchConditionDTO>, ConDAOAware, SessionAware
         // 판매자의 session_id 정보를 받아온다
         session_id = (String) sessionMap.get("session_id");
      
+       
         // session_id 값이 있는지 확인한다.
         if (session_id != null)
         {
-            // 파라메터DTO에 session_id 값 세팅
+            //검색조건 DTO에 session_id 값 세팅
             searchDTO.setSession_id(session_id);
+                     
+            //검색조건 DTO에 날짜값 설정
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            searchDTO.setStartDate(getStartDate());
+            searchDTO.setEndDate(getEndDate());
             
-            // 날짜 검색 조건 값이 없는 경우에는 오늘로부터 하루 전 날짜로 설정
+            // 날짜 검색 조건 값이 없는 경우(ex. 처음으로 dashSeller.action 실행하는 경우)에는 기간 검색조건을 어제로 설정
             if ((searchDTO.getStartDate() == null) && (searchDTO.getEndDate() == null))          
             {
                 Calendar cal = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String date = sdf.format(cal.getTime());
-                // EndDay에 오늘 날짜 값 설정
-                searchDTO.setEndDate(sdf.parse(date));
-            
-                // StartDay에 어제 날짜 값 설정 
+                
+         
+                // 어제 날짜 값 설정 
                 cal.add(cal.DATE, -1);
-                searchDTO.setStartDate(sdf.parse(sdf.format(cal.getTime())));                
+                searchDTO.setEndDate(sdf.format(cal.getTime()));
+                searchDTO.setStartDate(sdf.format(cal.getTime()));    
+                
             }
             
             // 판매자가 등록한 상품의 결제 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
@@ -67,6 +71,9 @@ ModelDriven<SearchConditionDTO>, ConDAOAware, SessionAware
             
             // 판매자가 등록한 상품의 인기 메뉴 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
             menuRes = sqlMapper.queryForList("Pay.hotmenu", searchDTO);
+            
+            
+            
             }
             return SUCCESS;
         }
@@ -88,6 +95,38 @@ ModelDriven<SearchConditionDTO>, ConDAOAware, SessionAware
         return actionName;
     }
     
+    // startDate getter & setter
+    public String getStartDate()
+    {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate)
+    {
+        this.startDate = startDate;
+    }
+
+    // endDate getter & setter
+    public String getEndDate()
+    {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate)
+    {
+        this.endDate = endDate;
+    }
+    
+    
+    
+    
+    public SearchConditionDTO getSearchDTO()
+    {
+        return searchDTO;
+    }
+
+   
+
     // paidRes setter & getter
     public List<PaidDTO> getPaidRes()
     {
@@ -122,20 +161,8 @@ ModelDriven<SearchConditionDTO>, ConDAOAware, SessionAware
         this.sessionMap = sessionMap;
         
     }
-
-
-    public SearchConditionDTO getModel()
-    {
-       
-        return searchDTO;
-    }
-
-    public void prepare() throws Exception
-    {
-      this.searchDTO =  new SearchConditionDTO();
-    }
-
-   
     
     
+
+
 }

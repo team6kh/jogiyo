@@ -20,58 +20,77 @@
         <link href="common/common-template.css" rel="stylesheet">
         <link href="user/common/dashboard.css" rel="stylesheet">
        <script type="text/javascript">
-       function setToday() {
-    	   var now = new Date();
-           
-           var day = ("0" + now.getDate()).slice(-2);
-           var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-           var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
- 
-           $('#startDate').val(today);
-		
-	}
-       function setThisWeek() {
-    	   var now = new Date();
-           var oneWeekAgo = new Date();
-           oneWeekAgo.setDate(now.getDate() - 7);
-           
-           
-           var day = ("0" + oneWeekAgo.getDate()).slice(-2);
-           var month = ("0" + (oneWeekAgo.getMonth() + 1)).slice(-2);
-           
-           var week = oneWeekAgo.getFullYear() + "-" + (month) + "-" + (day);
-           
-           $('#startDate').val(week);
-	}
-       
-       function setThisMon() {
-    	   var now = new Date();
-           var oneMonthAgo = new Date();
-           oneMonthAgo.setMonth(now.getMonth() -1);
-           
-           
-           var day = ("0" + oneMonthAgo.getDate()).slice(-2);
-           var month = ("0" + (oneMonthAgo.getMonth() + 1)).slice(-2);
-           
-           var oneMon = oneMonthAgo.getFullYear() + "-" + (month) + "-" + (day);
-           
-           $('#startDate').val(oneMon);
-	}
-       function setLastSixMon() {
-    	   var now = new Date();
-           var sixMonthAgo = new Date();
-           sixMonthAgo.setMonth(now.getMonth() - 6);
-           
-           
-           var day = ("0" + sixMonthAgo.getDate()).slice(-2);
-           var month = ("0" + (sixMonthAgo.getMonth() + 1)).slice(-2);
-           
-           var sixMon = sixMonthAgo.getFullYear() + "-" + (month) + "-" + (day);
-           
-           $('#startDate').val(sixMon);
-		
-	}
+       			// 오늘 버튼 눌렀을 때 날짜 설정
+		       function setToday() {
+		    	   var now = new Date();
+		           
+		           var day = ("0" + now.getDate()).slice(-2);
+		           var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		           var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+		           $('#startDate').val(today);
+              	   $('#endDate').val(today);
+				
+				}
+       			// 이번 주 버튼 눌렀을 때 날짜 설정
+		       function setThisWeek() {
+		    	   var now = new Date();
+		    	   
+		    	   
+		           var oneWeekAgo = new Date();
+		           oneWeekAgo.setDate(now.getDate() - 7);
+		           
+		           var day = ("0" + oneWeekAgo.getDate()).slice(-2);
+		           var month = ("0" + (oneWeekAgo.getMonth() + 1)).slice(-2);
+		           
+		           var week = oneWeekAgo.getFullYear() + "-" + (month) + "-" + (day);
+		           
+		           $('#startDate').val(week);
+		           setEndDate();
+		           
+				}
+		       // 이번 달 버튼 눌렀을 때 날짜 설정
+		       function setThisMon() {
+		    	   var now = new Date();
+		           var oneMonthAgo = new Date();
+		           oneMonthAgo.setMonth(now.getMonth() -1);
+		           
+		           
+		           var day = ("0" + oneMonthAgo.getDate()).slice(-2);
+		           var month = ("0" + (oneMonthAgo.getMonth() + 1)).slice(-2);
+		           
+		           var oneMon = oneMonthAgo.getFullYear() + "-" + (month) + "-" + (day);
+		           
+		           $('#startDate').val(oneMon);
+		           setEndDate();
+				}
+		       // 최근 6개월 버튼 눌렀을 때 날짜 설정
+		       function setLastSixMon() {
+		    	   var now = new Date();
+		           var sixMonthAgo = new Date();
+		           sixMonthAgo.setMonth(now.getMonth() - 6);
+		           
+		           
+		           var day = ("0" + sixMonthAgo.getDate()).slice(-2);
+		           var month = ("0" + (sixMonthAgo.getMonth() + 1)).slice(-2);
+		           
+		           var sixMon = sixMonthAgo.getFullYear() + "-" + (month) + "-" + (day);
+		           
+		           $('#startDate').val(sixMon);
+		           setEndDate();
+				}
+		       // 마지막 날짜 값 설정
+		       function setEndDate() {
+		    	   var now = new Date();
+		           
+		           var day = ("0" + now.getDate()).slice(-2);
+		           var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		           var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+		           
+		           $('#endDate').val(today);
+				
+			}
+		       
+		      
        </script> 
          
     </head>
@@ -89,7 +108,7 @@
             
                 <div class="col-md-12" style="margin-top: 20px">
                 <!--  기간 검색조건 폼  -->
-                    <form name="search" method="post" action="dashSeller.action">
+                    <form name="searchDate" method="post" action="dashSeller.action">
                           <table class="table" >
                             <tr>
                                 <th colspan="2"> 조회일 기준으로 검색 </th>
@@ -119,7 +138,7 @@
                             <tr>
                                 <td class="text-right" colspan="2"> 
                                         <button type="reset" class="btn btn-default">지우기</button>
-                                        <button type="submit" class="btn btn-primary" onclick="validSearch()">검 색</button>
+                                        <button type="submit" class="btn btn-primary">검 색</button>
                                 </td>
                             </tr>
                             </table>
@@ -132,7 +151,8 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-hover">
                         <caption class="text-left">
-                            <font size="3px"><B>결제 내역</B></font> <font size="2px">&nbsp;&nbsp;&nbsp;어제 기준</font>       
+                            <font size="3px"><B>결제 내역</B></font>
+                            <font size="2px"> ( ${searchDTO.startDate } ~ ${searchDTO.endDate } )</font>        
                         </caption>
                         <tr>
                             <th class="text-center">결제코드</th>
@@ -156,7 +176,7 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-hover">
                         <caption class="text-left">
-                            <font size="3px"><B>많이 팔린 상품</B></font> <font size="2px">&nbsp;&nbsp;&nbsp;어제 기준</font>
+                          	<font size="3px"><B> 인기 메뉴</B></font>  <font size="2px"> ( ${searchDTO.startDate } ~ ${searchDTO.endDate } ) </font>
                         </caption>
                         <tr>
                             <th class="text-center">메뉴명</th>
@@ -175,28 +195,12 @@
             </div>
         </div>
         <!-- /.container -->
-        
-        
-       
-        
-        
+    
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript">
-         $(document).ready( function() {
-                var now = new Date();
-             
-                var day = ("0" + now.getDate()).slice(-2);
-                var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-                var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-				  //$('#startDate').val(today);
-                //$('#endDate').val(today);
-         });
-        </script>
-        
+                
     </body>
 </html>

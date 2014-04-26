@@ -6,8 +6,10 @@ public class SearchConditionDTO
 {
     private String session_id; // 판매자의 세션id
     private int rest_num; // 식당 코드
-    private Date startDate; // 검색 날짜 조건
-    private Date endDate; // 검색 날짜 조건
+    private String startDate; // 기간 검색조건 : 시작 날짜 
+    private String endDate; // 기간 검색조건 : 마지막 날짜 
+    
+    
     public String getSession_id()
     {
         return session_id;
@@ -24,23 +26,23 @@ public class SearchConditionDTO
     {
         this.rest_num = rest_num;
     }
-    public Date getStartDate()
+    public String getStartDate()
     {
         return startDate;
     }
-    public void setStartDate(Date startDate)
+    public void setStartDate(String startDate)
     {
         this.startDate = startDate;
     }
-    public Date getEndDate()
+    public String getEndDate()
     {
         return endDate;
     }
-    public void setEndDate(Date endDate)
+    public void setEndDate(String endDate)
     {
         this.endDate = endDate;
     }
-  
+    
      
     
 }

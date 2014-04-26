@@ -4,9 +4,13 @@
 
 <sqlMap namespace="Pay">
 
+	<!--  결제내역 DTO -->
 	<typeAlias alias="paidDTO" type="board.pay.dto.PaidDTO"/>
+	<!--  인기메뉴 DTO -->
 	<typeAlias alias="menuDTO" type="board.pay.dto.MenuDTO"/>
+	<!--  검색 조건 파라미터 값 DTO -->
 	<typeAlias alias="searchDTO" type="board.pay.dto.SearchConditionDTO"/>
+      
       
       <resultMap class="paidDTO" id="paidRes">
 	      <result property="rest_num" column="rest_num"/>
@@ -37,7 +41,7 @@
     	where rest_writer_id = #session_id# and rest_num=paid_rest_num
     </sql>
     
-    <!-- paid_board에서 일정한 기간의 결과값이 필요한 경우 : and 등의 연결문 붙여서 사용할 것-->
+    <!-- paid_board에서 일정한 기간의 결과값이 필요한 경우 : where, and, or등의 구문을 붙여서 사용할 것-->
     <sql id="paidDate">
         (paid_reg_date <![CDATA[>=]]> #startDate# and paid_reg_date <![CDATA[<=]]> #endDate#) 
     </sql>
@@ -46,9 +50,17 @@
     <!-- 해당 식당의 결제 내역 :  식당번호/판매자id/결제번호/식당명/메뉴명/메뉴가격/구매자id/주문결제일 값을 뽑아낸다.  -->
     <!-- startDay와 endDay 값을 넘겨 받아 일정 기간 내의 결제 내역만 뽑아낼 수 있다.  -->
     <select id="payList" resultMap="paidRes" parameterClass="searchDTO">
-        SELECT r.rest_num, r.rest_writer_id, p.paid_num, p.paid_rest_subject,p.paid_restopt_subject,p.paid_restopt_priceplus,p.session_id,p.paid_reg_date 
+        SELECT 
+			        	r.rest_num, 
+			        	r.rest_writer_id, 
+			        	p.paid_num, 
+			        	p.paid_rest_subject,
+			        	p.paid_restopt_subject,
+			        	p.paid_restopt_priceplus,
+			        	p.session_id,
+			        	p.paid_reg_date 
         <include refid="fromRPBoard"/> 
-        <include refid="whereRest"/> and <include refid="paidDate"/>
+        <include refid="whereRest"/> AND <include refid="paidDate"/>
         ORDER BY paid_reg_date DESC  	
     </select>
     
@@ -56,13 +68,19 @@
     <!-- startDay와 endDay 값을 넘겨 받아 일정 기간 내의 결과를 뽑아낼 수 있다.  -->
    <select id="hotmenu" resultMap="menuRes" parameterClass="searchDTO">          
         SELECT * FROM
-        (SELECT paid_restopt_subject, count(*) as paid_sales_volume, sum(paid_restopt_priceplus) as paid_sales_price, rownum as paid_rownum
-        FROM paid_board WHERE paid_rest_num = #rest_num# AND <include refid="paidDate"/> GROUP BY paid_restopt_subject, rownum ORDER BY paid_sales_volume DESC) 
-        WHERE paid_rownum <![CDATA[>=]]> 1  AND paid_rownum <![CDATA[<=]]> 5
-        
+  				(SELECT 
+								paid_restopt_subject, 
+								count(*) as paid_sales_volume, 
+								sum(paid_restopt_priceplus) as paid_sales_price, 
+								rownum as paid_rownum
+  										
+   				FROM 	paid_board 	
+   				WHERE 	paid_rest_num = #rest_num# AND <include refid="paidDate"/> 
+   				GROUP BY  paid_restopt_subject, rownum 
+   				ORDER BY paid_sales_volume DESC) 
+							
+        WHERE  paid_rownum <![CDATA[>=]]> 1  AND paid_rownum <![CDATA[<=]]> 5
+        		
    </select>
     
-    
-  
-         
 </sqlMap>
