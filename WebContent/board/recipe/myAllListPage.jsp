@@ -113,7 +113,7 @@
 					<td><strong><a href="javascript:return false;" onClick="recipe_recommandarray()">추천수</strong></td>
 				</tr>
 				
-				<s:iterator value="list" status="stat">
+				<s:iterator value="recipelist" status="stat">
 
 					<s:url id="viewURL" action="readRecipe">
 						<s:param name="recipe_num">
@@ -143,7 +143,7 @@
 					
 				</s:iterator>
 
-				<s:if test="list.size() <= 0">
+				<s:if test="recipelist.size() <= 0">
 
 					<tr bgcolor="#FFFFFF" align="center">
 						<td colspan="10">등록된 게시물이 없습니다.</td>
@@ -160,7 +160,7 @@
 				<!-- 페이징 -->
 				<div class="text-center">
 			<ul class="pagination pagination-sm">
-				<s:property value="pagingHtml" escape="false" />
+				<s:property value="recipepagingHtml" escape="false" />
 			</ul>
 		</div>
 		<!-- /페이징 -->
@@ -237,7 +237,7 @@
 			</table>
 			
 			<div class="col-md-12">
-			<h3>글목록</h3>
+			<h3>My Q&A 목록</h3>
 		</div>
 		<form name="searchForm" id="searchForm">
 		<select name="qna_category" id="qna_category" onchange="fn_search();">
@@ -263,34 +263,34 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="list" items="${list }">
+					<c:forEach var="qnalist" items="${qnalist }">
 						<tr>
 							<td class="text-center">
-								<c:out value="${list.qna_num }" />
+								<c:out value="${qnalist.qna_num }" />
 							</td>
 						<td class="text-center">
 							<c:choose>
-								<c:when test="${list.qna_category eq '01' }">회원가입</c:when>
-								<c:when test="${list.qna_category eq '02' }">바로결제</c:when>
-								<c:when test="${list.qna_category eq '03' }">리뷰</c:when>
-								<c:when test="${list.qna_category eq '04' }">이용문의</c:when>
-								<c:when test="${list.qna_category eq '05' }">광고문의</c:when>
-								<c:when test="${list.qna_category eq '06' }">기타</c:when>
+								<c:when test="${qnalist.qna_category eq '01' }">회원가입</c:when>
+								<c:when test="${qnalist.qna_category eq '02' }">바로결제</c:when>
+								<c:when test="${qnalist.qna_category eq '03' }">리뷰</c:when>
+								<c:when test="${qnalist.qna_category eq '04' }">이용문의</c:when>
+								<c:when test="${qnalist.qna_category eq '05' }">광고문의</c:when>
+								<c:when test="${qnalist.qna_category eq '06' }">기타</c:when>
 								<c:otherwise>전체</c:otherwise>
 							</c:choose>
 						</td>
 							<td class="text-left">
-								<a href="detailQna.action?qna_num=${list.qna_num }">
-								<c:out value="${list.qna_subject }" />
+								<a href="detailQna.action?qna_num=${qnalist.qna_num }">
+								<c:out value="${qnalist.qna_subject }" />
 								</a>
 							</td>
-							<td class="text-center"><c:out value="${list.qna_reg_date }" /></td>
-							<td class="text-center"><c:out value="${list.qna_readcount }" /></td>
+							<td class="text-center"><c:out value="${qnalist.qna_reg_date }" /></td>
+							<td class="text-center"><c:out value="${qnalist.qna_readcount }" /></td>
 
 
 						</tr>
 					</c:forEach>
-					<c:if test="${empty list}">
+					<c:if test="${empty qnalist}">
 						<tr>
 							<td colspan="5">등록된 게시물이 없습니다.</td>
 						</tr>
@@ -300,7 +300,7 @@
 
 			<div class="text-center">
 				<ul class="pagination pagination-sm">
-					<s:property value="pagingHtml" escape="false" />
+					<s:property value="qnapagingHtml" escape="false" />
 				</ul>
 			</div>
 

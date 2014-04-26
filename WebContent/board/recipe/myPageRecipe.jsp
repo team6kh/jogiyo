@@ -39,7 +39,7 @@
 	<h2>마이페이지</h2>
 	<ul>
 		<li><a href="mypageFormRecipe.action">구매목록</a></li>
-		<li><a href="/board/recipe/myAllListPage.jsp">내가 작성한 글</a></li>
+		<li><a href="myAllListPage.action?session_id=<s:property value="#session.session_id"/>">내가 작성한 글</a></li>
 		<li><a href="listQna.action">상품 Q&A</a></li>
 		<li><a href="">1:1 문의</a></li>
 		<li><a href="">회원정보수정</a></li>
