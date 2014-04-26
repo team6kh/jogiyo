@@ -2,14 +2,11 @@ package board.rest.action;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import board.rest.dto.RestDTO;
 import board.restopt.dto.RestoptDTO;
 import board.review.action.FileUpload;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
-
 import common.ConDAOAware;
 import common.Constants;
 
@@ -18,10 +15,8 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 	public static SqlMapClient sqlMapper;
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
-	
 	private RestoptDTO paramClass1 = new RestoptDTO();
 	private List<RestoptDTO> list = new ArrayList<RestoptDTO>();
-
 	private int rest_num;
 	private String session_id;
 	
@@ -31,12 +26,9 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 	}
 	
 	public String execute() throws Exception {
-		
 		FileUpload fileUpload = new FileUpload();
 		//상품 매인,컨텐트 사진 삭제
 		resultClass = (RestDTO)sqlMapper.queryForObject("Rest.selectRestOne", getRest_num());
-		System.out.println("이거 콘솔 값 쫌 띄우자 : "+resultClass.getRest_main_savname());
-		
 		String main_fileName = resultClass.getRest_main_savname();
 		String content_fileName = resultClass.getRest_content_savname();
 		String main_fileUploadPath = Constants.COMMON_FILE_PATH + Constants.REST_MAIN_FILE_PATH;
@@ -48,8 +40,6 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 		paramClass.setRest_num(getRest_num());
 		paramClass.setRest_writer_id(getSession_id());
 		sqlMapper.delete("Rest.deleteRestBoard", paramClass);
-		
-		
 		
 		//옵션사진 제거
 		//옵션을 불러옴
@@ -66,7 +56,6 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 		//옵션레코드 제거
 		sqlMapper.delete("Rest.deleteRestoptBoard", getRest_num());
 		
-		
 		//카트레코드 제거
 		sqlMapper.delete("Rest.deleteCartBoard", paramClass);
 		
@@ -75,7 +64,6 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 		
 		return SUCCESS; // 액션-> listRest.jsp
 	}
-
 
 	
 	public int getRest_num() {
@@ -90,7 +78,5 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 	public void setSession_id(String session_id) {
 		this.session_id = session_id;
 	}
-	
-	
 	
 }

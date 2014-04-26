@@ -11,7 +11,6 @@ import javax.mail.internet.*;
 import java.util.*;
 import javax.mail.*;
 
-
 public class SendMailAction  implements Action, ConDAOAware {
 	private SqlMapClient sqlMapper;
 	private String rest_writer_email;
@@ -20,7 +19,6 @@ public class SendMailAction  implements Action, ConDAOAware {
 	private int currentPage;
 	private int  rest_num;
 	private String session_id;
-	
 	
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
@@ -31,14 +29,13 @@ public class SendMailAction  implements Action, ConDAOAware {
 	}
 	
 	public String execute() throws Exception {
-		
 		String host = "smtp.gmail.com";//smtp 서버
 	    String subject = getSession_id()+"이 문의하신 글입니다.";
 	    String from =  "team6kh@gmail.com";//문의하는 회원
 	    String to1 =getRest_writer_email(); //받는 사람
 	    String img_main = "http://blogfiles.naver.net/20140425_61/ljw7426_1398389790756PQfsf_PNG/%C1%A6%B8%F1.png";
 	    String putter = "http://blogfiles.naver.net/20140425_268/ljw7426_1398389791006NHcfO_PNG/%C7%AA%C5%CD.png";
-	    
+	    //메일 내용 부분
 	    String body = "<img src='"+img_main+"' /> <br/>"
 								+"<br/><br/>"
 								+ "<b>문의 내용</b><br/>"+getContent()+"<br/>"
@@ -51,7 +48,6 @@ public class SendMailAction  implements Action, ConDAOAware {
 	    try{
 	           // 프로퍼티 값 인스턴스 생성과 기본세션(SMTP 서버 호스트 지정)
 			   Properties props = new Properties();
-			   
 			   // G-Mail SMTP 사용시
 			   props.put("mail.smtp.starttls.enable","true");
 			   props.put("mail.transport.protocol", "smtp");
@@ -60,7 +56,7 @@ public class SendMailAction  implements Action, ConDAOAware {
 			   props.put("mail.smtp.port", "465");
 			   // props.put("mail.smtp.user", from);
 			   props.put("mail.smtp.auth", "true");
-			   
+			   // 세션생성
 			   Session mailSession = Session.getInstance(props,
 			 		  new javax.mail.Authenticator() {
 			 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -88,16 +84,12 @@ public class SendMailAction  implements Action, ConDAOAware {
 		return SUCCESS; //mailerPro.jsp
 	}
 
-
-	
 	public String getRest_writer_email() {
 		return rest_writer_email;
 	}
 	public void setRest_writer_email(String rest_writer_email) {
 		this.rest_writer_email = rest_writer_email;
 	}
-
-
 	public String getEmail() {
 		return email;
 	}
@@ -110,16 +102,12 @@ public class SendMailAction  implements Action, ConDAOAware {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-
 	public String getSession_id() {
 		return session_id;
 	}
 	public void setSession_id(String session_id) {
 		this.session_id = session_id;
 	}
-
-
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -132,5 +120,4 @@ public class SendMailAction  implements Action, ConDAOAware {
 	public void setRest_num(int rest_num) {
 		this.rest_num = rest_num;
 	}
-	
 }

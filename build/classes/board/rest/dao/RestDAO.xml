@@ -8,7 +8,6 @@
 	<typeAlias alias="CooponDTO" type="table.coopon.dto.CooponDTO" />
 	<typeAlias alias="PayDTO" type="board.pay.dto.payDTO" />
 	<typeAlias alias="reviewDTO" type="board.review.dto.ReviewDTO" />
-	
 
 	<!-- 리절트 맵 정의 -->
 	<resultMap id="RestBoard" class="RestDTO">
@@ -61,7 +60,6 @@
 		<result property="cpn_num" column="cpn_num" />
 	</resultMap>
 	
-	
 	<resultMap id="PaidBoard" class="PayDTO">
 		<result property="paid_num" column="paid_num" />
 		<result property="paid_rest_num" column="paid_rest_num" />
@@ -89,10 +87,6 @@
 	</resultMap>
 	
 	
-	
-
-
-
 	<!-- 공통정의 -->
 	<sql id="select-all">
 		select * from Rest_board
@@ -101,9 +95,6 @@
 	<sql id="where-num">
 		where rest_num = #rest_num#
 	</sql>
-
-
-
 
 
 	<!-- insert -->
@@ -138,12 +129,10 @@
 		Insert into coopon_table (cpn_num) values (#cpn_num#)
 	</insert>
 	
-	
 	<insert id="insertPaidBoard" parameterClass="PayDTO">
 		Insert into paid_board (paid_num, paid_rest_num, paid_rest_subject, paid_restopt_num, paid_restopt_subject, paid_restopt_priceplus, paid_restopt_destFile1, paid_cpn, paid_cpn_used, session_id, paid_reg_date) values (paid_seq_num.NEXTVAL, #paid_rest_num#, #paid_rest_subject#, #paid_restopt_num#, #paid_restopt_subject#, #paid_restopt_priceplus#, #paid_restopt_destFile1#, #paid_cpn#, #paid_cpn_used#, #session_id#, #paid_reg_date#)
 	</insert>
 	
-
 
 
 	<!-- select -->
@@ -167,31 +156,26 @@
 		SELECT count(*) FROM paid_board
 	</select>
 
-	<!-- 카테고리별 글 select -->
 	<select id="selectAll" resultMap="RestBoard" parameterClass="int">
 		<include refid="select-all" />
 		ORDER BY rest_num DESC
 	</select>
 	
-	<!-- 지역카테고리 전체 select -->
 	<select id="selectLocalAll" resultMap="RestBoard" parameterClass="int">
 		select * from rest_board where rest_localcategory like '1%'
 		ORDER BY rest_num DESC
 	</select>
 	
-	<!-- 종류카테고리 글 select -->
 	<select id="selectTypeAll" resultMap="RestBoard" parameterClass="int">
 		select * from rest_board where rest_typecategory like '2%'
 		ORDER BY rest_num DESC
 	</select>
 	
-	<!-- 지역 카테고리 글 select -->
 	<select id="selectLocal" resultMap="RestBoard" parameterClass="RestDTO">
 		select * from rest_board
 		where rest_localcategory=#rest_localcategory#
 	</select>
 	
-	<!-- 종류 카테고리 글 select -->
 	<select id="selectType" resultMap="RestBoard" parameterClass="RestDTO">
 		select * from rest_board
 		where rest_typecategory=#rest_typecategory#
@@ -228,8 +212,6 @@
 
 
 
-
-
 	<!-- update -->
 	<update id="updateRestone" parameterClass="RestDTO">
 		UPDATE Rest_board SET rest_subject = #rest_subject#,
@@ -237,7 +219,6 @@
 		rest_typecategory = #rest_typecategory#
 		<include refid="where-num" />
 	</update>
-	
 	
 	<update id="updateFile" parameterClass="RestDTO">
 		UPDATE Rest_board SET rest_destFile1 = #rest_destFile1#,
@@ -258,12 +239,10 @@
 		where restopt_rest_num=#restopt_rest_num# and restopt_subject=#restopt_subject#
 	</update>
 	
-	
 	<update id="updateRest_readcount" parameterClass="RestDTO">
 		UPDATE Rest_board SET rest_readcount = rest_readcount + 1
 		<include refid="where-num" />
 	</update>
-
 
 
 
@@ -294,7 +273,6 @@
 		where restopt_rest_num=#restopt_rest_num# and restopt_subject=#restopt_subject#
 	</delete>
 	
-	
 	<delete id="deleteCartBoard" parameterClass="RestDTO">
 		DELETE FROM Cart_board
 		where cart_rest_num=#rest_num# and session_id=#rest_writer_id#	
@@ -304,8 +282,6 @@
 		DELETE FROM review_board
 		where review_rest=#rest_num#	
 	</delete>
-	
-	
 	
 
 </sqlMap>

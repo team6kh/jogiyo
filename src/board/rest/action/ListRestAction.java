@@ -2,12 +2,9 @@ package board.rest.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
-
 import common.ConDAOAware;
 import common.action.PagingAction;
-
 import java.util.*;
-
 import board.rest.dto.RestDTO;
 
 public class ListRestAction extends ActionSupport implements ConDAOAware {
@@ -23,21 +20,18 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	private int blockPage = 5;				// 한 화면에 보여줄 페이지 수
 	private String pagingHtml;				// 페이징을 구현한 HTML
 	private PagingAction page;				// 페이징 클래스
-	
 	private String actionName = "listRest";	// 페이징액션과 로그인액션에서 쓰인다
 	
 	//카테고리 판단
 	private String rest_localcategory;
 	private String rest_typecategory;
-	
 
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
 	}	
 
-	// 게시판 LIST 액션.
 	public String execute() throws Exception {
-		
+		//카테고리별 분기
 		if(rest_localcategory==null&&rest_typecategory==null){
 			list = sqlMapper.queryForList("Rest.selectAll");
 		}else if(rest_localcategory.equals("1")&&rest_typecategory.equals("1")){//지역카테고리 전체글
@@ -108,10 +102,9 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	public void setPage(PagingAction page) {
 		this.page = page;
 	}
-	public String getActionName() { // 일단 get만...
+	public String getActionName() { 
 		return actionName;
 	}
-
 	public String getRest_localcategory() {
 		return rest_localcategory;
 	}
@@ -124,6 +117,4 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	public void setRest_typecategory(String rest_typecategory) {
 		this.rest_typecategory = rest_typecategory;
 	}
-	
-	
 }
