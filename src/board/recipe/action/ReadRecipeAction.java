@@ -37,13 +37,27 @@ public class ReadRecipeAction extends ActionSupport implements ConDAOAware {
 	// 게시판 상세보기 액션.
 	public String execute() throws Exception {
 
-		// 해당 글의 조회수 +1.
 		paramClass.setRecipe_num(getRecipe_num());
-		sqlMapper.update("Recipe.updateReadcount", paramClass);
+		paramRC.setRecipeCommand_num(getRecipe_num());
+		paramRC.setRecipeReadCount_writer(getSession_id());
+		
+        
+		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject(
+				"Recipe.readcountID", paramRC);
+
+		if (session_id != null && resultRC == null) {
+			// 해당 글의 조회수 +1.
+			sqlMapper.insert("Recipe.insertRecipeReadCount", paramRC);
+			sqlMapper.update("Recipe.updateReadcount", paramClass);
+
+		} else {
+
+		}
 
 		// 해당 번호의 글을 가져온다.
 		resultClass = (RecipeDTO) sqlMapper.queryForObject("Recipe.selectOne",
 				getRecipe_num());
+
 		pagingHtml.append(resultClass.getRecipe_content());
 
 		return SUCCESS;

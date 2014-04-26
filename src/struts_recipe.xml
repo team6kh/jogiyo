@@ -154,6 +154,13 @@
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
+
+		<!-- myAllListPage 액션 -->
+		<action name="myAllListPage" class="board.recipe.action.MyAllListPageAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/user/common/myAllListPage.jsp</result>
+		</action>
 		<!-- 레시피 끝 -->
 
 
