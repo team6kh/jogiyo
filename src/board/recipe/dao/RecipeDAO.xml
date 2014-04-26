@@ -102,6 +102,7 @@
 		)
 	</insert>
 	
+	<!-- insertRecipeCommand 쿼리정의 -->
 	<insert id="insertRecipeCommand" parameterClass="RecipeCommandDTO">
 
 		INSERT INTO
@@ -114,6 +115,21 @@
 		#recipeCommand_writer#
 		)
 	</insert>
+	
+	<!-- insertRecipeReadCount 쿼리정의 -->
+	<insert id="insertRecipeReadCount" parameterClass="RecipeCommandDTO">
+
+		INSERT INTO
+		RECIPE_COMMAND (
+		RECIPECOMMAND_NUM,
+		RECIPEREADCOUNT_WRITER
+		)
+		VALUES
+		(#recipeCommand_num#,
+		#recipeReadCount_writer#
+		)
+	</insert>
+	
 
 
 	<!-- update 쿼리문 정의 -->
@@ -156,6 +172,7 @@
 	<!-- myListRecipe 쿼리문 정의 -->
 	<select id="myListRecipe" resultMap="RecipeRes" parameterClass="java.lang.String">
 		SELECT * FROM RECIPE_BOARD WHERE RECIPE_MEMBERWRITER = #recipe_memberwriter#
+		ORDER BY recipe_num DESC
 	</select>
 
 
@@ -216,6 +233,9 @@
 	<select id="commandID" resultMap ="RecipeCommandRes" parameterClass="RecipeCommandDTO" >
 		SELECT * FROM recipe_command where recipeCommand_num = #recipeCommand_num# and recipeCommand_writer=#recipeCommand_writer#
 	</select>
-	
+	<!-- readcountID 쿼리문 정의-->
+	<select id="readcountID" resultMap ="RecipeCommandRes" parameterClass="RecipeCommandDTO" >
+		SELECT * FROM recipe_command where recipeCommand_num = #recipeCommand_num# and recipeReadCount_writer=#recipeReadCount_writer#
+	</select>
 	
 </sqlMap>
