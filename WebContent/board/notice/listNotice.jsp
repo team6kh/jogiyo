@@ -42,15 +42,15 @@
 				<div class="col-md-12">
 					<div class="col-md-4" align="left">
 						<b>공지사항</b><br/>
-						<font color=red>4</font>개의 글
+						<font color=red>${notice}</font>개의 글
 					</div>
 					<div class="col-md-4" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<b>이벤트</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<font color=red>3</font>개의 글
+						<font color=red>${event}</font>개의 글
 					</div>
 					<div class="col-md-4" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<b>스마트팁</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<font color=red>3</font>개의 글
+						<font color=red>${smartTip}</font>개의 글
 					</div>
 				</div>
 			</div>

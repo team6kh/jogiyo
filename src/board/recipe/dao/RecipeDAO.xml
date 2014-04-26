@@ -152,10 +152,9 @@
 		<include refid="where-recipe_num" />
 	</update>
 
+	<!-- 이미지 업로드 -->
 	<update id="updateFile" parameterClass="RecipeDTO">
-		UPDATE RECIPE_BOARD SET RECIPE_ORGFILE = #recipe_orgfile#
-		,RECIPE_FILE
-		= #recipe_file#
+		UPDATE RECIPE_BOARD SET RECIPE_FILE = #recipe_file#
 		<include refid="where-recipe_num" />
 	</update>
 

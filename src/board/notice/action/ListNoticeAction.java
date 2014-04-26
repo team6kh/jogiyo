@@ -26,8 +26,11 @@ public class ListNoticeAction extends ActionSupport implements ConDAOAware,	Prep
 	private int blockPage = 5; 	// 한 화면에 보여줄 페이지 수
 	private String pagingHtml; 	//페이징을 구현한 HTML
 	private PagingAction page; 	// 페이징 클래스
-	
 	private String actionName = "listNotice"; //페이징액션과 로그인액션에서 쓰인다
+	
+	int notice=0;
+	int event=0;
+	int smartTip=0;
 
 	// 게시판 LIST 액션
 	public String execute() throws Exception {
@@ -48,6 +51,17 @@ public class ListNoticeAction extends ActionSupport implements ConDAOAware,	Prep
 
 		// 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
 		list = list.subList(page.getStartCount(), lastCount);
+		
+		
+		for(int i=0; i<list.size(); i++){
+			if(list.get(i).getNotice_headtag().equals("[공지]")){
+				notice += 1;
+			}else if(list.get(i).getNotice_headtag().equals("[이벤트]")){
+				event += 1;
+			}else{
+				smartTip += 1;
+			}
+		}
 
 		return SUCCESS;
 	}
@@ -119,6 +133,18 @@ public class ListNoticeAction extends ActionSupport implements ConDAOAware,	Prep
 
 	public void prepare() throws Exception {
 		noticeDTO = new NoticeDTO();
+	}
+
+	public int getNotice() {
+		return notice;
+	}
+
+	public int getEvent() {
+		return event;
+	}
+
+	public int getSmartTip() {
+		return smartTip;
 	}
 	
 }

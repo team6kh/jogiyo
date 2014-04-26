@@ -74,9 +74,6 @@
 	<!-- end of header -->
 
 
-	<img src = "/jogiyo/board/se2/recipe_upload/2014_04_26_125402.jpg"/>
-
-	
 	<!-- container -->
 	<div class="container">
 	
@@ -88,8 +85,6 @@
 				<input type="button" class="btn btn-warning" value="게시판 사용 지침" onClick="recipeboardrules()"><br/>
 			</div>
 		</div>	
-		
-		
 		
 		<div class="col-md-12">
 			<div class="pull-right">
@@ -137,12 +132,9 @@
 						<td align="center">&nbsp;<s:a href="%{viewURL}">
 								<s:property value="recipe_subject" />
 							</s:a></td>
-							
 						<td align="center">
-							<img src = "<s:property value="recipe_file" />" />
 							<s:property value="recipe_foodsubject" />
 						</td>
-						
 						<td align="center"><s:property value="recipe_writer" /></td>
 						<td align="center"><s:property value="recipe_reg_date" /></td>
 						<td align="center"><s:property value="recipe_time" /></td>

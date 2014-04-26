@@ -2,9 +2,11 @@ package board.recipe.action;
 
 
 import java.util.*;
+
 import board.recipe.dto.RecipeDTO;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
+
 import common.ConDAOAware;
 import common.action.PagingAction;
 
@@ -15,6 +17,7 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 	public static SqlMapClient sqlMapper;  //SqlMapClient API를 사용하기 위한 sqlMapper 객체.
 	
 	private List<RecipeDTO> list = new ArrayList<RecipeDTO>();
+	private RecipeDTO paramClass = new RecipeDTO();
 	
 	private int currentPage = 1; //현재 페이지
 	private int totalCount;      //총 게시물의 수
@@ -35,31 +38,6 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 		totalCount = list.size(); //전체 글 갯수를 구한다.
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
 		pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.
-		
-		
-		/*//String Test for Tech
-		String[] ref = new String[list.size()];
-		
-		for(int i = 0; i<list.size(); i++){
-			
-			String content = list.get(i).getRecipe_content();
-			Boolean a =content.startsWith("src=");
-			
-			if(a==true){
-				int temp1 = content.indexOf("src=");
-				int temp2 = content.indexOf("><br>");
-				int start = temp1+5;
-				int end = temp2-1;
-				
-				ref[i] = content.substring(start, end);
-			}else{
-				ref[i] = "null";
-			}
-		}*/
-		//end of Test
-		
-		//각 인덱스별로 update.
-		
 		
 		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
 				int lastCount = totalCount;
