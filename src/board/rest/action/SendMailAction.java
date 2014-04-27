@@ -60,7 +60,7 @@ public class SendMailAction  implements Action, ConDAOAware {
 			   Session mailSession = Session.getInstance(props,
 			 		  new javax.mail.Authenticator() {
 			 			protected PasswordAuthentication getPasswordAuthentication() {
-			 				return new PasswordAuthentication("nathan2yo@gmail.com", "wodnr6435");
+			 				return new PasswordAuthentication(" kh.team6@gmail.com", "dkagh1234");
 			 			}
 			 		  });
 			   
