@@ -19,7 +19,6 @@
 	
 	<title>JOGIYO</title>
 	
-	
 	<!-- Bootstrap core CSS -->
 	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
 	
