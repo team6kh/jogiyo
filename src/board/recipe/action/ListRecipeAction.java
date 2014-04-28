@@ -44,15 +44,16 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 			
 			for(int i = 0; i<list.size(); i++){
 				String content = list.get(i).getRecipe_content();
-				Boolean isInclude =content.startsWith("src=");
+				int isInclude =content.indexOf("src=");
 				
-				if(isInclude==true){
+				if(isInclude>-1){
 					int temp1 = content.indexOf("src=");
-					int temp2 = content.indexOf("><br>");
+					int temp2 = content.indexOf("\">");
 					int start = temp1+5;
-					int end = temp2-1;
+					int end = temp2;
 					
-					imgPath[i] = content.substring(start, end);
+					
+					imgPath[i] = "C:/team6/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/jogiyo"+content.substring(start, end);
 					//update
 					paramClass.setRecipe_num(list.get(i).getRecipe_num());
 					paramClass.setRecipe_file(imgPath[i]);

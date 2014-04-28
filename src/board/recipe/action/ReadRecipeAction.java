@@ -44,21 +44,28 @@ public class ReadRecipeAction extends ActionSupport implements ConDAOAware {
         
 		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject(
 				"Recipe.readcountID", paramRC);
+		System.out.println("session_id:"+session_id);
+		System.out.println("paramClass.readCount(befor):"+resultClass.getRecipe_readcount());
 
-		if (session_id != null && resultRC == null) {
+		if (!(session_id.equals("")) && resultRC == null) {
 			// 해당 글의 조회수 +1.
 			sqlMapper.insert("Recipe.insertRecipeReadCount", paramRC);
 			sqlMapper.update("Recipe.updateReadcount", paramClass);
+			System.out.println("paramClass.readCount(session_id !=null):"+resultClass.getRecipe_readcount());
 
-		} else {
+		} else if(session_id.equals("")) {
+			System.out.println("paramClass.readCount(session_id null):"+resultClass.getRecipe_readcount());
 
 		}
+		
+		System.out.println("paramClass.readCount(after):"+resultClass.getRecipe_readcount());
 
 		// 해당 번호의 글을 가져온다.
 		resultClass = (RecipeDTO) sqlMapper.queryForObject("Recipe.selectOne",
 				getRecipe_num());
 
 		pagingHtml.append(resultClass.getRecipe_content());
+		System.out.println("paramClass.readCount(end):"+resultClass.getRecipe_readcount());
 
 		return SUCCESS;
 	}
