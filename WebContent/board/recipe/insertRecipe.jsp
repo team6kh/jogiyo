@@ -264,6 +264,7 @@ function submitContents(elClickedObj){
 // textArea에 이미지 첨부
 function pasteHTML(filepath){
     var sHTML = '<img src="<%=request.getContextPath()%>/board/se2/recipe_upload/'+filepath+'">';
+    System.out.printl(sHTML);
     oEditors.getById["recipe_content"].exec("PASTE_HTML", [sHTML]); 
 }
 	
