@@ -152,11 +152,12 @@
 		<include refid="where-recipe_num" />
 	</update>
 
-	<!-- 이미지 업로드 -->
+	<!-- 이미지 업로드 by 재욱 -->
 	<update id="updateFile" parameterClass="RecipeDTO">
 		UPDATE RECIPE_BOARD SET RECIPE_FILE = #recipe_file#
 		<include refid="where-recipe_num" />
 	</update>
+	<!-- made by 재욱 -->
 
 	<update id="updateReadcount" parameterClass="RecipeDTO">
 		UPDATE RECIPE_BOARD SET recipe_readcount = recipe_readcount + 1

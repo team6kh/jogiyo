@@ -39,6 +39,34 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
 		pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.
 		
+		//get ImgPath by 재욱
+			String[] imgPath = new String[list.size()];
+			
+			for(int i = 0; i<list.size(); i++){
+				String content = list.get(i).getRecipe_content();
+				Boolean isInclude =content.startsWith("src=");
+				
+				if(isInclude==true){
+					int temp1 = content.indexOf("src=");
+					int temp2 = content.indexOf("><br>");
+					int start = temp1+5;
+					int end = temp2-1;
+					
+					imgPath[i] = content.substring(start, end);
+					//update
+					paramClass.setRecipe_num(list.get(i).getRecipe_num());
+					paramClass.setRecipe_file(imgPath[i]);
+					sqlMapper.update("Recipe.updateFile", paramClass);
+				}else{
+					imgPath[i] = "no Image in content";
+					//update
+					paramClass.setRecipe_num(list.get(i).getRecipe_num());
+					paramClass.setRecipe_file(imgPath[i]);
+					sqlMapper.update("Recipe.updateFile", paramClass);
+				}
+			}
+		//the end
+		
 		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
 				int lastCount = totalCount;
 

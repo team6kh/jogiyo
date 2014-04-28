@@ -102,6 +102,7 @@
 				<tr align="center" bgcolor="">
 					<td><strong>번호</strong></td>
 					<td><strong>종류</strong></td>
+					<td><strong>미리보기</strong></td>
 					<td><strong>제목</strong></td>
 					<td><strong>요리명</strong></td>
 					<td><strong>작성자</strong></td>
@@ -129,6 +130,7 @@
 					<tr bgcolor="#FFFFFF" align="center">
 						<td><s:property value="recipe_num" /></td>
 						<td align="center">&nbsp;<s:property value="recipe_foodkind" /></td>
+						<td><img src="<s:property value="recipe_file" />" /></td>
 						<td align="center">&nbsp;<s:a href="%{viewURL}">
 								<s:property value="recipe_subject" />
 							</s:a></td>
