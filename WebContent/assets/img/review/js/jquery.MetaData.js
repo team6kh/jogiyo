@@ -67,13 +67,13 @@ $.extend({
 			var settings = $.extend({},this.defaults,opts);
 			// check for empty string in single property
 			if ( !settings.single.length ) settings.single = 'metadata';
-			
+
 			var data = $.data(elem, settings.single);
 			// returned cached data if it already exists
 			if ( data ) return data;
-			
+
 			data = "{}";
-			
+
 			if ( settings.type == "class" ) {
 				var m = settings.cre.exec( elem.className );
 				if ( m )
@@ -89,12 +89,12 @@ $.extend({
 				if ( attr )
 					data = attr;
 			}
-			
+
 			if ( data.indexOf( '{' ) <0 )
 			data = "{" + data + "}";
-			
+
 			data = eval("(" + data + ")");
-			
+
 			$.data( elem, settings.single, data );
 			return data;
 		}

@@ -17,27 +17,28 @@
 		<result property="review_rating" column="review_rating" />
 	</resultMap>
 
-	<!-- 공통으로 사용할 select절 정의 -->
+	<!-- review_board 테이블의 모든 컬럼 값을 뽑아낼 경우 -->
 	<sql id="select-all">
 		SELECT * FROM review_board
 	</sql>
 
-	<!-- 공통으로 사용할 where_review_num절 정의 -->
+	<!-- PK인 review_num으로 결과 추출하고자 할 경우 -->
 	<sql id="where_review_num">
 		WHERE review_num=#review_num#
 	</sql>
-	<!-- 공통으로 사용할 where_review_rest절 정의 -->
+	<!-- FK인 review_rest(rest_board의 PK)으로 결과 추출하고자 할 경우 -->
 	<sql id="where_review_rest">
-		where review_rest=#review_rest#
+		WHERE review_rest=#review_rest#
 	</sql>
 
 
 	<!-- SELECT 쿼리문 정의 -->
 
-	<!-- 해당 식당에 관한 리뷰 글 목록 -->
+	<!-- 해당 식당에 적힌 모든 리뷰글 추출하는 쿼리문 -->
 	<select id="selectReviewList" resultMap="reviewRes" parameterClass="int">
 		<include refid="select-all" />
-		where REVIEW_REST=#review_rest# ORDER BY REVIEW_REG_DATE DESC 
+		<include refid="where_review_rest"/>
+		ORDER BY REVIEW_REG_DATE DESC 
 	</select>
 
 	<!-- review_num으로 리뷰글 하나 추출하는 쿼리문 -->
@@ -48,43 +49,47 @@
 
 	<!-- 제일 마지막으로 작성된 리뷰글의 글번호 가져오기 -->
 	<select id="selectLastNum" resultClass="reviewDTO">
-		SELECT max(review_num) as
-		review_num FROM review_board
+		SELECT max(review_num) as review_num
+		 FROM review_board
 	</select>
 
 	<!-- INSERT 쿼리문 정의 -->
 	<insert id="insertReview" parameterClass="reviewDTO">
-		INSERT INTO
-		review_board (
-		review_num,
-		review_rest,
-		review_writer,
-		review_content,
-		review_reg_date,
-		review_rating
-		)
-		VALUES(
-		review_seq.nextval,
-		#review_rest#,
-		#review_writer#,
-		#review_content#,
-		#review_reg_date#,
-		#review_rating#
-		)
+		INSERT INTO review_board 
+										(
+											review_num,
+											review_rest,
+											review_writer,
+											review_content,
+											review_reg_date,
+											review_rating
+										)
+									VALUES
+										(
+											review_seq.nextval,
+											#review_rest#,
+											#review_writer#,
+											#review_content#,
+											#review_reg_date#,
+											#review_rating#
+										)
 	</insert>
 
 	<!-- UPDATE 쿼리문 정의 -->
 
 	<!-- 리뷰글 수정을 위한 쿼리문 -->
 	<update id="updateReview" parameterClass="reviewDTO">
-		UPDATE review_board SET REVIEW_RATING = #review_rating#,
-											REVIEW_CONTENT = #review_content#
+		UPDATE 	review_board 
+		
+		SET 				review_rating = #review_rating#,
+							revieew_content = #review_content#
 		<include refid="where_review_num" />
 	</update>
-
+    
 	<!-- 첨부파일을 위한 쿼리문 -->
 	<update id="updateReviewFile" parameterClass="reviewDTO">
-		UPDATE review_board SET REVIEW_FILE=#review_file#
+		UPDATE 	review_board 
+		SET 				review_file = #review_file#
 		<include refid="where_review_num" />
 	</update>
 

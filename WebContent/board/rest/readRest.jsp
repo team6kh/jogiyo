@@ -167,7 +167,7 @@
 		var restopt_destFile1 = form.restopt_destFile1.value;
 		var restopt_subject = form.restopt_subject.value;
 		var restopt_priceplus = form.restopt_priceplus.value;
-		
+
 		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_num="+restopt_num+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
 		document.getElementById("cartFrame").contentWindow.location.href=url;
 		return false;
@@ -308,19 +308,19 @@
 
 				<span class="glyphicon glyphicon-user"></span>	
 				${resultClass.rest_writer_name} <br/>
-			
+
 				<span class="glyphicon glyphicon-phone-alt"></span>
 				 ${resultClass.rest_writer_telnum}<br/>
-			
+
 				<span class="glyphicon glyphicon-earphone"></span>	
 				${resultClass.rest_writer_mobilenum}<br/>
 
 				<span class="glyphicon glyphicon-map-marker"></span>
 				${resultClass.rest_writer_address} <br/>
-			
+
 				<span class="glyphicon glyphicon-envelope"></span>
 				<a href="sendMail.action?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
-				
+
 				<span class="glyphicon glyphicon-print"></span>
 				<a href="javascript:printWindow()">프린트하기</a> <br/><br/>
 
