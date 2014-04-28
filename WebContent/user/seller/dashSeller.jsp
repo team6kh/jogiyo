@@ -19,7 +19,7 @@
         <link href="jogiyo.css" rel="stylesheet">
         <link href="common/common-template.css" rel="stylesheet">
         <link href="user/common/dashboard.css" rel="stylesheet">
-       <script type="text/javascript">
+        <script type="text/javascript">
        			// 오늘 버튼 눌렀을 때 날짜 설정
 		       function setToday() {
 		    	   var now = new Date();
@@ -111,7 +111,7 @@
                     <form name="searchDate" method="post" action="dashSeller.action">
                           <table class="table" >
                             <tr>
-                                <th colspan="2"> 조회일 기준으로 검색 </th>
+                                <th colspan="2">  기간별 검색 </th>
                             </tr>
                             <tr>
                                 <td class="text-center" colspan="2">
@@ -124,13 +124,13 @@
                             <tr>
                                 <td>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate }"/> 
+                                        <input type="date" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}"/> 
                                         <span class="input-group-addon">부터</span>  
                                     </div> 
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate }"/>
+                                        <input type="date" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}"/>
                                         <span class="input-group-addon">까지</span>  
                                     </div>
                                 </td>
