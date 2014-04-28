@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+
+<sqlMap namespace="Pay">
+
+	<typeAlias alias="paidDTO" type="board.pay.dto.PaidDTO"/>
+	<typeAlias alias="menuDTO" type="board.pay.dto.MenuDTO"/>
+	<typeAlias alias="searchDTO" type="board.pay.dto.SearchConditionDTO"/>
+      
+      <resultMap class="paidDTO" id="paidRes">
+	      <result property="rest_num" column="rest_num"/>
+	      <result property="rest_writer_id" column="rest_writer_id"/>
+	      <result property="paid_num" column="paid_num"/>
+	      <result property="paid_rest_subject" column="paid_rest_subject"/>
+	      <result property="paid_restopt_subject" column="paid_restopt_subject"/>
+	      <result property="paid_restopt_priceplus" column="paid_restopt_priceplus"/>
+	      <result property="session_id" column="session_id"/>
+	      <result property="paid_reg_date" column="paid_reg_date"/>      	
+      </resultMap> 
+      
+      <resultMap class="menuDTO" id="menuRes">	     
+	      <result property="paid_restopt_subject" column="paid_restopt_subject"/>
+	      <result property="paid_sales_volume" column="paid_sales_volume"/>
+	      <result property="paid_sales_price" column="paid_sales_price"/>
+      </resultMap>
+
+    <!-- 공통 정의  -->
+	
+	<!-- 식당코드를 기준으로 rest_board 테이블(r)과 paid_board(p) join  -->
+	<sql id="fromRPBoard">
+		from rest_board r,paid_board p
+	</sql>
+	<sql id="whereRest">
+    	where rest_writer_id = #session_id# and rest_num=paid_rest_num
+    </sql>
+    
+     <!--  SELECT  -->
+    <!-- 식당의 전체 결제 내역 :  식당번호/판매자id/결제번호/식당명/메뉴명/메뉴가격/구매자id/주문결제일 -->
+    <select id="payList" resultMap="paidRes" parameterClass="searchDTO">
+        SELECT r.rest_num, r.rest_writer_id, p.paid_num, p.paid_rest_subject,p.paid_restopt_subject,p.paid_restopt_priceplus,p.session_id,p.paid_reg_date 
+        <include refid="fromRPBoard"/> <include refid="whereRest"/> and (paid_reg_date <![CDATA[>=]]> #startDay# and paid_reg_date <![CDATA[<=]]> #endDay#)
+        ORDER BY paid_reg_date DESC  	
+    </select>
+    
+    <!-- 인기 메뉴 : 메뉴명/메뉴 매출건수/메뉴 총매출금-->
+   <select id="hotmenu" resultMap="menuRes" parameterClass="searchDTO">          
+        SELECT paid_restopt_subject, count(*) as paid_sales_volume, sum(paid_restopt_priceplus) as paid_sales_price
+        from paid_board  WHERE paid_rest_num = #rest_num# and (paid_reg_date <![CDATA[>=]]> #startDay# and paid_reg_date <![CDATA[<=]]> #endDay#) 
+        GROUP BY paid_restopt_subject ORDER BY paid_sales_volume DESC
+   </select>
+    
+    
+  
+         
+</sqlMap>

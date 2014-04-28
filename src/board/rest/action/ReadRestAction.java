@@ -3,17 +3,15 @@ package board.rest.action;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-
+import user.seller.dto.SellerDTO;
 import common.ConDAOAware;
 import board.rest.dto.RestDTO;
 import board.restopt.dto.RestoptDTO;
 import common.action.PagingAction;
 import board.review.action.PagingReviewAction;
 import board.review.dto.ReviewDTO;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
-
 import common.Constants;
 
 public class ReadRestAction extends ActionSupport implements ConDAOAware{
@@ -21,20 +19,16 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 	//listRest.jsp에서 보낸 히든값
 	private int currentPage;
 	private int rest_num;
-	
+	//필수
 	public static SqlMapClient sqlMapper;
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
 	private RestoptDTO paramClass1 = new RestoptDTO();
 	private RestoptDTO resultClass1 = new RestoptDTO();
 	private List<RestoptDTO> list = new ArrayList<RestoptDTO>();
-
-	
 	//수정시(파일관련)
 	private String fileUploadPath1 = Constants.COMMON_FILE_PATH + Constants.REST_MAIN_FILE_PATH;
 	private String fileUploadPath2 = Constants.COMMON_FILE_PATH + Constants.REST_CONTENT_FILE_PATH;
-	
-	
 	//후기리스트
 	private int review_rest;
     private List<ReviewDTO> reviewRes = new ArrayList<ReviewDTO>();
@@ -48,13 +42,9 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
     private PagingReviewAction page; // 페이징 클래스
     private String actionName = "readRest"; // 페이징액션과 로그인액션에서 쓰인다...
 
-	
-	
-	
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
 	}
-	
 	
 	public String execute() throws Exception {
 		//글 조회수 +1
@@ -63,24 +53,22 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 		
 		//해당글번호의 레코드를 가져옴(상품테이블, 옵션테이블)
 		resultClass = (RestDTO)sqlMapper.queryForObject("Rest.selectRestOne", getRest_num());
-		//옵션들
+		
+		//옵션 get
 		list = (List<RestoptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
-		
-		
-		
 		
 		//후기리스트
         review_rest = getRest_num();
         reviewRes = sqlMapper.queryForList("Review.selectReviewList", review_rest);
-        
-        reviewFile_Path = reviewFile_Path.replace("\\", "/").substring(27);
+        reviewFile_Path = reviewFile_Path.replace("\\", "/").substring(27); //파일경로 재정의
         
         // 페이징 관련 코드
         totalCount = reviewRes.size();
         page = new PagingReviewAction(actionName, ccp, totalCount, blockCount, blockPage, rest_num, currentPage);
         pagingHtml = page.getPagingHtml().toString();
         
-        int lastCount = totalCount; // 현재 페이지에서 보여줄 마지막 글의 번호 설정
+        // 현재 페이지에서 보여줄 마지막 글의 번호 설정
+        int lastCount = totalCount;
 
         // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
         if (page.getEndCount() < totalCount)
@@ -101,7 +89,6 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 		this.list = list;
 	}
 
-
 	//listRest.jsp에서 보낸 히든값
 	public int getCurrentPage() {
 		return currentPage;
@@ -115,7 +102,6 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 	public void setRest_num(int rest_num) {
 		this.rest_num = rest_num;
 	}
-
 
 	//paramClass,1 resultClass,1
 	public RestDTO getParamClass() {
@@ -143,8 +129,6 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 		this.resultClass1 = resultClass1;
 	}
 	
-	
-	
 	//후기 리스트
     public List<ReviewDTO> getReviewRes() {
         return reviewRes;
@@ -152,6 +136,7 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
     public void setReviewRes(List<ReviewDTO> reviewRes) {
         this.reviewRes = reviewRes;
     }
+    
     // 히든값 : review_rest 변수의 getter & setter
     public int getReview_rest() {
         return review_rest;
@@ -159,10 +144,12 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
     public void setReview_rest(int review_rest) {
         this.review_rest = review_rest;
     }
+    
     // 파일 경로 getter
     public String getReviewFile_Path() {
         return reviewFile_Path;
     }
+    
     // 페이징 관련 getter & setter
     public int getCcp() {
         return ccp;

@@ -33,8 +33,8 @@
 												+ "옵션가"
 												+ fields
 												+ ".&nbsp&nbsp <input type='text' name='restopt_priceplus"+fields+"' value='"+b+"'/> 원<br/>"
-												+ ".&nbsp&nbsp 현재 업로드된 파일명 : "+c+"<br/> 재 업로드시 기존 파일은 삭제 됩니다. <input type='file' name='optupload"+fields+"' />"
-												+ " <a href='#' onclick='removeInput(this.parentNode)' />옵션"+fields+"제거 <br/><hr></div>";
+												+ "&nbsp&nbsp 현재 업로드된 파일명 : "+c+"<br/> 재 업로드시 기존 파일은 삭제 됩니다. <input type='file' name='optupload"+fields+"' />"
+												+ "<a href='#' onclick='removeInput(this.parentNode)' />옵션"+fields+"제거 <br/><hr></div>";
 					fields += 1;
 				} else {
 					document.getElementById('stop').innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;<font color='#FF0000'>옵션은 최대 15개만 등록할 수 있습니다.</font><br/>";

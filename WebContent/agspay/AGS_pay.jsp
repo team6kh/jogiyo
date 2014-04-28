@@ -5,6 +5,13 @@
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+		<!-- Bootstrap core CSS -->
+		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="jogiyo.css" rel="stylesheet">
+		<link href="common/common-template.css" rel="stylesheet">
+
 <%
 	request.setCharacterEncoding("UTF-8");
 
@@ -286,6 +293,12 @@ function Display(form){
 <!-- 주의) onload 이벤트에서 아래와 같이 javascript 함수를 호출하지 마십시오. -->
 <!-- onload="javascript:Enable_Flag(frmAGS_pay);Pay(frmAGS_pay);" -->
 <body topmargin=0 leftmargin=0 rightmargin=0 bottommargin=0 onload="javascript:Enable_Flag(frmAGS_pay);">
+
+<!-- header -->
+<%@ include file="/common/header.jsp"%>
+<!-- end of header -->
+
+
 <form name=frmAGS_pay method=post action=/jogiyo/agspay/AGS_pay_ing.jsp>
 <table border=0 width=100% height=100% cellpadding=0 cellspacing=0>
 	<tr>
@@ -381,18 +394,18 @@ function Display(form){
 					</tr>
 					<tr>
 						<td class=clsleft>이메일</td>
-						<td colspan=2><input type=text style=width:200px name=UserEmail maxlength=50 value="ljw7426@naver.com"></td>
+						<td colspan=2><input type=text style=width:200px name=UserEmail maxlength=50 value="${buyerDTO.buyer_email}"></td>
 					</tr>
 					
 					
 					<tr>
 						<td class=clsleft>이름</td>
-						<td colspan=2><input type=text style=width:100px name=OrdNm maxlength=40 value="${sessionScope.session_name }"></td>
+						<td colspan=2><input type=text style=width:100px name=OrdNm maxlength=40 value="${buyerDTO.buyer_name}"></td>
 					</tr>
 					<tr>
 						<td class=clsleft>연락처</td>
 						<td colspan=2>
-							<input type=text style=width:130px name=OrdPhone maxlength=21 value="히든 주문자연락처">
+							<input type=text style=width:130px name=OrdPhone maxlength=21 value="${buyerDTO.buyer_mobilenum}">
 							<!--<input type=text style=width:300px name=OrdAddr maxlength=100 value="히든 주문자 주소"> -->
 						</td>
 					</tr>

@@ -1,13 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<div align="left">
-	<h2>¸¶ÀÌÆäÀÌÁö</h2>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%-- <%@ page isELIgnored="false" %> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+
+<title>JOGIYO</title>
+
+<!-- Bootstrap core CSS -->
+<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="common/common-template.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+	<!-- header -->
+	<%@ include file="/common/header.jsp"%>
+	<!-- end of header -->
+
+	<!-- container -->
+	
+	<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
+	<div class="container">
+	
+		<div align="left">
+	<h2>ë§ˆì´íŽ˜ì´ì§€</h2>
 	<ul>
-		<li><a href="">±¸¸Å¸ñ·Ï</a></li>
-		<li><a href="">Âò¸ñ·Ï</a></li>
-		<li><a href="">»óÇ° Q&A</a></li>
-		<li><a href="">1:1 ¹®ÀÇ</a></li>
-		<li><a href="">È¸¿øÁ¤º¸¼öÁ¤</a></li>
+		<li><a href="mypageFormRecipe.action">êµ¬ë§¤ëª©ë¡</a></li>
+		<li><a href="myAllListPage.action?session_id=<s:property value="#session.session_id"/>">ë‚´ê°€ ìž‘ì„±í•œ ê¸€</a></li>
+		<li><a href="listQna.action">ìƒí’ˆ Q&A</a></li>
+		<li><a href="">1:1 ë¬¸ì˜</a></li>
+		<li><a href="">íšŒì›ì •ë³´ìˆ˜ì •</a></li>
 		
 	</ul>
 
@@ -15,10 +50,10 @@
 
 
 <div align="center">
-	<h2>ÄÁÅÙÃ÷¿µ¿ª</h2>
+	<h2>ì»¨í…ì¸ ì˜ì—­</h2>
 	<div>
 		<p>
-			<strong>${resultClass.Id}</strong>´Ô ¹Ý°©½À´Ï´Ù!
+			<strong>${session_id}</strong>ë‹˜ ë°˜ê°‘ìŠµë‹ˆë‹¤!
 		</p>
 
 	</div>
@@ -33,19 +68,19 @@
 
 
 
-	<h3>±¸¸Å¸ñ·Ï</h3>
+	<h3>êµ¬ë§¤ëª©ë¡</h3>
 
 	<div>
 		<fieldset>
-			<legend>Á¶È¸±â°£ °Ë»ö</legend>
-			<strong>Á¶È¸±â°£</strong>
+			<legend>ì¡°íšŒê¸°ê°„ ê²€ìƒ‰</legend>
+			<strong>ì¡°íšŒê¸°ê°„</strong>
 			<div>
 				<div>
-					<label id="search_period_7D" for="radio01" onclick="">1ÁÖÀÏ</label>
-					<label id="search_period_15D" for="radio02" onclick="">15ÀÏ</label>
-					<label id="search_period_1M" for="radio03" onclick="">1°³¿ù</label> 
-					<label id="search_period_3M" for="radio04" onclick="">3°³¿ù</label> 
-					<label id="search_period_6M" for="radio05" onclick="">6°³¿ù</label>
+					<label id="search_period_7D" for="radio01" onclick="">1ì£¼ì¼</label>
+					<label id="search_period_15D" for="radio02" onclick="">15ì¼</label>
+					<label id="search_period_1M" for="radio03" onclick="">1ê°œì›”</label> 
+					<label id="search_period_3M" for="radio04" onclick="">3ê°œì›”</label> 
+					<label id="search_period_6M" for="radio05" onclick="">6ê°œì›”</label>
 				</div>
 				<div>
 					<select id="search_start_year" name="search_start_year">
@@ -53,7 +88,7 @@
 						<option value="2011">2011</option>
 						<option value="2012">2012</option>
 						<option value="2013">2013</option>
-						<option value="2014">2014</option></select> ³â
+						<option value="2014">2014</option></select> ë…„
 					 <select id="search_start_month" name="search_start_month">
 					    <option value="1">1</option>
 						<option value="2">2</option>
@@ -66,7 +101,7 @@
 						<option value="9">9</option>
 						<option value="10">10</option>
 						<option value="11">11</option>
-						<option value="12">12</option></select> ¿ù
+						<option value="12">12</option></select> ì›”
 					<select id="search_start_date" name="search_start_date">
 					    <option value="1">1</option>
 						<option value="2">2</option>
@@ -98,13 +133,13 @@
 						<option value="28">28</option>
 						<option value="29">29</option>
 						<option value="30">30</option>
-						<option value="31">31</option></select> ÀÏ  ~  
+						<option value="31">31</option></select> ì¼  ~  
 					<select id="search_end_year" name="search_end_year">
 					    <option value="2010">2010</option>
 						<option value="2011">2011</option>
 						<option value="2012">2012</option>
 						<option value="2013">2013</option>
-						<option value="2014">2014</option></select> ³â 
+						<option value="2014">2014</option></select> ë…„ 
 					<select id="search_end_month" name="search_end_month">
 					    <option value="1">1</option>
 						<option value="2">2</option>
@@ -117,7 +152,7 @@
 						<option value="9">9</option>
 						<option value="10">10</option>
 						<option value="11">11</option>
-						<option value="12">12</option></select> ¿ù
+						<option value="12">12</option></select> ì›”
 					<select	id="search_end_date" name="search_end_date">
 					    <option value="1">1</option>
 						<option value="2">2</option>
@@ -149,9 +184,9 @@
 						<option value="28">28</option>
 						<option value="29">29</option>
 						<option value="30">30</option>
-						<option value="31">31</option></select> ÀÏ
+						<option value="31">31</option></select> ì¼
 					<button type="submit" onclick="">
-						<span>Á¶È¸ÇÏ±â</span>
+						<span>ì¡°íšŒí•˜ê¸°</span>
 					</button>
 				</div>
 			</div>
@@ -159,13 +194,13 @@
 	</div>
 	<div >
 		<ul>
-			<li><a href="" >ÀüÃ¼ ±¸¸Å¸ñ·Ï</a></li>
-			<li><a href="" >ÄíÆù</a></li>
+			<li><a href="" >ì „ì²´ êµ¬ë§¤ëª©ë¡</a></li>
+			<li><a href="" >ì¿ í°</a></li>
 			
 		</ul>
 	</div>
-	<table cellspacing="0" width="100%" summary="±¸¸Å¸ñ·ÏÀÇ ÁÖ¹®ÀÏÀÚ(ÁÖ¹®¹øÈ£),ÁÖ¹® »óÇ° Á¤º¸, ÃÑ °áÁ¦±Ý¾×,»óÅÂµîÀ» ³ëÃâÇÏ´Â Å×ÀÌºí">
-		<caption>±¸¸Å¸ñ·Ï</caption>
+	<table cellspacing="0" width="100%" summary="êµ¬ë§¤ëª©ë¡ì˜ ì£¼ë¬¸ì¼ìž(ì£¼ë¬¸ë²ˆí˜¸),ì£¼ë¬¸ ìƒí’ˆ ì •ë³´, ì´ ê²°ì œê¸ˆì•¡,ìƒíƒœë“±ì„ ë…¸ì¶œí•˜ëŠ” í…Œì´ë¸”">
+		<caption>êµ¬ë§¤ëª©ë¡</caption>
 		<colgroup>
 			<col width="115">
 			<col width="413">
@@ -174,16 +209,16 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th scope="col">ÁÖ¹®ÀÏÀÚ<br>(ÁÖ¹®¹øÈ£)
+				<th scope="col">ì£¼ë¬¸ì¼ìž<br>(ì£¼ë¬¸ë²ˆí˜¸)
 				</th>
-				<th scope="col">ÁÖ¹® »óÇ° Á¤º¸</th>
-				<th scope="col">ÃÑ °áÁ¦ ±Ý¾×</th>
-				<th scope="col">»óÅÂ</th>
+				<th scope="col">ì£¼ë¬¸ ìƒí’ˆ ì •ë³´</th>
+				<th scope="col">ì´ ê²°ì œ ê¸ˆì•¡</th>
+				<th scope="col">ìƒíƒœ</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="4">±¸¸ÅÇÑ »óÇ°ÀÌ ¾ø½À´Ï´Ù.</td>
+				<td colspan="4">êµ¬ë§¤í•œ ìƒí’ˆì´ ì—†ìŠµë‹ˆë‹¤.</td>
 			</tr>
 		</tbody>
 	</table>
@@ -197,10 +232,10 @@
 <div id="buylist_div" style="display: none" height="1000">
 	<div id="buylist_title">
 		<h1>
-			±¸¸Å¸ñ·Ï
+			êµ¬ë§¤ëª©ë¡
 		</h1>
 		<p>
-			¸ÞÀÎ &gt; ¸¶ÀÌÆäÀÌÁö &gt; <span>±¸¸Å¸ñ·Ï</span>
+			ë©”ì¸ &gt; ë§ˆì´íŽ˜ì´ì§€ &gt; <span>êµ¬ë§¤ëª©ë¡</span>
 		</p>
 	</div>
 	<div id="buylist_content_area"></div>
@@ -211,12 +246,22 @@
 		<h1>
 			<img
 				src="http://image.wemakeprice.com/images/mypage/title_ticket.gif"
-				alt="±¸¸Å¸ñ·Ï">
+				alt="êµ¬ë§¤ëª©ë¡">
 		</h1>
 		<p class="location">
-			¸ÞÀÎ &gt; ¸¶ÀÌÆäÀÌÁö &gt; ±¸¸Å¸ñ·Ï &gt; <span class="location_on">Æ¼ÄÏ/»óÇ°Á¤º¸</span>
+			ë©”ì¸ &gt; ë§ˆì´íŽ˜ì´ì§€ &gt; êµ¬ë§¤ëª©ë¡ &gt; <span class="location_on">í‹°ì¼“/ìƒí’ˆì •ë³´</span>
 		</p>
 	</div>
 	<div id="buylist_content_area"></div>
 </div>
+		<!-- /.container -->
 
+
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="dist/js/bootstrap.min.js"></script>
+</body>
+</html>

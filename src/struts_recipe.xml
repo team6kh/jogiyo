@@ -101,11 +101,11 @@
 			method="recommandAction">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
-			<result>/board/recipe/readRecipe.jsp</result>
+			<result>/board/recipe/isRecommand.jsp</result>
 		</action>
 
 		<!-- recipe_mylsit 액션 -->
-		<action name="recipe_mylsit" class="board.recipe.action.MyListRecipeAction">
+		<action name="myListRecipe" class="board.recipe.action.MyListRecipeAction">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/myListRecipe.jsp</result>
@@ -133,7 +133,34 @@
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
+		<!-- timeRecipeDesc 액션 -->
+		<action name="timeRecipeDesc" class="board.recipe.action.ListRecipeAction"
+			method="timeDesc">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/board/recipe/listRecipe.jsp</result>
+		</action>
+		<!-- priceRecipeDesc 액션 -->
+		<action name="priceRecipeDesc" class="board.recipe.action.ListRecipeAction"
+			method="priceDesc">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/board/recipe/listRecipe.jsp</result>
+		</action>
+		<!-- recommandRecipeDesc 액션 -->
+		<action name="recommandRecipeDesc" class="board.recipe.action.ListRecipeAction"
+			method="recommandDesc">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/board/recipe/listRecipe.jsp</result>
+		</action>
 
+		<!-- myAllListPage 액션 -->
+		<action name="myAllListPage" class="board.recipe.action.MyAllListPageAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/user/common/myAllListPage.jsp</result>
+		</action>
 		<!-- 레시피 끝 -->
 
 

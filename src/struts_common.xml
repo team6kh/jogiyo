@@ -34,23 +34,25 @@
 			<result name="success" type="redirect-action">home</result>
 		</action>
 		
-		<!-- 회원가입/수정/탈퇴 -->
+		<!-- ./로그인/로그아웃 -->
+		
+		<!-- 회원 가입/수정/탈퇴 -->
 
-		<!-- 회원가입 폼 -->
+		<!-- 회원 가입 폼 -->
 		<action name="registrationForm" class="user.common.registration.action.RegistrationFormAction">
 			<result name="buyer">/user/buyer/regBuyerForm.jsp</result>
 			<result name="seller">/user/seller/regSellerForm.jsp</result>
 			<result>/user/buyer/regBuyerForm.jsp</result>
 		</action>
 		
-		<!-- 아이디 중복체크 액션 -->		
+		<!-- 아이디 중복 체크 액션 -->		
 		<action name="checkDup" class="user.common.registration.action.CheckDuplicateAction">
 			<interceptor-ref name="params" />				
 			<interceptor-ref name="conDAO" />
 			<result>/user/common/registration/checkDup.jsp</result>
 		</action>	
 
-		<!-- 회원가입 액션 : 구매자, 판매자로 chain -->
+		<!-- 회원 가입 액션 : 구매자, 판매자로 chain -->
 		<action name="registration" class="user.common.registration.action.RegistrationAction">
 			<result name="buyer" type="chain">regBuyer</result>
 			<result name="seller" type="chain">regSeller</result>
@@ -79,9 +81,9 @@
 			<result name="success" type="chain">
           		<param name="actionName">login</param>
         	</result>	
-		</action>
+		</action>			
 		
-		<!-- 유저정보 액션 : 구매자, 판매자로 chain -->
+		<!-- (헤더) 회원 정보 읽기 액션 : 구매자, 판매자로 chain -->
 		<action name="readUser" class="user.common.action.ReadUserAction">
 			<result name="buyer" type="chain">readBuyer</result>
 			<result name="seller" type="chain">readSeller</result>
@@ -89,49 +91,56 @@
 			<result name="error">/common/error.jsp</result>
 		</action>
 		
-		<!-- 구매자정보 읽기 액션 -->
+		<!-- 구매자 정보 읽기 액션 -->
 		<action name="readBuyer" class="user.buyer.action.ReadBuyerAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/user/buyer/readBuyer.jsp</result>
 		</action>
 		
-		<!-- 판매자정보 읽기 액션 -->
+		<!-- 판매자 정보 읽기 액션 -->
 		<action name="readSeller" class="user.seller.action.ReadSellerAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/user/seller/readSeller.jsp</result>
 		</action>
 		
-		<!-- 구매자정보 수정 폼 -->
+		<!-- 관리자 대시보드 -->
+		<action name="dashAdmin" class="user.admin.action.DashAdminAction">
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="conDAO"/>
+			<result>/user/admin/dashAdmin.jsp</result>
+		</action>	
+		
+		<!-- 구매자 정보 수정 폼 -->
 		<action name="updateBuyerForm" class="user.buyer.action.UpdateBuyerAction" method="updateForm">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/user/buyer/updateBuyerForm.jsp</result>
 		</action>
 		
-		<!-- 구매자정보 수정 액션 -->
+		<!-- 구매자 정보 수정 액션 -->
 		<action name="updateBuyer" class="user.buyer.action.UpdateBuyerAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/user/buyer/readBuyer.jsp</result>
 		</action>
 		
-		<!-- 판매자정보 수정 폼 -->
+		<!-- 판매자 정보 수정 폼 -->
 		<action name="updateSellerForm" class="user.seller.action.UpdateSellerAction" method="updateForm">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/user/seller/updateSellerForm.jsp</result>
 		</action>
 		
-		<!-- 판매자정보 수정 액션 -->
+		<!-- 판매자 정보 수정 액션 -->
 		<action name="updateSeller" class="user.seller.action.UpdateSellerAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result>/user/seller/readSeller.jsp</result>
 		</action>
 		
-		<!-- 구매자정보 삭제(탈퇴) 액션 -->
+		<!-- 구매자 탈퇴 액션 -->
 		<action name="deleteBuyer" class="user.buyer.action.DeleteBuyerAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
@@ -140,7 +149,7 @@
         	</result>	
 		</action>
 		
-		<!-- 판매자정보 삭제(탈퇴) 액션 -->
+		<!-- 판매자 탈퇴 액션 -->
 		<action name="deleteSeller" class="user.seller.action.DeleteSellerAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
@@ -149,7 +158,9 @@
         	</result>
 		</action>
 		
-		<!-- HOME -->
+		<!-- ./회원 가입/수정/탈퇴 -->
+		
+		<!-- 공통 기능(?) -->		
 		
 		<!-- 홈 액션 -->
 		<action name="home" class="common.action.HomeAction">
@@ -161,11 +172,9 @@
 		<!-- welocme 액션 -->
 		<action name="welcome" class="common.action.HomeAction" method="welcome">
 			<result>/common/welcome.jsp</result>
-		</action>
+		</action>		
 		
-		<!-- 공통기능(?) -->
-		
-		<!-- 이메일 인증 서비스 -->
+		<!-- 인증 이메일 발송 액션 -->
 		<action name="emailer" class="user.common.verification.action.Emailer">
 			<result name="success" type="chain">
 				<param name="actionName">insertEv</param>
@@ -173,7 +182,7 @@
 			<result name="error">/common/error.jsp</result>
 		</action>
 		
-		<!-- 이메일 인증 요청 저장소 -->
+		<!-- 인증 이메일 발송 내역 저장 액션 -->
 		<action name="insertEv" class="user.common.verification.action.InsertEmailVerification">
 			<param name="aliases">#{'to' : 'ev_requested'}</param>
 			<interceptor-ref name="alias"/>	
@@ -188,7 +197,7 @@
 			</result>
 		</action>
 		
-		<!-- 이메일 인증 체크 -->
+		<!-- 이메일 인증 체크 액션 -->
 		<action name="checkEv" class="user.common.verification.action.CheckEmailVerification">
 			<param name="aliases">#{'buyer_email' : 'ev_requested','seller_email' : 'ev_requested'}</param>
 			<interceptor-ref name="alias"/>	
@@ -198,7 +207,7 @@
 			<result>/user/common/verification/checkEv.jsp</result>
 		</action>
 		
-		<!-- NEW 비밀번호 체크 액션 -->
+		<!-- 공통 비밀번호 체커 -->
 		<action name="checkPass" class="common.action.CheckPasswordAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>

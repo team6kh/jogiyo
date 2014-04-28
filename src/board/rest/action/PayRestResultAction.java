@@ -2,47 +2,55 @@ package board.rest.action;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
 import table.coopon.dto.CooponDTO;
 import board.cart.dto.CartDTO;
 import board.pay.dto.payDTO;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
+
 import common.ConDAOAware;
 
 public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 	public static SqlMapClient sqlMapper;
 	Calendar today = Calendar.getInstance();
-	
 	private CooponDTO paramClass = new CooponDTO();
 	private CartDTO paramClass1 = new CartDTO();
 	private payDTO paramClass2 = new payDTO();
-	
+	private payDTO resultClass = new payDTO();
 	private List<CartDTO> list1 = new ArrayList<CartDTO>();
 	private List<payDTO> list2 = new ArrayList<payDTO>();
-	
 	Integer count;
 	private int rest_num;
 	private String session_id;
 	private String cooResult;
-
 	
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
 	}
 	
 	public String execute() throws Exception {
-		
 		//장바구니에 담은 레코드들을 get
 		paramClass1.setCart_rest_num(getRest_num());
 		paramClass1.setSession_id(getSession_id());
 		list1 = sqlMapper.queryForList("Rest.selectCartAll", paramClass1);
 		
+		//결제 테이블 insert전 레코드가 없는지 있는지 판단.
+		Integer count = (Integer)sqlMapper.queryForObject("Rest.selectPaidCount");
+		if( count != 0){ //레코드가 있을 경우, LastNum set
+			resultClass = (payDTO) sqlMapper.queryForObject("Rest.selectPaidLastNo"); //라스트넘 이상 select 하도록
+		}else{ //레코드가 없을 경우, 0 set
+			resultClass.setPaid_num(0);
+		}
+		
 		//장바구니 테이블 -> 결과테이블로 insert
 		for(int i=0; i<list1.size(); i++){
 			paramClass2.setPaid_rest_num(list1.get(i).getCart_rest_num());
 			paramClass2.setPaid_rest_subject(list1.get(i).getCart_rest_subject());
-			paramClass2.setPaid_restopt_num(list1.get(i).getCart_restopt_num()); //CartDTO int로 수정
+			paramClass2.setPaid_restopt_num(list1.get(i).getCart_restopt_num());
 			paramClass2.setPaid_restopt_subject(list1.get(i).getCart_restopt_subject());
 			paramClass2.setPaid_restopt_priceplus(list1.get(i).getCart_restopt_priceplus());
 			paramClass2.setPaid_restopt_destFile1(list1.get(i).getCart_restopt_destFile1());
@@ -70,14 +78,14 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		//최종 장바구니 레코드 삭제
 		sqlMapper.delete("Rest.deleteCartforpaid", paramClass1);
 		
-		//jsp로 보내줄 결과 리스트 생성
-		list2 = sqlMapper.queryForList("Rest.selectPaidAll", paramClass1);
+		//방금 장바구니로 구매한 레코드 (=방금 결제완료한 레코드)
+		list2 = sqlMapper.queryForList("Rest.selectPaidnow", resultClass);
 		
 		return SUCCESS; //payRestResult.jsp
 	}
 
 	
-	
+	//list get용
 	public int getRest_num() {
 		return rest_num;
 	}
@@ -90,7 +98,8 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 	public void setSession_id(String session_id) {
 		this.session_id = session_id;
 	}
-
+	
+	//구매목록
 	public List<payDTO> getList2() {
 		return list2;
 	}

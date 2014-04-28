@@ -24,7 +24,7 @@ public class MyListRecipeAction extends ActionSupport implements ConDAOAware {
 	private String pagingHtml; // 페이지를 구현할 HTML
 	private PagingAction page; // 페이징 클래스
 	private String actionName = "myListRecipe";
-	private String recipe_memberwriter;
+	private String session_id;
 	
 	
 	public void setConDAO(SqlMapClient sqlMapper) {
@@ -33,12 +33,11 @@ public class MyListRecipeAction extends ActionSupport implements ConDAOAware {
 	}
 
 	public String execute() throws Exception {
-		System.out.println("recipe_memberwriter : " + recipe_memberwriter);
-		list = sqlMapper.queryForList("Recipe.myListRecipe", recipe_memberwriter);
+		
+		list = sqlMapper.queryForList("Recipe.myListRecipe", session_id);
 
 		totalCount = list.size(); // 전체 글 갯수를 구한다.
-		page = new PagingAction(actionName, currentPage, totalCount,
-				blockCount, blockPage); // PagingAction 객체 생성
+		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // PagingAction 객체 생성
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
 
 		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
@@ -55,20 +54,13 @@ public class MyListRecipeAction extends ActionSupport implements ConDAOAware {
 
 	}
 	
-	
-	
-	
-	
-	
 
-	
-
-	public String getRecipe_memberwriter() {
-		return recipe_memberwriter;
+	public String getSession_id() {
+		return session_id;
 	}
 
-	public void setRecipe_memberwriter(String recipe_memberwriter) {
-		this.recipe_memberwriter = recipe_memberwriter;
+	public void setSession_id(String session_id) {
+		this.session_id = session_id;
 	}
 
 	public List<RecipeDTO> getList() {

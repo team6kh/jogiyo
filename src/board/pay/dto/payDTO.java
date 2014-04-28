@@ -8,12 +8,12 @@ public class payDTO {
 	private String paid_rest_subject;
 	private int paid_restopt_num;
 	private String paid_restopt_subject;
-    private int paid_restopt_priceplus;
-    private String paid_restopt_destFile1;
-    private String paid_cpn;
-    private int paid_cpn_used;
-    private String session_id;
-    private Date paid_reg_date;
+        private int paid_restopt_priceplus;
+        private String paid_restopt_destFile1;
+        private String paid_cpn;
+        private int paid_cpn_used;
+        private String session_id;
+        private Date paid_reg_date;
     
 	public int getPaid_num() {
 		return paid_num;

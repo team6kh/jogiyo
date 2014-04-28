@@ -16,6 +16,7 @@
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
+<link href="jogiyo.css" rel="stylesheet">
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
@@ -49,6 +50,8 @@
 		<div class="col-md-12 well">
 		<form action="${actionName }" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="qna_num" value="${resultClass.qna_num }"/>
+
+			<input type="hidden" name="qna_id" value="${session_id}"/>
 	
 			<div class="form-group">
 				<label for="qna_category">카테고리</label>
@@ -64,15 +67,15 @@
 			</div>
 			<div class="form-group">
 				<label for="qna_subject">제목</label>
-				<input type="text" class="form-control" name="qna_subject" placeholder="제목" value="${resultClass.qna_subject }" required>
+				<input type="text" class="form-control" name="qna_subject" maxlength="60" placeholder="60자 이하로 작성해 주세요" value="${resultClass.qna_subject }" required>
 			</div>
 			<div class="form-group">
 				<label for="qna_content">글내용</label>
-				<textarea class="form-control" rows="3" id="qna_content" name="qna_content" placeholder="글내용" required>${resultClass.qna_content }</textarea>
+				<textarea class="form-control" rows="3" id="qna_content" name="qna_content" maxlength="4000" placeholder="4000자 이하로 작성해 주세요" required>${resultClass.qna_content }</textarea>
 			</div>
 			<div class="pull-right">
 				<button type="submit" class="btn btn-primary">${textName }</button>
-				<a href="listQna.action" class="btn btn-default">글목록</a>
+				<a href="listQna.action" class="btn btn-primary">글목록</a>
 			</div>
 		</form>
 		</div>

@@ -10,31 +10,21 @@ import java.util.*;
 import java.io.Reader;
 import java.io.File;
 import org.apache.commons.io.FileUtils;
-
 import user.seller.dto.SellerDTO;
 
 public class InsertRestAction extends ActionSupport implements ConDAOAware{
 
 	public static Reader reader; 
 	public static SqlMapClient sqlMapper;
-	//RestBoard
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
-	//RestoptBoard
 	private RestoptDTO paramClass1 = new RestoptDTO();
 	private RestoptDTO resultClass1 = new RestoptDTO();
-	//Seller
 	private SellerDTO sellerDTO = new SellerDTO();
-
-	//폼으로 넘길 넘버
-	int temp;
+	int seq_num;
 	int virRest_num;
-
-	//insertRest.jsp에서 넘긴 히든값
-	private int currentPage; //현재 페이지
+	private int currentPage; 
 	private int rest_num;
-
-	//insertRest.jsp에서 사용자가 입력하여 보낸 파라미터
 	private String rest_subject;
 	private int rest_amount;
 	private String rest_localcategory;
@@ -79,8 +69,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	//옵션사진
 	private String restopt_orgname; //set get //dto
 	private String restopt_savname; //set get //dto
-
-	//이하 set get
+	
 	private File optupload1;
 	private String optupload1ContentType;
 	private String optupload1FileName;
@@ -156,7 +145,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private String optupload15FileName;
 	private String optfileUploadPath15 = Constants.COMMON_FILE_PATH + Constants.REST_MENU_FILE_PATH;
 
-
 	//매인사진
 	private File rest_destFile1; //dto
 	private String rest_main_orgname; // dto
@@ -174,63 +162,53 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private String upload2ContentType;
 	private String upload2FileName;
 	private String fileUploadPath2 = Constants.COMMON_FILE_PATH + Constants.REST_CONTENT_FILE_PATH;
-
+	
+	Integer count;
+	
 	//ConDAOAware 인터페이스의 메서드(인터셉터에서 호출)
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
 	}
 
-	//최초 insert액션 호출시 (폼제공)
 	public String form() throws Exception {
-		//가상 Rest_num을 만들어 virRest_num 이라는 이름으로 넘김
-		Integer count = (Integer)sqlMapper.queryForObject("Rest.selectCount");
-		if( count != 0){
-			resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
-			temp = (int)(resultClass.getRest_num());
-			virRest_num = temp+1; // 앞으로 만들어질 시퀀스 넘버
-		}else{
-			virRest_num = 1;
-		}
-
 		return SUCCESS;
 	}
-
 
 
 	public String cancel() throws Exception{
 		return SUCCESS;
 	}
 
-
-	//사용자가 글 등록(submit)했을시
 	public String execute() throws Exception {
-		
 		sellerDTO.setSeller_id(getSession_id());
 		sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectWhereSellerId", sellerDTO);
 		
-		//아래의 파라미터 insert
 		paramClass.setRest_subject(getRest_subject());
 		paramClass.setRest_localcategory(getRest_localcategory());
 		paramClass.setRest_typecategory(getRest_typecategory());
 		paramClass.setRest_writer_id(getSession_id());
-		paramClass.setRest_writer_name(sellerDTO.getSeller_name()); //세션의 정보를 넣음
-		paramClass.setRest_writer_telnum(sellerDTO.getSeller_telnum());//
-		paramClass.setRest_writer_mobilenum(sellerDTO.getSeller_mobilenum());//
-		paramClass.setRest_writer_address(sellerDTO.getSeller_rest_address());//
+		paramClass.setRest_writer_name(sellerDTO.getSeller_name()); 
+		paramClass.setRest_writer_telnum(sellerDTO.getSeller_telnum());
+		paramClass.setRest_writer_mobilenum(sellerDTO.getSeller_mobilenum());
+		paramClass.setRest_writer_address(sellerDTO.getSeller_rest_address());
+		paramClass.setRest_writer_email(sellerDTO.getSeller_email());
 		paramClass.setRest_reg_date(today.getTime());
-
+		//상품글 insert
 		sqlMapper.insert("Rest.insertRest_board", paramClass);
-
-
+		
+		//상품글 insert후 현재 최대시퀀스 값을 가짐
+		resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
+		seq_num = (int)(resultClass.getRest_num());
+		
 		// num, resnum, 옵션명, 옵션가 insert
 		if(getRestopt_subject1() != null && getRestopt_priceplus1() != 0){
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject1);
 			paramClass1.setRestopt_priceplus(restopt_priceplus1);
 
 			if (getOptupload1() != null){
 				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu1_" + getVirRest_num();
+				String file_name1 = "menu1_" + seq_num;
 				String file_ext1 = getOptupload1FileName().substring(getOptupload1FileName().lastIndexOf('.') + 1, getOptupload1FileName().length());
 				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath1 + file_name1 + "."+ file_ext1); 
@@ -245,22 +223,18 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject2() != null && getRestopt_priceplus2() != 0){
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject2);
 			paramClass1.setRestopt_priceplus(restopt_priceplus2);
 
-			//1개
 			if (getOptupload2() != null){
-
-				String file_name1 = "menu2_" + getVirRest_num();
+				String file_name1 = "menu2_" + seq_num;
 				String file_ext1 = getOptupload2FileName().substring(getOptupload2FileName().lastIndexOf('.') + 1, getOptupload2FileName().length());
 
 				File restopt_destFile1 = new File(optfileUploadPath2 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload2(), restopt_destFile1);
 
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
-																			//1개
 				paramClass1.setRestopt_orgname(getOptupload2FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
@@ -268,19 +242,17 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject3() != null && getRestopt_priceplus3() != 0){
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject3);
 			paramClass1.setRestopt_priceplus(restopt_priceplus3);
 
 			if (getOptupload3() != null){
-
-				String file_name1 = "menu3_" + getVirRest_num();
+				String file_name1 = "menu3_" + seq_num;
 				String file_ext1 = getOptupload3FileName().substring(getOptupload3FileName().lastIndexOf('.') + 1, getOptupload3FileName().length());
 
 				File restopt_destFile1 = new File(optfileUploadPath3 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload3(), restopt_destFile1);
 
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload3FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
@@ -289,96 +261,70 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject4() != null && getRestopt_priceplus4() != 0){
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject4);
 			paramClass1.setRestopt_priceplus(restopt_priceplus4);
 
 			if (getOptupload4() != null){
-				String file_name1 = "menu4_" + getVirRest_num();
+				String file_name1 = "menu4_" + seq_num;
 				String file_ext1 = getOptupload4FileName().substring(getOptupload4FileName().lastIndexOf('.') + 1, getOptupload4FileName().length());
 
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath4 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload4(), restopt_destFile1);
 
-
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload4FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject5() != null && getRestopt_priceplus5() != 0){
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject5);
 			paramClass1.setRestopt_priceplus(restopt_priceplus5);
 
-			//1개
 			if (getOptupload5() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu5_" + getVirRest_num();
+				String file_name1 = "menu5_" + seq_num;
 				String file_ext1 = getOptupload5FileName().substring(getOptupload5FileName().lastIndexOf('.') + 1, getOptupload5FileName().length());
-
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath5 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload5(), restopt_destFile1);
 
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload5FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject6() != null && getRestopt_priceplus6() != 0){
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject6);
 			paramClass1.setRestopt_priceplus(restopt_priceplus6);
 
-			//1개
 			if (getOptupload6() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu6_" + getVirRest_num();
+				String file_name1 = "menu6_" + seq_num;
 				String file_ext1 = getOptupload6FileName().substring(getOptupload6FileName().lastIndexOf('.') + 1, getOptupload6FileName().length());
-
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath6 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload6(), restopt_destFile1);
-
-
-				//매인사진파일 DTO에 set
+				
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload6FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject7() != null && getRestopt_priceplus7() != 0){
 
 			if (getOptupload7() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu7_" + getVirRest_num();
+				String file_name1 = "menu7_" + seq_num;
 				String file_ext1 = getOptupload7FileName().substring(getOptupload7FileName().lastIndexOf('.') + 1, getOptupload7FileName().length());
-
-
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath7 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload7(), restopt_destFile1);
 
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload7FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject7);
 			paramClass1.setRestopt_priceplus(restopt_priceplus7);
 
@@ -386,22 +332,16 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		}
 		if(getRestopt_subject8() != null && getRestopt_priceplus8() != 0){
 			if (getOptupload8() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu8_" + getVirRest_num();
+				String file_name1 = "menu8_" + seq_num;
 				String file_ext1 = getOptupload8FileName().substring(getOptupload8FileName().lastIndexOf('.') + 1, getOptupload8FileName().length());
-
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath8 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload8(), restopt_destFile1);
 
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload8FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject8);
 			paramClass1.setRestopt_priceplus(restopt_priceplus8);
 
@@ -409,24 +349,17 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		}
 		if(getRestopt_subject9() != null && getRestopt_priceplus9() != 0){
 			if (getOptupload9() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu9_" + getVirRest_num();
+				String file_name1 = "menu9_" + seq_num;
 				String file_ext1 = getOptupload9FileName().substring(getOptupload9FileName().lastIndexOf('.') + 1, getOptupload9FileName().length());
 
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath9 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload9(), restopt_destFile1);
 
-
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload9FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
-
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject9);
 			paramClass1.setRestopt_priceplus(restopt_priceplus9);
 
@@ -434,24 +367,17 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		}
 		if(getRestopt_subject10() != null && getRestopt_priceplus10() != 0){
 			if (getOptupload10() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu10_" + getVirRest_num();
+				String file_name1 = "menu10_" + seq_num;
 				String file_ext1 = getOptupload10FileName().substring(getOptupload10FileName().lastIndexOf('.') + 1, getOptupload10FileName().length());
 
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath10 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload10(), restopt_destFile1);
-
-
-				//매인사진파일 DTO에 set
+				
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload10FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
-
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject10);
 			paramClass1.setRestopt_priceplus(restopt_priceplus10);
 
@@ -459,23 +385,16 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		}
 		if(getRestopt_subject11() != null && getRestopt_priceplus11() != 0){
 			if (getOptupload11() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu11_" + getVirRest_num();
+				String file_name1 = "menu11_" + seq_num;
 				String file_ext1 = getOptupload11FileName().substring(getOptupload11FileName().lastIndexOf('.') + 1, getOptupload11FileName().length());
-
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath11 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload11(), restopt_destFile1);
 
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload11FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
-
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject11);
 			paramClass1.setRestopt_priceplus(restopt_priceplus11);
 
@@ -483,24 +402,16 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		}
 		if(getRestopt_subject12() != null && getRestopt_priceplus12() != 0){
 			if (getOptupload12() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu12_" + getVirRest_num();
+				String file_name1 = "menu12_" + seq_num;
 				String file_ext1 = getOptupload12FileName().substring(getOptupload12FileName().lastIndexOf('.') + 1, getOptupload12FileName().length());
-
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath12 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload12(), restopt_destFile1);
 
-
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload12FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
-
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject12);
 			paramClass1.setRestopt_priceplus(restopt_priceplus12);
 
@@ -508,22 +419,16 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		}
 		if(getRestopt_subject13() != null && getRestopt_priceplus13() != 0){
 			if (getOptupload13() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu13_" + getVirRest_num();
+				String file_name1 = "menu13_" + seq_num;
 				String file_ext1 = getOptupload13FileName().substring(getOptupload13FileName().lastIndexOf('.') + 1, getOptupload13FileName().length());
-
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath13 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload13(), restopt_destFile1);
 
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload13FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject13);
 			paramClass1.setRestopt_priceplus(restopt_priceplus13);
 
@@ -531,24 +436,16 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		}
 		if(getRestopt_subject14() != null && getRestopt_priceplus14() != 0){
 			if (getOptupload14() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu14_" + getVirRest_num();
+				String file_name1 = "menu14_" + seq_num;
 				String file_ext1 = getOptupload14FileName().substring(getOptupload14FileName().lastIndexOf('.') + 1, getOptupload14FileName().length());
-
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath14 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload14(), restopt_destFile1);
 
-
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload14FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
-
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject14);
 			paramClass1.setRestopt_priceplus(restopt_priceplus14);
 
@@ -556,32 +453,22 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		}
 		if(getRestopt_subject15() != null && getRestopt_priceplus15() != 0){
 			if (getOptupload15() != null){
-
-				//옵션 사진 파일 이름과 확장자 설정.
-				String file_name1 = "menu15_" + getVirRest_num();
+				String file_name1 = "menu15_" + seq_num;
 				String file_ext1 = getOptupload15FileName().substring(getOptupload15FileName().lastIndexOf('.') + 1, getOptupload15FileName().length());
-
-				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath15 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload15(), restopt_destFile1);
 
-
-				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload15FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
-
-			paramClass1.setRestopt_rest_num(getVirRest_num());
+			paramClass1.setRestopt_rest_num(seq_num);
 			paramClass1.setRestopt_subject(restopt_subject15);
 			paramClass1.setRestopt_priceplus(restopt_priceplus15);
 
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 
-
-		// 첨부파일을 선택했다면 파일을 업로드한다.
 		if (getUpload1() != null && getUpload2() != null) {
 			resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
 
@@ -598,7 +485,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 			//컨텐트사진파일 저장.
 			rest_destFile2 = new File(fileUploadPath2 + file_name2 + "."+ file_ext2); 
 			FileUtils.copyFile(getUpload2(), rest_destFile2); 
-
 
 			//글넘버
 			paramClass.setRest_num(resultClass.getRest_num());
@@ -617,15 +503,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 
 		return SUCCESS;
 	}
-
-	//form으로 넘길 가상 seq넘버(for opt)
-	public int getVirRest_num() {
-		return virRest_num;
-	}
-	public void setVirRest_num(int virRest_num) {
-		this.virRest_num = virRest_num;
-	}
-
 
 	public RestDTO getParamClass() {
 		return paramClass;

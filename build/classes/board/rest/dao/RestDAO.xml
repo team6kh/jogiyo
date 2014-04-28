@@ -26,6 +26,7 @@
 		<result property="rest_writer_telnum" column="rest_writer_telnum" />
 		<result property="rest_writer_mobilenum" column="rest_writer_mobilenum" />
 		<result property="rest_writer_address" column="rest_writer_address" />
+		<result property="rest_writer_email" column="rest_writer_email" />
 		<result property="rest_readcount" column="rest_readcount" />
 		<result property="rest_reg_date" column="rest_reg_date" />
 	</resultMap>
@@ -59,7 +60,6 @@
 		<result property="cpn_num" column="cpn_num" />
 	</resultMap>
 	
-	
 	<resultMap id="PaidBoard" class="PayDTO">
 		<result property="paid_num" column="paid_num" />
 		<result property="paid_rest_num" column="paid_rest_num" />
@@ -87,10 +87,6 @@
 	</resultMap>
 	
 	
-	
-
-
-
 	<!-- 공통정의 -->
 	<sql id="select-all">
 		select * from Rest_board
@@ -101,17 +97,14 @@
 	</sql>
 
 
-
-
-
 	<!-- insert -->
 	<insert id="insertRest_board" parameterClass="RestDTO">
 		INSERT INTO Rest_board (rest_num, rest_subject, rest_localcategory,
 		rest_typecategory, rest_writer_id, rest_writer_name, rest_writer_telnum,
-		rest_writer_mobilenum, rest_writer_address, rest_reg_date)
+		rest_writer_mobilenum, rest_writer_address, rest_writer_email, rest_reg_date)
 		VALUES (rest_seq_num.NEXTVAL, #rest_subject#, #rest_localcategory#,
 		#rest_typecategory#, #rest_writer_id#, #rest_writer_name#, #rest_writer_telnum#,
-		#rest_writer_mobilenum#, #rest_writer_address#, #rest_reg_date#)
+		#rest_writer_mobilenum#, #rest_writer_address#, #rest_writer_email#, #rest_reg_date#)
 	</insert>
 
 	<insert id="insertRestopt" parameterClass="RestoptDTO">
@@ -136,12 +129,10 @@
 		Insert into coopon_table (cpn_num) values (#cpn_num#)
 	</insert>
 	
-	
 	<insert id="insertPaidBoard" parameterClass="PayDTO">
 		Insert into paid_board (paid_num, paid_rest_num, paid_rest_subject, paid_restopt_num, paid_restopt_subject, paid_restopt_priceplus, paid_restopt_destFile1, paid_cpn, paid_cpn_used, session_id, paid_reg_date) values (paid_seq_num.NEXTVAL, #paid_rest_num#, #paid_rest_subject#, #paid_restopt_num#, #paid_restopt_subject#, #paid_restopt_priceplus#, #paid_restopt_destFile1#, #paid_cpn#, #paid_cpn_used#, #session_id#, #paid_reg_date#)
 	</insert>
 	
-
 
 
 	<!-- select -->
@@ -153,18 +144,50 @@
 		SELECT max(rest_num) as rest_num FROM Rest_board
 	</select>
 	
+	<select id="selectPaidLastNo" resultClass="PayDTO" parameterClass="int">
+		SELECT max(paid_num) as paid_num FROM paid_board
+	</select>
+	
 	<select id="selectCount" resultClass="int">
 		SELECT count(*) FROM Rest_board
+	</select>
+	
+	<select id="selectPaidCount" resultClass="int">
+		SELECT count(*) FROM paid_board
 	</select>
 
 	<select id="selectAll" resultMap="RestBoard" parameterClass="int">
 		<include refid="select-all" />
 		ORDER BY rest_num DESC
 	</select>
-
+	
+	<select id="selectLocalAll" resultMap="RestBoard" parameterClass="int">
+		select * from rest_board where rest_localcategory like '1%'
+		ORDER BY rest_num DESC
+	</select>
+	
+	<select id="selectTypeAll" resultMap="RestBoard" parameterClass="int">
+		select * from rest_board where rest_typecategory like '2%'
+		ORDER BY rest_num DESC
+	</select>
+	
+	<select id="selectLocal" resultMap="RestBoard" parameterClass="RestDTO">
+		select * from rest_board
+		where rest_localcategory=#rest_localcategory#
+	</select>
+	
+	<select id="selectType" resultMap="RestBoard" parameterClass="RestDTO">
+		select * from rest_board
+		where rest_typecategory=#rest_typecategory#
+	</select>
+	
 	<select id="selectCartAll" resultMap="CartBoard" parameterClass="CartDTO">
 		select * from Cart_board
 		where cart_rest_num=#cart_rest_num# and session_id=#session_id#
+	</select>
+	
+	<select id="selectPaidnow" resultMap="PaidBoard" parameterClass="PayDTO">
+		select * from paid_board where paid_num > #paid_num#
 	</select>
 	
 	<select id="selectPaidAll" resultMap="PaidBoard" parameterClass="CartDTO">
@@ -189,8 +212,6 @@
 
 
 
-
-
 	<!-- update -->
 	<update id="updateRestone" parameterClass="RestDTO">
 		UPDATE Rest_board SET rest_subject = #rest_subject#,
@@ -198,7 +219,6 @@
 		rest_typecategory = #rest_typecategory#
 		<include refid="where-num" />
 	</update>
-	
 	
 	<update id="updateFile" parameterClass="RestDTO">
 		UPDATE Rest_board SET rest_destFile1 = #rest_destFile1#,
@@ -219,12 +239,10 @@
 		where restopt_rest_num=#restopt_rest_num# and restopt_subject=#restopt_subject#
 	</update>
 	
-	
 	<update id="updateRest_readcount" parameterClass="RestDTO">
 		UPDATE Rest_board SET rest_readcount = rest_readcount + 1
 		<include refid="where-num" />
 	</update>
-
 
 
 
@@ -255,7 +273,6 @@
 		where restopt_rest_num=#restopt_rest_num# and restopt_subject=#restopt_subject#
 	</delete>
 	
-	
 	<delete id="deleteCartBoard" parameterClass="RestDTO">
 		DELETE FROM Cart_board
 		where cart_rest_num=#rest_num# and session_id=#rest_writer_id#	
@@ -265,8 +282,6 @@
 		DELETE FROM review_board
 		where review_rest=#rest_num#	
 	</delete>
-	
-	
 	
 
 </sqlMap>

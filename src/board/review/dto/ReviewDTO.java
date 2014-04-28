@@ -10,7 +10,7 @@ public class ReviewDTO {
 	private String review_content;  // 글내용
 	private String review_file; // 첨부 사진
 	private Date review_reg_date; // 작성일
-	private String review_rating; // 별점
+	private int review_rating; // 별점
 	
 	
 	// getter & setter
@@ -50,12 +50,15 @@ public class ReviewDTO {
 	public void setReview_reg_date(Date review_reg_date) {
 		this.review_reg_date = review_reg_date;
 	}
-	public String getReview_rating() {
-		return review_rating;
-	}
-	public void setReview_rating(String review_rating) {
-		this.review_rating = review_rating;
-	}
+        public int getReview_rating()
+        {
+            return review_rating;
+        }
+        public void setReview_rating(int review_rating)
+        {
+            this.review_rating = review_rating;
+        }
+	
 	
 	
 	

@@ -19,6 +19,7 @@
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
+<link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
 
 </head>
@@ -45,16 +46,20 @@
 	}
 </script>
 			</head>
-
+			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
+            
 			<body>
 
 				<table width="600" border="0" cellspacing="0" cellpadding="2">
 					<tr>
 						<td align="center"><h2>${resultClass.recipe_subject}</h2></td>
 					</tr>
-
 					<tr>
-						<td height="20" align="right"><input name="list" type="button" value="추천" onClick="javascript:location.href='recommand.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />'"></td>
+					<s:if test="#session.session_id != null">
+						
+						<td height="20" align="right"><input name="list" type="button" value="추천" onClick="javascript:document.getElementById('isrecommand').contentWindow.location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'"></td>
+                         <iframe src="blink.html" id ="isrecommand" style="display:none;"></iframe>					
+					</s:if>
 					</tr>
 				</table>
 
@@ -166,8 +171,8 @@
 
 					<tr>
 						<td bgcolor="#F4F4F4">내용</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_content" />
+						<td bgcolor="#FFFFFF" height="600" colspan="3" align="left">
+          			&nbsp;&nbsp;<s:property value="pagingHtml" escape="false" />
 						</td>
 					</tr>
 					<tr bgcolor="#777777">
@@ -193,23 +198,7 @@
 					<tr bgcolor="#777777">
 						<td height="1" colspan="2"></td>
 					</tr>
-
-					<tr>
-						<td bgcolor="#F4F4F4">첨부파일</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp; <s:url id="download"
-								action="fileDownloadAction">
-								<s:param name="recipe_num">
-									<s:property value="recipe_num" />
-								</s:param>
-							</s:url> <s:a href="%{download}">
-								<s:property value="resultClass.recipe_orgfile" />
-							</s:a>
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
-
+					
 					<tr>
 						<td height="10" colspan="2"></td>
 					</tr>
@@ -225,10 +214,16 @@
 								<s:param name="recipe_num">
 									<s:property value="recipe_num" />
 								</s:param>
-							</s:url> 
-							<input name="list" type="button" value="수정" class="inputb" onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
-							<input name="list" type="button" value="삭제" class="inputb" 	onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
-							<input name="list" type="button" value="목록" class="inputb" 	onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
+							</s:url>
+							<s:if test="resultClass.recipe_memberwriter == NULL">
+							<input name="list" type="button" value="수정" onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
+							<input name="list" type="button" value="삭제" onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
+							</s:if>
+							<s:elseif test="resultClass.recipe_memberwriter != NULL && resultClass.recipe_memberwriter == #session.session_id">
+							<input name="list" type="button" value="수정" onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
+							<input name="list" type="button" value="삭제" onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
+							</s:elseif>
+							<input name="list" type="button" value="목록" onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
 
 						</td>
 					</tr>

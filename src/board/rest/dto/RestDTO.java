@@ -23,11 +23,18 @@ public class RestDTO {
 	private String rest_writer_telnum;
 	private String rest_writer_mobilenum;
 	private String rest_writer_address;
+	private String rest_writer_email;
 	
 	private Date rest_reg_date;
 	private int rest_readcount;//
 	
 	
+	public String getRest_writer_email() {
+		return rest_writer_email;
+	}
+	public void setRest_writer_email(String rest_writer_email) {
+		this.rest_writer_email = rest_writer_email;
+	}
 	public int getRest_num() {
 		return rest_num;
 	}

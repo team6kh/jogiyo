@@ -2,48 +2,39 @@ package board.rest.action;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import user.buyer.dto.BuyerDTO;
+import user.seller.dto.SellerDTO;
 import board.cart.dto.CartDTO;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
-
 import common.ConDAOAware;
 
 public class PayRestAction extends ActionSupport implements ConDAOAware{
-
 	public static SqlMapClient sqlMapper;
 	private List<CartDTO> list = new ArrayList<CartDTO>();
 	private CartDTO paramClass = new CartDTO();
-	
+	private BuyerDTO buyerDTO = new BuyerDTO();
 	private int rest_num;
 	private String rest_subject;
-	private String session_id;//cart_restopt_priceplus
+	private String session_id;
 	
 	//pay용 파라미터 변수
-	private int pay_num; //완료
-	private String pay_rest_subject; //완료
-	private String pay_restopt_subject =""; //완료
-	private int pay_pricetotal; //완료
+	private int pay_num;
+	private String pay_rest_subject;
+	private String pay_restopt_subject ="";
+	private int pay_pricetotal;
 	
 	
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
 	}
 	
-	
 	public String execute() throws Exception {
-		
 		paramClass.setCart_rest_num(getRest_num());
 		paramClass.setSession_id(getSession_id());
 		
-		System.out.println(getRest_num());
-		System.out.println(getSession_id());
-		
-		
 		//현재 카트에 담긴 레코드를 리스트에 담음 (상품넘버and세션아이디)
 		list = sqlMapper.queryForList("Rest.selectForPayment",paramClass);
-		System.out.println("list : "+list); // null
 		
 		//결제 필수 4종 파라미터 생성, and get() to AGS_pay.jsp
 		pay_num = getRest_num();
@@ -53,6 +44,10 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 			pay_restopt_subject += list.get(i).getCart_restopt_subject()+", ";
 			pay_pricetotal += list.get(i).getCart_restopt_priceplus();
 		}
+		
+		//회원정보
+		String session_id = getSession_id();
+		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerOne", session_id);
 		
 		return SUCCESS; // AGS_pay.jsp
 	}
@@ -105,6 +100,12 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 	public void setRest_subject(String rest_subject) {
 		this.rest_subject = rest_subject;
 	}
-	
 
+	//구매자 정보용
+	public BuyerDTO getBuyerDTO() {
+		return buyerDTO;
+	}
+	public void setBuyerDTO(BuyerDTO buyerDTO) {
+		this.buyerDTO = buyerDTO;
+	}
 }

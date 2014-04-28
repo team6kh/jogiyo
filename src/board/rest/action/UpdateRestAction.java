@@ -4,29 +4,22 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
-
 import board.rest.dto.RestDTO;
 import board.restopt.dto.RestoptDTO;
 import board.review.action.FileUpload;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
-
 import common.ConDAOAware;
 import common.Constants;
 
 public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	public static SqlMapClient sqlMapper;
 	private List<RestoptDTO> list = new ArrayList<RestoptDTO>();
-	
 	private int rest_num;
 	private int currentPage;
 	private String session_id;
 	
-	
-	
-	
-	//상품글 update
+	//상품글 update 항목 [start]
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
 	
@@ -34,14 +27,16 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	private String rest_subject;
 	private String  rest_localcategory;
 	private String  rest_typecategory;
+	
 	//매인사진
-	private File rest_destFile1; //dto
-	private String rest_main_orgname; // dto
-	private String rest_main_savname; // dto
+	private File rest_destFile1; 
+	private String rest_main_orgname; 
+	private String rest_main_savname;
 	private File upload1;
 	private String upload1ContentType;
 	private String upload1FileName;
 	private String fileUploadPath1 = Constants.COMMON_FILE_PATH + Constants.REST_MAIN_FILE_PATH;
+	
 	//컨텐트사진
 	private File rest_destFile2;
 	private String rest_content_orgname;
@@ -50,14 +45,9 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	private String upload2ContentType;
 	private String upload2FileName;
 	private String fileUploadPath2 = Constants.COMMON_FILE_PATH + Constants.REST_CONTENT_FILE_PATH;
-	//상품글 update 끝
+	//상품글 update 항목 [end]
 	
-	
-	
-	
-	
-	
-	//옵션레코드 update
+	//옵션레코드 update [start]
 	private RestoptDTO paramClass1 = new RestoptDTO();
 	private RestoptDTO resultClass1 = new RestoptDTO();
 	
@@ -77,7 +67,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	private String restopt_subject13;
 	private String restopt_subject14;
 	private String restopt_subject15;
-
+	
 	//insertRest.jsp에서 사용자가 입력한 옵션가 파라미터
 	private int restopt_priceplus1;
 	private int restopt_priceplus2;
@@ -94,12 +84,12 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	private int restopt_priceplus13;
 	private int restopt_priceplus14;
 	private int restopt_priceplus15;
-
+	
 	//옵션사진
 	private String restopt_orgname; //set get //dto
 	private String restopt_savname; //set get //dto
-
-	//이하 set get
+	
+	//옵션사진관련
 	private File optupload1;
 	private String optupload1ContentType;
 	private String optupload1FileName;
@@ -174,10 +164,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	private String optupload15ContentType;
 	private String optupload15FileName;
 	private String optfileUploadPath15 = Constants.COMMON_FILE_PATH + Constants.REST_MENU_FILE_PATH;
-	//옵션레코드 update 끝
-	
-	
-	
+	//옵션레코드 update [end]
 	
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
@@ -192,9 +179,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 		return SUCCESS; //updateRest.jsp
 	}
 	
-	
 	public String execute() throws Exception {
-		
 		//상품글 업데이트 시작
 			//상품글 일반항목 업데이트
 			paramClass.setRest_num(getRest_num());
@@ -202,7 +187,6 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 			paramClass.setRest_localcategory(getRest_localcategory());
 			paramClass.setRest_typecategory(getRest_typecategory());
 			sqlMapper.update("Rest.updateRestone", paramClass);
-			
 			
 			//상품글 파일 업데이트
 			if (getUpload1() != null && getUpload2() != null) {
@@ -238,202 +222,198 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 			}
 		//상품글 업데이트 완료
 		
-		
-		
-		
 		//옵션글 업데이트 시작
 			//업데이트 전 기존옵션을 불러옴
 			list = (List<RestoptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
 			int listsize = list.size(); //기존 옵션의 개수 (index 0 to size)
 			
-			
 			//옵션사진 삭제용
 			FileUpload fileUpload = new FileUpload();
 
 			
-			//이전 옵션의 개수 이내의 인덱스를 판단.
-			if(0<listsize){
-				//사용자가 입력한 옵션이 없으면, 
-				if(getRestopt_subject1() == null && getRestopt_priceplus1() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-					//수정시에 사용자가 옵션을 감소시킨것으로 판단
-					//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
-					if(list.get(0).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(0).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+			//수정시, 사용자가 옵션을 감소했을 경우
+			//옵션 감소시 제거 유지 및 추가시 레코드 유지.
+			
+				//이전 옵션의 개수 이내의 인덱스를 판단.
+				if(0<listsize){
+					//사용자가 입력한 옵션이 없으면, 
+					if(getRestopt_subject1() == null && getRestopt_priceplus1() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+						//수정시에 사용자가 옵션을 감소시킨것으로 판단
+						//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
+						if(list.get(0).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(0).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			//이하 동일함
-			if(1<listsize){
-				if(getRestopt_subject2() == null && getRestopt_priceplus2() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-					
-					if(list.get(1).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(1).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(1<listsize){
+					if(getRestopt_subject2() == null && getRestopt_priceplus2() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+						
+						if(list.get(1).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(1).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(2<listsize){
-				if(getRestopt_subject3() == null && getRestopt_priceplus3() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(2).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(2).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(2<listsize){
+					if(getRestopt_subject3() == null && getRestopt_priceplus3() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(2).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(2).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(3<listsize){
-				if(getRestopt_subject4() == null && getRestopt_priceplus4() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(3).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(3).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(3<listsize){
+					if(getRestopt_subject4() == null && getRestopt_priceplus4() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(3).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(3).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(4<listsize){
-				if(getRestopt_subject5() == null && getRestopt_priceplus5() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(4).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(4).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(4<listsize){
+					if(getRestopt_subject5() == null && getRestopt_priceplus5() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(4).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(4).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(5<listsize){
-				if(getRestopt_subject6() == null && getRestopt_priceplus6() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(5).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(5).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(5<listsize){
+					if(getRestopt_subject6() == null && getRestopt_priceplus6() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(5).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(5).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(6<listsize){
-				if(getRestopt_subject7() == null && getRestopt_priceplus7() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(6).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(6).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(6<listsize){
+					if(getRestopt_subject7() == null && getRestopt_priceplus7() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(6).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(6).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(7<listsize){
-				if(getRestopt_subject8() == null && getRestopt_priceplus8() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(7).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(7).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(7<listsize){
+					if(getRestopt_subject8() == null && getRestopt_priceplus8() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(7).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(7).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(8<listsize){
-				if(getRestopt_subject9() == null && getRestopt_priceplus9() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(8).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(8).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(8<listsize){
+					if(getRestopt_subject9() == null && getRestopt_priceplus9() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(8).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(8).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(9<listsize){
-				if(getRestopt_subject10() == null && getRestopt_priceplus10() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(9).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(9).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(9<listsize){
+					if(getRestopt_subject10() == null && getRestopt_priceplus10() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(9).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(9).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(10<listsize){
-				if(getRestopt_subject11() == null && getRestopt_priceplus11() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(10).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(10).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(10<listsize){
+					if(getRestopt_subject11() == null && getRestopt_priceplus11() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(10).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(10).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(11<listsize){
-				if(getRestopt_subject12() == null && getRestopt_priceplus12() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(11).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(11).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(11<listsize){
+					if(getRestopt_subject12() == null && getRestopt_priceplus12() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(11).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(11).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(12<listsize){
-				if(getRestopt_subject13() == null && getRestopt_priceplus13() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(12).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(12).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(12<listsize){
+					if(getRestopt_subject13() == null && getRestopt_priceplus13() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(12).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(12).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(13<listsize){
-				if(getRestopt_subject14() == null && getRestopt_priceplus14() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(13).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(13).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(13<listsize){
+					if(getRestopt_subject14() == null && getRestopt_priceplus14() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(13).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(13).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
-			
-			if(14<listsize){
-				if(getRestopt_subject15() == null && getRestopt_priceplus15() == 0){
-					paramClass1.setRestopt_rest_num(getRest_num());
-	
-					if(list.get(14).getRestopt_subject() != null){
-						paramClass1.setRestopt_subject(list.get(14).getRestopt_subject());
-						sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+				
+				if(14<listsize){
+					if(getRestopt_subject15() == null && getRestopt_priceplus15() == 0){
+						paramClass1.setRestopt_rest_num(getRest_num());
+		
+						if(list.get(14).getRestopt_subject() != null){
+							paramClass1.setRestopt_subject(list.get(14).getRestopt_subject());
+							sqlMapper.delete("Rest.deleteRestoptOne", paramClass1);
+						}
 					}
 				}
-			}
 			
-			//위에서 필요없는 레코드는 삭제하고,
-			//필요한 레코드는 그대로임
-			//아래에서 사용자가 수정한 정보들을 update 함
-			
-			//다른case// 새로 사용자가 추가한 옵션들은 insert함
-			
+				
+			//사용자가 옵션을 수정했을 경우 레코드 update
+			//else// 사용자가 옵션을 추가했을 경우 insert
 			
 			if(getRestopt_subject1() != null && getRestopt_priceplus1() != 0){
 				paramClass1.setRestopt_rest_num(getRest_num());
 				paramClass1.setRestopt_subject(restopt_subject1);
 				paramClass1.setRestopt_priceplus(restopt_priceplus1);
-
-				if (getOptupload1() != null){ //수정시에 파일 업로드 했을경우
-					if(0<listsize){//기존파일 삭제
+				
+				//수정시에 파일 업로드 했을경우를 판단
+				if (getOptupload1() != null){
+					if(0<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
 						if (list.get(0).getRestopt_savname() != null) {
 							String filesName = list.get(0).getRestopt_savname(); //기존 파일명을 가져옴
 							fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
@@ -442,12 +422,10 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 					//새롭게 업로드된 것 저장
 					//옵션 사진 파일 이름과 확장자 설정.
 					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
-					
 					String file_ext1 = getOptupload1FileName().substring(getOptupload1FileName().lastIndexOf('.') + 1, getOptupload1FileName().length());
 					//옵션 사진 파일 저장.
 					File restopt_destFile1 = new File(optfileUploadPath1 + file_name1 + "."+ file_ext1); 
 					FileUtils.copyFile(getOptupload1(), restopt_destFile1);
-
 					//매인사진파일 DTO에 set
 					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 					paramClass1.setRestopt_orgname(getOptupload1FileName());
@@ -459,9 +437,9 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						paramClass1.setRestopt_savname(list.get(0).getRestopt_savname());
 					}
 				}
-				
 				if(0<listsize){ 
-					if(list.get(0).getRestopt_num() != 0){// 기존 옵션레코드가 있었을 경우 update
+					// 기존 옵션레코드가 있었을 경우 update
+					if(list.get(0).getRestopt_num() != 0){
 						sqlMapper.update("Rest.updateRestopt", paramClass1);
 					}
 				}else{ //옵션을 새로 추가하가한 경우 insert
@@ -469,7 +447,6 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 				}
 				
 			}
-			
 			
 			if(getRestopt_subject2() != null && getRestopt_priceplus2() != 0){
 				paramClass1.setRestopt_rest_num(getRest_num());
@@ -485,10 +462,8 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 					}
 					String file_name1 = getRest_num() + "_"+ Integer.toString((int)(Math.random() * 999999));
 					String file_ext1 = getOptupload2FileName().substring(getOptupload2FileName().lastIndexOf('.') + 1, getOptupload2FileName().length());
-
 					File restopt_destFile1 = new File(optfileUploadPath2 + file_name1 + "."+ file_ext1); 
 					FileUtils.copyFile(getOptupload2(), restopt_destFile1);
-
 					//매인사진파일 DTO에 set
 					paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 					paramClass1.setRestopt_orgname(getOptupload2FileName());
@@ -500,7 +475,6 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 						paramClass1.setRestopt_savname(list.get(1).getRestopt_savname());
 					}
 				}
-
 				if(1<listsize){ 
 					if(list.get(1).getRestopt_num() != 0){// 기존 옵션레코드가 있었을 경우 update
 						sqlMapper.update("Rest.updateRestopt", paramClass1);
@@ -1049,139 +1023,105 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	
 	
 	
-	
 	public RestDTO getParamClass() {
 		return paramClass;
 	}
-
 	public void setParamClass(RestDTO paramClass) {
 		this.paramClass = paramClass;
 	}
-
 	public String getRest_subject() {
 		return rest_subject;
 	}
-
 	public void setRest_subject(String rest_subject) {
 		this.rest_subject = rest_subject;
 	}
-
 	public String getRest_localcategory() {
 		return rest_localcategory;
 	}
-
 	public void setRest_localcategory(String rest_localcategory) {
 		this.rest_localcategory = rest_localcategory;
 	}
-
 	public String getRest_typecategory() {
 		return rest_typecategory;
 	}
-
 	public void setRest_typecategory(String rest_typecategory) {
 		this.rest_typecategory = rest_typecategory;
 	}
-
 	public File getRest_destFile1() {
 		return rest_destFile1;
 	}
-
 	public void setRest_destFile1(File rest_destFile1) {
 		this.rest_destFile1 = rest_destFile1;
 	}
-
 	public String getRest_main_orgname() {
 		return rest_main_orgname;
 	}
-
 	public void setRest_main_orgname(String rest_main_orgname) {
 		this.rest_main_orgname = rest_main_orgname;
 	}
-
 	public String getRest_main_savname() {
 		return rest_main_savname;
 	}
-
 	public void setRest_main_savname(String rest_main_savname) {
 		this.rest_main_savname = rest_main_savname;
 	}
-
 	public File getUpload1() {
 		return upload1;
 	}
-
 	public void setUpload1(File upload1) {
 		this.upload1 = upload1;
 	}
-
 	public String getUpload1ContentType() {
 		return upload1ContentType;
 	}
-
 	public void setUpload1ContentType(String upload1ContentType) {
 		this.upload1ContentType = upload1ContentType;
 	}
-
 	public String getUpload1FileName() {
 		return upload1FileName;
 	}
-
 	public void setUpload1FileName(String upload1FileName) {
 		this.upload1FileName = upload1FileName;
 	}
-
 	public String getFileUploadPath1() {
 		return fileUploadPath1;
 	}
-
 	public void setFileUploadPath1(String fileUploadPath1) {
 		this.fileUploadPath1 = fileUploadPath1;
 	}
-
 	public File getRest_destFile2() {
 		return rest_destFile2;
 	}
-
 	public void setRest_destFile2(File rest_destFile2) {
 		this.rest_destFile2 = rest_destFile2;
 	}
-
 	public String getRest_content_orgname() {
 		return rest_content_orgname;
 	}
-
 	public void setRest_content_orgname(String rest_content_orgname) {
 		this.rest_content_orgname = rest_content_orgname;
 	}
-
 	public String getRest_content_savname() {
 		return rest_content_savname;
 	}
-
 	public void setRest_content_savname(String rest_content_savname) {
 		this.rest_content_savname = rest_content_savname;
 	}
-
 	public File getUpload2() {
 		return upload2;
 	}
-
 	public void setUpload2(File upload2) {
 		this.upload2 = upload2;
 	}
-
 	public String getUpload2ContentType() {
 		return upload2ContentType;
 	}
-
 	public void setUpload2ContentType(String upload2ContentType) {
 		this.upload2ContentType = upload2ContentType;
 	}
-
 	public String getUpload2FileName() {
 		return upload2FileName;
 	}
-
 	public void setUpload2FileName(String upload2FileName) {
 		this.upload2FileName = upload2FileName;
 	}
@@ -1940,42 +1880,31 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	public String getOptfileUploadPath14() {
 		return optfileUploadPath14;
 	}
-
 	public void setOptfileUploadPath14(String optfileUploadPath14) {
 		this.optfileUploadPath14 = optfileUploadPath14;
 	}
-
 	public File getOptupload15() {
 		return optupload15;
 	}
-
 	public void setOptupload15(File optupload15) {
 		this.optupload15 = optupload15;
 	}
-
 	public String getOptupload15ContentType() {
 		return optupload15ContentType;
 	}
-
 	public void setOptupload15ContentType(String optupload15ContentType) {
 		this.optupload15ContentType = optupload15ContentType;
 	}
-
 	public String getOptupload15FileName() {
 		return optupload15FileName;
 	}
-
 	public void setOptupload15FileName(String optupload15FileName) {
 		this.optupload15FileName = optupload15FileName;
 	}
-
 	public String getOptfileUploadPath15() {
 		return optfileUploadPath15;
 	}
-
 	public void setOptfileUploadPath15(String optfileUploadPath15) {
 		this.optfileUploadPath15 = optfileUploadPath15;
 	}
-	
-	
 }

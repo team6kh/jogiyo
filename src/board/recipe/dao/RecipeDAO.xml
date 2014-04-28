@@ -3,7 +3,7 @@
 <sqlMap namespace="Recipe">
 
 	<typeAlias alias="RecipeDTO" type="board.recipe.dto.RecipeDTO" />
-
+    <typeAlias alias="RecipeCommandDTO" type="board.recipe.dto.RecipeCommandDTO" />
 	<!-- 리절트 맵 정의 -->
 	<resultMap id="RecipeRes" class="RecipeDTO">
 		<result property="recipe_subject" column="recipe_subject" />
@@ -24,6 +24,12 @@
 		<result property="recipe_reg_date" column="recipe_reg_date" />
 
 	</resultMap>
+	
+	<resultMap id="RecipeCommandRes" class="RecipeCommandDTO">
+		<result property="recipeCommand_num" column="recipeCommand_num" />
+		<result property="recipeCommand_writer" column="recipeCommand_writer" />
+	</resultMap>	
+		
 
 	<!-- 공통으로 사용할 select 절 정의 -->
 	<sql id="select-all">
@@ -95,6 +101,35 @@
 		#recipe_reg_date#
 		)
 	</insert>
+	
+	<!-- insertRecipeCommand 쿼리정의 -->
+	<insert id="insertRecipeCommand" parameterClass="RecipeCommandDTO">
+
+		INSERT INTO
+		RECIPE_COMMAND (
+		RECIPECOMMAND_NUM,
+		RECIPECOMMAND_WRITER
+		)
+		VALUES
+		(#recipeCommand_num#,
+		#recipeCommand_writer#
+		)
+	</insert>
+	
+	<!-- insertRecipeReadCount 쿼리정의 -->
+	<insert id="insertRecipeReadCount" parameterClass="RecipeCommandDTO">
+
+		INSERT INTO
+		RECIPE_COMMAND (
+		RECIPECOMMAND_NUM,
+		RECIPEREADCOUNT_WRITER
+		)
+		VALUES
+		(#recipeCommand_num#,
+		#recipeReadCount_writer#
+		)
+	</insert>
+	
 
 
 	<!-- update 쿼리문 정의 -->
@@ -117,12 +152,12 @@
 		<include refid="where-recipe_num" />
 	</update>
 
+	<!-- 이미지 업로드 by 재욱 -->
 	<update id="updateFile" parameterClass="RecipeDTO">
-		UPDATE RECIPE_BOARD SET RECIPE_ORGFILE = #recipe_orgfile#
-		,RECIPE_FILE
-		= #recipe_file#
+		UPDATE RECIPE_BOARD SET RECIPE_FILE = #recipe_file#
 		<include refid="where-recipe_num" />
 	</update>
+	<!-- made by 재욱 -->
 
 	<update id="updateReadcount" parameterClass="RecipeDTO">
 		UPDATE RECIPE_BOARD SET recipe_readcount = recipe_readcount + 1
@@ -137,6 +172,7 @@
 	<!-- myListRecipe 쿼리문 정의 -->
 	<select id="myListRecipe" resultMap="RecipeRes" parameterClass="java.lang.String">
 		SELECT * FROM RECIPE_BOARD WHERE RECIPE_MEMBERWRITER = #recipe_memberwriter#
+		ORDER BY recipe_num DESC
 	</select>
 
 
@@ -146,16 +182,60 @@
 		<include refid="where-recipe_num" />
 	</delete>
 
+
 	<!-- searchRecipeBoard 쿼리문 정의 -->
-	<select id="detailSearchRecipe" resultMap="RecipeRes" parameterClass="board.recipe.dto.RecipeSearchDTO">
-		SELECT * FROM RECIPE_BOARD WHERE RECIPE_FOODKIND LIKE '%'||#recipe_foodkind#||'%' AND RECIPE_WRITER LIKE '%'||#recipe_writerinput#||'%' AND RECIPE_FOODSUBJECT LIKE '%'||#recipe_foodnameinput#||'%' AND (RECIPE_SUBJECT LIKE '%'||#recipe_subjectinput#||'%' OR RECIPE_CONTENT LIKE '%'||#recipe_subjectinput#||'%')    
+	<select id="detailSearchRecipeAll" resultMap="RecipeRes" parameterClass="board.recipe.dto.RecipeSearchDTO">
+		SELECT * FROM RECIPE_BOARD 
+		WHERE RECIPE_FOODKIND LIKE '%'||#recipe_foodkind#||'%' AND RECIPE_WRITER LIKE '%'||#recipe_writerinput#||'%' AND RECIPE_FOODSUBJECT LIKE '%'||#recipe_foodnameinput#||'%' AND (RECIPE_SUBJECT LIKE '%'||#recipe_subjectinput#||'%' OR RECIPE_CONTENT LIKE '%'||#recipe_subjectinput#||'%') 
+		<![CDATA[ AND RECIPE_TIME>#recipe_timeinput1# AND RECIPE_TIME<#recipe_timeinput2# AND RECIPE_PRICE>#recipe_priceinput1# AND RECIPE_PRICE<#recipe_priceinput2# ]]>   
 	</select>
 	
+	<select id="detailSearchRecipeEmpty" resultMap="RecipeRes" parameterClass="board.recipe.dto.RecipeSearchDTO">
+		SELECT * FROM RECIPE_BOARD 
+		WHERE RECIPE_FOODKIND LIKE '%'||#recipe_foodkind#||'%' AND RECIPE_WRITER LIKE '%'||#recipe_writerinput#||'%' AND RECIPE_FOODSUBJECT LIKE '%'||#recipe_foodnameinput#||'%' AND (RECIPE_SUBJECT LIKE '%'||#recipe_subjectinput#||'%' OR RECIPE_CONTENT LIKE '%'||#recipe_subjectinput#||'%') 
+	</select>
+	
+	<select id="detailSearchRecipePrice" resultMap="RecipeRes" parameterClass="board.recipe.dto.RecipeSearchDTO">
+		SELECT * FROM RECIPE_BOARD 
+		WHERE RECIPE_FOODKIND LIKE '%'||#recipe_foodkind#||'%' AND RECIPE_WRITER LIKE '%'||#recipe_writerinput#||'%' AND RECIPE_FOODSUBJECT LIKE '%'||#recipe_foodnameinput#||'%' AND (RECIPE_SUBJECT LIKE '%'||#recipe_subjectinput#||'%' OR RECIPE_CONTENT LIKE '%'||#recipe_subjectinput#||'%') 
+		<![CDATA[ AND RECIPE_PRICE>#recipe_priceinput1# AND RECIPE_PRICE<#recipe_priceinput2# ]]>   
+	</select>
+	
+	<select id="detailSearchRecipeTime" resultMap="RecipeRes" parameterClass="board.recipe.dto.RecipeSearchDTO">
+		SELECT * FROM RECIPE_BOARD 
+		WHERE RECIPE_FOODKIND LIKE '%'||#recipe_foodkind#||'%' AND RECIPE_WRITER LIKE '%'||#recipe_writerinput#||'%' AND RECIPE_FOODSUBJECT LIKE '%'||#recipe_foodnameinput#||'%' AND (RECIPE_SUBJECT LIKE '%'||#recipe_subjectinput#||'%' OR RECIPE_CONTENT LIKE '%'||#recipe_subjectinput#||'%') 
+		<![CDATA[ AND RECIPE_TIME>#recipe_timeinput1# AND RECIPE_TIME<#recipe_timeinput2# ]]>   
+	</select>
+		
 	<!-- readcountDesc 쿼리문 정의 -->
 	<select id="readcountDesc" resultMap="RecipeRes">
 		SELECT * FROM RECIPE_BOARD
 		ORDER BY recipe_readcount DESC
 	</select>
 	
+	<!-- timeDesc 쿼리문 정의 -->
+	<select id="timeDesc" resultMap="RecipeRes">
+		SELECT * FROM RECIPE_BOARD
+		ORDER BY recipe_time DESC
+	</select>
+	
+	<!-- priceDesc 쿼리문 정의 -->
+	<select id="priceDesc" resultMap="RecipeRes">
+		SELECT * FROM RECIPE_BOARD
+		ORDER BY recipe_price DESC
+	</select>
+	<!-- recommandDesc 쿼리문 정의 -->
+	<select id="recommandDesc" resultMap="RecipeRes">
+		SELECT * FROM RECIPE_BOARD
+		ORDER BY recipe_recommand DESC
+	</select>
+	<!-- commandID 쿼리문 정의-->
+	<select id="commandID" resultMap ="RecipeCommandRes" parameterClass="RecipeCommandDTO" >
+		SELECT * FROM recipe_command where recipeCommand_num = #recipeCommand_num# and recipeCommand_writer=#recipeCommand_writer#
+	</select>
+	<!-- readcountID 쿼리문 정의-->
+	<select id="readcountID" resultMap ="RecipeCommandRes" parameterClass="RecipeCommandDTO" >
+		SELECT * FROM recipe_command where recipeCommand_num = #recipeCommand_num# and recipeReadCount_writer=#recipeReadCount_writer#
+	</select>
 	
 </sqlMap>

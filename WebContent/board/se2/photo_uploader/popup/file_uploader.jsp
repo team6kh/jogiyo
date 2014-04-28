@@ -7,9 +7,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 
-String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "/board/se2/upload"; // 이미지가 저장될 주소
-//String path = "C:/team6/jogiyo/WebContent/resource/notice/content";
-System.out.println(path);
+String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "/board/se2/recipe_upload"; // 이미지가 저장될 주소
+//C:\team6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\jogiyo\\/board/se2/recipe_upload
+
+
 String filename = "";
 
 if(request.getContentLength() > 10*1024*1024 ){
@@ -21,7 +22,6 @@ if(request.getContentLength() > 10*1024*1024 ){
 } else {
 
 	try {
-
 		
 		MultipartRequest multi=new MultipartRequest(request, path, 15*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
 	

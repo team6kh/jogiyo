@@ -20,14 +20,11 @@
 
 <title>JOGIYO</title>
 
-
 <!-- Bootstrap core CSS -->
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
-
 
 <style type="text/css">
 	html {
@@ -39,9 +36,6 @@
 		padding: 0
 	}
 </style>
-
-
-
 
 <body>
 	<!-- header -->
@@ -57,7 +51,7 @@
 		</div>
 		
 		<div class="col-md-12" align="center">
-			<font color=blue size=7 ><b>구매해주셔서 감사합니다!</b></font>
+			<img src="assets/img/common/Jogiyo_paidResult.png" width="800px" height="200px">
 		</div>
 		
 		<div class="col-md-12 well">
@@ -106,7 +100,6 @@
 	</div>
 	<!-- end of container -->
 				
-	
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

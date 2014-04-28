@@ -163,19 +163,17 @@
 		var rest_num = document.getElementById("rest_num").value;
 		var rest_subject = document.getElementById("rest_subject").value;
 		var session_id = document.getElementById("session_id").value;
-
 		var restopt_num = form.restopt_num.value;
 		var restopt_destFile1 = form.restopt_destFile1.value;
 		var restopt_subject = form.restopt_subject.value;
 		var restopt_priceplus = form.restopt_priceplus.value;
-
+		
 		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_num="+restopt_num+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
 		document.getElementById("cartFrame").contentWindow.location.href=url;
 		return false;
 	}
 
 	function reviewForm() {
-
 		var reviewform = document.insertReviewForm;
 		if (reviewform.style.display == "none") {
 			reviewform.style.display = "block";
@@ -206,6 +204,13 @@
 	function btnSubmit() {
 		var reviewForm = document.insertReviewForm;
 		reviewForm.submit();
+	}
+</script>
+
+<script language="Javascript1.2">
+	function printWindow(){
+	    browserVersion = parseInt(navigator.appVersion)
+	        if (browserVersion >= 4) window.print()
 	}
 </script>
 
@@ -246,40 +251,18 @@
 
 <!--=== Content Part ===-->
 <div class="container">	
-
-	<!-- 줄띄우기 -->
 	<br />	
-
-	<!-- Collapse : 너무 느림!
-	<div class="panel-group" id="accordion">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">지도 보기</a>
-				</h4>
-			</div>
-			<div id="collapseOne" class="panel-collapse collapse in">
-				<div class="panel-body">
-					<div id="map_canvas" class="map"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /Collapse -->	
-
-	<!-- /지도 -->
-
 	<!-- 메뉴 리스트 col-md-9-->
 	<div class="col-md-9">
-
 		<!-- 메뉴 리스트 page-header -->
 	    <div class="page-header">
-			<h1>메뉴 리스트 <small>장바구니에 담아 결제해주세요.</small></h1>
+			<h2><strong>메뉴 리스트</strong> <small>장바구니에 담아 결제해주세요.</small></h2>
 			<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
 			<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
 			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
 			<input type="hidden" id="rest_writer_address" name="rest_writer_address" value=<s:property value="resultClass.rest_writer_address" /> />
 
+			<!-- 글 작성자와 현재 로그인한 세션이 일치할 경우, 수정 및 삭제 버튼을 출력 시킴 -->
 			<c:if test="${sessionScope.session_id==resultClass.rest_writer_id}">
 				<div class="forSeller" align="right">
 					<a href="updateRestForm.action?rest_num=${resultClass.rest_num}&currentPage=${currentPage}&session_id=${sessionScope.session_id}" class="btn btn-success">수정</a>
@@ -288,14 +271,12 @@
 			</c:if>	
 		</div>
 
-
-
 		<c:forEach var="list" items="${list}">
 		<form class="col-sm-4 col-md-4" id="cartForm" name="test">					
 	    	<div class="thumbnail">
 	    		<!-- 옵션 -->
 	      		<a href="${list.restopt_destFile1}">
-	      			<img src="${list.restopt_destFile1}" alt="N/A" style="min-height:125px;height:125px;">
+	      			<img src="${list.restopt_destFile1}"  alt="N/A" style="min-height:125px;height:125px;">
 	      		</a>
 	      		<input type="hidden" id="restopt_destFile1" name="restopt_destFile1" value="${list.restopt_destFile1}" />
 	      		<div class="caption" align="center">
@@ -308,9 +289,9 @@
 
 	      		<!-- 장바구니 담기 버튼 -->
 	      		<div class="text-center">
-		      		<button type="button" class="btn btn-default" onclick="insertCart(this.form)">
-						<span class="glyphicon glyphicon-shopping-cart"></span> 장바구니 담기
-					</button>
+	      				<button type="button" class="btn btn-default" onclick="insertCart(this.form)">
+							<span class="glyphicon glyphicon-shopping-cart"></span> 장바구니 담기
+						</button>
 	      		</div>
 
 	    	</div>
@@ -319,21 +300,41 @@
 	</div>
 	<!-- /메뉴 리스트 col-md-9 -->
 
-	<!-- 지도 col-md-3 -->
+	<!-- 업소상세정보 col-md-3 -->
 	<div class="col-md-3">
 		<div class="page-header">
-		  <h1>지도</small></h1>
+		  <h2><strong>업소상세정보</strong></h2>
 		</div>
-		<div id="map_canvas" class="map"></div>
-	</div>
-	<!-- /지도 col-md-3 -->
 
-	<!-- 장바구니 col-md-3 -->
-	<div class="col-md-3" id="cart">
+				<span class="glyphicon glyphicon-user"></span>	
+				${resultClass.rest_writer_name} <br/>
+			
+				<span class="glyphicon glyphicon-phone-alt"></span>
+				 ${resultClass.rest_writer_telnum}<br/>
+			
+				<span class="glyphicon glyphicon-earphone"></span>	
+				${resultClass.rest_writer_mobilenum}<br/>
+
+				<span class="glyphicon glyphicon-map-marker"></span>
+				${resultClass.rest_writer_address} <br/>
+			
+				<span class="glyphicon glyphicon-envelope"></span>
+				<a href="sendMail.action?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
+				
+				<span class="glyphicon glyphicon-print"></span>
+				<a href="javascript:printWindow()">프린트하기</a> <br/><br/>
+
+		<div id="map_canvas" class="map"></div>
+
+		<!-- 장바구니 col-md-3 -->
+		<div class="page-header">
+			<h2><strong>장바구니</strong></small></h2>
+		</div>
 		<!-- iframe -->
-  		<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:700px;width:100%" height="100%" width="100%"></iframe>
-    </div>
-	<!-- /장바구니 col-md-3 -->	
+		<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:500px;width:100%" height="100%" width="100%"></iframe>
+		<!-- /장바구니 col-md-3 -->
+	</div>
+	<!-- /업소상세정보 col-md-3 -->
 
 	<!-- 리뷰 쓰기 col-md-12 -->
 	<div class="col-md-12">
@@ -510,17 +511,22 @@
     <script src="assets/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-29166220-1']);
-  _gaq.push(['_setDomainName', 'htmlstream.com']);
-  _gaq.push(['_trackPageview']);
+	var _gaq = _gaq || [];
+	_gaq.push([ '_setAccount', 'UA-29166220-1' ]);
+	_gaq.push([ '_setDomainName', 'htmlstream.com' ]);
+	_gaq.push([ '_trackPageview' ]);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+				: 'http://www')
+				+ '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
 </script>
 
 </body>
-</html>	
+</html>

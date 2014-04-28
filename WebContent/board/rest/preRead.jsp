@@ -10,10 +10,6 @@
 	<meta http-equiv="Refresh" content="0; URL=http://localhost:8000/jogiyo/readRest.action?rest_num=${rest_num}&currentPage=${review_rest_currentPage}">
 </head>
 
-
-<body>
-	
-</body>
 </html>
 
 
