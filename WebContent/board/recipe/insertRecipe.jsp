@@ -22,7 +22,6 @@
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -262,6 +261,8 @@ function submitContents(elClickedObj){
 
 // textArea에 이미지 첨부
 function pasteHTML(filepath){
+	//비교ㅇㅇ
+	//request.getSession().getServletContext().getRealPath("/") + File.separator + "/board/se2/recipe_upload"; // 이미지가 저장될 주소
     var sHTML = '<img src="<%=request.getContextPath()%>/board/se2/recipe_upload/'+filepath+'">';
     oEditors.getById["recipe_content"].exec("PASTE_HTML", [sHTML]); 
 }

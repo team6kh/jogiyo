@@ -11,6 +11,7 @@ String path = request.getSession().getServletContext().getRealPath("/") + File.s
 //String path = "C:/team6/jogiyo/WebContent/resource/notice/content";
 //String path = "C:/team6/jogiyo/WebContent/board/se2/upload";
 
+System.out.println(path);
 String filename = "";
 
 if(request.getContentLength() > 10*1024*1024 ){
