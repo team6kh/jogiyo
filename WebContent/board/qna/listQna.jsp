@@ -21,6 +21,7 @@
     <!-- Custom styles for this template -->
     <link href="common/common-template.css" rel="stylesheet">
     
+    
     <script type="text/javascript">
     	var num = 0;
     	var totcnt = "<c:out value="${topCount }"/>";
@@ -53,15 +54,20 @@
 			}else {
 			alert("!로그인 하셔야 글을 쓰실 수 있습니다.");
 				
-			}	
-		}
-	
-	
+			}
+    	}
+    	
+    	function fn_reply(qna_num){
+    		var reply = document.getElementById("qna_reply_"+qna_num).value;
+    		alert(reply);
+    	}
+
     </script>
 
 	
 </head>
 <body>
+
 	<%@ include file="/common/header.jsp"%>
 	<!-- container -->
 	<div class="container">
@@ -70,16 +76,17 @@
 
 		<!-- test board pretty -->
 		
-		<h3>자주묻는질문</h3>
+		<h3>자주묻는질문 TOP 10</h3>
 		 	<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
 				<tbody>
 					<c:forEach var="list" items="${topList }">
+						
 						<tr onclick="fn_show('row${list.qna_num }', '${list.qna_num }');" style="cursor: pointer;">
 							<td class="text-center">
 								<c:out value="${list.qna_num }" />
 							</td>
-					
+									
 							<td class="text-left">
 								<c:choose>
 									<c:when test="${list.qna_category eq '01' }"><font color="blue">[회원가입]</c:when>
@@ -90,14 +97,20 @@
 									<c:when test="${list.qna_category eq '06' }"><font color="#00D8FF">[기타]</c:when>
 									<c:otherwise><font color="red">[전체]</c:otherwise>
 								</c:choose>
-								<c:out value="${list.qna_subject }" /></font>
+								<c:out value="::${list.qna_subject }" /></font>
 							</td>
 						</tr>
 						<tr id="row${list.qna_num }" style="display: none;">
 							<td class="text-center">&nbsp;</td>
-							<td class="text-left"><pre style="border: 0px" >${list.qna_content}</pre></td>
+							<td class="text-left"><pre style="border: 0px"><font size="4">글내용:${list.qna_content}</pre>	</font>
+							<input type="hidden" id="qna_reply_${list.qna_num}" value="${list.qna_reply}" />	
+						<div class="pull-right">
+							<button type="button" class="btn btn-primary" onclick="fn_reply('${list.qna_num}')">답변보기</button>																												
+						</div>	
+							</td>				
 						</tr>
-					</c:forEach>
+						
+						</c:forEach>
 					<c:if test="${empty topList}">
 						<tr>
 							<td colspan="5">등록된 게시물이 없습니다.</td>
@@ -106,11 +119,11 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="pull-right">
-				
-				<input type="hidden" name="session_id" value="${sessionScope.session_id}"/>
-				<button type="button" class="btn btn-primary" onclick="return checkId()">글쓰기</button>
-			</div>  
+			
+		<div class="pull-right">							
+			<input type="hidden" name="session_id" value="${sessionScope.session_id}"/>
+			<button type="button" class="btn btn-primary" onclick="return checkId()">글쓰기</button>
+		</div>
 
 		<!-- test board pretty -->
 		<div class="col-md-12">
@@ -119,7 +132,6 @@
 		<form name="searchForm" id="searchForm" method="post">
 		<select name="qna_category" id="qna_category" onchange="fn_search();">
 			<option value="">전체</option>
-			<option value="" <c:if test="${qna_category eq ''}">selected</c:if>>작성자</option>
 			<option value="01" <c:if test="${qna_category eq '01'}">selected</c:if>>회원가입</option>
 			<option value="02" <c:if test="${qna_category eq '02'}">selected</c:if>>바로결제</option>
 			<option value="03" <c:if test="${qna_category eq '03'}">selected</c:if>>리뷰</option>
@@ -178,6 +190,7 @@
 							<td colspan="5">등록된 게시물이 없습니다.</td>
 						</tr>
 					</c:if>
+					
 				</tbody>
 			</table>
 

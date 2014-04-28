@@ -51,29 +51,41 @@
 		<form action="updateQnaForm.action" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="qna_num" value="${resultClass.qna_num }"/>
 		<div class="form-group">
-				<label for="qna_category"><font color="blue">카테고리:</label></font>
+				<label for="qna_category"><font size="4" color="blue">카테고리:</label></font>
 					<c:choose>
-						<c:when test="${resultClass.qna_category eq '01' }">회원가입</c:when>
-						<c:when test="${resultClass.qna_category eq '02' }">바로결제</c:when>
-						<c:when test="${resultClass.qna_category eq '03' }">리뷰</c:when>
-						<c:when test="${resultClass.qna_category eq '04' }">이용문의</c:when>
-						<c:when test="${resultClass.qna_category eq '05' }">광고문의</c:when>
-						<c:when test="${resultClass.qna_category eq '06' }">기타</c:when>
+						<c:when test="${resultClass.qna_category eq '01' }" >회원가입</c:when>
+						<c:when test="${resultClass.qna_category eq '02' }" >바로결제</c:when>
+						<c:when test="${resultClass.qna_category eq '03' }" >리뷰</c:when>
+						<c:when test="${resultClass.qna_category eq '04' }" >이용문의</c:when>
+						<c:when test="${resultClass.qna_category eq '05' }" >광고문의</c:when>
+						<c:when test="${resultClass.qna_category eq '06' }" >기타</c:when>
 						<c:otherwise>전체</c:otherwise>
 					</c:choose>
 			</div>
 			<div class="form-group">
-				<label for="qna_subject"><font color="green">제목:</label></font>
-				${resultClass.qna_subject }
+				<label for="qna_id"><font size="4" color="black">작성자:</label></font>
+				<font size="4">${resultClass.qna_id }</font>
 			</div>
 			<div class="form-group">
-				<label for="qna_content"><font color="orange">내용:</label></font>
-				${resultClass.qna_content }
+				<label for="qna_subject"><font size="4" color="green">제목:</label></font>
+				<font size="4">${resultClass.qna_subject }</font>
 			</div>
+			<div class="form-group">
+				<label for="qna_content"><font size="4" color="orange">내용:</label></font>
+				<pre style="border: 0px" ><font size="4">${resultClass.qna_content }</pre></font>
+			</div>
+			<div class="form-group">
+				<label for="qna_reply"><font size="4" color="red">답변:</label></font>
+				<pre style="border: 0px" ><font size="4">${resultClass.qna_reply }</pre></font>
+			</div>
+			
 
 			<div class="pull-right">
+				<c:if test="${session_id eq 'admin'}">
+					<button type="submit" class="btn btn-primary">답변</button>
+				</c:if>	
 				<c:if test="${session_id == resultClass.qna_id}">
-					<button type="submit" class="btn btn-primary">수정하기</button>
+					<button type="submit" class="btn btn-primary">수정</button>
 					<a href="deleteQna.action?qna_num=${resultClass.qna_num }" class="btn btn-primary">삭제</a>
 				</c:if>
 				<a href="listQna.action" class="btn btn-primary">목록</a>

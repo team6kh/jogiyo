@@ -7,6 +7,7 @@ public class QnaDTO {
     private String qna_isprivate;
     private String qna_category;
     private String qna_content;
+    private String qna_reply;
     private int qna_readcount;
     private String qna_reg_date;
     private int qna_ref;
@@ -82,6 +83,13 @@ public class QnaDTO {
 	}
 	public void setQna_id(String qna_id) {
 		this.qna_id = qna_id;
+	}
+	
+	public String getQna_reply() {
+		return qna_reply;
+	}
+	public void setQna_reply(String qna_reply) {
+		this.qna_reply = qna_reply;
 	}
 	@Override
     public String toString()

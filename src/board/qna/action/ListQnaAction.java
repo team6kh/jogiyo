@@ -27,10 +27,10 @@ public class ListQnaAction implements Action, ConDAOAware, Preparable, ModelDriv
 
 	private String qna_category;
 	private String searchText;
-
+	
 	private List<QnaDTO> list = new ArrayList<QnaDTO>();
 	private List<QnaDTO> topList = new ArrayList<QnaDTO>();
-
+	
 	private int currentPage = 1;			// 현재 페이지
 	private int totalCount;					// 총 게시물의 수
 	private int blockCount = 10;			// 한 페이지의 게시물의 수
@@ -54,6 +54,7 @@ public class ListQnaAction implements Action, ConDAOAware, Preparable, ModelDriv
     }
 
 	public String execute() throws Exception {
+		
 	    
 		QnaDTO qnaDTO = new QnaDTO();
 
@@ -85,6 +86,8 @@ public class ListQnaAction implements Action, ConDAOAware, Preparable, ModelDriv
 		    QnaDTO a = list.get(i);
 		    System.out.println("index = " + a.toString());
 		}*/
+		sqlMapper.update("Qna.updateReadCount", getQna_num());
+		resultClass = (QnaDTO)sqlMapper.queryForObject("Qna.qnaDetail", getQna_num());
 		searchText = "";
 		return SUCCESS;
 
@@ -98,8 +101,9 @@ public class ListQnaAction implements Action, ConDAOAware, Preparable, ModelDriv
 
 		//상세보기 조회
 		resultClass = (QnaDTO)sqlMapper.queryForObject("Qna.qnaDetail", getQna_num());
-		resultClass.setQna_content(resultClass.getQna_content().replaceAll("\n", "<br/>"));
-
+		//resultClass.setQna_content(resultClass.getQna_content().replaceAll("\n", "<br/>"));
+		
+		
 		return SUCCESS;
 	}
 
@@ -226,5 +230,7 @@ public class ListQnaAction implements Action, ConDAOAware, Preparable, ModelDriv
     {
         this.searchText = searchText;
     }
+
+
 
 }

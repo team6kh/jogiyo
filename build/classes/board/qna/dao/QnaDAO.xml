@@ -23,10 +23,11 @@
 		<result property="qna_num" column="qna_num" />
 		<result property="qna_category" column="qna_category" />
 		<result property="qna_subject" column="qna_subject" />
-		<result property="qna_content" column="qna_content" />
+		<result property="qna_content" column="qna_content" />		
 		<result property="qna_readcount" column="qna_readcount" />
 		<result property="qna_reg_date" column="qna_reg_date" />
 		<result property="qna_id" column="qna_id"/>
+		<result property="qna_reply" column="qna_reply"/>
 	</resultMap>
 
 	<resultMap id="boardTopRes" class="qnaBoard">
@@ -34,6 +35,8 @@
 		<result property="qna_category" column="qna_category" />		
 		<result property="qna_subject" column="qna_subject" />
 		<result property="qna_content" column="qna_content" />
+		<result property="qna_reply" column="qna_reply"/>
+		
 	</resultMap>
 
 	<select id="qnaList" resultClass="qnaBoard" parameterClass="java.util.HashMap">
@@ -43,7 +46,8 @@
 			qna_subject, 
 			qna_readcount, 
 			to_char(qna_reg_date, 'YYYY-MM-DD HH24:MI')	AS qna_reg_date,
-			qna_id
+			qna_id,
+			qna_reply
 		from qna_board
 		where 1=1 
 		<isNotEmpty property="qna_category">
@@ -56,13 +60,16 @@
 		</isNotEmpty>
 		order by qna_num desc
 	</select>
+	
+				
+	
 
 	<select id="qnaTopList" resultClass="qnaBoard">
 		SELECT 
-			ROWNUM AS QNA_NUM, QNA_CONTENT, QNA_SUBJECT, QNA_CATEGORY
+			ROWNUM AS QNA_NUM, QNA_CONTENT, QNA_SUBJECT, QNA_CATEGORY,qna_reply
 		FROM (
 			SELECT 
-			    QNA_NUM, QNA_CONTENT, QNA_SUBJECT, QNA_CATEGORY
+			    QNA_NUM, QNA_CONTENT, QNA_SUBJECT, QNA_CATEGORY,qna_reply
 			FROM QNA_BOARD
 			ORDER BY QNA_READCOUNT DESC
 		)
@@ -71,7 +78,7 @@
 
 	<select id="qnaDetail" parameterClass="int" resultMap="boardRes2">
 		select * from qna_board
-		where qna_num = #qna_num#
+		where qna_num = #qna_num#	
 	</select>
 
 	<insert id="insertQnaBoard" parameterClass="qnaBoard">
@@ -82,7 +89,7 @@
 			#qna_content#,
 			#qna_category#,
 			sysdate,
-			#qna_id#
+			#qna_id#		
 		)
 	</insert>
 
@@ -96,7 +103,8 @@
 		update qna_board
 		set qna_category = #qna_category#,
 			qna_subject = #qna_subject#,
-			qna_content = #qna_content#
+			qna_content = #qna_content#,
+			qna_reply = #qna_reply#		
 		where qna_num = #qna_num#
 	</update>
 
