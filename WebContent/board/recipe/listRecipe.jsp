@@ -130,7 +130,9 @@
 					<tr bgcolor="#FFFFFF" align="center">
 						<td><s:property value="recipe_num" /></td>
 						<td align="center">&nbsp;<s:property value="recipe_foodkind" /></td>
-						<td><img src="<s:property value="recipe_file" />" /></td>
+						<td>
+							<img src="<s:property value="recipe_file" />" />
+						</td>
 						<td align="center">&nbsp;<s:a href="%{viewURL}">
 								<s:property value="recipe_subject" />
 							</s:a></td>

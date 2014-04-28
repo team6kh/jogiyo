@@ -52,8 +52,7 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 					int start = temp1+5;
 					int end = temp2;
 					
-					
-					imgPath[i] = "C:/team6/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/jogiyo"+content.substring(start, end);
+					imgPath[i] = content.substring(start, end);
 					//update
 					paramClass.setRecipe_num(list.get(i).getRecipe_num());
 					paramClass.setRecipe_file(imgPath[i]);
