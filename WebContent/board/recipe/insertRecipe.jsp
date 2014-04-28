@@ -28,7 +28,6 @@
 <body>
 
 
-
 	<!-- header -->
 	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
@@ -41,7 +40,7 @@
 			<header>
 				<SCRIPT type="text/javascript">
 					function validation() {
-						
+
 
 						var frm = document.inputWarning;
 
@@ -87,9 +86,9 @@
 						}
 
 						return true;
-						
+
 					}
-					
+
 					function membervalidation(){
 						var frm = document.inputWarning;
 
@@ -131,16 +130,16 @@
 
 						return true;
 					}
-					
+
 				</SCRIPT>
 			</header>
-			
+
 			<body>
 			<!-- insert 게시판 윗부분 -->
 				<div class="col-md-12">
 					<h2>RECIPE 게시판</h2>
 					</div>
-					
+
 					<!-- insert 게시판 body -->
 					<!-- 게시판 바디 -->
 		<div class="col-md-12">
@@ -154,13 +153,13 @@
 					<form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="submitContents(this);">
 						<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
 						<s:hidden name="currentPage" value="%{currentPage}" />
-						
+
 				</s:elseif>
 				<s:elseif test="resultClass != NULL && session.session_id != null">
 				    <form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="submitContents(this);">
 						<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
 						<s:hidden name="currentPage" value="%{currentPage}" />
-						
+
 				</s:elseif>
 
 				<table class="table table-stiped">
@@ -199,7 +198,7 @@
 						<td width="100" align="left">
 						  <input type="text" name="recipe_writer" value="${resultClass.recipe_writer}" /></td>
 					</s:else>
-					
+
 						<td width="100" bgcolor="" align="center">비밀번호</td>
 						<td width="100" align="left">
 						  <input type="password" name="recipe_password" value="${resultClass.recipe_password}" /></td>
@@ -222,7 +221,7 @@
 						<td width="300" colspan="3" align="left">
 						  <s:textarea name="recipe_content" id="recipe_content" theme="simple" value="%{resultClass.recipe_content}" cssStyle="width:800px" /></td>
 					</tr>
-				
+
 					<td colspan="4" bgcolor="" align="center">
 					    <input name="submit" type="submit" value="등록"> 
 					    <input type="reset" value="다시작성">
@@ -251,10 +250,10 @@
 	sSkinURI: "<%=request.getContextPath()%>/board/se2/SmartEditor2Skin.html",
 	fCreator: "createSEditor2"
 });
-	
+
 function submitContents(elClickedObj){ 
-	
-	
+
+
 	oEditors.getById["recipe_content"].exec("UPDATE_CONTENTS_FIELD", []);
 	try{ 
 		elClickedObj.inputWarning.submit();
@@ -264,11 +263,10 @@ function submitContents(elClickedObj){
 // textArea에 이미지 첨부
 function pasteHTML(filepath){
     var sHTML = '<img src="<%=request.getContextPath()%>/board/se2/recipe_upload/'+filepath+'">';
-    System.out.printl(sHTML);
     oEditors.getById["recipe_content"].exec("PASTE_HTML", [sHTML]); 
 }
-	
-		
+
+
 	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
