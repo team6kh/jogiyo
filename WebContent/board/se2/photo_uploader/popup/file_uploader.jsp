@@ -9,8 +9,10 @@
 
 String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "/board/se2/recipe_upload"; // 이미지가 저장될 주소
 //C:\team6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\jogiyo\\/board/se2/recipe_upload
+//C:\team6\jogiyo\WebContent\\/board/se2/recipe_upload
 
 
+System.out.println("경로 : "+path);
 String filename = "";
 
 if(request.getContentLength() > 10*1024*1024 ){

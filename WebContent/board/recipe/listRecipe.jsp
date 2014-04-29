@@ -72,35 +72,26 @@
 	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
 
-
 	<!-- container -->
 	<div class="container">
+	
+		<!-- 요리팁 게시판 -->
 		<div class="col-md-12">
 			<h3>요리팁 게시판</h3>
 		</div>
-	
+		<!-- /.요리팁 게시판 -->
+
+		<!-- 게시판 사용 지침 -->
 		<div id=topOfRecipe class="col-md-12">
-			<div class="col-md-3"></div>
-			<div class="col-md-9"><br/><br/><br/>
-				<!-- 알고 있는 요리 레시피를 올려주세요~~! 혼자만 알고 있음, 안~돼!!<br/> -->
-				<input type="button" class="btn btn-warning" value="게시판 사용 지침" onClick="recipeboardrules()"><br/>
-			</div>
-		</div>	
-		
-		<div class="col-md-12">
-			<div class="pull-right">
-				<s:if test="#session.session_id != null">
-					<input type="button" class="btn btn-default" value="마이페이지" onClick="javascript:location.href='mypageFormRecipe.action'" /></td>
-				</s:if>
-			</div>
+			<!-- 알고 있는 요리 레시피를 올려주세요~~! 혼자만 알고 있음, 안~돼!!<br/> -->
+			<input type="button" class="btn btn-danger pull-right" value="게시판 사용 지침" onClick="recipeboardrules()"><br /><br />
 		</div>
-		<!-- /게시판 윗부분 -->
-		
-		
+		<!-- /.게시판 사용 지침 -->
+
 		<!-- 게시판 바디 -->
 		<div class="col-md-12">
-			<table class="table table-stiped">
-				<tr align="center" bgcolor="">
+			<table class="table table-stiped text-center">
+				<tr>
 					<td><strong>번호</strong></td>
 					<td><strong>종류</strong></td>
 					<td><strong>제목</strong></td>
@@ -114,7 +105,6 @@
 				</tr>
 
 				<s:iterator value="list" status="stat">
-
 					<s:url id="viewURL" action="readRecipe">
 						<s:param name="recipe_num">
 							<s:property value="recipe_num" />
@@ -123,45 +113,39 @@
 							<s:property value="currentPage" />
 						</s:param>
 						<s:param name="session_id">
-						<s:property value="#session.session_id" />
+							<s:property value="#session.session_id" />
 						</s:param>
 					</s:url>
 
-					<tr bgcolor="#FFFFFF" align="center">
+					<tr>
 						<td><s:property value="recipe_num" /></td>
-						<td align="center">&nbsp;<s:property value="recipe_foodkind" /></td>
-						<td align="center">&nbsp;<s:a href="%{viewURL}">
-								<s:property value="recipe_subject" />
-							</s:a></td>
-						<td align="center">
-							<s:property value="recipe_foodsubject" />
-						</td>
-						<td align="center"><s:property value="recipe_writer" /></td>
-						<td align="center"><s:property value="recipe_reg_date" /></td>
-						<td align="center"><s:property value="recipe_time" /></td>
-						<td align="center"><s:property value="recipe_price" /></td>
-						<td align="center"><s:property value="recipe_readcount" /></td>
-						<td align="center"><s:property value="recipe_recommand" /></td>
-
-
+						<td><s:property value="recipe_foodkind" /></td>
+						<td><s:a href="%{viewURL}"><s:property value="recipe_subject" /></s:a></td>
+						<td><s:property value="recipe_foodsubject" /></td>
+						<td><s:property value="recipe_writer" /></td>
+						<td><s:property value="recipe_reg_date" /></td>
+						<td><s:property value="recipe_time" /></td>
+						<td><s:property value="recipe_price" /></td>
+						<td><s:property value="recipe_readcount" /></td>
+						<td><s:property value="recipe_recommand" /></td>
 					</tr>
 
 				</s:iterator>
 
+				<!-- 글이 없을 때 -->
 				<s:if test="list.size() <= 0">
-
 					<tr bgcolor="#FFFFFF" align="center">
 						<td colspan="10">등록된 게시물이 없습니다.</td>
 					</tr>
 					<tr bgcolor="#777777">
 						<td height="1" colspan="10"></td>
 					</tr>
-
 				</s:if>
+				<!-- /.글이 없을 때 -->
 
 			</table>
 		</div>
-		<!-- /게시판 바디 -->
+		<!-- /.게시판 바디 -->
 
 		<!-- 페이징 -->
 		<div class="text-center">
@@ -169,107 +153,93 @@
 				<s:property value="pagingHtml" escape="false" />
 			</ul>
 		</div>
-		<!-- /페이징 -->
+		<!-- /.페이징 -->
 
 		<!-- 버튼 -->
-		<div class="pull-right">
-			<input type="button" value="글쓰기"
-				onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
-			<input type="button" value="새로고침" 	onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />';">
-		</div>
-		<!-- /버튼 -->
-
-
-		
-
-				
-
-				<br />
-              
-				<table width="900" border="0" cellspacing="0" cellpadding="2">
-					<tr>
-						<td colspan="10" align="center">
-							<!-- 검색 jsp -->
-							<form name="recipe_search" action="recipe_search.action"
-								enctype="multipart/form-data">
-								<select name="recipe_search_target" id="recipe_search_target"
-									title="검색" onchange="detailsearch()">
-									<option value="null">검색[선택]</option>
-									<option value="recipe_detailsearch">상세검색</option>
-								</select>
-								
-								<s:if test="#session.session_id != null">
-									<input name="mylist" type="button" value="내가쓴글" onClick="javascript:location.href='myListRecipe.action?session_id=<s:property value="#session.session_id" />';">
-								</s:if>
-
-								<div id="detailsearch" style="display: none">
-								  <div class="col-md-12">
-				
-									<table width="667" border="1" cellpadding="0" cellspacing="0" class="table table-stiped">
-
-
-										<tr>
-											<td align="center">종류</td>
-											<td><select name="recipe_foodkind" style="width: 120px"
-												id="recipe_foodkind">
-													<option value="">선택하세요</option>
-													<option value="한식">한식</option>
-													<option value="중식">중식</option>
-													<option value="일식">일식</option>
-													<option value="양식">양식</option>
-													<option value="기타">기타</option>
-											</select></td>
-											<td align="center">작성자</td>
-											<td><input type="text" name="recipe_writerinput"></td>
-										</tr>
-										<tr>
-											<td align="center">요리명</td>
-											<td colspan="3"><input type="text"
-												name="recipe_foodnameinput"></td>
-
-										</tr>
-										<tr>
-											<td align="center">제목+내용</td>
-											<td colspan="3"><input type="text"
-												name="recipe_subjectinput"></td>
-
-										</tr>
-										<tr>
-											<td align="center">소요시간</td>
-											<td colspan="3"><input type="text"
-												name="recipe_timeinput1" size="5">&nbsp;~ <input
-												type="text" name="recipe_timeinput2" size="5"></td>
-										</tr>
-										<tr>
-											<td align="center">비용</td>
-											<td colspan="3"><input type="text"
-												name="recipe_priceinput1" size="5">&nbsp;~ <input
-												type="text" name="recipe_priceinput2" size="5"></td>
-										</tr>
-										<tr>
-											<td align="center" colspan="4"><input type="reset"
-												value="초기화" />&nbsp; <input type="submit" value="검색"></td>
-
-										</tr>
-									</table>
-									</div>
-								</div>
-							</form>
-						</td>
-					</tr>
-				</table>
+		<div class="col-md-12">
+			<div class="form-inline pull-right">
+				<!-- 검색[선택] -->
+				<select class="form-control" name="recipe_search_target" id="recipe_search_target" title="검색" onchange="detailsearch()">
+					<option value="null">검색[선택]</option>
+					<option value="recipe_detailsearch">상세검색</option>
+				</select>
+				<!-- /.검색[선택] -->
+				<!-- 내가 쓴 글 -->
+				<s:if test="#session.session_id != null">
+					<input name="mylist" type="button" class="btn btn-default" value="내가 쓴 글" onClick="javascript:location.href='myAllListPage.action?session_id=<s:property value="#session.session_id" />';">
+				</s:if>
+				<!-- /.내가 쓴 글 -->
+				<input type="button" class="btn btn-primary" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
+				<!-- <input type="button" value="새로고침" onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />';">  -->
 			</div>
-			<!-- end of test message -->
-
 		</div>
-		<!-- /.container -->
+		<!-- /.버튼 -->
 
+		<br />
+		<br />
 
-		<!-- Bootstrap core JavaScript
+		<!-- 상세검색 폼 -->
+		<form name="recipe_search" action="recipe_search.action" enctype="multipart/form-data">
+
+			<!-- 상세검색 시에 나타난다. -->
+			<div id="detailsearch" style="display: none">
+				<div class="col-md-12">
+					<table class="table table-condensed">
+						<tr>
+							<td class="text-center">종류</td>
+							<td>
+								<select name="recipe_foodkind" style="width: 120px" id="recipe_foodkind">
+									<option value="">선택하세요</option>
+									<option value="한식">한식</option>
+									<option value="중식">중식</option>
+									<option value="일식">일식</option>
+									<option value="양식">양식</option>
+									<option value="기타">기타</option>
+								</select>
+							</td>
+							<td>작성자</td>
+							<td><input type="text" name="recipe_writerinput"></td>
+						</tr>
+						<tr>
+							<td class="text-center">요리명</td>
+							<td colspan="3"><input type="text" name="recipe_foodnameinput"></td>
+						</tr>
+						<tr>
+							<td class="text-center">제목+내용</td>
+							<td colspan="3"><input type="text" name="recipe_subjectinput"></td>
+						</tr>
+						<tr>
+							<td class="text-center">소요시간</td>
+							<td colspan="3">
+								<input type="text" name="recipe_timeinput1" size="5">&nbsp;~&nbsp;<input type="text" name="recipe_timeinput2" size="5">
+							</td>
+						</tr>
+						<tr>
+							<td class="text-center">비용</td>
+							<td colspan="3">
+								<input type="text" name="recipe_priceinput1" size="5">&nbsp;~&nbsp;<input type="text" name="recipe_priceinput2" size="5">
+							</td>
+						</tr>
+						<tr>
+							<td class="text-right" colspan="4">
+								<input type="reset" class="btn btn-default" value="초기화" />&nbsp;<input type="submit" class="btn btn-primary" value="검색">
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<!--/.상세검색 시에 나타난다. -->
+			
+		</form>
+		<!-- /.상세검색 폼 -->
+		
+	</div>
+	<!-- /.container -->
+
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="dist/js/bootstrap.min.js"></script>
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
 </body>
 </html>
