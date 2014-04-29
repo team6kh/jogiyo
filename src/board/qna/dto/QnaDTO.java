@@ -4,16 +4,13 @@ public class QnaDTO {
     private int qna_num;
     private String qna_id;
     private String qna_subject;
-    private String qna_isprivate;
+   
     private String qna_category;
     private String qna_content;
     private String qna_reply;
     private int qna_readcount;
     private String qna_reg_date;
-    private int qna_ref;
-    private int qna_ref_step;
-    private int qna_ref_level;
-
+   
 
     public int getQna_num() {
         return qna_num;
@@ -28,12 +25,7 @@ public class QnaDTO {
     public void setQna_subject(String qna_subject) {
         this.qna_subject = qna_subject;
     }
-    public String getQna_isprivate() {
-        return qna_isprivate;
-    }
-    public void setQna_isprivate(String qna_isprivate) {
-        this.qna_isprivate = qna_isprivate;
-    }
+ 
     public String getQna_category() {
         return qna_category;
     }
@@ -59,24 +51,7 @@ public class QnaDTO {
     public void setQna_reg_date(String qna_reg_date) {
         this.qna_reg_date = qna_reg_date;
     }
-    public int getQna_ref() {
-        return qna_ref;
-    }
-    public void setQna_ref(int qna_ref) {
-        this.qna_ref = qna_ref;
-    }
-    public int getQna_ref_step() {
-        return qna_ref_step;
-    }
-    public void setQna_ref_step(int qna_ref_step) {
-        this.qna_ref_step = qna_ref_step;
-    }
-    public int getQna_ref_level() {
-        return qna_ref_level;
-    }
-    public void setQna_ref_level(int qna_ref_level) {
-        this.qna_ref_level = qna_ref_level;
-    }
+ 
   
     public String getQna_id() {
 		return qna_id;
@@ -95,12 +70,10 @@ public class QnaDTO {
     public String toString()
     {
         return "QnaDTO [qna_num=" + qna_num + ", qna_id=" + qna_id
-                + ", qna_subject=" + qna_subject + ", qna_isprivate="
-                + qna_isprivate + ", qna_category=" + qna_category
-                + ", qna_content=" + qna_content + ", qna_readcount="
+                + ", qna_subject=" + qna_subject + ", qna_isprivate="+ ", qna_category=" + qna_category  + ", qna_content=" 
+        		+ qna_content + ", qna_readcount="
                 + qna_readcount + ", qna_reg_date=" + qna_reg_date
-                + ", qna_ref=" + qna_ref + ", qna_ref_step=" + qna_ref_step
-                + ", qna_ref_level=" + qna_ref_level + "]";
+                + ", qna_ref="  + ", qna_ref_step=" + ", qna_ref_level="+ "]";
     }
 
 }

@@ -61,7 +61,17 @@
     		var reply = document.getElementById("qna_reply_"+qna_num).value;
     		alert(reply);
     	}
-
+    	
+    	function fn_checkreply(){
+    		
+    		var qna_checkreply = document.getElementById("qna_checkreply").value;
+    		
+    		window.location.href = "listQna.action?qna_checkreply=" + qna_checkreply;
+    		
+    	}
+	
+     
+    	
     </script>
 
 	
@@ -119,7 +129,10 @@
 				</tbody>
 			</table>
 		</div>
-			
+		
+		
+		
+					
 		<div class="pull-right">							
 			<input type="hidden" name="session_id" value="${sessionScope.session_id}"/>
 			<button type="button" class="btn btn-primary" onclick="return checkId()">글쓰기</button>
@@ -141,7 +154,10 @@
 		</select>
 		<input type="text" name="searchText" maxlength="17"  value="${searchText }">
 		<a href="javascript:fn_search()" class="btn btn-primary">검색</a>
+		
+		
 		</form>
+	
 		<div class="col-md-12 well">
 			<table class="table table-striped table-forum">
 				<thead>
@@ -156,7 +172,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="list" items="${list }">
+					<c:forEach var="list" items="${list }">					
 						<tr>
 							<td class="text-center">
 								<c:out value="${list.qna_num }" />

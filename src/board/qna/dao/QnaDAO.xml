@@ -9,13 +9,10 @@
 		<result property="qna_num" column="qna_num" />
 		<result property="qna_id" column="qna_id" />
 		<result property="qna_subject" column="qna_subject" />
-		<result property="qna_isprivate" column="qna_isprivate" />
 		<result property="qna_content" column="qna_content" />
 		<result property="qna_readcount" column="qna_readcount" />
 		<result property="qna_reg_date" column="qna_reg_date" />
-		<result property="qna_ref" column="qna_ref" />
-		<result property="qna_ref_step" column="qna_ref_step" />
-		<result property="qna_ref_level" column="qna_ref_level" />
+		<result property="qna_reply" column="qna_reply"/>
 	</resultMap>
 
 
@@ -28,6 +25,7 @@
 		<result property="qna_reg_date" column="qna_reg_date" />
 		<result property="qna_id" column="qna_id"/>
 		<result property="qna_reply" column="qna_reply"/>
+		
 	</resultMap>
 
 	<resultMap id="boardTopRes" class="qnaBoard">
@@ -61,7 +59,12 @@
 		order by qna_num desc
 	</select>
 	
-				
+	<select id="qna_checkreplynull" resultMap="boardRes">
+		select * from qna_board where qna_reply is null
+	</select>
+	<select id="qna_checkreply" resultMap="boardRes">
+		select * from qna_board where qna_reply is not null
+	</select>		
 	
 
 	<select id="qnaTopList" resultClass="qnaBoard">
