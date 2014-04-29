@@ -41,7 +41,6 @@
 			<header>
 				<SCRIPT type="text/javascript">
 					function validation() {
-						
 
 						var frm = document.inputWarning;
 

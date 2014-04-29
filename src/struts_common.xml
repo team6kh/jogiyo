@@ -114,8 +114,25 @@
 		
 		<!-- 구매자 대시보드 : 김경남 -->
 		<action name="dashBuyer" class="user.buyer.action.DashBuyerAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
 			<result>/user/buyer/dashBuyer.jsp</result>
-		</action>	
+		</action>
+		
+		<action name="mylistCouponTime" class="user.buyer.action.DashBuyerAction" method="time">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/user/buyer/dashBuyer.jsp</result>
+		</action>
+		
+		<!-- 사용요청 -->
+		<action name="requestCPN" class="user.buyer.action.DashBuyerAction" method="requestCPN">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result type="chain">dashBuyer</result>
+		</action>
+		
+		
 		
 		<!-- 판매자 대시보드 : 윤지은 -->
 		<action name="dashSeller" class="user.seller.action.DashSellerAction">
