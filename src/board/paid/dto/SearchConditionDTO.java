@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class SearchConditionDTO
 {
-    private String session_id; // 판매자의 세션id
+    private String session_id; // 세션id
     private int rest_num; // 식당 코드
     private String startDate; // 기간 검색조건 : 시작 날짜 
     private String endDate; // 기간 검색조건 : 마지막 날짜 

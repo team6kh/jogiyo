@@ -209,6 +209,18 @@
 		select * from Cart_board
 		where cart_rest_num = #cart_rest_num# and session_id = #session_id#
 	</select>
+	
+	<select id="myListCoupon" resultMap="PaidBoard" parameterClass="java.lang.String">
+		SELECT * FROM PAID_BOARD WHERE session_id = #session_id# ORDER BY paid_num DESC
+	</select>
+	
+	<select id="myListTime" resultMap="PaidBoard" parameterClass="board.paid.dto.SearchConditionDTO">
+		SELECT * FROM PAID_BOARD 
+		WHERE SESSION_ID = #session_id# 
+		AND (PAID_REG_DATE Between to_date(#startDate#, 'yyyy-MM-dd') AND to_date(#endDate#, 'yyyy-MM-dd')
+ +0.99999)	ORDER BY paid_num DESC
+		
+	</select>
 
 
 
