@@ -22,7 +22,6 @@
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
-<link rel="stylesheet" href="style.css" type="text/css" charset="UTF-8" />
 
 </head>
 
@@ -35,14 +34,9 @@
 
 	<!-- container -->
 	<div class="container">
-	
-		<div id=topOfRest class="col-md-12">
-			<!-- topOfRest 의 이미지-->
-			<div class="col-md-3"></div>
-			<div class="col-md-9"><br/><br/><br/>
-				여기에 무언가를 추가
-			</div>
-		</div>		
+		<div class="col-md-12">
+			<h3>상품</h3>
+		</div>
 
 		<div class="col-md-12 well">
 			<div class="col-md-12">

@@ -21,7 +21,6 @@
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
-<link rel="stylesheet" href="style.css" type="text/css" charset="UTF-8" />
 
 <!-- 스크립트 -->
 <SCRIPT type="text/javascript">
@@ -76,9 +75,11 @@
 
 	<!-- container -->
 	<div class="container">
+		<div class="col-md-12">
+			<h3>요리팁 게시판</h3>
+		</div>
 	
 		<div id=topOfRecipe class="col-md-12">
-			<!-- topOfRecipe 의 이미지 -->
 			<div class="col-md-3"></div>
 			<div class="col-md-9"><br/><br/><br/>
 				<!-- 알고 있는 요리 레시피를 올려주세요~~! 혼자만 알고 있음, 안~돼!!<br/> -->

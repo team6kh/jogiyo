@@ -12,8 +12,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="assets/ico/jogiyo.png">
-<script type="text/javascript" src="<%=request.getContextPath()%>/board/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/board/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/board/se1/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/board/se1/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
@@ -39,13 +39,13 @@
   	<div class="col-md-12 well">
   		<s:if test="resultClass == NULL">
 			<form name="f" action="insertNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
-		</form></s:if>
+		</s:if>
 		<s:else>
 		  	<form name="u" action="updateNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
 		  	<s:hidden name="notice_num" value="%{notice_num}" />
 		  	<s:hidden name="currentPage" value="%{currentPage}" />
 		  	<s:hidden name="notice_file" value="%{notice_file}" />
-		</form></s:else>
+		</s:else>
 		
   		<div class="form-group">
 			<label>제목</label>
@@ -87,7 +87,7 @@
 			nhn.husky.EZCreator.createInIFrame({
     		oAppRef: oEditors,
     		elPlaceHolder: "notice_content",
-    		sSkinURI: "<%=request.getContextPath()%>/board/se2/SmartEditor2Skin.html",
+    		sSkinURI: "<%=request.getContextPath()%>/board/se1/SmartEditor2Skin.html",
     		fCreator: "createSEditor2"
 		});
 			
@@ -100,7 +100,7 @@
 		
 		// textArea에 이미지 첨부
 		function pasteHTML(filepath){
-		    var sHTML = '<img src="<%=request.getContextPath()%>/board/se2/upload/'+filepath+'">';
+		    var sHTML = '<img src="<%=request.getContextPath()%>/board/se1/notice_upload/'+filepath+'">';
 		    oEditors.getById["notice_content"].exec("PASTE_HTML", [sHTML]); 
 		}
 	</script>
