@@ -7,7 +7,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import board.paid.dto.MenuDTO;
 import board.paid.dto.SearchConditionDTO;
-import board.paid.dto.payDTO;
+import board.paid.dto.PaidDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
@@ -31,7 +31,7 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
  // db 검색 조건값을 담을 DTO
     private SearchConditionDTO searchDTO = new SearchConditionDTO(); 
  // 쿼리문 실행 후 결제 내역 결과를 담는 List
-    private List<payDTO> paidRes = new ArrayList<payDTO>(); 
+    private List<PaidDTO> paidRes = new ArrayList<PaidDTO>(); 
  // 쿼리문 실행 후 인기 메뉴결과를 담는 List
 
     private List<MenuDTO> menuRes = new ArrayList<MenuDTO>(); 
@@ -126,12 +126,12 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
     }
     
     // paidRes setter & getter
-    public List<payDTO> getPaidRes()
+    public List<PaidDTO> getPaidRes()
     {
         return paidRes;
     }
     
-    public void setPaidRes(List<payDTO> paidRes)
+    public void setPaidRes(List<PaidDTO> paidRes)
     {
         this.paidRes = paidRes;
     }

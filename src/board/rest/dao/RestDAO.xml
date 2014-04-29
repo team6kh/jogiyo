@@ -6,7 +6,7 @@
 	<typeAlias alias="RestoptDTO" type="board.restopt.dto.RestoptDTO" />
 	<typeAlias alias="CartDTO" type="board.cart.dto.CartDTO" />
 	<typeAlias alias="CooponDTO" type="table.coopon.dto.CooponDTO" />
-	<typeAlias alias="PayDTO" type="board.paid.dto.payDTO" />
+	<typeAlias alias="PaidDTO" type="board.paid.dto.PaidDTO" />
 	<typeAlias alias="reviewDTO" type="board.review.dto.ReviewDTO" />
 
 	<!-- 리절트 맵 정의 -->
@@ -60,7 +60,7 @@
 		<result property="cpn_num" column="cpn_num" />
 	</resultMap>
 	
-	<resultMap id="PaidBoard" class="PayDTO">
+	<resultMap id="PaidBoard" class="PaidDTO">
 		<result property="paid_num" column="paid_num" />
 		<result property="paid_rest_num" column="paid_rest_num" />
 		<result property="paid_rest_subject" column="paid_rest_subject" />
@@ -129,7 +129,7 @@
 		Insert into coopon_table (cpn_num) values (#cpn_num#)
 	</insert>
 	
-	<insert id="insertPaidBoard" parameterClass="PayDTO">
+	<insert id="insertPaidBoard" parameterClass="PaidDTO">
 		Insert into paid_board (paid_num, paid_rest_num, paid_rest_subject, paid_restopt_num, paid_restopt_subject, paid_restopt_priceplus, paid_restopt_destFile1, paid_cpn, paid_cpn_used, session_id, paid_reg_date) values (paid_seq_num.NEXTVAL, #paid_rest_num#, #paid_rest_subject#, #paid_restopt_num#, #paid_restopt_subject#, #paid_restopt_priceplus#, #paid_restopt_destFile1#, #paid_cpn#, #paid_cpn_used#, #session_id#, #paid_reg_date#)
 	</insert>
 	
@@ -144,7 +144,7 @@
 		SELECT max(rest_num) as rest_num FROM Rest_board
 	</select>
 	
-	<select id="selectPaidLastNo" resultClass="PayDTO" parameterClass="int">
+	<select id="selectPaidLastNo" resultClass="PaidDTO" parameterClass="int">
 		SELECT max(paid_num) as paid_num FROM paid_board
 	</select>
 	
@@ -186,7 +186,7 @@
 		where cart_rest_num=#cart_rest_num# and session_id=#session_id#
 	</select>
 	
-	<select id="selectPaidnow" resultMap="PaidBoard" parameterClass="PayDTO">
+	<select id="selectPaidnow" resultMap="PaidBoard" parameterClass="PaidDTO">
 		select * from paid_board where paid_num > #paid_num#
 	</select>
 	

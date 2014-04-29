@@ -7,7 +7,7 @@ import java.util.List;
 
 import table.coopon.dto.CooponDTO;
 import board.cart.dto.CartDTO;
-import board.paid.dto.payDTO;
+import board.paid.dto.PaidDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,10 +19,10 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 	Calendar today = Calendar.getInstance();
 	private CooponDTO paramClass = new CooponDTO();
 	private CartDTO paramClass1 = new CartDTO();
-	private payDTO paramClass2 = new payDTO();
-	private payDTO resultClass = new payDTO();
+	private PaidDTO paramClass2 = new PaidDTO();
+	private PaidDTO resultClass = new PaidDTO();
 	private List<CartDTO> list1 = new ArrayList<CartDTO>();
-	private List<payDTO> list2 = new ArrayList<payDTO>();
+	private List<PaidDTO> list2 = new ArrayList<PaidDTO>();
 	Integer count;
 	private int rest_num;
 	private String session_id;
@@ -41,7 +41,7 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		//결제 테이블 insert전 레코드가 없는지 있는지 판단.
 		Integer count = (Integer)sqlMapper.queryForObject("Rest.selectPaidCount");
 		if( count != 0){ //레코드가 있을 경우, LastNum set
-			resultClass = (payDTO) sqlMapper.queryForObject("Rest.selectPaidLastNo"); //라스트넘 이상 select 하도록
+			resultClass = (PaidDTO) sqlMapper.queryForObject("Rest.selectPaidLastNo"); //라스트넘 이상 select 하도록
 		}else{ //레코드가 없을 경우, 0 set
 			resultClass.setPaid_num(0);
 		}
@@ -100,7 +100,7 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 	}
 	
 	//구매목록
-	public List<payDTO> getList2() {
+	public List<PaidDTO> getList2() {
 		return list2;
 	}
 	

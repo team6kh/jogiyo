@@ -5,7 +5,7 @@
 <sqlMap namespace="Paid">
 
 	<!--  결제내역 DTO -->
-	<typeAlias alias="paidDTO" type="board.paid.dto.payDTO"/>
+	<typeAlias alias="paidDTO" type="board.paid.dto.PaidDTO"/>
 	<!--  인기메뉴 DTO -->
 	<typeAlias alias="menuDTO" type="board.paid.dto.MenuDTO"/>
 	<!--  검색 조건 파라미터 값 DTO -->
@@ -49,7 +49,7 @@
     
      <!--  SELECT  -->
     <!-- 해당 식당의 결제 내역 :  식당번호/판매자id/결제번호/식당명/메뉴명/메뉴가격/구매자id/주문결제일 값을 뽑아낸다.  -->
-    <!-- startDay와 endDay 값을 넘겨 받아 일정 기간 내의 결제 내역만 뽑아낼 수 있다.  -->
+    <!-- startDate와 endDate 값을 넘겨 받아 일정 기간 내의 결제 내역만 뽑아낼 수 있다.  -->
     <select id="paidList" resultMap="paidRes" parameterClass="searchDTO">
         SELECT 
 			        	p.paid_rest_num, 			         
@@ -65,7 +65,7 @@
     </select>
     
     <!-- 인기 메뉴 top 5개만 : 메뉴명/메뉴 매출건수(top5 선정 기준/메뉴 총매출금 값을 뽑아낸다-->
-    <!-- startDay와 endDay 값을 넘겨 받아 일정 기간 내의 결과를 뽑아낼 수 있다.  -->
+    <!-- startDate와 endDate 값을 넘겨 받아 일정 기간 내의 결과를 뽑아낼 수 있다.  -->
    <select id="hotmenu" resultMap="menuRes" parameterClass="searchDTO">          
         SELECT * FROM
   				(SELECT 
