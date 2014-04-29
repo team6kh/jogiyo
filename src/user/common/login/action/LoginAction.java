@@ -111,7 +111,7 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
         // 로그인 타입이 "관리자"
         } else if (getLogin_type().equals("admin"))
         {
-            if (getLogin_id() != "admin" && getLogin_pw() != "1234")
+            if (getLogin_id().equals("admin") && getLogin_pw().equals("1234"))
             {
                 sessionMap.put("session_type", getLogin_type());
                 sessionMap.put("session_id", "admin");
