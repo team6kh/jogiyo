@@ -101,9 +101,19 @@
         <!-- END of header -->
       
         <!-- container -->
-        <div class="container">
-           
-            <div class="col-md-12 ">
+		<div class="container-fluid">
+		  <!-- row -->
+	      <div class="row">
+	        <!-- sidebar -->
+	        <div class="col-sm-3 col-md-2 sidebar">
+	          <ul class="nav nav-sidebar">
+	            <li><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+	            <li class="active"><a href="dashSeller.action?sesssion_id=${session_id}">판매목록</a></li>
+	          </ul>
+	        </div>
+	        <!-- /.sidebar -->
+	        <!-- main -->
+	        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <!-- 상단 : 기간 검색조건 창 -->
             
                 <div class="col-md-12" style="margin-top: 20px">
@@ -192,6 +202,7 @@
                         </c:forEach>
                     </table>
                 </div>
+            </div>
             </div>
         </div>
         <!-- /.container -->
