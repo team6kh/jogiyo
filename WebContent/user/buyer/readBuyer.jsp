@@ -86,7 +86,7 @@
         	<div class="col-sm-3 col-md-2 sidebar">
           		<ul class="nav nav-sidebar">
             		<li class="active"><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
-            		<li><a href="dashBuyer.action?sesssion_id=${session_id}">구매목록</a></li>
+            		<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
             		<li><a href="myAllListPage.action?session_id=${session_id}">내가 작성한 글</a></li>
           		</ul>
         	</div>

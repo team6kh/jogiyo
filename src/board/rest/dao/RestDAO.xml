@@ -209,6 +209,10 @@
 		select * from Cart_board
 		where cart_rest_num = #cart_rest_num# and session_id = #session_id#
 	</select>
+	
+	<select id="myListCoupon" resultMap="PaidBoard" parameterClass="java.lang.String">
+		SELECT * FROM PAID_BOARD WHERE session_id = #session_id# ORDER BY paid_num DESC
+	</select>
 
 
 
