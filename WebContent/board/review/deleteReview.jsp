@@ -17,6 +17,11 @@
 <link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
+
+
+
+
+
 </head>
 
 <body>
