@@ -65,8 +65,8 @@ public class Emailer extends ActionSupport
             /* 파라미터 설정 */
             RNG rng = new RNG();            
             setEv_code(rng.sEv_code());
-            setFrom("team6kh@gmail.com");
-            setPassword("dkagh1234.");
+            setFrom("kh.team6@gmail.com");
+            setPassword("dkagh1234");
             
             if (getUser_type().equals("buyer"))
             { // BUYER에게 보내는 메일
