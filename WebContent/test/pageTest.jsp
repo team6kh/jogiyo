@@ -35,7 +35,7 @@
 		<!-- test message -->
 		<div class="common-template">
 			<h1>test message</h1>
-			<p class="lead">지금은 release 04.15.01 입니다.</p>
+			<p class="lead">지금은 release 04.29.01 입니다.</p>
 			<p class="lead">당신은 "${session_type}" 입니다.</p>
 			<p class="lead">"${session_name}" 님 환영합니다.</p>
 			<p class="lead"><strong>session_type : ${session_type}</strong></p>
