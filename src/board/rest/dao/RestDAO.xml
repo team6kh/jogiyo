@@ -213,6 +213,12 @@
 	<select id="myListCoupon" resultMap="PaidBoard" parameterClass="java.lang.String">
 		SELECT * FROM PAID_BOARD WHERE session_id = #session_id# ORDER BY paid_num DESC
 	</select>
+	
+	<select id="myListTime" resultMap="PaidBoard" parameterClass="board.paid.dto.SearchTimeDTO">
+	SELECT * FROM PAID_BOARD 
+		WHERE SESSION_ID = #session_id# 
+<![CDATA[ AND PAID_REG_DATE>=#search_start_year#-#search_start_mon#-#search_start_day# AND RECIPE_TIME<=#search_end_year#-#search_end_mon#-#search_end_day#]]> 
+	</select>
 
 
 

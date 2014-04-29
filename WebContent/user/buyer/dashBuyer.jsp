@@ -52,6 +52,7 @@
 
 				<!-- 여기에 작성해주시면 됩니다. -->
 				<div>
+				
 					<table>
 						<tr>
 							<td align="left"><select id="search_start_year"
@@ -79,8 +80,9 @@
 									<c:forEach var="i" begin="1" end="31" step="1">
 										<option value=${i}>${i}</option>
 									</c:forEach>
-							</select>일 <input type="button" value="조회하기" />
+							</select>일 <input type="button" value="조회하기" onClick="javascript:location.href='mylistCouponTime.action?search_start_year<s:property value="search_start_year" />?search_start_mon<s:property value="search_start_mon" />?search_start_day<s:property value="search_start_day" />?search_end_year<s:property value="search_end_year" />?search_end_mon<s:property value="search_end_mon" />?search_end_day<s:property value="search_end_day" />'" />
 					</table>
+					
 				</div>
 				<div>
 					<table class="table table-stiped">

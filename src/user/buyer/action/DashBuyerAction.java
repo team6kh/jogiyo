@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import board.paid.dto.PaidDTO;
+import board.paid.dto.SearchTimeDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
@@ -14,6 +15,7 @@ import common.action.PagingAction;
 public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 	public static SqlMapClient sqlMapper;
 	private List<PaidDTO> list = new ArrayList<PaidDTO>();
+	private List<PaidDTO> timelist= new ArrayList<PaidDTO>();
 
 	private int currentPage = 1; // 현재 페이지
 	private int totalCount; // 총 게시물의 수
@@ -24,16 +26,34 @@ public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 	private PagingAction page; // 페이징 클래스
 	private String actionName = "myListCoupon";
 	private String session_id;
+	private int search_start_year;
+	private int search_start_mon;
+	private int search_start_day;
+	private int search_end_year;
+	private int search_end_mon;
+	private int search_end_day;
+	private SearchTimeDTO parmaClass = new SearchTimeDTO();
+	
+	
 
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
 
 	}
+	
+	public String time() throws Exception{
+		
+		//시작
+		
+		timelist = sqlMapper.queryForList("Rest.myListCoupon", session_id);
+		return SUCCESS;
+		
+	}
 
 	public String execute() throws Exception {
 		System.out.println("session_id:"+session_id);
 
-		list = sqlMapper.queryForList("Rest.myListCoupon", session_id);
+		list = sqlMapper.queryForList("Rest.myListTime", session_id);
 		totalCount = list.size(); // 전체 글 갯수를 구한다.
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // PagingAction 객체 생성
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
