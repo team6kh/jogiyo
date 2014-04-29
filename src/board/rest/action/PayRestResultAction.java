@@ -7,7 +7,7 @@ import java.util.List;
 
 import table.coopon.dto.CooponDTO;
 import board.cart.dto.CartDTO;
-import board.pay.dto.payDTO;
+import board.paid.dto.payDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;

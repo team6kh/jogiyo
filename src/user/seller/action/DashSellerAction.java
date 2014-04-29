@@ -5,9 +5,9 @@ import java.util.*;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import board.pay.dto.MenuDTO;
-import board.pay.dto.PaidDTO;
-import board.pay.dto.SearchConditionDTO;
+import board.paid.dto.MenuDTO;
+import board.paid.dto.SearchConditionDTO;
+import board.paid.dto.payDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
@@ -31,7 +31,7 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
  // db 검색 조건값을 담을 DTO
     private SearchConditionDTO searchDTO = new SearchConditionDTO(); 
  // 쿼리문 실행 후 결제 내역 결과를 담는 List
-    private List<PaidDTO> paidRes = new ArrayList<PaidDTO>(); 
+    private List<payDTO> paidRes = new ArrayList<payDTO>(); 
  // 쿼리문 실행 후 인기 메뉴결과를 담는 List
 
     private List<MenuDTO> menuRes = new ArrayList<MenuDTO>(); 
@@ -68,14 +68,14 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
             }
             
             // 판매자가 등록한 상품의 결제 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
-            paidRes = sqlMapper.queryForList("Pay.payList", searchDTO);
+            paidRes = sqlMapper.queryForList("Paid.paidList", searchDTO);
             if (!paidRes.isEmpty())
             {
                 // 가져온 결제내역에서 식당코드를 꺼내어 searchDTO에 넣는다
-                searchDTO.setRest_num(paidRes.get(0).getRest_num());
+                searchDTO.setRest_num(paidRes.get(0).getPaid_rest_num());
                 
                 // 판매자가 등록한 상품의 인기 메뉴 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
-                menuRes = sqlMapper.queryForList("Pay.hotmenu", searchDTO);
+                menuRes = sqlMapper.queryForList("Paid.hotmenu", searchDTO);
                 
             }
             return SUCCESS;
@@ -126,12 +126,12 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
     }
     
     // paidRes setter & getter
-    public List<PaidDTO> getPaidRes()
+    public List<payDTO> getPaidRes()
     {
         return paidRes;
     }
     
-    public void setPaidRes(List<PaidDTO> paidRes)
+    public void setPaidRes(List<payDTO> paidRes)
     {
         this.paidRes = paidRes;
     }

@@ -1,4 +1,4 @@
-package board.pay.dto;
+package board.paid.dto;
 
 import java.util.Date;
 

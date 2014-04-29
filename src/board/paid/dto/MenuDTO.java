@@ -1,4 +1,4 @@
-package board.pay.dto;
+package board.paid.dto;
 
 public class MenuDTO
 {

@@ -6,7 +6,7 @@
 	<typeAlias alias="RestoptDTO" type="board.restopt.dto.RestoptDTO" />
 	<typeAlias alias="CartDTO" type="board.cart.dto.CartDTO" />
 	<typeAlias alias="CooponDTO" type="table.coopon.dto.CooponDTO" />
-	<typeAlias alias="PayDTO" type="board.pay.dto.payDTO" />
+	<typeAlias alias="PayDTO" type="board.paid.dto.payDTO" />
 	<typeAlias alias="reviewDTO" type="board.review.dto.ReviewDTO" />
 
 	<!-- 리절트 맵 정의 -->
