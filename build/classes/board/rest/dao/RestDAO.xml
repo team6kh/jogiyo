@@ -255,6 +255,11 @@
 		UPDATE Rest_board SET rest_readcount = rest_readcount + 1
 		<include refid="where-num" />
 	</update>
+	
+	<update id="requestCPN" parameterClass="int">
+		UPDATE paid_board SET paid_cpn_used = 1
+		where paid_num = #paid_num#
+	</update>
 
 
 

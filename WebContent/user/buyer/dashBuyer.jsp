@@ -175,6 +175,7 @@
 							<td><strong>품목이미지</strong></td>
 							<td><strong>쿠폰</strong></td>
 							<td><strong>사용유무</strong></td>
+							<td><strong>사용하기</strong></td>
 							<td><strong>구매자</strong></td>
 							<td><strong>구매날짜</strong></td>
 						</tr>
@@ -188,6 +189,7 @@
 								<td>이미지 사진뜨는곳. </td>
 								<td>${list.paid_cpn} </td>
 								<td>${list.paid_cpn_used} </td>
+								<td><a href="requestCPN.action?paid_num=${list.paid_num}&session_id=${session_id}" class="btn btn-danger">사용요청</a></td>
 								<td>${list.session_id} </td>
 								<td>${list.paid_reg_date} </td>
 							</tr>

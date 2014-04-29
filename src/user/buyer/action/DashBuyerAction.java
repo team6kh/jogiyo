@@ -30,6 +30,7 @@ public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 	private String session_id;
 	private String startDate;
 	private String endDate;
+	private int paid_num;
 	private SearchConditionDTO searchDTO = new SearchConditionDTO();	
 	
 
@@ -39,8 +40,6 @@ public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 	}
 	
 	public String time() throws Exception{
-		
-		//시작
 		searchDTO.setSession_id(getSession_id());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -52,6 +51,13 @@ public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 		return SUCCESS;
 		
 	}
+	
+	//사용요청
+	public String requestCPN() throws Exception{
+		sqlMapper.update("Rest.requestCPN", getPaid_num());
+		return SUCCESS;
+	}
+	
 
 	public String execute() throws Exception {
 		
@@ -163,6 +169,14 @@ public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 
 	public List<PaidDTO> getTimelist() {
 		return timelist;
+	}
+
+	public int getPaid_num() {
+		return paid_num;
+	}
+
+	public void setPaid_num(int paid_num) {
+		this.paid_num = paid_num;
 	}
 	
 	
