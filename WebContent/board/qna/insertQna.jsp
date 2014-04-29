@@ -16,10 +16,10 @@
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="jogiyo.css" rel="stylesheet">
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
+<link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
 
 </head>
