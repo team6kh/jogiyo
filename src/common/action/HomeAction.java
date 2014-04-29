@@ -80,7 +80,9 @@ public class HomeAction implements Action, ConDAOAware
     	/* Masonry 리스트 */
     	listRestopt = (List<RestoptDTO>) sqlMapper.queryForList("Common.selectRestoptAll");
     	// 리스트를 받아와 섞는다(shuffle)
-    	Collections.shuffle(listRestopt);    	
+    	Collections.shuffle(listRestopt);
+    	// 40개만 뽑아온다.
+    	listRestopt = listRestopt.subList(0, 80);
     	setListRestopt(listRestopt);
 
         return SUCCESS;
