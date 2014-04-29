@@ -144,6 +144,15 @@
 				<param name="actionName">loginForm</param>
             </result>
 		</action>
+        
+        <!-- 쿠폰 사용 승인 (in 판매자 대시보드) : 윤지은 -->
+        <action name="submitCPN" class="user.seller.action.DashSellerAction" method="submitCpn">
+            <interceptor-ref name="params"/>
+            <interceptor-ref name="conDAO"/>
+            <result type="redirect-action">
+                <param name="actionName">dashSeller</param>
+            </result>
+        </action>
 		
 		<!-- 관리자 대시보드 -->
 		<action name="dashAdmin" class="user.admin.action.DashAdminAction">
