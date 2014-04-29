@@ -15,9 +15,10 @@
       <resultMap class="paidDTO" id="paidRes">
 		<result property="paid_num" column="paid_num" />
 		<result property="paid_rest_num" column="paid_rest_num" />
-		<result property="paid_rest_subject" column="paid_rest_subject" />
 		<result property="paid_restopt_subject" column="paid_restopt_subject" />
-		<result property="paid_restopt_priceplus" column="paid_restopt_priceplus" />	
+		<result property="paid_restopt_priceplus" column="paid_restopt_priceplus" />
+        <result property="paid_cpn" column="paid_cpn"/>
+        <result property="paid_cpn_used" column="paid_cpn_used"/>	
 		<result property="session_id" column="session_id" />
 		<result property="paid_reg_date" column="paid_reg_date" />   	
       </resultMap> 
@@ -52,11 +53,13 @@
     <!-- startDate와 endDate 값을 넘겨 받아 일정 기간 내의 결제 내역만 뽑아낼 수 있다.  -->
     <select id="paidList" resultMap="paidRes" parameterClass="searchDTO">
         SELECT 
-			        	p.paid_rest_num, 			         
-			        	p.paid_num, 
+			        	p.paid_num,
+                        p.paid_rest_num,     
 			        	p.paid_rest_subject,
 			        	p.paid_restopt_subject,
 			        	p.paid_restopt_priceplus,
+                        p.paid_cpn,
+                        p.paid_cpn_used,
 			        	p.session_id,
 			        	p.paid_reg_date 
         <include refid="fromRPBoard"/> 
@@ -82,5 +85,27 @@
         WHERE  paid_rownum <![CDATA[>=]]> 1  AND paid_rownum <![CDATA[<=]]> 5
         		
    </select>
-    
+   
+   <!-- 쿠폰 사용 요청(paid_board에서 PAID_CPN_USED = 1인 레코드) 내역 추출 -->
+   <select id="requestCPN" resultMap="paidRes" parameterClass="searchDTO">
+        SELECT        
+                        p.paid_num,
+                        p.paid_rest_num, 
+                        p.paid_restopt_subject,
+                        p.paid_restopt_priceplus,
+                        p.paid_cpn,
+                        p.paid_cpn_used,
+                        p.session_id,
+                        p.paid_reg_date 
+        <include refid="fromRPBoard"/>
+        <include refid="whereRest"/> AND p.paid_cpn_used = 1 
+        ORDER BY paid_reg_date
+   </select>
+   
+   <!-- UPDATE -->
+   <update id="submitCPN" parameterClass="int">
+        UPDATE paid_board
+        SET paid_cpn_used = 2    
+        WHERE paid_num = #paid_num#
+    </update>   
 </sqlMap>

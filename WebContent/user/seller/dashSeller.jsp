@@ -154,8 +154,38 @@
                             </table>
                     </form>
                 </div>
-            <!-- 중단 :  차트 : -->
-                <div class="col-md-12">차트?</div>
+            <!-- 중단 :  쿠폰 사용 요청 내역 -->
+                <div class="col-md-12">
+                <form method="post" action="submitCPN.action" >
+                    <div class="col-md-12 text-center">
+                        <table class="table table-hober">
+                            <tr>
+                                <th></th>
+                                <th>결제 번호</th>
+                                <th>주문 메뉴</th>
+                                <th>주문 가격</th>
+                                <th>쿠폰 번호</th>
+                                <th>구 매 자</th>
+                                <th>결 제 일</th>
+                            </tr>
+                            <c:forEach var="cpnDTO" items="${cpnRes}">
+                                <tr>
+                                    <td><input type="checkbox" name="requestPaid_num" value="${cpnDTO.paid_num}"/></td>
+                                    <td>${cpnDTO.paid_num }</td>
+                                    <td>${cpnDTO.paid_restopt_subject}</td>
+                                    <td>${cpnDTO.paid_restopt_priceplus }</td>
+                                    <td>${cpnDTO.paid_cpn }</td>
+                                    <td>${cpnDTO.session_id }</td>
+                                    <td>${cpnDTO.paid_reg_date }</td>
+                            </c:forEach>
+                        </table>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <button type="submit" class="btn btn-primary">쿠폰사용 수락</button>
+                    </div>
+                </form>
+                
+                </div>
             <!--  하단  -->
             <!-- 하단 좌측 : 결제 내역 -->
                 <div class="col-md-6">
