@@ -21,7 +21,6 @@
 	</transactionManager>		
 
 	<sqlMap resource="/board/notice/dao/NoticeDAO.xml"/>
-	<sqlMap resource="/board/paid/dao/PaidDAO.xml"/>
 	<sqlMap resource="/board/qna/dao/QnaDAO.xml"/>
 	<sqlMap resource="/board/recipe/dao/RecipeDAO.xml"/>
 	<sqlMap resource="/board/rest/dao/RestDAO.xml"/>
@@ -30,8 +29,6 @@
 	<sqlMap resource="/common/dao/CommonDAO.xml"/>	
 	<sqlMap resource="/user/buyer/dao/BuyerDAO.xml"/>
 	<sqlMap resource="/user/common/verification/dao/EvDAO.xml"/>	
-	<sqlMap resource="/user/seller/dao/SellerDAO.xml"/>
-    	
-			
+	<sqlMap resource="/user/seller/dao/SellerDAO.xml"/>			
 
 </sqlMapConfig>
