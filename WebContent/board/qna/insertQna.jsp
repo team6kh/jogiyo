@@ -65,6 +65,7 @@
 					<option value="06" <c:if test="${resultClass.qna_category eq '06'}">selected</c:if>>기타</option>
 				</select>
 			</div>
+			
 			<div class="form-group">
 				<label for="qna_subject">제목</label>
 				<input type="text" class="form-control" name="qna_subject" maxlength="60" placeholder="60자 이하로 작성해 주세요" value="${resultClass.qna_subject }" required>
@@ -73,6 +74,11 @@
 				<label for="qna_content">글내용</label>
 				<textarea class="form-control" rows="3" id="qna_content" name="qna_content" maxlength="4000" placeholder="4000자 이하로 작성해 주세요" required>${resultClass.qna_content }</textarea>
 			</div>
+			<div class="form-group">
+				<c:if test="${session_id eq 'admin'}">				
+				<label for="qna_reply">답변글</label>
+				<textarea class="form-control" rows="3" id="qna_reply" name="qna_reply" maxlength="2000" placeholder="2000자 이하로 작성해 주세요" required>${resultClass.qna_reply }</textarea>
+			</div></c:if>
 			<div class="pull-right">
 				<button type="submit" class="btn btn-primary">${textName }</button>
 				<a href="listQna.action" class="btn btn-primary">글목록</a>

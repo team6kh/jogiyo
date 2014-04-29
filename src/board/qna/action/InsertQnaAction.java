@@ -44,8 +44,7 @@ public class InsertQnaAction implements Action, Preparable, ModelDriven, ConDAOA
 	public String insertForm() throws Exception {
 		if (sessionMap != null) {
 			resultClass = new QnaDTO();			
-		//resultClass.setQna_id((String) sessionMap.get("sessionName"));	// 세션이름을 작성자로 설정.
-		//resultClass.setQna_pw((String) sessionMap.get("sessionPw"));		// 세션비번을 글비번으로 설정..
+	
 		}
 		return SUCCESS;
 	}
@@ -67,6 +66,7 @@ public class InsertQnaAction implements Action, Preparable, ModelDriven, ConDAOA
 	
 
 		sqlMapper.insert("Qna.insertQnaBoard", paramClass);
+		
 
 		return SUCCESS;
 	}
@@ -80,7 +80,8 @@ public class InsertQnaAction implements Action, Preparable, ModelDriven, ConDAOA
 
 
 		sqlMapper.update("Qna.updateQna", paramClass);
-
+		//System.out.println("paramClass.qna_reply:"+ paramClass.getQna_reply());
+		
 		return SUCCESS;
 	}
 	/**
