@@ -117,7 +117,7 @@
 							<a href="#" class="alert-link">이메일을 확인해주세요.</a>
 						</div>
 						</c:if>
-					<!-- ./인증이 되지 않았을 시 뜬다. -->
+					<!-- /.인증이 되지 않았을 시 뜬다. -->
 					
 					<!-- 인증 성공 시 -->
 					<c:if test="${buyerDTO.buyer_verification eq 'yes' && actionStatus eq 'evSuccess'}">
@@ -126,11 +126,11 @@
 						<a href="#" class="alert-link">인증 성공</a>
 					</div>
 					</c:if>
-					<!-- ./인증 성공 시 -->
+					<!-- /.인증 성공 시 -->
 					
 					<!-- 숨겨진 iframe -->
 					<iframe src="blink.html" id="checkEv" style="display:none;"></iframe>
-					<!-- ./숨겨진 iframe -->
+					<!-- /.숨겨진 iframe -->
 					
 			       	<h2 class="form-signup-heading">${buyerDTO.buyer_name} 님의 정보</h2>			       				
 					
@@ -176,7 +176,7 @@
 						</div>
 					</div>
 					</c:if>
-					<!-- ./인증이 되지 않았을 시 입력폼이 뜬다. -->
+					<!-- /.인증이 되지 않았을 시 입력폼이 뜬다. -->
 										
 				</form>
 				<!-- /.form-signup -->
