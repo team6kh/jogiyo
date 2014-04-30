@@ -15,6 +15,7 @@ public class ListCartAction implements Action, ConDAOAware {
 	private String rest_subject;
 	private String session_id;
 
+	//인터셉터
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
 	}
@@ -26,7 +27,6 @@ public class ListCartAction implements Action, ConDAOAware {
 		list = sqlMapper.queryForList("Rest.selectCartAll", paramClass);
 		return SUCCESS;
 	}
-	
 	
 	public List<CartDTO> getList() {
 		return list;
@@ -52,5 +52,4 @@ public class ListCartAction implements Action, ConDAOAware {
 	public void setSession_id(String session_id) {
 		this.session_id = session_id;
 	}
-
 }

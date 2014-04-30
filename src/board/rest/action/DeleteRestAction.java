@@ -19,8 +19,8 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 	private List<RestoptDTO> list = new ArrayList<RestoptDTO>();
 	private int rest_num;
 	private String session_id;
-	
-		
+
+	//인터셉터
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
 	}
@@ -78,5 +78,4 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 	public void setSession_id(String session_id) {
 		this.session_id = session_id;
 	}
-	
 }

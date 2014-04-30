@@ -74,7 +74,9 @@
 				</ul>
 			</div>
 			
-			<c:if test="${sessionScope.session_type=='seller'}">
+			
+			
+			<c:if test="${sessionScope.session_type=='seller' && permission==0}">
 				<div class="pull-right">
 					<a href="insertRestForm.action" class="btn btn-primary">글쓰기</a>
 				</div>

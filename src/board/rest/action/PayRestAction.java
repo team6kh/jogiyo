@@ -24,7 +24,7 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 	private String pay_restopt_subject ="";
 	private int pay_pricetotal;
 	
-	
+	//인터셉터
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
 	}

@@ -302,9 +302,8 @@
 		<form class="col-sm-4 col-md-4" id="cartForm" name="test">					
 	    	<div class="thumbnail">
 	    		<!-- 옵션 -->
-	      		<a href="${list.restopt_destFile1}">
-	      			<img src="${list.restopt_destFile1}"  alt="N/A" style="min-height:125px;height:125px;">
-	      		</a>
+      			<img src="${list.restopt_destFile1}"  alt="N/A" style="min-height:125px;height:125px;">
+      			
 	      		<input type="hidden" id="restopt_destFile1" name="restopt_destFile1" value="${list.restopt_destFile1}" />
 	      		<div class="caption" align="center">
 	        		<font color="green"><b>${list.restopt_subject}</b></font> <br/>
@@ -316,9 +315,11 @@
 
 	      		<!-- 장바구니 담기 버튼 -->
 	      		<div class="text-center">
+	      			<c:if test="${sessionScope.session_type=='buyer'}">
 	      				<button type="button" class="btn btn-default" onclick="insertCart(this.form)">
 							<span class="glyphicon glyphicon-shopping-cart"></span> 장바구니 담기
 						</button>
+					</c:if>
 	      		</div>
 
 	    	</div>
@@ -354,11 +355,13 @@
 		<div id="map_canvas" class="map"></div>
 
 		<!-- 장바구니 col-md-3 -->
-		<div class="page-header">
-			<h2><strong>장바구니</strong></small></h2>
-		</div>
-		<!-- iframe -->
-		<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:500px;width:100%" height="100%" width="100%"></iframe>
+		<c:if test="${sessionScope.session_type == 'buyer'}">
+			<div class="page-header">
+				<h2><strong>장바구니</strong></small></h2>
+			</div>
+			<!-- iframe -->
+			<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:500px;width:100%" height="100%" width="100%"></iframe>
+		</c:if>	
 		<!-- /장바구니 col-md-3 -->
 	</div>
 	<!-- /업소상세정보 col-md-3 -->
