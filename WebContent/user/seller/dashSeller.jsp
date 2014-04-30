@@ -15,6 +15,11 @@
         <title>JOGIYO</title>
         <!-- Bootstrap core CSS -->
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!--  Datepicker CSS -->
+        <link href="assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+        
+        
         <!-- Custom styles for this template -->
         <link href="jogiyo.css" rel="stylesheet">
         <link href="common/common-template.css" rel="stylesheet">
@@ -134,13 +139,13 @@
                             <tr>
                                 <td>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}"/> 
+                                        <input type="text" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}"/> 
                                         <span class="input-group-addon">부터</span>  
                                     </div> 
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}"/>
+                                        <input type="text" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}"/>
                                         <span class="input-group-addon">까지</span>  
                                     </div>
                                 </td>
@@ -176,7 +181,8 @@
                                     <td>${cpnDTO.paid_restopt_priceplus }</td>
                                     <td>${cpnDTO.paid_cpn }</td>
                                     <td>${cpnDTO.session_id }</td>
-                                    <td>${cpnDTO.paid_reg_date }</td>
+                                    <td><fmt:formatDate value="${cpnDTO.paid_reg_date }" pattern="yyyy.MM.dd  HH:mm:ss" /></td>
+                                    
                             </c:forEach>
                         </table>
                     </div>
@@ -242,6 +248,27 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="dist/js/bootstrap.min.js"></script>
-                
+        
+         <!--  Datepicker JS -->
+        <script type="text/javascript" src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.ui.datepicker-ko.js"></script>
+        <script>
+             $(function() {
+              	$( "#startDate" ).datepicker({
+              		changeYear: true,
+                    showButtonPanel: true,   //달력아래 닫기 버튼 오늘가기 버튼 출력
+                    dateFormat: "yy-mm-dd", //날짜 출력 형식
+                    minDate : '-2y',
+                    maxDate : '+0'   
+              	});
+            	$("#endDate").datepicker({   //달력 2개가 필요하기 때문에 추가
+            		changeYear: true,
+                    showButtonPanel: true,   
+                    dateFormat: "yy-mm-dd", //날짜 출력 형식
+                    minDate : '-2y',
+                    maxDate : '+0'       
+            	});
+             });
+ </script>        
     </body>
 </html>
