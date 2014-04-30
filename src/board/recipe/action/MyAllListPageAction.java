@@ -19,7 +19,8 @@ public class MyAllListPageAction extends ActionSupport implements ConDAOAware {
 	private List<RecipeDTO> recipelist = new ArrayList<RecipeDTO>();
 	private List<QnaDTO> qnalist = new ArrayList<QnaDTO>();
 	
-	private int currentPage = 1; // 현재 페이지
+	private int recipecurrentPage = 1; // 현재 페이지
+	private int qnacurrentPage = 1;
 	private int recipetotalCount; // 총 게시물의 수
 	private int qnatotalCount;
 	private int blockCount = 10; // 한 페이지의 게시물의 수
@@ -28,7 +29,8 @@ public class MyAllListPageAction extends ActionSupport implements ConDAOAware {
 	private String qnapagingHtml;
 	private PagingAction recipepage; // 페이징 클래스
 	private PagingAction qnapage;
-	private String actionName = "myListRecipe";
+	private String recipeactionName = "myAllListPage";
+	private String qnaactionName = "myAllListPage";
 	private String session_id;
 	
 	
@@ -44,8 +46,8 @@ public class MyAllListPageAction extends ActionSupport implements ConDAOAware {
 
 		recipetotalCount = recipelist.size(); // recipe 전체 글 갯수를 구한다.
 		qnatotalCount = qnalist.size(); //qna 전체 글 갯수를 구한다.
-		recipepage = new PagingAction(actionName, currentPage, recipetotalCount, blockCount, blockPage); // PagingAction 객체 생성
-		qnapage = new PagingAction(actionName, currentPage, qnatotalCount, blockCount, blockPage);
+		recipepage = new PagingAction(recipeactionName, recipecurrentPage, recipetotalCount, blockCount, blockPage); // PagingAction 객체 생성
+		qnapage = new PagingAction(qnaactionName, qnacurrentPage, qnatotalCount, blockCount, blockPage);
 		recipepagingHtml = recipepage.getPagingHtml().toString(); // 페이지 HTML 생성.
 		qnapagingHtml = qnapage.getPagingHtml().toString();
 
@@ -79,15 +81,24 @@ public class MyAllListPageAction extends ActionSupport implements ConDAOAware {
 
 	
 	
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
 	
+	
+	public int getRecipecurrentPage() {
+		return recipecurrentPage;
+	}
+
+	public void setRecipecurrentPage(int recipecurrentPage) {
+		this.recipecurrentPage = recipecurrentPage;
+	}
+
+	public int getQnacurrentPage() {
+		return qnacurrentPage;
+	}
+
+	public void setQnacurrentPage(int qnacurrentPage) {
+		this.qnacurrentPage = qnacurrentPage;
+	}
+
 	public int getBlockCount() {
 		return blockCount;
 	}
