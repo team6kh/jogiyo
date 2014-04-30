@@ -89,7 +89,8 @@
 				<ul class="nav nav-sidebar">
 					<li><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
 					<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
-					<li class="active"><a href="myAllListPage.action?session_id=${session_id}">내가 작성한 글</a></li>
+					<li class="active"><a href="myAllListPage.action?session_id=${session_id}">내가 작성한 글(recipe)</a></li>
+					<li class="active"><a href="myAllListPageQna.action?session_id=${session_id}">내가 작성한 글(qna)</a></li>
 				</ul>
 			</div>
 			<!-- /.sidebar -->
@@ -249,88 +250,7 @@
 					</tr>
 				</table>
 
-				<div class="col-md-12">
-					<h3>My Q&A 목록</h3>
-				</div>
-
-				<!-- searchForm -->
-				<form name="searchForm" id="searchForm">
-					<select name="qna_category" id="qna_category"
-						onchange="fn_search();">
-						<option value="">전체</option>
-						<option value="01"
-							<c:if test="${qna_category eq '01'}">selected</c:if>>회원가입</option>
-						<option value="02"
-							<c:if test="${qna_category eq '02'}">selected</c:if>>바로결제</option>
-						<option value="03"
-							<c:if test="${qna_category eq '03'}">selected</c:if>>리뷰</option>
-						<option value="04"
-							<c:if test="${qna_category eq '04'}">selected</c:if>>이용문의</option>
-						<option value="05"
-							<c:if test="${qna_category eq '05'}">selected</c:if>>광고문의</option>
-						<option value="06"
-							<c:if test="${qna_category eq '06'}">selected</c:if>>기타</option>
-					</select>
-				</form>
-				<!-- /.searchForm -->
-
-				<!-- col-md-12 well -->
-				<div class="col-md-12 well">
-					<table class="table table-striped table-forum">
-						<thead>
-							<tr>
-								<th class="text-center" style="width: 100px;">번호</th>
-								<th class="text-center" style="width: 100px;">카테고리</th>
-								<th class="text-center" style="width: 100px;">제목</th>
-								<th class="text-center" style="width: 100px;">작성일</th>
-								<th class="text-center" style="width: 100px;">조회수</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="qnalist" items="${qnalist }">
-								<tr>
-									<td class="text-center"><c:out value="${qnalist.qna_num }" />
-									</td>
-									<td class="text-center"><c:choose>
-											<c:when test="${qnalist.qna_category eq '01' }">회원가입</c:when>
-											<c:when test="${qnalist.qna_category eq '02' }">바로결제</c:when>
-											<c:when test="${qnalist.qna_category eq '03' }">리뷰</c:when>
-											<c:when test="${qnalist.qna_category eq '04' }">이용문의</c:when>
-											<c:when test="${qnalist.qna_category eq '05' }">광고문의</c:when>
-											<c:when test="${qnalist.qna_category eq '06' }">기타</c:when>
-											<c:otherwise>전체</c:otherwise>
-										</c:choose></td>
-									<td class="text-left"><a
-										href="detailQna.action?qna_num=${qnalist.qna_num }"> <c:out
-												value="${qnalist.qna_subject }" />
-									</a></td>
-									<td class="text-center"><c:out
-											value="${qnalist.qna_reg_date }" /></td>
-									<td class="text-center"><c:out
-											value="${qnalist.qna_readcount }" /></td>
-								</tr>
-							</c:forEach>
-							<c:if test="${empty qnalist}">
-								<tr>
-									<td colspan="5">등록된 게시물이 없습니다.</td>
-								</tr>
-							</c:if>
-						</tbody>
-					</table>
-
-					<div class="text-center">
-						<ul class="pagination pagination-sm">
-							<s:property value="qnapagingHtml" escape="false" />
-						</ul>
-					</div>
-
-					<div class="pull-right">
-						<a href="insertQnaForm.action" class="btn btn-primary">글쓰기</a>
-					</div>
-
-				</div>
-				<!-- /.col-md-12 well -->
-
+			
 			</div>
 			<!-- /.main -->
 

@@ -38,34 +38,46 @@ public class MyAllListPageAction extends ActionSupport implements ConDAOAware {
 		this.sqlMapper = sqlMapper;
 
 	}
+	public String qnaAllList() throws Exception {
+		qnalist = sqlMapper.queryForList("Qna.myListQna", session_id);
+		qnatotalCount = qnalist.size(); //qna 전체 글 갯수를 구한다.
+		qnapage = new PagingAction(qnaactionName, qnacurrentPage, qnatotalCount, blockCount, blockPage);
+		qnapagingHtml = qnapage.getPagingHtml().toString();
+		
+		int qnalastCount = qnatotalCount;
+	
+		if(qnapage.getEndCount() < qnatotalCount)
+			qnalastCount = qnapage.getEndCount() + 1;
+		
+		qnalist = qnalist.subList(qnapage.getStartCount(), qnalastCount);
+		
+		return SUCCESS;
+	}
 
 	public String execute() throws Exception {
 		
 		recipelist = sqlMapper.queryForList("Recipe.myListRecipe", session_id);
-		qnalist = sqlMapper.queryForList("Qna.myListQna", session_id);
+		
 
 		recipetotalCount = recipelist.size(); // recipe 전체 글 갯수를 구한다.
-		qnatotalCount = qnalist.size(); //qna 전체 글 갯수를 구한다.
+		
 		recipepage = new PagingAction(recipeactionName, recipecurrentPage, recipetotalCount, blockCount, blockPage); // PagingAction 객체 생성
-		qnapage = new PagingAction(qnaactionName, qnacurrentPage, qnatotalCount, blockCount, blockPage);
+		
 		recipepagingHtml = recipepage.getPagingHtml().toString(); // 페이지 HTML 생성.
-		qnapagingHtml = qnapage.getPagingHtml().toString();
+		
 
 		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
 		int recipelastCount = recipetotalCount;
-		int qnalastCount = qnatotalCount;
+		
 
 		// 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
 		if (recipepage.getEndCount() < recipetotalCount)
 			recipelastCount = recipepage.getEndCount() + 1;
 		
-		if(qnapage.getEndCount() < qnatotalCount)
-			qnalastCount = qnapage.getEndCount() + 1;
 
 		// 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
 		recipelist = recipelist.subList(recipepage.getStartCount(), recipelastCount);
-		qnalist = qnalist.subList(recipepage.getStartCount(), qnalastCount);
-
+		
 		return SUCCESS;
 
 	}
