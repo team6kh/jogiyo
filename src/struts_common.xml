@@ -111,7 +111,7 @@
 			<interceptor-ref name="conDAO" />
 			<result>/user/common/myAllListPage.jsp</result>
 		</action>
-		<action name="myAllListPageQna" class="board.recipe.action.MyAllListPageAction" method="qnaAllList">
+		<action name="myAllListPageQna" class="board.recipe.action.MyAllListPageQnaAction">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/user/common/myAllListQnaPage.jsp</result>

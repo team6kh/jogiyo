@@ -137,30 +137,30 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="qnalist" items="${qnalist }">
+							<c:forEach var="list" items="${list }">
 								<tr>
-									<td class="text-center"><c:out value="${qnalist.qna_num }" />
+									<td class="text-center"><c:out value="${list.qna_num }" />
 									</td>
 									<td class="text-center"><c:choose>
-											<c:when test="${qnalist.qna_category eq '01' }">회원가입</c:when>
-											<c:when test="${qnalist.qna_category eq '02' }">바로결제</c:when>
-											<c:when test="${qnalist.qna_category eq '03' }">리뷰</c:when>
-											<c:when test="${qnalist.qna_category eq '04' }">이용문의</c:when>
-											<c:when test="${qnalist.qna_category eq '05' }">광고문의</c:when>
-											<c:when test="${qnalist.qna_category eq '06' }">기타</c:when>
+											<c:when test="${list.qna_category eq '01' }">회원가입</c:when>
+											<c:when test="${list.qna_category eq '02' }">바로결제</c:when>
+											<c:when test="${list.qna_category eq '03' }">리뷰</c:when>
+											<c:when test="${list.qna_category eq '04' }">이용문의</c:when>
+											<c:when test="${list.qna_category eq '05' }">광고문의</c:when>
+											<c:when test="${list.qna_category eq '06' }">기타</c:when>
 											<c:otherwise>전체</c:otherwise>
 										</c:choose></td>
 									<td class="text-left"><a
-										href="detailQna.action?qna_num=${qnalist.qna_num }"> <c:out
-												value="${qnalist.qna_subject }" />
+										href="detailQna.action?qna_num=${list.qna_num }"> <c:out
+												value="${list.qna_subject }" />
 									</a></td>
 									<td class="text-center"><c:out
-											value="${qnalist.qna_reg_date }" /></td>
+											value="${list.qna_reg_date }" /></td>
 									<td class="text-center"><c:out
-											value="${qnalist.qna_readcount }" /></td>
+											value="${list.qna_readcount }" /></td>
 								</tr>
 							</c:forEach>
-							<c:if test="${empty qnalist}">
+							<c:if test="${empty list}">
 								<tr>
 									<td colspan="5">등록된 게시물이 없습니다.</td>
 								</tr>

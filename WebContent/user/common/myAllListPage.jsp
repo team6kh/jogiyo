@@ -125,7 +125,7 @@
 									onClick="recipe_recommandarray()">추천수</strong></td>
 						</tr>
 
-						<s:iterator value="recipelist" status="stat">
+						<s:iterator value="list" status="stat">
 
 							<s:url id="viewURL" action="readRecipe">
 								<s:param name="recipe_num">
@@ -153,7 +153,7 @@
 
 						</s:iterator>
 
-						<s:if test="recipelist.size() <= 0">
+						<s:if test="list.size() <= 0">
 
 							<tr bgcolor="#FFFFFF" align="center">
 								<td colspan="10">등록된 게시물이 없습니다.</td>
@@ -168,11 +168,7 @@
 				<!-- /.게시판 바디 -->
 
 				<!-- 페이징 -->
-				<div class="text-center">
-					<ul class="pagination pagination-sm">
-						<s:property value="recipepagingHtml" escape="false" />
-					</ul>
-				</div>
+				
 				<!-- /.페이징 -->
 
 				<!-- 버튼 -->
