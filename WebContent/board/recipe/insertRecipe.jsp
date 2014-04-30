@@ -176,29 +176,23 @@
 			<div class="col-md-12">
 
 				<c:if test="${resultClass == NULL && empty sessionScope.session_id}">
-					1번
 					<form id="inputWarning" name="inputWarning"
 						action="insertRecipe.action" method="post"
 						enctype="multipart/form-data" onSubmit="return nomember();">
 				</c:if>
-				<c:if
-					test="${resultClass == NULL && !(empty sessionScope.session_id)}">
-					2번
+				<c:if test="${resultClass == NULL && !(empty sessionScope.session_id)}">
 				    <form id="inputWarning" name="inputWarning"
 						action="insertRecipe.action" method="post"
 						enctype="multipart/form-data" onSubmit="return member();">
 				</c:if>
 				<c:if test="${resultClass != NULL && empty sessionScope.session_id}">
-					3번
 					<form id="inputWarning" name="inputWarning"
 						action="updateRecipe.action" method="post"
 						enctype="multipart/form-data" onSubmit="return nomember();">
 						<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
 						<s:hidden name="currentPage" value="%{currentPage}" />
 				</c:if>
-				<c:if
-					test="${resultClass != NULL && !(empty sessionScope.session_id)}">
-					4번
+				<c:if test="${resultClass != NULL && !(empty sessionScope.session_id)}">
 				    <form id="inputWarning" name="inputWarning"
 						action="updateRecipe.action" method="post"
 						enctype="multipart/form-data" onSubmit="return member();">
