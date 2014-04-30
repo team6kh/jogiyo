@@ -15,6 +15,7 @@ public class CartDeleteAction implements Action, ConDAOAware {
 	private String rest_subject;
 	private String session_id;
 	
+	//인터셉터
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
 	}
@@ -22,10 +23,9 @@ public class CartDeleteAction implements Action, ConDAOAware {
 	public String execute() throws Exception {
 		paramClass.setCart_rest_num(getRest_num());
 		paramClass.setSession_id(getSession_id());
-		
-		//레코드 삭제
+		//장바구니 레코드 삭제
 		sqlMapper.delete("Rest.deleteCartforpaid", paramClass);
-		//레코드들 = cartboard // where 상품번호 and 세션아뒤 //
+		//장바구니 레코드 가져오기.
 		list = sqlMapper.queryForList("Rest.selectCartAll", paramClass);
 
 		return SUCCESS;
@@ -56,5 +56,4 @@ public class CartDeleteAction implements Action, ConDAOAware {
 	public void setSession_id(String session_id) {
 		this.session_id = session_id;
 	}
-	
 }

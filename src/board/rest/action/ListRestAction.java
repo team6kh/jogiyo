@@ -1,6 +1,7 @@
 package board.rest.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import common.ConDAOAware;
@@ -24,6 +25,7 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	private List<RestDTO> listCH = new ArrayList<RestDTO>();
 	private List<RestDTO> listETC = new ArrayList<RestDTO>();
 	
+	private String session_id; 
 	private int currentPage = 1;			// 현재 페이지
 	private int totalCount;					// 총 게시물의 수
 	private int blockCount = 12;			// 한 페이지의 게시물의 수
@@ -57,6 +59,8 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	private String etc2;
 	private String etc3;
 	private String etc4;
+	
+	int permission;
 
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
@@ -88,8 +92,18 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 			lastCount = page.getEndCount() + 1;
 		// 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
 		list = list.subList(page.getStartCount(), lastCount);
-
-		return SUCCESS;
+		
+		//카운트
+		Integer count = (Integer) sqlMapper.queryForObject("Rest.selectCountforSeller", getSession_id());
+		
+		//count값으로 셀러가 글을 썻는지 안썻는지 판단함. (즉 0이면 글을 쓸수 있어야 함. )
+		if(count == 0){
+			permission = 0;
+		}else{ //글을 썻을때
+			permission = 1;
+		}
+		
+		return SUCCESS; //listRest.jsp
 	}
 
 	public List<RestDTO> getList() {
@@ -229,5 +243,22 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 	public String getEtc4() {
 		return etc4;
 	}
+
+	public String getSession_id() {
+		return session_id;
+	}
+	public void setSession_id(String session_id) {
+		this.session_id = session_id;
+	}
+
+	public int getPermission() {
+		return permission;
+	}
+
+	public void setPermission(int permission) {
+		this.permission = permission;
+	}
+	
+	
 	
 }
