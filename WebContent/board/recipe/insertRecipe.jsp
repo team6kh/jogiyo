@@ -29,53 +29,53 @@
 <link href="common/common-template.css" rel="stylesheet">
 
 <SCRIPT type="text/javascript">
-							
+
 		function nomember(){
 			return validation();
 			submitContents(this);
-			
+
 		}
-		
+
 		function member(){
 			return membervalidation();
 		    submitContents(this);
 		}
-	
+
 		function validation() {
-			
-	
+
+
 			var frm = document.inputWarning; 
-			
+
 			if (frm.recipe_foodkind.value == "") {
 				alert("종류를 입력해주세요.");
 				return false;
 			}
-	
+
 			 if (frm.recipe_subject.value == "") {
 				alert("제목을 입력해주세요.");
 				return false;
 			}
-	
+
 			 if (frm.recipe_foodsubject.value == "") {
 				alert("요리명을 입력해주세요.");
 				return false;
 			}
-	
+
 			 if (frm.recipe_writer.value == "") {
 				alert("작성자를 입력해주세요.");
 				return false;
 			}
-	
+
 			 if (frm.recipe_password.value == "") {
 				alert("비밀번호를 입력해주세요.");
 				return false;
 			}
-	
+
 			 if (frm.recipe_method.value == "") {
 				alert("재료를 입력해주세요.");
 				return false;
 			}
-	
+
 			 if (frm.recipe_time.value == "") {
 				alert("소요시간을 입력해주세요.");
 				return false;
@@ -90,57 +90,57 @@
 			}
 			return true;	
 		}
-		
+
 		function membervalidation(){
-			
-			
+
+
 			var frm = document.inputWarning;
-			
+
 			if (frm.recipe_foodkind.value == "") {
 				alert("종류를 입력해주세요.");
-				
+
 				return false;
 			}
-	
+
 			if (frm.recipe_subject.value == "") {
 				alert("제목을 입력해주세요.");
 				return false;
 			}
-	
+
 			if (frm.recipe_foodsubject.value == "") {
 				alert("요리명을 입력해주세요.");
 				return false;
 			}
-	
+
 			if (frm.recipe_password.value == "") {
 				alert("비밀번호를 입력해주세요.");
 				return false;
 			}
-	
+
 			if (frm.recipe_method.value == "") {
 				alert("재료를 입력해주세요.");
 				return false;
 			}
-	
+
 			if (frm.recipe_time.value == "") {
 				alert("소요시간을 입력해주세요.");
 				return false;
 			}
-			
+
 			if (frm.recipe_price.value == "") {
 				alert("비용을 입력해주세요.");
 				return false;
 			}
-			
+
 			if (document.getElementById("recipe_content") == "") {
 				alert("방법 및 상세 내용을 입력해주세요.");
 				return false;
 			}
 			return true;
 
-			
+
 		}
-		
+
 	</SCRIPT>
 
 
@@ -316,16 +316,16 @@
                       }
             } 
 	});
-		
+
 	function submitContents(elClickedObj){ 
-		
+
 		alert("네이버에디터");
 		oEditors.getById["recipe_content"].exec("UPDATE_CONTENTS_FIELD", []);
 		try{ 
 			elClickedObj.inputWarning.submit(); //submit (form 정의된 action)
 		}catch(e){} 
 	} 
-	
+
 	// textArea에 이미지 첨부
 	function pasteHTML(filepath){
 	    var sHTML = '<img src="<%=request.getContextPath()%>/board/se2/recipe_upload/'+ filepath + '">';
