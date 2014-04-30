@@ -132,7 +132,7 @@
 				<div class="col-md-12" style="margin-top: 20px">
                 
                 	<!--  기간 검색조건 폼  -->
-                    <form name="searchDate" method="post" action="mylistCouponTime.action">
+                    <form name="searchDate" method="post" action="listMyCoupon.action">
                           <table class="table" >
                             <tr>
                                 <th colspan="2">  기간별 검색 </th>

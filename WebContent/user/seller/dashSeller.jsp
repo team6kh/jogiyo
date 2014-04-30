@@ -139,13 +139,13 @@
                             <tr>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}"/> 
+                                        <input type="text" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}" required/> 
                                         <span class="input-group-addon">부터</span>  
                                     </div> 
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}"/>
+                                        <input type="text" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}" required/>
                                         <span class="input-group-addon">까지</span>  
                                     </div>
                                 </td>
@@ -175,7 +175,7 @@
                             </tr>
                             <c:forEach var="cpnDTO" items="${cpnRes}">
                                 <tr>
-                                    <td><input type="checkbox" name="requestPaid_num" value="${cpnDTO.paid_num}"/></td>
+                                    <td><input type="checkbox" name="requestPaid_num" value="${cpnDTO.paid_num}" required /></td>
                                     <td>${cpnDTO.paid_num }</td>
                                     <td>${cpnDTO.paid_restopt_subject}</td>
                                     <td>${cpnDTO.paid_restopt_priceplus }</td>

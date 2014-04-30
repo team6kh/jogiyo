@@ -8,7 +8,6 @@ import common.ConDAOAware;
 import board.rest.dto.RestDTO;
 import board.restopt.dto.RestoptDTO;
 import common.action.PagingAction;
-import board.review.action.PagingReviewAction;
 import board.review.dto.ReviewDTO;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
@@ -39,8 +38,8 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
     private int blockCount = 5; // 한 페이지의 게시물의 수
     private int blockPage = 5; // 한 화면에 보여줄 페이지 수
     private String pagingHtml; // 페이징을 구현한 HTML
-    private PagingReviewAction page; // 페이징 클래스
     private String actionName = "readRest"; // 페이징액션과 로그인액션에서 쓰인다...
+    private PagingAction page;
 
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
@@ -64,7 +63,7 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
         
         // 페이징 관련 코드
         totalCount = reviewRes.size();
-        page = new PagingReviewAction(actionName, ccp, totalCount, blockCount, blockPage, rest_num, currentPage);
+        page = new PagingAction(actionName, ccp, totalCount, blockCount, blockPage, rest_num, currentPage);
         pagingHtml = page.getPagingHtml().toString();
         
         // 현재 페이지에서 보여줄 마지막 글의 번호 설정
@@ -181,10 +180,10 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
     public void setPagingHtml(String pagingHtml) {
         this.pagingHtml = pagingHtml;
     }
-    public PagingReviewAction getPage() {
+    public PagingAction getPage() {
         return page;
     }
-    public void setPage(PagingReviewAction page) {
+    public void setPage(PagingAction page) {
         this.page = page;
     }
     public String getActionName() {

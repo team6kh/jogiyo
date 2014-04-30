@@ -125,7 +125,7 @@
 			<result>/user/buyer/dashBuyer.jsp</result>
 		</action>
 		
-		<action name="mylistCouponTime" class="user.buyer.action.DashBuyerAction" method="time">
+		<action name="listMyCoupon" class="user.buyer.action.DashBuyerAction" method="time">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/user/buyer/dashBuyer.jsp</result>

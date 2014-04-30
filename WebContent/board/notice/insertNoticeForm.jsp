@@ -39,13 +39,13 @@
   	<div class="col-md-12 well">
   		<s:if test="resultClass == NULL">
 			<form name="f" action="insertNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
-		</form></s:if>
+		</s:if>
 		<s:else>
 		  	<form name="u" action="updateNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
 		  	<s:hidden name="notice_num" value="%{notice_num}" />
 		  	<s:hidden name="currentPage" value="%{currentPage}" />
 		  	<s:hidden name="notice_file" value="%{notice_file}" />
-		</form></s:else>
+		</s:else>
 		
   		<div class="form-group">
 			<label>제목</label>

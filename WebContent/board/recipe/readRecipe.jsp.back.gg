@@ -21,12 +21,7 @@
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
-<script type="text/javascript">
-	function open_win_noresizable(url, name) {
-		var oWin = window.open(url, name,
-				"scrollbars=no,status=no,resizable=no,width=300,height=150");
-	}
-</script>
+
 </head>
 
 <body>

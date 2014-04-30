@@ -26,7 +26,7 @@ public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 	private int blockPage = 5; // 한 화면에 보여줄 페이지
 	private String pagingHtml; // 페이지를 구현할 HTML
 	private PagingAction page; // 페이징 클래스
-	private String actionName = "myListCoupon";
+	private String actionName = "dashBuyer";
 	private String session_id;
 	private String startDate;
 	private String endDate;
@@ -63,7 +63,7 @@ public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 		
 		list = sqlMapper.queryForList("Rest.myListCoupon", session_id);
 		totalCount = list.size(); // 전체 글 갯수를 구한다.
-		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // PagingAction 객체 생성
+		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage, session_id); // PagingAction 객체 생성
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
 
 		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
