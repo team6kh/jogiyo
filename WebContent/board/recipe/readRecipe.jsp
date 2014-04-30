@@ -39,165 +39,101 @@
 	<div class="container">
 
 		<div class="col-md-12">
-			<h3>요리팁 게시판</h3>
+			<h3>${resultClass.recipe_subject}</h3>
+			<!-- 로그인 후 보이는 추천 버튼 -->
+			<s:if test="#session.session_id != null">
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary btn-lg" name="list" onClick="javascript:document.getElementById('isrecommand').contentWindow.location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'">
+					<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;추천
+				</button>
+				<br />
+				<br />
+			</div>
+			<iframe src="blink.html" id="isrecommand" style="display: none;"></iframe>
+			</s:if>
+			<!-- /.로그인 후 보이는 추천 버튼 -->	
 		</div>		
 			
-		<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
+		<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />			
 		
 		<!-- 컨텐츠  -->
 		<div class="col-md-12">
-		
-			<!-- 테이블 윗부분 -->
-			<table class="table table-striped text-center">
-				<tr>
-					<td><h2>${resultClass.recipe_subject}</h2></td>
-				</tr>
-				<tr>
-					<s:if test="#session.session_id != null">
-						<td>
-							<input name="list" type="button" value="추천" onClick="javascript:document.getElementById('isrecommand').contentWindow.location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'">
-						</td>
-						<iframe src="blink.html" id="isrecommand" style="display: none;"></iframe>
-					</s:if>
-				</tr>
-			</table>
-			<!-- /.테이블 윗부분 -->
 
 			<!-- 테이블 바디 -->
-			<table class="table table-striped text-center">
-			
-				<tr>
-					<td colspan="2"></td>
-				</tr>
+			<table class="table table-striped">		
 
 				<tr>
-					<td>번호</td>
+					<td class="text-center" style="width: 20%;">번호</td>
 					<td><s:property value="resultClass.recipe_num" /></td>
 				</tr>
-				
+		
 				<tr>
-					<td colspan="2"></td>
-				</tr>
-
-				<tr>
-					<td>종류</td>
+					<td class="text-center" style="width: 20%;">종류</td>
 					<td><s:property	value="resultClass.recipe_foodkind" /></td>
 				</tr>
 
 				<tr>
-					<td colspan="2"></td>
-				</tr>
-
-				<tr>
-					<td>작성일</td>
+					<td class="text-center" style="width: 20%;">작성일</td>
 					<td><s:property value="resultClass.recipe_reg_date" /></td>
 				</tr>
-				
+			
 				<tr>
-					<td height="1" colspan="2"></td>
-				</tr>
-
-				<tr>
-					<td>제목</td>
+					<td class="text-center" style="width: 20%;">제목</td>
 					<td><s:property value="resultClass.recipe_subject" /></td>
 				</tr>
 
 				<tr>
-					<td height="1" colspan="2"></td>
-				</tr>
-				
-				<tr>
-					<td>요리명</td>
+					<td class="text-center" style="width: 20%;">요리명</td>
 					<td><s:property value="resultClass.recipe_foodsubject" /></td>
-				</tr>
-				
-				<tr>
-					<td colspan="2"></td>
-				</tr>
+				</tr>			
 
 				<tr>
-					<td>재료</td>
+					<td class="text-center" style="width: 20%;">재료</td>
 					<td><s:property value="resultClass.recipe_method" />
 					</td>
-				</tr>
-				
+				</tr>				
+
 				<tr>
-					<td colspan="2"></td>
+					<td class="text-center" style="width: 20%;">소비 시간</td>
+					<td><s:property	value="resultClass.recipe_time" />&nbsp;분
+					</td>
 				</tr>
 
 				<tr>
-					<td>소비 시간</td>
-					<td><s:property	value="resultClass.recipe_time" />
+					<td class="text-center" style="width: 20%;">비용</td>
+					<td><s:property value="resultClass.recipe_price" />&nbsp;원
 					</td>
 				</tr>
 				
 				<tr>
-					<td colspan="2"></td>
-				</tr>
-
-				<tr>
-					<td>비용</td>
-					<td><s:property value="resultClass.recipe_price" />
-					</td>
-				</tr>
-				
-				<tr>
-					<td colspan="2"></td>
-				</tr>
-
-				<tr>
-					<td>회원ID</td>
+					<td class="text-center" style="width: 20%;">회원ID</td>
 					<td><s:property value="resultClass.recipe_memberwriter" />
 					</td>
 				</tr>
 				
 				<tr>
-					<td colspan="2"></td>
-				</tr>
-
-				<tr>
-					<td>작성자</td>
+					<td class="text-center" style="width: 20%;">작성자</td>
 					<td><s:property value="resultClass.recipe_writer" /></td>
 				</tr>
-				
-				<tr>
-					<td colspan="2"></td>
-				</tr>
 
 				<tr>
-					<td>내용</td>
+					<td class="text-center" style="width: 20%;">내용</td>
 					<td colspan="3"><s:property value="pagingHtml" escape="false" /></td>
 				</tr>
 				
 				<tr>
-					<td colspan="2"></td>
-				</tr>
-
-				<tr>
-					<td>조회수</td>
+					<td class="text-center" style="width: 20%;">조회수</td>
 					<td><s:property value="resultClass.recipe_readcount" /></td>
 				</tr>
-				
-				<tr>
-					<td colspan="2"></td>
-				</tr>
 
 				<tr>
-					<td>추천수</td>
+					<td class="text-center" style="width: 20%;">추천수</td>
 					<td><s:property value="resultClass.recipe_recommand" />
 					</td>
 				</tr>
 				
 				<tr>
-					<td colspan="2"></td>
-				</tr>
-
-				<tr>
-					<td colspan="2"></td>
-				</tr>
-				
-				<tr>
-					<td colspan="2">
+					<td class="text-right" colspan="2">
 						<s:url id="updateRecipeURL" action="updateRecipeForm">
 							<s:param name="recipe_num">
 								<s:property value="recipe_num" />
@@ -209,19 +145,19 @@
 							</s:param>
 						</s:url>
 						<s:if test="resultClass.recipe_memberwriter == NULL">
-							<input name="list" type="button" value="수정"
+							<input class="btn btn-default" name="list" type="button" value="수정"
 								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
-							<input name="list" type="button" value="삭제"
+							<input class="btn btn-default" name="list" type="button" value="삭제"
 								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
 						</s:if>
 						<s:elseif
 							test="resultClass.recipe_memberwriter != NULL && resultClass.recipe_memberwriter == #session.session_id">
-							<input name="list" type="button" value="수정"
+							<input class="btn btn-default" name="list" type="button" value="수정"
 								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
-							<input name="list" type="button" value="삭제"
+							<input class="btn btn-default" name="list" type="button" value="삭제"
 								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
 						</s:elseif>
-							<input name="list" type="button" value="목록"
+							<input class="btn btn-default" name="list" type="button" value="목록"
 								onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
 					</td>
 				</tr>

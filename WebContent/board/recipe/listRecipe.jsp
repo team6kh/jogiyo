@@ -124,8 +124,8 @@
 						<td><s:property value="recipe_foodsubject" /></td>
 						<td><s:property value="recipe_writer" /></td>
 						<td><s:property value="recipe_reg_date" /></td>
-						<td><s:property value="recipe_time" /></td>
-						<td><s:property value="recipe_price" /></td>
+						<td><s:property value="recipe_time" />&nbsp;분</td>
+						<td><s:property value="recipe_price" />&nbsp;원</td>
 						<td><s:property value="recipe_readcount" /></td>
 						<td><s:property value="recipe_recommand" /></td>
 					</tr>
