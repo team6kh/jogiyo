@@ -65,13 +65,22 @@
 					</form>
 				</c:when>
 				<c:when test="${empty session_id}">
-					<div class="navbar-form navbar-right">						
+					<form class="navbar-form navbar-right">						
 						<a href="registrationForm.action" class="btn btn-default">회원가입</a>
-						<a href="loginForm.action?actionName=${actionName}" class="btn btn-primary">로그인</a>
-					</div>					
+						<input type="hidden" name="actionName" value="${actionName}" />
+						<input type="hidden" name="queryString" value="${pageContext.request.queryString}" />
+						<button type="button" class="btn btn-primary" onclick="login(this.form)">로그인</button>
+					</form>					
 				</c:when>
 			</c:choose>
 		</div>
 		<!--/.nav-collapse -->
 	</div>
 </div>
+
+<script>
+	function login(form) {
+		form.action = "loginForm.action";
+		form.submit();
+	}
+</script>

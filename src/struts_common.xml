@@ -23,8 +23,8 @@
 			<interceptor-ref name="params" />				
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="servletConfig" />
-			<result name="error">/common/error.jsp</result>
-			<result name="success" type="redirect-action">${actionName}</result>
+			<result name="error">/common/error.jsp</result>			
+			<result name="success" type="redirect">${actionName}.action?${queryString}</result>			
 		</action>
 
 		<!-- 로그아웃 액션 -->
@@ -222,7 +222,7 @@
 			<result>/common/home.jsp</result>
 		</action>
 		
-		<!-- welocme 액션 -->
+		<!-- welcome 액션 -->
 		<action name="welcome" class="common.action.HomeAction" method="welcome">
 			<result>/common/welcome.jsp</result>
 		</action>		

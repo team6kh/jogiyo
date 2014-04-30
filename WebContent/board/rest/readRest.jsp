@@ -230,10 +230,6 @@
 	}
 </script>
 
-
-
-
-
 <script language="Javascript1.2">
 	function printWindow(){
 	    browserVersion = parseInt(navigator.appVersion)
@@ -247,7 +243,7 @@
 
 <!-- header -->
 <%@ include file="/common/header.jsp"%>
-<!-- end of header -->
+<!-- /.header -->
 
 <!--=== Slider ===-->
 <div class="slider-inner">
@@ -272,8 +268,8 @@
             <span class="da-arrows-prev"></span>
             <span class="da-arrows-next"></span>		
         </nav>
-    </div><!--/da-slider-->
-</div><!--/slider-->
+    </div><!--/.da-slider-->
+</div><!--/.slider-->
 <!--=== End Slider ===-->
 
 <!--=== Content Part ===-->
@@ -283,7 +279,14 @@
 	<div class="col-md-9">
 		<!-- 메뉴 리스트 page-header -->
 	    <div class="page-header">
-			<h2><strong>메뉴 리스트</strong> <small>장바구니에 담아 결제해주세요.</small></h2>
+	    	<!-- 판매자일 시 -->
+	    	<c:if test="${sessionScope.session_type=='buyer'}">
+	    		<h2><strong>메뉴 리스트</strong> <small>장바구니에 담아 구매해주세요.</small></h2>
+	    	</c:if>
+	    	<!-- 판매자가 아닐 시 -->
+	    	<c:if test="${sessionScope.session_type!='buyer'}">
+	    		<h2><strong>메뉴 리스트</strong> <small>구매하시려면 판매자로 로그인해주세요.</small></h2>
+	    	</c:if>			
 			<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
 			<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
 			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />

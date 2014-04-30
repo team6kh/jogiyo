@@ -42,6 +42,7 @@
 				name="login_id" required autofocus> <input type="password"
 				class="form-control" placeholder="비밀번호" name="login_pw" required>
 			<input type="hidden" name="actionName" value="${actionName}">
+			<input type="hidden" name="queryString" value="${queryString}">
 			<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
 		</form>
 
