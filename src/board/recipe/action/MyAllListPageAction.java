@@ -16,22 +16,22 @@ import common.action.PagingAction;
 
 public class MyAllListPageAction extends ActionSupport implements ConDAOAware {
 	public static SqlMapClient sqlMapper;
-	private List<RecipeDTO> recipelist = new ArrayList<RecipeDTO>();
-	private List<QnaDTO> qnalist = new ArrayList<QnaDTO>();
-	
-	private int currentPage = 1; // 현재 페이지
-	private int recipetotalCount; // 총 게시물의 수
-	private int qnatotalCount;
+	private List<RecipeDTO> list = new ArrayList<RecipeDTO>();
+
+	/*private int currentPage = 1; // 현재 페이지
+
+	private int totalCount; // 총 게시물의 수
+
 	private int blockCount = 10; // 한 페이지의 게시물의 수
 	private int blockPage = 5; // 한 화면에 보여줄 페이지
-	private String recipepagingHtml; // 페이지를 구현할 HTML
-	private String qnapagingHtml;
-	private PagingAction recipepage; // 페이징 클래스
-	private PagingAction qnapage;
-	private String actionName = "myListRecipe";
+	private String pagingHtml; // 페이지를 구현할 HTML
+
+	private PagingAction page; // 페이징 클래스
+
+	private String actionName = "myAllListPage";*/
+
 	private String session_id;
-	
-	
+
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
 
@@ -39,35 +39,30 @@ public class MyAllListPageAction extends ActionSupport implements ConDAOAware {
 
 	public String execute() throws Exception {
 		
-		recipelist = sqlMapper.queryForList("Recipe.myListRecipe", session_id);
-		qnalist = sqlMapper.queryForList("Qna.myListQna", session_id);
 
-		recipetotalCount = recipelist.size(); // recipe 전체 글 갯수를 구한다.
-		qnatotalCount = qnalist.size(); //qna 전체 글 갯수를 구한다.
-		recipepage = new PagingAction(actionName, currentPage, recipetotalCount, blockCount, blockPage); // PagingAction 객체 생성
-		qnapage = new PagingAction(actionName, currentPage, qnatotalCount, blockCount, blockPage);
-		recipepagingHtml = recipepage.getPagingHtml().toString(); // 페이지 HTML 생성.
-		qnapagingHtml = qnapage.getPagingHtml().toString();
+		list = sqlMapper.queryForList("Recipe.myListRecipe",session_id );
+	
+
+		/*totalCount = list.size(); // recipe 전체 글 갯수를 구한다.
+
+		page = new PagingAction(actionName, currentPage, totalCount,
+				blockCount, blockPage); // PagingAction 객체 생성
+
+		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
 
 		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
-		int recipelastCount = recipetotalCount;
-		int qnalastCount = qnatotalCount;
+		int lastCount = totalCount;
 
 		// 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
-		if (recipepage.getEndCount() < recipetotalCount)
-			recipelastCount = recipepage.getEndCount() + 1;
-		
-		if(qnapage.getEndCount() < qnatotalCount)
-			qnalastCount = qnapage.getEndCount() + 1;
+		if (page.getEndCount() < totalCount)
+			lastCount = page.getEndCount() + 1;
 
 		// 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
-		recipelist = recipelist.subList(recipepage.getStartCount(), recipelastCount);
-		qnalist = qnalist.subList(recipepage.getStartCount(), qnalastCount);
+		list = list.subList(page.getStartCount(), lastCount);*/
 
 		return SUCCESS;
 
 	}
-	
 
 	public String getSession_id() {
 		return session_id;
@@ -77,18 +72,7 @@ public class MyAllListPageAction extends ActionSupport implements ConDAOAware {
 		this.session_id = session_id;
 	}
 
-	
-	
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	
-	public int getBlockCount() {
+	/*public int getBlockCount() {
 		return blockCount;
 	}
 
@@ -102,72 +86,46 @@ public class MyAllListPageAction extends ActionSupport implements ConDAOAware {
 
 	public void setBlockPage(int blockPage) {
 		this.blockPage = blockPage;
+	}*/
+
+	public List<RecipeDTO> getList() {
+		return list;
 	}
 
-	
-	public List<RecipeDTO> getRecipelist() {
-		return recipelist;
+	public void setList(List<RecipeDTO> list) {
+		this.list = list;
 	}
 
-	public void setRecipelist(List<RecipeDTO> recipelist) {
-		this.recipelist = recipelist;
+	/*public int getCurrentPage() {
+		return currentPage;
 	}
 
-	public List<QnaDTO> getQnalist() {
-		return qnalist;
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
 	}
 
-	public void setQnalist(List<QnaDTO> qnalist) {
-		this.qnalist = qnalist;
+	public int getTotalCount() {
+		return totalCount;
 	}
 
-	public int getRecipetotalCount() {
-		return recipetotalCount;
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
 	}
 
-	public void setRecipetotalCount(int recipetotalCount) {
-		this.recipetotalCount = recipetotalCount;
+	public String getPagingHtml() {
+		return pagingHtml;
 	}
 
-	public int getQnatotalCount() {
-		return qnatotalCount;
+	public void setPagingHtml(String pagingHtml) {
+		this.pagingHtml = pagingHtml;
 	}
 
-	public void setQnatotalCount(int qnatotalCount) {
-		this.qnatotalCount = qnatotalCount;
+	public PagingAction getPage() {
+		return page;
 	}
 
-	public String getRecipepagingHtml() {
-		return recipepagingHtml;
-	}
-
-	public void setRecipepagingHtml(String recipepagingHtml) {
-		this.recipepagingHtml = recipepagingHtml;
-	}
-
-	public String getQnapagingHtml() {
-		return qnapagingHtml;
-	}
-
-	public void setQnapagingHtml(String qnapagingHtml) {
-		this.qnapagingHtml = qnapagingHtml;
-	}
-
-	public PagingAction getRecipepage() {
-		return recipepage;
-	}
-
-	public void setRecipepage(PagingAction recipepage) {
-		this.recipepage = recipepage;
-	}
-
-	public PagingAction getQnapage() {
-		return qnapage;
-	}
-
-	public void setQnapage(PagingAction qnapage) {
-		this.qnapage = qnapage;
-	}
-
+	public void setPage(PagingAction page) {
+		this.page = page;
+	}*/
 
 }

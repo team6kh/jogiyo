@@ -111,6 +111,11 @@
 			<interceptor-ref name="conDAO" />
 			<result>/user/common/myAllListPage.jsp</result>
 		</action>
+		<action name="myAllListPageQna" class="board.recipe.action.MyAllListPageQnaAction">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/user/common/myAllListQnaPage.jsp</result>
+		</action>
 		
 		<!-- 구매자 대시보드 : 김경남 -->
 		<action name="dashBuyer" class="user.buyer.action.DashBuyerAction">
