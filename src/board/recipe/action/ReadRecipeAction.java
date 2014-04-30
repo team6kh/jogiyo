@@ -36,6 +36,11 @@ public class ReadRecipeAction extends ActionSupport implements ConDAOAware {
 
 	// 게시판 상세보기 액션.
 	public String execute() throws Exception {
+		
+		if (getCurrentPage() == 0)
+		{
+			setCurrentPage(1);
+		}
 
 		paramClass.setRecipe_num(getRecipe_num());
 		paramRC.setRecipeCommand_num(getRecipe_num());

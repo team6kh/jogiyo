@@ -148,13 +148,14 @@
                             <tr>
                                 <td>
                                     <div class="input-group">
+                                    	<!-- 크롬에서는 date type을 지원한다. -->
                                         <input type="text" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}"/> 
                                         <span class="input-group-addon">부터</span>  
                                     </div> 
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}"/>
+                                        <input type="text" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}"/>
                                         <span class="input-group-addon">까지</span>  
                                     </div>
                                 </td>
@@ -172,17 +173,17 @@
 				
 					<!-- 테이블 div-->
 					<div>
-						<table class="table table-stiped">
+						<table class="table table-stiped text-center">
 							<tr align="center" bgcolor="">
 								<td><strong>번호</strong></td>
 								<td><strong>매장</strong></td>
 								<td><strong>품목</strong></td>
 								<td><strong>가격</strong></td>
-								<td><strong>품목이미지</strong></td>
+								<!-- <td><strong>품목이미지</strong></td> -->
 								<td><strong>쿠폰</strong></td>
-								<td><strong>사용유무</strong></td>
-								<td><strong>사용하기</strong></td>
-								<td><strong>구매자</strong></td>
+								<!--<td><strong>사용식별코드</strong></td> -->
+								<td><strong>사용현황</strong></td>
+								<!-- <td><strong>구매자</strong></td> -->
 								<td><strong>구매날짜</strong></td>
 							</tr>
 							
@@ -191,12 +192,23 @@
 									<td>${list.paid_num} </td>
 									<td>${list.paid_rest_subject} </td>
 									<td>${list.paid_restopt_subject} </td>
-									<td>${list.paid_restopt_priceplus} </td>
-									<td>이미지 사진뜨는곳. </td>
+									<td>${list.paid_restopt_priceplus}&nbsp;원 </td>
+									<!-- <td>이미지 사진뜨는곳. </td> -->
 									<td>${list.paid_cpn} </td>
-									<td>${list.paid_cpn_used} </td>
-									<td><a href="requestCPN.action?paid_num=${list.paid_num}&session_id=${session_id}" class="btn btn-danger">사용요청</a></td>
-									<td>${list.session_id} </td>
+									<!-- <td>${list.paid_cpn_used} </td> -->
+									<!-- 사용요청 -->
+									<c:if test="${list.paid_cpn_used eq 0 }">
+									<td><a href="requestCPN.action?paid_num=${list.paid_num}&session_id=${session_id}" class="btn btn-primary">사용요청</a></td>
+									</c:if>
+									<!-- 요청대기 -->	
+									<c:if test="${list.paid_cpn_used eq 1 }">
+									<td><button class="btn btn-warning">요청대기</button></td>
+									</c:if>
+									<!-- 사용완료 -->	
+									<c:if test="${list.paid_cpn_used eq 2 }">
+									<td><button class="btn btn-danger">사용완료</button></td>
+									</c:if>									
+									<!-- <td>${list.session_id} </td> -->
 									<td>${list.paid_reg_date} </td>
 								</tr>
 							</c:forEach>

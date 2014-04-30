@@ -139,6 +139,7 @@
                             <tr>
                                 <td>
                                     <div class="input-group">
+                                    	<!-- 크롬에서는 date type을 지원한다. -->
                                         <input type="text" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}" required/> 
                                         <span class="input-group-addon">부터</span>  
                                     </div> 
@@ -162,16 +163,16 @@
             <!-- 중단 :  쿠폰 사용 요청 내역 -->
                 <div class="col-md-12">
                 <form method="post" action="submitCPN.action" >
-                    <div class="col-md-12 text-center">
-                        <table class="table table-hober">
+                    <div class="col-md-12">
+                        <table class="table table-hover text-center">
                             <tr>
                                 <th></th>
-                                <th>결제 번호</th>
-                                <th>주문 메뉴</th>
-                                <th>주문 가격</th>
-                                <th>쿠폰 번호</th>
-                                <th>구 매 자</th>
-                                <th>결 제 일</th>
+                                <th class="text-center">결제 번호</th>
+                                <th class="text-center">주문 메뉴</th>
+                                <th class="text-center">주문 가격</th>
+                                <th class="text-center">쿠폰 번호</th>
+                                <th class="text-center">구매자</th>
+                                <th class="text-center">결제일</th>
                             </tr>
                             <c:forEach var="cpnDTO" items="${cpnRes}">
                                 <tr>
@@ -182,7 +183,7 @@
                                     <td>${cpnDTO.paid_cpn }</td>
                                     <td>${cpnDTO.session_id }</td>
                                     <td><fmt:formatDate value="${cpnDTO.paid_reg_date }" pattern="yyyy.MM.dd  HH:mm:ss" /></td>
-                                    
+                                 </tr> 
                             </c:forEach>
                         </table>
                     </div>
