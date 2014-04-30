@@ -13,7 +13,7 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 	public static Reader reader;
 	public static SqlMapClient sqlMapper;
 	private CartDTO paramClass = new CartDTO();
-	private CartDTO resultClass = new CartDTO();
+	//private CartDTO resultClass = new CartDTO();
 	private List<CartDTO> list = new ArrayList<CartDTO>();
 	private int cart_rest_num; 
 	private String cart_rest_subject;
@@ -28,7 +28,6 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 	}
 
 	public String execute() throws Exception {
-
 		paramClass.setCart_rest_num(getCart_rest_num());
 		paramClass.setCart_rest_subject(getCart_rest_subject());
 		paramClass.setCart_restopt_num(getCart_restopt_num());
@@ -38,6 +37,7 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 		paramClass.setSession_id(getSession_id());
 		//장바구니 데이터 insert
 		sqlMapper.insert("Rest.insertCart_board", paramClass);
+		//장바구니 레코드를 가져옴
 		list = sqlMapper.queryForList("Rest.selectCartAll", paramClass);
 
 		return SUCCESS; //listCart.jsp
@@ -54,12 +54,6 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 	}
 	public void setParamClass(CartDTO paramClass) {
 		this.paramClass = paramClass;
-	}
-	public CartDTO getResultClass() {
-		return resultClass;
-	}
-	public void setResultClass(CartDTO resultClass) {
-		this.resultClass = resultClass;
 	}
 	public int getCart_rest_num() {
 		return cart_rest_num;

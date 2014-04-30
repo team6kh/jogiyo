@@ -152,6 +152,11 @@
 		SELECT count(*) FROM Rest_board
 	</select>
 	
+	<select id="selectCountforSeller" resultClass ="int" parameterClass="java.lang.String">
+		SELECT count(*) FROM Rest_board
+		where rest_writer_id = #session_id#
+	</select>
+	
 	<select id="selectPaidCount" resultClass="int">
 		SELECT count(*) FROM paid_board
 	</select>

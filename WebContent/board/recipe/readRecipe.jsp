@@ -21,227 +21,160 @@
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-	<!-- header -->
-	<%@ include file="/common/header.jsp"%>
-	<!-- end of header -->
-
-	<!-- container -->
-	<div class="container">
-
-		<!-- test message -->
-		<div class="common-template">
-			<head>
-<title>스트럿츠2 게시판</title>
-<link rel="stylesheet" href="/StrutsBoard/board/common/css/css.css"
-	type="text/css">
 <script type="text/javascript">
 	function open_win_noresizable(url, name) {
 		var oWin = window.open(url, name,
 				"scrollbars=no,status=no,resizable=no,width=300,height=150");
 	}
 </script>
-			</head>
-			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
-            
-			<body>
+</head>
 
-				<table width="600" border="0" cellspacing="0" cellpadding="2">
-					<tr>
-						<td align="center"><h2>${resultClass.recipe_subject}</h2></td>
-					</tr>
-					<tr>
-					<s:if test="#session.session_id != null">
-						
-						<td height="20" align="right"><input name="list" type="button" value="추천" onClick="javascript:document.getElementById('isrecommand').contentWindow.location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'"></td>
-                         <iframe src="blink.html" id ="isrecommand" style="display:none;"></iframe>					
-					</s:if>
-					</tr>
-				</table>
+<body>
 
-				<table width="600" border="0" cellspacing="0" cellpadding="0">
+	<!-- header -->
+	<%@ include file="/common/header.jsp"%>
+	<!-- /.header -->
 
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
+	<!-- container -->
+	<div class="container">
 
-					<tr>
-						<td bgcolor="#F4F4F4">번호</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property value="resultClass.recipe_num" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
+		<div class="col-md-12">
+			<h3>${resultClass.recipe_subject}</h3>
+			<!-- 로그인 후 보이는 추천 버튼 -->
+			<s:if test="#session.session_id != null">
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary btn-lg" name="list" onClick="javascript:document.getElementById('isrecommand').contentWindow.location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'">
+					<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;추천
+				</button>
+				<br />
+				<br />
+			</div>
+			<iframe src="blink.html" id="isrecommand" style="display: none;"></iframe>
+			</s:if>
+			<!-- /.로그인 후 보이는 추천 버튼 -->	
+		</div>		
+			
+		<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />			
+		
+		<!-- 컨텐츠  -->
+		<div class="col-md-12">
 
-					<tr>
-						<td width="100" bgcolor="#F4F4F4">종류</td>
-						<td width="500" bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_foodkind" />
-						</td>
-					</tr>
+			<!-- 테이블 바디 -->
+			<table class="table table-striped">		
 
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
+				<tr>
+					<td class="text-center" style="width: 20%;">번호</td>
+					<td><s:property value="resultClass.recipe_num" /></td>
+				</tr>
+		
+				<tr>
+					<td class="text-center" style="width: 20%;">종류</td>
+					<td><s:property	value="resultClass.recipe_foodkind" /></td>
+				</tr>
 
-					<tr>
-						<td bgcolor="#F4F4F4">작성일</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_reg_date" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
+				<tr>
+					<td class="text-center" style="width: 20%;">작성일</td>
+					<td><s:property value="resultClass.recipe_reg_date" /></td>
+				</tr>
+			
+				<tr>
+					<td class="text-center" style="width: 20%;">제목</td>
+					<td><s:property value="resultClass.recipe_subject" /></td>
+				</tr>
 
-					<tr>
-						<td bgcolor="#F4F4F4">제목</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_subject" />
-						</td>
-					</tr>
+				<tr>
+					<td class="text-center" style="width: 20%;">요리명</td>
+					<td><s:property value="resultClass.recipe_foodsubject" /></td>
+				</tr>			
 
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
-					<tr>
-						<td bgcolor="#F4F4F4">요리명</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_foodsubject" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
+				<tr>
+					<td class="text-center" style="width: 20%;">재료</td>
+					<td><s:property value="resultClass.recipe_method" />
+					</td>
+				</tr>				
 
-					<tr>
-						<td bgcolor="#F4F4F4">재료</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_method" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
+				<tr>
+					<td class="text-center" style="width: 20%;">소비 시간</td>
+					<td><s:property	value="resultClass.recipe_time" />&nbsp;분
+					</td>
+				</tr>
 
-					<tr>
-						<td bgcolor="#F4F4F4">소비 시간</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_time" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
+				<tr>
+					<td class="text-center" style="width: 20%;">비용</td>
+					<td><s:property value="resultClass.recipe_price" />&nbsp;원
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="text-center" style="width: 20%;">회원ID</td>
+					<td><s:property value="resultClass.recipe_memberwriter" />
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="text-center" style="width: 20%;">작성자</td>
+					<td><s:property value="resultClass.recipe_writer" /></td>
+				</tr>
 
-					<tr>
-						<td bgcolor="#F4F4F4">비 용</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_price" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
+				<tr>
+					<td class="text-center" style="width: 20%;">내용</td>
+					<td colspan="3"><s:property value="pagingHtml" escape="false" /></td>
+				</tr>
+				
+				<tr>
+					<td class="text-center" style="width: 20%;">조회수</td>
+					<td><s:property value="resultClass.recipe_readcount" /></td>
+				</tr>
 
-					<tr>
-						<td bgcolor="#F4F4F4">회원ID</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_memberwriter" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
+				<tr>
+					<td class="text-center" style="width: 20%;">추천수</td>
+					<td><s:property value="resultClass.recipe_recommand" />
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="text-right" colspan="2">
+						<s:url id="updateRecipeURL" action="updateRecipeForm">
+							<s:param name="recipe_num">
+								<s:property value="recipe_num" />
+							</s:param>
+						</s:url>
+						<s:url id="deleteRecipeURL" action="deleteRecipe">
+							<s:param name="recipe_num">
+								<s:property value="recipe_num" />
+							</s:param>
+						</s:url>
+						<s:if test="resultClass.recipe_memberwriter == NULL">
+							<input class="btn btn-default" name="list" type="button" value="수정"
+								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
+							<input class="btn btn-default" name="list" type="button" value="삭제"
+								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
+						</s:if>
+						<s:elseif
+							test="resultClass.recipe_memberwriter != NULL && resultClass.recipe_memberwriter == #session.session_id">
+							<input class="btn btn-default" name="list" type="button" value="수정"
+								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
+							<input class="btn btn-default" name="list" type="button" value="삭제"
+								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
+						</s:elseif>
+							<input class="btn btn-default" name="list" type="button" value="목록"
+								onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
+					</td>
+				</tr>
 
-					<tr>
-						<td bgcolor="#F4F4F4">작성자</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_writer" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
-
-					<tr>
-						<td bgcolor="#F4F4F4">내용</td>
-						<td bgcolor="#FFFFFF" height="600" colspan="3" align="left">
-          			&nbsp;&nbsp;<s:property value="pagingHtml" escape="false" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
-
-					<tr>
-						<td bgcolor="#F4F4F4">조회수</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_readcount" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
-
-					<tr>
-						<td bgcolor="#F4F4F4">추천수</td>
-						<td bgcolor="#FFFFFF">&nbsp;&nbsp;<s:property
-								value="resultClass.recipe_recommand" />
-						</td>
-					</tr>
-					<tr bgcolor="#777777">
-						<td height="1" colspan="2"></td>
-					</tr>
-					
-					<tr>
-						<td height="10" colspan="2"></td>
-					</tr>
-
-
-					<tr>
-						<td align="right" colspan="2"><s:url id="updateRecipeURL"
-								action="updateRecipeForm">
-								<s:param name="recipe_num">
-									<s:property value="recipe_num" />
-								</s:param>
-							</s:url> <s:url id="deleteRecipeURL" action="deleteRecipe">
-								<s:param name="recipe_num">
-									<s:property value="recipe_num" />
-								</s:param>
-							</s:url>
-							<s:if test="resultClass.recipe_memberwriter == NULL">
-							<input name="list" type="button" value="수정" onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
-							<input name="list" type="button" value="삭제" onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
-							</s:if>
-							<s:elseif test="resultClass.recipe_memberwriter != NULL && resultClass.recipe_memberwriter == #session.session_id">
-							<input name="list" type="button" value="수정" onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
-							<input name="list" type="button" value="삭제" onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
-							</s:elseif>
-							<input name="list" type="button" value="목록" onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
-
-						</td>
-					</tr>
-
-				</table>
-			</body>
-		</div>
-		<!-- end of test message -->
+			</table>
+			<!-- /.테이블 바디 -->
+		
+		</div>			
+		<!-- /.컨텐츠 -->			
 
 	</div>
 	<!-- /.container -->
 
-
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 </body>
 </html>

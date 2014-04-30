@@ -15,6 +15,11 @@
         <title>JOGIYO</title>
         <!-- Bootstrap core CSS -->
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!--  Datepicker CSS -->
+        <link href="assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+        
+        
         <!-- Custom styles for this template -->
         <link href="jogiyo.css" rel="stylesheet">
         <link href="common/common-template.css" rel="stylesheet">
@@ -134,13 +139,14 @@
                             <tr>
                                 <td>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}"/> 
+                                    	<!-- 크롬에서는 date type을 지원한다. -->
+                                        <input type="text" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}" required/> 
                                         <span class="input-group-addon">부터</span>  
                                     </div> 
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}"/>
+                                        <input type="text" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}" required/>
                                         <span class="input-group-addon">까지</span>  
                                     </div>
                                 </td>
@@ -157,26 +163,27 @@
             <!-- 중단 :  쿠폰 사용 요청 내역 -->
                 <div class="col-md-12">
                 <form method="post" action="submitCPN.action" >
-                    <div class="col-md-12 text-center">
-                        <table class="table table-hober">
+                    <div class="col-md-12">
+                        <table class="table table-hover text-center">
                             <tr>
                                 <th></th>
-                                <th>결제 번호</th>
-                                <th>주문 메뉴</th>
-                                <th>주문 가격</th>
-                                <th>쿠폰 번호</th>
-                                <th>구 매 자</th>
-                                <th>결 제 일</th>
+                                <th class="text-center">결제 번호</th>
+                                <th class="text-center">주문 메뉴</th>
+                                <th class="text-center">주문 가격</th>
+                                <th class="text-center">쿠폰 번호</th>
+                                <th class="text-center">구매자</th>
+                                <th class="text-center">결제일</th>
                             </tr>
                             <c:forEach var="cpnDTO" items="${cpnRes}">
                                 <tr>
-                                    <td><input type="checkbox" name="requestPaid_num" value="${cpnDTO.paid_num}"/></td>
+                                    <td><input type="checkbox" name="requestPaid_num" value="${cpnDTO.paid_num}" required /></td>
                                     <td>${cpnDTO.paid_num }</td>
                                     <td>${cpnDTO.paid_restopt_subject}</td>
                                     <td>${cpnDTO.paid_restopt_priceplus }</td>
                                     <td>${cpnDTO.paid_cpn }</td>
                                     <td>${cpnDTO.session_id }</td>
-                                    <td>${cpnDTO.paid_reg_date }</td>
+                                    <td><fmt:formatDate value="${cpnDTO.paid_reg_date }" pattern="yyyy.MM.dd  HH:mm:ss" /></td>
+                                 </tr> 
                             </c:forEach>
                         </table>
                     </div>
@@ -242,6 +249,27 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="dist/js/bootstrap.min.js"></script>
-                
+        
+         <!--  Datepicker JS -->
+        <script type="text/javascript" src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.ui.datepicker-ko.js"></script>
+        <script>
+             $(function() {
+              	$( "#startDate" ).datepicker({
+              		changeYear: true,
+                    showButtonPanel: true,   //달력아래 닫기 버튼 오늘가기 버튼 출력
+                    dateFormat: "yy-mm-dd", //날짜 출력 형식
+                    minDate : '-2y',
+                    maxDate : '+0'   
+              	});
+            	$("#endDate").datepicker({   //달력 2개가 필요하기 때문에 추가
+            		changeYear: true,
+                    showButtonPanel: true,   
+                    dateFormat: "yy-mm-dd", //날짜 출력 형식
+                    minDate : '-2y',
+                    maxDate : '+0'       
+            	});
+             });
+ </script>        
     </body>
 </html>

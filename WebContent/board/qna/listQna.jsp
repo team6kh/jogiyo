@@ -19,8 +19,8 @@
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="common/common-template.css" rel="stylesheet">
-    
+    <link href="jogiyo.css" rel="stylesheet">
+    <link href="common/common-template.css" rel="stylesheet">    
     
     <script type="text/javascript">
     	var num = 0;
@@ -68,27 +68,24 @@
     		
     		window.location.href = "listQna.action?qna_checkreply=" + qna_checkreply;
     		
-    	}
-
-     
-    	
+    	}    	
     </script>
-
 
 </head>
 <body>
 
 	<%@ include file="/common/header.jsp"%>
+	
 	<!-- container -->
-	<div class="container">
+	<div class="container">		
 
-
-
-		<!-- test board pretty -->
-
-		<h3>자주묻는질문 TOP 10</h3>
-		 	<div class="col-md-12 well">
-			<table class="table table-striped table-forum">
+		<!-- 자주 묻는 질문 TOP 10 -->
+		<div class="col-md-12">
+			<h3>자주 묻는 질문 TOP 10</h3>
+		</div>
+		
+		<div class="col-md-12">
+			<table class="table">
 				<tbody>
 					<c:forEach var="list" items="${topList }">
 
@@ -96,7 +93,6 @@
 							<td class="text-center">
 								<c:out value="${list.qna_num }" />
 							</td>
-
 							<td class="text-left">
 								<c:choose>
 									<c:when test="${list.qna_category eq '01' }"><font color="blue">[회원가입]</c:when>
@@ -110,56 +106,55 @@
 								<c:out value="::${list.qna_subject }" /></font>
 							</td>
 						</tr>
+						
 						<tr id="row${list.qna_num }" style="display: none;">
 							<td class="text-center">&nbsp;</td>
-							<td class="text-left"><pre style="border: 0px"><font size="4">글내용:${list.qna_content}</pre>	</font>
-							<input type="hidden" id="qna_reply_${list.qna_num}" value="${list.qna_reply}" />	
-						<div class="pull-right">
-							<button type="button" class="btn btn-primary" onclick="fn_reply('${list.qna_num}')">답변보기</button>																												
-						</div>	
+							<td class="text-left">
+								<pre style="border: 0px">글내용:${list.qna_content}</pre>
+								<input type="hidden" id="qna_reply_${list.qna_num}" value="${list.qna_reply}" />
+								<!-- 답변보기 경고창 -->
+								<div class="pull-right">
+									<button type="button" class="btn btn-primary" onclick="fn_reply('${list.qna_num}')">답변보기</button>																												
+								</div>
+								<!-- /.답변보기 경고창 -->
 							</td>				
 						</tr>
 
-						</c:forEach>
+					</c:forEach>
+					
 					<c:if test="${empty topList}">
 						<tr>
 							<td colspan="5">등록된 게시물이 없습니다.</td>
 						</tr>
 					</c:if>
+					
 				</tbody>
 			</table>
 		</div>
+		<!-- /.자주 묻는 질문 TOP 10 -->
 
-
-
-
-		<div class="pull-right">							
-			<input type="hidden" name="session_id" value="${sessionScope.session_id}"/>
-			<button type="button" class="btn btn-primary" onclick="return checkId()">글쓰기</button>
-		</div>
-
-		<!-- test board pretty -->
+		<!-- 글목록 -->
 		<div class="col-md-12">
 			<h3>글목록</h3>
-		</div>
-		<form name="searchForm" id="searchForm" method="post">
-		<select name="qna_category" id="qna_category" onchange="fn_search();">
-			<option value="">전체</option>
-			<option value="01" <c:if test="${qna_category eq '01'}">selected</c:if>>회원가입</option>
-			<option value="02" <c:if test="${qna_category eq '02'}">selected</c:if>>바로결제</option>
-			<option value="03" <c:if test="${qna_category eq '03'}">selected</c:if>>리뷰</option>
-			<option value="04" <c:if test="${qna_category eq '04'}">selected</c:if>>이용문의</option>
-			<option value="05" <c:if test="${qna_category eq '05'}">selected</c:if>>광고문의</option>
-			<option value="06" <c:if test="${qna_category eq '06'}">selected</c:if>>기타</option>
-		</select>
-		<input type="text" name="searchText" maxlength="17"  value="${searchText }">
-		<a href="javascript:fn_search()" class="btn btn-primary">검색</a>
-
-
-		</form>
+			<form class="form-inline" name="searchForm" id="searchForm" method="post">
+				<select class="form-control" name="qna_category" id="qna_category" onchange="fn_search();">
+					<option value="">전체</option>
+					<option value="01" <c:if test="${qna_category eq '01'}">selected</c:if>>회원가입</option>
+					<option value="02" <c:if test="${qna_category eq '02'}">selected</c:if>>바로결제</option>
+					<option value="03" <c:if test="${qna_category eq '03'}">selected</c:if>>리뷰</option>
+					<option value="04" <c:if test="${qna_category eq '04'}">selected</c:if>>이용문의</option>
+					<option value="05" <c:if test="${qna_category eq '05'}">selected</c:if>>광고문의</option>
+					<option value="06" <c:if test="${qna_category eq '06'}">selected</c:if>>기타</option>
+				</select>
+				<input class="form-control" type="text" name="searchText" maxlength="17"  value="${searchText }">
+				<a href="javascript:fn_search()" class="btn btn-primary">검색</a>
+				<br />
+				<br />		
+			</form>
+		</div>			
 
 		<div class="col-md-12 well">
-			<table class="table table-striped table-forum">
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th class="text-center" style="width: 100px;">번호</th>
@@ -168,7 +163,6 @@
 						<th class="text-center" style="width: 100px;" >제목</th>
 						<th class="text-center" style="width: 100px;">작성일</th>
 						<th class="text-center" style="width: 100px;">조회수</th>
-
 					</tr>
 				</thead>
 				<tbody>
@@ -197,10 +191,9 @@
 							</td>
 							<td class="text-center"><c:out value="${list.qna_reg_date }" /></td>
 							<td class="text-center"><c:out value="${list.qna_readcount }" /></td>
-
-
 						</tr>
 					</c:forEach>
+					
 					<c:if test="${empty list}">
 						<tr>
 							<td colspan="5">등록된 게시물이 없습니다.</td>
@@ -221,7 +214,7 @@
 			</div>
 
 		</div>
-		<!-- end of test board pretty -->
+		<!-- /.글목록 -->
 
 	</div>
 	<!-- /.container -->

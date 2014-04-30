@@ -18,6 +18,10 @@
 <!-- Bootstrap core CSS -->
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
+<!--  Datepicker CSS -->
+<link href="assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+
+
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="user/common/dashboard.css" rel="stylesheet">
@@ -112,12 +116,10 @@
 			<!-- sidebar -->
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a
-						href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
-					<li class="active"><a
-						href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
-					<li><a href="myAllListPage.action?session_id=${session_id}">내가
-							작성한 글</a></li>
+					<li><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+					<li class="active"><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
+					<li><a href="listMyRecipe.action?session_id=${session_id}">마이 레시피</a></li>
+					<li><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
 				</ul>
 			</div>
 			<!-- /.sidebar -->
@@ -126,9 +128,11 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 				<!-- 여기에 작성해주시면 됩니다. -->
+				<!-- col-md-12 -->
 				<div class="col-md-12" style="margin-top: 20px">
-                <!--  기간 검색조건 폼  -->
-                    <form name="searchDate" method="post" action="mylistCouponTime.action">
+                
+                	<!--  기간 검색조건 폼  -->
+                    <form name="searchDate" method="post" action="listMyCoupon.action">
                           <table class="table" >
                             <tr>
                                 <th colspan="2">  기간별 검색 </th>
@@ -144,13 +148,14 @@
                             <tr>
                                 <td>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}"/> 
+                                    	<!-- 크롬에서는 date type을 지원한다. -->
+                                        <input type="text" class="form-control" id="startDate" name="startDate" value="${searchDTO.startDate}"/> 
                                         <span class="input-group-addon">부터</span>  
                                     </div> 
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}"/>
+                                        <input type="text" class="form-control" id="endDate" name="endDate" value="${searchDTO.endDate}"/>
                                         <span class="input-group-addon">까지</span>  
                                     </div>
                                 </td>
@@ -164,74 +169,89 @@
                             </tr>
                             </table>
                     </form>
-                </div>
-				<div>
-					<table class="table table-stiped">
-						<tr align="center" bgcolor="">
-							<td><strong>번호</strong></td>
-							<td><strong>매장</strong></td>
-							<td><strong>품목</strong></td>
-							<td><strong>가격</strong></td>
-							<td><strong>품목이미지</strong></td>
-							<td><strong>쿠폰</strong></td>
-							<td><strong>사용유무</strong></td>
-							<td><strong>사용하기</strong></td>
-							<td><strong>구매자</strong></td>
-							<td><strong>구매날짜</strong></td>
-						</tr>
-						
-						<c:forEach var="list" items="${list}">
-							<tr>
-								<td>${list.paid_num} </td>
-								<td>${list.paid_rest_subject} </td>
-								<td>${list.paid_restopt_subject} </td>
-								<td>${list.paid_restopt_priceplus} </td>
-								<td>이미지 사진뜨는곳. </td>
-								<td>${list.paid_cpn} </td>
-								<td>${list.paid_cpn_used} </td>
-								<td><a href="requestCPN.action?paid_num=${list.paid_num}&session_id=${session_id}" class="btn btn-danger">사용요청</a></td>
-								<td>${list.session_id} </td>
-								<td>${list.paid_reg_date} </td>
+                    <!-- /.기간 검색조건 폼  -->
+				
+					<!-- 테이블 div-->
+					<div>
+						<table class="table table-stiped text-center">
+							<tr align="center" bgcolor="">
+								<td><strong>번호</strong></td>
+								<td><strong>매장</strong></td>
+								<td><strong>품목</strong></td>
+								<td><strong>가격</strong></td>
+								<!-- <td><strong>품목이미지</strong></td> -->
+								<td><strong>쿠폰</strong></td>
+								<!--<td><strong>사용식별코드</strong></td> -->
+								<td><strong>사용현황</strong></td>
+								<!-- <td><strong>구매자</strong></td> -->
+								<td><strong>구매날짜</strong></td>
 							</tr>
-						</c:forEach>
-
-<%-- 
-						<s:iterator value="list" status="stat">
-							<s:url id="viewURL" action="readRecipe">
-								<s:param name="paid_num">
-									<s:property value="paid_num" />
-								</s:param>
-								<s:param name="currentPage">
-									<s:property value="currentPage" />
-								</s:param>
-							</s:url>
-
-							<tr bgcolor="#FFFFFF" align="center">
-								<td><s:property value="list.paid_num" /></td>
-								<td align="center">&nbsp;<s:a href="%{viewURL}"><s:property value="list.paid_rest_subject" /></s:a></td>
-								<td align="center"><s:property value="list.paid_restopt_subject" /></td>
-								<td align="center"><s:property value="list.paid_restopt_priceplus" /></td>
-								<td align="center"><s:property value="list.paid_restopt_destfile1" /></td>
-								<td align="center"><s:property value="list.paid_cpn" /></td>
-								<td align="center"><s:property value="list.paid_cpn_used" /></td>
-								<td align="center"><s:property value="list.session_id" /></td>
-								<td align="center"><s:property value="list.paid_reg_date" /></td>
-							</tr>
-						</s:iterator> --%>
-
-						<s:if test="list.size() <= 0">
-
-							<tr bgcolor="#FFFFFF" align="center">
-								<td colspan="10">등록된 게시물이 없습니다.</td>
-							</tr>
-							<tr bgcolor="#777777">
-								<td height="1" colspan="10"></td>
-							</tr>
-
-						</s:if>
-					</table>
+							
+							<c:forEach var="list" items="${list}">
+								<tr>
+									<td>${list.paid_num} </td>
+									<td>${list.paid_rest_subject} </td>
+									<td>${list.paid_restopt_subject} </td>
+									<td>${list.paid_restopt_priceplus}&nbsp;원 </td>
+									<!-- <td>이미지 사진뜨는곳. </td> -->
+									<td>${list.paid_cpn} </td>
+									<!-- <td>${list.paid_cpn_used} </td> -->
+									<!-- 사용요청 -->
+									<c:if test="${list.paid_cpn_used eq 0 }">
+									<td><a href="requestCPN.action?paid_num=${list.paid_num}&session_id=${session_id}" class="btn btn-primary">사용요청</a></td>
+									</c:if>
+									<!-- 요청대기 -->	
+									<c:if test="${list.paid_cpn_used eq 1 }">
+									<td><button class="btn btn-warning">요청대기</button></td>
+									</c:if>
+									<!-- 사용완료 -->	
+									<c:if test="${list.paid_cpn_used eq 2 }">
+									<td><button class="btn btn-danger">사용완료</button></td>
+									</c:if>									
+									<!-- <td>${list.session_id} </td> -->
+									<td>${list.paid_reg_date} </td>
+								</tr>
+							</c:forEach>
+	
+							<%-- 
+							<s:iterator value="list" status="stat">
+								<s:url id="viewURL" action="readRecipe">
+									<s:param name="paid_num">
+										<s:property value="paid_num" />
+									</s:param>
+									<s:param name="currentPage">
+										<s:property value="currentPage" />
+									</s:param>
+								</s:url>
+	
+								<tr bgcolor="#FFFFFF" align="center">
+									<td><s:property value="list.paid_num" /></td>
+									<td align="center">&nbsp;<s:a href="%{viewURL}"><s:property value="list.paid_rest_subject" /></s:a></td>
+									<td align="center"><s:property value="list.paid_restopt_subject" /></td>
+									<td align="center"><s:property value="list.paid_restopt_priceplus" /></td>
+									<td align="center"><s:property value="list.paid_restopt_destfile1" /></td>
+									<td align="center"><s:property value="list.paid_cpn" /></td>
+									<td align="center"><s:property value="list.paid_cpn_used" /></td>
+									<td align="center"><s:property value="list.session_id" /></td>
+									<td align="center"><s:property value="list.paid_reg_date" /></td>
+								</tr>
+							</s:iterator> --%>
+	
+							<s:if test="list.size() <= 0">
+	
+								<tr bgcolor="#FFFFFF" align="center">
+									<td colspan="10">등록된 게시물이 없습니다.</td>
+								</tr>
+								<tr bgcolor="#777777">
+									<td height="1" colspan="10"></td>
+								</tr>
+	
+							</s:if>
+						</table>
+					</div>
+					<!-- /.테이블 div -->
 				</div>
-				<!-- /게시판 바디 -->
+				<!-- /.col-md-12 -->
 
 				<!-- 페이징 -->
 				<div class="text-center">
@@ -245,11 +265,9 @@
 				<!-- /버튼 -->
 
 			</div>
-
+			<!-- /.main -->
 		</div>
-		<!-- /.main -->
-	</div>
-	<!-- /.row	-->
+		<!-- /.row	-->
 	</div>
 	<!-- /.container -->
 
@@ -259,6 +277,24 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
-
+    <!--  Datepicker JS -->
+        <script type="text/javascript" src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.ui.datepicker-ko.js"></script>
+        <script>
+             $(function() {
+                $( "#startDate" ).datepicker({
+                    changeYear: true,
+                    showButtonPanel: true,   //달력아래 닫기 버튼 오늘가기 버튼 출력
+                    dateFormat: "yy-mm-dd", //날짜 출력 형식
+                    maxDate : '+0'   
+                });
+                $("#endDate").datepicker({   //달력 2개가 필요하기 때문에 추가
+                    changeYear: true,
+                    showButtonPanel: true,   
+                    dateFormat: "yy-mm-dd", //날짜 출력 형식
+                    maxDate : '+0'       
+                });
+             });
+ </script>        
 </body>
 </html>

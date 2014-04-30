@@ -32,49 +32,51 @@
 	<!-- end of header -->
 
 	<!-- container -->
-	<div class="col-md-12">
-		<h3>공지사항/이벤트</h3>
-	</div>
-	
-  	<div class="col-md-12 well">
-  		<s:if test="resultClass == NULL">
-			<form name="f" action="insertNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
-		</form></s:if>
-		<s:else>
-		  	<form name="u" action="updateNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
-		  	<s:hidden name="notice_num" value="%{notice_num}" />
-		  	<s:hidden name="currentPage" value="%{currentPage}" />
-		  	<s:hidden name="notice_file" value="%{notice_file}" />
-		</form></s:else>
+	<div class="container">
+		<div class="col-md-12">
+			<h3>공지사항/이벤트</h3>
+		</div>
 		
-  		<div class="form-group">
-			<label>제목</label>
-			<br>
-			<div style="float:left;"><select name="notice_headtag" style="width: 200px;" class="form-control">
-  				<option>-----------------</option>
-  				<option>[공지]</option>
-  				<option>[이벤트]</option>
-  				<option>[스마트팁]</option>
-  			</select>
-  			
-  			</div>
-  			<input type="text" class="form-control" style="width: 898px;" name="notice_subject" value="${resultClass.notice_subject}" placeholder="제목" required>
-  		</div>
-  			
-  		<div class="form-group">
-			<label for="test_content">내용</label>
-  			<s:textarea name="notice_content" id="notice_content" theme="simple" value="%{resultClass.notice_content}" cssStyle="width:1098px" />
-  		</div>
-      	    
-  		<div class="pull-right">
-  			<button type="submit" class="btn btn-primary">완료</button>
-  			<a href="listNotice.action?currentPage=${currentPage}" class="btn btn-default">목록</a>
-  		</div>  
-  		
-	<!-- 꾸미기 끝 -->
+		<!-- 꾸미기 시작 -->
+	  	<div class="col-md-12 well">
+	  		<s:if test="resultClass == NULL">
+				<form name="f" action="insertNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
+			</s:if>
+			<s:else>
+			  	<form name="u" action="updateNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
+			  	<s:hidden name="notice_num" value="%{notice_num}" />
+			  	<s:hidden name="currentPage" value="%{currentPage}" />
+			  	<s:hidden name="notice_file" value="%{notice_file}" />
+			</s:else>
+			
+	  		<div class="form-group">
+				<label>제목</label>
+				<br>
+				<div style="float:left;"><select name="notice_headtag" style="width: 200px;" class="form-control">
+	  				<option>-----------------</option>
+	  				<option>[공지]</option>
+	  				<option>[이벤트]</option>
+	  				<option>[스마트팁]</option>
+	  			</select>
+	  			
+	  			</div>
+	  			<input type="text" class="form-control" style="width: 898px;" name="notice_subject" value="${resultClass.notice_subject}" placeholder="제목" required>
+	  		</div>
+	  			
+	  		<div class="form-group">
+				<label for="test_content">내용</label>
+	  			<s:textarea name="notice_content" id="notice_content" theme="simple" value="%{resultClass.notice_content}" cssStyle="width:1098px" />
+	  		</div>
+	      	    
+	  		<div class="pull-right">
+	  			<a href="listNotice.action?currentPage=${currentPage}" class="btn btn-default">목록</a>
+	  			<button type="submit" class="btn btn-primary">완료</button>	  			
+	  		</div>  	  		
+		
+		</div>
+		<!-- 꾸미기 끝 -->
+		
 	</div>
-
-	
 	<!-- /.container -->
 
 

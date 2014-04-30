@@ -90,7 +90,7 @@
 
 		<!-- 게시판 바디 -->
 		<div class="col-md-12">
-			<table class="table table-stiped text-center">
+			<table class="table table-hover text-center">
 				<tr>
 					<td><strong>번호</strong></td>
 					<td><strong>종류</strong></td>
@@ -124,8 +124,8 @@
 						<td><s:property value="recipe_foodsubject" /></td>
 						<td><s:property value="recipe_writer" /></td>
 						<td><s:property value="recipe_reg_date" /></td>
-						<td><s:property value="recipe_time" /></td>
-						<td><s:property value="recipe_price" /></td>
+						<td><s:property value="recipe_time" />&nbsp;분</td>
+						<td><s:property value="recipe_price" />&nbsp;원</td>
 						<td><s:property value="recipe_readcount" /></td>
 						<td><s:property value="recipe_recommand" /></td>
 					</tr>
@@ -166,7 +166,7 @@
 				<!-- /.검색[선택] -->
 				<!-- 내가 쓴 글 -->
 				<s:if test="#session.session_id != null">
-					<input name="mylist" type="button" class="btn btn-default" value="내가 쓴 글" onClick="javascript:location.href='myAllListPage.action?session_id=<s:property value="#session.session_id" />';">
+					<input name="mylist" type="button" class="btn btn-default" value="마이 레시피" onClick="javascript:location.href='listMyRecipe.action?session_id=<s:property value="#session.session_id" />';">
 				</s:if>
 				<!-- /.내가 쓴 글 -->
 				<input type="button" class="btn btn-primary" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">

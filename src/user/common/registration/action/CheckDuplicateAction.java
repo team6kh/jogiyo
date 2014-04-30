@@ -65,7 +65,10 @@ public class CheckDuplicateAction implements Action, ConDAOAware
         if (buyerDTO != null || sellerDTO != null)
         {
             isDup = 1;
-        } else
+        } else if (getReg_id().equals("admin"))
+    	{
+        	isDup = 1;
+    	} else
         {
             isDup = 0;
         }

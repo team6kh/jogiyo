@@ -39,7 +39,7 @@
 	</div>
 		
 	<div class="col-md-12 well">
-		<table class="table table-striped table-forum">
+		<table class="table table-striped">
 			<thead>
 	  			<tr>
       				<th class="text-center" width="50"><strong><s:property value="rnum" /></strong></th>

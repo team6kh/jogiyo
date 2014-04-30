@@ -16,14 +16,14 @@ import common.ConDAOAware;
 
 public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 	public static SqlMapClient sqlMapper;
-	Calendar today = Calendar.getInstance();
+	private Calendar today = Calendar.getInstance();
 	private CooponDTO paramClass = new CooponDTO();
 	private CartDTO paramClass1 = new CartDTO();
 	private PaidDTO paramClass2 = new PaidDTO();
 	private PaidDTO resultClass = new PaidDTO();
 	private List<CartDTO> list1 = new ArrayList<CartDTO>();
 	private List<PaidDTO> list2 = new ArrayList<PaidDTO>();
-	Integer count;
+	private Integer count;
 	private int rest_num;
 	private String session_id;
 	private String cooResult;

@@ -195,7 +195,7 @@
 			  <label>전화번호</label>
 			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="seller_telnum" required>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="divRegId">
 			  <label>판매자 아이디</label>
 			  <input type="text" class="form-control" id="seller_id" name="seller_id" onkeyup="validateRegId(this.form);" required>
 			  <p class="help-block" id="feedbackRegId">아이디를 입력해주세요.</p>

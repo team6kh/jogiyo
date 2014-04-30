@@ -21,8 +21,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private RestoptDTO paramClass1 = new RestoptDTO();
 	private RestoptDTO resultClass1 = new RestoptDTO();
 	private SellerDTO sellerDTO = new SellerDTO();
-	int seq_num;
-	int virRest_num;
+	private int seq_num;
 	private int currentPage; 
 	private int rest_num;
 	private String rest_subject;
@@ -67,8 +66,8 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private int restopt_priceplus15;
 
 	//옵션사진
-	private String restopt_orgname; //set get //dto
-	private String restopt_savname; //set get //dto
+	private String restopt_orgname;
+	private String restopt_savname;
 	
 	private File optupload1;
 	private String optupload1ContentType;
@@ -146,9 +145,9 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private String optfileUploadPath15 = Constants.COMMON_FILE_PATH + Constants.REST_MENU_FILE_PATH;
 
 	//매인사진
-	private File rest_destFile1; //dto
-	private String rest_main_orgname; // dto
-	private String rest_main_savname; // dto
+	private File rest_destFile1;
+	private String rest_main_orgname; 
+	private String rest_main_savname; 
 	private File upload1;
 	private String upload1ContentType;
 	private String upload1FileName;
@@ -163,9 +162,10 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	private String upload2FileName;
 	private String fileUploadPath2 = Constants.COMMON_FILE_PATH + Constants.REST_CONTENT_FILE_PATH;
 	
+	//판매자가 글을 썻는지 안썻는지 판단하기 위한 변수//판매자 1명당 1개의 상품글을 올릴 수 있도록 하기 위함.
 	Integer count;
 	
-	//ConDAOAware 인터페이스의 메서드(인터셉터에서 호출)
+	//인터셉터
 	public void setConDAO(SqlMapClient sqlMapper) { 
 	    this.sqlMapper = sqlMapper;
 	}
@@ -173,7 +173,6 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	public String form() throws Exception {
 		return SUCCESS;
 	}
-
 
 	public String cancel() throws Exception{
 		return SUCCESS;
@@ -213,13 +212,11 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 				//옵션 사진 파일 저장.
 				File restopt_destFile1 = new File(optfileUploadPath1 + file_name1 + "."+ file_ext1); 
 				FileUtils.copyFile(getOptupload1(), restopt_destFile1);
-
 				//매인사진파일 DTO에 set
 				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(27));
 				paramClass1.setRestopt_orgname(getOptupload1FileName());
 				paramClass1.setRestopt_savname(file_name1 + "." + file_ext1);
 			}
-
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		if(getRestopt_subject2() != null && getRestopt_priceplus2() != 0){
@@ -1219,6 +1216,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		this.optfileUploadPath15 = optfileUploadPath15;
 	}
 
+	//세션ID
 	public String getSession_id() {
 		return session_id;
 	}

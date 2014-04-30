@@ -16,10 +16,10 @@
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="jogiyo.css" rel="stylesheet">
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
+<link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
 
 </head>
@@ -80,8 +80,8 @@
 				<textarea class="form-control" rows="3" id="qna_reply" name="qna_reply" maxlength="2000" placeholder="2000자 이하로 작성해 주세요" required>${resultClass.qna_reply }</textarea>
 			</div></c:if>
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary">${textName }</button>
-				<a href="listQna.action" class="btn btn-primary">글목록</a>
+				<a href="listQna.action" class="btn btn-default">글목록</a>
+				<button type="submit" class="btn btn-primary">${textName }</button>				
 			</div>
 		</form>
 		</div>

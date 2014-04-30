@@ -20,6 +20,7 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
     private String login_id; // 로그인 아이디
     private String login_pw; // 로그인 비밀번호
     private String actionName; // 액션 이름
+    private String queryString; // queryString
 
     private Map sessionMap;
 
@@ -41,8 +42,9 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
 
     public String execute() throws Exception
     {
-        // System.out.println("LoginAction");
-        // System.out.println("getActionName:"+getActionName());
+        //System.out.println("LoginAction");
+        //System.out.println("getActionName:"+getActionName());
+    	//System.out.println("getQueryString:"+getQueryString());
 
         // 로그인을 실행한 액션의 actionName(로그인 후 리턴할 주소)이 설정되어 있지 않을 경우 home으로 설정(리턴)한다.
         /* 이 방법 밖에는 없는건가? */
@@ -50,8 +52,8 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
         {
             // System.out.println("no actionName");
             setActionName("home");
-        }
-
+        }        
+        
         /*
          * 이 액션에서는 paramClass와 resultClass로 나누어 구현하였다.
          */
@@ -164,5 +166,13 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
     {
         this.actionName = actionName;
     }
+
+	public String getQueryString() {
+		return queryString;
+	}
+
+	public void setQueryString(String queryString) {
+		this.queryString = queryString;
+	}
     
 }

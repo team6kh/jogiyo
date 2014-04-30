@@ -19,6 +19,7 @@
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
+<link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
 
 </head>
@@ -80,15 +81,16 @@
 			</div>
 
 
-			<div class="pull-right">
-				<c:if test="${session_id eq 'admin'}">
-					<button type="submit" class="btn btn-primary">답변</button>
-				</c:if>	
+			<div class="pull-right">				
 				<c:if test="${session_id == resultClass.qna_id}">
-					<button type="submit" class="btn btn-primary">수정</button>
-					<a href="deleteQna.action?qna_num=${resultClass.qna_num }" class="btn btn-primary">삭제</a>
+					<button type="submit" class="btn btn-default">수정</button>
+					<a href="deleteQna.action?qna_num=${resultClass.qna_num }" class="btn btn-default">삭제</a>
 				</c:if>
-				<a href="listQna.action" class="btn btn-primary">목록</a>
+				<a href="listQna.action" class="btn btn-default">목록</a>
+				<c:if test="${session_id eq 'admin'}">
+					<a href="deleteQna.action?qna_num=${resultClass.qna_num }" class="btn btn-default">삭제</a>
+					<button type="submit" class="btn btn-primary">답변</button>					
+				</c:if>	
 			</div>
 		</form>
 		</div>
