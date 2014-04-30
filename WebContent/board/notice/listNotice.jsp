@@ -38,7 +38,7 @@
 		</div>
 		
 		<div class="col-md-12 well">
-			<table class="table table-striped table-forum">
+			<table class="table table-hover">
 				<thead>
 					<tr bgcolor="#F3F3F3" align="center">
 						<th class="text-center" style="width: 100px;">번호</th>
