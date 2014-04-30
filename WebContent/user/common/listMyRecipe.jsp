@@ -88,9 +88,12 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
 					<li><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+					<!-- 구매자일시 -->
 					<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
-					<li class="active"><a href="myAllListPage.action?session_id=${session_id}">내가 작성한 글(recipe)</a></li>
-					<li class="active"><a href="myAllListPageQna.action?session_id=${session_id}">내가 작성한 글(qna)</a></li>
+					<!-- 판매자일시 미구현 -->
+					<!-- <li><a href="dashSeller.action?session_id=${session_id}">판매목록</a></li> -->
+					<li class="active"><a href="listMyRecipe.action?session_id=${session_id}">마이 레시피</a></li>
+					<li><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
 				</ul>
 			</div>
 			<!-- /.sidebar -->
@@ -100,14 +103,13 @@
 
 				<!-- 게시판 윗부분 -->
 				<div class="col-md-12">
-					<h3>MyRecipe 목록</h3>
-					<p>내가 올린 레시피~~!!</p>
+					<h3>마이 레시피</h3>
 				</div>
 				<!-- /.게시판 윗부분 -->
 
 				<!-- 게시판 바디 -->
 				<div class="col-md-12">
-					<table class="table table-stiped">
+					<table class="table">
 						<tr align="center" bgcolor="">
 							<td><strong>번호</strong></td>
 							<td><strong>종류</strong></td>
@@ -167,85 +169,11 @@
 				</div>
 				<!-- /.게시판 바디 -->
 
-				<!-- 페이징 -->
-				
+				<!-- 페이징 -->				
 				<!-- /.페이징 -->
 
 				<!-- 버튼 -->
-				<div class="pull-right">
-					<input type="button" value="글쓰기"
-						onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
-					<input type="button" value="새로고침"
-						onClick="javascript:location.href='myAllListPage.action?session_id=<s:property value="#session.session_id" />';">
-				</div>
 				<!-- /.버튼 -->
-
-				<br />
-
-				<table width="900" border="0" cellspacing="0" cellpadding="2">
-					<tr>
-						<td colspan="10" align="center">
-							<!-- 검색 jsp -->
-							<form name="recipe_search" action="recipe_search.action"
-								enctype="multipart/form-data">
-								<select name="recipe_search_target" id="recipe_search_target"
-									title="검색" onchange="detailsearch()">
-									<option value="null">검색[선택]</option>
-									<option value="recipe_detailsearch">상세검색</option>
-								</select> <input name="mylist" type="button" value="전체글목록보기"
-									onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage"  />';">
-
-								<div id="detailsearch" style="display: none">
-									<table width="667" border="1" cellpadding="0" cellspacing="0">
-
-										<tr>
-											<td align="center">종류</td>
-											<td><select name="recipe_foodkind" style="width: 120px"
-												id="statsType">
-													<option value="">선택하세요</option>
-													<option value="한식">한식</option>
-													<option value="중식">중식</option>
-													<option value="일식">일식</option>
-													<option value="양식">양식</option>
-													<option value="기타">기타</option>
-											</select></td>
-											<td align="center">작성자</td>
-											<td><input type="text" name="recipe_writerinput"></td>
-										</tr>
-										<tr>
-											<td align="center">요리명</td>
-											<td colspan="3"><input type="text"
-												name="recipe_foodnameinput"></td>
-										</tr>
-										<tr>
-											<td align="center">제목+내용</td>
-											<td colspan="3"><input type="text"
-												name="recipe_subjectinput"></td>
-										</tr>
-										<tr>
-											<td align="center">소요시간</td>
-											<td colspan="3"><input type="text"
-												id="recipe_timeinput1" size="5">&nbsp;~<input
-												type="text" id="recipe_timeinput2" size="5"></td>
-										</tr>
-										<tr>
-											<td align="center">비용</td>
-											<td colspan="3"><input type="text"
-												id="recipe_priceinput1" size="5">&nbsp;~<input
-												type="text" id="recipe_priceinput2" size="5"></td>
-										</tr>
-										<tr>
-											<td align="center" colspan="4"><input type="reset"
-												value="초기화" />&nbsp;<input type="submit" value="검색" /></td>
-										</tr>
-
-									</table>
-								</div>
-							</form> <!-- /.검색 jsp -->
-						</td>
-					</tr>
-				</table>
-
 			
 			</div>
 			<!-- /.main -->

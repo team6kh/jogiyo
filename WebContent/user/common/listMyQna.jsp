@@ -88,45 +88,26 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
 					<li><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+					<!-- 구매자일시 -->
 					<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
-					<li class="active"><a href="myAllListPage.action?session_id=${session_id}">내가 작성한 글(recipe)</a></li>
-					<li class="active"><a href="myAllListPageQna.action?session_id=${session_id}">내가 작성한 글(qna)</a></li>
+					<!-- 판매자일시 미구현 -->
+					<!-- <li><a href="dashSeller.action?session_id=${session_id}">판매목록</a></li> -->
+					<li><a href="listMyRecipe.action?session_id=${session_id}">마이 레시피</a></li>
+					<li class="active"><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
 				</ul>
 			</div>
 			<!-- /.sidebar -->
 
 			<!-- main -->
-			
-						
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">						
 
 				<div class="col-md-12">
-					<h3>My Q&A 목록</h3>
-				</div>
-
-				<!-- searchForm -->
-				<form name="searchForm" id="searchForm">
-					<select name="qna_category" id="qna_category"
-						onchange="fn_search();">
-						<option value="">전체</option>
-						<option value="01"
-							<c:if test="${qna_category eq '01'}">selected</c:if>>회원가입</option>
-						<option value="02"
-							<c:if test="${qna_category eq '02'}">selected</c:if>>바로결제</option>
-						<option value="03"
-							<c:if test="${qna_category eq '03'}">selected</c:if>>리뷰</option>
-						<option value="04"
-							<c:if test="${qna_category eq '04'}">selected</c:if>>이용문의</option>
-						<option value="05"
-							<c:if test="${qna_category eq '05'}">selected</c:if>>광고문의</option>
-						<option value="06"
-							<c:if test="${qna_category eq '06'}">selected</c:if>>기타</option>
-					</select>
-				</form>
-				<!-- /.searchForm -->
+					<h3>마이 문의하기</h3>
+				</div>				
 
 				<!-- col-md-12 well -->
-				<div class="col-md-12 well">
-					<table class="table table-striped table-forum">
+				<div class="col-md-12">
+					<table class="table">
 						<thead>
 							<tr>
 								<th class="text-center" style="width: 100px;">번호</th>
@@ -174,9 +155,9 @@
 						</ul>
 					</div>
 
-					<div class="pull-right">
+					<!-- <div class="pull-right">
 						<a href="insertQnaForm.action" class="btn btn-primary">글쓰기</a>
-					</div>
+					</div> -->
 
 				</div>
 				<!-- /.col-md-12 well -->

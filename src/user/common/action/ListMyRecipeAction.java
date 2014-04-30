@@ -1,4 +1,4 @@
-package board.recipe.action;
+package user.common.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import com.opensymphony.xwork2.Preparable;
 import common.ConDAOAware;
 import common.action.PagingAction;
 
-public class MyAllListPageAction extends ActionSupport implements ConDAOAware {
+public class ListMyRecipeAction extends ActionSupport implements ConDAOAware {
 	public static SqlMapClient sqlMapper;
 	private List<RecipeDTO> list = new ArrayList<RecipeDTO>();
 

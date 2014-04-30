@@ -1,4 +1,4 @@
-package board.recipe.action;
+package user.common.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import common.ConDAOAware;
 import common.action.PagingAction;
 
-public class MyAllListPageQnaAction extends ActionSupport implements
+public class ListMyQnaAction extends ActionSupport implements
 		ConDAOAware {
 	public static SqlMapClient sqlMapper;
 	private List<QnaDTO> list = new ArrayList<QnaDTO>();

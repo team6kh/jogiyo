@@ -105,16 +105,17 @@
 			<result>/user/seller/readSeller.jsp</result>
 		</action>
 		
-		<!-- myAllListPage 액션 : 김경남 -->
-		<action name="myAllListPage" class="board.recipe.action.MyAllListPageAction">
+		<!-- ListMy* 액션 : 김경남 -->
+		<action name="listMyRecipe" class="user.common.action.ListMyRecipeAction">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
-			<result>/user/common/myAllListPage.jsp</result>
+			<result>/user/common/listMyRecipe.jsp</result>
 		</action>
-		<action name="myAllListPageQna" class="board.recipe.action.MyAllListPageQnaAction">
+		
+		<action name="listMyQna" class="user.common.action.ListMyQnaAction">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
-			<result>/user/common/myAllListQnaPage.jsp</result>
+			<result>/user/common/listMyQna.jsp</result>
 		</action>
 		
 		<!-- 구매자 대시보드 : 김경남 -->
@@ -135,9 +136,7 @@
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result type="chain">dashBuyer</result>
-		</action>
-		
-		
+		</action>		
 		
 		<!-- 판매자 대시보드 : 윤지은 -->
 		<action name="dashSeller" class="user.seller.action.DashSellerAction">
