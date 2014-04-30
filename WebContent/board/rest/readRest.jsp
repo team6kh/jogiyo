@@ -31,6 +31,10 @@
 <link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css" type="text/css" media="screen" />    	
 <link rel="stylesheet" href="assets/plugins/parallax-slider/css/parallax-slider.css" type="text/css" />
 
+<!-- 별점 관련 css -->
+<link rel="stylesheet" href="assets/img/review/css/jquery.rating.css" />
+
+
 <!-- 커스텀 CSS -->
 <style type="text/css">
 	#map_canvas {
@@ -205,7 +209,30 @@
 		var reviewForm = document.insertReviewForm;
 		reviewForm.submit();
 	}
+	
+	function updateRV_form(review_num) {
+		var readRV = document.getElementById("readRV_" + review_num);
+		var updateRV = document.getElementById("updateRV_" + review_num);
+		
+		readRV.style.display = "none";
+		updateRV.style.display="block";
+		
+	}
+	
+	function cancelUpdateRV(review_num) {
+		var readRV = document.getElementById("readRV_" + review_num);
+		var updateRV = document.getElementById("updateRV_" + review_num);
+		
+		readRV.style.display = "block";
+		updateRV.style.display="none";
+		
+		
+	}
 </script>
+
+
+
+
 
 <script language="Javascript1.2">
 	function printWindow(){
@@ -345,7 +372,7 @@
 		</div>
 
 		<!-- 리뷰 쓰기 권한에 관한 조건문 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
-		<!-- 일단은 로그인을 하지 않으면 리뷰 쓰기 폼이 보이지 않도록 조건문 설정  -->
+		<!-- 일단 로그인한 회원만 리뷰 글 쓰기 가능  -->
 
 		<c:if test="${empty sessionScope.session_id}">
 			글을 쓰시려면 로그인을 하세요
@@ -359,11 +386,11 @@
 						<tr>
 							<th>별점</th>
 							<td class="text-center">
-								<input type="radio" name="review_rating" value="1" />1점
-								<input type="radio"	name="review_rating" value="2" />2점
-								<input type="radio"	name="review_rating" value="3" />3점
-								<input type="radio"	name="review_rating" value="4" />4점
-								<input type="radio"	name="review_rating" value="5" />5점
+								<input type="radio" name="review_rating" class="star" value="1" />
+								<input type="radio" name="review_rating" class="star" value="2" />
+								<input type="radio" name="review_rating" class="star" value="3" />
+								<input type="radio" name="review_rating" class="star" value="4"  checked="checked"/>
+								<input type="radio" name="review_rating" class="star" value="5" />
 							</td>
 						</tr>
 
@@ -417,7 +444,7 @@
 		<c:forEach var="reviewDTO" items="${reviewRes}">
 
 			<!-- media -->
-			<div class="media">
+			<div class="media" id="readRV_${reviewDTO.review_num}">
 				<!-- 일반적으로 아바타 아이콘. 우리는 없다 그런거. -->
 				<a class="pull-left" href="javascript:return false;">
 					<!-- <span class="glyphicon glyphicon-user"></span>  -->
@@ -426,23 +453,37 @@
 				<!-- 리뷰 바디 -->
 				<div class="media-body">
 					<div class="media-heading">
-						<strong>${reviewDTO.review_writer}</strong>
-						<em>&nbsp;|&nbsp;</em>
-						<fmt:formatDate value="${reviewDTO.review_reg_date}" pattern="yyyy-MM-dd" />
-						<em>&nbsp;|&nbsp;</em>
+					<table>
+							<tr>
+								<td><strong>${reviewDTO.review_writer}</strong><em>&nbsp;|&nbsp;</em></td>
+								<td><fmt:formatDate value="${reviewDTO.review_reg_date}" pattern="yyyy-MM-dd" /><em>&nbsp;|&nbsp;</em></td>
 
-						<!-- 별점 -->
-						<c:forEach begin="1"end="${reviewDTO.review_rating}">
-							<img src="assets/img/review/ratingimage/ico.png" width="25px" height="25px">
-						</c:forEach>
+									<!-- 별점 -->
+								<td>
+									<c:forEach var="ratingCnt" begin="1"end="5">
+			        						<c:if test="${ratingCnt le reviewDTO.review_rating }">                                
+			                                    <span class="star-rating rater-0 star star-rating-applied star-rating-readonly star-rating-on" >
+			                                        <a title="${ratingCnt }">${ratingCnt }</a>
+			                                     </span>
+			                                 </c:if> 
+			                                 <c:if test="${ratingCnt gt reviewDTO.review_rating }">
+			                                     <span class="star-rating rater-0 star star-rating-applied star-rating-readonly">
+			                                        <a title="${ratingCnt }">${ratingCnt }</a>
+			                                     </span>                    
+			                                 </c:if>
+			    						</c:forEach>
+			    					</td>
 
-						<!-- 해당글 작성자일 경우 수정/삭제 버튼  -->
-						<!-- 임시값 "test_Customer" session_id 값으로 교체 -->
-						<c:if test="${reviewDTO.review_writer == sessionScope.session_id}">
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-default" onclick="javascript:open('updateReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=500, height=270')">수정</button>
-							<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
-						</c:if>
+									<!-- 해당글 작성자일 경우 수정/삭제 버튼 보이도록 설정 -->
+									<td>
+										<c:if test="${reviewDTO.review_writer == sessionScope.session_id}">
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<button class="btn btn-default" onclick="return updateRV_form('${reviewDTO.review_num}')">수정</button>
+											<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
+										</c:if>
+									</td>
+							</tr>
+						</table>
 					</div>
 
 					<!-- 리뷰 글 -->
@@ -453,7 +494,7 @@
 						<c:forTokens var="reviewFileNames" items="${reviewDTO.review_file }" delims="' '">
 							<c:forEach var="reviewFileName" items="${reviewFileNames}">
 								<div class="img-review-group">
-									<img src="${reviewFile_Path}${reviewFileName}" style="display:block;">
+									<img src="${reviewFile_Path}${reviewFileName}" style="display:block; width:300px">
 								</div>
 							</c:forEach>
 						</c:forTokens>
@@ -464,7 +505,59 @@
 				<!-- /리뷰 바디 -->
 			</div>
 			<!-- /media -->
-
+			
+			<!-- 리뷰 수정 폼(review) -->
+			<div id="updateRV_${reviewDTO.review_num }" style="display:none; margin: 20px">
+				
+					<form method="post" name="updateReviewForm" id="updateReviewForm" action="updateReviewPro.action" enctype="multipart/form-data" >
+				
+						<input type="hidden" name="rest_num" value="${rest_num}" />
+						<input type="hidden"  name="review_rest_currentPage" value="${review_rest_currentPage}" />
+						<input type="hidden"  name="ccp" value="${ccp}" /> 
+						<input type="hidden"  name="review_num" value="${reviewDTO.review_num}" />
+						
+						<div class="page-header">
+		 					 <h1>리뷰 수정하기</h1>
+						</div>
+						<!-- 별점(review_rating) : radio 타입으로 -->
+						<div class="form-group text-center">
+							<table>
+							<tr>
+								<td><label>별점 &nbsp;&nbsp;&nbsp;</label></td>
+								<td>
+									<c:forEach var="cnt" begin="1" end="5">
+										<c:if test="${cnt eq reviewDTO.review_rating}">
+											<input type="radio" class="star" name="review_rating" value="${cnt}" checked="checked" />
+										</c:if>
+										<c:if test="${cnt ne reviewDTO.review_rating}">
+											<input type="radio" class="star" name="review_rating" value="${cnt}" />
+										</c:if>					
+				                    </c:forEach>
+				                 </td>
+		                    </table>
+		                 </div>        
+		      
+						<!-- 리뷰 content -->
+						<div class="form-group text-center">
+							<textarea class="form-control" name="review_content" rows="5" required>${reviewDTO.review_content}</textarea>
+						</div>
+				
+						<!-- 이미지 파일 첨부 -->
+							<div class="form-group text-center">
+							 	<label> 새로 파일을 첨부하시면 기존에 첨부하신 파일은 삭제됩니다. <br/>
+							 				  gif, jpg, jpen, png 확장자인 이미지 파일만 업로드 가능합니다.	 </label>
+			                    <input type="file" name="review_files" class="multi" maxlength="2" accept="gif|jpg|png|jpeg" multiple="multiple"/>        
+							</div>
+							<!-- 리뷰 작성 완료 버튼 -->
+								<div class="form-group text-right">
+									<button type="button" class="btn btn-default" onclick="cancelUpdateRV('${reviewDTO.review_num}')">취소</button> 
+									<button type="submit" class="btn btn-primary" >수정 완료</button>
+														
+								</div>
+					</form>
+			
+			</div>
+			<!--  리뷰 수정 폼 끝 -->
 		</c:forEach>
 
 		<div class="text-center">
@@ -484,12 +577,14 @@
 <!-- Bootstrap core JavaScript
    ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!--  수정해도 괜찮음? -->
+<script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
+<%-- <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>--%>
 <script src="dist/js/bootstrap.min.js"></script>
 
 <!-- Unify -->
 <!-- JS Global Compulsory -->			
-<script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
+
 <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>		
 <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>	
 <!-- JS Implementing Plugins -->           
@@ -507,6 +602,17 @@
         Index.initParallaxSlider();
     });
 </script>
+
+<!-- 별점 관련 js -->
+<script type="text/javascript" src="assets/img/review/js/jquery.rating.js"></script>
+<!-- 파일업로드 관련 js -->
+<script type="text/javascript" src="assets/img/review/js/jquery.form.js"></script>
+<script type="text/javascript" src="assets/img/review/js/jquery.MultiFile.js"></script>
+
+
+
+
+
 <!--[if lt IE 9]>
     <script src="assets/js/respond.js"></script>
 <![endif]-->

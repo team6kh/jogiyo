@@ -82,7 +82,7 @@
 		UPDATE 	review_board 
 		
 		SET 				review_rating = #review_rating#,
-							revieew_content = #review_content#
+							review_content = #review_content#
 		<include refid="where_review_num" />
 	</update>
     
