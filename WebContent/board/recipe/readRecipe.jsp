@@ -23,8 +23,7 @@
 <link href="common/common-template.css" rel="stylesheet">
 <script type="text/javascript">
 	function open_win_noresizable(url, name) {
-		var oWin = window.open(url, name,
-				"scrollbars=no,status=no,resizable=no,width=300,height=150");
+		var oWin = window.open(url, name, "scrollbars=no,status=no,resizable=no,width=400,height=200");
 	}
 </script>
 </head>
@@ -43,7 +42,7 @@
 			<!-- 로그인 후 보이는 추천 버튼 -->
 			<s:if test="#session.session_id != null">
 			<div class="pull-right">
-				<button type="button" class="btn btn-primary btn-lg" name="list" onClick="javascript:document.getElementById('isrecommand').contentWindow.location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'">
+				<button type="button" class="btn btn-primary" name="list" onClick="javascript:document.getElementById('isrecommand').contentWindow.location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'">
 					<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;추천
 				</button>
 				<br />
@@ -150,8 +149,7 @@
 							<input class="btn btn-default" name="list" type="button" value="삭제"
 								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
 						</s:if>
-						<s:elseif
-							test="resultClass.recipe_memberwriter != NULL && resultClass.recipe_memberwriter == #session.session_id">
+						<s:elseif test="resultClass.recipe_memberwriter != NULL && resultClass.recipe_memberwriter == #session.session_id">
 							<input class="btn btn-default" name="list" type="button" value="수정"
 								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
 							<input class="btn btn-default" name="list" type="button" value="삭제"

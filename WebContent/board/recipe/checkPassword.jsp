@@ -26,53 +26,28 @@
 
 <body>
 
-	<!-- header -->
-	<%@ include file="/common/header.jsp"%>
-	<!-- end of header -->
-
 	<!-- container -->
 	<div class="container">
 
-		<!-- test message -->
-		<div class="common-template">
-			<head>
-<title>비밀번호 확인</title>
-			</head>
+		<h3>비밀번호 확인</h3>
 
-			<body>
+		<form action="checkActionRecipe.action" method="post">
+			<s:hidden name="recipe_num" value="%{recipe_num}" />
+			<s:hidden name="currentPage" value="%{currentPage}" />
 
-				<h2>비밀번호 확인</h2>
+			<table class="table">
 
-				<form action="checkActionRecipe.action" method="post">
-					<s:hidden name="recipe_num" value="%{recipe_num}" />
-					<s:hidden name="currentPage" value="%{currentPage}" />
+				<tr>
+					<td width="100">비밀번호 입력</td>
+					<td width="150">
+						&nbsp;&nbsp;<s:textfield name="recipe_password" theme="simple" cssStyle="width:100px" maxlength="20" />
+						&nbsp;&nbsp;<input name="submit" type="submit" value="확인" class="inputb">
+					</td>
+				</tr>
 
-					<table width="250" border="0" cellspacing="0" cellpadding="0">
+			</table>
 
-						<tr bgcolor="#777777">
-							<td height="1" colspan="2"></td>
-						</tr>
-
-						<tr>
-							<td width="100" bgcolor="#F4F4F4">비밀번호 입력</td>
-							<td width="150" bgcolor="#FFFFFF">&nbsp;&nbsp;<s:textfield
-									name="recipe_password" theme="simple" cssStyle="width:100px"
-									maxlength="20" /> &nbsp;&nbsp;<input name="submit"
-								type="submit" value="확인" class="inputb">
-							</td>
-						</tr>
-
-						<tr bgcolor="#777777">
-							<td height="1" colspan="2"></td>
-						</tr>
-
-					</table>
-
-				</form>
-			</body>
-
-		</div>
-		<!-- end of test message -->
+		</form>
 
 	</div>
 	<!-- /.container -->
@@ -81,8 +56,7 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 </body>
 </html>

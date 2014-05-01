@@ -26,42 +26,13 @@
 
 <body>
 
-	<!-- header -->
-	<%@ include file="/common/header.jsp"%>
-	<!-- end of header -->
-
-	<!-- container -->
-	<div class="container">
-
-		<!-- test message -->
-		<div class="common-template">
-			<head>
-<title>비밀번호 오류</title>
 <script type="text/javascript">
-	function ErrorMessage() {
+//	function ErrorMessage() {
 		alert("비밀번호가 틀립니다.");
 		history.back(-1);
-	}
+//	}
 </script>
-			</head>
-
-			<body>
-				<script>
-					ErrorMessage()
-				</script>
-			</body>
-		</div>
-		<!-- end of test message -->
-
-	</div>
-	<!-- /.container -->
-
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
+			
 </body>
+
 </html>
