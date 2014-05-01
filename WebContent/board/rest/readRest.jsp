@@ -466,7 +466,7 @@
 
 									<!-- 별점 -->
 								<td>
-									<c:forEach var="ratingCnt" begin="1"end="5">
+									<c:forEach var="ratingCnt" begin="1" end="5">
 			        						<c:if test="${ratingCnt le reviewDTO.review_rating }">                                
 			                                    <span class="star-rating rater-0 star star-rating-applied star-rating-readonly star-rating-on" >
 			                                        <a title="${ratingCnt }">${ratingCnt }</a>
