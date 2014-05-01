@@ -380,15 +380,15 @@
 		<!-- 리뷰 쓰기 권한에 관한 조건문 : 필요한 값 - 회원이 이 식당에서 주문한 적이 있는지 없는지에 대한 논리값 -->
 		<!-- 일단 로그인한 회원만 리뷰 글 쓰기 가능  -->
 
-		<c:if test="${empty sessionScope.session_id}">
-			글을 쓰시려면 로그인을 하세요
+		<c:if test="${sessionScope.session_type ne 'buyer'}">
+			글을 쓰시려면 구매자로 로그인을 하세요
 		</c:if>
 
-		<c:if test="${!empty sessionScope.session_id}">
+		<c:if test="${sessionScope.session_type eq 'buyer'}">
 
 			<div class="text-center">
 				<form name="insertReviewForm" method="post" action="insertReviewPro.action" enctype="multipart/form-data" style="display: none">
-					<table class="table table-striped table-forum">
+					<table class="table table-striped">
 						<tr>
 							<th>별점</th>
 							<td class="text-center">

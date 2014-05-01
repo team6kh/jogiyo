@@ -30,7 +30,7 @@
 	<%@ include file="/common/header.jsp"%>
 	<!-- end of header -->
 
-	<!-- container -->
+	<!-- container --> 
 	<div class="container">
  
 	<!-- 밑으로 view 꾸미기 -->
@@ -129,8 +129,10 @@
 	        				</s:else></a>
 						</s:else>
 						</div>
+						<c:if test="${session_id eq 'admin'}">
 	        			<a href="updateNoticeForm.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}" class="btn btn-default">수정</a>
 	        			<a href="deleteNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}" class="btn btn-default">삭제</a>
+	        			</c:if>
 	        			<a href="listNotice.action?currentPage=${currentPage}" class="btn btn-default">목록</a>
 					</td>
       			</tr>
