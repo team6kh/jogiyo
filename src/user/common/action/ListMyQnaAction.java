@@ -16,13 +16,13 @@ public class ListMyQnaAction extends ActionSupport implements
 	public static SqlMapClient sqlMapper;
 	private List<QnaDTO> list = new ArrayList<QnaDTO>();
 
-/*//	private int currentPage = 1;
-//	private int totalCount;
-//	private int blockCount = 10; // 한 페이지의 게시물의 수
-//	private int blockPage = 5; // 한 화면에 보여줄 페이지
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 10; // 한 페이지의 게시물의 수
+	private int blockPage = 5; // 한 화면에 보여줄 페이지
 	private String pagingHtml;
 	private PagingAction page;
-	private String actionName = "myAllListPageQna";*/
+	private String actionName = "myAllListPageQna";
 	private String session_id;
 
 	public void setConDAO(SqlMapClient sqlMapper) {
@@ -32,9 +32,8 @@ public class ListMyQnaAction extends ActionSupport implements
 
 	public String execute() throws Exception {
 		list = sqlMapper.queryForList("Qna.myListQna", session_id);
-	/*	totalCount = list.size(); // qna 전체 글 갯수를 구한다.
-		page = new PagingAction(actionName, currentPage, totalCount,
-				blockCount, blockPage);
+		totalCount = list.size(); // qna 전체 글 갯수를 구한다.
+		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage, session_id);
 		pagingHtml = page.getPagingHtml().toString();
 
 		int lastCount = totalCount;
@@ -43,7 +42,7 @@ public class ListMyQnaAction extends ActionSupport implements
 			lastCount = page.getEndCount() + 1;
 
 		list = list.subList(page.getStartCount(), lastCount);
-*/
+
 		return SUCCESS;
 
 	}
@@ -56,7 +55,7 @@ public class ListMyQnaAction extends ActionSupport implements
 		this.list = list;
 	}
 
-	/*public int getTotalCount() {
+	public int getTotalCount() {
 		return totalCount;
 	}
 
@@ -94,7 +93,7 @@ public class ListMyQnaAction extends ActionSupport implements
 
 	public void setPage(PagingAction page) {
 		this.page = page;
-	}*/
+	}
 
 	public String getSession_id() {
 		return session_id;
@@ -104,12 +103,12 @@ public class ListMyQnaAction extends ActionSupport implements
 		this.session_id = session_id;
 	}
 
-/*	public int getCurrentPage() {
+	public int getCurrentPage() {
 		return currentPage;
 	}
 
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
-	}*/
+	}
 
 }

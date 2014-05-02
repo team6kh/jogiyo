@@ -18,7 +18,7 @@ public class ListMyRecipeAction extends ActionSupport implements ConDAOAware {
 	public static SqlMapClient sqlMapper;
 	private List<RecipeDTO> list = new ArrayList<RecipeDTO>();
 
-	/*private int currentPage = 1; // 현재 페이지
+	private int currentPage = 1; // 현재 페이지
 
 	private int totalCount; // 총 게시물의 수
 
@@ -28,7 +28,7 @@ public class ListMyRecipeAction extends ActionSupport implements ConDAOAware {
 
 	private PagingAction page; // 페이징 클래스
 
-	private String actionName = "myAllListPage";*/
+	private String actionName = "listMyRecipe";
 
 	private String session_id;
 
@@ -43,10 +43,9 @@ public class ListMyRecipeAction extends ActionSupport implements ConDAOAware {
 		list = sqlMapper.queryForList("Recipe.myListRecipe",session_id );
 	
 
-		/*totalCount = list.size(); // recipe 전체 글 갯수를 구한다.
+		totalCount = list.size(); // recipe 전체 글 갯수를 구한다.
 
-		page = new PagingAction(actionName, currentPage, totalCount,
-				blockCount, blockPage); // PagingAction 객체 생성
+		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage, session_id); // PagingAction 객체 생성
 
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
 
@@ -58,7 +57,7 @@ public class ListMyRecipeAction extends ActionSupport implements ConDAOAware {
 			lastCount = page.getEndCount() + 1;
 
 		// 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
-		list = list.subList(page.getStartCount(), lastCount);*/
+		list = list.subList(page.getStartCount(), lastCount);
 
 		return SUCCESS;
 
@@ -72,7 +71,7 @@ public class ListMyRecipeAction extends ActionSupport implements ConDAOAware {
 		this.session_id = session_id;
 	}
 
-	/*public int getBlockCount() {
+	public int getBlockCount() {
 		return blockCount;
 	}
 
@@ -86,7 +85,7 @@ public class ListMyRecipeAction extends ActionSupport implements ConDAOAware {
 
 	public void setBlockPage(int blockPage) {
 		this.blockPage = blockPage;
-	}*/
+	}
 
 	public List<RecipeDTO> getList() {
 		return list;
@@ -96,7 +95,7 @@ public class ListMyRecipeAction extends ActionSupport implements ConDAOAware {
 		this.list = list;
 	}
 
-	/*public int getCurrentPage() {
+	public int getCurrentPage() {
 		return currentPage;
 	}
 
@@ -126,6 +125,6 @@ public class ListMyRecipeAction extends ActionSupport implements ConDAOAware {
 
 	public void setPage(PagingAction page) {
 		this.page = page;
-	}*/
+	}
 
 }
