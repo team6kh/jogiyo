@@ -24,9 +24,9 @@ public class CartDeleteAction implements Action, ConDAOAware {
 		paramClass.setCart_rest_num(getRest_num());
 		paramClass.setSession_id(getSession_id());
 		//장바구니 레코드 삭제
-		sqlMapper.delete("Rest.deleteCartforpaid", paramClass);
+		sqlMapper.delete("Cart.deleteCartforpaid", paramClass);
 		//장바구니 레코드 가져오기.
-		list = sqlMapper.queryForList("Rest.selectCartAll", paramClass);
+		list = sqlMapper.queryForList("Cart.selectCartAll", paramClass);
 
 		return SUCCESS;
 	}

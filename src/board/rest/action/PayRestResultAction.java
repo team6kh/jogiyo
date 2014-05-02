@@ -36,7 +36,7 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		//장바구니에 담은 레코드들을 get
 		paramClass1.setCart_rest_num(getRest_num());
 		paramClass1.setSession_id(getSession_id());
-		list1 = sqlMapper.queryForList("Rest.selectCartAll", paramClass1);
+		list1 = sqlMapper.queryForList("Cart.selectCartAll", paramClass1);
 		
 		//결제 테이블 insert전 레코드가 없는지 있는지 판단.
 		Integer count = (Integer)sqlMapper.queryForObject("Rest.selectPaidCount");
@@ -76,7 +76,7 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		}
 		
 		//최종 장바구니 레코드 삭제
-		sqlMapper.delete("Rest.deleteCartforpaid", paramClass1);
+		sqlMapper.delete("Cart.deleteCartforpaid", paramClass1);
 		
 		//방금 장바구니로 구매한 레코드 (=방금 결제완료한 레코드)
 		list2 = sqlMapper.queryForList("Rest.selectPaidnow", resultClass);

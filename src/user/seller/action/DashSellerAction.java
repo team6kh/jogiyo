@@ -59,7 +59,7 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
             
             /* dashSeller.jsp 중단에 띄울 결과물을 위한 코드 */
             
-            cpnRes = sqlMapper.queryForList("Paid.requestCPN", searchDTO);
+            cpnRes = sqlMapper.queryForList("Paid.responseCPN", searchDTO);
            
          
             /* dashSeller.jsp 하단에 띄울 결과물을 위한 코드 */
