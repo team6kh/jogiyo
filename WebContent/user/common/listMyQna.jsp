@@ -151,7 +151,7 @@
 
 					<div class="text-center">
 						<ul class="pagination pagination-sm">
-							<s:property value="qnapagingHtml" escape="false" />
+							<s:property value="pagingHtml" escape="false" />
 						</ul>
 					</div>
 

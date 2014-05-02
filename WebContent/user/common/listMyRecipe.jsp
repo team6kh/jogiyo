@@ -169,8 +169,13 @@
 				</div>
 				<!-- /.게시판 바디 -->
 
-				<!-- 페이징 -->				
-				<!-- /.페이징 -->
+				<!-- 페이징 -->
+		<div class="text-center">
+			<ul class="pagination pagination-sm">
+				<s:property value="pagingHtml" escape="false" />
+			</ul>
+		</div>
+		<!-- /페이징 -->
 
 				<!-- 버튼 -->
 				<!-- /.버튼 -->
