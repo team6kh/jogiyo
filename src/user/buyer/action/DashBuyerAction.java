@@ -46,7 +46,7 @@ public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 		searchDTO.setStartDate(sdf.format(sdf.parse(getStartDate())));
 		searchDTO.setEndDate(sdf.format(sdf.parse(getEndDate())));	
 		
-		list = sqlMapper.queryForList("Rest.myListTime", searchDTO);
+		list = sqlMapper.queryForList("Paid.listMyDate", searchDTO);
 		
 		return SUCCESS;
 		
@@ -54,14 +54,14 @@ public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 	
 	//사용요청
 	public String requestCPN() throws Exception{
-		sqlMapper.update("Rest.requestCPN", getPaid_num());
+		sqlMapper.update("Paid.requestCpn", getPaid_num());
 		return SUCCESS;
 	}
 	
 
 	public String execute() throws Exception {
 		
-		list = sqlMapper.queryForList("Rest.myListCoupon", session_id);
+		list = sqlMapper.queryForList("Paid.listMyCpn", session_id);
 		totalCount = list.size(); // 전체 글 갯수를 구한다.
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage, session_id); // PagingAction 객체 생성
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.

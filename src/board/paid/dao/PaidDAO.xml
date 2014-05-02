@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
 
-
 <sqlMap namespace="Paid">
+
 	<typeAlias alias="paidDTO" type="board.paid.dto.PaidDTO"/>
 	<typeAlias alias="menuDTO" type="board.paid.dto.MenuDTO"/>
 	<typeAlias alias="searchConditionDTO" type="board.paid.dto.SearchConditionDTO"/>
 	<typeAlias alias="cooponDTO" type="table.coopon.dto.CooponDTO" />
 	<typeAlias alias="cartDTO" type="board.cart.dto.CartDTO" />
       
-      <resultMap class="paidDTO" id="paidRes">
+     <resultMap class="paidDTO" id="paidRes">
 		<result property="paid_num" column="paid_num" />
 		<result property="paid_rest_num" column="paid_rest_num" />
 		<result property="paid_rest_subject" column="paid_rest_subject" />
@@ -50,24 +50,16 @@
     
     
     <!-- select -->
-    <select id="paidList" resultMap="paidRes" parameterClass="searchDTO">
-        SELECT 
-			        	p.paid_num,
-                        p.paid_rest_num,     
-			        	p.paid_rest_subject,
-			        	p.paid_restopt_subject,
-			        	p.paid_restopt_priceplus,
-                        p.paid_cpn,
-                        p.paid_cpn_used,
-			        	p.session_id,
-			        	p.paid_reg_date 
+    <select id="paidList" resultMap="paidRes" parameterClass="searchConditionDTO">
+        SELECT *
         <include refid="fromRPBoard"/> 
         <include refid="whereRest"/> AND <include refid="paidDate"/>
         ORDER BY paid_reg_date DESC  	
     </select>
     
-   <select id="hotmenu" resultMap="menuRes" parameterClass="searchDTO">          
-        SELECT * FROM
+   <select id="hotMenu" resultMap="menuRes" parameterClass="searchConditionDTO">          
+        SELECT * 
+        FROM
   				(SELECT 
 								paid_restopt_subject, 
 								count(*) as paid_sales_volume, 
@@ -83,27 +75,18 @@
    </select>
    
    <!-- 쿠폰 사용 요청(paid_board에서 PAID_CPN_USED = 1인 레코드) 내역 추출 -->
-   <select id="responseCPN" resultMap="paidRes" parameterClass="searchDTO">
-        SELECT        
-                        p.paid_num,
-                        p.paid_rest_num, 
-                        p.paid_restopt_subject,
-                        p.paid_restopt_priceplus,
-                        p.paid_cpn,
-                        p.paid_cpn_used,
-                        p.session_id,
-                        p.paid_reg_date 
+   <select id="responseCpn" resultMap="paidRes" parameterClass="searchConditionDTO">
+        SELECT *
         <include refid="fromRPBoard"/>
         <include refid="whereRest"/> AND p.paid_cpn_used = 1 
         ORDER BY paid_reg_date
    </select>
    
-   <!-- select -->
-	<select id="selectCheckcpn" resultClass="int" parameterClass="java.lang.String">
+	<select id="selectCheckedCpn" resultClass="int" parameterClass="java.lang.String">
 		select count(*) from coopon_table where cpn_num = #cpn_num#
 	</select>
 
-	<select id="selectPaidLastNo" resultClass="PaidDTO" parameterClass="int">
+	<select id="selectPaidLastNum" resultClass="paidDTO" parameterClass="int">
 		SELECT max(paid_num) as paid_num FROM paid_board
 	</select>
 
@@ -111,52 +94,15 @@
 		SELECT count(*) FROM paid_board
 	</select>
 	
-	<select id="selectPaidnow" resultMap="PaidBoard" parameterClass="PaidDTO">
+	<select id="selectPaidNow" resultMap="paidRes" parameterClass="paidDTO">
 		select * from paid_board where paid_num > #paid_num#
 	</select>
 	
-	<select id="selectPaidAll" resultMap="PaidBoard" parameterClass="CartDTO">
-		select * from paid_board
-		where paid_rest_num=#cart_rest_num# and session_id=#session_id#
-	</select>
-	
-	<select id="myListCoupon" resultMap="PaidBoard" parameterClass="java.lang.String">
+	<select id="listMyCpn" resultMap="paidRes" parameterClass="java.lang.String">
 		SELECT * FROM PAID_BOARD WHERE session_id = #session_id# ORDER BY paid_num DESC
 	</select>
 	
-	<select id="myListTime" resultMap="PaidBoard" parameterClass="board.paid.dto.SearchConditionDTO">
-		SELECT * FROM PAID_BOARD 
-		WHERE SESSION_ID = #session_id# 
-		AND (PAID_REG_DATE Between to_date(#startDate#, 'yyyy-MM-dd') AND to_date(#endDate#, 'yyyy-MM-dd')
- 		+0.99999)	ORDER BY paid_num DESC
-	</select>
-   
-	<select id="selectCheckcpn" resultClass="int" parameterClass="java.lang.String">
-		select count(*) from coopon_table where cpn_num = #cpn_num#
-	</select>
-
-	<select id="selectPaidLastNo" resultClass="paidDTO" parameterClass="int">
-		SELECT max(paid_num) as paid_num FROM paid_board
-	</select>
-
-	<select id="selectPaidCount" resultClass="int">
-		SELECT count(*) FROM paid_board
-	</select>
-
-	<select id="selectPaidnow" resultMap="paidRes" parameterClass="paidDTO">
-		select * from paid_board where paid_num > #paid_num#
-	</select>
-	
-	<select id="selectPaidAll" resultMap="paidRes" parameterClass="cartDTO">
-		select * from paid_board
-		where paid_rest_num=#cart_rest_num# and session_id=#session_id#
-	</select>
-
-	<select id="myListCoupon" resultMap="paidRes" parameterClass="java.lang.String">
-		SELECT * FROM PAID_BOARD WHERE session_id = #session_id# ORDER BY paid_num DESC
-	</select>
-	
-	<select id="myListTime" resultMap="paidRes" parameterClass="searchConditionDTO">
+	<select id="listMyDate" resultMap="paidRes" parameterClass="board.paid.dto.SearchConditionDTO">
 		SELECT * FROM PAID_BOARD 
 		WHERE SESSION_ID = #session_id# 
 		AND (PAID_REG_DATE Between to_date(#startDate#, 'yyyy-MM-dd') AND to_date(#endDate#, 'yyyy-MM-dd')
@@ -175,13 +121,13 @@
    
    
    <!-- update -->
-   <update id="submitCPN" parameterClass="int">
+   <update id="submitCpn" parameterClass="int">
         UPDATE paid_board
         SET paid_cpn_used = 2    
         WHERE paid_num = #paid_num#
     </update>
     
-    <update id="requestCPN" parameterClass="int">
+    <update id="requestCpn" parameterClass="int">
 		UPDATE paid_board SET paid_cpn_used = 1
 		where paid_num = #paid_num#
 	</update>

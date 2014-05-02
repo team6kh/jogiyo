@@ -22,14 +22,6 @@
 			<result>board/review/goReadRest.jsp</result>
 		</action>
 
-		<!-- 리뷰 글 수정 폼 -->
-		<action name="updateReviewForm" class="board.review.action.UpdateReviewAction"
-			method="form">
-			<interceptor-ref name="conDAO" />
-			<interceptor-ref name="params" />
-			<result>/board/review/updateReview.jsp</result>
-		</action>
-
 		<!-- 리뷰 글 수정 처리 -->
 		<action name="updateReviewPro" class="board.review.action.UpdateReviewAction">
 			<interceptor-ref name="conDAO" />
