@@ -7,9 +7,15 @@
 <head>
 	<title>Untitled Document</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="Refresh" content="0; URL=http://localhost:8000/jogiyo/readRest.action?rest_num=${rest_num}&currentPage=${review_rest_currentPage}">
-</head>
 
+<%
+	String rest_num = request.getParameter("rest_num");
+	String review_rest_currentPage = request.getParameter("review_rest");
+	String session_id = (String)session.getAttribute("session_id");
+	response.sendRedirect("readRest.action?rest_num="+rest_num+"&currentPage="+review_rest_currentPage);
+%>
+
+</head>
 
 <body>
 	

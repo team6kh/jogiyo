@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <!DOCTYPE html>
@@ -209,7 +210,7 @@
 									<td><button class="btn btn-danger">사용완료</button></td>
 									</c:if>									
 									<!-- <td>${list.session_id} </td> -->
-									<td>${list.paid_reg_date} </td>
+									<td><fmt:formatDate value="${list.paid_reg_date}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 								</tr>
 							</c:forEach>
 	
