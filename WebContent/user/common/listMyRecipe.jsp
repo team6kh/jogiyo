@@ -178,7 +178,72 @@
 		<!-- /페이징 -->
 
 				<!-- 버튼 -->
+				<div class="col-md-12">
+			<div class="form-inline pull-right">
+				<!-- 검색[선택] -->
+				<select class="form-control" name="recipe_search_target" id="recipe_search_target" title="검색" onchange="detailsearch()">
+					<option value="null">검색[선택]</option>
+					<option value="recipe_detailsearch">상세검색</option>
+				</select>
+				<!-- /.검색[선택] -->
+				</div>
+				</div>
 				<!-- /.버튼 -->
+				
+				<br />
+		<br />
+
+		<!-- 상세검색 폼 -->
+		<form name="recipe_search" action="myrecipe_search.action" enctype="multipart/form-data">
+
+			<!-- 상세검색 시에 나타난다. -->
+			<div id="detailsearch" style="display: none">
+				<div class="col-md-12">
+					<table class="table table-condensed">
+						<tr>
+							<td class="text-center">종류</td>
+							<td>
+								<select name="recipe_foodkind" style="width: 120px" id="recipe_foodkind">
+									<option value="">선택하세요</option>
+									<option value="한식">한식</option>
+									<option value="중식">중식</option>
+									<option value="일식">일식</option>
+									<option value="양식">양식</option>
+									<option value="기타">기타</option>
+								</select>
+							</td>
+							
+							<td><input type="hidden" name="recipe_writerinput" value="${session_id }"></td>
+						</tr>
+						<tr>
+							<td class="text-center">요리명</td>
+							<td colspan="3"><input type="text" name="recipe_foodnameinput"></td>
+						</tr>
+						<tr>
+							<td class="text-center">제목+내용</td>
+							<td colspan="3"><input type="text" name="recipe_subjectinput"></td>
+						</tr>
+						<tr>
+							<td class="text-center">소요시간</td>
+							<td colspan="3">
+								<input type="text" name="recipe_timeinput1" size="5">&nbsp;~&nbsp;<input type="text" name="recipe_timeinput2" size="5">
+							</td>
+						</tr>
+						<tr>
+							<td class="text-center">비용</td>
+							<td colspan="3">
+								<input type="text" name="recipe_priceinput1" size="5">&nbsp;~&nbsp;<input type="text" name="recipe_priceinput2" size="5">
+							</td>
+						</tr>
+						<tr>
+							<td class="text-right" colspan="4">
+								<input type="reset" class="btn btn-default" value="초기화" />&nbsp;<input type="submit" class="btn btn-primary" value="검색">
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<!--/.상세검색 시에 나타난다. -->
 			
 			</div>
 			<!-- /.main -->
