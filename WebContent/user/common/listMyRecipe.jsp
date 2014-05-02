@@ -183,7 +183,7 @@
 				<!-- 검색[선택] -->
 				<select class="form-control" name="recipe_search_target" id="recipe_search_target" title="검색" onchange="detailsearch()">
 					<option value="null">검색[선택]</option>
-					<option value="recipe_detailsearch">상세검색</option>
+					<option value="recipe_detailsearch">MyRecipe상세검색</option>
 				</select>
 				<!-- /.검색[선택] -->
 				</div>
@@ -194,8 +194,8 @@
 		<br />
 
 		<!-- 상세검색 폼 -->
-		<form name="recipe_search" action="myrecipe_search.action" enctype="multipart/form-data">
-
+		<form name="recipe_search" method="post" action="myrecipe_search.action?session_id=<s:property value="#session.session_id" />" enctype="multipart/form-data">
+             
 			<!-- 상세검색 시에 나타난다. -->
 			<div id="detailsearch" style="display: none">
 				<div class="col-md-12">
@@ -213,7 +213,7 @@
 								</select>
 							</td>
 							
-							<td><input type="hidden" name="recipe_writerinput" value="${session_id }"></td>
+							<td><input type="hidden" name="recipe_writerinput" value="${session_id }">${session_id }</td>
 						</tr>
 						<tr>
 							<td class="text-center">요리명</td>

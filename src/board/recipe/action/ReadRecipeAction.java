@@ -48,6 +48,7 @@ public class ReadRecipeAction extends ActionSupport implements ConDAOAware {
 		
         
 		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject("Recipe.readcountID", paramRC);
+		
 
 		if (!(session_id.equals("")) && resultRC == null) {
 			// 해당 글의 조회수 +1.

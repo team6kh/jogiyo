@@ -54,6 +54,8 @@ public class SearchRecipeAction extends ActionSupport implements ConDAOAware,Pre
     
     public String myListSearch() throws Exception
     {
+    	
+    	
     	 if(paramClass.getRecipe_priceinput1()==0 && paramClass.getRecipe_priceinput2()==0 && paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){
          	list = sqlMapper.queryForList("Recipe.detailSearchRecipeEmpty", paramClass);
          }else if(paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){
@@ -86,6 +88,8 @@ public class SearchRecipeAction extends ActionSupport implements ConDAOAware,Pre
 
     public String execute() throws Exception
     {
+    	
+    	
         if(paramClass.getRecipe_priceinput1()==0 && paramClass.getRecipe_priceinput2()==0 && paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){
         	list = sqlMapper.queryForList("Recipe.detailSearchRecipeEmpty", paramClass);
         }else if(paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){

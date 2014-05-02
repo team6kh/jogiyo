@@ -155,8 +155,12 @@
 							<input class="btn btn-default" name="list" type="button" value="삭제"
 								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
 						</s:elseif>
-							<input class="btn btn-default" name="list" type="button" value="목록"
+							<input class="btn btn-default" name="list" type="button" value="전체 목록"
 								onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
+						<s:if test="#session.session_id != null">
+						    <input class="btn btn-default" name="list" type="button" value="마이레시피 목록"
+								onClick="javascript:location.href='listMyRecipe.action?session_id=<s:property value="#session.session_id" />'">
+								</s:if>
 					</td>
 				</tr>
 
