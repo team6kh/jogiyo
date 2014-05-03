@@ -15,8 +15,7 @@
 	<meta name="author" content="">
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<link rel="shortcut icon" href="assets/ico/jogiyo.png">
-	
-	
+		
 	<title>JOGIYO</title>
 	
 	<!-- Bootstrap core CSS -->
