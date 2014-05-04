@@ -36,12 +36,12 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 		//장바구니에 담은 레코드들을 get
 		paramClass1.setCart_rest_num(getRest_num());
 		paramClass1.setSession_id(getSession_id());
-		list1 = sqlMapper.queryForList("Rest.selectCartAll", paramClass1);
+		list1 = sqlMapper.queryForList("Cart.selectCartAll", paramClass1);
 		
 		//결제 테이블 insert전 레코드가 없는지 있는지 판단.
-		Integer count = (Integer)sqlMapper.queryForObject("Rest.selectPaidCount");
+		Integer count = (Integer)sqlMapper.queryForObject("Paid.selectPaidCount");
 		if( count != 0){ //레코드가 있을 경우, LastNum set
-			resultClass = (PaidDTO) sqlMapper.queryForObject("Rest.selectPaidLastNo"); //라스트넘 이상 select 하도록
+			resultClass = (PaidDTO) sqlMapper.queryForObject("Paid.selectPaidLastNum"); //라스트넘 이상 select 하도록
 		}else{ //레코드가 없을 경우, 0 set
 			resultClass.setPaid_num(0);
 		}
@@ -57,29 +57,29 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 			
 			//쿠폰생성
 			cooResult = Integer.toString((int)(Math.random() * 999999))+ "-" + Integer.toString((int)(Math.random() * 99999999))+ "-" + Integer.toString((int)(Math.random() * 777777));
-			count = (Integer)sqlMapper.queryForObject("Rest.selectCheckcpn", cooResult);
+			count = (Integer)sqlMapper.queryForObject("Paid.selectCheckedCpn", cooResult);
 			while(count != 0){ //값이 중복이 안될때까지 다시 생성
 				cooResult = Integer.toString((int)(Math.random() * 777777))+ "-" + Integer.toString((int)(Math.random() * 99999999))+ "-" + Integer.toString((int)(Math.random() * 999999));
-				count = (Integer)sqlMapper.queryForObject("Rest.selectCheckcpn", cooResult);
+				count = (Integer)sqlMapper.queryForObject("Paid.selectCheckedCpn", cooResult);
 			}
 			
 			//중복되지 않은 쿠폰번호 cooResult를 쿠폰테이블로 insert
 			paramClass.setCpn_num(cooResult);
-			sqlMapper.insert("Rest.insertCpn", paramClass);
+			sqlMapper.insert("Paid.insertCpn", paramClass);
 			
 			paramClass2.setPaid_cpn(cooResult); //쿠폰번호
 			paramClass2.setPaid_cpn_used(0); // 0발행완료, 1사용함, 2유효기간초과 되면서 처리되는 논리값
 			paramClass2.setSession_id(getSession_id()); //주문한 세션아이디
 			paramClass2.setPaid_reg_date(today.getTime()); // 쿠폰 발행일자
 			
-			sqlMapper.insert("Rest.insertPaidBoard", paramClass2);
+			sqlMapper.insert("Paid.insertPaidBoard", paramClass2);
 		}
 		
 		//최종 장바구니 레코드 삭제
-		sqlMapper.delete("Rest.deleteCartforpaid", paramClass1);
+		sqlMapper.delete("Cart.deleteCartforpaid", paramClass1);
 		
 		//방금 장바구니로 구매한 레코드 (=방금 결제완료한 레코드)
-		list2 = sqlMapper.queryForList("Rest.selectPaidnow", resultClass);
+		list2 = sqlMapper.queryForList("Paid.selectPaidNow", resultClass);
 		
 		return SUCCESS; //payRestResult.jsp
 	}

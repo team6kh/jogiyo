@@ -36,9 +36,9 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 		paramClass.setCart_restopt_priceplus(getCart_restopt_priceplus());
 		paramClass.setSession_id(getSession_id());
 		//장바구니 데이터 insert
-		sqlMapper.insert("Rest.insertCart_board", paramClass);
+		sqlMapper.insert("Cart.insertCart_board", paramClass);
 		//장바구니 레코드를 가져옴
-		list = sqlMapper.queryForList("Rest.selectCartAll", paramClass);
+		list = sqlMapper.queryForList("Cart.selectCartAll", paramClass);
 
 		return SUCCESS; //listCart.jsp
 	}

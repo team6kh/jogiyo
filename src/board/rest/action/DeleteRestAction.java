@@ -59,9 +59,11 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 		//카트레코드 제거
 		sqlMapper.delete("Rest.deleteCartBoard", paramClass);
 		
-		//리뷰레코드 제거
+		/*
+		식당이 없어져도 리뷰글은 존재한다.
+		만약, 리뷰글을 삭제하고 싶을 경우 주석을 해제하세요.  
 		sqlMapper.delete("Rest.deleteReviewtBoard", getRest_num());
-		
+		*/
 		return SUCCESS; // 액션-> listRest.jsp
 	}
 
