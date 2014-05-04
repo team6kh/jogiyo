@@ -125,6 +125,15 @@
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
+		
+		<!-- myrecipe_search 액션 -->
+		<action name="myrecipe_search" class="board.recipe.action.SearchRecipeAction" method="myListSearch">
+			<interceptor-ref name="prepare" />
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="conDAO" />
+			<result>/user/common/listMyRecipe.jsp</result>
+		</action>
 
 		<!-- readcountRecipeDesc 액션 -->
 		<action name="readcountRecipeDesc" class="board.recipe.action.ListRecipeAction"
