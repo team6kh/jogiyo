@@ -1,6 +1,6 @@
 package board.restopt.dto;
 
-public class RestoptDTO {
+public class RestOptDTO {
 
     private int restopt_num; //옵션 시퀀스
     private int restopt_rest_num; //rest테이블의 시퀀스넘

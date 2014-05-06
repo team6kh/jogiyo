@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
 import board.rest.dto.RestDTO;
-import board.restopt.dto.RestoptDTO;
+import board.restopt.dto.RestOptDTO;
 import board.review.action.FileUpload;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
@@ -14,7 +14,7 @@ import common.Constants;
 
 public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	public static SqlMapClient sqlMapper;
-	private List<RestoptDTO> list = new ArrayList<RestoptDTO>();
+	private List<RestOptDTO> list = new ArrayList<RestOptDTO>();
 	private int rest_num;
 	private int currentPage;
 	private String session_id;
@@ -48,8 +48,8 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	//상품글 update 항목 [end]
 	
 	//옵션레코드 update [start]
-	private RestoptDTO paramClass1 = new RestoptDTO();
-	private RestoptDTO resultClass1 = new RestoptDTO();
+	private RestOptDTO paramClass1 = new RestOptDTO();
+	private RestOptDTO resultClass1 = new RestOptDTO();
 	
 	//insertRest.jsp에서 사용자가 입력한 옵션명 파라미터
 	private String restopt_subject1;
@@ -174,7 +174,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 		//수정에 뿌려줄 레코드1개 select
 		resultClass = (RestDTO)sqlMapper.queryForObject("Rest.selectRestOne", getRest_num());
 		//옵션에 뿌려줄 레코드들 select
-		list = (List<RestoptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
+		list = (List<RestOptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
 	
 		return SUCCESS; //updateRest.jsp
 	}
@@ -224,7 +224,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 		
 		//옵션글 업데이트 시작
 			//업데이트 전 기존옵션을 불러옴
-			list = (List<RestoptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
+			list = (List<RestOptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
 			int listsize = list.size(); //기존 옵션의 개수 (index 0 to size)
 			
 			//옵션사진 삭제용
@@ -1158,26 +1158,26 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 	public void setResultClass(RestDTO resultClass) {
 		this.resultClass = resultClass;
 	}
-	public List<RestoptDTO> getList() {
+	public List<RestOptDTO> getList() {
 		return list;
 	}
-	public void setList(List<RestoptDTO> list) {
+	public void setList(List<RestOptDTO> list) {
 		this.list = list;
 	}
 
-	public RestoptDTO getParamClass1() {
+	public RestOptDTO getParamClass1() {
 		return paramClass1;
 	}
 
-	public void setParamClass1(RestoptDTO paramClass1) {
+	public void setParamClass1(RestOptDTO paramClass1) {
 		this.paramClass1 = paramClass1;
 	}
 
-	public RestoptDTO getResultClass1() {
+	public RestOptDTO getResultClass1() {
 		return resultClass1;
 	}
 
-	public void setResultClass1(RestoptDTO resultClass1) {
+	public void setResultClass1(RestOptDTO resultClass1) {
 		this.resultClass1 = resultClass1;
 	}
 

@@ -1,7 +1,7 @@
 package board.rest.action;
 
 import board.rest.dto.RestDTO;
-import board.restopt.dto.RestoptDTO;
+import board.restopt.dto.RestOptDTO;
 import com.opensymphony.xwork2.ActionSupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import common.ConDAOAware;
@@ -18,8 +18,8 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 	public static SqlMapClient sqlMapper;
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
-	private RestoptDTO paramClass1 = new RestoptDTO();
-	private RestoptDTO resultClass1 = new RestoptDTO();
+	private RestOptDTO paramClass1 = new RestOptDTO();
+	private RestOptDTO resultClass1 = new RestOptDTO();
 	private SellerDTO sellerDTO = new SellerDTO();
 	private int seq_num;
 	private int currentPage; 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import board.restopt.dto.RestoptDTO;
+import board.restopt.dto.RestOptDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
@@ -34,7 +34,7 @@ public class HomeAction implements Action, ConDAOAware {
     // .회원 관련
     
     // masonry
-    private List<RestoptDTO> listRestopt = new ArrayList<RestoptDTO>();
+    private List<RestOptDTO> listRestOpt = new ArrayList<RestOptDTO>();
     // .masonry
     
     public void setConDAO(SqlMapClient sqlMapper) {
@@ -75,12 +75,12 @@ public class HomeAction implements Action, ConDAOAware {
     	setCountSeller((Integer) sqlMapper.queryForObject("Seller.selectSellerCount"));
     	
     	/* Masonry 리스트 */
-    	listRestopt = (List<RestoptDTO>) sqlMapper.queryForList("Common.selectRestOptAll");
+    	listRestOpt = (List<RestOptDTO>) sqlMapper.queryForList("Common.selectRestOptAll");
     	// 리스트를 받아와 섞는다(shuffle)
-    	Collections.shuffle(listRestopt);
+    	Collections.shuffle(listRestOpt);
     	// 40개만 뽑아온다.
-    	listRestopt = listRestopt.subList(0, 80);
-    	setListRestopt(listRestopt);
+    	listRestOpt = listRestOpt.subList(0, 80);
+    	setListRestopt(listRestOpt);
 
         return SUCCESS;
     }
@@ -162,12 +162,12 @@ public class HomeAction implements Action, ConDAOAware {
 		this.countSeller = countSeller;
 	}
 	
-	public List<RestoptDTO> getListRestopt() {
-		return listRestopt;
+	public List<RestOptDTO> getListRestOpt() {
+		return listRestOpt;
 	}
 	
-	public void setListRestopt(List<RestoptDTO> listRestopt) {
-		this.listRestopt = listRestopt;
+	public void setListRestopt(List<RestOptDTO> listRestOpt) {
+		this.listRestOpt = listRestOpt;
 	}
     
 }
