@@ -10,6 +10,7 @@ public class RecipeSearchDTO
     private int recipe_timeinput2;
     private int recipe_priceinput1;
     private int recipe_priceinput2;
+    
     public String getRecipe_foodkind()
     {
         return recipe_foodkind;

@@ -94,7 +94,7 @@ public class ListRestAction extends ActionSupport implements ConDAOAware {
 		list = list.subList(page.getStartCount(), lastCount);
 		
 		//카운트
-		Integer count = (Integer) sqlMapper.queryForObject("Rest.selectCountforSeller", getSession_id());
+		Integer count = (Integer) sqlMapper.queryForObject("Rest.selectCountForSeller", getSession_id());
 		
 		//count값으로 셀러가 글을 썻는지 안썻는지 판단함. (즉 0이면 글을 쓸수 있어야 함. )
 		if(count == 0){

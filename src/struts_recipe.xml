@@ -104,19 +104,6 @@
 			<result>/board/recipe/isRecommand.jsp</result>
 		</action>
 
-		<!-- recipe_mylsit 액션 -->
-		<action name="myListRecipe" class="board.recipe.action.MyListRecipeAction">
-			<interceptor-ref name="params" />
-			<interceptor-ref name="conDAO" />
-			<result>/board/recipe/myListRecipe.jsp</result>
-		</action>
-
-		<!-- mypageform 액션 -->
-		<action name="mypageFormRecipe" class="board.recipe.action.MyPageRecipeAction"
-			method="form">
-			<result>/board/recipe/myPageRecipe.jsp</result>
-		</action>
-
 		<!-- recipe_search 액션 -->
 		<action name="recipe_search" class="board.recipe.action.SearchRecipeAction">
 			<interceptor-ref name="prepare" />
@@ -136,29 +123,25 @@
 		</action>
 
 		<!-- readcountRecipeDesc 액션 -->
-		<action name="readcountRecipeDesc" class="board.recipe.action.ListRecipeAction"
-			method="readcountDesc">
+		<action name="readcountRecipeDesc" class="board.recipe.action.ListRecipeAction" method="readcountDesc">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
 		<!-- timeRecipeDesc 액션 -->
-		<action name="timeRecipeDesc" class="board.recipe.action.ListRecipeAction"
-			method="timeDesc">
+		<action name="timeRecipeDesc" class="board.recipe.action.ListRecipeAction" method="timeDesc">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
 		<!-- priceRecipeDesc 액션 -->
-		<action name="priceRecipeDesc" class="board.recipe.action.ListRecipeAction"
-			method="priceDesc">
+		<action name="priceRecipeDesc" class="board.recipe.action.ListRecipeAction" method="priceDesc">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
 		<!-- recommandRecipeDesc 액션 -->
-		<action name="recommandRecipeDesc" class="board.recipe.action.ListRecipeAction"
-			method="recommandDesc">
+		<action name="recommandRecipeDesc" class="board.recipe.action.ListRecipeAction"	method="recommandDesc">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>

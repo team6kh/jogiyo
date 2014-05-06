@@ -32,7 +32,7 @@ public class DeleteTestAction implements Action, ConDAOAware
         testDTO.setTest_num(getTest_num());
 
         // 삭제 쿼리 수행
-        sqlMapper.update("Test.deleteBoard", testDTO);
+        sqlMapper.update("Test.deleteTest", testDTO);
 
         return SUCCESS;
     }

@@ -11,8 +11,8 @@ import com.opensymphony.xwork2.Action;
 
 import common.ConDAOAware;
 
-public class HomeAction implements Action, ConDAOAware
-{
+public class HomeAction implements Action, ConDAOAware {
+	
     private String actionName = "home"; // 페이징액션과 로그인액션에서 쓰인다.
     
     private SqlMapClient sqlMapper;
@@ -37,24 +37,21 @@ public class HomeAction implements Action, ConDAOAware
     private List<RestoptDTO> listRestopt = new ArrayList<RestoptDTO>();
     // .masonry
     
-    public void setConDAO(SqlMapClient sqlMapper)
-    {
+    public void setConDAO(SqlMapClient sqlMapper) {
         this.sqlMapper = sqlMapper;
     }
 
     // 환영 페이지
-    public String welcome() throws Exception
-    {
+    public String welcome() throws Exception {
         return SUCCESS;
     }
 
-    public String execute() throws Exception
-    {
+    public String execute() throws Exception {
     	// 상품 개수를 구한다.
     	setCountRest((Integer) sqlMapper.queryForObject("Common.selectRestCount"));
     	
     	// 메뉴 개수를 구한다.
-    	setCountRestopt((Integer) sqlMapper.queryForObject("Common.selectRestoptCount"));
+    	setCountRestopt((Integer) sqlMapper.queryForObject("Common.selectRestOptCount"));
     	
     	// 결재 개수를 구한다.
     	setCountPaid((Integer) sqlMapper.queryForObject("Common.selectPaidCount"));
@@ -69,7 +66,7 @@ public class HomeAction implements Action, ConDAOAware
     	setCountNotice((Integer) sqlMapper.queryForObject("Common.selectNoticeCount"));
     	
     	// 문의하기 개수를 구한다.
-    	setCountQna((Integer) sqlMapper.queryForObject("Common.selectQnaCount"));
+    	setCountQna((Integer) sqlMapper.queryForObject("Common.selectQnACount"));
     	
     	// 구매자 수를 구한다.
     	setCountBuyer((Integer) sqlMapper.queryForObject("Buyer.selectBuyerCount"));
@@ -78,7 +75,7 @@ public class HomeAction implements Action, ConDAOAware
     	setCountSeller((Integer) sqlMapper.queryForObject("Seller.selectSellerCount"));
     	
     	/* Masonry 리스트 */
-    	listRestopt = (List<RestoptDTO>) sqlMapper.queryForList("Common.selectRestoptAll");
+    	listRestopt = (List<RestoptDTO>) sqlMapper.queryForList("Common.selectRestOptAll");
     	// 리스트를 받아와 섞는다(shuffle)
     	Collections.shuffle(listRestopt);
     	// 40개만 뽑아온다.
@@ -89,8 +86,7 @@ public class HomeAction implements Action, ConDAOAware
     }
 
     // getter & setter
-	public String getActionName()
-    {
+	public String getActionName() {
         return actionName;
     }
 

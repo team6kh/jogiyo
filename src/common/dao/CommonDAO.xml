@@ -2,10 +2,10 @@
 <!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
 <sqlMap namespace="Common">
 
-	<typeAlias alias="RestoptDTO" type="board.restopt.dto.RestoptDTO" />
+	<typeAlias alias="restOptDTO" type="board.restopt.dto.RestoptDTO" />
 
 	<!-- 리절트 맵 정의 -->
-	<resultMap id="RestoptBoard" class="RestoptDTO">
+	<resultMap id="restOptRes" class="restOptDTO">
 		<result property="restopt_num" column="restopt_num" />
 		<result property="restopt_rest_num" column="restopt_rest_num" />
 		<result property="restopt_subject" column="restopt_subject" />
@@ -18,35 +18,35 @@
 
 	<!-- select -->
 	<select id="selectRestCount" resultClass="int">
-		SELECT count(*) FROM rest_board
+		SELECT COUNT(*) FROM Rest_Board
 	</select>
 
-	<select id="selectRestoptCount" resultClass="int">
-		SELECT count(*) FROM restopt_board
+	<select id="selectRestOptCount" resultClass="int">
+		SELECT COUNT(*) FROM RestOpt_Board
 	</select>		
 
 	<select id="selectPaidCount" resultClass="int">
-		SELECT count(*) FROM paid_board
+		SELECT COUNT(*) FROM Paid_Board
 	</select>	
 
 	<select id="selectReviewCount" resultClass="int">
-		SELECT count(*) FROM review_board
+		SELECT COUNT(*) FROM Review_Board
 	</select>
 
 	<select id="selectRecipeCount" resultClass="int">
-		SELECT count(*) FROM recipe_board
+		SELECT COUNT(*) FROM Recipe_Board
 	</select>
 
 	<select id="selectNoticeCount" resultClass="int">
-		SELECT count(*) FROM notice_board
+		SELECT COUNT(*) FROM Notice_Board
 	</select>
 
-	<select id="selectQnaCount" resultClass="int">
-		SELECT count(*) FROM qna_board
+	<select id="selectQnACount" resultClass="int">
+		SELECT COUNT(*) FROM QnA_board
 	</select>
 	
-	<select id="selectRestoptAll" resultMap="RestoptBoard">
-		SELECT * FROM restopt_board
+	<select id="selectRestOptAll" resultMap="restOptRes">
+		SELECT * FROM RestOpt_Board
 	</select>	
 
 </sqlMap>

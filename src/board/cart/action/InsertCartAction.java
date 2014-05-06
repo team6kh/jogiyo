@@ -1,4 +1,4 @@
-package board.rest.action;
+package board.cart.action;
 
 import java.io.Reader;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class InsertCartAction extends ActionSupport implements ConDAOAware {
 		paramClass.setCart_restopt_priceplus(getCart_restopt_priceplus());
 		paramClass.setSession_id(getSession_id());
 		//장바구니 데이터 insert
-		sqlMapper.insert("Cart.insertCart_board", paramClass);
+		sqlMapper.insert("Cart.insertCart", paramClass);
 		//장바구니 레코드를 가져옴
 		list = sqlMapper.queryForList("Cart.selectCartAll", paramClass);
 

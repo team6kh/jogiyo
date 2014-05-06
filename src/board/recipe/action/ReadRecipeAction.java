@@ -47,7 +47,7 @@ public class ReadRecipeAction extends ActionSupport implements ConDAOAware {
 		paramRC.setRecipeReadCount_writer(getSession_id());
 		
         
-		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject("Recipe.readcountID", paramRC);
+		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject("Recipe.selectReadcountId", paramRC);
 		
 
 		if (!(session_id.equals("")) && resultRC == null) {
@@ -75,7 +75,7 @@ public class ReadRecipeAction extends ActionSupport implements ConDAOAware {
 		paramRC.setRecipeCommand_num(getRecipe_num());
 		paramRC.setRecipeCommand_writer(getSession_id());
 
-		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject("Recipe.commandID", paramRC);
+		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject("Recipe.selectCommandId", paramRC);
 		if (resultRC == null) {
 			
 			// 해당 글의 추천수 +1.

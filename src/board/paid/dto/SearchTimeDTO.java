@@ -1,6 +1,7 @@
 package board.paid.dto;
 
 public class SearchTimeDTO {
+	
 	private String session_id;
 	private int search_start_year;
 	private int search_start_mon;
@@ -8,6 +9,7 @@ public class SearchTimeDTO {
 	private int search_end_year;
 	private int search_end_mon;
 	private int search_end_day;
+	
 	public String getSession_id() {
 		return session_id;
 	}
@@ -50,6 +52,5 @@ public class SearchTimeDTO {
 	public void setSearch_end_day(int search_end_day) {
 		this.search_end_day = search_end_day;
 	}
-	
 	
 }

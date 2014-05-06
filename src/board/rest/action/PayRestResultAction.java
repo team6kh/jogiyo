@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import table.coopon.dto.CooponDTO;
+import table.coupon.dto.CouponDTO;
 import board.cart.dto.CartDTO;
 import board.paid.dto.PaidDTO;
 
@@ -17,7 +17,7 @@ import common.ConDAOAware;
 public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 	public static SqlMapClient sqlMapper;
 	private Calendar today = Calendar.getInstance();
-	private CooponDTO paramClass = new CooponDTO();
+	private CouponDTO paramClass = new CouponDTO();
 	private CartDTO paramClass1 = new CartDTO();
 	private PaidDTO paramClass2 = new PaidDTO();
 	private PaidDTO resultClass = new PaidDTO();
@@ -72,11 +72,11 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 			paramClass2.setSession_id(getSession_id()); //주문한 세션아이디
 			paramClass2.setPaid_reg_date(today.getTime()); // 쿠폰 발행일자
 			
-			sqlMapper.insert("Paid.insertPaidBoard", paramClass2);
+			sqlMapper.insert("Paid.insertPaid", paramClass2);
 		}
 		
 		//최종 장바구니 레코드 삭제
-		sqlMapper.delete("Cart.deleteCartforpaid", paramClass1);
+		sqlMapper.delete("Cart.deleteCartForPaid", paramClass1);
 		
 		//방금 장바구니로 구매한 레코드 (=방금 결제완료한 레코드)
 		list2 = sqlMapper.queryForList("Paid.selectPaidNow", resultClass);

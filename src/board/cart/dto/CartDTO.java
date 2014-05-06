@@ -1,6 +1,7 @@
 package board.cart.dto;
 
 public class CartDTO {
+	
 	int cart_num;
 	int cart_rest_num;
 	String cart_rest_subject;
@@ -73,4 +74,5 @@ public class CartDTO {
 	public void setSession_id(String session_id) {
 		this.session_id = session_id;
 	}
+	
 }

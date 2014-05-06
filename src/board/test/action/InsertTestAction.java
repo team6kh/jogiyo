@@ -60,7 +60,7 @@ public class InsertTestAction implements Action, Preparable, ModelDriven, ConDAO
         testDTO.setTest_reg_date(today.getTime());
 
         // 등록 쿼리 수행
-        sqlMapper.insert("Test.insertBoard", testDTO);
+        sqlMapper.insert("Test.insertTest", testDTO);
 
         return SUCCESS;
     }

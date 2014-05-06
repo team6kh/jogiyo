@@ -59,7 +59,7 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
             
             /* dashSeller.jsp 중단에 띄울 결과물을 위한 코드 */
             
-            cpnRes = sqlMapper.queryForList("Paid.responseCpn", searchDTO);
+            cpnRes = sqlMapper.queryForList("Paid.selectRequestedCpn", searchDTO);
            
          
             /* dashSeller.jsp 하단에 띄울 결과물을 위한 코드 */
@@ -88,14 +88,14 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
             }
             
             // 판매자가 등록한 상품의 결제 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
-            paidRes = sqlMapper.queryForList("Paid.paidList", searchDTO);
+            paidRes = sqlMapper.queryForList("Paid.selectPaidList", searchDTO);
             if (!paidRes.isEmpty())
             {
                 // 가져온 결제내역에서 식당코드를 꺼내어 searchDTO에 넣는다
                 searchDTO.setRest_num(paidRes.get(0).getPaid_rest_num());
                 
                 // 판매자가 등록한 상품의 인기 메뉴 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
-                menuRes = sqlMapper.queryForList("Paid.hotMenu", searchDTO);
+                menuRes = sqlMapper.queryForList("Paid.selectHotMenu", searchDTO);
                 
             }
             return SUCCESS;
@@ -108,10 +108,10 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
     }
     
     
-    public String submitCpn() throws Exception{
+    public String responseCpn() throws Exception{
         
         for(int i=0; i< requestPaid_num.length; i++) {
-            sqlMapper.update("Paid.submitCpn", requestPaid_num[i]);
+            sqlMapper.update("Paid.updateResponseCpn", requestPaid_num[i]);
         }
         return SUCCESS;
     }

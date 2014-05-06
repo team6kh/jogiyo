@@ -112,21 +112,21 @@
 		</action>
 		
 		<!-- 장바구니 insert -->
-		<action name="insertCart" class="board.rest.action.InsertCartAction">
+		<action name="insertCart" class="board.cart.action.InsertCartAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result type="chain">listCart</result>
 		</action>
 		
 		<!-- 장바구니 delete -->
-		<action name="cartDelete" class="board.rest.action.CartDeleteAction">
+		<action name="deleteCart" class="board.cart.action.DeleteCartAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result type="chain">listCart</result>
 		</action>
 		
 		<!-- 장바구니 list -->
-		<action name="listCart" class="board.rest.action.ListCartAction">
+		<action name="listCart" class="board.cart.action.ListCartAction">
 			<param name="aliases">#{'cart_rest_num':'rest_num','cart_rest_subject':'rest_subject'}</param>
 			<interceptor-ref name="alias"/>
 			<interceptor-ref name="params"/>

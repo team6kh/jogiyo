@@ -190,7 +190,7 @@ public class UpdateRestAction extends ActionSupport implements ConDAOAware {
 			
 			//상품글 파일 업데이트
 			if (getUpload1() != null && getUpload2() != null) {
-				resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
+				resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNum");
 	
 				//매인사진 파일 이름과 확장자 설정.
 				String file_name1 = "main_" + resultClass.getRest_num();

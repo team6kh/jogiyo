@@ -31,7 +31,7 @@ public class ListMyQnaAction extends ActionSupport implements
 	}
 
 	public String execute() throws Exception {
-		list = sqlMapper.queryForList("Qna.myListQna", session_id);
+		list = sqlMapper.queryForList("Qna.selectMyQnaList", session_id);
 		totalCount = list.size(); // qna 전체 글 갯수를 구한다.
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage, session_id);
 		pagingHtml = page.getPagingHtml().toString();

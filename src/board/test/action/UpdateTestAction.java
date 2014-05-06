@@ -32,7 +32,7 @@ public class UpdateTestAction implements Action, ConDAOAware
         setTest_num(Integer.parseInt(getModalParam_key())); // modalParam_key를 Test_num에...
 
         // 해당 번호의 글을 가져온다.
-        testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
+        testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectTestNum", getTest_num());
 
         return SUCCESS;
     }
@@ -47,10 +47,10 @@ public class UpdateTestAction implements Action, ConDAOAware
         testDTO.setTest_content(getTest_content());
 
         // 일단 항목만 수정한다.
-        sqlMapper.update("Test.updateBoard", testDTO);
+        sqlMapper.update("Test.updateTest", testDTO);
 
         // 수정이 끝나면 view 페이지로 이동.
-        testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
+        testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectTestNum", getTest_num());
 
         return SUCCESS;
     }

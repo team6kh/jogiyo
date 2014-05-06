@@ -199,7 +199,7 @@
 									<!-- <td>${list.paid_cpn_used} </td> -->
 									<!-- 사용요청 -->
 									<c:if test="${list.paid_cpn_used eq 0 }">
-									<td><a href="requestCPN.action?paid_num=${list.paid_num}&session_id=${session_id}" class="btn btn-primary">사용요청</a></td>
+									<td><a href="requestCpn.action?paid_num=${list.paid_num}&session_id=${session_id}" class="btn btn-primary">사용요청</a></td>
 									</c:if>
 									<!-- 요청대기 -->	
 									<c:if test="${list.paid_cpn_used eq 1 }">

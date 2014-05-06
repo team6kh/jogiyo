@@ -4,14 +4,13 @@ import java.util.Date;
 
 public class ReviewDTO {
 	
-	private int review_num;  // 글번호(PK)
+	private int review_num; // 글번호(PK)
 	private int review_rest; // 식당코드 (FK - 식당테이블의 식당 정보) : 임시값 설정 test_Rest
-	private String review_writer;  //작성자 (FK - 결제테이블의 주문자 정보) : 임시값 설정 test_Customer 
-	private String review_content;  // 글내용
+	private String review_writer; //작성자 (FK - 결제테이블의 주문자 정보) : 임시값 설정 test_Customer 
+	private String review_content; // 글내용
 	private String review_file; // 첨부 사진
 	private Date review_reg_date; // 작성일
-	private int review_rating; // 별점
-	
+	private int review_rating; // 별점	
 	
 	// getter & setter
 	public int getReview_num() {
@@ -50,18 +49,13 @@ public class ReviewDTO {
 	public void setReview_reg_date(Date review_reg_date) {
 		this.review_reg_date = review_reg_date;
 	}
-        public int getReview_rating()
-        {
-            return review_rating;
-        }
-        public void setReview_rating(int review_rating)
-        {
-            this.review_rating = review_rating;
-        }
-	
-	
-	
-	
-	
+    public int getReview_rating()
+    {
+        return review_rating;
+    }
+    public void setReview_rating(int review_rating)
+    {
+        this.review_rating = review_rating;
+    }
 
 }

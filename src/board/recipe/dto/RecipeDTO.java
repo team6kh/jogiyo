@@ -3,6 +3,7 @@ package board.recipe.dto;
 import java.util.Date;
 
 public class RecipeDTO {
+	
 	private int recipe_num;
 	private String recipe_foodkind;
 	private String recipe_subject;

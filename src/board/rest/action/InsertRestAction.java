@@ -193,10 +193,10 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		paramClass.setRest_writer_email(sellerDTO.getSeller_email());
 		paramClass.setRest_reg_date(today.getTime());
 		//상품글 insert
-		sqlMapper.insert("Rest.insertRest_board", paramClass);
+		sqlMapper.insert("Rest.insertRest", paramClass);
 		
 		//상품글 insert후 현재 최대시퀀스 값을 가짐
-		resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
+		resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNum");
 		seq_num = (int)(resultClass.getRest_num());
 		
 		// num, resnum, 옵션명, 옵션가 insert
@@ -467,7 +467,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 		}
 
 		if (getUpload1() != null && getUpload2() != null) {
-			resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNo");
+			resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNum");
 
 			//매인사진 파일 이름과 확장자 설정.
 			String file_name1 = "main_" + resultClass.getRest_num();

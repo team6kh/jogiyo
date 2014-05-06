@@ -40,7 +40,7 @@ public class ListMyRecipeAction extends ActionSupport implements ConDAOAware {
 	public String execute() throws Exception {
 		
 
-		list = sqlMapper.queryForList("Recipe.myListRecipe",session_id );
+		list = sqlMapper.queryForList("Recipe.selectMyRecipe",session_id );
 	
 
 		totalCount = list.size(); // recipe 전체 글 갯수를 구한다.

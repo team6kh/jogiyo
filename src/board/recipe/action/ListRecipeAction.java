@@ -53,7 +53,7 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 			}
 	//recommandDesc
 	public String recommandDesc() throws Exception {
-		list = sqlMapper.queryForList("Recipe.recommandDesc");
+		list = sqlMapper.queryForList("Recipe.selectRecommandDesc");
        
 	   
         totalCount = list.size(); //전체 글 갯수를 구한다.
@@ -77,7 +77,7 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 	
 	//priceDesc
 	public String priceDesc() throws Exception {
-		list = sqlMapper.queryForList("Recipe.priceDesc");
+		list = sqlMapper.queryForList("Recipe.selectPriceDesc");
        
 	   
         totalCount = list.size(); //전체 글 갯수를 구한다.
@@ -99,7 +99,7 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 	}
 	//timeDesc
 	public String timeDesc() throws Exception {
-		list = sqlMapper.queryForList("Recipe.timeDesc");
+		list = sqlMapper.queryForList("Recipe.selectTimeDesc");
        
         totalCount = list.size(); //전체 글 갯수를 구한다.
         page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
@@ -121,7 +121,7 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 	}
 	//readcountDesc
 	public String readcountDesc() throws Exception {
-	    list = sqlMapper.queryForList("Recipe.readcountDesc");
+	    list = sqlMapper.queryForList("Recipe.selectReadcountDesc");
        
         totalCount = list.size(); //전체 글 갯수를 구한다.
         page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
