@@ -13,8 +13,7 @@
 		<!-- 레시피 -->
 
 		<!-- insertRecipeForm 액션 -->
-		<action name="insertRecipeForm" class="board.recipe.action.InsertRecipeAction"
-			method="form">
+		<action name="insertRecipeForm" class="board.recipe.action.InsertRecipeAction" method="form">
 			<interceptor-ref name="servletConfig" />
 			<interceptor-ref name="params" />
 			<result>/board/recipe/insertRecipe.jsp</result>
@@ -54,8 +53,7 @@
 		</action>
 
 		<!-- recipe update 액션. -->
-		<action name="updateRecipeForm" class="board.recipe.action.UpdateRecipeAction"
-			method="updateRecipeForm">
+		<action name="updateRecipeForm" class="board.recipe.action.UpdateRecipeAction" method="updateRecipeForm">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result type="chain">insertRecipeForm</result>
@@ -70,8 +68,7 @@
 		</action>
 
 		<!-- 파일 다운로드 액션. -->
-		<action name="fileDownloadAction" class="board.recipe.action.ReadRecipeAction"
-			method="download">
+		<action name="downloadFileAction" class="board.recipe.action.ReadRecipeAction" method="download">
 			<result name="success" type="stream">
 				<param name="contentType">binary/octet-stream</param>
 				<param name="inputName">inputStream</param>
@@ -82,30 +79,26 @@
 		</action>
 
 		<!-- 비밀번호 체크 액션. -->
-		<action name="checkFormRecipe" class="board.recipe.action.ReadRecipeAction"
-			method="checkForm">
+		<action name="checkRecipePwForm" class="board.recipe.action.ReadRecipeAction" method="checkForm">
 			<result>/board/recipe/checkPassword.jsp</result>
 		</action>
 
-		<action name="checkActionRecipe" class="board.recipe.action.ReadRecipeAction"
-			method="checkAction">
-
+		<action name="checkRecipePwAction" class="board.recipe.action.ReadRecipeAction" method="checkAction">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result name="error">/board/recipe/checkError.jsp</result>
 			<result>/board/recipe/checkSuccess.jsp</result>
 		</action>
 
-		<!-- recommand 액션 -->
-		<action name="recommandRecipe" class="board.recipe.action.ReadRecipeAction"
-			method="recommandAction">
+		<!-- recommend 액션 -->
+		<action name="recommendRecipe" class="board.recipe.action.ReadRecipeAction" method="recommendAction">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
-			<result>/board/recipe/isRecommand.jsp</result>
+			<result>/board/recipe/isRecommend.jsp</result>
 		</action>
 
-		<!-- recipe_search 액션 -->
-		<action name="recipe_search" class="board.recipe.action.SearchRecipeAction">
+		<!-- searchRecipe 액션 -->
+		<action name="searchRecipe" class="board.recipe.action.SearchRecipeAction">
 			<interceptor-ref name="prepare" />
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="params" />
@@ -113,8 +106,8 @@
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
 		
-		<!-- myrecipe_search 액션 -->
-		<action name="myrecipe_search" class="board.recipe.action.SearchRecipeAction" method="myListSearch">
+		<!-- searchMyRecipe 액션 -->
+		<action name="searchMyRecipe" class="board.recipe.action.SearchRecipeAction" method="searchMyRecipe">
 			<interceptor-ref name="prepare" />
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="params" />
@@ -128,20 +121,23 @@
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
+		
 		<!-- timeRecipeDesc 액션 -->
 		<action name="timeRecipeDesc" class="board.recipe.action.ListRecipeAction" method="timeDesc">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
+		
 		<!-- priceRecipeDesc 액션 -->
 		<action name="priceRecipeDesc" class="board.recipe.action.ListRecipeAction" method="priceDesc">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>
 		</action>
-		<!-- recommandRecipeDesc 액션 -->
-		<action name="recommandRecipeDesc" class="board.recipe.action.ListRecipeAction"	method="recommandDesc">
+		
+		<!-- recommendRecipeDesc 액션 -->
+		<action name="recommendRecipeDesc" class="board.recipe.action.ListRecipeAction"	method="recommendDesc">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />
 			<result>/board/recipe/listRecipe.jsp</result>

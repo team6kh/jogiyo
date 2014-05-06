@@ -6,7 +6,6 @@ import java.util.List;
 
 import board.paid.dto.PaidDTO;
 import board.paid.dto.SearchConditionDTO;
-import board.paid.dto.SearchTimeDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
@@ -36,7 +35,6 @@ public class DashBuyerAction extends ActionSupport implements ConDAOAware {
 
 	public void setConDAO(SqlMapClient sqlMapper) {
 		this.sqlMapper = sqlMapper;
-
 	}
 	
 	public String time() throws Exception{

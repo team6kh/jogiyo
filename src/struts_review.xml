@@ -33,8 +33,7 @@
 		</action>
 
 		<!-- 리뷰글 삭제 폼 -->
-		<action name="deleteReviewForm" class="board.review.action.DeleteReviewAction"
-			method="form">
+		<action name="deleteReviewForm" class="board.review.action.DeleteReviewAction" method="form">
 			<interceptor-ref name="params" />
 			<result>/board/review/deleteReview.jsp</result>
 		</action>

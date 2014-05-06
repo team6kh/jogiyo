@@ -5,8 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import table.coupon.dto.CouponDTO;
 import board.cart.dto.CartDTO;
+import board.coupon.dto.CouponDTO;
 import board.paid.dto.PaidDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -57,15 +57,15 @@ public class PayRestResultAction  extends ActionSupport implements ConDAOAware{
 			
 			//쿠폰생성
 			cooResult = Integer.toString((int)(Math.random() * 999999))+ "-" + Integer.toString((int)(Math.random() * 99999999))+ "-" + Integer.toString((int)(Math.random() * 777777));
-			count = (Integer)sqlMapper.queryForObject("Paid.selectCheckedCpn", cooResult);
+			count = (Integer)sqlMapper.queryForObject("Coupon.selectCheckedCpn", cooResult);
 			while(count != 0){ //값이 중복이 안될때까지 다시 생성
 				cooResult = Integer.toString((int)(Math.random() * 777777))+ "-" + Integer.toString((int)(Math.random() * 99999999))+ "-" + Integer.toString((int)(Math.random() * 999999));
-				count = (Integer)sqlMapper.queryForObject("Paid.selectCheckedCpn", cooResult);
+				count = (Integer)sqlMapper.queryForObject("Coupon.selectCheckedCpn", cooResult);
 			}
 			
 			//중복되지 않은 쿠폰번호 cooResult를 쿠폰테이블로 insert
 			paramClass.setCpn_num(cooResult);
-			sqlMapper.insert("Paid.insertCpn", paramClass);
+			sqlMapper.insert("Coupon.insertCpn", paramClass);
 			
 			paramClass2.setPaid_cpn(cooResult); //쿠폰번호
 			paramClass2.setPaid_cpn_used(0); // 0발행완료, 1사용함, 2유효기간초과 되면서 처리되는 논리값

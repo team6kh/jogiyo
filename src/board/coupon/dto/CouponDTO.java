@@ -1,4 +1,4 @@
-package table.coupon.dto;
+package board.coupon.dto;
 
 public class CouponDTO {
 	

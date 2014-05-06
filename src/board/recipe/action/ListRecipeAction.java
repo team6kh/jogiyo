@@ -51,9 +51,9 @@ public class ListRecipeAction extends ActionSupport implements ConDAOAware {
 
 				return SUCCESS;
 			}
-	//recommandDesc
-	public String recommandDesc() throws Exception {
-		list = sqlMapper.queryForList("Recipe.selectRecommandDesc");
+	//recommendDesc
+	public String recommendDesc() throws Exception {
+		list = sqlMapper.queryForList("Recipe.selectRecommendDesc");
        
 	   
         totalCount = list.size(); //전체 글 갯수를 구한다.

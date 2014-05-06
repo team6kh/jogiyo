@@ -180,7 +180,7 @@ public class InsertRestAction extends ActionSupport implements ConDAOAware{
 
 	public String execute() throws Exception {
 		sellerDTO.setSeller_id(getSession_id());
-		sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectWhereSellerId", sellerDTO);
+		sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectSellerId", sellerDTO);
 		
 		paramClass.setRest_subject(getRest_subject());
 		paramClass.setRest_localcategory(getRest_localcategory());

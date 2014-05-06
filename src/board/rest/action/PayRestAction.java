@@ -47,7 +47,7 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 		
 		//회원정보
 		String session_id = getSession_id();
-		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerOne", session_id);
+		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerSession", session_id);
 		
 		return SUCCESS; // AGS_pay.jsp
 	}

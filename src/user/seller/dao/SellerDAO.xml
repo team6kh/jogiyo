@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
 <sqlMap namespace="Seller">
 
-	<typeAlias alias="SellerDTO" type="user.seller.dto.SellerDTO" />
+	<typeAlias alias="sellerDTO" type="user.seller.dto.SellerDTO" />
 
 	<!-- 판매자 리절트 맵 정의 -->
-	<resultMap id="SellerResult" class="SellerDTO">
+	<resultMap id="sellerRes" class="sellerDTO">
 		<result property="user_seq" column="user_seq" />
 		<result property="seller_id" column="seller_id" />
 		<result property="seller_pw" column="seller_pw" />
@@ -24,35 +25,34 @@
 		SELECT * FROM seller_table
 	</sql>
 	
-	<!-- 공통으로 사용할 where-user_id 절 정의 -->
+	<!-- 공통으로 사용할 where-seller_id 절 정의 -->
 	<sql id="where-seller_id">
 		WHERE seller_id = #seller_id#
 	</sql>
 
 	<!-- select 쿼리문 정의 -->
-	<select id="selectAll" resultMap="SellerResult" parameterClass="SellerDTO">
+	<select id="selectAll" resultMap="sellerRes" parameterClass="sellerDTO">
 		<include refid="select-all" />
 		ORDER BY seller_reg_date DESC
 	</select>
 	
 	<select id="selectSellerCount" resultClass="int">
-		SELECT count(*) FROM seller_table
+		SELECT COUNT(*) FROM seller_table
 	</select>
 	
-	<select id="selectWhereSellerId" resultMap="SellerResult" parameterClass="SellerDTO">
+	<select id="selectSellerId" resultMap="sellerRes" parameterClass="sellerDTO">
 		<include refid="select-all" />
 		<include refid="where-seller_id" />
 	</select>
 
-	<select id="selectWhereSellerPw" resultMap="SellerResult">
+	<select id="selectSellerPw" resultMap="sellerRes">
 		<include refid="select-all" />
 		<include refid="where-seller_id" />
 		AND seller_pw = #seller_pw#
-	</select>
-	
+	</select>	
 
 	<!-- insert 쿼리문 정의 -->
-	<insert id="insertSeller" parameterClass="SellerDTO">
+	<insert id="insertSeller" parameterClass="sellerDTO">
 		INSERT INTO seller_table
 			(user_seq,
 			seller_id,
@@ -81,8 +81,9 @@
 	</insert>
 
 	<!-- update 쿼리문 정의 -->
-	<update id="updateSeller" parameterClass="SellerDTO">
-		UPDATE seller_table SET
+	<update id="updateSeller" parameterClass="sellerDTO">
+		UPDATE seller_table
+		SET
 			seller_pw = #seller_pw#,
 			seller_rest_name = #seller_rest_name#,
 			seller_rest_address = #seller_rest_address#,
@@ -93,14 +94,14 @@
 	</update>
 	
 	<!-- seller_verification 업데이트 -->
-	<update id="updateVerification" parameterClass="SellerDTO">
-		UPDATE seller_table SET
-			seller_verification = #seller_verification#
+	<update id="updateVerification" parameterClass="sellerDTO">
+		UPDATE seller_table
+		SET seller_verification = #seller_verification#
 		<include refid="where-seller_id"	/>
 	</update>
 
 	<!-- delete 쿼리문 정의 -->
-	<delete id="deleteSeller" parameterClass="SellerDTO">
+	<delete id="deleteSeller" parameterClass="sellerDTO">
 		DELETE FROM seller_table
 		<include refid="where-seller_id" />
 	</delete>

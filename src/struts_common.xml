@@ -131,7 +131,7 @@
 			<result>/user/buyer/dashBuyer.jsp</result>
 		</action>
 		
-		<!-- 사용요청 -->
+		<!-- 쿠폰 사용 요청 -->
 		<action name="requestCpn" class="user.buyer.action.DashBuyerAction" method="requestCpn">
 			<interceptor-ref name="params" />
 			<interceptor-ref name="conDAO" />

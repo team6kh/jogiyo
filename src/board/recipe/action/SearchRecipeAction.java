@@ -52,7 +52,7 @@ public class SearchRecipeAction extends ActionSupport implements ConDAOAware,Pre
         
     }
     
-    public String myListSearch() throws Exception
+    public String searchMyRecipe() throws Exception
     {
     	
     	

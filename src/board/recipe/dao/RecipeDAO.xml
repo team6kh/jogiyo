@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
 <sqlMap namespace="Recipe">
 
 	<typeAlias alias="recipeDTO" type="board.recipe.dto.RecipeDTO" />
@@ -21,7 +22,7 @@
 		<result property="recipe_orgfile" column="recipe_orgfile" />
 		<result property="recipe_num" column="recipe_num" />
 		<result property="recipe_readcount" column="recipe_readcount" />
-		<result property="recipe_recommand" column="recipe_recommand" />
+		<result property="recipe_recommend" column="recipe_recommend" />
 		<result property="recipe_reg_date" column="recipe_reg_date" />
 	</resultMap>
 	
@@ -141,8 +142,8 @@
 		<include refid="where-recipe_num" />
 	</update>
 
-	<update id="updateRecommand" parameterClass="recipeDTO">
-		UPDATE RECIPE_BOARD SET recipe_recommand = recipe_recommand + 1
+	<update id="updateRecommend" parameterClass="recipeDTO">
+		UPDATE RECIPE_BOARD SET recipe_recommend = recipe_recommend + 1
 		<include refid="where-recipe_num" />
 	</update>
 
@@ -201,10 +202,10 @@
 		ORDER BY recipe_price DESC
 	</select>
 	
-	<!-- selectRecommandDesc 쿼리문 정의 -->
-	<select id="selectRecommandDesc" resultMap="recipeRes">
+	<!-- selectRecommendDesc 쿼리문 정의 -->
+	<select id="selectRecommendDesc" resultMap="recipeRes">
 		SELECT * FROM RECIPE_BOARD
-		ORDER BY recipe_recommand DESC
+		ORDER BY recipe_recommend DESC
 	</select>
 	
 	<!-- selectCommandId 쿼리문 정의-->

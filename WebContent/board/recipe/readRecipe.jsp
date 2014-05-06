@@ -42,13 +42,13 @@
 			<!-- 로그인 후 보이는 추천 버튼 -->
 			<s:if test="#session.session_id != null">
 			<div class="pull-right">
-				<button type="button" class="btn btn-primary" name="list" onClick="javascript:document.getElementById('isrecommand').contentWindow.location.href='recommandRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'">
+				<button type="button" class="btn btn-primary" name="list" onClick="javascript:document.getElementById('isRecommend').contentWindow.location.href='recommendRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'">
 					<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;추천
 				</button>
 				<br />
 				<br />
 			</div>
-			<iframe src="blink.html" id="isrecommand" style="display: none;"></iframe>
+			<iframe src="blink.html" id="isRecommend" style="display: none;"></iframe>
 			</s:if>
 			<!-- /.로그인 후 보이는 추천 버튼 -->	
 		</div>		
@@ -127,7 +127,7 @@
 
 				<tr>
 					<td class="text-center" style="width: 20%;">추천수</td>
-					<td><s:property value="resultClass.recipe_recommand" />
+					<td><s:property value="resultClass.recipe_recommend" />
 					</td>
 				</tr>
 				
@@ -145,15 +145,15 @@
 						</s:url>
 						<s:if test="resultClass.recipe_memberwriter == NULL">
 							<input class="btn btn-default" name="list" type="button" value="수정"
-								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
+								onClick="javascript:open_win_noresizable('checkRecipePwForm.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
 							<input class="btn btn-default" name="list" type="button" value="삭제"
-								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
+								onClick="javascript:open_win_noresizable('checkRecipePwForm.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
 						</s:if>
 						<s:elseif test="resultClass.recipe_memberwriter != NULL && resultClass.recipe_memberwriter == #session.session_id">
 							<input class="btn btn-default" name="list" type="button" value="수정"
-								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
+								onClick="javascript:open_win_noresizable('checkRecipePwForm.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
 							<input class="btn btn-default" name="list" type="button" value="삭제"
-								onClick="javascript:open_win_noresizable('checkFormRecipe.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
+								onClick="javascript:open_win_noresizable('checkRecipePwForm.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
 						</s:elseif>
 							<input class="btn btn-default" name="list" type="button" value="전체 목록"
 								onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">

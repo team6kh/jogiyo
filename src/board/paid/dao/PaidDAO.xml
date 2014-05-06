@@ -6,8 +6,6 @@
 	<typeAlias alias="paidDTO" type="board.paid.dto.PaidDTO"/>
 	<typeAlias alias="menuDTO" type="board.paid.dto.MenuDTO"/>
 	<typeAlias alias="searchConditionDTO" type="board.paid.dto.SearchConditionDTO"/>
-	<typeAlias alias="couponDTO" type="table.coupon.dto.CouponDTO" />
-	<typeAlias alias="cartDTO" type="board.cart.dto.CartDTO" />
       
     <resultMap class="paidDTO" id="paidRes">
 		<result property="paid_num" column="paid_num" />
@@ -80,10 +78,6 @@
    		<include refid="whereRest"/> AND p.paid_cpn_used = 1 
    		ORDER BY paid_reg_date
 	</select>
-   
-	<select id="selectCheckedCpn" resultClass="int" parameterClass="java.lang.String">
-		SELECT COUNT(*) FROM coupon_table WHERE cpn_num = #cpn_num#
-	</select>
 
 	<select id="selectPaidLastNum" resultClass="paidDTO" parameterClass="int">
 		SELECT MAX(paid_num) AS paid_num FROM paid_board
@@ -110,19 +104,15 @@
 		ORDER BY paid_num DESC
 	</select>   
    
-   <!-- insert -->
-	<insert id="insertCpn" parameterClass="couponDTO">
-		INSERT INTO coupon_table (cpn_num) VALUES (#cpn_num#)
-	</insert>
-	
+	<!-- insert -->	
 	<insert id="insertPaid" parameterClass="paidDTO">
 		INSERT INTO paid_board (paid_num, paid_rest_num, paid_rest_subject, paid_restopt_num, paid_restopt_subject, paid_restopt_priceplus, paid_restopt_destFile1, paid_cpn, paid_cpn_used, session_id, paid_reg_date)
 		VALUES (paid_seq_num.NEXTVAL, #paid_rest_num#, #paid_rest_subject#, #paid_restopt_num#, #paid_restopt_subject#, #paid_restopt_priceplus#, #paid_restopt_destFile1#, #paid_cpn#, #paid_cpn_used#, #session_id#, #paid_reg_date#)
 	</insert>   
    
-   <!-- update -->
-   <update id="updateResponseCpn" parameterClass="int">
-        UPDATE paid_board
+	<!-- update -->
+	<update id="updateResponseCpn" parameterClass="int">
+    	UPDATE paid_board
         SET paid_cpn_used = 2    
         WHERE paid_num = #paid_num#
     </update>

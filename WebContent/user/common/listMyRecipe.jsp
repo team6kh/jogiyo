@@ -124,7 +124,7 @@
 							<td><strong><a href="javascript:return false;"
 									onClick="recipe_readcountarray()">조회수</a></strong></td>
 							<td><strong><a href="javascript:return false;"
-									onClick="recipe_recommandarray()">추천수</strong></td>
+									onClick="recipe_recommendarray()">추천수</strong></td>
 						</tr>
 
 						<s:iterator value="list" status="stat">
@@ -150,7 +150,7 @@
 								<td align="center"><s:property value="recipe_time" /></td>
 								<td align="center"><s:property value="recipe_price" /></td>
 								<td align="center"><s:property value="recipe_readcount" /></td>
-								<td align="center"><s:property value="recipe_recommand" /></td>
+								<td align="center"><s:property value="recipe_recommend" /></td>
 							</tr>
 
 						</s:iterator>
@@ -194,7 +194,7 @@
 		<br />
 
 		<!-- 상세검색 폼 -->
-		<form name="recipe_search" method="post" action="myrecipe_search.action?session_id=<s:property value="#session.session_id" />" enctype="multipart/form-data">
+		<form name="recipe_search" method="post" action="searchMyRecipe.action?session_id=<s:property value="#session.session_id" />" enctype="multipart/form-data">
              
 			<!-- 상세검색 시에 나타난다. -->
 			<div id="detailsearch" style="display: none">
