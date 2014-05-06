@@ -3,7 +3,7 @@
 
 <sqlMap namespace="Common">
 
-	<typeAlias alias="restOptDTO" type="board.restopt.dto.RestoptDTO" />
+	<typeAlias alias="restOptDTO" type="board.restopt.dto.RestOptDTO" />
 
 	<!-- 리절트 맵 정의 -->
 	<resultMap id="restOptRes" class="restOptDTO">

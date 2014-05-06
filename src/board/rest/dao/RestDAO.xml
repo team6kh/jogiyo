@@ -4,7 +4,7 @@
 <sqlMap namespace="Rest">
 
 	<typeAlias alias="restDTO" type="board.rest.dto.RestDTO" />
-	<typeAlias alias="restoptDTO" type="board.restopt.dto.RestoptDTO" />
+	<typeAlias alias="restoptDTO" type="board.restopt.dto.RestOptDTO" />
 	
 	<!-- 리절트 맵 정의 -->
 	<resultMap id="restRes" class="restDTO">
