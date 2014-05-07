@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class ReviewDTO {
 	
-	private int review_num; // 글번호(PK)
-	private int review_rest; // 식당코드 (FK - 식당테이블의 식당 정보) : 임시값 설정 test_Rest
-	private String review_writer; //작성자 (FK - 결제테이블의 주문자 정보) : 임시값 설정 test_Customer 
+	private int review_num; // 리뷰글번호(PK)
+	private int review_rest; // 레스토랑 코드 (FK) 
+	private String review_writer; //작성자 (FK - 구매자 ID)  
 	private String review_content; // 글내용
-	private String review_file; // 첨부 사진
+	private String review_file; // 첨부파일
 	private Date review_reg_date; // 작성일
 	private int review_rating; // 별점	
 	

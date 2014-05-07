@@ -47,6 +47,8 @@
     </sql>    
     
     <!-- select -->
+    <!-- 레스토랑 테이블에서 판매자 아이디로 레스토랑 코드 값을 찾아서, 
+    결제내역 테이블에서 동일한 레스토랑 코드 값을 가진 결제내역들을 추출   -->
     <select id="selectPaidList" resultMap="paidRes" parameterClass="searchConditionDTO">
         SELECT *
         <include refid="fromRPBoard"/> 
@@ -54,24 +56,24 @@
         ORDER BY paid_reg_date DESC  	
     </select>
     
+    <!-- 판매자의 레스토랑에서 일정 기간 동안 가장 많이 팔린 메뉴 5가지와 그 메뉴들의 매출금 합을 추출 -->
    	<select id="selectHotMenu" resultMap="menuRes" parameterClass="searchConditionDTO">          
-    	SELECT	* 
+    	SELECT	 paid_restopt_subject, paid_sales_volume, paid_sales_price, rownum
     	FROM
   				(SELECT 
 							paid_restopt_subject, 
 							COUNT(*) AS paid_sales_volume, 
-							SUM(paid_restopt_priceplus) AS paid_sales_price, 
-							rownum AS paid_rownum
+							SUM(paid_restopt_priceplus) AS paid_sales_price
   										
    				FROM 		paid_board 	
    				WHERE 		paid_rest_num = #rest_num# AND <include refid="paidDate"/> 
-   				GROUP BY	paid_restopt_subject, rownum 
+   				GROUP BY	paid_restopt_subject
    				ORDER BY	paid_sales_volume DESC) 
    				
-		WHERE  paid_rownum <![CDATA[>=]]> 1 AND paid_rownum <![CDATA[<=]]> 5
+		WHERE  rownum <![CDATA[>=]]> 1 AND rownum <![CDATA[<=]]> 5
    	</select>
    
-	<!-- 쿠폰 사용 요청(PAID_BOARD에서 PAID_CPN_USED = 1) 내역 추출 -->
+	<!-- 쿠폰 사용 요청(PAID_BOARD에서 PAID_CPN_USED = 1 인 레코드) 내역 추출 -->
 	<select id="selectRequestedCpn" resultMap="paidRes" parameterClass="searchConditionDTO">
    		SELECT *
    		<include refid="fromRPBoard"/>
@@ -111,6 +113,8 @@
 	</insert>   
    
 	<!-- update -->
+	
+	<!-- 판매자의 마이페이지에서 쿠폰 승인 버튼을 클릭했을 때 동작하는 쿼리문 : paid_cpn_used의 값을 2로 업데이트-->
 	<update id="updateResponseCpn" parameterClass="int">
     	UPDATE paid_board
         SET paid_cpn_used = 2    

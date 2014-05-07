@@ -21,26 +21,26 @@
 		SELECT * FROM review_board
 	</sql>
 
-	<!-- PK인 review_num으로 결과 추출하고자 할 경우 -->
+	<!-- PK인 review_num을 조건으로 하여 레코드를 추출하고자 할 경우 -->
 	<sql id="where-review_num">
 		WHERE review_num = #review_num#
 	</sql>
 	
-	<!-- FK인 review_rest(rest_board의 PK)으로 결과 추출하고자 할 경우 -->
+	<!-- FK인 review_rest(rest_board의 PK)을 조건으로 하여 레코드를 추출하고자 할 경우 -->
 	<sql id="where-review_rest">
 		WHERE review_rest = #review_rest#
 	</sql>
 
 	<!-- SELECT 쿼리문 정의 -->
 
-	<!-- 해당 식당에 적힌 모든 리뷰글 추출하는 쿼리문 -->
+	<!-- 해당 레스토랑에 적힌 모든 리뷰글 추출하는 쿼리문 -->
 	<select id="selectReviewList" resultMap="reviewRes" parameterClass="int">
 		<include refid="select-all" />
 		<include refid="where-review_rest"/>
 		ORDER BY review_reg_date DESC 
 	</select>
 
-	<!-- review_num으로 리뷰글 하나 추출하는 쿼리문 -->
+	<!-- review_num으로 리뷰글 하나만 추출하는 쿼리문 -->
 	<select id="selectReviewOne" resultClass="reviewDTO" >
 		<include refid="select-all" />
 		<include refid="where-review_num" />
@@ -53,6 +53,8 @@
 	</select>
 
 	<!-- INSERT 쿼리문 정의 -->
+	
+	<!-- 리뷰글 쓰기를 위한 쿼리문 -->
 	<insert id="insertReview" parameterClass="reviewDTO">
 		INSERT INTO review_board 
 			(
@@ -85,7 +87,7 @@
 		<include refid="where-review_num" />
 	</update>
     
-	<!-- 첨부파일을 위한 쿼리문 -->
+	<!-- 첨부파일명들을 DB에 저장하기 위한 쿼리문 -->
 	<update id="updateReviewFile" parameterClass="reviewDTO">
 		UPDATE review_board 
 		SET review_file = #review_file#
@@ -93,6 +95,8 @@
 	</update>
 
 	<!-- DELETE 쿼리문 정의 -->
+	
+	<!-- 리뷰글 삭제를 위한 쿼리문 -->
 	<delete id="deleteReview">
 		DELETE FROM review_board
 		<include refid="where-review_num" />

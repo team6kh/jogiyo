@@ -2,9 +2,9 @@ package board.paid.dto;
 
 public class MenuDTO
 {  
-    private String paid_restopt_subject; // 메뉴명
+    private String paid_restopt_subject; // 레스토랑의 메뉴명
     private String paid_sales_volume; // 메뉴 매출 건수
-    private int paid_sales_price; //메뉴 총 매출금액
+    private int paid_sales_price; //메뉴 총 매출금액 (매출금액의 합)
        
     public String getPaid_restopt_subject()
     {
