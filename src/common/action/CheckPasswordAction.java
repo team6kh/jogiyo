@@ -59,7 +59,7 @@ public class CheckPasswordAction implements Action, ConDAOAware
             buyerDTO.setBuyer_pw(getModalParam_pw());
 
             // 해당 유저의 비밀번호 가져오기
-            buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerPw", buyerDTO);
+            buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerPw", buyerDTO);
 
             // 입력한 비밀번호가 틀리면(없으면) ERROR 리턴
             if (buyerDTO != null)
@@ -85,7 +85,7 @@ public class CheckPasswordAction implements Action, ConDAOAware
             System.out.println("getModalParam_pw()():"+getModalParam_pw());
             
             // 해당 유저의 비밀번호 가져오기
-            sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectWhereSellerPw", sellerDTO);
+            sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectSellerPw", sellerDTO);
             
             // 입력한 비밀번호가 틀리면(없으면) ERROR 리턴
             if (sellerDTO != null)

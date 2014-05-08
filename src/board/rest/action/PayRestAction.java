@@ -34,7 +34,7 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 		paramClass.setSession_id(getSession_id());
 		
 		//현재 카트에 담긴 레코드를 리스트에 담음 (상품넘버and세션아이디)
-		list = sqlMapper.queryForList("Rest.selectForPayment",paramClass);
+		list = sqlMapper.queryForList("Cart.selectForPayment",paramClass);
 		
 		//결제 필수 4종 파라미터 생성, and get() to AGS_pay.jsp
 		pay_num = getRest_num();
@@ -47,7 +47,7 @@ public class PayRestAction extends ActionSupport implements ConDAOAware{
 		
 		//회원정보
 		String session_id = getSession_id();
-		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerOne", session_id);
+		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerSession", session_id);
 		
 		return SUCCESS; // AGS_pay.jsp
 	}

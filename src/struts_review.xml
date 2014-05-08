@@ -22,14 +22,6 @@
 			<result>board/review/goReadRest.jsp</result>
 		</action>
 
-		<!-- 리뷰 글 수정 폼 -->
-		<action name="updateReviewForm" class="board.review.action.UpdateReviewAction"
-			method="form">
-			<interceptor-ref name="conDAO" />
-			<interceptor-ref name="params" />
-			<result>/board/review/updateReview.jsp</result>
-		</action>
-
 		<!-- 리뷰 글 수정 처리 -->
 		<action name="updateReviewPro" class="board.review.action.UpdateReviewAction">
 			<interceptor-ref name="conDAO" />
@@ -41,8 +33,7 @@
 		</action>
 
 		<!-- 리뷰글 삭제 폼 -->
-		<action name="deleteReviewForm" class="board.review.action.DeleteReviewAction"
-			method="form">
+		<action name="deleteReviewForm" class="board.review.action.DeleteReviewAction" method="form">
 			<interceptor-ref name="params" />
 			<result>/board/review/deleteReview.jsp</result>
 		</action>

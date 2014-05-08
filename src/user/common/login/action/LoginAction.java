@@ -68,7 +68,7 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
             paramClass.setBuyer_pw(getLogin_pw());
 
             // 사용자의 비밀번호 가져오기
-            resultClass = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerPw", paramClass);
+            resultClass = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerPw", paramClass);
 
             // 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴
             if (resultClass != null)
@@ -94,7 +94,7 @@ public class LoginAction implements Action, ConDAOAware, SessionAware
             paramClass.setSeller_pw(getLogin_pw());
 
             // 사용자의 비밀번호 가져오기
-            resultClass = (SellerDTO) sqlMapper.queryForObject("Seller.selectWhereSellerPw", paramClass);
+            resultClass = (SellerDTO) sqlMapper.queryForObject("Seller.selectSellerPw", paramClass);
 
             // 입력한 비밀번호가 맞으면 세션 설정 후 SUCCESS 리턴
             if (resultClass != null)

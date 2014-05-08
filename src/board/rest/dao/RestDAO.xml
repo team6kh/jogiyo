@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
 <sqlMap namespace="Rest">
 
-	<typeAlias alias="RestDTO" type="board.rest.dto.RestDTO" />
-	<typeAlias alias="RestoptDTO" type="board.restopt.dto.RestoptDTO" />
-	<typeAlias alias="CartDTO" type="board.cart.dto.CartDTO" />
-	<typeAlias alias="CooponDTO" type="table.coopon.dto.CooponDTO" />
-	<typeAlias alias="PaidDTO" type="board.paid.dto.PaidDTO" />
-	<typeAlias alias="reviewDTO" type="board.review.dto.ReviewDTO" />
-
+	<typeAlias alias="restDTO" type="board.rest.dto.RestDTO" />
+	<typeAlias alias="restoptDTO" type="board.restopt.dto.RestOptDTO" />
+	
 	<!-- 리절트 맵 정의 -->
-	<resultMap id="RestBoard" class="RestDTO">
+	<resultMap id="restRes" class="restDTO">
 		<result property="rest_num" column="rest_num" />
 		<result property="rest_subject" column="rest_subject" />
 		<result property="rest_localcategory" column="rest_localcategory" />
@@ -31,8 +28,7 @@
 		<result property="rest_reg_date" column="rest_reg_date" />
 	</resultMap>
 
-
-	<resultMap id="RestoptBoard" class="RestoptDTO">
+	<resultMap id="restoptRes" class="restoptDTO">
 		<result property="restopt_num" column="restopt_num" />
 		<result property="restopt_rest_num" column="restopt_rest_num" />
 		<result property="restopt_subject" column="restopt_subject" />
@@ -42,268 +38,153 @@
 		<result property="restopt_orgname" column="restopt_orgname" />
 		<result property="restopt_savname" column="restopt_savname" />
 	</resultMap>
-
-
-	<resultMap id="CartBoard" class="CartDTO">
-		<result property="cart_num" column="cart_num" />
-		<result property="cart_rest_num" column="cart_rest_num" />
-		<result property="cart_rest_subject" column="cart_rest_subject" />
-		<result property="cart_restopt_num" column="cart_restopt_num" />
-		<result property="cart_restopt_destFile1" column="cart_restopt_destFile1" />
-		<result property="cart_restopt_subject" column="cart_restopt_subject" />
-		<result property="cart_restopt_priceplus" column="cart_restopt_priceplus" />
-		<result property="session_id" column="session_id" />
-	</resultMap>
-
-
-	<resultMap id="CooponTable" class="CooponDTO">
-		<result property="cpn_num" column="cpn_num" />
-	</resultMap>
-	
-	<resultMap id="PaidBoard" class="PaidDTO">
-		<result property="paid_num" column="paid_num" />
-		<result property="paid_rest_num" column="paid_rest_num" />
-		<result property="paid_rest_subject" column="paid_rest_subject" />
-		<result property="paid_restopt_num" column="paid_restopt_num" />
-		<result property="paid_restopt_subject" column="paid_restopt_subject" />
-		<result property="paid_restopt_priceplus" column="paid_restopt_priceplus" />
-		<result property="paid_restopt_destFile1" column="paid_restopt_destFile1" />
-		<result property="paid_cpn" column="paid_cpn" />
-		<result property="paid_cpn_used" column="paid_cpn_used" />
-		<result property="session_id" column="session_id" />
-		<result property="paid_reg_date" column="paid_reg_date" />
-	</resultMap>
-	
-
-	<!-- 리절트맵 정의 -->
-	<resultMap id="reviewRes" class="reviewDTO">
-		<result property="review_num" column="review_num" />
-		<result property="review_rest" column="review_rest" />
-		<result property="review_writer" column="review_writer" />
-		<result property="review_content" column="review_content" />
-		<result property="review_file" column="review_file" />
-		<result property="review_reg_date" column="review_reg_date" />
-		<result property="review_rating" column="review_rating" />
-	</resultMap>
-	
 	
 	<!-- 공통정의 -->
 	<sql id="select-all">
-		select * from Rest_board
+		SELECT * FROM REST_BOARD
 	</sql>
 
 	<sql id="where-num">
-		where rest_num = #rest_num#
+		WHERE rest_num = #rest_num#
 	</sql>
 
-
 	<!-- insert -->
-	<insert id="insertRest_board" parameterClass="RestDTO">
-		INSERT INTO Rest_board (rest_num, rest_subject, rest_localcategory,
-		rest_typecategory, rest_writer_id, rest_writer_name, rest_writer_telnum,
-		rest_writer_mobilenum, rest_writer_address, rest_writer_email, rest_reg_date)
-		VALUES (rest_seq_num.NEXTVAL, #rest_subject#, #rest_localcategory#,
-		#rest_typecategory#, #rest_writer_id#, #rest_writer_name#, #rest_writer_telnum#,
-		#rest_writer_mobilenum#, #rest_writer_address#, #rest_writer_email#, #rest_reg_date#)
+	<insert id="insertRest" parameterClass="restDTO">
+		INSERT INTO REST_BOARD
+			(rest_num, rest_subject, rest_localcategory, rest_typecategory, rest_writer_id,
+			rest_writer_name, rest_writer_telnum, rest_writer_mobilenum, rest_writer_address, rest_writer_email,
+			rest_reg_date)
+		VALUES
+			(rest_seq_num.NEXTVAL, #rest_subject#, #rest_localcategory#, #rest_typecategory#, #rest_writer_id#,
+			#rest_writer_name#, #rest_writer_telnum#, #rest_writer_mobilenum#, #rest_writer_address#, #rest_writer_email#,
+			#rest_reg_date#)
 	</insert>
 
-	<insert id="insertRestopt" parameterClass="RestoptDTO">
-		INSERT INTO RestOpt_Board (restopt_num, restopt_rest_num, restopt_subject,
-		restopt_priceplus, restopt_destFile1, restopt_orgname,
-		restopt_savname)
-		VALUES (restopt_seq_num.NEXTVAL, #restopt_rest_num#, #restopt_subject#,
-		#restopt_priceplus#, #restopt_destFile1#, #restopt_orgname#,
-		#restopt_savname#)
-	</insert>
-
-	<insert id="insertCart_board" parameterClass="CartDTO">
-		INSERT INTO Cart_board (cart_num, cart_rest_num, cart_rest_subject,
-		cart_restopt_num, cart_restopt_destFile1, cart_restopt_subject,
-		cart_restopt_priceplus, session_id)
-		VALUES (cart_seq_num.NEXTVAL, #cart_rest_num#, #cart_rest_subject#,
-		#cart_restopt_num#, #cart_restopt_destFile1#, #cart_restopt_subject#,
-		#cart_restopt_priceplus#, #session_id#)
+	<insert id="insertRestopt" parameterClass="restoptDTO">
+		INSERT INTO RESTOPT_BOARD
+			(restopt_num, restopt_rest_num, restopt_subject, restopt_priceplus, restopt_destFile1,
+			restopt_orgname, restopt_savname)
+		VALUES
+			(restopt_seq_num.NEXTVAL, #restopt_rest_num#, #restopt_subject#, #restopt_priceplus#, #restopt_destFile1#,
+			#restopt_orgname#, #restopt_savname#)
 	</insert>
 	
-	<insert id="insertCpn" parameterClass="CooponDTO">
-		Insert into coopon_table (cpn_num) values (#cpn_num#)
-	</insert>
-	
-	<insert id="insertPaidBoard" parameterClass="PaidDTO">
-		Insert into paid_board (paid_num, paid_rest_num, paid_rest_subject, paid_restopt_num, paid_restopt_subject, paid_restopt_priceplus, paid_restopt_destFile1, paid_cpn, paid_cpn_used, session_id, paid_reg_date) values (paid_seq_num.NEXTVAL, #paid_rest_num#, #paid_rest_subject#, #paid_restopt_num#, #paid_restopt_subject#, #paid_restopt_priceplus#, #paid_restopt_destFile1#, #paid_cpn#, #paid_cpn_used#, #session_id#, #paid_reg_date#)
-	</insert>
-	
-
-
 	<!-- select -->
-	<select id="selectCheckcpn" resultClass="int" parameterClass="java.lang.String">
-		select count(*) from coopon_table where cpn_num = #cpn_num#
-	</select>
-	
-	<select id="selectLastNo" resultClass="RestDTO" parameterClass="int">
-		SELECT max(rest_num) as rest_num FROM Rest_board
-	</select>
-	
-	<select id="selectPaidLastNo" resultClass="PaidDTO" parameterClass="int">
-		SELECT max(paid_num) as paid_num FROM paid_board
+	<select id="selectLastNum" resultClass="restDTO" parameterClass="int">
+		SELECT MAX(rest_num) AS rest_num FROM REST_BOARD
 	</select>
 	
 	<select id="selectCount" resultClass="int">
-		SELECT count(*) FROM Rest_board
+		SELECT COUNT(*) FROM REST_BOARD
 	</select>
 	
-	<select id="selectCountforSeller" resultClass ="int" parameterClass="java.lang.String">
-		SELECT count(*) FROM Rest_board
-		where rest_writer_id = #session_id#
-	</select>
-	
-	<select id="selectPaidCount" resultClass="int">
-		SELECT count(*) FROM paid_board
+	<select id="selectCountForSeller" resultClass ="int" parameterClass="java.lang.String">
+		SELECT COUNT(*) FROM REST_BOARD
+		WHERE rest_writer_id = #session_id#
 	</select>
 
-	<select id="selectAll" resultMap="RestBoard" parameterClass="int">
+	<select id="selectAll" resultMap="restRes" parameterClass="int">
 		<include refid="select-all" />
 		ORDER BY rest_num DESC
 	</select>
 	
-	<select id="selectLocalAll" resultMap="RestBoard" parameterClass="int">
-		select * from rest_board where rest_localcategory like '1%'
+	<select id="selectLocalAll" resultMap="restRes" parameterClass="int">
+		SELECT * FROM REST_BOARD
+		WHERE rest_localcategory LIKE '1%'
 		ORDER BY rest_num DESC
 	</select>
 	
-	<select id="selectTypeAll" resultMap="RestBoard" parameterClass="int">
-		select * from rest_board where rest_typecategory like '2%'
+	<select id="selectTypeAll" resultMap="restRes" parameterClass="int">
+		SELECT * FROM REST_BOARD
+		WHERE rest_typecategory LIKE '2%'
 		ORDER BY rest_num DESC
 	</select>
 	
-	<select id="selectLocal" resultMap="RestBoard" parameterClass="RestDTO">
-		select * from rest_board
-		where rest_localcategory=#rest_localcategory#
+	<select id="selectLocal" resultMap="restRes" parameterClass="restDTO">
+		SELECT * FROM REST_BOARD
+		WHERE rest_localcategory = #rest_localcategory#
 	</select>
 	
-	<select id="selectType" resultMap="RestBoard" parameterClass="RestDTO">
-		select * from rest_board
-		where rest_typecategory=#rest_typecategory#
-	</select>
-	
-	<select id="selectCartAll" resultMap="CartBoard" parameterClass="CartDTO">
-		select * from Cart_board
-		where cart_rest_num=#cart_rest_num# and session_id=#session_id#
-	</select>
-	
-	<select id="selectPaidnow" resultMap="PaidBoard" parameterClass="PaidDTO">
-		select * from paid_board where paid_num > #paid_num#
-	</select>
-	
-	<select id="selectPaidAll" resultMap="PaidBoard" parameterClass="CartDTO">
-		select * from paid_board
-		where paid_rest_num=#cart_rest_num# and session_id=#session_id#
+	<select id="selectType" resultMap="restRes" parameterClass="restDTO">
+		SELECT * FROM REST_BOARD
+		WHERE rest_typecategory = #rest_typecategory#
 	</select>
 
-	<select id="selectRestOne" resultMap="RestBoard" parameterClass="int">
+	<select id="selectRestOne" resultMap="restRes" parameterClass="int">
 		<include refid="select-all" />
 		<include refid="where-num" />
 	</select>
 
-	<select id="selectRestoptOne" resultMap="RestoptBoard" parameterClass="int">
-		select * from RestOpt_Board
-		where restopt_rest_num = #restopt_rest_num#
+	<select id="selectRestoptOne" resultMap="restoptRes" parameterClass="int">
+		SELECT * FROM RESTOPT_BOARD
+		WHERE restopt_rest_num = #restopt_rest_num#
 	</select>
-
-	<select id="selectForPayment" resultMap="CartBoard" parameterClass="CartDTO">
-		select * from Cart_board
-		where cart_rest_num = #cart_rest_num# and session_id = #session_id#
-	</select>
-	
-	<select id="myListCoupon" resultMap="PaidBoard" parameterClass="java.lang.String">
-		SELECT * FROM PAID_BOARD WHERE session_id = #session_id# ORDER BY paid_num DESC
-	</select>
-	
-	<select id="myListTime" resultMap="PaidBoard" parameterClass="board.paid.dto.SearchConditionDTO">
-		SELECT * FROM PAID_BOARD 
-		WHERE SESSION_ID = #session_id# 
-		AND (PAID_REG_DATE Between to_date(#startDate#, 'yyyy-MM-dd') AND to_date(#endDate#, 'yyyy-MM-dd')
- +0.99999)	ORDER BY paid_num DESC
-		
-	</select>
-
-
 
 	<!-- update -->
-	<update id="updateRestone" parameterClass="RestDTO">
-		UPDATE Rest_board SET rest_subject = #rest_subject#,
-		rest_localcategory = #rest_localcategory#,
-		rest_typecategory = #rest_typecategory#
+	<update id="updateRestone" parameterClass="restDTO">
+		UPDATE REST_BOARD
+		SET
+			rest_subject = #rest_subject#,
+			rest_localcategory = #rest_localcategory#,
+			rest_typecategory = #rest_typecategory#
 		<include refid="where-num" />
 	</update>
 	
-	<update id="updateFile" parameterClass="RestDTO">
-		UPDATE Rest_board SET rest_destFile1 = #rest_destFile1#,
-		rest_main_orgname = #rest_main_orgname#,
-		rest_main_savname = #rest_main_savname#,
-		rest_destFile2 = #rest_destFile2#,
-		rest_content_orgname = #rest_content_orgname#,
-		rest_content_savname = #rest_content_savname#
+	<update id="updateFile" parameterClass="restDTO">
+		UPDATE REST_BOARD
+		SET
+			rest_destFile1 = #rest_destFile1#,
+			rest_main_orgname = #rest_main_orgname#,
+			rest_main_savname = #rest_main_savname#,
+			rest_destFile2 = #rest_destFile2#,
+			rest_content_orgname = #rest_content_orgname#,
+			rest_content_savname = #rest_content_savname#
 		<include refid="where-num" />
 	</update>
 	
-	<update id="updateRestopt" parameterClass="RestoptDTO">
-		UPDATE RestOpt_Board SET restopt_subject=#restopt_subject#,
-														restopt_priceplus=#restopt_priceplus#,
-														restopt_destFile1=#restopt_destFile1#,
-														restopt_orgname=#restopt_orgname#,
-														restopt_savname=#restopt_savname#
-		where restopt_rest_num=#restopt_rest_num# and restopt_subject=#restopt_subject#
+	<update id="updateRestopt" parameterClass="restoptDTO">
+		UPDATE RESTOPT_BOARD
+		SET
+			restopt_subject=#restopt_subject#,
+			restopt_priceplus=#restopt_priceplus#,
+			restopt_destFile1=#restopt_destFile1#,
+			restopt_orgname=#restopt_orgname#,
+			restopt_savname=#restopt_savname#
+		WHERE
+			restopt_rest_num = #restopt_rest_num# AND
+			restopt_subject=#restopt_subject#
 	</update>
 	
-	<update id="updateRest_readcount" parameterClass="RestDTO">
-		UPDATE Rest_board SET rest_readcount = rest_readcount + 1
+	<update id="updateRest_readcount" parameterClass="restDTO">
+		UPDATE REST_BOARD
+		SET rest_readcount = rest_readcount + 1
 		<include refid="where-num" />
-	</update>
-	
-	<update id="requestCPN" parameterClass="int">
-		UPDATE paid_board SET paid_cpn_used = 1
-		where paid_num = #paid_num#
-	</update>
-
-
-
+	</update>	
 
 	<!-- delete -->
-	<delete id="tempArticleDelete" parameterClass="RestDTO">
-		DELETE FROM Rest_board
+	<delete id="deleteTempArticle" parameterClass="restDTO">
+		DELETE FROM REST_BOARD
 		<include refid="where-num" />
 	</delete>
-
-	<delete id="deleteCartforpaid" parameterClass="CartDTO">
-		DELETE FROM Cart_board
-		where cart_rest_num=#cart_rest_num# and session_id=#session_id#	
-	</delete>
 	
-	<delete id="deleteRestBoard" parameterClass="RestDTO">
-		DELETE FROM Rest_board
-		where rest_num=#rest_num# and rest_writer_id=#rest_writer_id#	
+	<delete id="deleteRestBoard" parameterClass="restDTO">
+		DELETE FROM REST_BOARD
+		WHERE rest_num = #rest_num# AND rest_writer_id = #rest_writer_id#	
 	</delete>
 	
 	<delete id="deleteRestoptBoard" parameterClass="int">
-		DELETE FROM RestOpt_Board
-		where restopt_rest_num=#rest_num#	
+		DELETE FROM RESTOPT_BOARD
+		WHERE restopt_rest_num = #rest_num#	
 	</delete>
 	
-	<delete id="deleteRestoptOne" parameterClass="RestoptDTO">
-		DELETE FROM RestOpt_Board
-		where restopt_rest_num=#restopt_rest_num# and restopt_subject=#restopt_subject#
+	<delete id="deleteRestoptOne" parameterClass="restoptDTO">
+		DELETE FROM RESTOPT_BOARD
+		WHERE restopt_rest_num = #restopt_rest_num# AND restopt_subject = #restopt_subject#
 	</delete>
 	
-	<delete id="deleteCartBoard" parameterClass="RestDTO">
-		DELETE FROM Cart_board
-		where cart_rest_num=#rest_num# and session_id=#rest_writer_id#	
-	</delete>
-	
-	<delete id="deleteReviewtBoard" parameterClass="int">
-		DELETE FROM review_board
-		where review_rest=#rest_num#	
-	</delete>
-	
+	<delete id="deleteCartBoard" parameterClass="restDTO">
+		DELETE FROM CART_BOARD
+		WHERE cart_rest_num = #rest_num# AND session_id = #rest_writer_id#	
+	</delete>	
 
 </sqlMap>

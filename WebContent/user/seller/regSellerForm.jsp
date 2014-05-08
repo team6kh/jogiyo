@@ -24,7 +24,7 @@
 
 <script type="text/javascript">
 	// 선택하는 가입유형에 따라 다른 폼을 로딩합니다.
-	function optionCheck(){
+	function selectRegType(){
 	    var option = document.getElementById("reg_type").value;
 	    if(option == "buyer"){
 	    	url = "registrationForm.action?reg_type=" + option;
@@ -115,7 +115,7 @@
 	
 	//
 	// Geolocation with Google Maps
-	function get_current_postion() {
+	function getCurrentPosition() {
 	    if(navigator.geolocation)
 	        navigator.geolocation.getCurrentPosition(handleGetCurrentPosition, handleGetCurrentPositionError);		
 	}
@@ -175,7 +175,7 @@
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">
 			  <label>가입유형을 선택하세요.</label>
-			    <select class="form-control" id="reg_type" name="reg_type" onchange="optionCheck()">
+			    <select class="form-control" id="reg_type" name="reg_type" onchange="selectRegType()">
 			      <option value="buyer">구매자</option>
 			      <option value="seller" selected>판매자</option>
 			    </select>		  
@@ -187,7 +187,7 @@
 			<div class="form-group">
 			  <label>주소</label>
 			  <input type="text" class="form-control" id="seller_rest_address" name="seller_rest_address" required>
-			  <button type="button" class="btn btn-default btn-block" onclick="get_current_postion(); return false;">
+			  <button type="button" class="btn btn-default btn-block" onclick="getCurrentPosition(); return false;">
 			    <span class="glyphicon glyphicon-map-marker"></span> 현재위치 자동검색
 			  </button>
 			</div>							

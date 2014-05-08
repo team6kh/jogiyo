@@ -3,7 +3,7 @@ package board.rest.action;
 import java.util.ArrayList;
 import java.util.List;
 import board.rest.dto.RestDTO;
-import board.restopt.dto.RestoptDTO;
+import board.restopt.dto.RestOptDTO;
 import board.review.action.FileUpload;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
@@ -15,8 +15,8 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 	public static SqlMapClient sqlMapper;
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
-	private RestoptDTO paramClass1 = new RestoptDTO();
-	private List<RestoptDTO> list = new ArrayList<RestoptDTO>();
+	private RestOptDTO paramClass1 = new RestOptDTO();
+	private List<RestOptDTO> list = new ArrayList<RestOptDTO>();
 	private int rest_num;
 	private String session_id;
 
@@ -43,7 +43,7 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 		
 		//옵션사진 제거
 		//옵션을 불러옴
-		list = (List<RestoptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
+		list = (List<RestOptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
 		
 		//옵션사진 삭제
 		for(int i=0; i<list.size(); i++){
@@ -59,9 +59,11 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 		//카트레코드 제거
 		sqlMapper.delete("Rest.deleteCartBoard", paramClass);
 		
-		//리뷰레코드 제거
+		/*
+		식당이 없어져도 리뷰글은 존재한다.
+		만약, 리뷰글을 삭제하고 싶을 경우 주석을 해제하세요.  
 		sqlMapper.delete("Rest.deleteReviewtBoard", getRest_num());
-		
+		*/
 		return SUCCESS; // 액션-> listRest.jsp
 	}
 

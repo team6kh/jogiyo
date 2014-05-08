@@ -48,7 +48,7 @@ public class DashAdminAction implements Action, ConDAOAware
     	setCountRest((Integer) sqlMapper.queryForObject("Common.selectRestCount"));
     	
     	// 메뉴 개수를 구한다.
-    	setCountRestopt((Integer) sqlMapper.queryForObject("Common.selectRestoptCount"));
+    	setCountRestopt((Integer) sqlMapper.queryForObject("Common.selectRestOptCount"));
     	
     	// 결재 개수를 구한다.
     	setCountPaid((Integer) sqlMapper.queryForObject("Common.selectPaidCount"));
@@ -63,7 +63,7 @@ public class DashAdminAction implements Action, ConDAOAware
     	setCountNotice((Integer) sqlMapper.queryForObject("Common.selectNoticeCount"));
     	
     	// 문의하기 개수를 구한다.
-    	setCountQna((Integer) sqlMapper.queryForObject("Common.selectQnaCount"));
+    	setCountQna((Integer) sqlMapper.queryForObject("Common.selectQnACount"));
     	
     	// 구매자 수를 구한다.
     	setCountBuyer((Integer) sqlMapper.queryForObject("Buyer.selectBuyerCount"));

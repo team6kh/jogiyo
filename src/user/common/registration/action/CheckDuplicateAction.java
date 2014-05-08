@@ -59,8 +59,8 @@ public class CheckDuplicateAction implements Action, ConDAOAware
         buyerDTO.setBuyer_id(getReg_id());
         sellerDTO.setSeller_id(getReg_id());
 
-        buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerId", buyerDTO);
-        sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectWhereSellerId", sellerDTO);
+        buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerId", buyerDTO);
+        sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectSellerId", sellerDTO);
 
         if (buyerDTO != null || sellerDTO != null)
         {

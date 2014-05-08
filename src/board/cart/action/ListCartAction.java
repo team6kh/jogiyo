@@ -1,4 +1,4 @@
-package board.rest.action;
+package board.cart.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ListCartAction implements Action, ConDAOAware {
 		paramClass.setCart_rest_num(getRest_num());
 		paramClass.setSession_id(getSession_id());
 		//카트리스트
-		list = sqlMapper.queryForList("Rest.selectCartAll", paramClass);
+		list = sqlMapper.queryForList("Cart.selectCartAll", paramClass);
 		return SUCCESS;
 	}
 	

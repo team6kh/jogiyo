@@ -25,31 +25,33 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
     
     private Map sessionMap; // session 정보를 꺼내기 위한 sessionMap
     private int[] requestPaid_num; //  쿠폰사용 승인을 하기 위해 필요한 결제번호들을 저장하는 배열
+    
     private String startDate; // 검색 조건 - 조회할 기간의 시작 날짜    
     private String endDate; // 검색 조건 - 조회할 기간의 마지막 날짜
-    
     private String seller_id; // 판매자id 값을 저장하기 위한 변수
     
    
-    
- // 검색 조건값들을 담을 DTO
+    // 검색 조건값들을 담을 DTO
     private SearchConditionDTO searchDTO = new SearchConditionDTO(); 
     
     
     
  // 쿼리문 실행 후 쿠폰 사용 요청 내역을 담을 List   
     private List<PaidDTO> cpnRes  = new ArrayList<PaidDTO>();
+    
  // 쿼리문 실행 후 결제 내역 결과를 담는 List
     private List<PaidDTO> paidRes = new ArrayList<PaidDTO>(); 
+    
  // 쿼리문 실행 후 인기 메뉴결과를 담는 List
-
     private List<MenuDTO> menuRes = new ArrayList<MenuDTO>(); 
    
+    
+    // 판매자의 마이페이지를 위한 메서드
     public String execute() throws Exception
     {
+        
         // 판매자의 session_id 정보를 받아온다
         seller_id = (String) sessionMap.get("session_id");
-        
         
         // session_id 값이 있는 경우
         if (seller_id != null)
@@ -57,15 +59,14 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
          // 검색조건 DTO인 searchDTO에 seller_id 값 세팅
             searchDTO.setSession_id(seller_id);
             
-            /* dashSeller.jsp 중단에 띄울 결과물을 위한 코드 */
+            /* dashSeller.jsp 중단에 띄울 결과물을 위한 코드 - 쿠폰 사용 요청 내역들 */
             
-            cpnRes = sqlMapper.queryForList("Paid.requestCPN", searchDTO);
+            cpnRes = sqlMapper.queryForList("Paid.selectRequestedCpn", searchDTO);
            
          
-            /* dashSeller.jsp 하단에 띄울 결과물을 위한 코드 */
+            /* dashSeller.jsp 하단에 띄울 결과물을 위한 코드 - 일정기간 동안의 결제내역과 인기메뉴*/
             
-            
-            
+                        
             // 날짜값을 일정한 패턴으로 표시하기 위한 format
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
          
@@ -88,19 +89,19 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
             }
             
             // 판매자가 등록한 상품의 결제 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
-            paidRes = sqlMapper.queryForList("Paid.paidList", searchDTO);
+            paidRes = sqlMapper.queryForList("Paid.selectPaidList", searchDTO);
             if (!paidRes.isEmpty())
             {
                 // 가져온 결제내역에서 식당코드를 꺼내어 searchDTO에 넣는다
                 searchDTO.setRest_num(paidRes.get(0).getPaid_rest_num());
                 
                 // 판매자가 등록한 상품의 인기 메뉴 내역을 가져온다. (추출해내는 레코드 개수 제한 설정 필요)
-                menuRes = sqlMapper.queryForList("Paid.hotmenu", searchDTO);
+                menuRes = sqlMapper.queryForList("Paid.selectHotMenu", searchDTO);
                 
             }
             return SUCCESS;
         }
-        // seller_id 값이 없는 경우에는 ERROR 리턴 -> 로그인 페이지로 
+        // seller_id 값이 없는 경우(session_id값이 없는 경우)에는 ERROR 리턴 -> 로그인 페이지로 
         else
         {
             return ERROR;
@@ -108,11 +109,11 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
     }
     
     
-    public String submitCpn() throws Exception{
+    // 사용 요청된 쿠폰들을 사용완료 처리하는 메서드
+    public String responseCpn() throws Exception{
         
         for(int i=0; i< requestPaid_num.length; i++) {
-            System.out.println("requestPaid_num[i] : " + requestPaid_num[i]);
-            sqlMapper.update("Paid.submitCPN", requestPaid_num[i]);
+            sqlMapper.update("Paid.updateResponseCpn", requestPaid_num[i]);
         }
         return SUCCESS;
     }
@@ -121,7 +122,7 @@ public class DashSellerAction implements Action, ConDAOAware, SessionAware
     
     
     
-    
+   
     public String getActionName()
     {
         return actionName;

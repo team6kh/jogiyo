@@ -162,7 +162,7 @@
                 </div>
             <!-- 중단 :  쿠폰 사용 요청 내역 -->
                 <div class="col-md-12">
-                <form method="post" action="submitCPN.action" >
+                <form method="post" action="responseCpn.action" >
                     <div class="col-md-12">
                         <table class="table table-hover text-center">
                             <tr>
@@ -176,13 +176,13 @@
                             </tr>
                             <c:forEach var="cpnDTO" items="${cpnRes}">
                                 <tr>
-                                    <td><input type="checkbox" name="requestPaid_num" value="${cpnDTO.paid_num}" required /></td>
+                                    <td><input type="checkbox" name="requestPaid_num" value="${cpnDTO.paid_num}" /></td>
                                     <td>${cpnDTO.paid_num }</td>
                                     <td>${cpnDTO.paid_restopt_subject}</td>
                                     <td>${cpnDTO.paid_restopt_priceplus }</td>
                                     <td>${cpnDTO.paid_cpn }</td>
                                     <td>${cpnDTO.session_id }</td>
-                                    <td><fmt:formatDate value="${cpnDTO.paid_reg_date }" pattern="yyyy.MM.dd  HH:mm:ss" /></td>
+                                    <td><fmt:formatDate value="${cpnDTO.paid_reg_date }" pattern="yyyy-MM-dd hh:mm:ss" /></td>
                                  </tr> 
                             </c:forEach>
                         </table>

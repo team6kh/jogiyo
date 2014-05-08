@@ -32,7 +32,7 @@ public class UpdateBuyerAction implements Action, ConDAOAware
         buyerDTO.setBuyer_id(getModalParam_key());
 
         // 해당 유저의 정보를 가져온다.
-        setBuyerDTO((BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerId", buyerDTO));
+        setBuyerDTO((BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerId", buyerDTO));
 
         return SUCCESS;
     }
@@ -48,7 +48,7 @@ public class UpdateBuyerAction implements Action, ConDAOAware
         sqlMapper.update("Buyer.updateBuyer", buyerDTO);
 
         // 수정이 끝나면 view 페이지로 이동.
-        buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerId", buyerDTO);
+        buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerId", buyerDTO);
 
         return SUCCESS;
     }

@@ -11,25 +11,28 @@ public class DeleteReviewAction implements Action, ConDAOAware {
 	// DAO 관련 변수
 	private SqlMapClient sqlMapper;
 	
-	private int rest_num;
-    private int review_rest_currentPage; 
-    private int ccp;
-    private int review_num;
-    private int currentPage;
-    
+	// 페이징을 위한 변수
+	private int rest_num; 
+	private int review_rest_currentPage; 
+	private int ccp;
+	private int currentPage;
+	
+	// 리뷰글 삭제를 위한 리뷰 글 번호(PK) 
+	private int review_num;
 
 
-
-	// DTO 관련 변수
+	// DTO 변수
 	private ReviewDTO reviewDTO;
 
 
+	// 리뷰글 삭제 확인 페이지로 가기 위한 메서드
 	public String form() throws Exception {
 	    
 	    
 		return SUCCESS;
 	}
 
+	// 리뷰글 삭제 처리 메서드
 	public String execute() throws Exception {
 	    
 		// 첨부파일 삭제를 위해 DB에서 해당 글을 가져옴

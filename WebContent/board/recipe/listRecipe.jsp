@@ -59,8 +59,8 @@
 		document.location.href = 'priceRecipeDesc.action';
 	}
 
-	function recipe_recommandarray() {
-		document.location.href = 'recommandRecipeDesc.action';
+	function recipe_recommendarray() {
+		document.location.href = 'recommendRecipeDesc.action';
 	}
 </SCRIPT>
 
@@ -101,7 +101,7 @@
 					<td><strong><a href="javascript:return false;" onClick="recipe_timearray()">소비시간</strong></td>
 					<td><strong><a href="javascript:return false;" onClick="recipe_pricearray()">비용</strong></td>
 					<td><strong><a href="javascript:return false;" onClick="recipe_readcountarray()">조회수</a></strong></td>
-					<td><strong><a href="javascript:return false;" onClick="recipe_recommandarray()">추천수</strong></td>
+					<td><strong><a href="javascript:return false;" onClick="recipe_recommendarray()">추천수</strong></td>
 				</tr>
 
 				<s:iterator value="list" status="stat">
@@ -127,7 +127,7 @@
 						<td><s:property value="recipe_time" />&nbsp;분</td>
 						<td><s:property value="recipe_price" />&nbsp;원</td>
 						<td><s:property value="recipe_readcount" /></td>
-						<td><s:property value="recipe_recommand" /></td>
+						<td><s:property value="recipe_recommend" /></td>
 					</tr>
 
 				</s:iterator>
@@ -179,7 +179,7 @@
 		<br />
 
 		<!-- 상세검색 폼 -->
-		<form name="recipe_search" action="recipe_search.action" enctype="multipart/form-data">
+		<form name="recipe_search" action="searchRecipe.action" enctype="multipart/form-data">
 
 			<!-- 상세검색 시에 나타난다. -->
 			<div id="detailsearch" style="display: none">

@@ -1,6 +1,7 @@
-package table.coopon.dto;
+package board.coupon.dto;
 
-public class CooponDTO {
+public class CouponDTO {
+	
 	private String cpn_num;
 
 	public String getCpn_num() {
@@ -9,4 +10,5 @@ public class CooponDTO {
 	public void setCpn_num(String cpn_num) {
 		this.cpn_num = cpn_num;
 	}
+	
 }

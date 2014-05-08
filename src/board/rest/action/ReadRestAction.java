@@ -6,7 +6,7 @@ import java.util.List;
 import user.seller.dto.SellerDTO;
 import common.ConDAOAware;
 import board.rest.dto.RestDTO;
-import board.restopt.dto.RestoptDTO;
+import board.restopt.dto.RestOptDTO;
 import common.action.PagingAction;
 import board.review.dto.ReviewDTO;
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -22,9 +22,9 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 	public static SqlMapClient sqlMapper;
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
-	private RestoptDTO paramClass1 = new RestoptDTO();
-	private RestoptDTO resultClass1 = new RestoptDTO();
-	private List<RestoptDTO> list = new ArrayList<RestoptDTO>();
+	private RestOptDTO paramClass1 = new RestOptDTO();
+	private RestOptDTO resultClass1 = new RestOptDTO();
+	private List<RestOptDTO> list = new ArrayList<RestOptDTO>();
 	//수정시(파일관련)
 	private String fileUploadPath1 = Constants.COMMON_FILE_PATH + Constants.REST_MAIN_FILE_PATH;
 	private String fileUploadPath2 = Constants.COMMON_FILE_PATH + Constants.REST_CONTENT_FILE_PATH;
@@ -54,7 +54,7 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 		resultClass = (RestDTO)sqlMapper.queryForObject("Rest.selectRestOne", getRest_num());
 		
 		//옵션 get
-		list = (List<RestoptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
+		list = (List<RestOptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
 		
 		//후기리스트
         review_rest = getRest_num();
@@ -81,10 +81,10 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 	
 	
 	//옵션 테이블 list
-	public List<RestoptDTO> getList() {
+	public List<RestOptDTO> getList() {
 		return list;
 	}
-	public void setList(List<RestoptDTO> list) {
+	public void setList(List<RestOptDTO> list) {
 		this.list = list;
 	}
 
@@ -115,16 +115,16 @@ public class ReadRestAction extends ActionSupport implements ConDAOAware{
 	public void setResultClass(RestDTO resultClass) {
 		this.resultClass = resultClass;
 	}
-	public RestoptDTO getParamClass1() {
+	public RestOptDTO getParamClass1() {
 		return paramClass1;
 	}
-	public void setParamClass1(RestoptDTO paramClass1) {
+	public void setParamClass1(RestOptDTO paramClass1) {
 		this.paramClass1 = paramClass1;
 	}
-	public RestoptDTO getResultClass1() {
+	public RestOptDTO getResultClass1() {
 		return resultClass1;
 	}
-	public void setResultClass1(RestoptDTO resultClass1) {
+	public void setResultClass1(RestOptDTO resultClass1) {
 		this.resultClass1 = resultClass1;
 	}
 	

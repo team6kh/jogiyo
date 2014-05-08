@@ -15,8 +15,7 @@ public class ConDAOInterceptor implements Interceptor
 
     public void init()
     {
-        try
-        {
+        try{
             // sqlMapConfig.xml 파일의 설정내용을 가져온다.
             reader = Resources.getResourceAsReader("sqlMapConfig.xml");
             // sqlMapConfig.xml의 SQL맵만 다시 읽어들임 = DAO

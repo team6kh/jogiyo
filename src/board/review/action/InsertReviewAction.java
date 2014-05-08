@@ -19,21 +19,29 @@ public class InsertReviewAction implements Action, Preparable,
 	// DAO 관련 변수
 	SqlMapClient sqlMapper;
 
+	// 페이징을 위한 변수
 	private int rest_num;
 	private int review_rest_currentPage;
 
 	// DTO 관련 변수
 	private ReviewDTO reviewDTO;
 	private Calendar today = Calendar.getInstance();
+	
 	// 첨부파일 업로드 관련 변수
 	private List<File> review_files = new ArrayList<File>();
 	private List<String> review_filesFileName = new ArrayList<String>();
 	private List<String> review_filesContentType = new ArrayList<String>();
 
+	
 	// 리뷰 글쓰기 등록
 	public String execute() throws Exception {
-		// 필요한 param : 식당코드, 세션아이디값
-		// 두 param을 이용해 해당회원이 해당 식당에서 구매한 내역이 있는지 없는지 논리값을 구할 것
+		/*필요한 param : 레스토랑 코드, 구매자 세션아이디값(리뷰글 작성자)
+		위의 두 param을 이용해 리뷰를 쓰려고 하는 레스토랑에서 
+		해당 회원이 결제한 내역이 있는지 없는지 논리값을 구할 것 (미구현)
+	        
+	       현재는 Buyer 타입의 회원인 경우에는 글을 쓸 수 있도록 되어있음 
+	        */
+	    
 		// 작성일에 현재 시간 설정
 		reviewDTO.setReview_reg_date(today.getTime());
 	
@@ -46,11 +54,11 @@ public class InsertReviewAction implements Action, Preparable,
 			String fileUploadPath = Constants.COMMON_FILE_PATH
 					+ Constants.REVIEW_FILE_PATH;
 
-			// 파일 이름 변경을 위해, review_num 값을 가져온다.
-			reviewDTO = (ReviewDTO) sqlMapper
-					.queryForObject("Review.selectLastNum");
+			// 첨부파일의 파일명을 일정한 규칙에 따른 파일명으로 변경하기 위해, review_num 값을 가져온다.
+			reviewDTO = (ReviewDTO) sqlMapper.queryForObject("Review.selectLastNum");
+					
 
-			// 파일명 변경 시 공통으로 붙여줄 이름 설정
+			// 파일명 값 설정 ex) review_0
 			String fileRename = "review_" + reviewDTO.getReview_num();
 
 			// 파일업로드를 위해 FileUpload 클래스의 인스턴스 생성
@@ -59,7 +67,7 @@ public class InsertReviewAction implements Action, Preparable,
 			String saveFileName = fileUpload.uploadFiles(review_files,
 					review_filesFileName, fileUploadPath, fileRename);
 
-			// setReview_file 메서드로 값 설정
+			// DTO에 리턴받은 값을 세팅(DB에 변경된 파일명들이 저장시키기 위함)
 			reviewDTO.setReview_file(saveFileName);
 			// DB update 진행
 			sqlMapper.update("Review.updateReviewFile", reviewDTO);

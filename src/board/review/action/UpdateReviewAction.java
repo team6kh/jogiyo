@@ -20,13 +20,14 @@ public class UpdateReviewAction implements Action, Preparable,
 	// DAO 관련 변수
 	SqlMapClient sqlMapper;
 
+	// 페이징을 위한 변수
 	private int rest_num;
 	private int review_rest_currentPage;
 
 	// DTO 관련 변수
 	private ReviewDTO reviewDTO;
 
-	// 받아야 하는 파라미터
+	// 받아야 하는 파라메터
 	private int ccp;
 	private int review_num;
 
@@ -35,20 +36,13 @@ public class UpdateReviewAction implements Action, Preparable,
 	private List<String> review_filesFileName = new ArrayList<String>();
 	private List<String> review_filesContentType = new ArrayList<String>();
 
-	// 리뷰 글 수정 폼
-	public String form() throws Exception {
-		reviewDTO = (ReviewDTO) sqlMapper.queryForObject(
-				"Review.selectReviewOne", review_num);
-		
-		return SUCCESS;
-	}
-
-	// 리뷰글 수정 update 처리
+	
+	// 리뷰글수정을 위한 DB update 처리
 	public String execute() throws Exception {
-		// 다른 항목 업데이트 처리
+		// 첨부파일 이외의 항목 업데이트 처리
 		sqlMapper.update("Review.updateReview", reviewDTO);
 
-		// 새로운 첨부파일이 있는 경우
+		// 새로 첨부한 파일이 있는 경우
 		if (!review_files.isEmpty()) {
 			// 첨부파일 저장된 경로
 			String fileUploadPath = Constants.COMMON_FILE_PATH
@@ -62,7 +56,6 @@ public class UpdateReviewAction implements Action, Preparable,
 			reviewDTO = (ReviewDTO) sqlMapper.queryForObject("Review.selectReviewOne", reviewDTO);
 			
 			// 이전에 업로드된 첨부파일이 있는 경우에 삭제 진행
-			
 			if(reviewDTO.getReview_file() != null){
 			// 이전 첨부파일명 값을 꺼냄
 			String filesName = reviewDTO.getReview_file();
