@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+<struts>
+	<package name="struts_good" extends="struts-default">
+
+		<!-- SqlMapClient 인터셉터 -->
+		<interceptors>
+			<interceptor name="conDAO" class="common.ConDAOInterceptor" />
+		</interceptors>
+
+		<!-- 상품관리 시작
+		=============================================================== -->
+
+		<!-- 상품 등록 -->
+		<action name="insertGoodForm" class="good.action.InsertGoodAction">
+			<interceptor-ref name="conDAO" />
+			<result>good/insertGood.jsp</result>
+		</action>
+		
+		<!-- 상품 목록 -->
+		<action name="listGoodForm" class="good.action.ListGoodAction">
+		<interceptor-ref name="conDAO" />
+		<result>good/listGood.jsp</result>
+		</action>
+		
+		
+		
+	</package>
+</struts>

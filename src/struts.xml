@@ -12,4 +12,5 @@
 	<include file="struts_qna.xml"/>
 	<include file="struts_test.xml"/>
 	<include file="struts_pay.xml"/>
+	<include file="struts_good.xml"/>
 </struts>
