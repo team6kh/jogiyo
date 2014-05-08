@@ -29,7 +29,7 @@ public class ReadTestAction implements Action, ConDAOAware
         sqlMapper.update("Test.updateReadcount", testDTO);
 
         // 해당 번호의 글을 가져온다.
-        testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectWhereTestNum", getTest_num());
+        testDTO = (TestDTO) sqlMapper.queryForObject("Test.selectTestNum", getTest_num());
 
         return SUCCESS;
     }

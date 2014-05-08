@@ -22,7 +22,7 @@
 
 <script type="text/javascript">
 	// 선택하는 가입유형에 따라 다른 폼을 로딩합니다.
-	function optionCheck(){
+	function selectRegType(){
 	    var option = document.getElementById("reg_type").value;
 	    if(option == "buyer"){
 	    	url = "registrationForm.action?reg_type=" + option;
@@ -154,7 +154,7 @@
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">
 			  <label>가입유형을 선택하세요.</label>
-			    <select class="form-control" id="reg_type" name="reg_type" onchange="optionCheck()">
+			    <select class="form-control" id="reg_type" name="reg_type" onchange="selectRegType()">
 			      <option value="buyer" selected>구매자</option>
 			      <option value="seller">판매자</option>
 			    </select>		  

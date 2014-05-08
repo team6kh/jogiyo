@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import board.restopt.dto.RestoptDTO;
+import board.restopt.dto.RestOptDTO;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.Action;
 
 import common.ConDAOAware;
 
-public class HomeAction implements Action, ConDAOAware
-{
+public class HomeAction implements Action, ConDAOAware {
+	
     private String actionName = "home"; // 페이징액션과 로그인액션에서 쓰인다.
     
     private SqlMapClient sqlMapper;
@@ -34,27 +34,24 @@ public class HomeAction implements Action, ConDAOAware
     // .회원 관련
     
     // masonry
-    private List<RestoptDTO> listRestopt = new ArrayList<RestoptDTO>();
+    private List<RestOptDTO> listRestOpt = new ArrayList<RestOptDTO>();
     // .masonry
     
-    public void setConDAO(SqlMapClient sqlMapper)
-    {
+    public void setConDAO(SqlMapClient sqlMapper) {
         this.sqlMapper = sqlMapper;
     }
 
     // 환영 페이지
-    public String welcome() throws Exception
-    {
+    public String welcome() throws Exception {
         return SUCCESS;
     }
 
-    public String execute() throws Exception
-    {
+    public String execute() throws Exception {
     	// 상품 개수를 구한다.
     	setCountRest((Integer) sqlMapper.queryForObject("Common.selectRestCount"));
     	
     	// 메뉴 개수를 구한다.
-    	setCountRestopt((Integer) sqlMapper.queryForObject("Common.selectRestoptCount"));
+    	setCountRestopt((Integer) sqlMapper.queryForObject("Common.selectRestOptCount"));
     	
     	// 결재 개수를 구한다.
     	setCountPaid((Integer) sqlMapper.queryForObject("Common.selectPaidCount"));
@@ -69,7 +66,7 @@ public class HomeAction implements Action, ConDAOAware
     	setCountNotice((Integer) sqlMapper.queryForObject("Common.selectNoticeCount"));
     	
     	// 문의하기 개수를 구한다.
-    	setCountQna((Integer) sqlMapper.queryForObject("Common.selectQnaCount"));
+    	setCountQna((Integer) sqlMapper.queryForObject("Common.selectQnACount"));
     	
     	// 구매자 수를 구한다.
     	setCountBuyer((Integer) sqlMapper.queryForObject("Buyer.selectBuyerCount"));
@@ -78,19 +75,18 @@ public class HomeAction implements Action, ConDAOAware
     	setCountSeller((Integer) sqlMapper.queryForObject("Seller.selectSellerCount"));
     	
     	/* Masonry 리스트 */
-    	listRestopt = (List<RestoptDTO>) sqlMapper.queryForList("Common.selectRestoptAll");
+    	listRestOpt = (List<RestOptDTO>) sqlMapper.queryForList("Common.selectRestOptAll");
     	// 리스트를 받아와 섞는다(shuffle)
-    	Collections.shuffle(listRestopt);
+    	Collections.shuffle(listRestOpt);
     	// 40개만 뽑아온다.
-    	listRestopt = listRestopt.subList(0, 80);
-    	setListRestopt(listRestopt);
+    	listRestOpt = listRestOpt.subList(0, 80);
+    	setListRestopt(listRestOpt);
 
         return SUCCESS;
     }
 
     // getter & setter
-	public String getActionName()
-    {
+	public String getActionName() {
         return actionName;
     }
 
@@ -166,12 +162,12 @@ public class HomeAction implements Action, ConDAOAware
 		this.countSeller = countSeller;
 	}
 	
-	public List<RestoptDTO> getListRestopt() {
-		return listRestopt;
+	public List<RestOptDTO> getListRestOpt() {
+		return listRestOpt;
 	}
 	
-	public void setListRestopt(List<RestoptDTO> listRestopt) {
-		this.listRestopt = listRestopt;
+	public void setListRestopt(List<RestOptDTO> listRestOpt) {
+		this.listRestOpt = listRestOpt;
 	}
     
 }

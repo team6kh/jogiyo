@@ -20,8 +20,7 @@
 		</action>
 
 		<!-- 게시판 쓰기 액션. -->
-		<action name="insertNoticeForm" class="board.notice.action.InsertNoticeAction"
-			method="form">
+		<action name="insertNoticeForm" class="board.notice.action.InsertNoticeAction" method="form">
 			<result>/board/notice/insertNoticeForm.jsp</result>
 		</action>
 
@@ -43,6 +42,7 @@
 			<interceptor-ref name="params" />
 			<result>/board/notice/readNotice.jsp</result>
 		</action>
+		
 		<action name="rnumNoticeAction" class="board.notice.action.ReadNoticeAction" method="rnum">
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="prepare" />
@@ -52,8 +52,7 @@
 		</action>
 
 		<!-- 게시판 오류 액션 -->
-		<action name="checkAction" class="board.notice.action.ReadNoticeAction"
-			method="checkAction">
+		<action name="checkAction" class="board.notice.action.ReadNoticeAction" method="checkAction">
 			<interceptor-ref name="conDAO" />
 			<interceptor-ref name="prepare" />
 			<interceptor-ref name="modelDriven" />

@@ -3,7 +3,7 @@ package board.rest.action;
 import java.util.ArrayList;
 import java.util.List;
 import board.rest.dto.RestDTO;
-import board.restopt.dto.RestoptDTO;
+import board.restopt.dto.RestOptDTO;
 import board.review.action.FileUpload;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.opensymphony.xwork2.ActionSupport;
@@ -15,8 +15,8 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 	public static SqlMapClient sqlMapper;
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
-	private RestoptDTO paramClass1 = new RestoptDTO();
-	private List<RestoptDTO> list = new ArrayList<RestoptDTO>();
+	private RestOptDTO paramClass1 = new RestOptDTO();
+	private List<RestOptDTO> list = new ArrayList<RestOptDTO>();
 	private int rest_num;
 	private String session_id;
 
@@ -43,7 +43,7 @@ public class DeleteRestAction extends ActionSupport implements ConDAOAware{
 		
 		//옵션사진 제거
 		//옵션을 불러옴
-		list = (List<RestoptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
+		list = (List<RestOptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", getRest_num());
 		
 		//옵션사진 삭제
 		for(int i=0; i<list.size(); i++){

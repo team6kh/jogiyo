@@ -1,9 +1,11 @@
 package board.recipe.dto;
 
 public class RecipeCommandDTO {
+	
 	private int recipeCommand_num;
 	private String recipeCommand_writer;
 	private String recipeReadCount_writer;
+	
 	public int getRecipeCommand_num() {
 		return recipeCommand_num;
 	}
@@ -22,7 +24,5 @@ public class RecipeCommandDTO {
 	public void setRecipeReadCount_writer(String recipeReadCount_writer) {
 		this.recipeReadCount_writer = recipeReadCount_writer;
 	}
-	
-	
 
 }

@@ -22,7 +22,7 @@ public class ReadBuyerAction implements Action, ConDAOAware
         buyerDTO.setBuyer_id(getUser_id());
 
         // 해당 유저의 정보를 가져온다.
-        buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectWhereBuyerId", buyerDTO);
+        buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerId", buyerDTO);
 
         return SUCCESS;
     }

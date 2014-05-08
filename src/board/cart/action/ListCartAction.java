@@ -1,4 +1,4 @@
-package board.rest.action;
+package board.cart.action;
 
 import java.util.ArrayList;
 import java.util.List;

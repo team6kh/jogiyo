@@ -24,8 +24,7 @@
 			<interceptor-ref name="conDAO"/>
 			<interceptor-ref name="params"/>
 			<result>/board/rest/mailerPro.jsp</result>
-		</action>	
-		
+		</action>			
 		
 		<!-- 리스트에서 글쓰기 클릭시 -->
 		<action name="insertRestForm" class="board.rest.action.InsertRestAction" method="form">
@@ -51,8 +50,7 @@
 			<result type="redirect-action">
 				<param name="actionName">listRest</param>
 			</result>
-		</action>
-		
+		</action>		
 		
 		<!--글 읽기에서 상품 수정 클릭시 -->
 		<action name="updateRestForm" class="board.rest.action.UpdateRestAction"  method="form">
@@ -67,10 +65,7 @@
 			<interceptor-ref name="fileUpload"/>
 			<interceptor-ref name="params"/>
 			<result>/board/rest/preRead.jsp</result>
-		</action>
-		
-		
-		
+		</action>		
 		
 		<!-- 글 읽기에서 상품 삭제 클릭시 -->
 		<action name="deleteRest" class="board.rest.action.DeleteRestAction" >
@@ -88,7 +83,6 @@
 			<result>/board/rest/listRest.jsp</result>
 		</action>
 		
-
 		<!-- 리드 액션 -->
 		<action name="readRest" class="board.rest.action.ReadRestAction">
 			<interceptor-ref name="params"/>
@@ -96,7 +90,6 @@
 			<result>/board/rest/readRest.jsp</result>
 		</action>
 		
-
 		<!-- 결제 액션 -->
 		<action name="payRest" class="board.rest.action.PayRestAction">
 			<interceptor-ref name="params"/>
@@ -112,21 +105,21 @@
 		</action>
 		
 		<!-- 장바구니 insert -->
-		<action name="insertCart" class="board.rest.action.InsertCartAction">
+		<action name="insertCart" class="board.cart.action.InsertCartAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result type="chain">listCart</result>
 		</action>
 		
 		<!-- 장바구니 delete -->
-		<action name="cartDelete" class="board.rest.action.CartDeleteAction">
+		<action name="deleteCart" class="board.cart.action.DeleteCartAction">
 			<interceptor-ref name="params"/>
 			<interceptor-ref name="conDAO"/>
 			<result type="chain">listCart</result>
 		</action>
 		
 		<!-- 장바구니 list -->
-		<action name="listCart" class="board.rest.action.ListCartAction">
+		<action name="listCart" class="board.cart.action.ListCartAction">
 			<param name="aliases">#{'cart_rest_num':'rest_num','cart_rest_subject':'rest_subject'}</param>
 			<interceptor-ref name="alias"/>
 			<interceptor-ref name="params"/>
@@ -134,7 +127,6 @@
 			<result>/board/rest/listCart.jsp</result>
 		</action>
 		
-
 		<!-- RestBoard 끝 -->
 
 	</package>

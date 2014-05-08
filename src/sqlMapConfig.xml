@@ -21,6 +21,7 @@
 	</transactionManager>		
 
 	<sqlMap resource="/board/cart/dao/CartDAO.xml"/>
+	<sqlMap resource="/board/coupon/dao/CouponDAO.xml"/>
 	<sqlMap resource="/board/notice/dao/NoticeDAO.xml"/>
 	<sqlMap resource="/board/paid/dao/PaidDAO.xml"/>
 	<sqlMap resource="/board/qna/dao/QnaDAO.xml"/>

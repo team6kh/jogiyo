@@ -15,7 +15,7 @@ public class ReadRecipeAction extends ActionSupport implements ConDAOAware {
 
 	public static SqlMapClient sqlMapper;
 
-	private int isrecommand = 1;
+	private int isRecommend = 1;
 	private RecipeDTO paramClass = new RecipeDTO(); // 파라미터를 저장할 객체
 	private RecipeDTO resultClass = new RecipeDTO(); // 쿼리 결과 값을 저장할 객체
 	private RecipeCommandDTO paramRC = new RecipeCommandDTO();
@@ -47,10 +47,10 @@ public class ReadRecipeAction extends ActionSupport implements ConDAOAware {
 		paramRC.setRecipeReadCount_writer(getSession_id());
 		
         
-		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject(
-				"Recipe.readcountID", paramRC);
+		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject("Recipe.selectReadcountId", paramRC);
+		
 
-		if (session_id != null && resultRC == null) {
+		if (!(session_id.equals("")) && resultRC == null) {
 			// 해당 글의 조회수 +1.
 			sqlMapper.insert("Recipe.insertRecipeReadCount", paramRC);
 			sqlMapper.update("Recipe.updateReadcount", paramClass);
@@ -60,36 +60,33 @@ public class ReadRecipeAction extends ActionSupport implements ConDAOAware {
 		}
 
 		// 해당 번호의 글을 가져온다.
-		resultClass = (RecipeDTO) sqlMapper.queryForObject("Recipe.selectOne",
-				getRecipe_num());
+		resultClass = (RecipeDTO) sqlMapper.queryForObject("Recipe.selectOne", getRecipe_num());
 
 		pagingHtml.append(resultClass.getRecipe_content());
 
 		return SUCCESS;
 	}
 
-	// recommandAction
-	public String recommandAction() throws Exception {
+	// recommendAction
+	public String recommendAction() throws Exception {
 
 		// 해당글에 추천 유무 확인
 		paramClass.setRecipe_num(getRecipe_num());
 		paramRC.setRecipeCommand_num(getRecipe_num());
 		paramRC.setRecipeCommand_writer(getSession_id());
 
-		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject(
-				"Recipe.commandID", paramRC);
+		resultRC = (RecipeCommandDTO) sqlMapper.queryForObject("Recipe.selectCommandId", paramRC);
 		if (resultRC == null) {
-			System.out.println("rdDTO is null!");
+			
 			// 해당 글의 추천수 +1.
 			sqlMapper.insert("Recipe.insertRecipeCommand", paramRC);
-			sqlMapper.update("Recipe.updateRecommand", paramClass);
+			sqlMapper.update("Recipe.updateRecommend", paramClass);
 
 			// 해당 번호의 글을 가져온다.
-			resultClass = (RecipeDTO) sqlMapper.queryForObject(
-					"Recipe.selectOne", getRecipe_num());
-			isrecommand = 0;
+			resultClass = (RecipeDTO) sqlMapper.queryForObject("Recipe.selectOne", getRecipe_num());
+			isRecommend = 0;
 		} else {
-			isrecommand = 1;
+			isRecommend = 1;
 		}
 
 		return SUCCESS;
@@ -200,12 +197,12 @@ public class ReadRecipeAction extends ActionSupport implements ConDAOAware {
 		this.session_id = session_id;
 	}
 
-	public int getIsrecommand() {
-		return isrecommand;
+	public int getIsRecommend() {
+		return isRecommend;
 	}
 
-	public void setIsrecommand(int isrecommand) {
-		this.isrecommand = isrecommand;
+	public void setIsRecommend(int isRecommend) {
+		this.isRecommend = isRecommend;
 	}
 
 }

@@ -1,7 +1,7 @@
 package common.action;
 
-public class PagingAction
-{
+public class PagingAction {
+	
     private String actionName; // 액션 이름...
     private int currentPage; // 현재페이지
     private int totalCount; // 전체 게시물 수
@@ -15,11 +15,10 @@ public class PagingAction
     private String session_id; //세션
     private int rest_num; //글의 번호
     private int ccp; // 리뷰의 페이지 번호
-    private StringBuffer pagingHtml;
-    
+    private StringBuffer pagingHtml;    
 
     // 생성자1: String actionName 파라미터 추가
-    public PagingAction(String actionName, int currentPage, int totalCount, int blockCount, int blockPage){
+    public PagingAction(String actionName, int currentPage, int totalCount, int blockCount, int blockPage) {
 		
     	this.actionName = actionName;
 		this.blockCount = blockCount;
@@ -55,12 +54,12 @@ public class PagingAction
 		pagingHtml = new StringBuffer();
 		if (currentPage > blockPage) {
 			pagingHtml.append("<li><a href=" + actionName
-					+ ".action?currentPage=" + (startPage - 1) + ">");
+						+ ".action?currentPage=" + (startPage - 1) + ">");
 			pagingHtml.append("이전");
 			pagingHtml.append("</a></li>");
 		}
 
-		// 페이지 번호.현재 페이지는 파란색으로 강조하고 링크를 제거
+		// 페이지 번호. 현재 페이지는 파란색으로 강조하고 링크를 제거
 		for (int i = startPage; i <= endPage; i++) {
 			if (i > totalPage) {
 				break;
@@ -87,11 +86,11 @@ public class PagingAction
 			pagingHtml.append("</a></li>");
 		}
 	}
-    //.생성자1
+    // .생성자1
     
     
-    //생성자2. 구매내역 페이지
-    public PagingAction(String actionName, int currentPage, int totalCount, int blockCount, int blockPage, String session_id){
+    // 생성자2: 구매내역 페이지
+    public PagingAction(String actionName, int currentPage, int totalCount, int blockCount, int blockPage, String session_id) {
 		
     	this.actionName = actionName;
 		this.blockCount = blockCount;
@@ -133,7 +132,7 @@ public class PagingAction
 			pagingHtml.append("</a></li>");
 		}
 
-		// 페이지 번호.현재 페이지는 파란색으로 강조하고 링크를 제거
+		// 페이지 번호. 현재 페이지는 파란색으로 강조하고 링크를 제거
 		for (int i = startPage; i <= endPage; i++) {
 			if (i > totalPage) {
 				break;
@@ -160,10 +159,9 @@ public class PagingAction
 			pagingHtml.append("</a></li>");
 		}
 	}
-    //.생성자2
+    // .생성자2    
     
-    
-    //생성자3. 리뷰 페이지
+    // 생성자3: 리뷰 페이지
     public PagingAction(String actionName, int ccp, int totalCount, int blockCount, int blockPage, int rest_num, int currentPage) {
 
 		this.actionName = actionName;
@@ -208,7 +206,7 @@ public class PagingAction
 			pagingHtml.append("</a></li>");
 		}
 
-		// 페이지 번호.현재 페이지는 파란색으로 강조하고 링크를 제거.
+		// 페이지 번호. 현재 페이지는 파란색으로 강조하고 링크를 제거.
 		for (int i = startPage; i <= endPage; i++) {
 			if (i > totalPage) {
 				break;
@@ -235,116 +233,93 @@ public class PagingAction
 			pagingHtml.append("</a></li>");
 		}
 	}
-	//.생성자3
-    
+	// .생성자3    
 
-    public String getActionName()
-    {
+    public String getActionName() {
         return actionName;
     }
 
-    public void setActionName(String actionName)
-    {
+    public void setActionName(String actionName) {
         this.actionName = actionName;
     }
 
-    public int getCurrentPage()
-    {
+    public int getCurrentPage() {
         return currentPage;
     }
 
-    public void setCurrentPage(int currentPage)
-    {
+    public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
     }
 
-    public int getTotalCount()
-    {
+    public int getTotalCount() {
         return totalCount;
     }
 
-    public void setTotalCount(int totalCount)
-    {
+    public void setTotalCount(int totalCount) {
         this.totalCount = totalCount;
     }
 
-    public int getTotalPage()
-    {
+    public int getTotalPage() {
         return totalPage;
     }
 
-    public void setTotalPage(int totalPage)
-    {
+    public void setTotalPage(int totalPage) {
         this.totalPage = totalPage;
     }
 
-    public int getBlockCount()
-    {
+    public int getBlockCount() {
         return blockCount;
     }
 
-    public void setBlockCount(int blockCount)
-    {
+    public void setBlockCount(int blockCount) {
         this.blockCount = blockCount;
     }
 
-    public int getBlockPage()
-    {
+    public int getBlockPage() {
         return blockPage;
     }
 
-    public void setBlockPage(int blockPage)
-    {
+    public void setBlockPage(int blockPage) {
         this.blockPage = blockPage;
     }
 
-    public int getStartCount()
-    {
+    public int getStartCount() {
         return startCount;
     }
 
-    public void setStartCount(int startCount)
-    {
+    public void setStartCount(int startCount) {
         this.startCount = startCount;
     }
 
-    public int getEndCount()
-    {
+    public int getEndCount() {
         return endCount;
     }
 
-    public void setEndCount(int endCount)
-    {
+    public void setEndCount(int endCount) {
         this.endCount = endCount;
     }
 
-    public int getStartPage()
-    {
+    public int getStartPage() {
         return startPage;
     }
 
-    public void setStartPage(int startPage)
-    {
+    public void setStartPage(int startPage) {
         this.startPage = startPage;
     }
 
-    public int getEndPage()
-    {
+    public int getEndPage() {
         return endPage;
     }
 
-    public void setEndPage(int endPage)
-    {
+    public void setEndPage(int endPage) {
         this.endPage = endPage;
     }
 
-    public StringBuffer getPagingHtml()
-    {
+    public StringBuffer getPagingHtml() {
         return pagingHtml;
     }
 
-    public void setPagingHtml(StringBuffer pagingHtml)
-    {
+    public void setPagingHtml(StringBuffer pagingHtml) {
         this.pagingHtml = pagingHtml;
     }
 

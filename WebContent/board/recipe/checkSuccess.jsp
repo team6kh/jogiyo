@@ -25,21 +25,9 @@
 </head>
 
 <body>
-
-	<!-- header -->
-	<%@ include file="/common/header.jsp"%>
-	<!-- end of header -->
-
-	<!-- container -->
-	<div class="container">
-
-		<!-- test message -->
-		<div class="common-template">
-		<head>
-	<title>비밀번호 확인</title>
 	
 	<script type="text/javascript">
-		function locationURL() {
+//		function locationURL() {
 		
 		if ( window.name == 'update' ) 
 			window.opener.parent.location.href='updateRecipeForm.action?recipe_num=<s:property value="recipe_num" />&currentPage=<s:property value="currentPage" />';
@@ -51,19 +39,8 @@
 		}
 			
 		window.close();
-		}
+//		}
 	</script>
-</head>
-  
-<body>
-  	<script>locationURL()</script>
-</body>
-		</div>
-		<!-- end of test message -->
-
-	</div>
-	<!-- /.container -->
-
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

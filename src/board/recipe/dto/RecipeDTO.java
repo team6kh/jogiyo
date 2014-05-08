@@ -3,6 +3,7 @@ package board.recipe.dto;
 import java.util.Date;
 
 public class RecipeDTO {
+	
 	private int recipe_num;
 	private String recipe_foodkind;
 	private String recipe_subject;
@@ -17,7 +18,7 @@ public class RecipeDTO {
 	private String recipe_orgfile;
 	private String recipe_file;
 	private int recipe_readcount;
-	private int recipe_recommand;
+	private int recipe_recommend;
 	private Date recipe_reg_date;
 
 	public int getRecipe_num() {
@@ -124,12 +125,12 @@ public class RecipeDTO {
 		this.recipe_file = recipe_file;
 	}
 
-	public int getRecipe_recommand() {
-		return recipe_recommand;
+	public int getRecipe_recommend() {
+		return recipe_recommend;
 	}
 
-	public void setRecipe_recommand(int recipe_recommand) {
-		this.recipe_recommand = recipe_recommand;
+	public void setRecipe_recommend(int recipe_recommend) {
+		this.recipe_recommend = recipe_recommend;
 	}
 
 	public Date getRecipe_reg_date() {

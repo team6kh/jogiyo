@@ -1,20 +1,19 @@
 package board.rest.dto;
 
-import java.io.File;
 import java.util.Date;
 
 public class RestDTO {
 
-	private int rest_num;//
+	private int rest_num;
 	private String rest_subject;
 	private String rest_localcategory;
 	private String rest_typecategory;
 
 	private String rest_destFile1;
-	private String rest_main_orgname;//
-	private String rest_main_savname;//
-	private String rest_content_orgname;//
-	private String rest_content_savname;//
+	private String rest_main_orgname;
+	private String rest_main_savname;
+	private String rest_content_orgname;
+	private String rest_content_savname;
 
 	private String rest_destFile2;
 	
@@ -27,8 +26,7 @@ public class RestDTO {
 	
 	private Date rest_reg_date;
 	private int rest_readcount;//
-	
-	
+		
 	public String getRest_writer_email() {
 		return rest_writer_email;
 	}

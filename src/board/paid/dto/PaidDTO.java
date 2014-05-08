@@ -3,6 +3,7 @@ package board.paid.dto;
 import java.util.Date;
 
 public class PaidDTO {
+	
 	private int paid_num;
 	private int paid_rest_num;
 	private String paid_rest_subject;
