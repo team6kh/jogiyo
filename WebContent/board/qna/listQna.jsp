@@ -148,8 +148,13 @@
 				</select>
 				<input class="form-control" type="text" name="searchText" maxlength="17"  value="${searchText }">
 				<a href="javascript:fn_search()" class="btn btn-primary">검색</a>
+				<c:if test="${session_id eq 'admin'}">
+				<input type="checkbox" name="qna_checkreply" value="Y" id="reply1" onclick="fn_search()"/>&nbsp;<label for="reply1">답변미완료</label>
+				</c:if>
 				<br />
-				<br />		
+				<br />
+				
+			
 			</form>
 		</div>			
 

@@ -57,7 +57,7 @@ public class ListQnaAction implements Action, ConDAOAware, Preparable,
 
 		QnaDTO qnaDTO = new QnaDTO();
 
-		topList = sqlMapper.queryForList("Qna.selectTopQnaList");
+		topList = sqlMapper.queryForList("Qna.qnaTopList");
 
 		setTopCount(topList.size());
 
@@ -67,8 +67,9 @@ public class ListQnaAction implements Action, ConDAOAware, Preparable,
 
 			param.put("qna_category", getQna_category());
 			param.put("searchText", getSearchText());
+			param.put("qna_checkreply",getQna_checkreply());
 
-			list = sqlMapper.queryForList("Qna.selectQnaList", param);
+			list = sqlMapper.queryForList("Qna.qnaList", param);
 
 
 		totalCount = list.size(); // 전체 글 갯수를 구한다.
@@ -92,7 +93,7 @@ public class ListQnaAction implements Action, ConDAOAware, Preparable,
 		 */
 
 		// sqlMapper.update("Qna.updateReadCount", getQna_num());
-		// resultClass = (QnaDTO)sqlMapper.queryForObject("Qna.selectQnaDetail",
+		// resultClass = (QnaDTO)sqlMapper.queryForObject("Qna.qnaDetail",
 		// getQna_num());
 		searchText = "";
 		return SUCCESS;
@@ -105,7 +106,7 @@ public class ListQnaAction implements Action, ConDAOAware, Preparable,
 		sqlMapper.update("Qna.updateReadCount", getQna_num());
 
 		// 상세보기 조회
-		resultClass = (QnaDTO) sqlMapper.queryForObject("Qna.selectQnaDetail",
+		resultClass = (QnaDTO) sqlMapper.queryForObject("Qna.qnaDetail",
 				getQna_num());
 		// resultClass.setQna_content(resultClass.getQna_content().replaceAll("\n",
 		// "<br/>"));

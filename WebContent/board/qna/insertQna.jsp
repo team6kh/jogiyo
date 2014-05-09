@@ -21,10 +21,17 @@
 <!-- Custom styles for this template -->
 <link href="jogiyo.css" rel="stylesheet">
 <link href="common/common-template.css" rel="stylesheet">
-
+<script type="text/javascript">
+	function fn_checkLogin(){
+		if("${session_id}" == '') {
+			alert("!로그인 하셔야 글을 쓰실 수 있습니다.");
+			window.location.href= "listQna.action";
+		}
+	}
+</script>
 </head>
 
-<body>
+<body onload="fn_checkLogin();">
 
 	<!-- header -->
 	<%@ include file="/common/header.jsp"%>
