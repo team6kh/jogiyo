@@ -62,12 +62,15 @@ public class CheckDuplicateAction implements Action, ConDAOAware
         buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.selectBuyerId", buyerDTO);
         sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.selectSellerId", sellerDTO);
 
+        // 구매자&판매자 DB에 가입하려는 ID가 있다면
         if (buyerDTO != null || sellerDTO != null)
         {
             isDup = 1;
+        // 가입하려는 ID가 "admin"이라면 : 금지어
         } else if (getReg_id().equals("admin"))
     	{
         	isDup = 1;
+        // 그게 아니면 가입 가능
     	} else
         {
             isDup = 0;
