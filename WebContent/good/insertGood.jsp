@@ -33,6 +33,7 @@
 Login check. 회원 유형(buyer,seller)에 따른 사용 제한, input area check, search 연동
 -->
 
+
 <title>JOGIYO 상품등록</title>
 
 </head>
@@ -52,16 +53,44 @@ Login check. 회원 유형(buyer,seller)에 따른 사용 제한, input area che
 			<h3>상품등록</h3>
 		</div>
 		
-	<!-- 2-2. Forms 설정 및 본문  -->
+	<!-- 2-2 category  -->
+
+	<form name="categoryBox" method=post action=''>
+		<select name=Depth1 onChange="selectSecond();">
+			<option value=''>대분류선택</option>
+			<option value='1'>쌀/과일/농수축산물</option>
+			<option value='2'>차/음료</option>
+			<option value='3'>라면/통조림/과자/조미료</option>
+			<option value='4'>가공식품</option>
+			<option value='5'>건강식품</option>
+			<option value='6'>다이어트식품</option>
+			<option value='7'>유아식</option>
+		</select> 
+		<select name=Depth2 onChange="thirdOption();">
+			<option value=''>중분류</option>
+		</select> 
+		<select name=Depth3>
+			<option value=''>소분류</option>
+		</select>
+	</form>
+	
+		<script id="selectOption"/>
+		<script language="javascript">
+			function secondOption() {
+				selectOption.src = "category.js";
+			}
+			function thirdOption() {
+				selectOption.src = "category.js";
+			}
+		</script>
+	<!-- ./ category  -->
+		
+	<!-- 2-3. Forms 설정 및 본문  -->
 	<form class="form-inline" 
 			name="inputForm" id="inputForm" method="post">
 	
-	<!-- category  -->
-	<%-- <s:action namespace="/" name="actionName" executeResult="true"/>	카테고리 결과만 가져오기 --%>
-	<%@ include file="/good/category.jsp"%>
-	<!-- /.분류설정 -->	
-		
-		<!-- 상품내용 입력폼 -->
+
+			<!-- 상품내용 입력폼 -->
 		
 		<div class="row">
 		

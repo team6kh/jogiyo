@@ -2,6 +2,7 @@
 <<<<<<<=HEAD
 >>>>>>>=origin/jaewook
 eclipse.preferences.version=1
+encoding//WebContent/good/category.js=UTF-8
 encoding//src/common/action/CheckPasswordAction.java=UTF-8
 encoding//src/struts.xml=UTF-8
 encoding/<project>=UTF-8
