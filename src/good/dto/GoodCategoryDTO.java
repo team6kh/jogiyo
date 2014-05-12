@@ -1,4 +1,4 @@
-package good.dataBean;
+package good.dto;
 
 public class GoodCategoryDTO
 {

@@ -3,7 +3,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- bootstrap : 렌더링과 확대/축소를 위해, viewport 메타태그 추가 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- shortcut icon을 통한 home 이동 설정 --> 
+<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<!-- bootstrap core CSS -->
+<link rel="stylesheet" href="dist/css/bootstrap.min.css">
+
+<!-- script : jQuery & bootstrap jQuery -->
+<script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="dist/js/bootstrap.min.js"></script>
+
+<!-- Custom styles for this template -->
+<link href="jogiyo.css" rel="stylesheet">
+<link href="common/common-template.css" rel="stylesheet">
+
 <title>Insert title here</title>
 </head>
 <body>

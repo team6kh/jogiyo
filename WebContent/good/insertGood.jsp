@@ -55,23 +55,30 @@ Login check. 회원 유형(buyer,seller)에 따른 사용 제한, input area che
 		
 	<!-- 2-2 category  -->
 
-	<form name="categoryBox" method=post action=''>
-		<select name=Depth1 onChange="selectSecond();">
-			<option value=''>대분류선택</option>
-			<option value='1'>쌀/과일/농수축산물</option>
-			<option value='2'>차/음료</option>
-			<option value='3'>라면/통조림/과자/조미료</option>
-			<option value='4'>가공식품</option>
-			<option value='5'>건강식품</option>
-			<option value='6'>다이어트식품</option>
-			<option value='7'>유아식</option>
-		</select> 
-		<select name=Depth2 onChange="thirdOption();">
-			<option value=''>중분류</option>
-		</select> 
-		<select name=Depth3>
-			<option value=''>소분류</option>
-		</select>
+	<form class="form-inline" 
+			name="categoryBox" id="categoryBox" method=post action=''>
+		<div class="row" style="margin-bottom: 10px" >
+		
+			<div class="col-md-12">
+			<select class="form-control input-sm" name="categoryBox" id="Depth1" onChange="selectSecond();">
+				<option value=''>대분류선택</option>
+				<option value='1'>쌀/과일/농수축산물</option>
+				<option value='2'>차/음료</option>
+				<option value='3'>라면/통조림/과자/조미료</option>
+				<option value='4'>가공식품</option>
+				<option value='5'>건강식품</option>
+				<option value='6'>다이어트식품</option>
+				<option value='7'>유아식</option>
+			</select> 
+			<select class="form-control input-sm"  name="categoryBox" id="Depth2" onChange="thirdOption();">
+				<option value=''>중분류</option>
+			</select> 
+			<select class="form-control input-sm"  name="categoryBox" id="Depth3">
+				<option value=''>소분류</option>
+			</select>
+			</div>
+		
+		</div>
 	</form>
 	
 		<script id="selectOption"/>
@@ -90,7 +97,7 @@ Login check. 회원 유형(buyer,seller)에 따른 사용 제한, input area che
 			name="inputForm" id="inputForm" method="post">
 	
 
-			<!-- 상품내용 입력폼 -->
+		<!-- 상품내용 입력폼 -->
 		
 		<div class="row">
 		
@@ -122,9 +129,16 @@ Login check. 회원 유형(buyer,seller)에 따른 사용 제한, input area che
 						</td>
 					</tr>
 					<tr>
-						<th style="width: 100px;">제조사</th>
-						<td><input class="form-control input-sm" style="width: 50%"
-	 								type="text" name="good_name" /></td>
+						<th style="width: 100px;">수량</th>
+						<td><input class="form-control input-sm" type="text"
+							name="reg_amount" />개</td>
+					</tr>
+					<tr>
+					<th style="width: 100px;">제조사</th>
+						<td>
+						<input class="form-control input-sm" style="width: 50%"
+	 								type="text" name="good_name" />
+						</td>
 					</tr>
 					<tr>
 						<th style="width: 100px;">원산지</th>
@@ -134,7 +148,7 @@ Login check. 회원 유형(buyer,seller)에 따른 사용 제한, input area che
 					<tr>
 						<th style="width: 100px;">배송정보</th>
 						<td>
-						<textarea class="form-control" rows="3" style="width: 100%; margin-bottom: 5px"></textarea>
+						<textarea class="form-control" rows="2" style="width: 100%; margin-bottom: 5px"></textarea>
 						<select class="form-control input-sm" name="shp_fee_type">
 						<option>주문시결제(선결제)</option>
 						<option>상품수령시결제(착불)</option>
