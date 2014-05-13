@@ -102,11 +102,14 @@ Login check. 회원 유형(buyer,seller)에 따른 사용 제한, input area che
 		<div class="row">
 		
 			<div class="col-md-4" >
-			<img src="..." alt="상품이미지위치" class="img-thumbnail" style="width: 350px; height: 350px">
-			<input class="form-control input-sm"
-	 								type="text" name="good_file" />
-			<input class="form-control input-sm"
-					type="button" name="Find" />
+			<img src="..." alt="상품이미지위치" class="img-thumbnail" 
+				style="width: 350px; height: 350px; margin-bottom: 10px">
+			
+			<input class="form-control input-sm" style="width: 300px;" disabled
+				type="text" name="good_file" />
+			<button class="btn btn-info btn-sm"  placeholder="file root"
+				type="submit">찾기</button>
+				
 			</div>
 			
 		  	<div class="col-md-8" name="insertGoodInfo">		  	

@@ -6,6 +6,7 @@ public class GoodDTO
 	private	int	good_seq;      //시퀀스
 	private	String	good_group_code;      //상품분류코드
 	private	int	good_code;      //상품코드 (상품분류코드+시퀀스)
+	private String	good_img; //상품이미지
 	private	String	good_seller;      //상품 판매자
 	private	String	good_name;      //상품명
 	private	int	sell_price;      //판매가
@@ -22,7 +23,6 @@ public class GoodDTO
 	private	int	shp_fee;      //배송비
 	private	String	shp_fee_type;      //배송비 유형
 	private	String	registrant;      //등록자
-	
 	
 	/* 자바빈의 메소드 선언 (getter & setter) */
 	public int getGood_seq()
