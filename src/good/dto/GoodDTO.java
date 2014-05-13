@@ -2,19 +2,16 @@ package good.dto;
 
 public class GoodDTO
 {
-	/*﻿ 자바빈의 프로퍼티(멤버변수) 선언 */
-	
-	// 1. 상품관련 변수 선언
-	
-	private	int	good_seq;      //상품시퀀스
-	private	int	good_num;      //상품글번호
-	private	int	good_code;      //상품코드
+	/*﻿ 자바빈의 상품관련 프로퍼티(멤버변수) 선언 */
+	private	int	good_seq;      //시퀀스
+	private	String	good_group_code;      //상품분류코드
+	private	int	good_code;      //상품코드 (상품분류코드+시퀀스)
 	private	String	good_seller;      //상품 판매자
-	private	String	good_ctgy;      //상품분류
 	private	String	good_name;      //상품명
 	private	int	sell_price;      //판매가
 	private	String	mnft;      //제조사
 	private	String	pbnc;      //원산지
+	private	int	amount;      //수량
 	private	int	reg_amount;      //등록수량
 	private	int	sell_amount;      //판매수량
 	private	int	stock_amount;      //재고수량
@@ -24,11 +21,10 @@ public class GoodDTO
 	private	String	good_keep_type;      //상품 보관 유형
 	private	int	shp_fee;      //배송비
 	private	String	shp_fee_type;      //배송비 유형
-	private	int	good_reg_date;      //상품 등록일
+	private	String	registrant;      //등록자
 	
-	// 2. 게시판관련 변수 선언
 	
-	/* 자바빈의 메소드 선언 (getter & setter) */		
+	/* 자바빈의 메소드 선언 (getter & setter) */
 	public int getGood_seq()
 	{
 		return good_seq;
@@ -37,13 +33,13 @@ public class GoodDTO
 	{
 		this.good_seq = good_seq;
 	}
-	public int getGood_num()
+	public String getGood_group_code()
 	{
-		return good_num;
+		return good_group_code;
 	}
-	public void setGood_num(int good_num)
+	public void setGood_group_code(String good_group_code)
 	{
-		this.good_num = good_num;
+		this.good_group_code = good_group_code;
 	}
 	public int getGood_code()
 	{
@@ -60,14 +56,6 @@ public class GoodDTO
 	public void setGood_seller(String good_seller)
 	{
 		this.good_seller = good_seller;
-	}
-	public String getGood_ctgy()
-	{
-		return good_ctgy;
-	}
-	public void setGood_ctgy(String good_ctgy)
-	{
-		this.good_ctgy = good_ctgy;
 	}
 	public String getGood_name()
 	{
@@ -100,6 +88,14 @@ public class GoodDTO
 	public void setPbnc(String pbnc)
 	{
 		this.pbnc = pbnc;
+	}
+	public int getAmount()
+	{
+		return amount;
+	}
+	public void setAmount(int amount)
+	{
+		this.amount = amount;
 	}
 	public int getReg_amount()
 	{
@@ -173,13 +169,13 @@ public class GoodDTO
 	{
 		this.shp_fee_type = shp_fee_type;
 	}
-	public int getGood_reg_date()
+	public String getRegistrant()
 	{
-		return good_reg_date;
+		return registrant;
 	}
-	public void setGood_reg_date(int good_reg_date)
+	public void setRegistrant(String registrant)
 	{
-		this.good_reg_date = good_reg_date;
+		this.registrant = registrant;
 	}
 	
 }

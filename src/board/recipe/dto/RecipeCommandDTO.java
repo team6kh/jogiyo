@@ -4,6 +4,7 @@ public class RecipeCommandDTO {
 	private int recipeCommand_num;
 	private String recipeCommand_writer;
 	private String recipeReadCount_writer;
+	
 	public int getRecipeCommand_num() {
 		return recipeCommand_num;
 	}

@@ -63,14 +63,21 @@ Login check. 회원 유형(buyer,seller)에 따른 사용 제한, input area che
 	<div class="col-md-12 well"> 
 		<div class="row form-group">
 			<!-- category 선택 검색  -->
-				<label class="col-md-2">상품분류코드</label>
+				<label class="col-md-1">상품분류</label>
 			    <div class="col-md-2">
 			      <input class="form-control input-sm"  placeholder="write category code"
 			      		type="text" name="GoodCategory" id="WriteGoodCategory">
 			    </div>
+    		<!-- 상품번호 -->
+				<label class="col-md-1">상품번호</label>
+				<div class="col-md-2">
+					<input class="form-control input-sm"
+							type="text" name="good_name">
+				</div>
+			    
    			<!-- 상품명+상품설명 검색 -->
-				<label class="col-md-2">상품명+상품설명</label>
-				<div class="col-md-6">
+				<label class="col-md-2">상품명 또는 상품설명</label>
+				<div class="col-md-4">
 					<input class="form-control input-sm"
 							type="text" name="good_name">
 				</div>
@@ -78,14 +85,20 @@ Login check. 회원 유형(buyer,seller)에 따른 사용 제한, input area che
 		
 		<div class="row form-group">
 			<!-- 글번호 선택 검색  -->
-	    	<label class="col-md-2">글번호</label>
+	    	<label class="col-md-1">글번호</label>
 		    <div class="col-md-2">
 		      <input class="form-control input-sm" 
 		      		type="text" name="GoodCategory" id="WriteGoodCategory">
 		    </div>
-			<!-- 작성자+글제목 검색 -->	
-			<label class="col-md-2">작성자/글제목</label>
-			<div class="col-md-6">
+			<!-- 작성자 검색 -->	
+			<label class="col-md-1">작성자</label>
+			<div class="col-md-2">
+				<input class="form-control input-sm"
+						type="text" name="good_name">
+			</div>
+			<!-- 글제목 검색 -->	
+			<label class="col-md-1">글제목</label>
+			<div class="col-md-5">
 				<input class="form-control input-sm"
 						type="text" name="good_name">
 			</div>
@@ -93,7 +106,7 @@ Login check. 회원 유형(buyer,seller)에 따른 사용 제한, input area che
 		
 		<div class="row form-group">
 			<!-- 기간 선택 검색  -->
-	    	<label class="col-md-2">기간검색</label>
+	    	<label class="col-md-1">기간검색</label>
 		    <div class="col-md-2" placeholder="start Date">
 			      <input class="form-control input-sm" 
 			      		type="text" name="startDate" id="startDate">
